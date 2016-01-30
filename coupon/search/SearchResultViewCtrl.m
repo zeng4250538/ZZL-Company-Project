@@ -8,6 +8,8 @@
 
 #import "SearchResultViewCtrl.h"
 #import "ShopCouponTableViewCell.h"
+#import "CouponDetailViewCtrl.h"
+
 
 @interface SearchResultViewCtrl ()
 @property(nonatomic,strong)UISearchBar *searchBar;
@@ -223,6 +225,17 @@
         [self.tableView reloadData];
         
     }else{
+        
+        
+        
+        
+        
+        CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+
+        
+        
         
         
         

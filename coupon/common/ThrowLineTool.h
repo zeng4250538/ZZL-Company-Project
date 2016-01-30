@@ -38,6 +38,11 @@ typedef void(^animationDidFinish)();
 - (void)throwObject:(UIView *)obj from:(CGPoint)start to:(CGPoint)end
              height:(CGFloat)height duration:(CGFloat)duration;
 
+
+- (void)throwBall:(UIView *)obj from:(CGPoint)start to:(CGPoint)end
+           height:(CGFloat)height duration:(CGFloat)duration;
+
+
 @end
 
 

@@ -12,10 +12,12 @@
 
 #import "UINavigationBar+Awesome.h"
 #import "AppShareData.h"
+#import "ThrowLineTool.h"
 
 
 @interface CouponDetailViewCtrl ()
 @property(nonatomic,strong)UILabel   *cartNumLabel;
+@property(nonatomic,strong)UIButton *cartButton;
 
 
 @end
@@ -35,7 +37,6 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.top.equalTo(self.view);
-        //make.height.equalTo(self.view).offset(-64);
         make.width.equalTo(self.view);
         
         
@@ -103,6 +104,8 @@
     cartButton.clipsToBounds = YES;
     cartButton.layer.cornerRadius = 30;
     [self.view addSubview:cartButton];
+    
+    self.cartButton = cartButton;
     
     
     [cartButton bk_addEventHandler:^(id sender) {
@@ -243,7 +246,7 @@
     
     [uv addSubview:addCartButton];
     
-    [addCartButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [addCartButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         
         make.width.mas_equalTo(SCREEN_WIDTH/2);
         make.top.left.and.bottom.equalTo(uv);
@@ -254,16 +257,69 @@
     [addCartButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
     
     
+    
+    
+    
+    
     [addCartButton bk_addEventHandler:^(id sender) {
         
         
+        ThrowLineTool *tool = [[ThrowLineTool alloc] init];
         
-        NSDictionary *dd = [Utils getRandomData];
         
         
-        [[AppShareData instance] addCouponToCart:dd];
+        UIView *ballView = [[UIView alloc] initWithFrame:CGRectMake(addCartButton.frame.origin.x+SCREEN_WIDTH/8, SCREEN_HEIGHT-100,20, 20)];
         
-        [self updateCartNum];
+        ballView.backgroundColor = [UIColor redColor];
+        ballView.layer.cornerRadius =ballView.frame.size.width;
+        
+        [self.view addSubview:ballView];
+        
+        
+        
+        
+        
+        CGFloat startX = ballView.frame.origin.x;//arc4random() % (NSInteger)CGRectGetWidth(self.frame);
+        CGFloat startY = ballView.frame.origin.y;//CGRectGetHeight(self.frame);
+        CGFloat endX = CGRectGetMidX(self.cartButton.frame)+25;
+        CGFloat endY = CGRectGetMidY(self.cartButton.frame)-15;
+        CGFloat height = -100;
+        [tool throwBall:ballView
+                     from:CGPointMake(startX, startY)
+                       to:CGPointMake(endX, endY)
+                   height:height duration:0.5];
+        
+        
+        
+        tool.didFinishBlock = ^(){
+            
+            [ballView removeFromSuperview];
+            
+            NSDictionary *dd = [Utils getRandomData];
+            
+            
+            
+            [[AppShareData instance] addCouponToCart:dd];
+            
+            [self updateCartNum];
+            
+            
+        };
+        
+        
+            
+            // return;
+            
+            
+            
+            
+            
+     
+        
+        
+        
+        
+        
         
         
         

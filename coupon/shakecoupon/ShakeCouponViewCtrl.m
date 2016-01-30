@@ -102,7 +102,6 @@
     
     
     ThrowLineTool *tool = [ThrowLineTool sharedTool];
-    tool.delegate = self;
     
     
     CGFloat startX = view.frame.origin.x*1.5f;//arc4random() % (NSInteger)CGRectGetWidth(self.frame);
