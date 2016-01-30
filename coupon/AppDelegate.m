@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ShakeViewCtrl.h"
+#import "PortalShopViewCtrl.h"
+#import "PersonInfoViewCtrl.h"
+#import "CartViewCtrl.h"
 @interface AppDelegate ()
 
 @end
@@ -15,8 +18,171 @@
 @implementation AppDelegate
 
 
+#pragma mark - tab控制器创建
+-(void)makeTabViewCtrl{
+    
+    
+    
+    
+    
+    
+    NSArray *titleArray = @[@"摇一摇",@"找商家",/*@"篮子",*/@"我的"];
+    NSArray *imageArray = @[[UIImage imageNamed:@"tab_shake_icon.png"],
+                            [UIImage imageNamed:@"tab_brand_icon.png"],
+                           /* [UIImage imageNamed:@"gocart.png"],*/
+                            [UIImage imageNamed:@"tab_person_icon.png"]
+                            ];
+    
+    
+    
+    NSArray *vcList = @[[[ShakeViewCtrl alloc] init],
+                        [[PortalShopViewCtrl alloc] init],
+                       /* [[CartViewCtrl alloc] init],*/
+                        
+                        [[PersonInfoViewCtrl alloc] init]
+                        ];
+    
+    
+  //  self.cartVc = vcList[2];
+    
+    
+    int pos=0;
+    
+    NSMutableArray *vcArray = [NSMutableArray arrayWithCapacity:3];
+    for (NSString *title in titleArray) {
+        
+        UIViewController *vc = vcList[pos];
+        vc.view.backgroundColor = [UIColor whiteColor];
+        
+        vc.navigationItem.title = title;
+        
+        
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        nav.tabBarItem.image = imageArray[pos];
+        nav.tabBarItem.title = title;
+        
+        [vcArray addObject:nav];
+        
+        
+        if ([vc isKindOfClass:[CartViewCtrl class]]) {
+            self.cartVc = nav;
+            
+        }
+        
+        //nav.tabBarItem.selectedImage
+        
+
+        
+        pos++;
+        
+        
+    }
+    
+    UITabBarController *tabViewCtrl = [[UITabBarController alloc] init];
+    self.tabViewCtrl = tabViewCtrl;
+    
+    self.tabViewCtrl.viewControllers=vcArray;
+    
+    
+    self.window.rootViewController = tabViewCtrl;
+    
+    [self.window makeKeyAndVisible];
+    
+    
+    
+   // UITabBarItem *tabBarItem1 = self.tabViewCtrl.tabBar.items[0];
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+#pragma mark 设置统一外观
+-(void)setAppearance{
+    
+    
+    
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    //页式控件的主色
+    
+    [UITabBar appearance].tintColor = [GUIConfig mainColor];
+    
+    [UITabBar appearance].barTintColor = [UIColor whiteColor];
+    
+    // [UITabBar appearance].translucent = NO;
+    
+   // [[UITabBar appearance] setBarTintColor:[GUIConfig tabBackgroundColor]];
+    
+    
+    
+    //<返回   不显示标题
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -100)
+                                                         forBarMetrics:UIBarMetricsDefault];
+    
+    
+    
+    //设置导航栏文字前景
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    
+    
+    
+    
+    //导航栏背景
+    // [UINavigationBar appearance].barTintColor = [GUIConfig mainColor];
+    
+    
+    [UINavigationBar appearance].barTintColor = [GUIConfig mainColor];
+    
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    
+    
+    
+    [SVProgressHUD setBackgroundColor:[UIColor blackColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    
+     [[UITabBar appearance]setSelectedImageTintColor:[UIColor redColor]];
+    
+    
+    [UITabBar appearance].selectedImageTintColor = [GUIConfig mainColor];
+    
+   
+    
+    //背景反白，暂时屏蔽
+    //[UITabBar appearance].selectionIndicatorImage = [Utils imageWithColor:[GUIConfig mainColor] rect:CGRectMake(0, 0, SCREEN_WIDTH/4, 50)];
+
+    
+    
+    
+    // [[UITabBar appearance]setBackgroundColor:[UIColor redColor]];
+    
+    
+    
+    
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    [self setAppearance];
+    [self makeTabViewCtrl];
     return YES;
 }
 

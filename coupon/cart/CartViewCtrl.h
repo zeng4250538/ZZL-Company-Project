@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CartViewCtrl : UITableViewController
+@interface CartViewCtrl : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,assign)int cartType;
+
 
 @end

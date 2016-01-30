@@ -12,4 +12,56 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
+
+#define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+
+// UI_COLOR
+#define UIColorFromHex(hexValue) [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0f green:((float)((hexValue & 0xFF00) >> 8))/255.0f blue:((float)(hexValue & 0xFF))/255.0f alpha:1.0]
+#define UIColorFromRGB(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0f]
+
+#import <UIKit/UIKit.h>
+#include "GUIConfig.h"
+
+#import "NSObject+NSJSONSerialization.h"
+
+#import <CocoaLumberjack/CocoaLumberjack.h>
+
+#import<iConsole.h>
+#import<EGOCache.h>
+
+#import <Masonry.h>
+
+#import <BlocksKit.h>
+#import <BlocksKit+UIKit.h>
+
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+
+#import <UIButton+WebCache.h>
+#import <UIImageView+WebCache.h>
+
+#import "Utils.h"
+#import <objc/runtime.h>
+
+#import "UIView+LayoutBlock.h"
+
+#import "UINavigationBar+Awesome.h"
+
+
+#import "YYImage.h"
+
+
+
+
+
+//#import "Utils.h"
+//
+//#import "UIView+LayoutBlock.h"
+
+
+
+
+
 #endif

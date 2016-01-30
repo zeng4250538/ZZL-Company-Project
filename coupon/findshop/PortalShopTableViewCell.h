@@ -10,4 +10,14 @@
 
 @interface PortalShopTableViewCell : UITableViewCell
 
+
+@property(nonatomic,strong)NSDictionary *data;
++(UIView*)headerView:(NSString*)title;
+
++(CGFloat)height;
+
+-(void)updateData;
+
+
+
 @end

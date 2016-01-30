@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShopDetailViewCtrl : UITableViewController
+@interface ShopCouponViewCtrl : UITableViewController
 
 @end

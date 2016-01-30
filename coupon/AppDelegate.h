@@ -11,6 +11,9 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong,nonatomic)UITabBarController *tabViewCtrl;
+
+@property (strong, nonatomic) UIViewController *cartVc;
 
 
 @end

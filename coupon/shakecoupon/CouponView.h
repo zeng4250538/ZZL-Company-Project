@@ -10,4 +10,10 @@
 
 @interface CouponView : UIView
 
+@property(nonatomic,strong)NSDictionary *data;
+
+
+-(instancetype)initWithFrame:(CGRect)frame data:(NSDictionary*)data;
+
+
 @end

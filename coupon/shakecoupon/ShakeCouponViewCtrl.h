@@ -10,4 +10,6 @@
 
 @interface ShakeCouponViewCtrl : UIViewController
 
+@property(nonatomic,weak)UINavigationController *nav;
+
 @end

@@ -10,4 +10,10 @@
 
 @interface SelectCityTableViewCtrl : UITableViewController
 
+@property(nonatomic,strong)NSDictionary *cityList;
+@property(nonatomic,strong)NSArray *sectionList;
+
+
+
+
 @end

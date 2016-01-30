@@ -9,6 +9,7 @@
 #import "SelectCityTableViewCtrl.h"
 
 @interface SelectCityTableViewCtrl ()
+@property(nonatomic,strong)UISearchBar *searchBar;
 
 @end
 
@@ -17,11 +18,81 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+   // self.tableView registerClass:[UITableViewCell class] forHeaderFooterViewReuseIdentifier:<#(NSString *)#>
+    
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    
+    [self loadData];
+    
+    [self makeSearchBar];
+    self.navigationItem.title=@"选择城市";
+    
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+-(void)makeSearchBar{
+    
+    
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    //self.searchBar.searchBarStyle = UISearchBarStyleProminent;
+    self.searchBar.barTintColor = [GUIConfig mainBackgroundColor];
+    
+    self.searchBar.backgroundImage =[UIImage new];
+    
+    self.searchBar.delegate= self;
+    
+    //self.searchBar.barStyle = UIBarStyleDefault;
+    self.searchBar.backgroundColor = [UIColor whiteColor];
+    
+    self.searchBar.backgroundColor = [GUIConfig mainBackgroundColor];
+    
+    
+    
+    UIView *bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    
+    [bgView addSubview:self.searchBar];
+    
+    
+  //  [self.searchBar becomeFirstResponder];
+    
+    
+    self.tableView.tableHeaderView = bgView;
+    
+    
+    
+    
+    
+}
+
+
+-(void)loadData{
+    
+    
+    self.sectionList=@[@"位置",@"A",@"B",@"C",@"D"];
+    
+    self.cityList = @{@"位置":@[@"广州"],
+                      @"A":@[@"鞍山",@"安阳",@"安庆"],
+                      @"B":@[@"北京",@"包头",@"宝鸡"],
+                      @"C":@[@"长沙",@"成都",@"长春"]
+                      };
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,27 +102,88 @@
 
 #pragma mark - Table view data source
 
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+   
+    
+    
+    UILabel *lab = [UILabel new];
+    
+    lab.backgroundColor = [GUIConfig mainBackgroundColor];
+    
+    NSString *name = self.sectionList[section];
+    
+    lab.text = [NSString stringWithFormat:@"  %@",name];
+    
+    lab.font  = [UIFont systemFontOfSize:14];
+    lab.textColor = [GUIConfig grayFontColor];
+    
+    return lab;
+    
+    
+    
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 20;
+}
+
+
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return [self.cityList count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    
+    NSString *name = self.sectionList[section];
+    
+    return [self.cityList[name] count];
+    
+    
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
+    
+    //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    NSString *section = self.sectionList[[indexPath section]];
+    
+    
+    
+    NSArray * currentCityList  = self.cityList[section];
+    
+    
+    
+    cell.textLabel.text = currentCityList[[indexPath row]];
+    
+    
     
     // Configure the cell...
     
     return cell;
 }
-*/
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

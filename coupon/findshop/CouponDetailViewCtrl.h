@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CouponDetailViewCtrl : UITableViewController
+@interface CouponDetailViewCtrl : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property(nonatomic,strong)UITableView *tableView;
 
 @end

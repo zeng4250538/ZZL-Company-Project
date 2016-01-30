@@ -21,7 +21,7 @@ typedef enum : NSUInteger {
 
 typedef void(^PayBlock)(NSDictionary *data);
 
-@interface ShopCouponTableViewCell : UITableViewCell
+@interface SubTableViewCell : UITableViewCell
 
 
 @property(nonatomic,strong)NSDictionary *data;

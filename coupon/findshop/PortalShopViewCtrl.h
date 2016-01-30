@@ -10,4 +10,7 @@
 
 @interface PortalShopViewCtrl : UITableViewController
 
+@property(nonatomic,strong)NSArray *hotData;
+@property(nonatomic,strong)NSArray *otherData;
+
 @end

@@ -7,8 +7,15 @@
 //
 
 #import "SearchResultViewCtrl.h"
+#import "ShopCouponTableViewCell.h"
 
 @interface SearchResultViewCtrl ()
+@property(nonatomic,strong)UISearchBar *searchBar;
+@property(nonatomic,strong)UISearchDisplayController *displayCtrl;
+
+@property(nonatomic,strong)NSArray *keyWordList;
+
+
 
 @end
 
@@ -17,6 +24,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
+    [self makeSearchBar];
+    
+    [self makeDisplayCtrl];
+    
+    [self.tableView registerClass:[ShopCouponTableViewCell class] forCellReuseIdentifier:@"cell1"];
+    
+    
+    [self.displayCtrl.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell2"];
+    
+    
+    
+    [self loadData];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -24,34 +46,194 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+
+-(void)loadData{
+    
+    self.keyWordList = @[@"麦当劳",@"咖啡",@"美甲",@"蛋糕"];
+    
+    
+    
+}
+
+-(void)makeDisplayCtrl{
+    
+    self.displayCtrl = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
+    
+    self.displayCtrl.delegate = self;
+    self.displayCtrl.searchResultsDataSource = self;
+    
+    self.displayCtrl.searchResultsDelegate = self;
+    
+    self.displayCtrl.displaysSearchBarInNavigationBar = YES;
+    
+    //displaysSearchBarInNavigationBar
+    
+    
+    
+    
+    
+    [GUIConfig tableViewGUIFormat:self.tableView];
+    
+    [GUIConfig tableViewGUIFormat:self.displayCtrl.searchResultsTableView];
+    
+    
+    
+    
+}
+
+
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller{
+    
+    controller.searchBar.placeholder=@"";
+    
+    
+    
+    
+}
+
+- (void) searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller{
+    
+    controller.searchBar.placeholder=self.keyWord;
+    
+}
+
+
+
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {
+    
+    
+    
+}
+
+
+
+-(void)makeSearchBar{
+    
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-60, 44)];
+    //self.searchBar.searchBarStyle = UISearchBarStyleProminent;
+    self.searchBar.barTintColor = [GUIConfig mainBackgroundColor];
+    
+    self.searchBar.backgroundImage =[UIImage new];
+    
+    self.searchBar.delegate= self;
+    
+    self.searchBar.placeholder=self.keyWord;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+    
+   // self.navigationItem.titleView = self.searchBar;
+    
+    
+    
+}
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    
+    if (self.displayCtrl.searchResultsTableView == tableView) {
+        
+        return [self.keyWordList count];
+    }
+    
+    return 7;
 }
 
-/*
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.displayCtrl.searchResultsTableView == tableView) {
+        
+        
+        return 50;
+ 
+    }else{
+        
+        return [ShopCouponTableViewCell height];
+       
+        
+    }
+    
+    
+    
+    
+    
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    if (self.displayCtrl.searchResultsTableView == tableView) {
+        
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+        
+        // Configure the cell...
+        
+        
+        cell.textLabel.text=self.keyWordList[[indexPath row]];
+
+        
+        
+        return cell;
+    }
+    
+    
+    ShopCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
     
     // Configure the cell...
     
+    
+    [cell updateData];
+    
+    
+    
+    
+    
+    
+    
     return cell;
 }
-*/
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    //搜索点击
+    if (self.displayCtrl.searchResultsTableView == tableView) {
+        
+        [self.displayCtrl setActive:NO animated:YES];
+        
+        [self.tableView reloadData];
+        
+    }else{
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+}
+
 
 /*
 // Override to support conditional editing of the table view.

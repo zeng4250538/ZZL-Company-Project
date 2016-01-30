@@ -10,4 +10,35 @@
 
 @interface GUIConfig : NSObject
 
++(UIColor*)mainColor;
+
++(UIColor*)mainBackgroundColor;
+
++(UIColor*)grayFontColorLight;
+
++(UIColor*)grayFontColor;
++(UIColor*)grayFontColorDeep;
+
+
++(UIImageView*)iconGood;
++(UIImageView*)iconBad;
+
++(void)tableViewGUIFormat:(UITableView*)tableView;
+
++(void)tableViewGUIFormat:(UITableView*)tableView backgroundColor:(UIColor*)color;
+
+
++(UIView*)line;
+
++(CGFloat)tabBarHeight;
++(CGFloat)navBarHeight;
+
+
+
+
+
+
+
+
+
 @end

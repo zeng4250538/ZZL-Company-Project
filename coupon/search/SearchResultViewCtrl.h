@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchResultViewCtrl : UITableViewController
+@interface SearchResultViewCtrl : UITableViewController<UISearchBarDelegate,UISearchDisplayDelegate>
+
+@property(nonatomic,strong)NSString *keyWord;
+
 
 @end

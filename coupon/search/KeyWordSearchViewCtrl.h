@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UISearchViewCtrl : UITableViewController
+@interface KeyWordSearchViewCtrl : UITableViewController<UISearchBarDelegate>
+
+
 
 @end

@@ -6,10 +6,10 @@
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "ShopCouponTableViewCell.h"
+#import "SubTableViewCell.h"
 #import "ToPayTableViewCtrl.h"
 
-@interface ShopCouponTableViewCell()
+@interface SubTableViewCell()
 @property(nonatomic,strong)UIImageView *logoView;  //商店图片
 @property(nonatomic,strong)UILabel *titleLabel;    //优惠券标题
 @property(nonatomic,strong)UILabel *addtionLabel;    //额外说明
@@ -26,7 +26,7 @@
 @end
 
 
-@implementation ShopCouponTableViewCell
+@implementation SubTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -110,9 +110,12 @@
         make.height.equalTo(@30);
         make.left.equalTo(self.logoView.mas_right).with.offset(10);
         make.top.equalTo(self.titleLabel.mas_bottom).with.offset(5);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-90);
         
     }];
+    
+    self.detailLabel.numberOfLines=0;
+    self.detailLabel.lineBreakMode = NSLineBreakByWordWrapping;
     
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@20);
@@ -122,11 +125,14 @@
     }];
     
     
+    self.priceLabel.hidden = YES;
+    
+    
     [self.recommentButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.height.equalTo(@25);
+        make.height.equalTo(@30);
         make.width.equalTo(@60);
-        make.bottom.equalTo(self.logoView.mas_bottom);
+        make.bottom.equalTo(self.logoView.mas_bottom).offset(-25);
         make.right.equalTo(self.contentView.mas_right).with.offset(-15);
     }];
     
@@ -135,8 +141,9 @@
     self.recommentButton.layer.cornerRadius = 4;
     self.recommentButton.clipsToBounds = YES;
     self.recommentButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
+    [self.recommentButton setTitle:@"取消订阅" forState:UIControlStateNormal];
     [self.recommentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
     
     if (self.couponType == CouponTypeNormal) {
         self.recommentButton.hidden = YES;
@@ -174,6 +181,9 @@
     }else{
         self.recommentButton.hidden = NO;
     }
+    
+    
+    self.recommentButton.hidden = NO;
     
     
     

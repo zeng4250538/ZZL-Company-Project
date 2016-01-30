@@ -7,6 +7,14 @@
 //
 
 #import "PersonInfoViewCtrl.h"
+#import "CartViewCtrl.h"
+#import "MySubViewCtrl.h"
+
+
+
+
+#define NAVBAR_CHANGE_POINT 50
+
 
 @interface PersonInfoViewCtrl ()
 
@@ -17,12 +25,101 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    
+    CGFloat rate = 420.0f/750.0f;
+    
+    
+    UIImageView *header = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_WIDTH*rate )];
+    
+    header.image = [UIImage imageNamed:@"personbg.png"];
+    
+    
+    self.tableView.tableHeaderView = header;
+    
+    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
+    
+    
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"setting_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+    }];
+    
+    self.navigationItem.leftBarButtonItem=leftBarButton;
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"message_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+    }];
+    
+    self.navigationItem.rightBarButtonItem=rightBarButton;
+    
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+
+    
+    
+    
+    
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 20;
+    
+}
+
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    UIColor * color = [GUIConfig mainColor];
+    CGFloat offsetY = scrollView.contentOffset.y;
+    if (offsetY > NAVBAR_CHANGE_POINT) {
+        CGFloat alpha = MIN(1, 1 - ((NAVBAR_CHANGE_POINT + 64 - offsetY) / 64));
+        [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:alpha]];
+    } else {
+        [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0]];
+    }
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.tableView.delegate = self;
+    [self scrollViewDidScroll:self.tableView];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    self.automaticallyAdjustsScrollViewInsets=NO;
+    
+    
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.tableView.delegate = nil;
+    [self.navigationController.navigationBar lt_reset];
+    
+    self.automaticallyAdjustsScrollViewInsets=YES;
+    
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -32,26 +129,139 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
+    
+    
     // Return the number of rows in the section.
+    if (section==0) {
+        return 2;
+    }
+
+    if (section==1) {
+        return 1;
+    }
+
+    
+    if (section==2) {
+        return 2;
+    }
+    if (section==3) {
+        return 1;
+    }
+    
     return 0;
+    
+  //  return 20;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
+    
+    
+    
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    if ([indexPath section]==0) {
+        
+        
+        if ([indexPath row]==0) {
+            cell.textLabel.text=@"我的订阅";
+            
+        }
+        
+  
+        if ([indexPath row]==1) {
+            cell.textLabel.text=@"我的评价";
+            
+        }
+        
+        
+    }
+
+    if ([indexPath section]==1) {
+        
+        if ([indexPath row]==0) {
+            cell.textLabel.text=@"我的提醒";
+            
+        }
+        
+        
+    }
+
+    
+    if ([indexPath section]==2) {
+        
+        
+        
+        if ([indexPath row]==0) {
+            cell.textLabel.text=@"优惠篮子";
+            
+            
+        }
+        
+        if ([indexPath row]==1) {
+            cell.textLabel.text=@"我的退款";
+            
+            
+        }
+        
+        
+        
+    }
+
+    
+    if ([indexPath section]==3) {
+        
+        if ([indexPath row]==0) {
+            cell.textLabel.text=@"意见反馈";
+            
+            
+        }
+        
+        
+        
+        
+    }
+
     // Configure the cell...
     
     return cell;
 }
-*/
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    if ([indexPath section]==0) {
+        MySubViewCtrl *vc = [MySubViewCtrl new];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if ([indexPath section]==1) {
+        
+        CartViewCtrl *vc = [CartViewCtrl new];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
+    
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

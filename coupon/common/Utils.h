@@ -10,4 +10,21 @@
 
 @interface Utils : NSObject
 
++(NSArray*)getImagePath:(NSString*)addPath;
+
+
++(NSString*)getRandomImage:(NSString*)path;
+
++(NSDictionary*)getRandomData;
+
+
++(void)incCoupon;
+
++ (UIImage *)imageWithColor:(UIColor *)color;
+
++ (UIImage *)imageWithColor:(UIColor *)color rect:(CGRect)rect;
+
+
+
+
 @end
