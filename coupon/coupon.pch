@@ -51,6 +51,7 @@
 
 
 #import "YYImage.h"
+#import "AppShareData.h"
 
 
 

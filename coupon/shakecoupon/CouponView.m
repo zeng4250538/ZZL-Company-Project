@@ -38,12 +38,21 @@
         uv.contentMode = UIViewContentModeScaleToFill;
         
         
-        uv.image =[UIImage imageNamed:self.data[@"imgurl"]];
+        
+        if (self.data==nil) {
+            
+            uv.image =[UIImage imageNamed:[Utils getRandomImage:@"商家图片"]];
+            
+            
+            
+        }else{
+        
+            uv.image =[UIImage imageNamed:self.data[@"imgurl"]];
+        }
         
     
         
         
-        uv.image =[UIImage imageNamed:[Utils getRandomImage:@"商家图片"]];
         
         [self addSubview:uv];
         

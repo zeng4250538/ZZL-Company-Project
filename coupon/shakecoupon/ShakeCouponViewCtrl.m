@@ -12,6 +12,7 @@
 #import "ThrowLineTool.h"
 #import "AppShareData.h"
 #import "CartViewCtrl.h"
+#import "BasketContainerViewCtrl.h"
 
 @interface ShakeCouponViewCtrl ()
 
@@ -126,11 +127,14 @@
         
         
         
+        
+        
+        
+        
+        
         [[AppShareData instance] addCouponToCart:self.couponData];
         
-        
         [self updateCartNum];
-        
         
         
         view.hidden = YES;
@@ -140,10 +144,15 @@
       //  self.imgView = nil;
         
         
+        self.couponData = [Utils getRandomData];
+        
         CGFloat viewWidth = SCREEN_WIDTH-120;
         CGFloat viewHeight = SCREEN_WIDTH-120+40;
         
-        CouponView *nextView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:nil];
+        CouponView *nextView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
+        
+        
+        
         
         
         [self.view addSubview:nextView];
@@ -215,11 +224,13 @@
         
         [self dismissViewControllerAnimated:NO completion:^{
             
-            CartViewCtrl *vc =[[CartViewCtrl alloc] init];
+            
+            
+            BasketContainerViewCtrl *vc = [BasketContainerViewCtrl new];
             
             vc.hidesBottomBarWhenPushed = YES;
-            
             [self.nav pushViewController:vc animated:YES];
+            
             
         }];
         

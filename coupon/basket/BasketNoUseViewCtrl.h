@@ -10,4 +10,7 @@
 
 @interface BasketNoUseViewCtrl : UITableViewController
 
+@property(nonatomic,strong)NSArray *dataList;
+
+
 @end

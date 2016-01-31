@@ -13,6 +13,7 @@
 #import "UINavigationBar+Awesome.h"
 #import "AppShareData.h"
 #import "ThrowLineTool.h"
+#import "BasketContainerViewCtrl.h"
 
 
 @interface CouponDetailViewCtrl ()
@@ -111,8 +112,9 @@
     [cartButton bk_addEventHandler:^(id sender) {
         
         
-        CartViewCtrl *vc =[[CartViewCtrl alloc] init];
+        BasketContainerViewCtrl *vc =[[BasketContainerViewCtrl alloc] init];
         
+        vc.hidesBottomBarWhenPushed = YES;
         
         
         [self.navigationController pushViewController:vc animated:YES];

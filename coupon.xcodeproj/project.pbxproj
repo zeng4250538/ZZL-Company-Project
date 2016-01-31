@@ -79,6 +79,11 @@
 		57A94E851C39901200BE0022 /* hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E831C39901200BE0022 /* hand@2x.png */; };
 		57A94E881C3AB30E00BE0022 /* ShakeCouponViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A94E871C3AB30E00BE0022 /* ShakeCouponViewCtrl.m */; };
 		57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511A11C5B90D2000DA1A8 /* SearchResultViewCtrl.m */; };
+		57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511A41C5CC3BC000DA1A8 /* MHTabBarController.m */; };
+		57F511AA1C5CCF86000DA1A8 /* BasketContainerViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511A91C5CCF86000DA1A8 /* BasketContainerViewCtrl.m */; };
+		57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511AC1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m */; };
+		57F511B01C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511AF1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m */; };
+		57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +204,16 @@
 		57A94E871C3AB30E00BE0022 /* ShakeCouponViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeCouponViewCtrl.m; sourceTree = "<group>"; };
 		57F511A01C5B90D2000DA1A8 /* SearchResultViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewCtrl.h; sourceTree = "<group>"; };
 		57F511A11C5B90D2000DA1A8 /* SearchResultViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewCtrl.m; sourceTree = "<group>"; };
+		57F511A41C5CC3BC000DA1A8 /* MHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTabBarController.m; sourceTree = "<group>"; };
+		57F511A51C5CC3BC000DA1A8 /* MHTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTabBarController.h; sourceTree = "<group>"; };
+		57F511A81C5CCF86000DA1A8 /* BasketContainerViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketContainerViewCtrl.h; sourceTree = "<group>"; };
+		57F511A91C5CCF86000DA1A8 /* BasketContainerViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketContainerViewCtrl.m; sourceTree = "<group>"; };
+		57F511AB1C5CD188000DA1A8 /* BasketNoPayViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketNoPayViewCtrl.h; sourceTree = "<group>"; };
+		57F511AC1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketNoPayViewCtrl.m; sourceTree = "<group>"; };
+		57F511AE1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketNoUseViewCtrl.h; sourceTree = "<group>"; };
+		57F511AF1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketNoUseViewCtrl.m; sourceTree = "<group>"; };
+		57F511B11C5CD1CF000DA1A8 /* BasketFinishViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketFinishViewCtrl.h; sourceTree = "<group>"; };
+		57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketFinishViewCtrl.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +290,7 @@
 		5779BD631C25381600E15934 /* coupon */ = {
 			isa = PBXGroup;
 			children = (
+				57F511A71C5CC923000DA1A8 /* basket */,
 				5736E9EF1C4BAD750055774D /* search */,
 				5796FA6B1C4600D7004CA23B /* cart */,
 				5796FA5B1C44118D004CA23B /* person */,
@@ -323,6 +339,8 @@
 		578E63DB1C254DA000C1FB19 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				57F511A41C5CC3BC000DA1A8 /* MHTabBarController.m */,
+				57F511A51C5CC3BC000DA1A8 /* MHTabBarController.h */,
 				5796FA6F1C460CB1004CA23B /* UIControl+LayoutBlock.h */,
 				5796FA701C460CB1004CA23B /* UIControl+LayoutBlock.m */,
 				5796FA711C460CB1004CA23B /* UIView+LayoutBlock.h */,
@@ -468,6 +486,21 @@
 				57A94E6D1C380BE400BE0022 /* shoplogo.png */,
 			);
 			path = example;
+			sourceTree = "<group>";
+		};
+		57F511A71C5CC923000DA1A8 /* basket */ = {
+			isa = PBXGroup;
+			children = (
+				57F511A81C5CCF86000DA1A8 /* BasketContainerViewCtrl.h */,
+				57F511A91C5CCF86000DA1A8 /* BasketContainerViewCtrl.m */,
+				57F511AB1C5CD188000DA1A8 /* BasketNoPayViewCtrl.h */,
+				57F511AC1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m */,
+				57F511AE1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.h */,
+				57F511AF1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m */,
+				57F511B11C5CD1CF000DA1A8 /* BasketFinishViewCtrl.h */,
+				57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */,
+			);
+			path = basket;
 			sourceTree = "<group>";
 		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {
@@ -669,6 +702,7 @@
 				57A94E811C393A3F00BE0022 /* CouponDetailViewCtrl.m in Sources */,
 				5779BD6D1C25381600E15934 /* ViewController.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
+				57F511B01C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m in Sources */,
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
 				578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */,
 				57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */,
@@ -684,15 +718,19 @@
 				5736E9F51C4D3E420055774D /* AppShareData.m in Sources */,
 				578E63E51C2551B800C1FB19 /* NSObject+NSJSONSerialization.m in Sources */,
 				5736EA021C5535720055774D /* ThrowLineTool.m in Sources */,
+				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,
 				578E63E11C254DE900C1FB19 /* Utils.m in Sources */,
 				5796FA5E1C4411AE004CA23B /* PersonInfoViewCtrl.m in Sources */,
 				5796FA6E1C460108004CA23B /* CartViewCtrl.m in Sources */,
+				57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */,
+				57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */,
 				5796FA771C4614F1004CA23B /* CartTableViewCell.m in Sources */,
 				5779BD671C25381600E15934 /* main.m in Sources */,
 				5796FA671C45491C004CA23B /* SelectCityTableViewCtrl.m in Sources */,
 				57A94E621C37E34900BE0022 /* ShakeViewCtrl.m in Sources */,
 				57A94E691C3805E500BE0022 /* PortalShopTableViewCell.m in Sources */,
 				5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */,
+				57F511AA1C5CCF86000DA1A8 /* BasketContainerViewCtrl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

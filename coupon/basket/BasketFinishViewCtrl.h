@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BasketFinishViewCtrl : UITableViewController
-
+@property(nonatomic,strong)NSArray *dataList;
 @end

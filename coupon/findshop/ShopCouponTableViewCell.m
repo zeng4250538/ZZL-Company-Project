@@ -247,7 +247,7 @@
     
     
     
-    
+    NSLog(@"update  url  %@",data[@"imgurl"]);
     
     self.logoView.image = [UIImage imageNamed:data[@"imgurl"]];
     self.titleLabel.text=data[@"name"];

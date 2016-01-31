@@ -308,6 +308,8 @@
     
     ShopCouponViewCtrl *vc =[[ShopCouponViewCtrl alloc] init];
     
+    vc.hidesBottomBarWhenPushed = YES;
+    
     [self.navigationController pushViewController:vc animated:YES];
     
     
