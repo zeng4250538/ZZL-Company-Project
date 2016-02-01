@@ -10,6 +10,7 @@
 #import "ShakeCouponViewCtrl.h"
 #import "SelectCityTableViewCtrl.h"
 #import "SelectMallTableCtrl.h"
+#import "SelectMallPopViewCtrl.h"
 @interface ShakeViewCtrl ()
 
 @property(nonatomic,strong)UIScrollView *contentView;
@@ -224,6 +225,10 @@
     
     UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
+        
+        
+    
+        
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
         [self.navigationController pushViewController:vc animated:YES];
@@ -267,10 +272,15 @@
     
     [headButton bk_addEventHandler:^(id sender) {
         
-        SelectMallTableCtrl *vc = [SelectMallTableCtrl new];
         
-        [self.navigationController pushViewController:vc animated:YES];
+        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
+        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
+        
+//        SelectMallTableCtrl *vc = [SelectMallTableCtrl new];
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
         
         
     } forControlEvents:UIControlEventTouchUpInside];

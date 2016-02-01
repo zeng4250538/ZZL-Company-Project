@@ -8,6 +8,7 @@
 
 #import "BasketNoUseViewCtrl.h"
 #import "ShopCouponTableViewCell.h"
+#import "CouponDetailViewCtrl.h"
 
 @interface BasketNoUseViewCtrl ()
 
@@ -83,6 +84,24 @@
     
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    
+    CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+    
+    
+}
+
 
 
 /*

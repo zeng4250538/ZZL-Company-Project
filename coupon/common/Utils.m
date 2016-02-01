@@ -185,6 +185,45 @@
     return YES;
 }
 
++(void)popTransparentViewCtrl:(UIViewController*)parentViewCtrl childViewCtrl:(UIViewController*)childViewCtrl{
+    
+    
+    
+    
+    parentViewCtrl.definesPresentationContext = NO; //self is presenting view controller
+    
+    
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:childViewCtrl];
+    
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
+        
+        nav.modalPresentationStyle=UIModalPresentationOverCurrentContext;
+        
+    }else{
+        
+        parentViewCtrl.modalPresentationStyle=UIModalPresentationCurrentContext;
+        
+    }
+    
+    
+    
+    
+    
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:NO completion:^{
+        
+    }];
+    
+    
+    
+    
+
+    
+    
+    
+}
+
 
 
 @end

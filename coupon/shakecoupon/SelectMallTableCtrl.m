@@ -36,6 +36,9 @@
     [GUIConfig tableViewGUIFormat:self.tableView];
     
     
+    self.navigationController.navigationBar.barTintColor = [GUIConfig mainColor];
+    
+    
     
     
 

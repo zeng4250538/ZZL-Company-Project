@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E6948255BF932C4567844B2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4466E56B3CF3B0D2F175C0C1 /* libPods.a */; };
+		57017F331C5F4128007B0112 /* SelectMallPopViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57017F321C5F4128007B0112 /* SelectMallPopViewCtrl.m */; };
 		5728FDBD1C5765460051F01E /* history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5728FDBC1C5765460051F01E /* history@2x.png */; };
 		5736E9E41C497B050055774D /* sampleImg05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5736E9DF1C497B050055774D /* sampleImg05@2x.png */; };
 		5736E9E51C497B050055774D /* sampleImg04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5736E9E01C497B050055774D /* sampleImg04@2x.png */; };
@@ -99,6 +100,8 @@
 /* Begin PBXFileReference section */
 		4466E56B3CF3B0D2F175C0C1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B84B3CF55C05AC490E9E3A2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		57017F311C5F4128007B0112 /* SelectMallPopViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectMallPopViewCtrl.h; sourceTree = "<group>"; };
+		57017F321C5F4128007B0112 /* SelectMallPopViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectMallPopViewCtrl.m; sourceTree = "<group>"; };
 		5728FDBC1C5765460051F01E /* history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history@2x.png"; sourceTree = "<group>"; };
 		5736E9DF1C497B050055774D /* sampleImg05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sampleImg05@2x.png"; sourceTree = "<group>"; };
 		5736E9E01C497B050055774D /* sampleImg04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sampleImg04@2x.png"; sourceTree = "<group>"; };
@@ -453,6 +456,8 @@
 				5796FA691C456490004CA23B /* SelectMallTableCtrl.m */,
 				5796FA811C47E904004CA23B /* CouponView.h */,
 				5796FA821C47E904004CA23B /* CouponView.m */,
+				57017F311C5F4128007B0112 /* SelectMallPopViewCtrl.h */,
+				57017F321C5F4128007B0112 /* SelectMallPopViewCtrl.m */,
 			);
 			name = shakeCoupon;
 			path = shakecoupon;
@@ -702,6 +707,7 @@
 				57A94E811C393A3F00BE0022 /* CouponDetailViewCtrl.m in Sources */,
 				5779BD6D1C25381600E15934 /* ViewController.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
+				57017F331C5F4128007B0112 /* SelectMallPopViewCtrl.m in Sources */,
 				57F511B01C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m in Sources */,
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
 				578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */,

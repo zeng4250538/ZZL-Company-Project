@@ -114,8 +114,11 @@
     
     
     
+    //设置状态栏为白色
+    //View controller-based status bar appearance，并将其值设置为NO。白色才有效
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     //页式控件的主色
     

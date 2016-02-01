@@ -24,6 +24,11 @@
 
 + (UIImage *)imageWithColor:(UIColor *)color rect:(CGRect)rect;
 
++(void)popTransparentViewCtrl:(UIViewController*)parentViewCtrl childViewCtrl:(UIViewController*)childViewCtrl;
+
+
+
+
 
 
 
