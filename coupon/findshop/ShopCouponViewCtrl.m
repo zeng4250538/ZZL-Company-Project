@@ -9,6 +9,7 @@
 #import "ShopCouponViewCtrl.h"
 #import "ShopCouponTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
+#import "ShopCommentViewCtrl.h"
 
 
 @interface ShopCouponViewCtrl ()
@@ -219,13 +220,16 @@
     }];
     
     
-    UILabel *commentLabel = [UILabel new];
-    commentLabel.textColor = [GUIConfig mainColor];
-    commentLabel.font = [UIFont systemFontOfSize:12];
+    UIButton *commentButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [commentButton setTitleColor:[GUIConfig mainColor] forState:UIControlStateNormal];
+    [commentButton setTitle:@"网友评论(1245)" forState:UIControlStateNormal];
     
-    [bottomBar addSubview:commentLabel];
+    commentButton.titleLabel.font = [UIFont systemFontOfSize:12];
     
-    [commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [bottomBar addSubview:commentButton];
+    
+    [commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
   //      make.width.equalTo(@40);
         make.left.equalTo(bottomBar.mas_centerX);
@@ -233,7 +237,17 @@
 
     }];
     
-    commentLabel.text=@"网友评论(1245)";
+    [commentButton bk_addEventHandler:^(id sender) {
+        
+        ShopCommentViewCtrl *vc = [ShopCommentViewCtrl new];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
     
   
     
@@ -279,6 +293,8 @@
         
         return [ShopCouponTableViewCell headerView:@"即时优惠" touchBlock:^{
             
+            NSLog(@"click 即时优惠 ");
+            
         }];
 
         
@@ -287,6 +303,9 @@
         
         
         return [ShopCouponTableViewCell headerView:@"其他优惠" touchBlock:^{
+            
+            NSLog(@"click 其他优惠 ");
+            
             
         }];
 
