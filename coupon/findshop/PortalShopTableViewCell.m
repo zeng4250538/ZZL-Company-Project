@@ -45,18 +45,45 @@
     
 }
 
-+(UIView*)headerView:(NSString*)title{
++(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock{
     
     
     UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
     uv.backgroundColor = [GUIConfig mainBackgroundColor];
     
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH/2, 30)];
-    lab.textColor = [GUIConfig grayFontColor];
+    lab.textColor = [GUIConfig grayFontColorDeep];
     lab.font = [UIFont systemFontOfSize:14];
     lab.text = title;
     
     [uv addSubview:lab];
+    
+    
+    
+    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [moreButton setTitle:@"更多 >>" forState:UIControlStateNormal];
+    
+    moreButton.frame = CGRectMake(SCREEN_WIDTH-80, 0, 80, 30);
+    moreButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    [moreButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
+    
+    [uv addSubview:moreButton];
+    
+    [moreButton bk_addEventHandler:^(id sender) {
+        
+        if (clickBlock) {
+            clickBlock();
+
+            
+        }
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    
+    
     
     return uv;
     

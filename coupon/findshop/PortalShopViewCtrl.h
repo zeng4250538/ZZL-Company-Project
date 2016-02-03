@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PortalShopViewCtrl : UITableViewController
+@interface PortalShopViewCtrl : UITableViewController<UISearchBarDelegate>
 
 @property(nonatomic,strong)NSArray *hotData;
 @property(nonatomic,strong)NSArray *otherData;

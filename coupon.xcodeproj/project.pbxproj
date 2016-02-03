@@ -85,6 +85,7 @@
 		57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511AC1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m */; };
 		57F511B01C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511AF1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m */; };
 		57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */; };
+		57F7B9FB1C624C64002A8A08 /* roommap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7B9FA1C624C64002A8A08 /* roommap@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +218,7 @@
 		57F511AF1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketNoUseViewCtrl.m; sourceTree = "<group>"; };
 		57F511B11C5CD1CF000DA1A8 /* BasketFinishViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketFinishViewCtrl.h; sourceTree = "<group>"; };
 		57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketFinishViewCtrl.m; sourceTree = "<group>"; };
+		57F7B9FA1C624C64002A8A08 /* roommap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "roommap@2x.png"; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,6 +387,7 @@
 		578E63F61C255B4800C1FB19 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				57F7B9FA1C624C64002A8A08 /* roommap@2x.png */,
 				5728FDBC1C5765460051F01E /* history@2x.png */,
 				5736E9FE1C552A460055774D /* down.png */,
 				5736E9FC1C5521520055774D /* up.png */,
@@ -624,6 +627,7 @@
 				5736E9EE1C4B87030055774D /* animation003@2x.png in Resources */,
 				578E63FC1C255BD900C1FB19 /* tab_cat1@2x.png in Resources */,
 				57A94E741C380BF700BE0022 /* good_icon@2x.png in Resources */,
+				57F7B9FB1C624C64002A8A08 /* roommap@2x.png in Resources */,
 				57A94E731C380BF700BE0022 /* bad_icon@2x.png in Resources */,
 				57A94E701C380BE400BE0022 /* shoplogo.png in Resources */,
 				5779BD751C25381600E15934 /* LaunchScreen.xib in Resources */,

@@ -12,7 +12,7 @@
 
 
 @property(nonatomic,strong)NSDictionary *data;
-+(UIView*)headerView:(NSString*)title;
++(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock;
 
 +(CGFloat)height;
 

@@ -108,6 +108,19 @@
     }];
     
     
+    UIBarButtonItem *roomMapBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"roommap"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+        
+    }];
+    
+    self.navigationItem.rightBarButtonItem = roomMapBarItem;
+    
+    
+    
+
+    
+    
 //    UIBarButtonItem *scanerBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"scanner_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
 //        
 //    }];
@@ -170,12 +183,8 @@
     
     searchBar.delegate = self;
     searchBar.frame = CGRectMake(-30, 4, SCREEN_WIDTH-100, 28);
-    //    searchBar.backgroundColor = color;
-    //    searchBar.layer.cornerRadius = 4;
-    //    searchBar.layer.masksToBounds = YES;
-    //    [searchBar.layer setBorderWidth:0];
-    //    [searchBar.layer setBorderColor:[UIColor whiteColor].CGColor];  //设置边框为白色
-    
+ 
+  //  searchBar.placeholder=@"搜索品牌，商家，优惠券";
     searchBar.backgroundImage =[UIImage new];
     
     
@@ -217,6 +226,9 @@
     self.searchBar.backgroundColor = [UIColor whiteColor];
     
     self.searchBar.backgroundColor = [GUIConfig mainBackgroundColor];
+    
+    self.searchBar.placeholder=@"搜索品牌，商家，优惠券";
+
     
     
     
@@ -269,8 +281,6 @@
     }];
     
     
-  //  [self.navigationController pushViewController:vc animated:YES];
-    
     
     
     
@@ -291,7 +301,29 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    return [PortalShopTableViewCell headerView:@"优选品牌"];
+    
+    if (section ==0) {
+        
+       return  [PortalShopTableViewCell headerView:@"优选商家" clickBlock:^{
+           
+           NSLog(@"xxxx");
+            
+        }];
+        
+    }else if (section ==1) {
+        
+        return  [PortalShopTableViewCell headerView:@"优选品牌" clickBlock:^{
+            
+        }];
+        
+        
+    }else{
+        return  [PortalShopTableViewCell headerView:@"优选品牌" clickBlock:^{
+            
+        }];
+        
+    }
+
     
 }
 
