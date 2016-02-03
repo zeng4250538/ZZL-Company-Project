@@ -35,7 +35,7 @@ typedef void(^PayBlock)(NSDictionary *data);
 
 
 
-+(UIView*)headerView:(NSString*)title;
++(UIView*)headerView:(NSString*)title touchBlock:(void(^)())touchBlock;
 
 
 +(CGFloat)height;

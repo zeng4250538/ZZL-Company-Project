@@ -276,14 +276,22 @@
     
     if (section==0) {
         
-        return [ShopCouponTableViewCell headerView:@"即时优惠"];
+        
+        return [ShopCouponTableViewCell headerView:@"即时优惠" touchBlock:^{
+            
+        }];
 
         
         
     }else{
         
-        return [ShopCouponTableViewCell headerView:@"其他优惠"];
+        
+        return [ShopCouponTableViewCell headerView:@"其他优惠" touchBlock:^{
+            
+        }];
 
+        
+   
         
     }
     
@@ -291,7 +299,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 50;
+    return 60;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

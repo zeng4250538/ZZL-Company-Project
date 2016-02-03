@@ -183,17 +183,17 @@
 
 
 
-+(UIView*)headerView:(NSString*)title{
++(UIView*)headerView:(NSString*)title touchBlock:(void(^)())touchBlock{
     
     
-    UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     uv.backgroundColor = [GUIConfig mainBackgroundColor];
     
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [uv addSubview:btn];
+    UIButton *touchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [uv addSubview:touchButton];
     
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [touchButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(uv.mas_top).offset(20);
         make.left.equalTo(uv.mas_left);
         make.right.equalTo(uv.mas_right);
@@ -201,28 +201,75 @@
         
     }];
     
+    [touchButton bk_addEventHandler:^(id sender) {
+        if (touchBlock) {
+            touchBlock();
+        }
+    } forControlEvents:UIControlEventTouchUpInside];
     
-    btn.backgroundColor = [UIColor whiteColor];
+    
+   // [touchButton setTitle:@"更多 >>" forState:UIControlStateNormal];
+
+    
+    touchButton.backgroundColor = [UIColor whiteColor];
     
     
     
     UILabel *nameLabel  = [UILabel new];
+    [touchButton addSubview:nameLabel];
     
-    [btn addSubview:nameLabel];
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(btn.mas_top);
-        make.left.equalTo(btn.mas_left).offset(15);
-        make.height.equalTo(@30);
+        make.top.equalTo(touchButton.mas_top);
+        make.left.equalTo(touchButton.mas_left).offset(15);
+        make.height.equalTo(@40);
         make.width.equalTo(@60);
         
     }];
     nameLabel.text=title;
-    nameLabel.textColor = [GUIConfig mainColor];
+    nameLabel.textColor = [GUIConfig grayFontColor];
     nameLabel.font = [UIFont systemFontOfSize:14];
     
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, 50, SCREEN_WIDTH, 1)];
+    UILabel *moreLabel = [UILabel new];
+    [touchButton addSubview:moreLabel];
+    [moreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(touchButton);
+        make.top.equalTo(touchButton.mas_top);
+        make.width.equalTo(@60);
+        make.height.equalTo(@40);
+        
+    }];
+    
+    moreLabel.text = @"更多>>";
+    moreLabel.font = [UIFont systemFontOfSize:14];
+    moreLabel.textColor = [GUIConfig grayFontColor];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    
+//    [uv addSubview:moreButton];
+//    
+//    [moreButton setTitle:@"更多 >>" forState:UIControlStateNormal];
+//    
+//    [moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(uv);
+//        make.height.equalTo(@40);
+//        make.width.equalTo(@80);
+//        
+//    }];
+//    
+    
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, 60, SCREEN_WIDTH, 1)];
     line.backgroundColor = [GUIConfig mainBackgroundColor];
     
     [uv addSubview:line];

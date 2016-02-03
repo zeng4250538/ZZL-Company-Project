@@ -312,7 +312,7 @@
         
     }else if (section ==1) {
         
-        return  [PortalShopTableViewCell headerView:@"优选品牌" clickBlock:^{
+        return  [PortalShopTableViewCell headerView:@"品牌街" clickBlock:^{
             
         }];
         
