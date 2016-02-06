@@ -10,6 +10,8 @@
 #import "ShopCouponTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 #import "ShopCommentViewCtrl.h"
+#import "CouponListViewCtrl.h"
+#import "MallMapViewCtrl.h"
 
 
 @interface ShopCouponViewCtrl ()
@@ -293,6 +295,13 @@
         
         return [ShopCouponTableViewCell headerView:@"即时优惠" touchBlock:^{
             
+            
+            CouponListViewCtrl *vc =[CouponListViewCtrl new];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
             NSLog(@"click 即时优惠 ");
             
         }];
@@ -304,7 +313,9 @@
         
         return [ShopCouponTableViewCell headerView:@"其他优惠" touchBlock:^{
             
-            NSLog(@"click 其他优惠 ");
+            CouponListViewCtrl *vc =[CouponListViewCtrl new];
+            
+            [self.navigationController pushViewController:vc animated:YES];
             
             
         }];
