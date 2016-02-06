@@ -7,6 +7,7 @@
 //
 
 #import "ShopCommentViewCtrl.h"
+#import "ShopCommentTableViewCell.h"
 
 @interface ShopCommentViewCtrl ()
 
@@ -16,6 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    self.navigationItem.title=@"商店评论";
+    
+    
+    [self.tableView registerClass:[ShopCommentTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -29,29 +37,29 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 100;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 10;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    ShopCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // Configure the cell...
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

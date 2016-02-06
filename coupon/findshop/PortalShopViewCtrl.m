@@ -12,6 +12,7 @@
 #import "KeyWordSearchViewCtrl.h"
 #import "SelectMallTableCtrl.h"
 #import "SelectCityTableViewCtrl.h"
+#import "ShopListViewCtrl.h"
 
 @interface PortalShopViewCtrl ()
 
@@ -306,13 +307,22 @@
         
        return  [PortalShopTableViewCell headerView:@"优选商家" clickBlock:^{
            
-           NSLog(@"xxxx");
-            
+           
+           ShopListViewCtrl *vc = [ShopListViewCtrl new];
+           
+           [self.navigationController pushViewController:vc animated:YES];
+           
+           
         }];
         
     }else if (section ==1) {
         
         return  [PortalShopTableViewCell headerView:@"品牌街" clickBlock:^{
+            
+            ShopListViewCtrl *vc = [ShopListViewCtrl new];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
             
         }];
         

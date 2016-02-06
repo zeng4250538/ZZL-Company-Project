@@ -129,7 +129,7 @@
 
     
     
-    NSArray *ary = @[@"sampleImg01.png",@"sampleImg02.png",@"sampleImg03.png",@"sampleImg04.png"];
+    NSArray *ary = @[@"sampleImg01.png"];
     
     
     
@@ -147,6 +147,8 @@
         
         
         UIImage *img = [UIImage imageNamed:imgFile];
+        
+        
         
         
         UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
@@ -175,9 +177,18 @@
         
         imgView.frame = r;
         
-        [uv addSubview:imgView];
         
         [self.contentView addSubview:uv];
+        
+        
+        UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,FrameHeight)];
+        
+        bgView.image = [UIImage imageNamed:@"spring.png"];
+        
+        
+        [uv addSubview:bgView];
+        [uv addSubview:imgView];
+        
         
         
         
