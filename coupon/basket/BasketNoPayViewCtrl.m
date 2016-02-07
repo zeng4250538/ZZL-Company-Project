@@ -7,7 +7,7 @@
 //
 
 #import "BasketNoPayViewCtrl.h"
-#import "ShopCouponTableViewCell.h"
+#import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 
 @interface BasketNoPayViewCtrl ()
@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[ShopCouponTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
@@ -55,7 +55,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return [ShopCouponTableViewCell height];
+    return [CouponInfoTableViewCell height];
     
 }
 
@@ -73,7 +73,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    ShopCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     NSDictionary *d = [AppShareData instance].getCartList[ [indexPath row]];

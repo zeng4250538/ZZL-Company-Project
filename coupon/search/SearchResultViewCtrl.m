@@ -7,7 +7,7 @@
 //
 
 #import "SearchResultViewCtrl.h"
-#import "ShopCouponTableViewCell.h"
+#import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 
 
@@ -32,7 +32,7 @@
     
     [self makeDisplayCtrl];
     
-    [self.tableView registerClass:[ShopCouponTableViewCell class] forCellReuseIdentifier:@"cell1"];
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell1"];
     
     
     [self.displayCtrl.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell2"];
@@ -166,7 +166,7 @@
  
     }else{
         
-        return [ShopCouponTableViewCell height];
+        return [CouponInfoTableViewCell height];
        
         
     }
@@ -196,7 +196,7 @@
     }
     
     
-    ShopCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
     
     // Configure the cell...
     

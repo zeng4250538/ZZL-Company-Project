@@ -7,7 +7,7 @@
 //
 
 #import "BasketNoUseViewCtrl.h"
-#import "ShopCouponTableViewCell.h"
+#import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 
 @interface BasketNoUseViewCtrl ()
@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[ShopCouponTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [self loadData];
     
@@ -52,7 +52,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    return [ShopCouponTableViewCell height];
+    return [CouponInfoTableViewCell height];
     
     
 }
@@ -69,7 +69,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ShopCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     [cell updateData:self.dataList[[indexPath row]]];

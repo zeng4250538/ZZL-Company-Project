@@ -21,7 +21,7 @@ typedef enum : NSUInteger {
 
 typedef void(^PayBlock)(NSDictionary *data);
 
-@interface ShopCouponTableViewCell : UITableViewCell
+@interface CouponInfoTableViewCell : UITableViewCell
 
 
 @property(nonatomic,strong)NSDictionary *data;
@@ -35,7 +35,7 @@ typedef void(^PayBlock)(NSDictionary *data);
 
 
 
-+(UIView*)headerView:(NSString*)title touchBlock:(void(^)())touchBlock;
++(UIView*)headerView:(NSString*)title clickBlock:(void(^)())touchBlock;
 
 
 +(CGFloat)height;

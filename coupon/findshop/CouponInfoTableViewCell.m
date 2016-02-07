@@ -6,10 +6,10 @@
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "ShopCouponTableViewCell.h"
+#import "CouponInfoTableViewCell.h"
 #import "ToPayTableViewCtrl.h"
 
-@interface ShopCouponTableViewCell()
+@interface CouponInfoTableViewCell()
 @property(nonatomic,strong)UIImageView *logoView;  //商店图片
 @property(nonatomic,strong)UILabel *titleLabel;    //优惠券标题
 @property(nonatomic,strong)UILabel *addtionLabel;    //额外说明
@@ -26,7 +26,7 @@
 @end
 
 
-@implementation ShopCouponTableViewCell
+@implementation CouponInfoTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -183,7 +183,7 @@
 
 
 
-+(UIView*)headerView:(NSString*)title touchBlock:(void(^)())touchBlock{
++(UIView*)headerView:(NSString*)title clickBlock:(void(^)())touchBlock{
     
     
     UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
@@ -208,8 +208,7 @@
     } forControlEvents:UIControlEventTouchUpInside];
     
     
-   // [touchButton setTitle:@"更多 >>" forState:UIControlStateNormal];
-
+ 
     
     touchButton.backgroundColor = [UIColor whiteColor];
     
@@ -294,13 +293,11 @@
     
     
     
-    NSLog(@"update  url  %@",data[@"imgurl"]);
-    
-    self.logoView.image = [UIImage imageNamed:data[@"imgurl"]];
+    self.logoView.image = [UIImage imageNamed:data[@"icon"]];
     self.titleLabel.text=data[@"name"];
     self.priceLabel.text=data[@"price"];
     
-    self.detailLabel.text=@"满100送20，全天通用，消费满100";
+    self.detailLabel.text=data[@"prompt"];
     
     
     

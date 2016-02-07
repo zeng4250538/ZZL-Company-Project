@@ -8,7 +8,7 @@
 
 #import "CartViewCtrl.h"
 
-#import "ShopCouponTableViewCell.h"
+#import "CouponInfoTableViewCell.h"
 #import "ToPayTableViewCtrl.h"
 #import "AppShareData.h"
 
@@ -31,7 +31,7 @@
     self.tableView.delegate = self;
     
     
-    [self.tableView registerClass:[ShopCouponTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     self.navigationItem.title=@"篮子";
     
@@ -219,7 +219,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return [ShopCouponTableViewCell height];
+    return [CouponInfoTableViewCell height];
     
 }
 
@@ -249,7 +249,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ShopCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     

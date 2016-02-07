@@ -7,7 +7,7 @@
 //
 
 #import "ShopCouponViewCtrl.h"
-#import "ShopCouponTableViewCell.h"
+#import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 #import "ShopCommentViewCtrl.h"
 #import "CouponListViewCtrl.h"
@@ -24,7 +24,7 @@
     [super viewDidLoad];
     
     
-    [self.tableView registerClass:[ShopCouponTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [self makeHeaderView];
     
@@ -293,7 +293,7 @@
     if (section==0) {
         
         
-        return [ShopCouponTableViewCell headerView:@"即时优惠" touchBlock:^{
+        return [CouponInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
             
             
             CouponListViewCtrl *vc =[CouponListViewCtrl new];
@@ -311,7 +311,7 @@
     }else{
         
         
-        return [ShopCouponTableViewCell headerView:@"其他优惠" touchBlock:^{
+        return [CouponInfoTableViewCell headerView:@"其他优惠" clickBlock:^{
             
             CouponListViewCtrl *vc =[CouponListViewCtrl new];
             
@@ -334,7 +334,10 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return [ShopCouponTableViewCell height];
+    
+    
+    
+    return [CouponInfoTableViewCell height];
     
 }
 
@@ -357,7 +360,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ShopCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     

@@ -53,6 +53,12 @@
 
 #import "YYImage.h"
 #import "AppShareData.h"
+#import "MockData.h"
+
+
+#define TRY @try{
+#define CATCH      }@catch (NSException *exception) {}@finally {}
+
 
 
 

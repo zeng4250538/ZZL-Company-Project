@@ -6,10 +6,10 @@
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "PortalShopTableViewCell.h"
+#import "ShopInfoTableViewCell.h"
 
 
-@interface PortalShopTableViewCell()
+@interface ShopInfoTableViewCell()
 
 @property(nonatomic,strong)UIImageView *logoView;  //商店图片
 @property(nonatomic,strong)UILabel *titleLabel;    //商店标题
@@ -29,7 +29,7 @@
 @end
 
 
-@implementation PortalShopTableViewCell
+@implementation ShopInfoTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -241,18 +241,15 @@
    // NSString *urlString = self.data[@"imgurl"];
     
     
-    self.titleLabel.text = self.data[@"title"];
+    self.titleLabel.text = self.data[@"name"];
     
     self.goodLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"goodcount"] integerValue]];
     
     self.badLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"badcount"] integerValue]];
     
-    self.commentLabel.text = self.data[@"comment"];
+    self.commentLabel.text = self.data[@"prompt"];
     
-    NSString *urlString = self.data[@"imgurl"];
-    
-    
-     urlString = [Utils getRandomImage:@"商家图片"];
+    NSString *urlString = self.data[@"icon"];
     
     
     

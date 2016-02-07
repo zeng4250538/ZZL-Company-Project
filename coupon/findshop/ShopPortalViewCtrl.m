@@ -6,28 +6,44 @@
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "PortalShopViewCtrl.h"
-#import "PortalShopTableViewCell.h"
+#import "ShopPortalViewCtrl.h"
+#import "ShopInfoTableViewCell.h"
 #import "ShopCouponViewCtrl.h"
 #import "KeyWordSearchViewCtrl.h"
 #import "SelectMallTableCtrl.h"
 #import "SelectCityTableViewCtrl.h"
 #import "ShopListViewCtrl.h"
-
-@interface PortalShopViewCtrl ()
+#import "MallMapViewCtrl.h"
+#import "ShopService.h"
+#import "CouponInfoTableViewCell.h"
+#import "CouponListViewCtrl.h"
+#import "SelectMallPopViewCtrl.h"
+#import "CouponDetailViewCtrl.h"
+@interface ShopPortalViewCtrl ()
 
 @property(nonatomic,strong)UISearchBar *searchBar;
 
+@property(nonatomic,strong)NSArray *hotShopData;
+@property(nonatomic,strong)NSArray *couponData;
+@property(nonatomic,strong)NSArray *hotBrandData;
+
+
+@property(nonatomic,strong)NSArray *otherData;
+@property(nonatomic,strong)NSDictionary *portalData;
+
 @end
 
-@implementation PortalShopViewCtrl
+@implementation ShopPortalViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title=@"找商家";
     
-    [self.tableView registerClass:[PortalShopTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell1"];
+    
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell2"];
+    
     
     [self makeSearchBar];
     
@@ -47,35 +63,52 @@
 
 -(void)loadData{
     
-    self.hotData = @[
-                     @{@"imgurl":@"shoplogo.png",
-                       @"title":@"赛百味",
-                       @"goodcount":@100,
-                       @"badcount":@2,
-                       @"comment":@"全场8折，满足100送20"
-                       },
-                     @{@"imgurl":@"shoplogo2.png",
-                       @"title":@"点都得",
-                       @"goodcount":@100,
-                       @"badcount":@2,
-                       @"comment":@"全场8折，满足100送20"
-                       },
-                     @{@"imgurl":@"shoplogo3.png",
-                       @"title":@"贡茶",
-                       @"goodcount":@100,
-                       @"badcount":@2,
-                       @"comment":@"全场8折，满足100送20"
-                       },
-                     
-                     @{@"imgurl":@"shoplogo.png",
-                       @"title":@"绿茵阁",
-                       @"goodcount":@100,
-                       @"badcount":@2,
-                       @"comment":@"全场8折，满足100送20"
-                       }
-                     
-                     
-                     ];
+    
+    
+    ShopService *service = [ShopService new];
+    
+    
+    NSDictionary *params = @{@"mallId":@5};
+    
+    [service queryShopPortalData:params success:
+     ^(int code, NSString *message, id data) {
+         
+         if (code==0) {
+             
+             TRY
+             
+             self.hotShopData = data[@"hotshop"];
+             self.couponData=data[@"hotcoupon"];
+             self.hotBrandData = data[@"hotbrand"];
+             
+             
+             CATCH
+             
+             
+             
+         }else{
+             
+             
+             
+             
+         }
+         
+         
+        
+    } failure:
+     ^(int code, BOOL retry, NSString *message, id data) {
+         
+         
+        
+        
+    }];
+    
+    
+    
+    
+    
+   // self.hotData =
+    
     
     
     
@@ -112,6 +145,15 @@
     UIBarButtonItem *roomMapBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"roommap"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         
+        MallMapViewCtrl *vc = [MallMapViewCtrl new];
+        
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
+        
         
     }];
     
@@ -143,15 +185,24 @@
     self.navigationItem.titleView = headButton;
     
     
+    
+    
     [headButton bk_addEventHandler:^(id sender) {
         
-        SelectMallTableCtrl *vc = [SelectMallTableCtrl new];
         
-        [self.navigationController pushViewController:vc animated:YES];
+        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
+        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
+        
+        //        SelectMallTableCtrl *vc = [SelectMallTableCtrl new];
+        //
+        //        [self.navigationController pushViewController:vc animated:YES];
+        //
         
         
     } forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     
     
@@ -296,7 +347,20 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    return [PortalShopTableViewCell height];
+    if (indexPath.section==0 || indexPath.section==2) {
+        
+        return [ShopInfoTableViewCell height];
+
+        
+        
+    }else{
+        
+        return [CouponInfoTableViewCell height];
+    }
+    
+    
+    
+    
     
 }
 
@@ -305,10 +369,11 @@
     
     if (section ==0) {
         
-       return  [PortalShopTableViewCell headerView:@"优选商家" clickBlock:^{
+       return  [ShopInfoTableViewCell headerView:@"优选商家" clickBlock:^{
            
            
            ShopListViewCtrl *vc = [ShopListViewCtrl new];
+           vc.hidesBottomBarWhenPushed = YES;
            
            [self.navigationController pushViewController:vc animated:YES];
            
@@ -317,9 +382,13 @@
         
     }else if (section ==1) {
         
-        return  [PortalShopTableViewCell headerView:@"品牌街" clickBlock:^{
+        return  [ShopInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
             
-            ShopListViewCtrl *vc = [ShopListViewCtrl new];
+            
+            CouponListViewCtrl *vc = [CouponListViewCtrl new];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
             
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -328,7 +397,14 @@
         
         
     }else{
-        return  [PortalShopTableViewCell headerView:@"优选品牌" clickBlock:^{
+        return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
+            
+            
+            ShopListViewCtrl *vc = [ShopListViewCtrl new];
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
             
         }];
         
@@ -348,11 +424,29 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    ShopCouponViewCtrl *vc =[[ShopCouponViewCtrl alloc] init];
+    if (indexPath.section == 0 || indexPath.section==2) {
+        ShopCouponViewCtrl *vc =[[ShopCouponViewCtrl alloc] init];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }else{
+        
+        
+        CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
+        
+    }
     
-    vc.hidesBottomBarWhenPushed = YES;
     
-    [self.navigationController pushViewController:vc animated:YES];
     
     
 }
@@ -361,14 +455,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     
     if (section ==0 ) {
-        return [self.hotData count];
+        return [self.hotShopData count];
+    }else if (section ==1){
+        return [self.couponData count];
+        
+    }else{
+        return [self.hotBrandData count];
+        
+        
     }
     // Return the number of rows in the section.
     return 2;
@@ -376,16 +477,63 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PortalShopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
-    cell.data = self.hotData[[indexPath row]];
     
-    [cell updateData];
+    if ([indexPath section]==0) {
+        
+        ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+ 
+        cell.data = self.hotShopData[[indexPath row]];
+        
+        [cell updateData];
+        
+        return cell;
+        
+    }else   if ([indexPath section]==1) {
+        
+        
+        CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+        
+        
+        
+        [cell updateData:self.couponData[indexPath.row]];
+        
+        
+        cell.couponType = CouponTypeLimited;
+        
+        
+        
+        return cell;
+        
+        
+        
+        
+        
+    }else if([indexPath section]==2) {
+        
+        
+        ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+        
+
+
+        cell.data = self.hotBrandData[[indexPath row]];
+        
+        [cell updateData];
+
+        return cell;
+        
+    }else{
+
+        
+        return nil;
+    }
+    
+    
+    
     
     // Configure the cell...
     
-    return cell;
 }
 
 

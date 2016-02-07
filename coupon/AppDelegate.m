@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ShakeViewCtrl.h"
-#import "PortalShopViewCtrl.h"
+#import "ShopPortalViewCtrl.h"
 #import "PersonInfoViewCtrl.h"
 #import "CartViewCtrl.h"
 @interface AppDelegate ()
@@ -36,7 +36,7 @@
     
     
     NSArray *vcList = @[[[ShakeViewCtrl alloc] init],
-                        [[PortalShopViewCtrl alloc] init],
+                        [[ShopPortalViewCtrl alloc] init],
                        /* [[CartViewCtrl alloc] init],*/
                         
                         [[PersonInfoViewCtrl alloc] init]

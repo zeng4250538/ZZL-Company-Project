@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PortalShopTableViewCell : UITableViewCell
+@interface ShopInfoTableViewCell : UITableViewCell
 
 
 @property(nonatomic,strong)NSDictionary *data;

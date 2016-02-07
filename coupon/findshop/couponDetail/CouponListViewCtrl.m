@@ -7,8 +7,12 @@
 //
 
 #import "CouponListViewCtrl.h"
+#import "CouponInfoTableViewCell.h"
+#import "CouponService.h"
 
 @interface CouponListViewCtrl ()
+
+@property(nonatomic,strong)NSArray *data;
 
 @end
 
@@ -18,9 +22,12 @@
     [super viewDidLoad];
     
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     self.navigationItem.title=@"优惠券列表";
+    
+    
+    [self loadData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -29,12 +36,52 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+-(void)loadData{
+    
+    
+    CouponService *service = [CouponService new];
+    
+    
+    [service queryPortalCoupon:nil success:
+     ^(int code, NSString *message, id data) {
+         
+         if (code==0) {
+            
+             self.data = data;
+             
+             [self.tableView reloadData];
+            
+         }
+        
+    } failure:
+     ^(int code, BOOL retry, NSString *message, id data) {
+        
+         
+    }];
+    
+    //service qu
+    
+    
+    
+    
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    return [CouponInfoTableViewCell height];
+    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -43,12 +90,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return [self.data count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
+    
+    NSDictionary *d = self.data[indexPath.row];
+    
+    [cell updateData:d];
+    
+    
     
     // Configure the cell...
     

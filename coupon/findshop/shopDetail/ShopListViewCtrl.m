@@ -7,8 +7,12 @@
 //
 
 #import "ShopListViewCtrl.h"
+#import "ShopInfoTableViewCell.h"
+#import "ShopService.h"
 
 @interface ShopListViewCtrl ()
+
+@property(nonatomic,strong)NSArray *shopList;
 
 @end
 
@@ -18,14 +22,46 @@
     [super viewDidLoad];
     
     
+    
+    [self loadData];
+    
     self.navigationItem.title=@"商家列表";
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+
+-(void)loadData{
+    
+    
+    ShopService *service = [ShopService new];
+    
+    [service queryMoreHotShop:nil success:
+     ^(int code, NSString *message, id data) {
+         
+         if (code==0) {
+             self.shopList = data;
+             
+             [self.tableView reloadData];
+             
+         }
+         
+        
+    } failure:
+     ^(int code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +71,14 @@
 
 #pragma mark - Table view data source
 
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return [ShopInfoTableViewCell height];
+    
+    
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
@@ -42,12 +86,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return [self.shopList count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
+    
+    cell.data = self.shopList[[indexPath row]];
+    
+    [cell updateData];
     
     // Configure the cell...
     
