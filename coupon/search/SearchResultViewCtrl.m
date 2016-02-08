@@ -9,6 +9,9 @@
 #import "SearchResultViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
+#import "CouponService.h"
+
+
 
 
 @interface SearchResultViewCtrl ()
@@ -16,6 +19,9 @@
 @property(nonatomic,strong)UISearchDisplayController *displayCtrl;
 
 @property(nonatomic,strong)NSArray *keyWordList;
+
+@property(nonatomic,strong)NSArray *dataList;
+
 
 
 
@@ -53,6 +59,28 @@
 -(void)loadData{
     
     self.keyWordList = @[@"麦当劳",@"咖啡",@"美甲",@"蛋糕"];
+    
+    
+    CouponService *service = [CouponService new];
+    
+    
+    [service queryByKeyword:nil success:^(int code, NSString *message, id data) {
+        
+        if (code ==0) {
+            
+            self.dataList = data;
+        }
+        
+        
+    } failure:^(int code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
+    
+    
+    
     
     
     
@@ -151,6 +179,9 @@
     if (self.displayCtrl.searchResultsTableView == tableView) {
         
         return [self.keyWordList count];
+    }else{
+        
+        return [self.dataList count];
     }
     
     return 7;
@@ -201,7 +232,9 @@
     // Configure the cell...
     
     
-    [cell updateData];
+    NSDictionary *d = self.dataList[indexPath.row];
+    
+    [cell updateData:d];
     
     
     
@@ -231,6 +264,11 @@
         
         
         CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+        
+        NSDictionary *d = self.dataList[indexPath.row];
+        
+        vc.data= d;
+        
         
         [self.navigationController pushViewController:vc animated:YES];
 

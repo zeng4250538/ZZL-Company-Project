@@ -270,7 +270,7 @@
         
         
         
-        UIView *ballView = [[UIView alloc] initWithFrame:CGRectMake(addCartButton.frame.origin.x+SCREEN_WIDTH/8, SCREEN_HEIGHT-100,20, 20)];
+        UIView *ballView = [[UIView alloc] initWithFrame:CGRectMake(addCartButton.frame.origin.x+SCREEN_WIDTH/8, SCREEN_HEIGHT-60,20, 20)];
         
         ballView.backgroundColor = [UIColor redColor];
         ballView.layer.cornerRadius =ballView.frame.size.width;
@@ -297,11 +297,9 @@
             
             [ballView removeFromSuperview];
             
-            NSDictionary *dd = [Utils getRandomData];
             
             
-            
-            [[AppShareData instance] addCouponToCart:dd];
+            [[AppShareData instance] addCouponToCart:self.data];
             
             [self updateCartNum];
             
@@ -397,7 +395,7 @@
         
     }];
     
-    couponNameLabel.text=@"星巴克20元代金券";
+    couponNameLabel.text=self.data[@"name"];
     
     
     UILabel *priceLabel = [UILabel new];
@@ -414,7 +412,7 @@
         make.height.equalTo(@20);
         
     }];
-    priceLabel.text=@"￥20";
+    priceLabel.text=self.data[@"price"];
     
     
     
@@ -441,7 +439,7 @@
         
     }];
     
-    addressLabel.text=@"星巴克(正佳广场一楼)     300米";
+    addressLabel.text=self.data[@"shop"][@"address"];
     
     UIView *line = [GUIConfig line];
     

@@ -12,9 +12,13 @@
 #import "ShopCommentViewCtrl.h"
 #import "CouponListViewCtrl.h"
 #import "MallMapViewCtrl.h"
+#import "CouponService.h"
 
 
 @interface ShopCouponViewCtrl ()
+
+@property(nonatomic,strong)NSArray *limitCouponList;
+@property(nonatomic,strong)NSArray *otherCouponList;
 
 @end
 
@@ -37,11 +41,48 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 48, 0);
     
     
+    [self loadData];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+-(void)loadData{
+    
+    
+    
+    
+    CouponService *service = [CouponService new];
+    
+    [service queryShopCoupon:nil success:
+    ^(int code, NSString *message, id data) {
+        
+        
+        if (code==0) {
+            
+            self.limitCouponList = data[@"limit"];
+            
+            self.otherCouponList = data[@"other"];
+            
+            [self.tableView reloadData];
+        }
+        
+        
+        
+        
+        
+    } failure:
+    ^(int code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -278,6 +319,27 @@
     
     CouponDetailViewCtrl *vc = [[CouponDetailViewCtrl alloc] init];
     
+    
+    
+    
+    if ([indexPath section]==0) {
+        
+        
+        vc.data = self.limitCouponList[indexPath.row];
+        
+    }else{
+        
+        
+        vc.data = self.otherCouponList[indexPath.row];
+    }
+    
+    
+    
+    
+  //  NSDictionary *d = s
+    
+    
+    
     vc.hidesBottomBarWhenPushed = YES;
     
     
@@ -351,7 +413,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section==0) {
-        return 2;
+        return [self.limitCouponList count];
+    }else{
+        return [self.otherCouponList count];
+        
+        
     }
     
     // Return the number of rows in the section.
@@ -364,16 +430,27 @@
     
     
     
+
+    
     if ([indexPath section]==0) {
         
         cell.couponType = CouponTypeLimited;
+        
+        NSDictionary *d = self.limitCouponList[indexPath.row];
+        
+        [cell updateData:d];
+        
     }else{
         
         cell.couponType = CouponTypeNormal;
+        
+        NSDictionary *d = self.otherCouponList[indexPath.row];
+        
+        [cell updateData:d];
+        
     }
     
     
-    [cell updateData];
     
     // Configure the cell...
     

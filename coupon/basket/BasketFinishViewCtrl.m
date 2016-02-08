@@ -9,6 +9,7 @@
 #import "BasketFinishViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
+#import "CouponService.h"
 
 @interface BasketFinishViewCtrl ()
 
@@ -36,7 +37,23 @@
 -(void)loadData{
     
     
-    self.dataList = @[[Utils getRandomData],[Utils getRandomData],[Utils getRandomData],[Utils getRandomData],[Utils getRandomData],[Utils getRandomData],[Utils getRandomData],[Utils getRandomData],[Utils getRandomData]];
+    
+    
+    CouponService *service = [CouponService new];
+    
+    [service queryFinishCoupon:nil success:^(int code, NSString *message, id data) {
+        
+        if (code==0) {
+            self.dataList = data;
+            
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(int code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
     
     
     

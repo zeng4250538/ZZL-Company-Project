@@ -13,6 +13,10 @@
 #import "AppShareData.h"
 #import "CartViewCtrl.h"
 #import "BasketContainerViewCtrl.h"
+#import "CouponService.h"
+#import "ShakeService.h"
+
+
 
 @interface ShakeCouponViewCtrl ()
 
@@ -26,6 +30,10 @@
 @property(nonatomic,strong)UISwipeGestureRecognizer *swipeLeftCouponRG;
 
 @property(nonatomic,strong)NSDictionary *couponData;
+
+@property(nonatomic,strong)NSMutableArray *shakeCouponList;
+
+@property(nonatomic,strong)UIView *placeHolderView;
 
 
 
@@ -59,25 +67,24 @@
     
     self.swipeDownCouponRG.direction = UISwipeGestureRecognizerDirectionDown;
 
-    self.swipeLeftCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipe:)];
-    
-    self.swipeLeftCouponRG.direction = UISwipeGestureRecognizerDirectionLeft;
-    
+//    self.swipeLeftCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipe:)];
+//    
+//    self.swipeLeftCouponRG.direction = UISwipeGestureRecognizerDirectionLeft;
+//    
     
     [self makeCartView];
     [self makeAddCommentView];
     
     
+    [self makeRequestCoupon];
     
     
     
     
-//    UIButton *upButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    
-//    [upButton setImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
-//    
-//    upButton.frame= CGRectMake((SCREEN_WIDTH-30)/2, 100,30 , 30);
-//    [self.view addSubview:upButton];
+    
+    
+    
+    
     
     
     
@@ -95,9 +102,61 @@
 }
 
 
+#pragma mark - 初始化优惠券
+
+-(void)makeRequestCoupon{
+    
+    
+    CGFloat viewWidth = SCREEN_WIDTH-120;
+    CGFloat viewHeight = SCREEN_WIDTH-120+40;
+    
+    
+    
+    ShakeService *service = [ShakeService new];
+    
+    [service requestShakeCoupon:nil success:^(int code, NSString *message, id data) {
+        
+        
+        if (code==0) {
+            
+            self.shakeCouponList = [data mutableCopy];
+            
+            self.couponData = self.shakeCouponList[0];
+            
+            
+            [self.shakeCouponList removeObjectAtIndex:0];
+            
+            
+            
+            CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
+            
+            
+            [self.view addSubview:couponView];
+            
+            
+            self.imgView = couponView;
+            
+            
+            
+        }
+        
+        
+        
+    } failure:^(int code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
+    
+    
+    
+}
 
 
-#pragma mark - 抛物线规矩
+
+
+#pragma mark - 抛物线轨迹
 - (void)beginThrowing:(UIView *)view
 {
     
@@ -144,7 +203,27 @@
       //  self.imgView = nil;
         
         
-        self.couponData = [Utils getRandomData];
+     
+        if ([self.shakeCouponList count]==0) {
+            
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+            
+            
+            
+            [SVProgressHUD showInfoWithStatus:@"本轮优惠券已经完毕，请重新摇摇"];
+            
+            
+            
+            return ;
+            
+        }
+        
+        self.couponData = self.shakeCouponList[0];
+        
+        [self.shakeCouponList removeObjectAtIndex:0];
         
         CGFloat viewWidth = SCREEN_WIDTH-120;
         CGFloat viewHeight = SCREEN_WIDTH-120+40;
@@ -220,10 +299,7 @@
     [cartButton bk_addEventHandler:^(id sender) {
         
         
-        
-        
         [self dismissViewControllerAnimated:NO completion:^{
-            
             
             
             BasketContainerViewCtrl *vc = [BasketContainerViewCtrl new];
@@ -299,30 +375,34 @@
     
 }
 
+
 #pragma mark - 额外相关的视图
 
 -(void)makeAddCommentView{
     
     //加入
     
-    CGFloat viewWidth = SCREEN_WIDTH-120;
-    CGFloat viewHeight = SCREEN_WIDTH-120+40;
     
     
-    self.couponData = [Utils getRandomData];
+    self.placeHolderView = [UIView new];
     
-    CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
+    [self.view addSubview:self.placeHolderView];
     
-    // couponView.layer.borderWidth=2;
-    couponView.layer.borderColor = [[UIColor blackColor] CGColor];
-    
-    
-    [self.view addSubview:couponView];
+    self.placeHolderView.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.2f];
     
     
-    self.imgView = couponView;
+    [self.placeHolderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.center.equalTo(self.view);
+        
+        make.width.equalTo(@(SCREEN_WIDTH-120));
+        make.height.equalTo(@(SCREEN_WIDTH-120+40));
+        
+        
+        
+        
+    }];
     
-
     
     
     
@@ -338,12 +418,12 @@
         make.width.equalTo(@30);
         make.height.equalTo(@30);
         make.centerX.equalTo(self.view);
-        make.top.equalTo(@130);
+        make.bottom.equalTo(self.placeHolderView.mas_top).offset(-20);
+       // make.bottom.equalTo(self.imgView.mas_top).offset(-20);
        // make.bottom.equalTo(couponView.).offset(-20);
         
         
     }];
-    
     
     UIImageView *upImageView2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"up.png"]];
     [self.view addSubview:upImageView2];
@@ -358,6 +438,7 @@
         
         
     }];
+    
     
     
     UILabel *upLabel = [UILabel new];
@@ -386,7 +467,8 @@
         make.width.equalTo(@30);
         make.height.equalTo(@30);
         make.centerX.equalTo(self.view);
-        make.top.equalTo(@(SCREEN_HEIGHT-170));
+        //距离滑动视图 20个像素
+        make.top.equalTo(self.placeHolderView.mas_bottom).offset(10);
         
         
     }];
@@ -444,7 +526,31 @@
     CGFloat viewWidth = SCREEN_WIDTH-120;
     CGFloat viewHeight = SCREEN_WIDTH-120+40;
     
-    self.couponData = [Utils getRandomData];
+    
+    
+    
+    if ([self.shakeCouponList count]==0) {
+        
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+        
+        
+        
+        [SVProgressHUD showInfoWithStatus:@"本轮优惠券已经完毕，请重新摇摇"];
+        
+        
+        
+        return ;
+        
+    }
+    
+   
+    
+    self.couponData = self.shakeCouponList[0];
+    
+    [self.shakeCouponList removeObjectAtIndex:0];
     
     CouponView *nextView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
     
@@ -474,8 +580,6 @@
         
         
         [self beginThrowing:rg.view];
-        
-        
         
         
         
@@ -590,9 +694,9 @@
     [self.imgView addGestureRecognizer:self.swipeDownCouponRG];
     
     
-    [self.imgView removeGestureRecognizer:self.swipeLeftCouponRG];
+    //[self.imgView removeGestureRecognizer:self.swipeLeftCouponRG];
     
-    [self.imgView addGestureRecognizer:self.swipeLeftCouponRG];
+   // [self.imgView addGestureRecognizer:self.swipeLeftCouponRG];
     
     
 }
@@ -710,11 +814,6 @@
         
         rr.origin.y = yy;
         rr.origin.x = rr.origin.x+SCREEN_WIDTH/5;
-        //        rr.size.width=0;
-        //
-        //        rr.size.height=0;
-        //
-        
         self.imgView.frame = rr;
         
         self.imgView.transform = CGAffineTransformMakeScale(0.2, 0.2);

@@ -9,6 +9,7 @@
 #import "BasketNoUseViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
+#import "CouponService.h"
 
 @interface BasketNoUseViewCtrl ()
 
@@ -36,7 +37,24 @@
 -(void)loadData{
     
     
-    self.dataList = @[[Utils getRandomData],[Utils getRandomData],[Utils getRandomData],[Utils getRandomData],[Utils getRandomData]];
+    
+    
+    CouponService *service = [CouponService new];
+    
+    [service queryNoUseCoupon:nil success:^(int code, NSString *message, id data) {
+        
+        if (code==0) {
+            self.dataList = data;
+            
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(int code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
     
     
 }

@@ -47,7 +47,7 @@
             
         }else{
         
-            uv.image =[UIImage imageNamed:self.data[@"imgurl"]];
+            uv.image =[UIImage imageNamed:self.data[@"icon"]];
         }
         
     

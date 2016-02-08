@@ -16,4 +16,31 @@
                 failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
 
 
+
+
+-(void)queryShopCoupon:(NSDictionary*)params
+                 success:(void(^)(int code,NSString *message,id data))success
+                 failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
+
+
+
+-(void)queryNoUseCoupon:(NSDictionary*)params
+               success:(void(^)(int code,NSString *message,id data))success
+               failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
+
+
+
+-(void)queryFinishCoupon:(NSDictionary*)params
+                success:(void(^)(int code,NSString *message,id data))success
+                failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
+
+
+
+-(void)queryByKeyword:(NSDictionary*)params
+              success:(void(^)(int code,NSString *message,id data))success
+              failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
+
+
+
+
 @end

@@ -52,6 +52,22 @@
     
 }
 
+-(NSString*)randomAddress{
+    
+    
+    return [@[@"正佳三楼109",
+              @"天河城一楼西门",
+              @"摩登百货二楼",
+              @"万达四楼505"
+              ] randomObject];
+
+    
+    
+    
+}
+
+
+
 -(NSString*)randomShopPrompt{
     
     
@@ -65,6 +81,20 @@
     
 }
 
+-(NSString*)randomPhone{
+    
+    
+    return [@[@"13808860210",
+              @"020-83456789",
+              @"020-87657600",
+              @"第2份套餐5折"
+              ] randomObject];
+    
+    
+    
+}
+
+
 -(NSDictionary*)shopModel{
     
     return @{
@@ -74,7 +104,9 @@
              @"headimage":[self randShopImage],
              @"goodcount":@(arc4random()%100),
              @"badcount":@(arc4random()%50),
-             @"prompt":[self randomShopPrompt]
+             @"prompt":[self randomShopPrompt],
+             @"address":[self randomAddress],
+             @"phone":[self randomPhone]
              
              };
     
@@ -106,7 +138,8 @@
              @"shopName":[self randomShopName],
              @"price": priceArray[arc4random()% [priceArray count]],
              @"marketPrice": priceArray[arc4random()% [priceArray count]],
-             @"prompt":[self randomShopPrompt]
+             @"prompt":[self randomShopPrompt],
+             @"shop":[self shopModel]
              };
     
     
