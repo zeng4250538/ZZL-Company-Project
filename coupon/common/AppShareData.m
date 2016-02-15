@@ -53,7 +53,11 @@ static AppShareData *instance;
 
 -(NSUInteger)addCouponToCart:(NSDictionary*)data{
     
-    [instance.cartList addObject:data];
+    if (data==nil) {
+        return 0;
+    }
+    
+    [instance.cartList addObject:[data mutableCopy]];
     
     return [instance.cartList count];
     

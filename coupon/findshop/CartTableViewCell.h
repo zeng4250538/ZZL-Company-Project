@@ -9,33 +9,30 @@
 #import <UIKit/UIKit.h>
 
 
-
-typedef enum : NSUInteger {
-    CouponTypeNormal,
-    CouponTypeLimited,
-    CouponTypeToPay,
-    CouponTypeToUse
-    
- } CouponType;
+@class NumSpanView;
 
 
-typedef void(^PayBlock)(NSDictionary *data);
 
-@interface CouponInfoTableViewCell : UITableViewCell
+typedef void(^DataUpdateBlock_t)();
 
 
-@property(nonatomic,strong)NSDictionary *data;
-@property(nonatomic,assign)CouponType couponType;
-@property(nonatomic,copy)PayBlock payBlock;
+
+@interface CartTableViewCell : UITableViewCell
+
+
+@property(nonatomic,strong)NSMutableDictionary *data;
+@property(nonatomic,strong)NumSpanView *spanButton;
+//数据发生改变的响应
+
+@property(nonatomic,strong)DataUpdateBlock_t dataUpdateBlock;
+
+
 
 
 
 -(void)updateData;
--(void)updateData:(NSDictionary*)data;
 
 
-
-+(UIView*)headerView:(NSString*)title clickBlock:(void(^)())touchBlock;
 
 
 +(CGFloat)height;

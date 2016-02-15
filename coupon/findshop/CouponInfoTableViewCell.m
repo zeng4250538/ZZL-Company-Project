@@ -249,23 +249,7 @@
     
     
     
-    
-    
-    
-    
-//    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeSystem];
-//    
-//    [uv addSubview:moreButton];
-//    
-//    [moreButton setTitle:@"更多 >>" forState:UIControlStateNormal];
-//    
-//    [moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(uv);
-//        make.height.equalTo(@40);
-//        make.width.equalTo(@80);
-//        
-//    }];
-//    
+  
     
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, 60, SCREEN_WIDTH, 1)];
@@ -295,7 +279,10 @@
     
     self.logoView.image = [UIImage imageNamed:data[@"icon"]];
     self.titleLabel.text=data[@"name"];
-    self.priceLabel.text=data[@"price"];
+    self.priceLabel.text=[NSString stringWithFormat:@"￥%@",data[@"price"]];
+    
+    
+   // data[@"price"];
     
     self.detailLabel.text=data[@"prompt"];
     
@@ -314,7 +301,7 @@
     
     self.logoView.image = [UIImage imageNamed:imgUrl];
     self.titleLabel.text=@"代金券";
-    self.priceLabel.text=@"￥20";
+    self.priceLabel.text=@"20";
     
     self.detailLabel.text=@"满100送20，全天通用，消费满100";
     

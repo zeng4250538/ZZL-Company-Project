@@ -6,9 +6,17 @@
 //  Copyright (c) 2015年 orangelight. All rights reserved.
 //
 
-#import "GoodsNumSpanView.h"
+#import "NumSpanView.h"
 
-@implementation GoodsNumSpanView
+@interface NumSpanView()
+
+@property(nonatomic,strong) UILabel *textLabel;
+
+@end
+
+
+
+@implementation NumSpanView
 
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -17,7 +25,7 @@
     
     if (self) {
         
-        self.limitNum =99999999;
+        self.limitNum =99;
         
         [self makeView];
         

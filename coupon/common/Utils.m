@@ -97,7 +97,7 @@
     
     NSString *imgrul = [Utils getRandomImage:@"商家图片"];
    
-    NSArray *priceArray=@[@"￥10.0",@"￥15.0",@"￥8.0",@"￥25.0",@"￥12.0",@"￥5.0"];
+    NSArray *priceArray=@[@"10.0",@"15.0",@"8.0",@"25.0",@"12.0",@"5.0"];
     
     
     NSString *price = priceArray[arc4random()% [priceArray count]];

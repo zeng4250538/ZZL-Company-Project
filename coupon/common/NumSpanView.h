@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^GoodsNumSpanViewBlock)(NSInteger value);
+typedef void (^NumSpanViewBlock)(NSInteger value);
 
-@interface GoodsNumSpanView : UIView
+@interface NumSpanView : UIView
 
 @property(nonatomic,assign)NSInteger num;
-@property(nonatomic,copy)GoodsNumSpanViewBlock block;
+@property(nonatomic,copy)NumSpanViewBlock block;
 @property(nonatomic,assign)NSInteger limitNum;
-@property(nonatomic,strong) UILabel *textLabel;
 
 
 

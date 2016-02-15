@@ -9,8 +9,11 @@
 #import "BasketNoPayViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
+#import "CartTableViewCell.h"
 
 @interface BasketNoPayViewCtrl ()
+
+@property(nonatomic,strong)UILabel *totalPriceLabel;
 
 @end
 
@@ -19,10 +22,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    self.tableView = [UITableView new];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    [self.view addSubview:self.tableView];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.left.bottom.right.equalTo(self.view);
+        
+    }];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+    
+    [self.tableView registerClass:[CartTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    [self makeToolBar];
     
     
     
@@ -37,8 +58,176 @@
 }
 
 
+-(void)makeToolBar{
+    
+    UIView *barView = [UIView new];
+    barView.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:barView];
+    
+    
+    [barView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.bottom.right.equalTo(self.view);
+        make.height.equalTo(@50);
+    
+        
+    }];
+    
+    
+    UIButton *payButton = [UIButton buttonWithType:UIButtonTypeSystem];
+
+    [barView addSubview:payButton];
+    
+    [payButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.top.bottom.equalTo(barView);
+        make.width.equalTo(@100);
+        
+    }];
+    
+    payButton.backgroundColor = [GUIConfig mainColor];
+    
+    [payButton setTitle:@"去支付" forState:UIControlStateNormal];
+    
+    [payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    
+    UIButton *selectAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [selectAllButton setImage:[UIImage imageNamed:@"CellNotSelected@2x.png"] forState:UIControlStateNormal];
+    [selectAllButton setImage:[UIImage imageNamed:@"CellRedSelected@2x.png"] forState:UIControlStateSelected];
+    
+    
+    [barView addSubview:selectAllButton];
+    
+    
+    //选择按钮位置设置
+    [selectAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(barView).offset(15);
+        make.centerY.equalTo(barView);
+        
+        
+        
+    }];
+    
+    //点击切换选择状态
+    
+    [selectAllButton bk_addEventHandler:^(id sender) {
+        
+        selectAllButton.selected  = !selectAllButton.selected;
+    } forControlEvents:UIControlEventTouchUpInside ];
+  
+    
+    UILabel *selectAllLabel = [UILabel new];
+    selectAllLabel.font = [UIFont systemFontOfSize:12];
+    selectAllLabel.text=@"全选";
+    selectAllLabel.textColor = [UIColor lightGrayColor];
+    [barView addSubview:selectAllLabel];
+    
+    [selectAllLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(selectAllButton.mas_right);
+        make.top.bottom.equalTo(barView);
+    }];
+    
+    [selectAllLabel sizeToFit];
+    
+    
+    UILabel *totalPriceLabel = [UILabel new];
+    
+    [barView addSubview:totalPriceLabel];
+    
+    totalPriceLabel.textColor = [UIColor darkGrayColor];
+    
+    totalPriceLabel.font = [UIFont boldSystemFontOfSize:16];
+    
+    [totalPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+       // make.left.equalTo(selectAllLabel.mas_right).offset(5);
+        make.right.equalTo(payButton.mas_left).offset(-10);
+        make.centerY.equalTo(barView);
+        
+    }];
+    
+    self.totalPriceLabel = totalPriceLabel;
+    
+    
+    [self computeTotalPrice];
+    
+    
+  //  totalPriceLabel.text=@"总计：14.0元";
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+}
+
+#pragma  mark  计算购物车金额
+
+-(void)computeTotalPrice{
+    
+    
+    NSInteger isSelected=1;
+    NSInteger num=1;
+    
+    CGFloat totalPrice = 0.0;
+    
+    for(NSDictionary *d in [AppShareData instance].getCartList){
+        
+        if (d[@"isSelected"]==nil) {
+            isSelected = 1;
+        }else{
+            
+            isSelected = [d[@"isSelected"] integerValue];
+        }
+        
+        
+        if (d[@"num"]==nil) {
+            num=1;
+        }else{
+            
+            num = [d[@"num"] integerValue];
+            
+        }
+        
+        totalPrice = totalPrice+ isSelected*num*[d[@"price"] floatValue];
+        
+        
+        
+    }
+    
+    
+    self.totalPriceLabel.text = [NSString stringWithFormat:@"总计：￥%.2f",totalPrice];
+    
+    
+    
+   // NSMutableDictionary *d = [AppShareData instance].getCartList[ [indexPath row]];
+    
+    
+    
+    
+    
+//    CartTableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:]
+//    
+    
+    
+    
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    
+    
     
     
     
@@ -73,14 +262,32 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
-    NSDictionary *d = [AppShareData instance].getCartList[ [indexPath row]];
+    NSMutableDictionary *d = [AppShareData instance].getCartList[ [indexPath row]];
+    
+    
+    cell.data = d;
+    
+    [cell updateData];
+    
+    
+    cell.dataUpdateBlock=^(){
+        
+        
+        
+        [self computeTotalPrice];
+        
+        
+        
+    
+    
+    };
     
     
     
-    [cell updateData:d];
+    
  
     
     

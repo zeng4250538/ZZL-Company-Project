@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BasketNoPayViewCtrl : UITableViewController
+@interface BasketNoPayViewCtrl : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property(nonatomic,strong)UITableView *tableView;
+
+
+
 
 @end

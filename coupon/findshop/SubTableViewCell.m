@@ -262,7 +262,7 @@
     
     self.logoView.image = [UIImage imageNamed:imgUrl];
     self.titleLabel.text=@"代金券";
-    self.priceLabel.text=@"￥20";
+    self.priceLabel.text=@"20";
     
     self.detailLabel.text=@"满100送20，全天通用，消费满100";
     
