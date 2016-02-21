@@ -55,6 +55,9 @@
 #import "AppShareData.h"
 #import "MockData.h"
 
+#import "SWTableViewCell.h"
+
+
 
 #define TRY @try{
 #define CATCH      }@catch (NSException *exception) {}@finally {}

@@ -1,34 +1,39 @@
 //
-//  ShopListViewCtrl.m
+//  MyRemindViewCtrl.m
 //  coupon
 //
-//  Created by chijr on 16/2/4.
+//  Created by chijr on 16/2/20.
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "ShopListViewCtrl.h"
-#import "ShopInfoTableViewCell.h"
-#import "ShopService.h"
-#import "ShopInfoViewCtrl.h"
+#import "MyRemindViewCtrl.h"
+
+#import "CouponService.h"
+#import "CouponDetailViewCtrl.h"
+#import "CouponInfoTableViewCell.h"
 
 
-@interface ShopListViewCtrl ()
 
-@property(nonatomic,strong)NSArray *shopList;
+@interface MyRemindViewCtrl ()
+
+@property(nonatomic,strong)NSArray *data;
 
 @end
 
-@implementation ShopListViewCtrl
+@implementation MyRemindViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    
+    self.navigationItem.title=@"我的提醒";
+    
     
     [self loadData];
     
-    self.navigationItem.title=@"商家列表";
-    [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -38,33 +43,41 @@
 }
 
 
-
 -(void)loadData{
     
     
-    ShopService *service = [ShopService new];
+    CouponService *service = [CouponService new];
     
-    [service queryMoreHotShop:nil success:
+    
+    [service queryRemindCoupon:nil success:
      ^(int code, NSString *message, id data) {
          
          if (code==0) {
-             self.shopList = data;
+             
+             self.data = data;
              
              [self.tableView reloadData];
              
          }
          
-        
-    } failure:
+     } failure:
      ^(int code, BOOL retry, NSString *message, id data) {
-        
-    }];
+         
+         
+     }];
+    
+    //service qu
+    
     
     
     
     
     
 }
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -76,8 +89,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return [ShopInfoTableViewCell height];
-    
+    return [CouponInfoTableViewCell height];
     
 }
 
@@ -88,39 +100,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.shopList count];
+    return [self.data count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     
-    cell.data = self.shopList[[indexPath row]];
+    
+    NSDictionary *d = self.data[indexPath.row];
+    
+    cell.data =d;
+    
+    
+    
+    
+    cell.couponType = CouponTypeUnLimited;
+    
     
     [cell updateData];
+    
+    //cell.textLabel.text=@"我的提醒";
     
     // Configure the cell...
     
     return cell;
-}
-
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    NSDictionary *data = self.shopList[indexPath.row];
-    
-    ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    
-    
-    
-    
 }
 
 

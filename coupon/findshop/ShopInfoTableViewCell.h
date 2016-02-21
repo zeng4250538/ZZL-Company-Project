@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef NS_ENUM(NSUInteger, SubscribeType) {
+    SubscribeTypeNone=0,
+    SubscribeTypeHave,
+
+};
+
 @interface ShopInfoTableViewCell : UITableViewCell
 
 
 @property(nonatomic,strong)NSDictionary *data;
+@property(nonatomic,assign)SubscribeType subscribeType;
+
 +(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock;
 
 +(CGFloat)height;

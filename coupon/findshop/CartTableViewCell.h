@@ -17,7 +17,7 @@ typedef void(^DataUpdateBlock_t)();
 
 
 
-@interface CartTableViewCell : UITableViewCell
+@interface CartTableViewCell : SWTableViewCell
 
 
 @property(nonatomic,strong)NSMutableDictionary *data;

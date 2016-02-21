@@ -20,8 +20,14 @@
 +(UIColor*)grayFontColorDeep;
 
 
-+(UIImageView*)iconGood;
-+(UIImageView*)iconBad;
++(UIButton*)iconGood;
++(UIButton*)iconBad;
+
++(UIColor*)greenBackgroundColor;
+
+
+
+
 
 +(void)tableViewGUIFormat:(UITableView*)tableView;
 

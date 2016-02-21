@@ -13,6 +13,7 @@
 typedef enum : NSUInteger {
     CouponTypeNormal,
     CouponTypeLimited,
+    CouponTypeUnLimited,
     CouponTypeToPay,
     CouponTypeToUse
     

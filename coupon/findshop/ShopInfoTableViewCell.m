@@ -21,6 +21,9 @@
 @property(nonatomic,strong)UILabel *commentLabel ;  //备注
 
 
+@property(nonatomic,strong)UIButton *subscribeButton ;  //订阅按钮
+
+
 
 
 
@@ -142,6 +145,18 @@
         [self.contentView addSubview:self.commentLabel];
         
         
+        self.subscribeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        
+        self.subscribeButton.backgroundColor = [GUIConfig greenBackgroundColor];
+        
+        [self.subscribeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        self.subscribeButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        
+        [self.contentView addSubview:self.subscribeButton];
+        
+        
+        
         
         
         
@@ -227,11 +242,40 @@
     [self.commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.logoView.mas_right).with.offset(10);
         make.top.equalTo(self.badLabel.mas_bottom).with.offset(0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-10);
+        make.right.equalTo(self.contentView).with.offset(-10);
+        make.bottom.equalTo(self.contentView).with.offset(-10);
     }];
     
     [self.commentLabel sizeToFit];
+    
+    
+    
+    
+    [self.subscribeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.equalTo(@70);
+        make.height.equalTo(@30);
+        make.centerY.equalTo(self.contentView).offset(-10);
+        make.right.equalTo(self.contentView).offset(-10);
+        
+        
+        
+        
+        
+        
+    }];
+    
+    [self.subscribeButton setTitle:@"取消订阅" forState:UIControlStateNormal];
+    
+    self.subscribeButton.hidden = YES;
+    if (self.subscribeType == SubscribeTypeHave) {
+        
+        self.subscribeButton.hidden = NO;
+        
+        
+    
+    }
+    
     
 }
 

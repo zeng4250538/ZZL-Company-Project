@@ -212,6 +212,16 @@
     [self.priceLabel sizeToFit];
     
     
+    if ([self.data[@"isSelected"] integerValue]==1) {
+        
+        self.checkButton.selected = YES;
+    }else{
+        self.checkButton.selected = NO;
+    }
+    
+    
+    
+    
     
     
     
@@ -241,6 +251,9 @@
     
     self.logoView.image = [UIImage imageNamed:self.data[@"icon"]];
     self.titleLabel.text=self.data[@"name"];
+    
+    
+     self.spanButton.num = [self.data[@"num"] integerValue];
     
     
    self.detailLabel.text=self.data[@"prompt"];

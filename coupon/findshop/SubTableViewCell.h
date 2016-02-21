@@ -9,14 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-
-typedef enum : NSUInteger {
-    CouponTypeNormal,
-    CouponTypeLimited,
-    CouponTypeToPay,
-    CouponTypeToUse
-    
- } CouponType;
+#import "CouponInfoTableViewCell.h"
 
 
 typedef void(^PayBlock)(NSDictionary *data);

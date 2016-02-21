@@ -45,6 +45,7 @@
     
     [self makeToolBar];
     
+     
     
     
    // automaticallyAdjustsScrollViewInsets = NO;
@@ -110,11 +111,18 @@
         
     }];
     
+    selectAllButton.selected = YES;
+    
     //点击切换选择状态
     
     [selectAllButton bk_addEventHandler:^(id sender) {
         
         selectAllButton.selected  = !selectAllButton.selected;
+        
+        
+        [self checkAll:selectAllButton.selected];
+        
+        [self computeTotalPrice];
     } forControlEvents:UIControlEventTouchUpInside ];
   
     
@@ -164,6 +172,40 @@
     
 
     
+    
+    
+    
+    
+}
+
+
+#pragma mark - 控制所有的选项
+
+
+
+-(void)checkAll:(BOOL)isSelected{
+    
+    
+    for(NSMutableDictionary *d in [AppShareData instance].getCartList){
+        
+            if (isSelected) {
+                d[@"isSelected"] = @1;
+                
+            }else{
+                
+                d[@"isSelected"] = @0;
+                
+                
+            }
+        
+        
+        
+    }
+    
+    
+    [self.tableView reloadData];
+    
+
     
     
     
@@ -271,6 +313,15 @@
     cell.data = d;
     
     [cell updateData];
+    
+    
+    UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    deleteButton.backgroundColor = [GUIConfig mainColor];
+    [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+    
+    
+    
+    cell.rightUtilityButtons = @[deleteButton];
     
     
     cell.dataUpdateBlock=^(){

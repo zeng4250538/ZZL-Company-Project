@@ -22,6 +22,15 @@
 }
 
 
++(UIColor*)greenBackgroundColor{
+    
+ return UIColorFromRGB(40, 162, 123);
+    
+    
+}
+
+
+
 +(UIColor*)mainBackgroundColor{
     
     
@@ -51,19 +60,31 @@
     
     
 }
-+(UIImageView*)iconGood{
++(UIButton*)iconGood{
     
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"good_icon.png"]];
+    UIImage *img = [UIImage imageNamed:@"good_icon.png"];
     
-    return imgView;
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [btn setImage:img forState:UIControlStateNormal];
+    
+    
+    return btn;
     
 }
-+(UIImageView*)iconBad{
++(UIButton*)iconBad{
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bad_icon.png"]];
+     
+    UIImage *img = [UIImage imageNamed:@"bad_icon.png"];
     
-    return imgView;
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [btn setImage:img forState:UIControlStateNormal];
+    
+    
+    return btn;
+    
 
     
 }

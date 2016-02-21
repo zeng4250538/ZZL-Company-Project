@@ -8,7 +8,7 @@
 
 #import "ShopPortalViewCtrl.h"
 #import "ShopInfoTableViewCell.h"
-#import "ShopCouponViewCtrl.h"
+#import "ShopInfoViewCtrl.h"
 #import "KeyWordSearchViewCtrl.h"
 #import "SelectMallTableCtrl.h"
 #import "SelectCityTableViewCtrl.h"
@@ -226,10 +226,6 @@
     
     
     
-    //  UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(-30, 0, SCREEN_WIDTH-100, 35)];//allocate titleView
-    //  UIColor *color =  self.navigationController.navigationBar.barTintColor;
-    
-    //  [titleView setBackgroundColor:color];
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     
@@ -425,7 +421,7 @@
     
     
     if (indexPath.section == 0 || indexPath.section==2) {
-        ShopCouponViewCtrl *vc =[[ShopCouponViewCtrl alloc] init];
+        ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
         
         vc.hidesBottomBarWhenPushed = YES;
         
@@ -435,6 +431,8 @@
         
         
         CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+        
+        vc.data =self.couponData[indexPath.row];
         
         vc.hidesBottomBarWhenPushed = YES;
         

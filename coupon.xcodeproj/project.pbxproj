@@ -15,6 +15,8 @@
 		571C29751C707D8800DDBCE8 /* CellRedSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 571C29711C707D8800DDBCE8 /* CellRedSelected@2x.png */; };
 		571C29781C70AC8F00DDBCE8 /* CartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 571C29771C70AC8F00DDBCE8 /* CartTableViewCell.m */; };
 		571C297B1C70D55000DDBCE8 /* NumSpanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 571C29791C70D55000DDBCE8 /* NumSpanView.m */; };
+		571C29C71C787FD100DDBCE8 /* MyRemindViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 571C29C61C787FD100DDBCE8 /* MyRemindViewCtrl.m */; };
+		571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */; };
 		5728FDBD1C5765460051F01E /* history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5728FDBC1C5765460051F01E /* history@2x.png */; };
 		5736E9E41C497B050055774D /* sampleImg05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5736E9DF1C497B050055774D /* sampleImg05@2x.png */; };
 		5736E9E51C497B050055774D /* sampleImg04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5736E9E01C497B050055774D /* sampleImg04@2x.png */; };
@@ -78,7 +80,7 @@
 		57A94E731C380BF700BE0022 /* bad_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E711C380BF700BE0022 /* bad_icon@2x.png */; };
 		57A94E741C380BF700BE0022 /* good_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E721C380BF700BE0022 /* good_icon@2x.png */; };
 		57A94E761C383E0200BE0022 /* 商家图片 in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E751C383E0200BE0022 /* 商家图片 */; };
-		57A94E791C38D99800BE0022 /* ShopCouponViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A94E781C38D99800BE0022 /* ShopCouponViewCtrl.m */; };
+		57A94E791C38D99800BE0022 /* ShopInfoViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A94E781C38D99800BE0022 /* ShopInfoViewCtrl.m */; };
 		57A94E7B1C38E08700BE0022 /* 商家封面 in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E7A1C38E08700BE0022 /* 商家封面 */; };
 		57A94E7E1C38FF5800BE0022 /* CouponInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A94E7D1C38FF5800BE0022 /* CouponInfoTableViewCell.m */; };
 		57A94E811C393A3F00BE0022 /* CouponDetailViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A94E801C393A3F00BE0022 /* CouponDetailViewCtrl.m */; };
@@ -130,6 +132,10 @@
 		571C29771C70AC8F00DDBCE8 /* CartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartTableViewCell.m; path = coupon/findshop/CartTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		571C29791C70D55000DDBCE8 /* NumSpanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumSpanView.m; sourceTree = "<group>"; };
 		571C297A1C70D55000DDBCE8 /* NumSpanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumSpanView.h; sourceTree = "<group>"; };
+		571C29C51C787FD100DDBCE8 /* MyRemindViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRemindViewCtrl.h; sourceTree = "<group>"; };
+		571C29C61C787FD100DDBCE8 /* MyRemindViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRemindViewCtrl.m; sourceTree = "<group>"; };
+		571C29C81C78CC7500DDBCE8 /* FeedBackViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewCtrl.h; sourceTree = "<group>"; };
+		571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewCtrl.m; sourceTree = "<group>"; };
 		5728FDBC1C5765460051F01E /* history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history@2x.png"; sourceTree = "<group>"; };
 		5736E9DF1C497B050055774D /* sampleImg05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sampleImg05@2x.png"; sourceTree = "<group>"; };
 		5736E9E01C497B050055774D /* sampleImg04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sampleImg04@2x.png"; sourceTree = "<group>"; };
@@ -200,8 +206,8 @@
 		5796FA791C462719004CA23B /* ToPayTableViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToPayTableViewCtrl.m; sourceTree = "<group>"; };
 		5796FA7B1C463877004CA23B /* MySubViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubViewCtrl.h; sourceTree = "<group>"; };
 		5796FA7C1C463877004CA23B /* MySubViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubViewCtrl.m; sourceTree = "<group>"; };
-		5796FA7E1C46392C004CA23B /* SubTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTableViewCell.h; sourceTree = "<group>"; };
-		5796FA7F1C463949004CA23B /* SubTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTableViewCell.m; sourceTree = "<group>"; };
+		5796FA7E1C46392C004CA23B /* SubTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubTableViewCell.h; path = ../findshop/SubTableViewCell.h; sourceTree = "<group>"; };
+		5796FA7F1C463949004CA23B /* SubTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubTableViewCell.m; path = ../findshop/SubTableViewCell.m; sourceTree = "<group>"; };
 		5796FA811C47E904004CA23B /* CouponView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponView.h; sourceTree = "<group>"; };
 		5796FA821C47E904004CA23B /* CouponView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponView.m; sourceTree = "<group>"; };
 		5796FA861C481AB6004CA23B /* gocart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gocart@2x.png"; sourceTree = "<group>"; };
@@ -214,16 +220,16 @@
 		57A94E611C37E34900BE0022 /* ShakeViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeViewCtrl.m; sourceTree = "<group>"; };
 		57A94E641C37EB1200BE0022 /* ShopPortalViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopPortalViewCtrl.h; sourceTree = "<group>"; };
 		57A94E651C37EB1200BE0022 /* ShopPortalViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopPortalViewCtrl.m; sourceTree = "<group>"; };
-		57A94E671C3805E500BE0022 /* ShopInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopInfoTableViewCell.h; sourceTree = "<group>"; };
-		57A94E681C3805E500BE0022 /* ShopInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopInfoTableViewCell.m; sourceTree = "<group>"; };
+		57A94E671C3805E500BE0022 /* ShopInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopInfoTableViewCell.h; path = ../ShopInfoTableViewCell.h; sourceTree = "<group>"; };
+		57A94E681C3805E500BE0022 /* ShopInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopInfoTableViewCell.m; path = ../ShopInfoTableViewCell.m; sourceTree = "<group>"; };
 		57A94E6B1C380BE400BE0022 /* shoplogo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoplogo3.png; sourceTree = "<group>"; };
 		57A94E6C1C380BE400BE0022 /* shoplogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoplogo2.png; sourceTree = "<group>"; };
 		57A94E6D1C380BE400BE0022 /* shoplogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoplogo.png; sourceTree = "<group>"; };
 		57A94E711C380BF700BE0022 /* bad_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bad_icon@2x.png"; sourceTree = "<group>"; };
 		57A94E721C380BF700BE0022 /* good_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "good_icon@2x.png"; sourceTree = "<group>"; };
 		57A94E751C383E0200BE0022 /* 商家图片 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "商家图片"; sourceTree = "<group>"; };
-		57A94E771C38D99800BE0022 /* ShopCouponViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopCouponViewCtrl.h; path = ../ShopCouponViewCtrl.h; sourceTree = "<group>"; };
-		57A94E781C38D99800BE0022 /* ShopCouponViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopCouponViewCtrl.m; path = ../ShopCouponViewCtrl.m; sourceTree = "<group>"; };
+		57A94E771C38D99800BE0022 /* ShopInfoViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopInfoViewCtrl.h; path = ../ShopInfoViewCtrl.h; sourceTree = "<group>"; };
+		57A94E781C38D99800BE0022 /* ShopInfoViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopInfoViewCtrl.m; path = ../ShopInfoViewCtrl.m; sourceTree = "<group>"; };
 		57A94E7A1C38E08700BE0022 /* 商家封面 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "商家封面"; sourceTree = "<group>"; };
 		57A94E7C1C38FF5800BE0022 /* CouponInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouponInfoTableViewCell.h; path = ../CouponInfoTableViewCell.h; sourceTree = "<group>"; };
 		57A94E7D1C38FF5800BE0022 /* CouponInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CouponInfoTableViewCell.m; path = ../CouponInfoTableViewCell.m; sourceTree = "<group>"; };
@@ -320,6 +326,8 @@
 		574AE8A41C626BE000928B09 /* couponDetail */ = {
 			isa = PBXGroup;
 			children = (
+				57A94E7C1C38FF5800BE0022 /* CouponInfoTableViewCell.h */,
+				57A94E7D1C38FF5800BE0022 /* CouponInfoTableViewCell.m */,
 				57A94E7F1C393A3F00BE0022 /* CouponDetailViewCtrl.h */,
 				57A94E801C393A3F00BE0022 /* CouponDetailViewCtrl.m */,
 				57CE97CD1C63A9E800CE0E57 /* CouponListViewCtrl.h */,
@@ -331,11 +339,11 @@
 		574AE8A51C626C4800928B09 /* shopDetail */ = {
 			isa = PBXGroup;
 			children = (
-				57A94E771C38D99800BE0022 /* ShopCouponViewCtrl.h */,
-				57A94E781C38D99800BE0022 /* ShopCouponViewCtrl.m */,
-				57A94E7C1C38FF5800BE0022 /* CouponInfoTableViewCell.h */,
+				57A94E681C3805E500BE0022 /* ShopInfoTableViewCell.m */,
+				57A94E671C3805E500BE0022 /* ShopInfoTableViewCell.h */,
+				57A94E771C38D99800BE0022 /* ShopInfoViewCtrl.h */,
+				57A94E781C38D99800BE0022 /* ShopInfoViewCtrl.m */,
 				571C29761C70AC7100DDBCE8 /* CartTableViewCell.h */,
-				57A94E7D1C38FF5800BE0022 /* CouponInfoTableViewCell.m */,
 				571C29771C70AC8F00DDBCE8 /* CartTableViewCell.m */,
 				574AE8A61C626C8200928B09 /* ShopCommentViewCtrl.h */,
 				574AE8A71C626C8200928B09 /* ShopCommentViewCtrl.m */,
@@ -517,10 +525,16 @@
 		5796FA5B1C44118D004CA23B /* person */ = {
 			isa = PBXGroup;
 			children = (
+				5796FA7E1C46392C004CA23B /* SubTableViewCell.h */,
+				5796FA7F1C463949004CA23B /* SubTableViewCell.m */,
 				5796FA5C1C4411AE004CA23B /* PersonInfoViewCtrl.h */,
 				5796FA5D1C4411AE004CA23B /* PersonInfoViewCtrl.m */,
 				5796FA7B1C463877004CA23B /* MySubViewCtrl.h */,
 				5796FA7C1C463877004CA23B /* MySubViewCtrl.m */,
+				571C29C51C787FD100DDBCE8 /* MyRemindViewCtrl.h */,
+				571C29C61C787FD100DDBCE8 /* MyRemindViewCtrl.m */,
+				571C29C81C78CC7500DDBCE8 /* FeedBackViewCtrl.h */,
+				571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */,
 			);
 			path = person;
 			sourceTree = "<group>";
@@ -563,10 +577,6 @@
 				574AE8A41C626BE000928B09 /* couponDetail */,
 				57A94E641C37EB1200BE0022 /* ShopPortalViewCtrl.h */,
 				57A94E651C37EB1200BE0022 /* ShopPortalViewCtrl.m */,
-				57A94E671C3805E500BE0022 /* ShopInfoTableViewCell.h */,
-				57A94E681C3805E500BE0022 /* ShopInfoTableViewCell.m */,
-				5796FA7E1C46392C004CA23B /* SubTableViewCell.h */,
-				5796FA7F1C463949004CA23B /* SubTableViewCell.m */,
 				57CE97D01C63B39500CE0E57 /* MallMapViewCtrl.h */,
 				57CE97D11C63B39500CE0E57 /* MallMapViewCtrl.m */,
 			);
@@ -843,12 +853,13 @@
 				57F511B01C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m in Sources */,
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
 				578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */,
+				571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */,
 				57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */,
 				5796FA831C47E904004CA23B /* CouponView.m in Sources */,
 				5796FA731C460CB1004CA23B /* UIControl+LayoutBlock.m in Sources */,
 				5796FA6A1C456490004CA23B /* SelectMallTableCtrl.m in Sources */,
 				5796FA741C460CB1004CA23B /* UIView+LayoutBlock.m in Sources */,
-				57A94E791C38D99800BE0022 /* ShopCouponViewCtrl.m in Sources */,
+				57A94E791C38D99800BE0022 /* ShopInfoViewCtrl.m in Sources */,
 				5779BD6A1C25381600E15934 /* AppDelegate.m in Sources */,
 				57A94E881C3AB30E00BE0022 /* ShakeCouponViewCtrl.m in Sources */,
 				57A94E661C37EB1200BE0022 /* ShopPortalViewCtrl.m in Sources */,
@@ -873,6 +884,7 @@
 				5796FA671C45491C004CA23B /* SelectCityTableViewCtrl.m in Sources */,
 				57A94E621C37E34900BE0022 /* ShakeViewCtrl.m in Sources */,
 				574AE8A81C626C8200928B09 /* ShopCommentViewCtrl.m in Sources */,
+				571C29C71C787FD100DDBCE8 /* MyRemindViewCtrl.m in Sources */,
 				57A94E691C3805E500BE0022 /* ShopInfoTableViewCell.m in Sources */,
 				57CE97CC1C63A9CB00CE0E57 /* ShopListViewCtrl.m in Sources */,
 				5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */,

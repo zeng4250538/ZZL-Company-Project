@@ -8,8 +8,13 @@
 
 #import "MySubViewCtrl.h"
 #import "SubTableViewCell.h"
+#import "ShopInfoTableViewCell.h"
+#import "ShopService.h"
 
 @interface MySubViewCtrl ()
+
+@property(nonatomic,strong)NSArray *dataList;
+
 
 @end
 
@@ -19,9 +24,12 @@
     [super viewDidLoad];
     
     
-    [self.tableView registerClass:[SubTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     self.navigationItem.title=@"消息订阅";
+    
+    
+    [self loadData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -29,6 +37,40 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)loadData{
+    
+    
+    ShopService *service = [ShopService new];
+    
+    [service queryMoreHotShop:nil success:
+     
+     ^(int code, NSString *message, id data) {
+         
+         if (code==0) {
+             self.dataList = data;
+             
+             [self.tableView reloadData];
+             
+         }
+         
+         
+     } failure:
+     ^(int code, BOOL retry, NSString *message, id data) {
+         
+     }];
+    
+    
+    
+    
+    
+}
+
+    
+    
+    
+    
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -39,7 +81,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return [SubTableViewCell height];
+    return [ShopInfoTableViewCell height];
     
 }
 
@@ -55,9 +97,14 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SubTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-     
+    
+    
+    cell.data = self.dataList[indexPath.row];
+    
+    
+    cell.subscribeType = SubscribeTypeHave;
     
     [cell updateData];
     // Configure the cell...

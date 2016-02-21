@@ -6,7 +6,7 @@
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "ShopCouponViewCtrl.h"
+#import "ShopInfoViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 #import "ShopCommentViewCtrl.h"
@@ -15,14 +15,14 @@
 #import "CouponService.h"
 
 
-@interface ShopCouponViewCtrl ()
+@interface ShopInfoViewCtrl ()
 
 @property(nonatomic,strong)NSArray *limitCouponList;
 @property(nonatomic,strong)NSArray *otherCouponList;
 
 @end
 
-@implementation ShopCouponViewCtrl
+@implementation ShopInfoViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -208,57 +208,76 @@
     
     
     
-    UIImageView *goodIcon = [GUIConfig iconGood];
     
-    [bottomBar addSubview:goodIcon];
-    
-    [goodIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(bottomBar.mas_left).with.offset(20);
-        make.centerY.equalTo(bottomBar.mas_centerY);
-    }];
-    
-    
-    UILabel *goodLabel = [UILabel new];
-    [bottomBar addSubview:goodLabel];
+    UIButton *likeButton = [GUIConfig iconGood];
 
     
-    goodLabel.textColor=[GUIConfig grayFontColor];
-    goodLabel.font = [UIFont systemFontOfSize:12];
-    goodLabel.text=@"1234";
-    [goodLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [bottomBar addSubview:likeButton];
+    
+    [likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.width.equalTo(@40);
-        make.left.equalTo(goodIcon.mas_right).with.offset(10);
+        make.left.equalTo(bottomBar.mas_left).with.offset(20);
+        make.centerY.equalTo(bottomBar);
+    }];
+    
+    //喜欢按钮
+    
+    [likeButton bk_addEventHandler:^(id sender) {
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    UILabel *likeLabel = [UILabel new];
+    [bottomBar addSubview:likeLabel];
+
+    
+    likeLabel.textColor=[GUIConfig grayFontColor];
+    likeLabel.font = [UIFont systemFontOfSize:12];
+    likeLabel.text=@"1234";
+    [likeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        //make.width.equalTo(@40);
+        make.left.equalTo(likeButton.mas_right).with.offset(10);
         make.centerY.equalTo(bottomBar.mas_centerY);
         
     }];
     
   
     
-    UIImageView *badIcon = [GUIConfig iconBad];
+    UIButton *unlikeButton = [GUIConfig iconBad];
     
-    [bottomBar addSubview:badIcon];
     
-    [badIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    
+    [bottomBar addSubview:unlikeButton];
+    
+    
+    //不喜欢按钮
+    [unlikeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(goodLabel.mas_right).with.offset(20);
-        make.centerY.equalTo(bottomBar.mas_centerY);
+        make.left.equalTo(likeLabel.mas_right).with.offset(20);
+        make.centerY.equalTo(bottomBar);
     }];
     
     
-    UILabel *badLabel = [UILabel new];
-    [bottomBar addSubview:badLabel];
+    [unlikeButton bk_addEventHandler:^(id sender) {
+        
+    } forControlEvents:UIControlEventTouchUpInside];
     
     
-    badLabel.textColor=[GUIConfig grayFontColor];
-    badLabel.font = [UIFont systemFontOfSize:12];
-    badLabel.text=@"55";
-    [badLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *unlikeLabel = [UILabel new];
+    [bottomBar addSubview:unlikeLabel];
+    
+    
+    unlikeLabel.textColor=[GUIConfig grayFontColor];
+    unlikeLabel.font = [UIFont systemFontOfSize:12];
+    unlikeLabel.text=@"55";
+    [unlikeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.width.equalTo(@40);
-        make.left.equalTo(badIcon.mas_right).with.offset(10);
-        make.centerY.equalTo(bottomBar.mas_centerY);
+        make.left.equalTo(unlikeButton.mas_right).with.offset(10);
+        make.centerY.equalTo(bottomBar);
         
     }];
     
@@ -274,9 +293,8 @@
     
     [commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
-  //      make.width.equalTo(@40);
         make.left.equalTo(bottomBar.mas_centerX);
-        make.centerY.equalTo(bottomBar.mas_centerY);
+        make.centerY.equalTo(bottomBar);
 
     }];
     

@@ -9,6 +9,7 @@
 #import "CouponListViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponService.h"
+#import "CouponDetailViewCtrl.h"
 
 @interface CouponListViewCtrl ()
 
@@ -108,6 +109,28 @@
     // Configure the cell...
     
     return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *d = self.data[indexPath.row];
+    
+    CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+    
+    vc.data = d;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+  
+    
+
+    
+    
+    
+    
 }
 
 

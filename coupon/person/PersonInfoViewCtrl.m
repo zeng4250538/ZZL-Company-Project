@@ -9,6 +9,10 @@
 #import "PersonInfoViewCtrl.h"
 #import "CartViewCtrl.h"
 #import "MySubViewCtrl.h"
+#import "ShopCommentViewCtrl.h"
+#import "MyRemindViewCtrl.h"
+#import "BasketContainerViewCtrl.h"
+#import "FeedBackViewCtrl.h"
 
 
 
@@ -147,7 +151,7 @@
 
     
     if (section==2) {
-        return 2;
+        return 3;
     }
     if (section==3) {
         return 1;
@@ -208,6 +212,13 @@
         }
         
         if ([indexPath row]==1) {
+            cell.textLabel.text=@"我的订单";
+            
+            
+        }
+        
+        
+        if ([indexPath row]==2) {
             cell.textLabel.text=@"我的退款";
             
             
@@ -243,19 +254,73 @@
     
     
     if ([indexPath section]==0) {
-        MySubViewCtrl *vc = [MySubViewCtrl new];
         
-        vc.hidesBottomBarWhenPushed = YES;
+        if (indexPath.row==0) {
+            MySubViewCtrl *vc = [MySubViewCtrl new];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
         
-        
-        [self.navigationController pushViewController:vc animated:YES];
+        if (indexPath.row==1) {
+            
+            
+            ShopCommentViewCtrl *vc = [ShopCommentViewCtrl new];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
+            
+            
+            
+        }
     }
     
     if ([indexPath section]==1) {
         
-        CartViewCtrl *vc = [CartViewCtrl new];
+        
+        MyRemindViewCtrl *vc = [MyRemindViewCtrl new];
+        vc.hidesBottomBarWhenPushed = YES;
         
         [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }
+    
+    
+    if (indexPath.section==2) {
+        
+        if (indexPath.row==0) {
+            
+            
+            BasketContainerViewCtrl *vc = [BasketContainerViewCtrl new];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
+        }
+        
+    }
+    
+    
+    if (indexPath.section==3) {
+        
+        
+        FeedBackViewCtrl *vc = [FeedBackViewCtrl new];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    
     }
     
     

@@ -146,6 +146,11 @@
         
         [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
 
+    }else if (self.couponType == CouponTypeUnLimited) {
+        self.recommentButton.hidden = NO;
+        
+        [self.recommentButton setTitle:@"取消提醒" forState:UIControlStateNormal];
+    
     }else if (self.couponType == CouponTypeToPay) {
         self.recommentButton.hidden = NO;
         
