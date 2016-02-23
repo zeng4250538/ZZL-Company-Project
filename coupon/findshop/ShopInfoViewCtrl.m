@@ -193,6 +193,74 @@
     [shopBgButton setBackgroundImage:[UIImage imageNamed:url] forState:UIControlStateNormal];
     
     
+    UIButton *subButton = [UIButton buttonWithType:UIButtonTypeCustom];
+
+    
+    [shopBgButton addSubview:subButton];
+    
+    subButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    [subButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(shopBgButton).offset(-10);
+        make.bottom.equalTo(shopBgButton).offset(-10);
+        make.height.equalTo(@30);
+        make.width.equalTo(@60);
+        
+    }];
+    
+    [subButton bk_addEventHandler:^(id sender) {
+        
+        subButton.selected = !subButton.selected;
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    subButton.layer.cornerRadius=4;
+    subButton.clipsToBounds = YES;
+    
+    [subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+ 
+    [subButton setTitle:@"取消订阅" forState:UIControlStateSelected];
+    
+    subButton.backgroundColor =UIColorFromRGB(247, 180, 38);
+    
+    //[GUIConfig greenBackgroundColor];
+    
+    
+    
+    
+    UILabel *subLabel = [UILabel new];
+    [shopBgButton addSubview:subLabel];
+    subLabel.font = [UIFont boldSystemFontOfSize:10];
+    subLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    subLabel.numberOfLines = 2;
+    subLabel.textColor = [UIColor whiteColor];
+    subLabel.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
+    //[subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    subLabel.text=@"订阅数\n1234\n";
+    subLabel.layer.cornerRadius=4;
+    subLabel.clipsToBounds = YES;
+    [subLabel sizeToFit];
+    
+    subLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(subButton.mas_left).offset(-5);
+        make.bottom.equalTo(subButton);
+        make.width.equalTo(@50);
+        make.height.equalTo(@30);
+    }];
+    
+    
+    
+    
+    
+    
+    
     UIView *bottomBar = [[UIView alloc] init];
     [uv addSubview:bottomBar];
 
@@ -452,7 +520,7 @@
     
     if ([indexPath section]==0) {
         
-        cell.couponType = CouponTypeLimited;
+        cell.couponActionType = CouponTypeLimited;
         
         NSDictionary *d = self.limitCouponList[indexPath.row];
         
@@ -460,7 +528,7 @@
         
     }else{
         
-        cell.couponType = CouponTypeNormal;
+        cell.couponActionType = CouponTypeNormal;
         
         NSDictionary *d = self.otherCouponList[indexPath.row];
         

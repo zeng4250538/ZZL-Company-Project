@@ -48,6 +48,208 @@
     
 }
 
++(UIView*)headerViewWithSort:(NSString*)title clickBlock:(void(^)())clickBlock{
+    
+    
+    
+    UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30+50)];
+    uv.backgroundColor = [GUIConfig mainBackgroundColor];
+    
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH/2, 30)];
+    lab.textColor = [GUIConfig grayFontColorDeep];
+    lab.font = [UIFont systemFontOfSize:14];
+    lab.text = title;
+    
+    [uv addSubview:lab];
+    
+    
+    
+    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [moreButton setTitle:@"更多 >>" forState:UIControlStateNormal];
+    
+    moreButton.frame = CGRectMake(SCREEN_WIDTH-80, 0, 80, 30);
+    moreButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    [moreButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
+    
+    [uv addSubview:moreButton];
+    
+    [moreButton bk_addEventHandler:^(id sender) {
+        
+        if (clickBlock) {
+            clickBlock();
+            
+            
+        }
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    UIView *sortBarView = [UIView new];
+    sortBarView.backgroundColor = [UIColor whiteColor];
+    
+    sortBarView.frame = CGRectMake(0, 30, SCREEN_WIDTH, 50);
+    [uv addSubview:sortBarView];
+    
+    
+    UIView *line = [UIView new];
+    line.frame = CGRectMake(0, 79, SCREEN_WIDTH, 1);
+    
+    line.backgroundColor = [GUIConfig mainBackgroundColor];
+    
+    [uv addSubview:line];
+    
+    
+    UIButton *filterButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    filterButton.frame = CGRectMake(0, 0, SCREEN_WIDTH/2, 50);
+    [filterButton setTitle:@"全部" forState:UIControlStateNormal];
+    [sortBarView addSubview:filterButton];
+    
+    [filterButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
+    
+    
+ 
+    UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    sortButton.frame = CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 50);
+    [sortButton setTitle:@"排序" forState:UIControlStateNormal];
+    [sortBarView addSubview:sortButton];
+    
+    [sortButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
+
+    
+    
+    UIView *line2 = [UIView new];
+    line2.backgroundColor = [GUIConfig mainBackgroundColor];
+
+    line2.frame = CGRectMake(SCREEN_WIDTH/2, 10, 1, 30);
+    
+    [sortBarView addSubview:line2];
+    
+    
+    [filterButton bk_addEventHandler:^(id sender) {
+        
+        UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
+        
+        
+        
+        
+        [as bk_addButtonWithTitle:@"全部" handler:^{
+            
+            
+            [filterButton setTitle:@"全部" forState:UIControlStateNormal];
+            
+        }];
+        
+  
+        [as bk_addButtonWithTitle:@"美食" handler:^{
+            
+            [filterButton setTitle:@"美食" forState:UIControlStateNormal];
+            
+            
+        }];
+        
+        [as bk_addButtonWithTitle:@"电影" handler:^{
+            
+            [filterButton setTitle:@"电影" forState:UIControlStateNormal];
+            
+            
+        }];
+        
+        [as bk_addButtonWithTitle:@"美容" handler:^{
+            
+            [filterButton setTitle:@"美容" forState:UIControlStateNormal];
+            
+            
+        }];
+        
+        [as bk_addButtonWithTitle:@"服饰" handler:^{
+            
+            [filterButton setTitle:@"服饰" forState:UIControlStateNormal];
+            
+            
+        }];
+        
+        [as showInView:[UIApplication sharedApplication].keyWindow];
+        
+    
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    [sortButton bk_addEventHandler:^(id sender) {
+        
+        
+        UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
+        
+        
+        
+        
+        [as bk_addButtonWithTitle:@"默认排序" handler:^{
+            
+            
+            [sortButton setTitle:@"默认排序" forState:UIControlStateNormal];
+            
+        }];
+        
+        
+        [as bk_addButtonWithTitle:@"价格排序" handler:^{
+            
+            [sortButton setTitle:@"价格排序" forState:UIControlStateNormal];
+            
+            
+        }];
+        
+        [as bk_addButtonWithTitle:@"金额排序" handler:^{
+            
+            [sortButton setTitle:@"金额排序" forState:UIControlStateNormal];
+            
+            
+        }];
+        
+        [as bk_addButtonWithTitle:@"时间排序" handler:^{
+            
+            [sortButton setTitle:@"时间排序" forState:UIControlStateNormal];
+            
+            
+        }];
+        
+         [as showInView:[UIApplication sharedApplication].keyWindow];
+        
+
+        
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    return uv;
+    
+    
+    
+    
+    
+    
+}
+
+
 +(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock{
     
     

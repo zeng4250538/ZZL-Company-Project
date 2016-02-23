@@ -355,7 +355,19 @@
     
     
     
+    
+    
+    
     CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+    
+    vc.couponDetailType = CouponDetailTypeNotHaveCart;
+    
+    NSMutableDictionary *d = [AppShareData instance].getCartList[ [indexPath row]];
+    
+    
+    vc.data = d;
+    
+    
     
     
     [self.navigationController pushViewController:vc animated:YES];

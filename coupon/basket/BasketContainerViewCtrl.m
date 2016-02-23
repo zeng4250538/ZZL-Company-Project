@@ -37,14 +37,14 @@
     
     
     BasketNoPayViewCtrl *noPayVc = [BasketNoPayViewCtrl new];
-    noPayVc.title=@"未支付";
+    noPayVc.title=@"待支付";
     
     BasketNoUseViewCtrl *noUseVc = [BasketNoUseViewCtrl new];
     
     noUseVc.title=@"未使用";
     BasketFinishViewCtrl *finishedVc = [BasketFinishViewCtrl new];
     
-    finishedVc.title=@"已完成";
+    finishedVc.title=@"已消费";
     
     self.headTabBar.viewControllers = @[noPayVc, noUseVc, finishedVc];
     self.headTabBar.selectedViewController = noPayVc;

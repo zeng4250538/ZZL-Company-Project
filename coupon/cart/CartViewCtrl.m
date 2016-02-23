@@ -255,7 +255,7 @@
     
     NSDictionary *d = [AppShareData instance].getCartList[ [indexPath row]];
     
-    cell.payBlock = ^(NSDictionary *data){
+    cell.doActionBlock = ^(NSDictionary *data){
         
         ToPayTableViewCtrl *vc = [ToPayTableViewCtrl new];
         
@@ -267,19 +267,19 @@
     
     
     if (self.cartType ==0) {
-        cell.couponType = CouponTypeToPay;
+        cell.couponActionType = CouponTypeToPay;
         
         [cell updateData:d];
         
         return cell;
         
     }else if (self.cartType ==1) {
-        cell.couponType = CouponTypeToUse;
+        cell.couponActionType = CouponTypeToUse;
         
         
     }else{
         
-        cell.couponType = CouponTypeNormal;
+        cell.couponActionType = CouponTypeNormal;
 
     }
     

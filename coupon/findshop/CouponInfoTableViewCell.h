@@ -15,9 +15,11 @@ typedef enum : NSUInteger {
     CouponTypeLimited,
     CouponTypeUnLimited,
     CouponTypeToPay,
-    CouponTypeToUse
+    CouponTypeToUse,
+    CouponTypeToComment,
+    CouponTypeToUnPay
     
- } CouponType;
+ } CouponActionType;
 
 
 typedef void(^PayBlock)(NSDictionary *data);
@@ -26,8 +28,8 @@ typedef void(^PayBlock)(NSDictionary *data);
 
 
 @property(nonatomic,strong)NSDictionary *data;
-@property(nonatomic,assign)CouponType couponType;
-@property(nonatomic,copy)PayBlock payBlock;
+@property(nonatomic,assign)CouponActionType couponActionType;
+@property(nonatomic,copy)PayBlock doActionBlock;
 
 
 

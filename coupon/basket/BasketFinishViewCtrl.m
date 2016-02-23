@@ -10,6 +10,8 @@
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 #import "CouponService.h"
+#import "CouponPaymentDetailViewCtrl.h"
+#import "ShopCommentEditViewCtrl.h"
 
 @interface BasketFinishViewCtrl ()
 
@@ -91,9 +93,27 @@
     CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
+    
+    
+    
+    
     NSDictionary *d = self.dataList[[indexPath row]];
     
+    cell.couponActionType = CouponTypeToComment;
     
+    cell.doActionBlock = ^(NSDictionary *data){
+        
+        
+        ShopCommentEditViewCtrl *vc = [ShopCommentEditViewCtrl new];
+        
+        vc.data = d;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+      
+        
+        
+    };
     
     [cell updateData:d];
     
@@ -106,22 +126,29 @@
 }
 
 
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
     
-    CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+    CouponPaymentDetailViewCtrl *vc = [CouponPaymentDetailViewCtrl new];
     
+    vc.couponPaymentType = CouponPaymentTypeUsed;
+    
+    NSDictionary *d = self.dataList[[indexPath row]];
+    
+    vc.data =d;
     
     [self.navigationController pushViewController:vc animated:YES];
     
     
     
     
-    
 }
+
 
 
 

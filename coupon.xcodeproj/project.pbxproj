@@ -31,6 +31,9 @@
 		5736E9FD1C5521520055774D /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 5736E9FC1C5521520055774D /* up.png */; };
 		5736E9FF1C552A460055774D /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5736E9FE1C552A460055774D /* down.png */; };
 		5736EA021C5535720055774D /* ThrowLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736EA011C5535720055774D /* ThrowLineTool.m */; };
+		573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 573E51CE1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m */; };
+		573E51D11C7C2561005DBBC3 /* BasketNoUseViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 573E51D01C7C2561005DBBC3 /* BasketNoUseViewCtrl.m */; };
+		573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 573E51D31C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m */; };
 		574AE8A81C626C8200928B09 /* ShopCommentViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 574AE8A71C626C8200928B09 /* ShopCommentViewCtrl.m */; };
 		5779BD671C25381600E15934 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BD661C25381600E15934 /* main.m */; };
 		5779BD6A1C25381600E15934 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BD691C25381600E15934 /* AppDelegate.m */; };
@@ -104,7 +107,6 @@
 		57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511A41C5CC3BC000DA1A8 /* MHTabBarController.m */; };
 		57F511AA1C5CCF86000DA1A8 /* BasketContainerViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511A91C5CCF86000DA1A8 /* BasketContainerViewCtrl.m */; };
 		57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511AC1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m */; };
-		57F511B01C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511AF1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m */; };
 		57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */; };
 		57F7B9FB1C624C64002A8A08 /* roommap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7B9FA1C624C64002A8A08 /* roommap@2x.png */; };
 /* End PBXBuildFile section */
@@ -153,6 +155,11 @@
 		5736E9FE1C552A460055774D /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		5736EA001C5535720055774D /* ThrowLineTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowLineTool.h; sourceTree = "<group>"; };
 		5736EA011C5535720055774D /* ThrowLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowLineTool.m; sourceTree = "<group>"; };
+		573E51CD1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponPaymentDetailViewCtrl.h; sourceTree = "<group>"; };
+		573E51CE1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponPaymentDetailViewCtrl.m; sourceTree = "<group>"; };
+		573E51D01C7C2561005DBBC3 /* BasketNoUseViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketNoUseViewCtrl.m; sourceTree = "<group>"; };
+		573E51D21C7C5407005DBBC3 /* ShopCommentEditViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCommentEditViewCtrl.h; sourceTree = "<group>"; };
+		573E51D31C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCommentEditViewCtrl.m; sourceTree = "<group>"; };
 		574AE8A61C626C8200928B09 /* ShopCommentViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCommentViewCtrl.h; sourceTree = "<group>"; };
 		574AE8A71C626C8200928B09 /* ShopCommentViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCommentViewCtrl.m; sourceTree = "<group>"; };
 		5779BD611C25381600E15934 /* coupon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coupon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,7 +276,6 @@
 		57F511AB1C5CD188000DA1A8 /* BasketNoPayViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketNoPayViewCtrl.h; sourceTree = "<group>"; };
 		57F511AC1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketNoPayViewCtrl.m; sourceTree = "<group>"; };
 		57F511AE1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketNoUseViewCtrl.h; sourceTree = "<group>"; };
-		57F511AF1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketNoUseViewCtrl.m; sourceTree = "<group>"; };
 		57F511B11C5CD1CF000DA1A8 /* BasketFinishViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketFinishViewCtrl.h; sourceTree = "<group>"; };
 		57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketFinishViewCtrl.m; sourceTree = "<group>"; };
 		57F7B9FA1C624C64002A8A08 /* roommap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "roommap@2x.png"; sourceTree = "<group>"; };
@@ -332,6 +338,8 @@
 				57A94E801C393A3F00BE0022 /* CouponDetailViewCtrl.m */,
 				57CE97CD1C63A9E800CE0E57 /* CouponListViewCtrl.h */,
 				57CE97CE1C63A9E800CE0E57 /* CouponListViewCtrl.m */,
+				573E51CD1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.h */,
+				573E51CE1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m */,
 			);
 			path = couponDetail;
 			sourceTree = "<group>";
@@ -351,6 +359,8 @@
 				57CE97C01C63231B00CE0E57 /* ShopCommentTableViewCell.m */,
 				57CE97CA1C63A9CB00CE0E57 /* ShopListViewCtrl.h */,
 				57CE97CB1C63A9CB00CE0E57 /* ShopListViewCtrl.m */,
+				573E51D21C7C5407005DBBC3 /* ShopCommentEditViewCtrl.h */,
+				573E51D31C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m */,
 			);
 			path = shopDetail;
 			sourceTree = "<group>";
@@ -626,12 +636,12 @@
 		57F511A71C5CC923000DA1A8 /* basket */ = {
 			isa = PBXGroup;
 			children = (
+				573E51D01C7C2561005DBBC3 /* BasketNoUseViewCtrl.m */,
 				57F511A81C5CCF86000DA1A8 /* BasketContainerViewCtrl.h */,
 				57F511A91C5CCF86000DA1A8 /* BasketContainerViewCtrl.m */,
 				57F511AB1C5CD188000DA1A8 /* BasketNoPayViewCtrl.h */,
 				57F511AC1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m */,
 				57F511AE1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.h */,
-				57F511AF1C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m */,
 				57F511B11C5CD1CF000DA1A8 /* BasketFinishViewCtrl.h */,
 				57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */,
 			);
@@ -848,9 +858,10 @@
 				5779BD6D1C25381600E15934 /* ViewController.m in Sources */,
 				57CE97D91C65E90400CE0E57 /* ShopService.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
+				573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */,
 				57017F331C5F4128007B0112 /* SelectMallPopViewCtrl.m in Sources */,
+				573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */,
 				57CE97C11C63231B00CE0E57 /* ShopCommentTableViewCell.m in Sources */,
-				57F511B01C5CD1AD000DA1A8 /* BasketNoUseViewCtrl.m in Sources */,
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
 				578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */,
 				571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */,
@@ -871,6 +882,7 @@
 				5736EA021C5535720055774D /* ThrowLineTool.m in Sources */,
 				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,
 				57E722C61C686A51004DBA9C /* ShakeService.m in Sources */,
+				573E51D11C7C2561005DBBC3 /* BasketNoUseViewCtrl.m in Sources */,
 				578E63E11C254DE900C1FB19 /* Utils.m in Sources */,
 				5796FA5E1C4411AE004CA23B /* PersonInfoViewCtrl.m in Sources */,
 				5796FA6E1C460108004CA23B /* CartViewCtrl.m in Sources */,

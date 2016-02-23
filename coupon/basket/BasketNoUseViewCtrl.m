@@ -10,6 +10,7 @@
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 #import "CouponService.h"
+#import "CouponPaymentDetailViewCtrl.h"
 
 @interface BasketNoUseViewCtrl ()
 
@@ -90,6 +91,14 @@
     CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
+    
+    cell.couponActionType = CouponTypeToUnPay;
+    
+    cell.doActionBlock = ^(NSDictionary *data){
+        
+    };
+    
+    
     [cell updateData:self.dataList[[indexPath row]]];
     
     
@@ -109,10 +118,19 @@
     
     
     
-    CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+    CouponPaymentDetailViewCtrl *vc = [CouponPaymentDetailViewCtrl new];
     
+    
+    
+    
+    NSDictionary *d = self.dataList[[indexPath row]];
+    
+    vc.data =d;
     
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
     
     
     

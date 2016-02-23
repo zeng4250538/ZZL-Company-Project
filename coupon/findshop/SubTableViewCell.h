@@ -18,7 +18,7 @@ typedef void(^PayBlock)(NSDictionary *data);
 
 
 @property(nonatomic,strong)NSDictionary *data;
-@property(nonatomic,assign)CouponType couponType;
+@property(nonatomic,assign)CouponActionType couponType;
 @property(nonatomic,copy)PayBlock payBlock;
 
 

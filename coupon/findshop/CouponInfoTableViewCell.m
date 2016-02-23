@@ -138,20 +138,20 @@
     [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
     [self.recommentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    if (self.couponType == CouponTypeNormal) {
+    if (self.couponActionType == CouponTypeNormal) {
         self.recommentButton.hidden = YES;
  
-    }else if (self.couponType == CouponTypeLimited) {
+    }else if (self.couponActionType == CouponTypeLimited) {
             self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
 
-    }else if (self.couponType == CouponTypeUnLimited) {
+    }else if (self.couponActionType == CouponTypeUnLimited) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"取消提醒" forState:UIControlStateNormal];
     
-    }else if (self.couponType == CouponTypeToPay) {
+    }else if (self.couponActionType == CouponTypeToPay) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"支付" forState:UIControlStateNormal];
@@ -159,8 +159,8 @@
         
         [self.recommentButton bk_addEventHandler:^(id sender) {
             
-            if (self.payBlock) {
-                self.payBlock(nil);
+            if (self.doActionBlock) {
+                self.doActionBlock(nil);
                 
             }
             
@@ -170,11 +170,48 @@
             
         } forControlEvents:UIControlEventTouchUpInside];
 
-    }else if (self.couponType == CouponTypeToUse) {
+    }else if (self.couponActionType == CouponTypeToUse) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"退款" forState:UIControlStateNormal];
     
+    }else if (self.couponActionType == CouponTypeToComment) {
+        self.recommentButton.hidden = NO;
+        
+        [self.recommentButton setTitle:@"去评论" forState:UIControlStateNormal];
+        
+        [self.recommentButton bk_addEventHandler:^(id sender) {
+            
+            if (self.doActionBlock) {
+                self.doActionBlock(nil);
+                
+            }
+            
+            
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
+        
+            
+    }else if (self.couponActionType == CouponTypeToUnPay) {
+        self.recommentButton.hidden = NO;
+        
+        [self.recommentButton setTitle:@"退款" forState:UIControlStateNormal];
+        
+        [self.recommentButton bk_addEventHandler:^(id sender) {
+            
+            if (self.doActionBlock) {
+                self.doActionBlock(nil);
+                
+            }
+            
+            
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+
         
     }else{
         self.recommentButton.hidden = NO;
@@ -301,14 +338,25 @@
     
     
     
+    self.logoView.image = [UIImage imageNamed:self.data[@"icon"]];
+    self.titleLabel.text=self.data[@"name"];
+    self.priceLabel.text=[NSString stringWithFormat:@"￥%@",self.data[@"price"]];
     
-    NSString *imgUrl = [Utils getRandomImage:@"商家图片"];
     
-    self.logoView.image = [UIImage imageNamed:imgUrl];
-    self.titleLabel.text=@"代金券";
-    self.priceLabel.text=@"20";
+    // data[@"price"];
     
-    self.detailLabel.text=@"满100送20，全天通用，消费满100";
+    self.detailLabel.text=self.data[@"prompt"];
+    
+    
+    
+    
+//    NSString *imgUrl = [Utils getRandomImage:@"商家图片"];
+//    
+//    self.logoView.image = [UIImage imageNamed:imgUrl];
+//    self.titleLabel.text=@"代金券";
+//    self.priceLabel.text=@"20";
+//    
+//    self.detailLabel.text=@"满100送20，全天通用，消费满100";
     
     
     

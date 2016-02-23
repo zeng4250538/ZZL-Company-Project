@@ -1,39 +1,32 @@
 //
-//  MyRemindViewCtrl.m
+//  ShopCommentEditViewCtrl.m
 //  coupon
 //
-//  Created by chijr on 16/2/20.
+//  Created by chijr on 16/2/23.
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "MyRemindViewCtrl.h"
+#import "ShopCommentEditViewCtrl.h"
+#import "ShopInfoTableViewCell.h"
 
-#import "CouponService.h"
-#import "CouponDetailViewCtrl.h"
-#import "CouponInfoTableViewCell.h"
+@interface ShopCommentEditViewCtrl ()
 
-
-
-@interface MyRemindViewCtrl ()
-
-@property(nonatomic,strong)NSArray *data;
 
 @end
 
-@implementation MyRemindViewCtrl
+@implementation ShopCommentEditViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"shopCell"];
     
     
-    self.navigationItem.title=@"我的提醒";
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
-    [self loadData];
-    
+    self.navigationItem.title=@"商家评价";
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -41,43 +34,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
-
--(void)loadData{
-    
-    
-    CouponService *service = [CouponService new];
-    
-    
-    [service queryRemindCoupon:nil success:
-     ^(int code, NSString *message, id data) {
-         
-         if (code==0) {
-             
-             self.data = data;
-             
-             [self.tableView reloadData];
-             
-         }
-         
-     } failure:
-     ^(int code, BOOL retry, NSString *message, id data) {
-         
-         
-     }];
-    
-    //service qu
-    
-    
-    
-    
-    
-    
-}
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -89,44 +45,83 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return [CouponInfoTableViewCell height];
+    if (indexPath.section==0) {
+        
+        return [ShopInfoTableViewCell height];
+        
+    }
     
+    return 30;
+    
+    
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 20;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.data count];
+    return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    
-    
-    
-    NSDictionary *d = self.data[indexPath.row];
-    
-    cell.data =d;
-    
-    
-    
-    
-    cell.couponActionType = CouponTypeUnLimited;
-    
-    
-    [cell updateData];
-    
-    //cell.textLabel.text=@"我的提醒";
+   
+    if (indexPath.section==0) {
+        
+        
+        ShopInfoTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"shopCell" forIndexPath:indexPath];
+        
+        
+        
+        NSArray *list = [[MockData instance] randomShopModel:1];
+        
+        
+        cell.data = list[0];
+        
+        [cell updateData];
+        
+        return cell;
+        
+        
+        
+    }
+  
+    if (indexPath.section==1) {
+        
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+      
+        
+        //UILabel *nameLabel = [UILabel new];
+        
+        return cell;
+        
+        
+        
+        
+        
+        
+     //   return cell;
+        
+        
+        
+    }
+
     
     // Configure the cell...
+   
     
-    return cell;
+    return nil;
 }
 
 

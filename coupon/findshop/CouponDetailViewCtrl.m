@@ -69,9 +69,16 @@
     
     [self makeHeaderView];
     
-    [self makeBottomView];
     
-    [self makeCartView];
+    
+    if (self.couponDetailType == CouponDetailTypeHaveCart) {
+        
+        [self makeBottomView];
+        
+        [self makeCartView];
+        
+    }
+    
     
  
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[UIColor whiteColor]];

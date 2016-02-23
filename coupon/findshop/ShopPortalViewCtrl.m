@@ -393,7 +393,7 @@
         
         
     }else{
-        return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
+        return  [ShopInfoTableViewCell headerViewWithSort:@"品牌街" clickBlock:^{
             
             
             ShopListViewCtrl *vc = [ShopListViewCtrl new];
@@ -410,6 +410,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    if (section==2) {
+        return 80;
+    }
     
     return 30;
 }
@@ -498,7 +502,7 @@
         [cell updateData:self.couponData[indexPath.row]];
         
         
-        cell.couponType = CouponTypeLimited;
+        cell.couponActionType = CouponTypeLimited;
         
         
         
