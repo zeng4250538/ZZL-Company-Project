@@ -11,6 +11,7 @@
 #import "CouponDetailViewCtrl.h"
 #import "CouponService.h"
 #import "CouponPaymentDetailViewCtrl.h"
+#import "CouponDrawbackViewCtrl.h"
 
 @interface BasketNoUseViewCtrl ()
 
@@ -95,6 +96,19 @@
     cell.couponActionType = CouponTypeToUnPay;
     
     cell.doActionBlock = ^(NSDictionary *data){
+        
+        
+        CouponDrawbackViewCtrl *vc = [CouponDrawbackViewCtrl new];
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        NSDictionary *d = self.dataList[[indexPath row]];
+        
+        vc.data =d;
+        
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
         
     };
     

@@ -141,8 +141,8 @@
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
-        make.height.equalTo(@(SCREEN_WIDTH-40));
-        make.width.equalTo(@(SCREEN_WIDTH-80));
+        make.height.equalTo(@(40*4+60));
+        make.width.equalTo(@(SCREEN_WIDTH-100));
         
         
     }];
@@ -150,7 +150,7 @@
     
     
     {
-        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-80, 40)];
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-100, 40)];
         headView.backgroundColor = [UIColor whiteColor];
         
         UILabel *headLabel = [UILabel new];
@@ -165,7 +165,7 @@
             
             make.left.equalTo(headView).offset(15);
             make.height.equalTo(headView);
-            make.width.equalTo(headView).offset(-100);
+            make.width.equalTo(headView);
             
             
         }];

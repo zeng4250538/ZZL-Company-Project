@@ -30,6 +30,8 @@ typedef void(^PayBlock)(NSDictionary *data);
 @property(nonatomic,strong)NSDictionary *data;
 @property(nonatomic,assign)CouponActionType couponActionType;
 @property(nonatomic,copy)PayBlock doActionBlock;
+@property(nonatomic,strong)UILabel *couponStatusLabel;    //优惠券
+
 
 
 

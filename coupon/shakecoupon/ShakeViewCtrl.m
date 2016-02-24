@@ -77,16 +77,16 @@
 -(void)makeAnimateView:(UIView*)shakeLogo parentView:(UIView*)parentView{
     
     
-    NSArray *paths = @[[[NSBundle mainBundle] pathForResource:@"animation001@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation002@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation003@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation001@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation002@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation003@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation001@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation002@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation003@2x" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation001@2x" ofType:@"png"]];
+    NSArray *paths = @[[[NSBundle mainBundle] pathForResource:@"animation_01" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_02" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_03" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_01" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_02" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_03" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_01" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_02" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_03" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_01" ofType:@"png"]];
     NSArray *times = @[@0.1, @0.1, @.1,@.1,@0.1,@0.1,@0.1, @0.1, @.1,@1.0];
     
     UIImage *image = [[YYFrameImage alloc] initWithImagePaths:paths frameDurations:times loopCount:0];
@@ -96,22 +96,33 @@
     
     [parentView addSubview:imageView];
     
+    [parentView addSubview:imageView];
+
+    
+    
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(parentView);
+        make.centerY.equalTo(parentView);
+        make.width.equalTo(@(383/2));
+        make.height.equalTo(@(596/2));
+
+    }];
+    
     
     
    // CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
     
-    CGRect r = imageView.frame;
-    r.origin.x = SCREEN_WIDTH/2+60;
-    r.origin.y = shakeLogo.frame.origin.y+shakeLogo.frame.size.height;
-    r.size.width = r.size.width/2;
+//    CGRect r = imageView.frame;
+//    r.origin.x = SCREEN_WIDTH/2+60;
+//    r.origin.y = shakeLogo.frame.origin.y+shakeLogo.frame.size.height;
+//    r.size.width = r.size.width/2;
+//    
+//    r.size.height = r.size.height/2;
+//    
+//    
+//    imageView.frame = r;
+//    
     
-    r.size.height = r.size.height/2;
-    
-    
-    imageView.frame = r;
-    
-    
-    [parentView addSubview:imageView];
     //imageView.frame = CGRectMake(SCREEN_WIDTH/2, FrameHeight/2,150 ,150);
         
     
@@ -162,7 +173,7 @@
         UITapGestureRecognizer *rg = [[UITapGestureRecognizer alloc] bk_initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
             
             
-            [self doLoadShakeView];
+           // [self doLoadShakeView];
             
             
         }];
@@ -183,11 +194,26 @@
         
         UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,FrameHeight)];
         
-        bgView.image = [UIImage imageNamed:@"spring.png"];
+        bgView.image = [UIImage imageNamed:@"beijing2"];
         
         
         [uv addSubview:bgView];
-        [uv addSubview:imgView];
+        
+        
+        UIImageView *ballView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"beijingball.png"]];
+        
+        [uv addSubview:ballView];
+        
+        [ballView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(uv);
+            
+        }];
+        
+        
+        
+        
+        
+       // [uv addSubview:imgView];
         
         
         

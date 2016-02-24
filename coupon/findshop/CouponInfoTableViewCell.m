@@ -67,6 +67,14 @@
         [self.contentView addSubview:self.recommentButton];
         
         
+        self.couponStatusLabel = [UILabel new];
+        self.couponStatusLabel.font = [UIFont systemFontOfSize:13];
+        self.couponStatusLabel.textColor = [UIColor redColor];
+        
+        [self.contentView addSubview:self.couponStatusLabel];
+        
+        
+        
         
         
 
@@ -101,6 +109,17 @@
         make.left.equalTo(self.logoView.mas_right).with.offset(10);
         make.top.equalTo(self.contentView.mas_top).with.offset(10);
         make.right.equalTo(self.contentView.mas_right).with.offset(-10);
+        
+    }];
+    
+    
+    [self.couponStatusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.height.equalTo(@20);
+        make.left.equalTo(self.contentView.mas_right).with.offset(-80);
+        make.width.equalTo(@50);
+        make.top.equalTo(self.titleLabel);
+      //  make.centerY.equalTo(self.contentView);
         
     }];
     

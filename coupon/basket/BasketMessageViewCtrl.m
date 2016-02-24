@@ -1,33 +1,34 @@
 //
-//  BasketFinishViewCtrl.m
+//  BasketMessageViewCtrl.m
 //  coupon
 //
-//  Created by chijr on 16/1/30.
+//  Created by chijr on 16/2/24.
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "BasketFinishViewCtrl.h"
+#import "BasketMessageViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
-#import "CouponDetailViewCtrl.h"
-#import "CouponService.h"
-#import "CouponPaymentDetailViewCtrl.h"
-#import "ShopCommentEditViewCtrl.h"
 
-@interface BasketFinishViewCtrl ()
+@interface BasketMessageViewCtrl ()
+
+@property(nonatomic,strong)NSArray *dataList;
 
 @end
 
-@implementation BasketFinishViewCtrl
+@implementation BasketMessageViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-    [self loadData];
+    self.navigationItem.title=@"篮子消息";
+    
+    
+    self.dataList = [[MockData instance] randomCouponModel:4];
+    
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -35,40 +36,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-
--(void)loadData{
-    
-    
-    
-    
-    CouponService *service = [CouponService new];
-    
-    [service queryFinishCoupon:nil success:^(int code, NSString *message, id data) {
-        
-        if (code==0) {
-            self.dataList = data;
-            
-            [self.tableView reloadData];
-        }
-        
-    } failure:^(int code, BOOL retry, NSString *message, id data) {
-        
-    }];
-    
-    
-    
-    
-    
-}
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -88,70 +61,26 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
+    NSDictionary *d = self.dataList[indexPath.row];
+    
+    cell.data = d;
+    
+    
+    cell.couponStatusLabel.text =[NSString stringWithFormat:@"%d天过期",arc4random()%4+1];
     
     
     
     
-    NSDictionary *d = self.dataList[[indexPath row]];
-    
-    cell.couponActionType = CouponTypeToComment;
-    
-    [cell updateData:d];
-    
-    
-    cell.doActionBlock = ^(NSDictionary *data){
-        
-        
-        ShopCommentEditViewCtrl *vc = [ShopCommentEditViewCtrl new];
-        
-        vc.data = d;
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-      
-        
-        
-    };
-    
-    
-    
+    [cell updateData];
     
     
     // Configure the cell...
     
     return cell;
 }
-
-
-
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-    
-    CouponPaymentDetailViewCtrl *vc = [CouponPaymentDetailViewCtrl new];
-    
-    vc.couponPaymentType = CouponPaymentTypeUsed;
-    
-    NSDictionary *d = self.dataList[[indexPath row]];
-    
-    vc.data =d;
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    
-    
-    
-}
-
-
 
 
 /*

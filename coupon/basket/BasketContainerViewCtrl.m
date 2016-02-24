@@ -11,6 +11,7 @@
 #import "BasketNoPayViewCtrl.h"
 #import "BasketNoUseViewCtrl.h"
 #import "BasketFinishViewCtrl.h"
+#import "BasketMessageViewCtrl.h"
 
 
 
@@ -67,6 +68,19 @@
     
     
     [self.headTabBar didMoveToParentViewController:self];
+    
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"message_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+        BasketMessageViewCtrl *vc =[BasketMessageViewCtrl new];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }];
+    
+    self.navigationItem.rightBarButtonItem=rightBarButton;
+
     
     
     

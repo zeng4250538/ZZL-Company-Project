@@ -9,6 +9,7 @@
 #import "ShopCommentEditViewCtrl.h"
 #import "ShopInfoTableViewCell.h"
 
+
 @interface ShopCommentEditViewCtrl ()
 
 
@@ -27,6 +28,18 @@
     
     
     self.navigationItem.title=@"商家评价";
+    
+    
+    UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+    uv.backgroundColor =[UIColor whiteColor];
+    
+    self.tableView.tableFooterView = uv;
+    
+    
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"发布" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+    }];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -51,7 +64,7 @@
         
     }
     
-    return 30;
+    return 50;
     
     
     
@@ -104,6 +117,100 @@
         
         //UILabel *nameLabel = [UILabel new];
         
+        
+        UILabel *nameLabel = [UILabel new];
+        nameLabel.font = [UIFont systemFontOfSize:14];
+        nameLabel.text=@"商家的印象";
+        
+        
+        [cell.contentView addSubview:nameLabel];
+        
+        [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(cell.contentView);
+            make.left.equalTo(cell.contentView).offset(20);
+            make.width.equalTo(@80);
+        }];
+        
+        
+        UIButton *likeButton = [GUIConfig iconGood];
+        
+        
+        [cell.contentView addSubview:likeButton];
+        
+        [likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(nameLabel.mas_right).with.offset(20);
+            make.centerY.equalTo(cell.contentView);
+            
+        }];
+        
+        //喜欢按钮
+        
+        [likeButton bk_addEventHandler:^(id sender) {
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+        UILabel *likeLabel = [UILabel new];
+        [cell.contentView addSubview:likeLabel];
+        
+        
+        likeLabel.textColor=[GUIConfig grayFontColor];
+        likeLabel.font = [UIFont systemFontOfSize:12];
+        likeLabel.text=@"赞";
+        [likeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            //make.width.equalTo(@40);
+            make.left.equalTo(likeButton.mas_right).with.offset(10);
+            make.centerY.equalTo(cell.contentView);
+            
+        }];
+        
+        
+        
+        UIButton *unlikeButton = [GUIConfig iconBad];
+        
+        
+        
+        
+        [cell.contentView addSubview:unlikeButton];
+        
+        
+        //不喜欢按钮
+        [unlikeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(likeLabel.mas_right).with.offset(20);
+            make.centerY.equalTo(cell.contentView);
+        }];
+        
+        
+        [unlikeButton bk_addEventHandler:^(id sender) {
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        UILabel *unlikeLabel = [UILabel new];
+        [cell.contentView addSubview:unlikeLabel];
+        
+        
+        unlikeLabel.textColor=[GUIConfig grayFontColor];
+        unlikeLabel.font = [UIFont systemFontOfSize:12];
+        unlikeLabel.text=@"倒赞";
+        [unlikeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.width.equalTo(@40);
+            make.left.equalTo(unlikeButton.mas_right).with.offset(10);
+            make.centerY.equalTo(cell.contentView);
+            
+        }];
+        
+        
+        
+        
+        
+        
+        
         return cell;
         
         
@@ -116,6 +223,15 @@
         
         
     }
+    
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
+    //UILabel *nameLabel = [UILabel new];
+    
+    return cell;
+    
 
     
     // Configure the cell...
@@ -124,6 +240,12 @@
     return nil;
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
