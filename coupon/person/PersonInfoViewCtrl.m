@@ -13,6 +13,9 @@
 #import "MyRemindViewCtrl.h"
 #import "BasketContainerViewCtrl.h"
 #import "FeedBackViewCtrl.h"
+#import "SettingViewCtrl.h"
+#import "SettingMessageTypeViewCtrl.h"
+#import "CouponDrawBackListViewCtrl.h"
 
 
 
@@ -48,11 +51,27 @@
     
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"setting_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
+        SettingViewCtrl *set = [SettingViewCtrl new];
+        
+        set.hidesBottomBarWhenPushed = YES;
+        
+        
+        [self.navigationController pushViewController:set animated:YES];
+        
+        
     }];
+    
+    
+    
     
     self.navigationItem.leftBarButtonItem=leftBarButton;
     
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"message_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+        SettingMessageTypeViewCtrl *vc = [SettingMessageTypeViewCtrl new];
+        
+        [self.navigationController pushViewController:vc animated:YES];
         
     }];
     
@@ -303,6 +322,21 @@
             
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
+        }
+        
+        
+        if (indexPath.row==2) {
+            
+            CouponDrawBackListViewCtrl *vc =[CouponDrawBackListViewCtrl new];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
             
             
             

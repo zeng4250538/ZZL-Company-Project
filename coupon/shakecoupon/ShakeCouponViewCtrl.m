@@ -22,6 +22,7 @@
 
 @property(nonatomic,strong)CouponView *imgView;
 @property(nonatomic,strong)CouponView *nextView;
+@property(nonatomic,strong)NSDictionary *currentData;
 @property(nonatomic,strong)UITapGestureRecognizer *tapCouponRG;
 @property(nonatomic,strong)UIButton *cartButton;
 @property(nonatomic,strong)UILabel *cartNumLabel;
@@ -34,6 +35,13 @@
 @property(nonatomic,strong)NSMutableArray *shakeCouponList;
 
 @property(nonatomic,strong)UIView *placeHolderView;
+
+@property(nonatomic,strong)UIView *maskView;
+
+@property(nonatomic,strong)UIImageView *leftMaskView;
+@property(nonatomic,strong)UIImageView *rightMaskView;
+
+
 
 
 
@@ -49,7 +57,7 @@
     
     self.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
-    self.view.backgroundColor =[UIColor colorWithWhite:0.1f alpha:0.7f];
+    self.view.backgroundColor =[UIColor colorWithWhite:0.1f alpha:0.0f];
     
     
     UITapGestureRecognizer *rg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTap:)];
@@ -72,11 +80,15 @@
 //    self.swipeLeftCouponRG.direction = UISwipeGestureRecognizerDirectionLeft;
 //    
     
-    [self makeCartView];
-    [self makeAddCommentView];
+   // [self makeCartView];
+   // [self makeAddCommentView];
     
     
     [self makeRequestCoupon];
+    
+    
+    [self makeMaskCircleView];
+    
     
     
     
@@ -100,6 +112,67 @@
     
     // Do any additional setup after loading the view.
 }
+
+
+#pragma mark - 请求优惠券
+
+
+
+-(void)makeRequestCouponBlock:( void (^)(NSDictionary *data))completion{
+    
+    
+    
+    CGFloat viewWidth = SCREEN_WIDTH-120;
+    CGFloat viewHeight = SCREEN_WIDTH-120+40;
+    
+    
+    
+    
+    ShakeService *service = [ShakeService new];
+    
+    [service requestShakeCoupon:nil success:^(int code, NSString *message, id data) {
+        
+        
+        if (code==0) {
+            
+            self.shakeCouponList = [data mutableCopy];
+            
+            self.couponData = self.shakeCouponList[0];
+            
+            
+            [self.shakeCouponList removeObjectAtIndex:0];
+            
+            completion(self.couponData);
+            
+            
+            
+//            CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
+//            
+//            
+//            [self.view addSubview:couponView];
+//            
+//            
+//            self.imgView = couponView;
+//            
+            
+            
+        }
+        
+        
+        
+    } failure:^(int code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
+    
+    
+    
+}
+
+
+
 
 
 #pragma mark - 初始化优惠券
@@ -284,14 +357,14 @@
     UIButton *cartButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     
-    [cartButton setImage:[UIImage imageNamed:@"gocart.png"] forState:UIControlStateNormal];
+    [cartButton setImage:[UIImage imageNamed:@"cart"] forState:UIControlStateNormal];
     
     cartButton.frame = CGRectMake(SCREEN_WIDTH-100, 50, 60, 60);
     
-    cartButton.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.7];
-    
-    cartButton.clipsToBounds = YES;
-    cartButton.layer.cornerRadius = 30;
+//    cartButton.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.7];
+//    
+//    cartButton.clipsToBounds = YES;
+//    cartButton.layer.cornerRadius = 30;
     [self.view addSubview:cartButton];
     
     self.cartButton  = cartButton;
@@ -327,8 +400,8 @@
     
     [self.cartNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(cartButton.mas_right).offset(-10);
-        make.top.equalTo(cartButton.mas_top).offset(10);
+        make.left.equalTo(cartButton.mas_right).offset(-15);
+        make.top.equalTo(cartButton.mas_top).offset(12);
         make.width.equalTo(@14);
         make.height.equalTo(@14);
         
@@ -388,7 +461,7 @@
     
     [self.view addSubview:self.placeHolderView];
     
-    self.placeHolderView.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.2f];
+    self.placeHolderView.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.0f];
     
     
     [self.placeHolderView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -397,8 +470,6 @@
         
         make.width.equalTo(@(SCREEN_WIDTH-120));
         make.height.equalTo(@(SCREEN_WIDTH-120+40));
-        
-        
         
         
     }];
@@ -419,7 +490,7 @@
         make.height.equalTo(@30);
         make.centerX.equalTo(self.view);
         make.bottom.equalTo(self.placeHolderView.mas_top).offset(-20);
-       // make.bottom.equalTo(self.imgView.mas_top).offset(-20);
+        //make.bottom.equalTo(self.imgView.mas_top).offset(-20);
        // make.bottom.equalTo(couponView.).offset(-20);
         
         
@@ -449,8 +520,8 @@
     upLabel.textColor = [UIColor whiteColor];
     [upLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(upImageView2.mas_right).offset(10);
-        make.centerY.equalTo(upImageView2).offset(-5);
+        make.left.equalTo(upImageView1.mas_right).offset(5);
+        make.centerY.equalTo(upImageView1).offset(10);
         
         
     }];
@@ -495,8 +566,8 @@
     downLabel.textColor = [UIColor whiteColor];
     [downLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(downImageView2.mas_right).offset(10);
-        make.centerY.equalTo(downImageView2).offset(-5);
+        make.left.equalTo(downImageView1.mas_right).offset(10);
+        make.centerY.equalTo(downImageView1).offset(5);
         
         
     }];
@@ -546,6 +617,9 @@
         
     }
     
+    
+    
+    
    
     
     self.couponData = self.shakeCouponList[0];
@@ -565,7 +639,296 @@
     
     
     
+    
+    
 }
+
+
+
+#pragma mark 建立屏蔽视图
+-(void)makeMaskCircleView{
+    
+    
+    UIView *maskView = [UIView new];
+    
+   // maskView.backgroundColor = [UIColor whiteColor];
+    
+   // maskView.layer.borderWidth=2;
+    
+    [self.view addSubview:maskView];
+    
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(self.view);
+        make.centerY.equalTo(self.view).offset(-55);
+        
+        make.width.equalTo(@218);
+        make.height.equalTo(@218);
+        
+    }];
+    
+    maskView.layer.cornerRadius = 109;
+    maskView.clipsToBounds = YES;
+    
+    self.maskView = maskView;
+    
+    
+    UIImageView *maskLeft = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mask_left"]];
+    
+    UIImageView *maskRight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mask_right"]];
+    
+    
+    maskLeft.frame = CGRectMake(-109, 0, 109, 218);
+    
+    maskRight.frame = CGRectMake(109+109, 0, 109, 218);
+    
+    [self.maskView addSubview:maskLeft];
+    
+    [self.maskView addSubview:maskRight];
+    
+    
+    self.leftMaskView = maskLeft;
+    self.rightMaskView = maskRight;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+-(void)makeMaskCircleViewClose{
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        self.leftMaskView.frame = CGRectMake(0, 0, 109, 218);
+        
+        
+        
+        
+        
+        
+    } completion:^(BOOL finished) {
+        
+        
+    }];
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        self.rightMaskView.frame = CGRectMake(109, 0, 109, 218);
+        
+        
+        
+        
+        
+        
+    } completion:^(BOOL finished) {
+        
+        
+        
+        [self makeRequestCouponBlock:^(NSDictionary *data) {
+            
+            CGFloat viewWidth = SCREEN_WIDTH-120;
+            CGFloat viewHeight = SCREEN_WIDTH-120+40;
+
+            
+            
+            CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, viewHeight) data:data];
+            
+            self.currentData = data;
+            
+            self.imgView = couponView;
+            
+            
+            
+            
+            
+            
+            
+            [self.maskView addSubview:couponView];
+            
+            
+            
+            [self.maskView sendSubviewToBack:couponView];
+            
+            
+         
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        
+        
+        
+        }];
+        
+        
+        
+        
+        
+        
+        
+        [self makeMaskCircleViewOpen];
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+-(void)makeMaskCircleViewOpen{
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        self.leftMaskView.frame = CGRectMake(0-109, 0, 109, 218);
+        
+        
+        
+        
+        
+        
+    } completion:^(BOOL finished) {
+        
+        
+    }];
+    
+ 
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        self.rightMaskView.frame = CGRectMake(109+109, 0, 109, 218);
+        
+        
+        
+        
+        
+        
+    } completion:^(BOOL finished) {
+        
+         [self makeCartView];
+         [self makeAddCommentView];
+
+        
+        
+        [self.rightMaskView removeFromSuperview];
+        
+        CGFloat viewWidth = (SCREEN_WIDTH-120)*0.9;
+        CGFloat viewHeight = (SCREEN_WIDTH-120+40)*0.9;
+        
+        
+        [self.imgView removeFromSuperview];
+        
+
+        
+        
+        
+        CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-viewWidth)/2,
+                                                                              (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.currentData];
+        
+        
+        
+        [self.view addSubview:couponView];
+        
+        self.imgView = couponView;
+        
+        
+        
+        
+        
+        
+        
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            
+           // self.view.alpha=0.5;
+            
+            self.view.backgroundColor =[UIColor colorWithWhite:0.1f alpha:0.7f];
+            
+            
+            self.maskView.layer.cornerRadius=0;
+            
+            
+            
+//            r.size.height=r.size.height*1.5;
+//            r.size.width = r.size.width*1.5;
+            
+            
+            
+            
+           // self.maskView.transform = CGAffineTransformScale(self.maskView.transform, 1.3, 1.3);
+            self.imgView.transform = CGAffineTransformScale(self.imgView.transform, 1.1, 1.1);
+           
+            
+//            CGRect rr = self.imgView.frame;
+//            
+//            rr.origin.x-=20;
+//            rr.origin.y-=20;
+//            rr.size.width+=20;
+//            rr.size.height+=20;
+//            
+//            self.imgView.frame = rr;
+//            
+//            self.maskView.frame =r;
+//            
+            
+            // self.maskView.frame = CGRectMake(0-109, 0, 109, 218);
+            
+            
+            
+            
+            
+            
+        } completion:^(BOOL finished) {
+            
+            [self doAddAction];
+            
+            
+            
+        }];
+        
+        
+        
+        
+    }];
+    
+
+
+    
+    
+    
+    
+    
+    
+    
+}
+
 
 
 
@@ -633,8 +996,14 @@
     
     [super viewDidAppear:animated];
     
+   [self makeMaskCircleViewClose];
     
     
+   // -(void)makeMaskCircleViewMove{
+
+    
+    
+    return ;
     
     [self doAddAction];
     
@@ -909,6 +1278,12 @@
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     
+    
+    
+    
+    [Utils playShakeSound];
+    
+    
     [super motionEnded:motion withEvent:event];
     
     
@@ -916,81 +1291,6 @@
         
         
         [self animationSwipeLeft];
-        
-        
-//        CouponView *nextView =[[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-240)/2, 200, 240) data:nil];
-//        
-//        
-//        
-//        [self.view addSubview:nextView];
-//        
-//        
-//        self.nextView = nextView;
-//        
-//        
-//        
-//        
-//        
-//        [UIView animateWithDuration:0.5 animations:^{
-//        
-//            
-//            
-//            CGRect r = self.nextView.frame;
-//            
-//            CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
-//            
-//            r.origin.x = x;
-//            
-//            
-//            self.nextView.frame = r;
-//            
-//            
-//   
-//            CGRect rr = self.imgView.frame;
-//            
-//            CGFloat xx = self.imgView.frame.size.width*-2.0f;
-//            
-//            rr.origin.x = xx;
-//            
-//            
-//            self.imgView.frame = rr;
-//            
-//            
-//            
-//            
-//        } completion:^(BOOL finished) {
-//            
-//            
-//            [self.imgView removeFromSuperview];
-//            
-//            self.imgView = nil;
-//            
-//            self.imgView = self.nextView;
-//            
-//            [self doAddAction];
-//            
-//            
-//            
-//        }];
-//        
-        
-        
-
-        
-        
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -1011,6 +1311,9 @@
     [self dismissViewControllerAnimated:NO completion:^{
         
         CouponDetailViewCtrl *vc =  [CouponDetailViewCtrl new];
+        
+        vc.data = self.couponData;
+        
         
         vc.hidesBottomBarWhenPushed = YES;
         

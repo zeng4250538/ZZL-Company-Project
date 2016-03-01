@@ -16,6 +16,12 @@
 
 -(NSArray*)randomCouponModel:(NSUInteger)count;
 
+-(NSArray*)orderCouponModel:(NSUInteger)count;
+
+
+
+
+
 
 
 @end

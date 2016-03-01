@@ -40,7 +40,7 @@
 -(NSString*)randomShopIcon{
     
     
-    return  [Utils getRandomImage:@"商家图片"];
+    return  [Utils getRandomImage:@"商家新图"];
     
     
 }
@@ -114,17 +114,59 @@
     
 }
 
+-(NSDictionary*)couponModelOrder:(NSInteger)order{
+    
+    
+  //  NSString *imgrul = [Utils getRandomImage:@"商家新图"];
+    
+    NSString *imgurl = [Utils getOrderImage:@"商家新图" order:order];
+    
+    NSArray *priceArray=@[@"10.0",@"15.0",@"8.0",@"25.0",@"12.0",@"5.0",@"5.0",@"9.9",@"100",@"88"];
+    
+    
+    
+    NSArray *nameArray=@[@"代金券50",@"代金券8折",@"优惠券8.8折",@"满100送20",@"满200送50",
+                         @"代金券买3送1",@"代金券",@"7折券",@"代金券6折",@"代金券6.6折"];
+    
+    
+    
+    
+    NSString *name =nameArray [arc4random()%[nameArray count]];
+    
+    
+    
+    return @{@"icon":imgurl,
+             @"name":name,
+             @"shopName":[self randomShopName],
+             @"price": priceArray[order%[priceArray count]],
+             @"marketPrice": priceArray[order% [priceArray count]],
+             @"prompt":[self randomShopPrompt],
+             @"shop":[self shopModel]
+             };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
 -(NSDictionary*)couponModel{
     
     
-    NSString *imgrul = [Utils getRandomImage:@"商家图片"];
+    NSString *imgrul = [Utils getRandomImage:@"商家新图"];
     
-    NSArray *priceArray=@[@"10.0",@"15.0",@"8.0",@"25.0",@"12.0",@"5.0"];
+    NSArray *priceArray=@[@"10.0",@"15.0",@"8.0",@"25.0",@"12.0",@"5.0",@"5.0",@"9.9",@"100",@"88"];
     
     
     
-    NSArray *nameArray=@[@"代金券20代50",@"代金券8折",@"优惠券8.8择",@"代金券满100送20",
-                         @"代金券买3送1",@"代金券，多送一盘",@"7折券"];
+    NSArray *nameArray=@[@"代金券50",@"代金券8折",@"优惠券8.8折",@"满100送20",@"满200送50",
+                         @"代金券买3送1",@"代金券",@"7折券",@"代金券6折",@"代金券6.6折"];
     
     
     
@@ -152,6 +194,8 @@
     
 }
 
+
+
 -(NSArray*)randomShopModel:(NSUInteger)count{
     
     
@@ -161,10 +205,64 @@
     
     
     
+    
+    NSMutableSet *set  = [NSMutableSet setWithCapacity:100];
+    
     NSMutableArray *data =[NSMutableArray arrayWithCapacity:count];
     
-    for (int i=0; i<count; i++) {
-        [data addObject:[self shopModel]];
+    for (int i=0; i<100; i++) {
+        
+        NSDictionary *d = [self shopModel];
+        
+        if (![set containsObject:d[@"icon"]]){
+            [data addObject:d];
+            
+            [set addObject:d[@"icon"]];
+        }
+        
+        if ([data count]>=count) {
+            return data;
+        }
+        
+        
+    }
+    
+    
+    return data;
+    
+    
+}
+
+-(NSArray*)randomCouponModel:(NSUInteger)count{
+    
+    
+    
+    if (count<1) {
+        return nil;
+    }
+    
+    
+    
+    
+    NSMutableSet *set  = [NSMutableSet setWithCapacity:100];
+    
+    NSMutableArray *data =[NSMutableArray arrayWithCapacity:count];
+    
+    for (int i=0; i<100; i++) {
+        
+        NSDictionary *d = [self couponModel];
+        
+        if (![set containsObject:d[@"icon"]]){
+            [data addObject:d];
+            
+            [set addObject:d[@"icon"]];
+        }
+        
+        if ([data count]>=count) {
+            return data;
+        }
+        
+        
     }
     
     
@@ -172,16 +270,14 @@
     
     
     
-    
-    
-    
+  
     
     
     
     
 }
 
--(NSArray*)randomCouponModel:(NSUInteger)count{
+-(NSArray*)orderCouponModel:(NSUInteger)count{
     
     
     if (count<=1) {
@@ -190,10 +286,12 @@
     
     
     
+    
+    
     NSMutableArray *data =[NSMutableArray arrayWithCapacity:count];
     
     for (int i=0; i<count; i++) {
-        [data addObject:[self couponModel]];
+        [data addObject:[self couponModelOrder:i]];
     }
     
     
@@ -205,7 +303,6 @@
     
     
 }
-
 
 
 

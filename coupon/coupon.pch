@@ -57,6 +57,9 @@
 
 #import "SWTableViewCell.h"
 
+#import "GUIHelper.h"
+
+
 
 
 #define TRY @try{

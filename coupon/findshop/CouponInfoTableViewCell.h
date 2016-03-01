@@ -11,15 +11,21 @@
 
 
 typedef enum : NSUInteger {
-    CouponTypeNormal,
-    CouponTypeLimited,
-    CouponTypeUnLimited,
-    CouponTypeToPay,
+    CouponTypeNormal=0,  //普通
+    CouponTypeLimited,   //限时购买
+    CouponTypeUnLimited,  //处于限时购买状态
+    CouponTypeToPay,    
     CouponTypeToUse,
     CouponTypeToComment,
     CouponTypeToUnPay
     
  } CouponActionType;
+
+//typedef NS_ENUM(NSUInteger, MyEnum) {
+//    <#MyEnumValueA#>,
+//    <#MyEnumValueB#>,
+//    <#MyEnumValueC#>,
+//};
 
 
 typedef void(^PayBlock)(NSDictionary *data);
@@ -32,6 +38,7 @@ typedef void(^PayBlock)(NSDictionary *data);
 @property(nonatomic,copy)PayBlock doActionBlock;
 @property(nonatomic,strong)UILabel *couponStatusLabel;    //优惠券
 
+@property(nonatomic,strong)UILabel *couponDrawBackStatusLabel;    //退款的显示流程
 
 
 

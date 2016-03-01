@@ -16,8 +16,11 @@
 
 -(NSUInteger)getCartCount;
 
--(NSArray*)getCartList;
+-(NSMutableArray*)getCartList;
 
+-(void)openAudio:(BOOL)on;
+
+-(BOOL)isAudioOpen;
 
 
 

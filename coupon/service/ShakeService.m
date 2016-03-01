@@ -20,7 +20,7 @@
     
     if (success) {
         
-        NSArray *data = [[MockData instance] randomCouponModel:10];
+        NSArray *data = [[MockData instance] orderCouponModel:10];
         
         
         

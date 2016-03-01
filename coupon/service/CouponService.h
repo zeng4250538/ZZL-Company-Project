@@ -46,6 +46,13 @@
                  success:(void(^)(int code,NSString *message,id data))success
                  failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
 
+-(void)queryDrawBackCoupon:(NSDictionary*)params
+                   success:(void(^)(int code,NSString *message,id data))success
+                   failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
+
+
+
+
 
 
 

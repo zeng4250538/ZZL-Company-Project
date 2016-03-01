@@ -10,6 +10,7 @@
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 #import "CartTableViewCell.h"
+#import "ToPayTableViewCtrl.h"
 
 @interface BasketNoPayViewCtrl ()
 
@@ -44,6 +45,8 @@
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
     [self makeToolBar];
+    
+    
     
      
     
@@ -92,6 +95,16 @@
     [payButton setTitle:@"去支付" forState:UIControlStateNormal];
     
     [payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [payButton bk_addEventHandler:^(id sender) {
+        
+        ToPayTableViewCtrl *vc = [ToPayTableViewCtrl new];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
     
     
     UIButton *selectAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -307,6 +320,14 @@
     CartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
+    UILongPressGestureRecognizer *longPressed = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressToDo:)];
+    
+    longPressed.minimumPressDuration = 1.0;
+    
+    [cell.contentView addGestureRecognizer:longPressed];
+
+    
+    
     NSMutableDictionary *d = [AppShareData instance].getCartList[ [indexPath row]];
     
     
@@ -315,13 +336,49 @@
     [cell updateData];
     
     
+  
+    
+    
+
+    
+    
+    
     UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeSystem];
     deleteButton.backgroundColor = [GUIConfig mainColor];
     [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
     
+    [deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     
-    cell.rightUtilityButtons = @[deleteButton];
+    
+  //  cell.rightUtilityButtons = @[deleteButton];
+    
+
+    
+//    [deleteButton bk_addEventHandler:^(id sender) {
+//        
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        
+//        NSMutableArray *ary = [AppShareData instance].getCartList;
+//        
+//        
+//        [ary removeObjectAtIndex:[indexPath row]];
+//        
+//        
+//        //[self.tableView reloadData];
+//        
+//        
+//        
+//        
+//        
+//    
+//        
+//        
+//    } forControlEvents:UIControlEventTouchUpInside];
+//    
+    
+    
+    
     
     
     cell.dataUpdateBlock=^(){
@@ -348,6 +405,85 @@
     return cell;
 }
 
+
+-(void)longPressToDo:(UILongPressGestureRecognizer *)gesture
+{
+    
+    if(gesture.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint point = [gesture locationInView:self.tableView];
+        
+        
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
+        
+        
+        if(indexPath == nil) return ;
+        
+        
+        UIActionSheet *act = [UIActionSheet bk_actionSheetWithTitle:@"操作"];
+        
+        [act bk_addButtonWithTitle:@"删除" handler:^{
+            
+            NSMutableArray *ary = [AppShareData instance].getCartList;
+            
+            [ary removeObjectAtIndex:indexPath.row];
+            
+            
+            
+            
+            
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [self computeTotalPrice];
+            
+            
+           // [self.tableView reloadData];
+            
+            
+            
+            
+            
+            
+            
+            
+        }];
+        
+        [act bk_setDestructiveButtonWithTitle:@"关闭" handler:^{
+            
+            
+            
+            
+        }];
+        
+        
+        [act showInView:self.view];
+        
+        //add your code here
+        
+        
+        
+    }
+}
+
+
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+    
+    
+            NSMutableArray *ary = [AppShareData instance].getCartList;
+    
+    
+            [ary removeObjectAtIndex:index];
+    
+    
+            //[self.tableView reloadData];
+            
+
+    
+    
+    
+    
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     

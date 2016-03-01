@@ -8,8 +8,28 @@
 
 #import "Utils.h"
 #import "AppDelegate.h"
+#import "SimpleAudioPlayer.h"
+
 
 @implementation Utils
+
+
+
++(void)playShakeSound{
+
+
+    if ([AppShareData instance].isAudioOpen) {
+        
+        [SimpleAudioPlayer playFile:@"shake_sound_male1.mp3"  volume:1.0f loops:0 withCompletionBlock:^(BOOL finished) {
+            // NSLog(@"Finished playing %");
+            
+        }];
+        
+        
+    }
+}
+
+
 
 
 +(NSString*)getRandomImage:(NSString*)path{
@@ -26,6 +46,29 @@
     return @"";
     
 }
+
++(NSString*)getOrderImage:(NSString*)path order:(NSInteger)order{
+    
+    NSArray *ary = [Utils getImagePath:path];
+    
+    NSInteger  nn = arc4random()%[ary count];
+    
+    order = order+nn;
+    
+    NSInteger newOrder = order % [ary count];
+    
+    if ([ary count]>0 && newOrder<[ary count]) {
+        
+         ;
+        return ary[newOrder];
+        
+    }
+    
+    return @"";
+    
+}
+
+
 
 +(void)incCoupon{
     
@@ -223,6 +266,55 @@
     
     
 }
+
++(void)downCountLabel:(UILabel*)label{
+    
+    
+    NSString *timeString = label.text;
+    
+    if ([timeString length]!=8) {
+        return ;
+    }
+    
+    NSString *hour = [timeString substringWithRange:NSMakeRange(0,2)];
+    
+    NSString *minute = [timeString substringWithRange:NSMakeRange(3,2)];
+    
+    NSString *second = [timeString substringWithRange:NSMakeRange(6,2)];
+    
+    
+    NSInteger totalSecond = [hour integerValue]*3600+[minute integerValue]*60+[second integerValue];
+    
+    if (totalSecond>0) {
+        
+        totalSecond --;
+        
+    }else{
+        
+        return ;
+    }
+    
+    NSInteger hourValue = totalSecond/3600;
+    
+    NSInteger minuteValue = (totalSecond - hourValue*3600)/60;
+    
+    NSInteger secondValue = totalSecond - hourValue*3600-minuteValue*60;
+    
+    
+    NSString *lastValue = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)hourValue,(long)minuteValue,(long)secondValue];
+    
+    label.text = lastValue;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
 
 
 

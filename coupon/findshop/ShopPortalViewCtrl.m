@@ -178,7 +178,7 @@
     
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeSystem];
     headButton.frame = CGRectMake(0, 0, 200, 44);
-    [headButton setTitle:@"正佳广场(1km)" forState:UIControlStateNormal];
+    [headButton setTitle:@"天河城(1km)" forState:UIControlStateNormal];
     headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     
@@ -365,7 +365,7 @@
     
     if (section ==0) {
         
-       return  [ShopInfoTableViewCell headerView:@"优选商家" clickBlock:^{
+       return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
            
            
            ShopListViewCtrl *vc = [ShopListViewCtrl new];

@@ -64,19 +64,21 @@
         
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(uv.mas_bottom);
-            make.left.right.equalTo(uv);
+            make.left.right.equalTo(uv).offset(10);
             make.right.right.equalTo(uv);
             
-            make.height.equalTo(@20);
+            make.height.equalTo(@35);
         }];
         
-        nameLabel.textAlignment = NSTextAlignmentCenter;
+        nameLabel.textAlignment = NSTextAlignmentLeft;
         
         nameLabel.backgroundColor = [UIColor whiteColor];
         
-        nameLabel.font = [UIFont systemFontOfSize:15];
+        nameLabel.font = [UIFont boldSystemFontOfSize:15];
         
         nameLabel.text = self.data[@"name"];
+        
+        nameLabel.textColor = [UIColor darkGrayColor];
         
         
         UILabel *priceLabel = [UILabel new];
@@ -85,20 +87,23 @@
         
         
         [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(nameLabel.mas_bottom);
-            make.left.right.equalTo(uv);
+            make.top.equalTo(uv.mas_bottom);
+            make.right.equalTo(uv).offset(-10);
+            make.height.equalTo(@35);
             
             
         }];
         
         priceLabel.textAlignment = NSTextAlignmentCenter;
         priceLabel.backgroundColor = [UIColor whiteColor];
-        priceLabel.font = [UIFont systemFontOfSize:14];
+        priceLabel.font = [UIFont boldSystemFontOfSize:16];
         priceLabel.textColor = [UIColor redColor];
         
         
         
-        priceLabel.text = self.data[@"price"];
+        priceLabel.text =[NSString stringWithFormat:@"￥%@元",self.data[@"price"]];
+        
+        //self.data[@"price"];
         
        
         

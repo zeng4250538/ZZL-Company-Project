@@ -26,9 +26,6 @@
 
 
 
-
-
-
 @end
 
 
@@ -170,13 +167,44 @@
             
         }];
         
+     
+      
+        [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{
+            
+        }];
+        
+        
         [as showInView:[UIApplication sharedApplication].keyWindow];
         
+        
+        UITapGestureRecognizer *tap =[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+            
+            
+            [as dismissWithClickedButtonIndex:0 animated:YES];
+            
+            
+            
+            
+        }];
+        
+        
+        
+        
+        
+        
+        
+        
+        [as.window addGestureRecognizer:tap];
+
     
         
         
         
     } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+   // [tap release];
     
     
     
@@ -217,6 +245,12 @@
             
         }];
         
+        [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{
+            
+        }];
+        
+        
+        
          [as showInView:[UIApplication sharedApplication].keyWindow];
         
 
@@ -248,6 +282,8 @@
     
     
 }
+
+
 
 
 +(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock{

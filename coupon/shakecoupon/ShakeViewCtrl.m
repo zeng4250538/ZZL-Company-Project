@@ -11,9 +11,11 @@
 #import "SelectCityTableViewCtrl.h"
 #import "SelectMallTableCtrl.h"
 #import "SelectMallPopViewCtrl.h"
+#import "SimpleAudioPlayer.h"
 @interface ShakeViewCtrl ()
 
 @property(nonatomic,strong)UIScrollView *contentView;
+@property(nonatomic,assign)BOOL audioOn;
 
 
 @end
@@ -23,6 +25,8 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    
+    self.audioOn = YES;
     
     self.view.backgroundColor = [GUIConfig grayFontColor];
     
@@ -53,6 +57,52 @@
     
     
     
+    UIButton *audioButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [self.view addSubview:audioButton];
+    [audioButton setImage:[UIImage imageNamed:@"soundon"] forState:UIControlStateNormal];
+    
+    [audioButton setImage:[UIImage imageNamed:@"soundoff"] forState:UIControlStateSelected];
+    
+    
+    //audioButton.frame = CGRectMake(100, 100, 100, 30);
+    
+   // [audioButton setTitle:@"播放声音" forState:UIControlStateNormal];
+    
+    
+    [audioButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(self.view.mas_right).offset(-30);
+        make.top.equalTo(self.view).offset(100);
+        make.width.equalTo(@30);
+        make.height.equalTo(@30);
+        
+        
+        
+    }];
+    
+    
+    [audioButton bk_addEventHandler:^(id sender) {
+        
+        
+        
+        audioButton.selected = !audioButton.selected;
+        
+        
+        [[AppShareData instance] openAudio:!audioButton.selected];
+        
+        
+          
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    [self.view addSubview:audioButton];
+    
+    
     
     
     
@@ -80,14 +130,18 @@
     NSArray *paths = @[[[NSBundle mainBundle] pathForResource:@"animation_01" ofType:@"png"],
                        [[NSBundle mainBundle] pathForResource:@"animation_02" ofType:@"png"],
                        [[NSBundle mainBundle] pathForResource:@"animation_03" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation_01" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation_02" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation_03" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation_01" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation_02" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation_03" ofType:@"png"],
-                       [[NSBundle mainBundle] pathForResource:@"animation_01" ofType:@"png"]];
-    NSArray *times = @[@0.1, @0.1, @.1,@.1,@0.1,@0.1,@0.1, @0.1, @.1,@1.0];
+                       [[NSBundle mainBundle] pathForResource:@"animation_04" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_05" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_06" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_07" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_08" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_09" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_10" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_11" ofType:@"png"],
+                       [[NSBundle mainBundle] pathForResource:@"animation_12" ofType:@"png"]
+                       
+                       ];
+    NSArray *times = @[@0.08, @0.08, @.08,@.08,@0.08,@0.08,@0.08, @0.08, @.08,@0.08,@0.08,@0.08];
     
     UIImage *image = [[YYFrameImage alloc] initWithImagePaths:paths frameDurations:times loopCount:0];
     
@@ -101,10 +155,10 @@
     
     
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(parentView);
-        make.centerY.equalTo(parentView);
-        make.width.equalTo(@(383/2));
-        make.height.equalTo(@(596/2));
+        make.centerX.equalTo(parentView).offset(100);
+        make.centerY.equalTo(parentView).offset(130);
+        make.width.equalTo(@(220/3));
+        make.height.equalTo(@(370/3));
 
     }];
     
@@ -194,18 +248,20 @@
         
         UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,FrameHeight)];
         
-        bgView.image = [UIImage imageNamed:@"beijing2"];
+        bgView.image = [UIImage imageNamed:@"mainpagebg"];
         
         
         [uv addSubview:bgView];
         
         
-        UIImageView *ballView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"beijingball.png"]];
+        UIImageView *ballView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guangzhoufood"]];
         
         [uv addSubview:ballView];
         
         [ballView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(uv);
+            make.centerX.equalTo(uv);
+            make.centerY.equalTo(uv).offset(-30);
+            
             
         }];
         
@@ -300,7 +356,7 @@
     
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeSystem];
     headButton.frame = CGRectMake(0, 0, 200, 44);
-    [headButton setTitle:@"正佳广场(1km)" forState:UIControlStateNormal];
+    [headButton setTitle:@"天河城(1km)" forState:UIControlStateNormal];
     headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     
@@ -503,6 +559,25 @@
 
 #pragma mark - 装载摇一摇控制器
 -(void)doLoadShakeView{
+    
+    
+    
+    if ([AppShareData instance].isAudioOpen) {
+        
+            [SimpleAudioPlayer playFile:@"shake_sound_male1.mp3"  volume:1.0f loops:0 withCompletionBlock:^(BOOL finished) {
+                // NSLog(@"Finished playing %");
+                
+            }];
+            
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     ShakeCouponViewCtrl *vc = [ShakeCouponViewCtrl new];
     

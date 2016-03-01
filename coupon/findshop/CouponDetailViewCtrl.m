@@ -103,12 +103,12 @@
     UIButton *cartButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     
-    [cartButton setImage:[UIImage imageNamed:@"gocart.png"] forState:UIControlStateNormal];
+    [cartButton setImage:[UIImage imageNamed:@"cart"] forState:UIControlStateNormal];
     
     cartButton.frame = CGRectMake(SCREEN_WIDTH-100, SCREEN_HEIGHT-150, 60, 60);
     
-    cartButton.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.3];
-    
+//    cartButton.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.3];
+//    
     cartButton.clipsToBounds = YES;
     cartButton.layer.cornerRadius = 30;
     [self.view addSubview:cartButton];
@@ -145,8 +145,8 @@
     
     [self.cartNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(cartButton.mas_right).offset(-10);
-        make.top.equalTo(cartButton.mas_top).offset(10);
+        make.left.equalTo(cartButton.mas_right).offset(-15);
+        make.top.equalTo(cartButton.mas_top).offset(9);
         make.width.equalTo(@14);
         make.height.equalTo(@14);
         
@@ -419,7 +419,8 @@
         make.height.equalTo(@20);
         
     }];
-    priceLabel.text=self.data[@"price"];
+    priceLabel.text=[NSString stringWithFormat:@"￥%@元",self.data[@"price"]];
+    
     
     
     

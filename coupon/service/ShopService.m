@@ -27,7 +27,7 @@
         NSArray *hotbrand = [[MockData instance] randomShopModel:3];
         
         
-        NSArray *hotcoupon = [[MockData instance] randomCouponModel:3];
+        NSArray *hotcoupon = [[MockData instance] orderCouponModel:3];
             
                              
                              

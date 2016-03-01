@@ -16,6 +16,7 @@
 @property(nonatomic,strong)UILabel *detailLabel;    //明细
 @property(nonatomic,strong)UILabel *priceLabel;    //价格
 @property(nonatomic,strong)UIButton *recommentButton;    //提醒按钮
+@property(nonatomic,strong)UILabel *timeLabel;
 
 
 
@@ -74,6 +75,66 @@
         [self.contentView addSubview:self.couponStatusLabel];
         
         
+        [self.recommentButton bk_addEventHandler:^(id sender) {
+            
+            
+            
+            if (self.couponActionType == CouponTypeLimited) {
+                
+                [self.recommentButton setTitle:@"取消提醒" forState:UIControlStateNormal];
+                
+                self.couponActionType = CouponTypeUnLimited;
+            }else if(self.couponActionType == CouponTypeUnLimited){
+          
+                [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
+                self.couponActionType = CouponTypeLimited;
+                
+                
+            }
+            
+            if (self.doActionBlock) {
+                self.doActionBlock(nil);
+                
+            }
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+    
+        
+        self.timeLabel = [UILabel new];
+        
+        [self.contentView addSubview:self.timeLabel];
+        
+        self.timeLabel.font = [UIFont boldSystemFontOfSize:12];
+        self.timeLabel.text=@"12:11:33";
+        self.timeLabel.textColor = [GUIConfig mainColor];
+        
+        
+        
+        NSTimer *timer = [NSTimer bk_scheduledTimerWithTimeInterval:1.0 block:^(NSTimer *timer) {
+            
+            
+            [Utils downCountLabel:self.timeLabel];
+            
+            
+            
+            
+        } repeats:YES];
+        
+        [timer fire];
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
         
         
         
@@ -85,6 +146,14 @@
     }
     
     return self;
+    
+}
+
+
+-(void)updateTime{
+    
+    
+    
     
 }
 
@@ -141,6 +210,17 @@
     }];
     
     
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@25);
+        make.width.equalTo(@70);
+        make.top.equalTo(self.logoView);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-15);
+        
+    }];
+    
+    self.timeLabel.textAlignment = NSTextAlignmentRight;
+    
+    
     [self.recommentButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.height.equalTo(@25);
@@ -176,19 +256,7 @@
         [self.recommentButton setTitle:@"支付" forState:UIControlStateNormal];
         
         
-        [self.recommentButton bk_addEventHandler:^(id sender) {
-            
-            if (self.doActionBlock) {
-                self.doActionBlock(nil);
-                
-            }
-            
-            
-            
-            
-            
-        } forControlEvents:UIControlEventTouchUpInside];
-
+     
     }else if (self.couponActionType == CouponTypeToUse) {
         self.recommentButton.hidden = NO;
         
@@ -199,35 +267,12 @@
         
         [self.recommentButton setTitle:@"去评论" forState:UIControlStateNormal];
         
-        [self.recommentButton bk_addEventHandler:^(id sender) {
-            
-            if (self.doActionBlock) {
-                self.doActionBlock(nil);
-                
-            }
-            
-            
-            
-        } forControlEvents:UIControlEventTouchUpInside];
-        
-        
+       
             
     }else if (self.couponActionType == CouponTypeToUnPay) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"退款" forState:UIControlStateNormal];
-        
-        [self.recommentButton bk_addEventHandler:^(id sender) {
-            
-            if (self.doActionBlock) {
-                self.doActionBlock(nil);
-                
-            }
-            
-            
-            
-        } forControlEvents:UIControlEventTouchUpInside];
-        
         
         
 
@@ -235,6 +280,17 @@
     }else{
         self.recommentButton.hidden = NO;
     }
+    
+    
+    if (self.couponActionType == CouponTypeLimited || self.couponActionType == CouponTypeUnLimited) {
+        
+        self.timeLabel.hidden = NO;
+    }else{
+        
+        self.timeLabel.hidden = YES;
+    }
+    
+    
     
     
     

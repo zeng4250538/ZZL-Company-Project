@@ -36,7 +36,7 @@ static AppShareData *instance;
     
 }
 
--(NSArray*)getCartList{
+-(NSMutableArray*)getCartList{
     
     
     return self.cartList;
@@ -62,6 +62,23 @@ static AppShareData *instance;
     return [instance.cartList count];
     
 }
+
+-(void)openAudio:(BOOL)on{
+    
+    [[NSUserDefaults standardUserDefaults] setBool:!on forKey:@"audiostatusclose"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+  
+}
+
+
+
+-(BOOL)isAudioOpen{
+    
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:@"audiostatusclose"];
+    
+}
+
 
 
 

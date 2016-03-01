@@ -26,6 +26,18 @@
 
 +(void)popTransparentViewCtrl:(UIViewController*)parentViewCtrl childViewCtrl:(UIViewController*)childViewCtrl;
 
++(NSString*)getOrderImage:(NSString*)path order:(NSInteger)order;
+
++(void)playShakeSound;
+
+
++(void)downCountLabel:(UILabel*)label;
+
+
+
+
+
+
 
 
 

@@ -19,7 +19,7 @@
     if (success) {
         
         
-        NSArray *hotCoupon = [[MockData instance] randomCouponModel:10];
+        NSArray *hotCoupon = [[MockData instance] orderCouponModel:10];
         
         
         success(0,@"",hotCoupon);
@@ -170,6 +170,28 @@
     
     
 }
+
+
+-(void)queryDrawBackCoupon:(NSDictionary*)params
+                 success:(void(^)(int code,NSString *message,id data))success
+                 failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    if (success) {
+        
+        NSArray *data = [[MockData instance] randomCouponModel:10];
+        
+        
+        
+        success(0,@"",data);
+    }
+    
+    
+    
+    
+    
+}
+
 
 
 

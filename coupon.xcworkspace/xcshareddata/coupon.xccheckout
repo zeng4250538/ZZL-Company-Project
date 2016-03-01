@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>63A44985-F39B-4DCD-8003-712181C51694</string>
+	<key>IDESourceControlProjectName</key>
+	<string>coupon</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>189AEA12F48961734A22A9C97D5EC3C826293D60</key>
+		<string>http://192.168.6.96/richstonedt-app-diamond/client-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>coupon.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>189AEA12F48961734A22A9C97D5EC3C826293D60</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://192.168.6.96/richstonedt-app-diamond/client-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>189AEA12F48961734A22A9C97D5EC3C826293D60</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>189AEA12F48961734A22A9C97D5EC3C826293D60</string>
+			<key>IDESourceControlWCCName</key>
+			<string>coupon</string>
+		</dict>
+	</array>
+</dict>
+</plist>
