@@ -7,6 +7,7 @@
 //
 
 #import "CouponDrawBackDetailViewCtrl.h"
+#import "CouponInfoTableViewCell.h"
 
 @interface CouponDrawBackDetailViewCtrl ()
 
@@ -16,6 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    self.navigationItem.title=@"退款详情";
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+  
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"couponcell"];
+    
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -31,27 +43,113 @@
 
 #pragma mark - Table view data source
 
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 20;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row==0 && indexPath.section==0) {
+        
+        return [CouponInfoTableViewCell height];
+        
+    }else{
+        
+        
+        return 60;
+    }
+    
+    
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    
+    if (section == 0 ) {
+        
+        return 1;
+    }
+    return 3;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+   
+    if (indexPath.row==0 && indexPath.section==0) {
+        
+        CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"couponcell" forIndexPath:indexPath];
+        
+        cell.data = self.data;
+        
+        [cell updateData];
+        
+        
+        return cell;
+        
+        
+    }
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    for (UIView *uv in [cell.contentView subviews]) {
+        
+        [uv removeFromSuperview];
+    }
+    
+    UILabel *titleLabel = [UILabel new];
+    titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    
+    titleLabel.textColor = [GUIConfig grayFontColorDeep];
+    
+    [cell.contentView addSubview:titleLabel];
+    
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(cell.contentView).offset(15);
+        make.right.equalTo(cell.contentView);
+        make.top.equalTo(cell.contentView).offset(5);
+        make.height.equalTo(@20);
+        
+        
+    }];
+    
+    titleLabel.text=@"申请";
+    
+    UILabel *detailLabel = [UILabel new];
+    detailLabel.font = [UIFont boldSystemFontOfSize:12];
+    
+    detailLabel.textColor = [UIColor lightGrayColor];
+    
+    [cell.contentView addSubview:detailLabel];
+    
+    
+    [detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(cell.contentView).offset(15);
+        make.right.equalTo(cell.contentView);
+        make.top.equalTo(titleLabel.mas_bottom).offset(5);
+        make.height.equalTo(@20);
+        
+        
+    }];
+    detailLabel.text=@"退货时间 2016-03-06";
+    
+   
+    
+    
+     // Configure the cell...
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

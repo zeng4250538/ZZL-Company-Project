@@ -21,11 +21,14 @@ typedef enum : NSUInteger {
     
  } CouponActionType;
 
-//typedef NS_ENUM(NSUInteger, MyEnum) {
-//    <#MyEnumValueA#>,
-//    <#MyEnumValueB#>,
-//    <#MyEnumValueC#>,
-//};
+typedef NS_ENUM(NSUInteger, CouponStatus) {
+    CouponStatusNone=0,     //无状态
+    CouponStatusDrawBacking,   //退款过程中
+    CouponStatusDrawBackFinish  //退款完成
+ 
+};
+
+
 
 
 typedef void(^PayBlock)(NSDictionary *data);
@@ -38,7 +41,9 @@ typedef void(^PayBlock)(NSDictionary *data);
 @property(nonatomic,copy)PayBlock doActionBlock;
 @property(nonatomic,strong)UILabel *couponStatusLabel;    //优惠券
 
-@property(nonatomic,strong)UILabel *couponDrawBackStatusLabel;    //退款的显示流程
+@property(nonatomic,assign)CouponStatus couponStatus;    //退款的显示流程标志
+
+
 
 
 

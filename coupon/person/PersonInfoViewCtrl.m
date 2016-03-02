@@ -17,6 +17,8 @@
 #import "SettingMessageTypeViewCtrl.h"
 #import "CouponDrawBackListViewCtrl.h"
 
+#import "OrderContainerViewCtrl.h"
+
 
 
 
@@ -326,6 +328,20 @@
             
             
         }
+  
+        if (indexPath.row==1) {
+            
+            
+            OrderContainerViewCtrl *vc = [OrderContainerViewCtrl new];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
+        }
+
+        
         
         
         if (indexPath.row==2) {

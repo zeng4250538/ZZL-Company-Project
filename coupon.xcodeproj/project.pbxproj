@@ -131,6 +131,8 @@
 		57E722C31C670AB7004DBA9C /* CouponService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C21C670AB7004DBA9C /* CouponService.m */; };
 		57E722C61C686A51004DBA9C /* ShakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C51C686A51004DBA9C /* ShakeService.m */; };
 		57F3E2861C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */; };
+		57F3E2891C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */; };
+		57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E28B1C86D39200A8CCA8 /* OrderContainerViewCtrl.m */; };
 		57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511A11C5B90D2000DA1A8 /* SearchResultViewCtrl.m */; };
 		57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511A41C5CC3BC000DA1A8 /* MHTabBarController.m */; };
 		57F511AA1C5CCF86000DA1A8 /* BasketContainerViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511A91C5CCF86000DA1A8 /* BasketContainerViewCtrl.m */; };
@@ -333,6 +335,10 @@
 		57E722C51C686A51004DBA9C /* ShakeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeService.m; sourceTree = "<group>"; };
 		57F3E2841C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDrawBackListViewCtrl.h; sourceTree = "<group>"; };
 		57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponDrawBackListViewCtrl.m; sourceTree = "<group>"; };
+		57F3E2871C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDrawBackDetailViewCtrl.h; sourceTree = "<group>"; };
+		57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponDrawBackDetailViewCtrl.m; sourceTree = "<group>"; };
+		57F3E28A1C86D39200A8CCA8 /* OrderContainerViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderContainerViewCtrl.h; sourceTree = "<group>"; };
+		57F3E28B1C86D39200A8CCA8 /* OrderContainerViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderContainerViewCtrl.m; sourceTree = "<group>"; };
 		57F511A01C5B90D2000DA1A8 /* SearchResultViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewCtrl.h; sourceTree = "<group>"; };
 		57F511A11C5B90D2000DA1A8 /* SearchResultViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewCtrl.m; sourceTree = "<group>"; };
 		57F511A41C5CC3BC000DA1A8 /* MHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTabBarController.m; sourceTree = "<group>"; };
@@ -655,6 +661,8 @@
 				571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */,
 				57F3E2841C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.h */,
 				57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */,
+				57F3E2871C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.h */,
+				57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */,
 			);
 			path = person;
 			sourceTree = "<group>";
@@ -756,6 +764,8 @@
 				57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */,
 				573E51E41C7CCF09005DBBC3 /* BasketMessageViewCtrl.h */,
 				573E51E51C7CCF09005DBBC3 /* BasketMessageViewCtrl.m */,
+				57F3E28A1C86D39200A8CCA8 /* OrderContainerViewCtrl.h */,
+				57F3E28B1C86D39200A8CCA8 /* OrderContainerViewCtrl.m */,
 			);
 			path = basket;
 			sourceTree = "<group>";
@@ -989,6 +999,7 @@
 				57CE97D91C65E90400CE0E57 /* ShopService.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
 				573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */,
+				57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */,
 				57017F331C5F4128007B0112 /* SelectMallPopViewCtrl.m in Sources */,
 				573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */,
 				57CE97C11C63231B00CE0E57 /* ShopCommentTableViewCell.m in Sources */,
@@ -1000,6 +1011,7 @@
 				5796FA731C460CB1004CA23B /* UIControl+LayoutBlock.m in Sources */,
 				5796FA6A1C456490004CA23B /* SelectMallTableCtrl.m in Sources */,
 				573E51E31C7CB134005DBBC3 /* CouponDrawbackViewCtrl.m in Sources */,
+				57F3E2891C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m in Sources */,
 				5796FA741C460CB1004CA23B /* UIView+LayoutBlock.m in Sources */,
 				57A94E791C38D99800BE0022 /* ShopInfoViewCtrl.m in Sources */,
 				5779BD6A1C25381600E15934 /* AppDelegate.m in Sources */,

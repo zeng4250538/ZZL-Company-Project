@@ -10,4 +10,6 @@
 
 @interface CouponDrawBackDetailViewCtrl : UITableViewController
 
+@property(nonatomic,strong)NSDictionary *data;
+
 @end

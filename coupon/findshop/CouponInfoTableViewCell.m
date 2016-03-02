@@ -126,6 +126,13 @@
         [timer fire];
         
         
+        self.couponStatusLabel = [UILabel new];
+        
+        self.couponStatusLabel.textColor = [GUIConfig mainColor];
+        self.couponStatusLabel.font = [UIFont systemFontOfSize:12];
+        [self.contentView addSubview:self.couponStatusLabel];
+        
+        
         
         
         
@@ -289,6 +296,10 @@
         
         self.timeLabel.hidden = YES;
     }
+    
+    
+    
+    
     
     
     

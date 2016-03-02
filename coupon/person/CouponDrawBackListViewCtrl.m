@@ -9,6 +9,7 @@
 #import "CouponDrawBackListViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponService.h"
+#import "CouponDrawBackDetailViewCtrl.h"
 
 
 
@@ -115,6 +116,8 @@
     
     cell.data  = d;
     
+    cell.couponStatusLabel.text=@"退款中";
+    
     [cell updateData];
     
     
@@ -123,6 +126,26 @@
     // Configure the cell...
     
     return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    CouponDrawBackDetailViewCtrl *vc =[CouponDrawBackDetailViewCtrl new];
+    
+    
+    NSDictionary *d = self.data[indexPath.row];
+
+    
+    vc.data =d;
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
 
 
