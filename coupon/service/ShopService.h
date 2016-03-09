@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ShopService : NSObject
+@interface ShopService : BaseService
+
+
+
 
 -(void)queryShopPortalData:(NSDictionary*)params
             success:(void(^)(int code,NSString *message,id data))success

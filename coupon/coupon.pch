@@ -59,6 +59,11 @@
 
 #import "GUIHelper.h"
 
+#import "AFNetworking.h"
+
+#import "BaseRequest.h"
+#import "BaseService.h"
+
 
 
 

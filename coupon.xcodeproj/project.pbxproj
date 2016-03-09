@@ -130,6 +130,9 @@
 		57CE97DD1C65F41300CE0E57 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CE97DC1C65F41300CE0E57 /* MockData.m */; };
 		57E722C31C670AB7004DBA9C /* CouponService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C21C670AB7004DBA9C /* CouponService.m */; };
 		57E722C61C686A51004DBA9C /* ShakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C51C686A51004DBA9C /* ShakeService.m */; };
+		57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE21C90758B003103B1 /* BaseRequest.m */; };
+		57EFEEE61C90874E003103B1 /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE51C90874E003103B1 /* BaseService.m */; };
+		57EFEEE91C9087B8003103B1 /* MallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE81C9087B8003103B1 /* MallService.m */; };
 		57F3E2861C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */; };
 		57F3E2891C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */; };
 		57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E28B1C86D39200A8CCA8 /* OrderContainerViewCtrl.m */; };
@@ -333,6 +336,12 @@
 		57E722C21C670AB7004DBA9C /* CouponService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponService.m; sourceTree = "<group>"; };
 		57E722C41C686A51004DBA9C /* ShakeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeService.h; sourceTree = "<group>"; };
 		57E722C51C686A51004DBA9C /* ShakeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeService.m; sourceTree = "<group>"; };
+		57EFEEE11C90758B003103B1 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
+		57EFEEE21C90758B003103B1 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
+		57EFEEE41C90874E003103B1 /* BaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseService.h; sourceTree = "<group>"; };
+		57EFEEE51C90874E003103B1 /* BaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseService.m; sourceTree = "<group>"; };
+		57EFEEE71C9087B8003103B1 /* MallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallService.h; sourceTree = "<group>"; };
+		57EFEEE81C9087B8003103B1 /* MallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallService.m; sourceTree = "<group>"; };
 		57F3E2841C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDrawBackListViewCtrl.h; sourceTree = "<group>"; };
 		57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponDrawBackListViewCtrl.m; sourceTree = "<group>"; };
 		57F3E2871C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDrawBackDetailViewCtrl.h; sourceTree = "<group>"; };
@@ -738,6 +747,12 @@
 				57E722C21C670AB7004DBA9C /* CouponService.m */,
 				57E722C41C686A51004DBA9C /* ShakeService.h */,
 				57E722C51C686A51004DBA9C /* ShakeService.m */,
+				57EFEEE11C90758B003103B1 /* BaseRequest.h */,
+				57EFEEE21C90758B003103B1 /* BaseRequest.m */,
+				57EFEEE41C90874E003103B1 /* BaseService.h */,
+				57EFEEE51C90874E003103B1 /* BaseService.m */,
+				57EFEEE71C9087B8003103B1 /* MallService.h */,
+				57EFEEE81C9087B8003103B1 /* MallService.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -997,6 +1012,7 @@
 				57A94E811C393A3F00BE0022 /* CouponDetailViewCtrl.m in Sources */,
 				5779BD6D1C25381600E15934 /* ViewController.m in Sources */,
 				57CE97D91C65E90400CE0E57 /* ShopService.m in Sources */,
+				57EFEEE61C90874E003103B1 /* BaseService.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
 				573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */,
 				57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */,
@@ -1008,6 +1024,7 @@
 				571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */,
 				57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */,
 				5796FA831C47E904004CA23B /* CouponView.m in Sources */,
+				57EFEEE91C9087B8003103B1 /* MallService.m in Sources */,
 				5796FA731C460CB1004CA23B /* UIControl+LayoutBlock.m in Sources */,
 				5796FA6A1C456490004CA23B /* SelectMallTableCtrl.m in Sources */,
 				573E51E31C7CB134005DBBC3 /* CouponDrawbackViewCtrl.m in Sources */,
@@ -1042,6 +1059,7 @@
 				57E722C31C670AB7004DBA9C /* CouponService.m in Sources */,
 				5771697B1C81EEE100223EDB /* MessagePromptConfigViewCtrl.m in Sources */,
 				571C297B1C70D55000DDBCE8 /* NumSpanView.m in Sources */,
+				57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */,
 				57CE97DD1C65F41300CE0E57 /* MockData.m in Sources */,
 				5779BD671C25381600E15934 /* main.m in Sources */,
 				5796FA671C45491C004CA23B /* SelectCityTableViewCtrl.m in Sources */,

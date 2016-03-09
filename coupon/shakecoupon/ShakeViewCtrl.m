@@ -12,6 +12,8 @@
 #import "SelectMallTableCtrl.h"
 #import "SelectMallPopViewCtrl.h"
 #import "SimpleAudioPlayer.h"
+#import "MallService.h"
+
 @interface ShakeViewCtrl ()
 
 @property(nonatomic,strong)UIScrollView *contentView;
@@ -320,6 +322,9 @@
         
         
         
+        
+        
+        
     
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
@@ -366,9 +371,26 @@
     [headButton bk_addEventHandler:^(id sender) {
         
         
-        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+        MallService *service = [MallService new];
         
-        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
+        [service queryMallByCity:@"1" success:^(NSInteger code, NSString *message, id data) {
+            
+            NSLog(@"success %@",data);
+            
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+            
+            NSLog(@"error %@",data);
+            
+            
+            
+        }];
+        
+        
+//        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+//        
+//        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
         
 //        SelectMallTableCtrl *vc = [SelectMallTableCtrl new];
 //        
