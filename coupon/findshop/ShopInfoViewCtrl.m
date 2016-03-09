@@ -56,7 +56,6 @@
     
     
     
-    
     CouponService *service = [CouponService new];
     
     [service queryShopCoupon:nil success:

@@ -20,6 +20,7 @@ pod 'YYCategories'
 pod 'YYCache'
 pod 'YYImage'
 pod 'LTNavigationBar'
+pod 'AFNetworking'
 
 
 #pod 'KMNavigationBarTransition'
