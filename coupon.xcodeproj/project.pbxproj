@@ -133,6 +133,7 @@
 		57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE21C90758B003103B1 /* BaseRequest.m */; };
 		57EFEEE61C90874E003103B1 /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE51C90874E003103B1 /* BaseService.m */; };
 		57EFEEE91C9087B8003103B1 /* MallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE81C9087B8003103B1 /* MallService.m */; };
+		57EFEEEC1C917B15003103B1 /* ReloadHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEEB1C917B15003103B1 /* ReloadHud.m */; };
 		57F3E2861C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */; };
 		57F3E2891C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */; };
 		57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F3E28B1C86D39200A8CCA8 /* OrderContainerViewCtrl.m */; };
@@ -342,6 +343,8 @@
 		57EFEEE51C90874E003103B1 /* BaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseService.m; sourceTree = "<group>"; };
 		57EFEEE71C9087B8003103B1 /* MallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallService.h; sourceTree = "<group>"; };
 		57EFEEE81C9087B8003103B1 /* MallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallService.m; sourceTree = "<group>"; };
+		57EFEEEA1C917B15003103B1 /* ReloadHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReloadHud.h; sourceTree = "<group>"; };
+		57EFEEEB1C917B15003103B1 /* ReloadHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloadHud.m; sourceTree = "<group>"; };
 		57F3E2841C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDrawBackListViewCtrl.h; sourceTree = "<group>"; };
 		57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponDrawBackListViewCtrl.m; sourceTree = "<group>"; };
 		57F3E2871C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDrawBackDetailViewCtrl.h; sourceTree = "<group>"; };
@@ -565,6 +568,8 @@
 				5736E9F41C4D3E420055774D /* AppShareData.m */,
 				5736EA001C5535720055774D /* ThrowLineTool.h */,
 				5736EA011C5535720055774D /* ThrowLineTool.m */,
+				57EFEEEA1C917B15003103B1 /* ReloadHud.h */,
+				57EFEEEB1C917B15003103B1 /* ReloadHud.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1038,6 +1043,7 @@
 				57A94E661C37EB1200BE0022 /* ShopPortalViewCtrl.m in Sources */,
 				57A94E7E1C38FF5800BE0022 /* CouponInfoTableViewCell.m in Sources */,
 				5736E9F51C4D3E420055774D /* AppShareData.m in Sources */,
+				57EFEEEC1C917B15003103B1 /* ReloadHud.m in Sources */,
 				578E63E51C2551B800C1FB19 /* NSObject+NSJSONSerialization.m in Sources */,
 				57CE97CF1C63A9E800CE0E57 /* CouponListViewCtrl.m in Sources */,
 				571C29781C70AC8F00DDBCE8 /* CartTableViewCell.m in Sources */,

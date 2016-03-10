@@ -10,9 +10,14 @@
 
 @interface AppShareData : NSObject
 
+@property(nonatomic,strong)NSDictionary *currentMall;
+
+
 +(instancetype)instance;
 
 -(NSUInteger)addCouponToCart:(NSDictionary*)data;
+
+
 
 -(NSUInteger)getCartCount;
 

@@ -18,6 +18,7 @@
 
 @property(nonatomic,strong)UIScrollView *contentView;
 @property(nonatomic,assign)BOOL audioOn;
+@property(nonatomic,strong)UIButton *mallButton;
 
 
 @end
@@ -359,43 +360,61 @@
     
     
     
-    UIButton *headButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    headButton.frame = CGRectMake(0, 0, 200, 44);
-    [headButton setTitle:@"天河城(1km)" forState:UIControlStateNormal];
-    headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    mallButton.frame = CGRectMake(0, 0, 200, 44);
+    [mallButton setTitle:@"天河城(1km)" forState:UIControlStateNormal];
+    mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     
-    self.navigationItem.titleView = headButton;
+    self.mallButton =mallButton;
     
     
-    [headButton bk_addEventHandler:^(id sender) {
+    self.navigationItem.titleView = self.mallButton;
+    
+    
+    [mallButton bk_addEventHandler:^(id sender) {
         
         
         MallService *service = [MallService new];
         
-        [service queryMallByCity:@"1" success:^(NSInteger code, NSString *message, id data) {
-            
-            NSLog(@"success %@",data);
-            
-            
-        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-            
-            
-            NSLog(@"error %@",data);
-            
-            
-            
-        }];
         
         
-//        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
-//        
-//        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
         
-//        SelectMallTableCtrl *vc = [SelectMallTableCtrl new];
+        
+//        [service queryMallByCity:@"1" success:^(NSInteger code, NSString *message, id data) {
+//            
+//            NSLog(@"success %@",data);
+//            
+//            
+//        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+//            
+//            
+//            NSLog(@"error %@",data);
+//            
+//            
+//            
+//        }];
 //        
-//        [self.navigationController pushViewController:vc animated:YES];
-//        
+        
+        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+        
+        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
+        
+        vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
+            
+            
+            NSString *name = [NSString stringWithFormat:@"%@(%@)",mall[@"name"],mall[@"distance"]];
+            
+            
+            [self.mallButton setTitle:name forState:UIControlStateNormal];
+            
+            
+            
+        };
+        
+        
+        
+         
         
         
     } forControlEvents:UIControlEventTouchUpInside];

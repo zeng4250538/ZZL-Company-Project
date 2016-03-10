@@ -11,6 +11,7 @@
 @interface AppShareData()
 
 @property(nonatomic,strong)NSMutableArray *cartList;
+
 @end
 
 

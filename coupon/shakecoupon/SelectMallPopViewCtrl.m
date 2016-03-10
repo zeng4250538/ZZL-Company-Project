@@ -8,6 +8,8 @@
 
 #import "SelectMallPopViewCtrl.h"
 #import "SelectMallTableCtrl.h"
+#import "ReloadHud.h"
+#import "MallService.h"
 
 @interface SelectMallPopViewCtrl ()
 
@@ -48,6 +50,18 @@
     
     
     
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self loadData];
+        
+        
+        
+    }];
+    
+    
+    
+    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [GUIConfig tableViewGUIFormat:self.tableView];
@@ -67,22 +81,58 @@
 
 -(void)loadData{
     
-    self.mallList = @[@{@"mall":@"天河城",
-                        @"distance":@"100米"
-                        },
-                      @{@"mall":@"正佳",
-                        @"distance":@"200米"
-                        },
-                      @{@"mall":@"高德置地",
-                        @"distance":@"2000米"
-                        },
-                      @{@"mall":@"全城",
-                        @"distance":@""
-                        }
-                      
-                      
-                      ];
     
+    
+    MallService *service = [[MallService alloc] init];
+    
+    [service queryMallByNear:@"广州" lon:113.1234 lat:23.1234 success:^(NSInteger code, NSString *message, id data) {
+        
+        
+       // [ReloadHud re:self.tableView];
+        
+  //      [ReloadHud showReloadMode:self.tableView];
+        
+        [ReloadHud removeHud:self.tableView animated:YES];
+        
+        self.mallList = data;
+        
+        [self.tableView reloadData];
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        [ReloadHud showReloadMode:self.tableView];
+        
+        
+        
+        
+        
+    }];
+    
+    
+//    
+//    self.mallList = @[@{@"mall":@"天河城",
+//                        @"distance":@"100米"
+//                        },
+//                      @{@"mall":@"正佳",
+//                        @"distance":@"200米"
+//                        },
+//                      @{@"mall":@"高德置地",
+//                        @"distance":@"2000米"
+//                        },
+//                      @{@"mall":@"全城",
+//                        @"distance":@""
+//                        }
+//                      
+//                      
+//                      ];
+//    
+//    
+//    
+//    [ReloadHud showReloadMode:self.tableView];
+//    
     
 }
 
@@ -135,6 +185,8 @@
     
     self.tableView.layer.cornerRadius = 6;
     self.tableView.clipsToBounds = YES;
+    
+    
     
     
     
@@ -267,7 +319,7 @@
     NSDictionary *mallDict = self.mallList[[indexPath row]];
     
     
-    nameLabel.text=mallDict[@"mall"];
+    nameLabel.text=mallDict[@"name"];
     
 
     UILabel *distanceLabel = [UILabel new];
@@ -281,7 +333,9 @@
     }];
     distanceLabel.textColor = [GUIConfig grayFontColor];
     
-    distanceLabel.text=mallDict[@"distance"];
+    distanceLabel.text=[NSString stringWithFormat:@"%@",mallDict[@"distance"]];
+    
+   // mallDict[@"distance"];
 
     
 
@@ -297,7 +351,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
+    NSDictionary *mallDict = self.mallList[[indexPath row]];
+    
+    [AppShareData instance].currentMall = mallDict;
+
+    
     [self dismissViewControllerAnimated:NO completion:^{
+        
+        if (self.selectMallBlock) {
+            self.selectMallBlock(YES,mallDict);
+        
+        }
         
     }];
     
