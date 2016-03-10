@@ -14,5 +14,6 @@
 -(NSString*)getBaseUrl;
 
 -(BOOL)checkParams;
+-(NSString*)version;
 
 @end

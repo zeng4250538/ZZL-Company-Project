@@ -12,10 +12,20 @@
 
 -(NSString*)getBaseUrl{
     
-    return @"http://120.25.66.110:9998/diamond-sis-web";
+    
+    NSString *url = [NSString stringWithFormat:@"http://120.25.66.110:9998/diamond-sis-web/%@",[self version]];
+    
+    return url;
+    
+    
     
 }
 
+
+-(NSString*)version{
+    
+    return @"v1";
+}
 
 -(BOOL)checkParams{
     

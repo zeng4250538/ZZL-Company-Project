@@ -19,6 +19,15 @@
 
 
 
+//根据经纬度获取周边的商场
+-(void)queryMallByNear:(NSString*)cityName
+                   lon:(double)lon
+                   lat:(double)lat
+               success:(void(^)(NSInteger code,NSString *message,id data))success
+               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
 
 -(void)queryMoreHotShop:(NSDictionary*)params
                 success:(void(^)(int code,NSString *message,id data))success

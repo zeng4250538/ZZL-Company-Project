@@ -18,7 +18,7 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/v1/shopmall"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shopmall"];
     
     NSDictionary *parm = @{@"city":cityName};
     
@@ -43,6 +43,53 @@
     
     
 }
+
+-(void)queryMallByNear:(NSString*)cityName
+                   lon:(double)lon
+                   lat:(double)lat
+               success:(void(^)(NSInteger code,NSString *message,id data))success
+               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shopmall"];
+    
+    NSDictionary *parm = @{@"city":cityName,@"lon":@(lon),@"lat":@(lat)};
+    
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+        
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
 
 
 @end
