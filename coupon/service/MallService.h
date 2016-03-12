@@ -28,10 +28,10 @@
 
 
 
-
--(void)queryMoreHotShop:(NSDictionary*)params
-                success:(void(^)(int code,NSString *message,id data))success
-                failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
+//获取更多的商城
+-(void)queryMoreHotShop:(NSString*)cityName
+                success:(void(^)(NSInteger code,NSString *message,id data))success
+                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
 
