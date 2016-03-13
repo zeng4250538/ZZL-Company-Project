@@ -12,6 +12,7 @@
 
 
 -(NSString*)getBaseUrl;
+-(NSString*)getBaseLoginUrl;
 
 -(BOOL)checkParams;
 -(NSString*)version;

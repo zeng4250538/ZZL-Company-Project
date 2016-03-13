@@ -117,6 +117,11 @@
 		57B0196D1C7D8F6300884E0E /* animation_10.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B019611C7D8F6300884E0E /* animation_10.png */; };
 		57B0196E1C7D8F6300884E0E /* animation_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B019621C7D8F6300884E0E /* animation_11.png */; };
 		57B0196F1C7D8F6300884E0E /* animation_12.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B019631C7D8F6300884E0E /* animation_12.png */; };
+		57B57CCD1C95BFDD009F4EB2 /* ForgetViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B57CC81C95BFDD009F4EB2 /* ForgetViewCtrl.m */; };
+		57B57CCE1C95BFDD009F4EB2 /* LoginViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B57CCA1C95BFDD009F4EB2 /* LoginViewCtrl.m */; };
+		57B57CCF1C95BFDD009F4EB2 /* RegisterViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B57CCC1C95BFDD009F4EB2 /* RegisterViewCtrl.m */; };
+		57B57CD21C95C03F009F4EB2 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B57CD11C95C03F009F4EB2 /* LoginService.m */; };
+		57B57CD81C95C3B8009F4EB2 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B57CD71C95C3B8009F4EB2 /* logo@2x.png */; };
 		57CE97C11C63231B00CE0E57 /* ShopCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CE97C01C63231B00CE0E57 /* ShopCommentTableViewCell.m */; };
 		57CE97C61C634A5900CE0E57 /* head_icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 57CE97C21C634A5900CE0E57 /* head_icon4.png */; };
 		57CE97C71C634A5900CE0E57 /* head_icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 57CE97C31C634A5900CE0E57 /* head_icon3.png */; };
@@ -316,6 +321,15 @@
 		57B019611C7D8F6300884E0E /* animation_10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animation_10.png; sourceTree = "<group>"; };
 		57B019621C7D8F6300884E0E /* animation_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animation_11.png; sourceTree = "<group>"; };
 		57B019631C7D8F6300884E0E /* animation_12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animation_12.png; sourceTree = "<group>"; };
+		57B57CC71C95BFDD009F4EB2 /* ForgetViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetViewCtrl.h; sourceTree = "<group>"; };
+		57B57CC81C95BFDD009F4EB2 /* ForgetViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetViewCtrl.m; sourceTree = "<group>"; };
+		57B57CC91C95BFDD009F4EB2 /* LoginViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewCtrl.h; sourceTree = "<group>"; };
+		57B57CCA1C95BFDD009F4EB2 /* LoginViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewCtrl.m; sourceTree = "<group>"; };
+		57B57CCB1C95BFDD009F4EB2 /* RegisterViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewCtrl.h; sourceTree = "<group>"; };
+		57B57CCC1C95BFDD009F4EB2 /* RegisterViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewCtrl.m; sourceTree = "<group>"; };
+		57B57CD01C95C03F009F4EB2 /* LoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginService.h; path = "../../../../归档/couponarch/coupon/service/LoginService.h"; sourceTree = "<group>"; };
+		57B57CD11C95C03F009F4EB2 /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginService.m; path = "../../../../归档/couponarch/coupon/service/LoginService.m"; sourceTree = "<group>"; };
+		57B57CD71C95C3B8009F4EB2 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		57CE97BF1C63231B00CE0E57 /* ShopCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCommentTableViewCell.h; sourceTree = "<group>"; };
 		57CE97C01C63231B00CE0E57 /* ShopCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCommentTableViewCell.m; sourceTree = "<group>"; };
 		57CE97C21C634A5900CE0E57 /* head_icon4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_icon4.png; sourceTree = "<group>"; };
@@ -496,6 +510,7 @@
 		5779BD631C25381600E15934 /* coupon */ = {
 			isa = PBXGroup;
 			children = (
+				57B57CC61C95BFDD009F4EB2 /* auth */,
 				57CE97DA1C65F3CB00CE0E57 /* test */,
 				57CE97D51C65E8E100CE0E57 /* model */,
 				57CE97D61C65E8E100CE0E57 /* service */,
@@ -597,6 +612,7 @@
 		578E63F61C255B4800C1FB19 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				57B57CD71C95C3B8009F4EB2 /* logo@2x.png */,
 				574EE03F1C7F0F4C0009D6EF /* guangzhoufood@2x.png */,
 				574EE03B1C7DD9E40009D6EF /* soundon@2x.png */,
 				574EE03C1C7DD9E40009D6EF /* soundoff@2x.png */,
@@ -736,6 +752,20 @@
 			path = example;
 			sourceTree = "<group>";
 		};
+		57B57CC61C95BFDD009F4EB2 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				57B57CC71C95BFDD009F4EB2 /* ForgetViewCtrl.h */,
+				57B57CC81C95BFDD009F4EB2 /* ForgetViewCtrl.m */,
+				57B57CC91C95BFDD009F4EB2 /* LoginViewCtrl.h */,
+				57B57CCA1C95BFDD009F4EB2 /* LoginViewCtrl.m */,
+				57B57CCB1C95BFDD009F4EB2 /* RegisterViewCtrl.h */,
+				57B57CCC1C95BFDD009F4EB2 /* RegisterViewCtrl.m */,
+			);
+			name = auth;
+			path = "../../../归档/couponarch/coupon/auth";
+			sourceTree = "<group>";
+		};
 		57CE97D51C65E8E100CE0E57 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +776,8 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				57B57CD01C95C03F009F4EB2 /* LoginService.h */,
+				57B57CD11C95C03F009F4EB2 /* LoginService.m */,
 				57CE97D71C65E90400CE0E57 /* ShopService.h */,
 				57CE97D81C65E90400CE0E57 /* ShopService.m */,
 				57E722C11C670AB7004DBA9C /* CouponService.h */,
@@ -884,6 +916,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5736E9FD1C5521520055774D /* up.png in Resources */,
+				57B57CD81C95C3B8009F4EB2 /* logo@2x.png in Resources */,
 				578E63FB1C255BD900C1FB19 /* tab_home1@2x.png in Resources */,
 				57A94E5A1C37DBFD00BE0022 /* tab_shake_icon@2x.png in Resources */,
 				57A94E5D1C37E2C500BE0022 /* scanner_icon@2x.png in Resources */,
@@ -1020,6 +1053,7 @@
 				57EFEEE61C90874E003103B1 /* BaseService.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
 				573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */,
+				57B57CD21C95C03F009F4EB2 /* LoginService.m in Sources */,
 				57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */,
 				57017F331C5F4128007B0112 /* SelectMallPopViewCtrl.m in Sources */,
 				573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */,
@@ -1041,6 +1075,7 @@
 				577169781C80B2A300223EDB /* SettingMessageTypeViewCtrl.m in Sources */,
 				57A94E881C3AB30E00BE0022 /* ShakeCouponViewCtrl.m in Sources */,
 				57A94E661C37EB1200BE0022 /* ShopPortalViewCtrl.m in Sources */,
+				57B57CCF1C95BFDD009F4EB2 /* RegisterViewCtrl.m in Sources */,
 				57A94E7E1C38FF5800BE0022 /* CouponInfoTableViewCell.m in Sources */,
 				5736E9F51C4D3E420055774D /* AppShareData.m in Sources */,
 				57EFEEEC1C917B15003103B1 /* ReloadHud.m in Sources */,
@@ -1060,6 +1095,7 @@
 				57CE97D21C63B39500CE0E57 /* MallMapViewCtrl.m in Sources */,
 				57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */,
 				57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */,
+				57B57CCD1C95BFDD009F4EB2 /* ForgetViewCtrl.m in Sources */,
 				577169871C82129100223EDB /* GUIHelper.m in Sources */,
 				573E51E61C7CCF09005DBBC3 /* BasketMessageViewCtrl.m in Sources */,
 				57E722C31C670AB7004DBA9C /* CouponService.m in Sources */,
@@ -1075,6 +1111,7 @@
 				57A94E691C3805E500BE0022 /* ShopInfoTableViewCell.m in Sources */,
 				57CE97CC1C63A9CB00CE0E57 /* ShopListViewCtrl.m in Sources */,
 				577169841C820E9900223EDB /* AboutViewCtrl.m in Sources */,
+				57B57CCE1C95BFDD009F4EB2 /* LoginViewCtrl.m in Sources */,
 				5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */,
 				57F511AA1C5CCF86000DA1A8 /* BasketContainerViewCtrl.m in Sources */,
 			);

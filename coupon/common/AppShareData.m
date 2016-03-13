@@ -8,6 +8,18 @@
 
 #import "AppShareData.h"
 
+
+NSString * const UserNameKey=@"username";
+NSString * const PasswordKey=@"password";
+NSString * const AccessTokenKey=@"accesstoken";
+
+NSString * const AudioStatusCloseKey=@"audiostatusclose";
+
+NSString * const IsLoginKey=@"islogin";
+
+
+
+
 @interface AppShareData()
 
 @property(nonatomic,strong)NSMutableArray *cartList;
@@ -19,6 +31,8 @@
 
 
 static AppShareData *instance;
+
+
 
 
 +(instancetype)instance{
@@ -66,19 +80,58 @@ static AppShareData *instance;
 
 -(void)openAudio:(BOOL)on{
     
-    [[NSUserDefaults standardUserDefaults] setBool:!on forKey:@"audiostatusclose"];
+    [[NSUserDefaults standardUserDefaults] setBool:!on forKey:AudioStatusCloseKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-  
+    
 }
 
 
 
 -(BOOL)isAudioOpen{
     
-    return ![[NSUserDefaults standardUserDefaults] boolForKey:@"audiostatusclose"];
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:AudioStatusCloseKey];
     
 }
+
+
+-(void)loginOut{
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:UserNameKey];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:PasswordKey];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AccessTokenKey];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:IsLoginKey];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+}
+
+-(void)saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserNameKey];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:password forKey:PasswordKey];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:AccessTokenKey];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:IsLoginKey];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    
+}
+
+-(BOOL)isLogin{
+    
+    
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:IsLoginKey];
+    
+    
+}
+
 
 
 

@@ -21,6 +21,17 @@
     
 }
 
+-(NSString*)getBaseLoginUrl{
+    
+    
+    
+    NSString *url = [NSString stringWithFormat:@"http://120.25.66.110:9998/diamond-client-security-web"];
+    
+    return url;
+    
+    
+}
+
 
 -(NSString*)version{
     
