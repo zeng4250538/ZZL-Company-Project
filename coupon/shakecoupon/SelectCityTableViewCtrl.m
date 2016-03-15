@@ -8,7 +8,7 @@
 
 #import "SelectCityTableViewCtrl.h"
 
-@interface SelectCityTableViewCtrl ()
+@interface SelectCityTableViewCtrl ()<UISearchBarDelegate>
 @property(nonatomic,strong)UISearchBar *searchBar;
 
 @end
