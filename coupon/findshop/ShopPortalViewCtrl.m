@@ -167,49 +167,7 @@
     
     
     
-    
-    
-    
-//    NSDictionary *params = @{@"mallId":@5};
-//    
-//    [service queryShopPortalData:params success:
-//     ^(int code, NSString *message, id data) {
-//         
-//         if (code==0) {
-//             
-//             TRY
-//             
-//             self.hotShopData = data[@"hotshop"];
-//             self.couponData=data[@"hotcoupon"];
-//             self.hotBrandData = data[@"hotbrand"];
-//             
-//             
-//             CATCH
-//             
-//             
-//             
-//         }else{
-//             
-//             
-//             
-//             
-//         }
-//         
-//         
-//        
-//    } failure:
-//     ^(int code, BOOL retry, NSString *message, id data) {
-//         
-//         
-//        
-//        
-//    }];
-    
-    
-    
-    
-    
-   // self.hotData =
+
     
     
     
@@ -528,6 +486,19 @@
     
     if (indexPath.section == 0 || indexPath.section==2) {
         ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
+        
+        if (indexPath.section == 0) {
+            
+            vc.shopData = self.hotShopData[indexPath.row];
+            
+        }
+        
+        if (indexPath.section == 2) {
+            
+            vc.shopData = self.hotBrandData[indexPath.row];
+            
+        }
+        
         
         vc.hidesBottomBarWhenPushed = YES;
         

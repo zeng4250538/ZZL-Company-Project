@@ -13,6 +13,7 @@
 #import "CouponListViewCtrl.h"
 #import "MallMapViewCtrl.h"
 #import "CouponService.h"
+#import "ReloadHud.h"
 
 
 @interface ShopInfoViewCtrl ()
@@ -52,33 +53,81 @@
 }
 
 
+
+-(void)doLoad{
+    
+    
+    
+    CouponService *couponService = [CouponService new];
+    
+    
+    
+    
+    [couponService queryRecommandCoupon:@"12345" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        [ReloadHud removeHud:self.tableView animated:YES];
+        
+        self.limitCouponList=data;
+        
+        [self.tableView reloadData];
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        [ReloadHud showReloadMode:self.tableView];
+        
+        
+        
+    }];
+  
+    
+    [couponService queryRecommandCoupon:@"12345" page:2 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        [ReloadHud removeHud:self.tableView animated:YES];
+        
+        self.otherCouponList=data;
+        
+        [self.tableView reloadData];
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        [ReloadHud showReloadMode:self.tableView];
+        
+        
+        
+    }];
+
+    
+    
+    
+    
+    
+}
+
+
+
 -(void)loadData{
     
     
     
-    CouponService *service = [CouponService new];
     
-    [service queryShopCoupon:nil success:
-    ^(int code, NSString *message, id data) {
-        
-        
-        if (code==0) {
-            
-            self.limitCouponList = data[@"limit"];
-            
-            self.otherCouponList = data[@"other"];
-            
-            [self.tableView reloadData];
-        }
-        
-        
-        
-        
-        
-    } failure:
-    ^(int code, BOOL retry, NSString *message, id data) {
-        
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
+        [self doLoad];
     }];
+    
+    
+    [self doLoad];
+    
+    
     
     
     
@@ -187,9 +236,28 @@
     [uv addSubview:shopBgButton];
     
     
-    NSString *url = [Utils getRandomImage:@"商家封面"];
+    NSString *urlString =self.shopData[@"couponSmallPhotoUrl"];
     
-    [shopBgButton setBackgroundImage:[UIImage imageNamed:url] forState:UIControlStateNormal];
+    
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    
+    
+   
+    [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
+    
+    
+    
+    
+    
+    
+    
+    
+  //  [shopBgButton setBackgroundImage:[UIImage imageNamed:url] forState:UIControlStateNormal];
     
     
     UIButton *subButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -301,7 +369,9 @@
     
     likeLabel.textColor=[GUIConfig grayFontColor];
     likeLabel.font = [UIFont systemFontOfSize:12];
-    likeLabel.text=@"1234";
+    likeLabel.text=[NSString stringWithFormat:@"%@",self.shopData[@"good"]];
+    
+    
     [likeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         //make.width.equalTo(@40);
@@ -339,7 +409,9 @@
     
     unlikeLabel.textColor=[GUIConfig grayFontColor];
     unlikeLabel.font = [UIFont systemFontOfSize:12];
-    unlikeLabel.text=@"55";
+    
+    unlikeLabel.text=[NSString stringWithFormat:@"%@",self.shopData[@"good"]];
+    
     [unlikeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.width.equalTo(@40);
@@ -377,18 +449,9 @@
     } forControlEvents:UIControlEventTouchUpInside];
     
     
-  
-    
-    
-    
-    
     
     
     self.tableView.tableHeaderView = uv;
-    
-    
-    
-    
     
     
     

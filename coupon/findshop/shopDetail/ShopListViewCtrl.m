@@ -10,6 +10,8 @@
 #import "ShopInfoTableViewCell.h"
 #import "ShopService.h"
 #import "ShopInfoViewCtrl.h"
+#import "ReloadHud.h"
+
 
 
 @interface ShopListViewCtrl ()
@@ -30,6 +32,9 @@
     self.navigationItem.title=@"商家列表";
     [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -38,25 +43,27 @@
 }
 
 
-
--(void)loadData{
+-(void)doLoad{
     
     
     ShopService *service = [ShopService new];
     
-    [service queryMoreHotShop:nil success:
-     ^(int code, NSString *message, id data) {
-         
-         if (code==0) {
-             self.shopList = data;
-             
-             [self.tableView reloadData];
-             
-         }
-         
+    
+    
+    [service queryRecommandShop:@"123456" page:2 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
         
-    } failure:
-     ^(int code, BOOL retry, NSString *message, id data) {
+        
+        
+        self.shopList = data;
+        
+        [ReloadHud removeHud:self.tableView animated:YES];
+        
+        [self.tableView reloadData];
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        [ReloadHud showReloadMode:self.tableView];
+        
         
     }];
     
@@ -64,7 +71,42 @@
     
     
     
+    
 }
+
+
+-(void)loadData{
+    
+    
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        
+        [self doLoad];
+        
+        
+        
+        
+        
+    }];
+    
+    
+    [self doLoad];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,6 +10,7 @@
 #import "CouponInfoTableViewCell.h"
 #import "CouponService.h"
 #import "CouponDetailViewCtrl.h"
+#import "ReloadHud.h"
 
 @interface CouponListViewCtrl ()
 
@@ -30,6 +31,9 @@
     
     [self loadData];
     
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -38,30 +42,50 @@
 }
 
 
--(void)loadData{
+
+
+-(void)doLoad{
     
     
-    CouponService *service = [CouponService new];
+    
+    CouponService *couponService = [CouponService new];
     
     
-    [service queryPortalCoupon:nil success:
-     ^(int code, NSString *message, id data) {
-         
-         if (code==0) {
-            
-             self.data = data;
-             
-             [self.tableView reloadData];
-            
-         }
+    
+    
+    [couponService queryRecommandCoupon:@"12345" page:2 pageCount:30 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
-    } failure:
-     ^(int code, BOOL retry, NSString *message, id data) {
         
-         
+        [ReloadHud removeHud:self.tableView animated:YES];
+        
+        self.data=data;
+        
+        [self.tableView reloadData];
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        [ReloadHud showReloadMode:self.tableView];
+        
+        
+        
+        
+        
+        
+        
     }];
     
-    //service qu
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -69,6 +93,71 @@
     
     
 }
+
+
+-(void)loadData{
+    
+    
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        
+        [self doLoad];
+        
+        
+        
+        
+        
+    }];
+    
+    
+    [self doLoad];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+//-(void)loadData{
+//    
+//    
+//    CouponService *service = [CouponService new];
+//    
+//    
+//    [service queryPortalCoupon:nil success:
+//     ^(int code, NSString *message, id data) {
+//         
+//         if (code==0) {
+//            
+//             self.data = data;
+//             
+//             [self.tableView reloadData];
+//            
+//         }
+//        
+//    } failure:
+//     ^(int code, BOOL retry, NSString *message, id data) {
+//        
+//         
+//    }];
+//    
+//    //service qu
+//    
+//    
+//    
+//    
+//    
+//    
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

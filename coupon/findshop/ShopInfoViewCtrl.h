@@ -10,4 +10,6 @@
 
 @interface ShopInfoViewCtrl : UITableViewController
 
+@property(nonatomic,strong)NSDictionary *shopData;
+
 @end

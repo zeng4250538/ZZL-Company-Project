@@ -525,9 +525,9 @@
     
     self.titleLabel.text = self.data[@"name"];
     
-    self.goodLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"goodcount"] integerValue]];
+    self.goodLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"good"] integerValue]];
     
-    self.badLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"badcount"] integerValue]];
+    self.badLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"bad"] integerValue]];
     
     self.commentLabel.text = self.data[@"prompt"];
     
@@ -554,19 +554,7 @@
     
     
     
-   // [Utils getImagePath:@"商家图片"];
-    
-    
-    
-    
-    
-//    NSURL *url = [NSURL fileURLWithPath:@""];
-//    
-//    
-//    [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//    }];
-    
+ 
     
     
 }
