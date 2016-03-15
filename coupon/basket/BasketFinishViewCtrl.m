@@ -101,7 +101,9 @@
     
     cell.couponActionType = CouponTypeToComment;
     
-    [cell updateData:d];
+    cell.data = d;
+    
+    [cell updateData];
     
     
     cell.doActionBlock = ^(NSDictionary *data){

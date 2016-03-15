@@ -531,12 +531,24 @@
     
     self.commentLabel.text = self.data[@"prompt"];
     
-    NSString *urlString = self.data[@"icon"];
+    NSString *urlString = self.data[@"couponSmallPhotoUrl"];
+    
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    
+    
+    [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self setNeedsLayout];
+        
+    }];
     
     
     
     
-    self.logoView.image = [UIImage imageNamed:urlString];
     
     
     

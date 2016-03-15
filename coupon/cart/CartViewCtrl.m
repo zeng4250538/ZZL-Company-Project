@@ -269,7 +269,10 @@
     if (self.cartType ==0) {
         cell.couponActionType = CouponTypeToPay;
         
-        [cell updateData:d];
+        cell.data = d;
+        
+        [cell updateData];
+       // [cell updateData:d];
         
         return cell;
         

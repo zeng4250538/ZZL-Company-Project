@@ -523,7 +523,9 @@
         
         NSDictionary *d = self.limitCouponList[indexPath.row];
         
-        [cell updateData:d];
+        cell.data = d;
+        
+        [cell updateData];
         
     }else{
         
@@ -531,7 +533,9 @@
         
         NSDictionary *d = self.otherCouponList[indexPath.row];
         
-        [cell updateData:d];
+        cell.data =d;
+        
+        [cell updateData];
         
     }
     

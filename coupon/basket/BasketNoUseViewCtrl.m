@@ -113,7 +113,11 @@
     };
     
     
-    [cell updateData:self.dataList[[indexPath row]]];
+    cell.data  = self.dataList[indexPath.row];
+    
+    [cell updateData];
+    
+   // [cell updateData:self.dataList[[indexPath row]]];
     
     
     

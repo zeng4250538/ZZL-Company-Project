@@ -20,15 +20,15 @@
 #import "SelectMallPopViewCtrl.h"
 #import "CouponDetailViewCtrl.h"
 #import "CouponService.h"
+#import "ReloadHud.h"
+
+
 @interface ShopPortalViewCtrl ()
 
 @property(nonatomic,strong)UISearchBar *searchBar;
-
 @property(nonatomic,strong)NSArray *hotShopData;
 @property(nonatomic,strong)NSArray *couponData;
 @property(nonatomic,strong)NSArray *hotBrandData;
-
-
 @property(nonatomic,strong)NSArray *otherData;
 @property(nonatomic,strong)NSDictionary *portalData;
 
@@ -54,31 +54,39 @@
     [self makeBarItem];
     
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
--(void)loadData{
-    
+-(void)doLoad{
     
     
     ShopService *service = [ShopService new];
     
     CouponService *couponService = [CouponService new];
     
+    
+    
+    
     [couponService queryRecommandCoupon:@"12345" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        [ReloadHud removeHud:self.tableView animated:YES];
         
         self.couponData=data;
         
         [self.tableView reloadData];
-
+        
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        [ReloadHud showReloadMode:self.tableView];
+        
+        
+        
+        
         
         
         
@@ -93,10 +101,16 @@
     
     [service queryRecommandShop:@"123456" page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
         
+        
+        
         self.hotShopData = data;
-
+        
+        [ReloadHud removeHud:self.tableView animated:YES];
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        [ReloadHud showReloadMode:self.tableView];
+        
         
     }];
     
@@ -106,6 +120,8 @@
     
     [service queryNearbyShop:@"1234556" categoryid:@"11111" sort:@"111111" success:^(NSInteger code, NSString *message, id data) {
         
+        [ReloadHud removeHud:self.tableView animated:YES];
+        
         self.hotBrandData = data;
         
         [self.tableView reloadData];
@@ -113,7 +129,40 @@
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
+        [ReloadHud showReloadMode:self.tableView];
+        
+        
     }];
+    
+    
+
+    
+    
+    
+    
+    
+}
+
+
+-(void)loadData{
+    
+    
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        
+        [self doLoad];
+        
+        
+        
+        
+    
+    }];
+    
+    
+    [self doLoad];
     
     
     
@@ -551,8 +600,10 @@
         CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         
         
+        cell.data = self.couponData[indexPath.row];
         
-        [cell updateData:self.couponData[indexPath.row]];
+        [cell updateData];
+        
         
         
         cell.couponActionType = CouponTypeLimited;

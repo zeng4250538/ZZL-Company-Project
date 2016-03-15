@@ -48,7 +48,7 @@ typedef void(^PayBlock)(NSDictionary *data);
 
 
 -(void)updateData;
--(void)updateData:(NSDictionary*)data;
+//-(void)updateData:(NSDictionary*)data;
 
 
 

@@ -102,7 +102,9 @@
     
     NSDictionary *d = self.data[indexPath.row];
     
-    [cell updateData:d];
+    cell.data = d;
+    
+    [cell updateData];
     
     
     

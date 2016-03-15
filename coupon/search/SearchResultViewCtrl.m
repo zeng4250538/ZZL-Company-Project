@@ -234,7 +234,9 @@
     
     NSDictionary *d = self.dataList[indexPath.row];
     
-    [cell updateData:d];
+    cell.data=d;
+    
+    [cell updateData];
     
     
     
