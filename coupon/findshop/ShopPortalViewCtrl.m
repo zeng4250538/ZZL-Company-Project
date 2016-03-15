@@ -19,6 +19,7 @@
 #import "CouponListViewCtrl.h"
 #import "SelectMallPopViewCtrl.h"
 #import "CouponDetailViewCtrl.h"
+#import "CouponService.h"
 @interface ShopPortalViewCtrl ()
 
 @property(nonatomic,strong)UISearchBar *searchBar;
@@ -67,41 +68,93 @@
     
     ShopService *service = [ShopService new];
     
+    CouponService *couponService = [CouponService new];
     
-    NSDictionary *params = @{@"mallId":@5};
-    
-    [service queryShopPortalData:params success:
-     ^(int code, NSString *message, id data) {
-         
-         if (code==0) {
-             
-             TRY
-             
-             self.hotShopData = data[@"hotshop"];
-             self.couponData=data[@"hotcoupon"];
-             self.hotBrandData = data[@"hotbrand"];
-             
-             
-             CATCH
-             
-             
-             
-         }else{
-             
-             
-             
-             
-         }
-         
-         
+    [couponService queryRecommandCoupon:@"12345" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
-    } failure:
-     ^(int code, BOOL retry, NSString *message, id data) {
-         
-         
+        self.couponData=data;
+        
+        [self.tableView reloadData];
+
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
         
         
     }];
+    
+    
+    
+    
+    
+    
+    
+    
+    [service queryRecommandShop:@"123456" page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
+        
+        self.hotShopData = data;
+
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
+    
+    
+    [service queryNearbyShop:@"1234556" categoryid:@"11111" sort:@"111111" success:^(NSInteger code, NSString *message, id data) {
+        
+        self.hotBrandData = data;
+        
+        [self.tableView reloadData];
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+//    NSDictionary *params = @{@"mallId":@5};
+//    
+//    [service queryShopPortalData:params success:
+//     ^(int code, NSString *message, id data) {
+//         
+//         if (code==0) {
+//             
+//             TRY
+//             
+//             self.hotShopData = data[@"hotshop"];
+//             self.couponData=data[@"hotcoupon"];
+//             self.hotBrandData = data[@"hotbrand"];
+//             
+//             
+//             CATCH
+//             
+//             
+//             
+//         }else{
+//             
+//             
+//             
+//             
+//         }
+//         
+//         
+//        
+//    } failure:
+//     ^(int code, BOOL retry, NSString *message, id data) {
+//         
+//         
+//        
+//        
+//    }];
     
     
     

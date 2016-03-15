@@ -206,6 +206,7 @@
 		573E51E51C7CCF09005DBBC3 /* BasketMessageViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketMessageViewCtrl.m; sourceTree = "<group>"; };
 		574AE8A61C626C8200928B09 /* ShopCommentViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCommentViewCtrl.h; sourceTree = "<group>"; };
 		574AE8A71C626C8200928B09 /* ShopCommentViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCommentViewCtrl.m; sourceTree = "<group>"; };
+		574BF3E61C95D28E0088A9A6 /* BaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseService.h; sourceTree = "<group>"; };
 		574EE0271C7DC79C0009D6EF /* mask_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_right@2x.png"; sourceTree = "<group>"; };
 		574EE0281C7DC79C0009D6EF /* mask_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_left@2x.png"; sourceTree = "<group>"; };
 		574EE0291C7DC79C0009D6EF /* mainpagebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainpagebg.png; sourceTree = "<group>"; };
@@ -365,7 +366,6 @@
 		57E722C51C686A51004DBA9C /* ShakeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeService.m; sourceTree = "<group>"; };
 		57EFEEE11C90758B003103B1 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		57EFEEE21C90758B003103B1 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
-		57EFEEE41C90874E003103B1 /* BaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseService.h; sourceTree = "<group>"; };
 		57EFEEE51C90874E003103B1 /* BaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseService.m; sourceTree = "<group>"; };
 		57EFEEE71C9087B8003103B1 /* MallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallService.h; sourceTree = "<group>"; };
 		57EFEEE81C9087B8003103B1 /* MallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallService.m; sourceTree = "<group>"; };
@@ -794,6 +794,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				574BF3E61C95D28E0088A9A6 /* BaseService.h */,
 				57B57CD01C95C03F009F4EB2 /* LoginService.h */,
 				57B57CD11C95C03F009F4EB2 /* LoginService.m */,
 				57CE97D71C65E90400CE0E57 /* ShopService.h */,
@@ -804,7 +805,6 @@
 				57E722C51C686A51004DBA9C /* ShakeService.m */,
 				57EFEEE11C90758B003103B1 /* BaseRequest.h */,
 				57EFEEE21C90758B003103B1 /* BaseRequest.m */,
-				57EFEEE41C90874E003103B1 /* BaseService.h */,
 				57EFEEE51C90874E003103B1 /* BaseService.m */,
 				57EFEEE71C9087B8003103B1 /* MallService.h */,
 				57EFEEE81C9087B8003103B1 /* MallService.m */,
