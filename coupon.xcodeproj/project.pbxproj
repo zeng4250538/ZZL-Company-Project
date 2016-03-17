@@ -65,8 +65,6 @@
 		578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63DD1C254DD200C1FB19 /* GUIConfig.m */; };
 		578E63E11C254DE900C1FB19 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63E01C254DE900C1FB19 /* Utils.m */; };
 		578E63E51C2551B800C1FB19 /* NSObject+NSJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63E31C2551B800C1FB19 /* NSObject+NSJSONSerialization.m */; };
-		578E63EC1C2558A800C1FB19 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 578E63E81C2558A800C1FB19 /* libWeChatSDK.a */; };
-		578E63ED1C2558A800C1FB19 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 578E63E91C2558A800C1FB19 /* read_me.txt */; };
 		578E63EF1C25590500C1FB19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578E63EE1C25590500C1FB19 /* MobileCoreServices.framework */; };
 		578E63F11C25591900C1FB19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578E63F01C25591900C1FB19 /* SystemConfiguration.framework */; };
 		578E63F31C25597000C1FB19 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578E63F21C25597000C1FB19 /* Security.framework */; };
@@ -262,10 +260,6 @@
 		578E63E21C254E1900C1FB19 /* coupon.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = coupon.pch; sourceTree = "<group>"; };
 		578E63E31C2551B800C1FB19 /* NSObject+NSJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+NSJSONSerialization.m"; sourceTree = "<group>"; };
 		578E63E41C2551B800C1FB19 /* NSObject+NSJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+NSJSONSerialization.h"; sourceTree = "<group>"; };
-		578E63E81C2558A800C1FB19 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		578E63E91C2558A800C1FB19 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
-		578E63EA1C2558A800C1FB19 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		578E63EB1C2558A800C1FB19 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		578E63EE1C25590500C1FB19 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		578E63F01C25591900C1FB19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		578E63F21C25597000C1FB19 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -404,7 +398,6 @@
 				578E63F31C25597000C1FB19 /* Security.framework in Frameworks */,
 				578E63F11C25591900C1FB19 /* SystemConfiguration.framework in Frameworks */,
 				578E63EF1C25590500C1FB19 /* MobileCoreServices.framework in Frameworks */,
-				578E63EC1C2558A800C1FB19 /* libWeChatSDK.a in Frameworks */,
 				1E6948255BF932C4567844B2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,21 +613,9 @@
 		578E63E61C2558A800C1FB19 /* thirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				578E63E71C2558A800C1FB19 /* WeChatSDK_1.5 */,
 			);
 			name = thirdParty;
 			path = thirdparty;
-			sourceTree = "<group>";
-		};
-		578E63E71C2558A800C1FB19 /* WeChatSDK_1.5 */ = {
-			isa = PBXGroup;
-			children = (
-				578E63E81C2558A800C1FB19 /* libWeChatSDK.a */,
-				578E63E91C2558A800C1FB19 /* read_me.txt */,
-				578E63EA1C2558A800C1FB19 /* WXApi.h */,
-				578E63EB1C2558A800C1FB19 /* WXApiObject.h */,
-			);
-			path = WeChatSDK_1.5;
 			sourceTree = "<group>";
 		};
 		578E63F61C255B4800C1FB19 /* images */ = {
@@ -1001,7 +982,6 @@
 				57A94E841C39901200BE0022 /* handbg@2x.png in Resources */,
 				574EE03A1C7DD5EB0009D6EF /* shake_sound_male1.mp3 in Resources */,
 				57A94E5E1C37E2C500BE0022 /* location_icon@2x.png in Resources */,
-				578E63ED1C2558A800C1FB19 /* read_me.txt in Resources */,
 				574EE0381C7DD1D50009D6EF /* 商家新图 in Resources */,
 				57B019691C7D8F6300884E0E /* animation_08.png in Resources */,
 				571C29721C707D8800DDBCE8 /* CellBlueSelected@2x.png in Resources */,
