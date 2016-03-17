@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CouponQueue.h"
+
+
 
 extern NSString * const UserNameKey;
 extern NSString * const PasswordKey;
@@ -20,6 +23,7 @@ extern NSString * const IsLoginKey;
 @interface AppShareData : NSObject
 
 @property(nonatomic,strong)NSDictionary *currentMall;
+@property(nonatomic,strong)CouponQueue *shakeCouponQueue;
 
 
 +(instancetype)instance;

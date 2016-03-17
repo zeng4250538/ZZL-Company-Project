@@ -139,6 +139,7 @@
 		57CE97D41C63C13100CE0E57 /* spring.png in Resources */ = {isa = PBXBuildFile; fileRef = 57CE97D31C63C13100CE0E57 /* spring.png */; };
 		57CE97D91C65E90400CE0E57 /* ShopService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CE97D81C65E90400CE0E57 /* ShopService.m */; };
 		57CE97DD1C65F41300CE0E57 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CE97DC1C65F41300CE0E57 /* MockData.m */; };
+		57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D238831C9AC41500CE5331 /* CouponQueue.m */; };
 		57E722C31C670AB7004DBA9C /* CouponService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C21C670AB7004DBA9C /* CouponService.m */; };
 		57E722C61C686A51004DBA9C /* ShakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C51C686A51004DBA9C /* ShakeService.m */; };
 		57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE21C90758B003103B1 /* BaseRequest.m */; };
@@ -360,6 +361,8 @@
 		57CE97D81C65E90400CE0E57 /* ShopService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopService.m; sourceTree = "<group>"; };
 		57CE97DB1C65F41300CE0E57 /* MockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockData.h; sourceTree = "<group>"; };
 		57CE97DC1C65F41300CE0E57 /* MockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockData.m; sourceTree = "<group>"; };
+		57D238821C9AC41500CE5331 /* CouponQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponQueue.h; sourceTree = "<group>"; };
+		57D238831C9AC41500CE5331 /* CouponQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponQueue.m; sourceTree = "<group>"; };
 		57E722C11C670AB7004DBA9C /* CouponService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponService.h; sourceTree = "<group>"; };
 		57E722C21C670AB7004DBA9C /* CouponService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponService.m; sourceTree = "<group>"; };
 		57E722C41C686A51004DBA9C /* ShakeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeService.h; sourceTree = "<group>"; };
@@ -786,6 +789,8 @@
 		57CE97D51C65E8E100CE0E57 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				57D238821C9AC41500CE5331 /* CouponQueue.h */,
+				57D238831C9AC41500CE5331 /* CouponQueue.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1109,6 +1114,7 @@
 				5771697E1C81FE0A00223EDB /* ImageDisplayConfigViewCtrl.m in Sources */,
 				577169751C80B0F100223EDB /* SettingViewCtrl.m in Sources */,
 				5736EA021C5535720055774D /* ThrowLineTool.m in Sources */,
+				57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */,
 				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,
 				577169811C820D4F00223EDB /* ChangePasswordViewCtrl.m in Sources */,
 				57E722C61C686A51004DBA9C /* ShakeService.m in Sources */,

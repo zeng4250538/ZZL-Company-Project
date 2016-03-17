@@ -13,12 +13,15 @@
 #import "SelectMallPopViewCtrl.h"
 #import "SimpleAudioPlayer.h"
 #import "MallService.h"
+#import "ShakeService.h"
 
 @interface ShakeViewCtrl ()
 
 @property(nonatomic,strong)UIScrollView *contentView;
 @property(nonatomic,assign)BOOL audioOn;
 @property(nonatomic,strong)UIButton *mallButton;
+
+@property(nonatomic,assign)BOOL isShakeDataLoaded;
 
 
 @end
@@ -29,7 +32,79 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-    self.audioOn = YES;
+    
+    self.isShakeDataLoaded = NO;
+    
+    [self makeContentView];
+    
+    [self makeBarItem];
+    
+    [self makeShakeBody];
+    
+    [self makeAudioControl];
+    
+    
+    [self loadShakeData:^(BOOL ret){
+        
+        self.isShakeDataLoaded = ret;
+    }];
+    
+    
+    
+}
+
+
+#pragma mark - 装载摇一摇优惠券数据
+
+
+-(void)loadShakeData:(void(^)(BOOL ret))completion{
+    
+    
+    ShakeService *service = [ShakeService new];
+    
+    
+    //[SVProgressHUD showWithStatus:@""];
+    
+    
+    [service requestShakeCoupon:@"12345" success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        self.isShakeDataLoaded = YES;
+        
+        [[AppShareData instance].shakeCouponQueue resetData:data];
+        
+      //  [SVProgressHUD dismiss];
+        
+        completion(YES);
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+    //    [SVProgressHUD dismiss];
+        
+        completion(NO);
+        
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+#pragma mark - 创建首页内容视图
+
+-(void)makeContentView{
+    
     
     self.view.backgroundColor = [GUIConfig grayFontColor];
     
@@ -41,8 +116,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     
-     CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
-    
+    CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
     
     self.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, FrameHeight);
     
@@ -54,9 +128,19 @@
     
     self.contentView.showsVerticalScrollIndicator = NO;
     
-    [self makeBarItem];
     
-    [self makeShakeBody];
+    
+    
+    
+}
+
+
+#pragma mark - 建立声音图标
+
+-(void)makeAudioControl{
+    
+    
+    self.audioOn = YES;
     
     
     
@@ -70,7 +154,7 @@
     
     //audioButton.frame = CGRectMake(100, 100, 100, 30);
     
-   // [audioButton setTitle:@"播放声音" forState:UIControlStateNormal];
+    // [audioButton setTitle:@"播放声音" forState:UIControlStateNormal];
     
     
     [audioButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -95,30 +179,12 @@
         [[AppShareData instance] openAudio:!audioButton.selected];
         
         
-          
-        
-        
         
     } forControlEvents:UIControlEventTouchUpInside];
     
     
     
     [self.view addSubview:audioButton];
-    
-    
-    
-    
-    
-    
-
-    
-   // [self.contentView addSubview:[self makeView]];
-    
-
-    
-    
-    
-  //  [self makeBody];
     
     
     
@@ -270,34 +336,10 @@
         
         
         
-        
-        
-       // [uv addSubview:imgView];
-        
-        
-        
-        
-        
         [self makeAnimateView:imgView parentView:uv];
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //   uv.layer.borderWidth=2;
-        
-        pos++;
-        
-        
-        
+          pos++;
         
     }
     
@@ -321,12 +363,7 @@
     
     UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
-        
-        
-        
-        
-        
-    
+     
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
@@ -668,7 +705,23 @@
             
             
             
-            [self doLoadShakeView];
+            
+            [self loadShakeData:^(BOOL ret){
+                
+                if (ret) {
+                    
+                    [self doLoadShakeView];
+                    
+                }else{
+                    
+                    [SVProgressHUD showErrorWithStatus:@"网络错误，请重试！"];
+                    
+                }
+                
+            }];
+
+            
+            
             
             
         

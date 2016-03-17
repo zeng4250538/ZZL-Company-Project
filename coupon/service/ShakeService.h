@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ShakeService : NSObject
+@interface ShakeService : BaseService
 
 
--(void)requestShakeCoupon:(NSDictionary*)params
-                 success:(void(^)(int code,NSString *message,id data))success
-                 failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;
+-(void)requestShakeCoupon:(NSString*)mallid
+                 success:(void(^)(NSInteger code,NSString *message,id data))success
+                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 @end

@@ -84,7 +84,7 @@
    // [self makeAddCommentView];
     
     
-    [self makeRequestCoupon];
+ //   [self makeRequestCoupon];
     
     
     [self makeMaskCircleView];
@@ -118,59 +118,62 @@
 
 
 
--(void)makeRequestCouponBlock:( void (^)(NSDictionary *data))completion{
-    
-    
-    
-    CGFloat viewWidth = SCREEN_WIDTH-120;
-    CGFloat viewHeight = SCREEN_WIDTH-120+40;
-    
-    
-    
-    
-    ShakeService *service = [ShakeService new];
-    
-    [service requestShakeCoupon:nil success:^(int code, NSString *message, id data) {
-        
-        
-        if (code==0) {
-            
-            self.shakeCouponList = [data mutableCopy];
-            
-            self.couponData = self.shakeCouponList[0];
-            
-            
-            [self.shakeCouponList removeObjectAtIndex:0];
-            
-            completion(self.couponData);
-            
-            
-            
-//            CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
+//-(void)makeRequestCouponBlock:( void (^)(NSDictionary *data))completion{
+//    
+//    
+//    
+//    CGFloat viewWidth = SCREEN_WIDTH-120;
+//    CGFloat viewHeight = SCREEN_WIDTH-120+40;
+//    
+//    
+//    
+//    
+//    ShakeService *service = [ShakeService new];
+//    
+//    [service requestShakeCoupon:@"12345" success:^(NSInteger code, NSString *message, id data) {
+//        
+//        
+//        if (code==0) {
+//            
+//            self.shakeCouponList = [data mutableCopy];
+//            
+//            self.couponData = self.shakeCouponList[0];
 //            
 //            
-//            [self.view addSubview:couponView];
+//            [self.shakeCouponList removeObjectAtIndex:0];
+//            
+//            completion(self.couponData);
 //            
 //            
-//            self.imgView = couponView;
 //            
-            
-            
-        }
-        
-        
-        
-    } failure:^(int code, BOOL retry, NSString *message, id data) {
-        
-    }];
-    
-    
-    
-    
-    
-    
-}
-
+////            CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
+////            
+////            
+////            [self.view addSubview:couponView];
+////            
+////            
+////            self.imgView = couponView;
+////            
+//            
+//            
+//        }
+//        
+//        
+//        
+//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+//        
+//        
+//        
+//        
+//    }];
+//    
+//    
+//    
+//    
+//    
+//    
+//}
+//
 
 
 
@@ -187,7 +190,7 @@
     
     ShakeService *service = [ShakeService new];
     
-    [service requestShakeCoupon:nil success:^(int code, NSString *message, id data) {
+    [service requestShakeCoupon:@"122344" success:^(NSInteger code, NSString *message, id data) {
         
         
         if (code==0) {
@@ -215,7 +218,7 @@
         
         
         
-    } failure:^(int code, BOOL retry, NSString *message, id data) {
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
     }];
     
@@ -276,27 +279,27 @@
       //  self.imgView = nil;
         
         
+        
      
-        if ([self.shakeCouponList count]==0) {
-            
+        
+        
+        
+        self.couponData = [[AppShareData instance].shakeCouponQueue next];
+        
+        if (self.couponData==nil) {
             
             [self dismissViewControllerAnimated:YES completion:^{
                 
             }];
             
-            
-            
             [SVProgressHUD showInfoWithStatus:@"本轮优惠券已经完毕，请重新摇摇"];
-            
-            
-            
             return ;
-            
         }
         
-        self.couponData = self.shakeCouponList[0];
         
-        [self.shakeCouponList removeObjectAtIndex:0];
+        
+        
+        
         
         CGFloat viewWidth = SCREEN_WIDTH-120;
         CGFloat viewHeight = SCREEN_WIDTH-120+40;
@@ -361,10 +364,6 @@
     
     cartButton.frame = CGRectMake(SCREEN_WIDTH-100, 50, 60, 60);
     
-//    cartButton.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.7];
-//    
-//    cartButton.clipsToBounds = YES;
-//    cartButton.layer.cornerRadius = 30;
     [self.view addSubview:cartButton];
     
     self.cartButton  = cartButton;
@@ -600,7 +599,18 @@
     
     
     
-    if ([self.shakeCouponList count]==0) {
+    
+    
+    
+    
+    
+   
+    
+    self.couponData = [[AppShareData instance].shakeCouponQueue next];
+    
+    
+    //无法获取新的优惠券
+    if (self.couponData==nil) {
         
         
         [self dismissViewControllerAnimated:YES completion:^{
@@ -618,11 +628,7 @@
     }
     
     
-    
-    
-   
-    
-    self.couponData = self.shakeCouponList[0];
+
     
     [self.shakeCouponList removeObjectAtIndex:0];
     
@@ -656,7 +662,7 @@
    // maskView.layer.borderWidth=2;
     
     [self.view addSubview:maskView];
-    
+
     [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(self.view);
@@ -700,6 +706,7 @@
     
 }
 
+#pragma mark - 圆形遮罩关闭
 
 -(void)makeMaskCircleViewClose{
     
@@ -708,10 +715,6 @@
         
         
         self.leftMaskView.frame = CGRectMake(0, 0, 109, 218);
-        
-        
-        
-        
         
         
     } completion:^(BOOL finished) {
@@ -734,51 +737,43 @@
         
         
         
-        [self makeRequestCouponBlock:^(NSDictionary *data) {
+        NSDictionary *couponData = [[AppShareData instance].shakeCouponQueue next];
+        
+        if (couponData == nil) {
+        
             
-            CGFloat viewWidth = SCREEN_WIDTH-120;
-            CGFloat viewHeight = SCREEN_WIDTH-120+40;
-
+            UIAlertView *av = [[UIAlertView alloc] bk_initWithTitle:@"错误" message:@"当前无优惠券，请重新摇一摇"];
             
+            [av bk_addButtonWithTitle:@"确认" handler:^{
+                
+                
+                [av dismissWithClickedButtonIndex:0 animated:YES];
+                
+                
+            }];
             
-            CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, viewHeight) data:data];
+            [av show];
             
-            self.currentData = data;
+            return ;
             
-            self.imgView = couponView;
-            
-            
-            
-            
-            
-            
-            
-            [self.maskView addSubview:couponView];
-            
-            
-            
-            [self.maskView sendSubviewToBack:couponView];
-            
-            
-         
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+        }
+        
+        
+        CGFloat viewWidth = SCREEN_WIDTH-120;
+        CGFloat viewHeight = SCREEN_WIDTH-120+40;
+        
+        
+        CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, viewHeight) data:couponData];
+        
+        self.currentData = couponData;
+        
+        self.imgView = couponView;
         
         
         
-        }];
+        [self.maskView addSubview:couponView];
         
-        
-        
-        
+        [self.maskView sendSubviewToBack:couponView];
         
         
         
@@ -786,9 +781,6 @@
         
         
     }];
-    
-    
-    
     
     
     
@@ -807,10 +799,6 @@
         
         
         self.leftMaskView.frame = CGRectMake(0-109, 0, 109, 218);
-        
-        
-        
-        
         
         
     } completion:^(BOOL finished) {
@@ -862,8 +850,6 @@
         
         
         
-        
-        
         [UIView animateWithDuration:0.5 animations:^{
             
             
@@ -874,33 +860,8 @@
             
             self.maskView.layer.cornerRadius=0;
             
-            
-            
-//            r.size.height=r.size.height*1.5;
-//            r.size.width = r.size.width*1.5;
-            
-            
-            
-            
-           // self.maskView.transform = CGAffineTransformScale(self.maskView.transform, 1.3, 1.3);
             self.imgView.transform = CGAffineTransformScale(self.imgView.transform, 1.1, 1.1);
            
-            
-//            CGRect rr = self.imgView.frame;
-//            
-//            rr.origin.x-=20;
-//            rr.origin.y-=20;
-//            rr.size.width+=20;
-//            rr.size.height+=20;
-//            
-//            self.imgView.frame = rr;
-//            
-//            self.maskView.frame =r;
-//            
-            
-            // self.maskView.frame = CGRectMake(0-109, 0, 109, 218);
-            
-            
             
             
             
@@ -1274,10 +1235,41 @@
 }
 
 
+-(void)loadShakeData:(void(^)(BOOL ret))completion{
+    
+    
+    ShakeService *service = [ShakeService new];
+    
+    
+    
+    
+    [service requestShakeCoupon:@"12345" success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        
+        [[AppShareData instance].shakeCouponQueue resetData:data];
+        
+        
+        completion(YES);
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        completion(NO);
+        
+        
+        
+    }];
+}
+
+    
+
+
 
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
-    
     
     
     
@@ -1289,12 +1281,36 @@
     
     if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake){
         
+       // -(void)loadShakeData:(void(^)(BOOL ret))completion{
+            
+            
+        [self loadShakeData:^(BOOL ret) {
+            
+            if (ret) {
+                
+                [self animationSwipeLeft];
+                
+            }else{
+                
+                
+                UIAlertView *av = [[UIAlertView alloc] bk_initWithTitle:@"警告" message:@"获取优惠券失败,请重试获取"];
+                
+                
+                [av bk_addButtonWithTitle:@"关闭" handler:^{
+                    
+                    [av dismissWithClickedButtonIndex:0 animated:YES];
+                    
+                }];
+                
+                [av show];
+                
+            }
+            
+        }];
+
         
-        [self animationSwipeLeft];
         
         
-        
-        NSLog(@" subview  shake ...");
         
     }
 }

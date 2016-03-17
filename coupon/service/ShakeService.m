@@ -11,23 +11,48 @@
 @implementation ShakeService
 
 
--(void)requestShakeCoupon:(NSDictionary*)params
-                  success:(void(^)(int code,NSString *message,id data))success
-                  failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure{
+-(void)requestShakeCoupon:(NSString*)mallid
+                  success:(void(^)(NSInteger code,NSString *message,id data))success
+                  failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
     
     
-    if (success) {
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponrecommand"];
+    
+    NSDictionary *parm = @{@"shopmallid":mallid,@"userid":@"13693284393",
+                           @"page":@1,@"per_page":@(10),@"sort":@""};
+    
+    
+    [req get:url param:parm success:^(NSInteger code, id object) {
         
-        NSArray *data = [[MockData instance] orderCouponModel:10];
+        success(code,@"",object);
         
         
         
-        success(0,@"",data);
-    }
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+        
+        
+    }];
     
     
+    
+    
+
+    
+    
+    
+    
+     
     
 }
 

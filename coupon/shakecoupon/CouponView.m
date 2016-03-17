@@ -47,7 +47,24 @@
             
         }else{
         
-            uv.image =[UIImage imageNamed:self.data[@"icon"]];
+            
+            NSString *urlString = self.data[@"couponSmallPhotoUrl"];
+            
+            
+            urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSURL *url = [NSURL URLWithString:urlString];
+            
+            
+            [uv sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                [uv setNeedsDisplay];
+            }];
+            
+            
+            
+            
+            
+         //   uv.image =[UIImage imageNamed:self.data[@"icon"]];
         }
         
     

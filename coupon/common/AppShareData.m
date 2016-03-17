@@ -43,6 +43,7 @@ static AppShareData *instance;
         
         instance.cartList = [@[] mutableCopy];
         
+        instance.shakeCouponQueue =[CouponQueue new];
         
     });
     
