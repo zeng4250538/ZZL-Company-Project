@@ -21,6 +21,7 @@
 #import "CouponDetailViewCtrl.h"
 #import "CouponService.h"
 #import "ReloadHud.h"
+#import "Shop.h"
 
 
 @interface ShopPortalViewCtrl ()
@@ -70,7 +71,7 @@
     
     
     
-    [couponService queryRecommandCoupon:@"12345" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:@"12345" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         
         [ReloadHud removeHud:self.tableView animated:YES];
@@ -102,7 +103,7 @@
     
     
     
-    [service queryRecommandShop:@"123456" page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
+    [service requestRecommendShop:@"123456" page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
         
         
         
@@ -121,7 +122,7 @@
     
     
     
-    [service queryNearbyShop:@"1234556" categoryid:@"11111" sort:@"111111" success:^(NSInteger code, NSString *message, id data) {
+    [service requestNearbyShop:@"1234556" categoryid:@"11111" sort:@"111111" success:^(NSInteger code, NSString *message, id data) {
         
         [ReloadHud removeHud:self.tableView animated:YES];
         
@@ -492,13 +493,24 @@
         
         if (indexPath.section == 0) {
             
-            vc.shopData = self.hotShopData[indexPath.row];
+            NSDictionary *data =  self.hotShopData[indexPath.row];
+            
+            vc.shopData = [Shop yy_modelWithDictionary:data];
+            
+            
+            
+            
             
         }
         
         if (indexPath.section == 2) {
             
-            vc.shopData = self.hotBrandData[indexPath.row];
+            
+            
+            NSDictionary *data =  self.hotBrandData[indexPath.row];
+            
+            vc.shopData = [Shop yy_modelWithDictionary:data];
+            
             
         }
         

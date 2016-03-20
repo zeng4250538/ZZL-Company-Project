@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Shop.h"
+
 @interface ShopInfoViewCtrl : UITableViewController
 
-@property(nonatomic,strong)NSDictionary *shopData;
+@property(nonatomic,strong)Shop *shopData;
 
 @end

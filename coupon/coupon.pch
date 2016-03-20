@@ -64,6 +64,10 @@
 #import "BaseRequest.h"
 #import "BaseService.h"
 
+#import <YYModel/YYModel.h>
+
+
+
 
 
 

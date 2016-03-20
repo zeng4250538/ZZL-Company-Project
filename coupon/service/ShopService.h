@@ -21,7 +21,7 @@
  *http://120.25.66.110:9998/diamond-sis-web/v1/shoprecommand?shopmallid=53420473120&userid=13693284393&page=1&per_page=3
   */
 
--(void)queryRecommandShop:(NSString*)mallid page:(NSInteger)page pageCount:(NSInteger)pageCount
+-(void)requestRecommendShop:(NSString*)mallid page:(NSInteger)page pageCount:(NSInteger)pageCount
                   success:(void(^)(NSInteger code,NSString *message,id data))success
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
@@ -40,9 +40,27 @@
  */
 
 
--(void)queryNearbyShop:(NSString*)mallid categoryid:(NSString*)categoryid sort:(NSString*)sort
+-(void)requestNearbyShop:(NSString*)mallid categoryid:(NSString*)categoryid sort:(NSString*)sort
                success:(void(^)(NSInteger code,NSString *message,id data))success
                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
+
+/**
+ *  查询关键字
+ *
+ *  @param mallid  商城id
+ *  @param keyWord 输入的关键字
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
+
+-(void)requestShopByKeyword:(NSString*)mallid keyWord:(NSString*)keyWord
+                 success:(void(^)(NSInteger code,NSString *message,id data))success
+                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
 
 
 

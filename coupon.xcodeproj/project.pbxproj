@@ -138,6 +138,9 @@
 		57CE97D91C65E90400CE0E57 /* ShopService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CE97D81C65E90400CE0E57 /* ShopService.m */; };
 		57CE97DD1C65F41300CE0E57 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CE97DC1C65F41300CE0E57 /* MockData.m */; };
 		57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D238831C9AC41500CE5331 /* CouponQueue.m */; };
+		57E364A31C9DA17B003575FC /* Shop.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A21C9DA17B003575FC /* Shop.m */; };
+		57E364A61C9DA293003575FC /* Mall.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A51C9DA293003575FC /* Mall.m */; };
+		57E364A91C9DB347003575FC /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A81C9DB347003575FC /* Coupon.m */; };
 		57E722C31C670AB7004DBA9C /* CouponService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C21C670AB7004DBA9C /* CouponService.m */; };
 		57E722C61C686A51004DBA9C /* ShakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C51C686A51004DBA9C /* ShakeService.m */; };
 		57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE21C90758B003103B1 /* BaseRequest.m */; };
@@ -357,6 +360,12 @@
 		57CE97DC1C65F41300CE0E57 /* MockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockData.m; sourceTree = "<group>"; };
 		57D238821C9AC41500CE5331 /* CouponQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponQueue.h; sourceTree = "<group>"; };
 		57D238831C9AC41500CE5331 /* CouponQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponQueue.m; sourceTree = "<group>"; };
+		57E364A11C9DA17B003575FC /* Shop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shop.h; sourceTree = "<group>"; };
+		57E364A21C9DA17B003575FC /* Shop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shop.m; sourceTree = "<group>"; };
+		57E364A41C9DA293003575FC /* Mall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mall.h; sourceTree = "<group>"; };
+		57E364A51C9DA293003575FC /* Mall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mall.m; sourceTree = "<group>"; };
+		57E364A71C9DB347003575FC /* Coupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coupon.h; sourceTree = "<group>"; };
+		57E364A81C9DB347003575FC /* Coupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coupon.m; sourceTree = "<group>"; };
 		57E722C11C670AB7004DBA9C /* CouponService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponService.h; sourceTree = "<group>"; };
 		57E722C21C670AB7004DBA9C /* CouponService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponService.m; sourceTree = "<group>"; };
 		57E722C41C686A51004DBA9C /* ShakeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeService.h; sourceTree = "<group>"; };
@@ -772,6 +781,12 @@
 			children = (
 				57D238821C9AC41500CE5331 /* CouponQueue.h */,
 				57D238831C9AC41500CE5331 /* CouponQueue.m */,
+				57E364A11C9DA17B003575FC /* Shop.h */,
+				57E364A21C9DA17B003575FC /* Shop.m */,
+				57E364A41C9DA293003575FC /* Mall.h */,
+				57E364A51C9DA293003575FC /* Mall.m */,
+				57E364A71C9DB347003575FC /* Coupon.h */,
+				57E364A81C9DB347003575FC /* Coupon.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1069,7 +1084,9 @@
 				573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */,
 				57CE97C11C63231B00CE0E57 /* ShopCommentTableViewCell.m in Sources */,
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
+				57E364A91C9DB347003575FC /* Coupon.m in Sources */,
 				578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */,
+				57E364A61C9DA293003575FC /* Mall.m in Sources */,
 				571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */,
 				57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */,
 				5796FA831C47E904004CA23B /* CouponView.m in Sources */,
@@ -1089,6 +1106,7 @@
 				5736E9F51C4D3E420055774D /* AppShareData.m in Sources */,
 				57EFEEEC1C917B15003103B1 /* ReloadHud.m in Sources */,
 				578E63E51C2551B800C1FB19 /* NSObject+NSJSONSerialization.m in Sources */,
+				57E364A31C9DA17B003575FC /* Shop.m in Sources */,
 				57CE97CF1C63A9E800CE0E57 /* CouponListViewCtrl.m in Sources */,
 				571C29781C70AC8F00DDBCE8 /* CartTableViewCell.m in Sources */,
 				5771697E1C81FE0A00223EDB /* ImageDisplayConfigViewCtrl.m in Sources */,

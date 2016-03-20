@@ -393,7 +393,7 @@
     
     self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
     
-    self.navigationItem.rightBarButtonItem = scanerBarItem;
+  //  self.navigationItem.rightBarButtonItem = scanerBarItem;
     
     
     

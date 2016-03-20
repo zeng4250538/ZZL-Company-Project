@@ -16,7 +16,7 @@
 //couponrecommand?shopmallid=23645321432444&userid=13693284393&page=1&per_page=3&sort=endTime
 
 
--(void)queryRecommandCoupon:(NSString*)mallid
+-(void)requestRecommendCoupon:(NSString*)mallid
                        page:(NSInteger)page
                   pageCount:(NSInteger)pageCount
                        sort:(NSString*)sort
@@ -57,6 +57,89 @@
     
     
 }
+
+//查询商店里面的实时推荐的优惠券
+//http://120.25.66.110:9998/diamond-sis-web/
+//v1/couponpromotion?
+//shopid=4532443&type=realtime
+
+-(void)requestRealTimeCoupon:(NSString*)shopId
+                        page:(NSInteger)page
+                   pageCount:(NSInteger)pageCount
+                     success:(void(^)(NSInteger code,NSString *message,id data))success
+                     failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponpromotion"];
+    
+    NSDictionary *parm = @{@"shopid":shopId,@"type":@"realtime",
+                           @"page":@(page),@"per_page":@(pageCount)};
+    
+    
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+        
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+
+    
+    
+    
+    
+}
+
+
+-(void)requestNormalCoupon:(NSString*)shopId
+                      page:(NSInteger)page
+                 pageCount:(NSInteger)pageCount
+                   success:(void(^)(NSInteger code,NSString *message,id data))success
+                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponpromotion"];
+    
+    NSDictionary *parm = @{@"shopid":shopId,@"type":@"normal",
+                           @"page":@(page),@"per_page":@(pageCount)};
+    
+    
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+        
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+    
+    
+    
+    
+    
+}
+
+
+
 
 
 -(void)queryPortalCoupon:(NSDictionary*)params

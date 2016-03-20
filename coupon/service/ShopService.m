@@ -17,7 +17,7 @@
 
 
 
--(void)queryRecommandShop:(NSString*)mallid page:(NSInteger)page pageCount:(NSInteger)pageCount
+-(void)requestRecommendShop:(NSString*)mallid page:(NSInteger)page pageCount:(NSInteger)pageCount
                   success:(void(^)(NSInteger code,NSString *message,id data))success
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
 
@@ -65,7 +65,7 @@
 
 //http://120.25.66.110:9998/diamond-sis-web/v1/nearby?shopmallid=53420473120&customerid=13693284393&categoryid=34624363243&sort=default
 
--(void)queryNearbyShop:(NSString*)mallid categoryid:(NSString*)categoryid sort:(NSString*)sort
+-(void)requestNearbyShop:(NSString*)mallid categoryid:(NSString*)categoryid sort:(NSString*)sort
                success:(void(^)(NSInteger code,NSString *message,id data))success
                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
@@ -106,6 +106,49 @@
     
     
 }
+
+
+-(void)requestShopByKeyword:(NSString*)mallid keyWord:(NSString*)keyWord
+                    success:(void(^)(NSInteger code,NSString *message,id data))success
+                    failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/search"];
+    
+    NSDictionary *parm = @{@"shopmallid":mallid,@"keyword":keyWord};
+    
+    
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+        
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+        
+        
+    }];
+    
+
+    
+    
+    
+    
+    
+    
+    
+}
+
+
 
 
 

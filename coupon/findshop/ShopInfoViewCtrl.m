@@ -18,7 +18,7 @@
 
 @interface ShopInfoViewCtrl ()
 
-@property(nonatomic,strong)NSArray *limitCouponList;
+@property(nonatomic,strong)NSArray *realTimeCouponList;
 @property(nonatomic,strong)NSArray *otherCouponList;
 
 @end
@@ -61,51 +61,84 @@
     CouponService *couponService = [CouponService new];
     
     
+    //查询实时优惠券信息
     
     
-    [couponService queryRecommandCoupon:@"12345" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    
+    //requestRealTimeCoupon
+    
+    [couponService requestRealTimeCoupon:self.shopData.id page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
         
-        [ReloadHud removeHud:self.tableView animated:YES];
         
-        self.limitCouponList=data;
+        
+        
+        if (![data isKindOfClass:[NSArray class]]) {
+            
+            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
+            return ;
+        }
+        
+        self.realTimeCouponList = data;
+        
         
         [self.tableView reloadData];
+        
+        [ReloadHud removeHud:self.view animated:YES];
+        
+        
         
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
         
+        [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
         
-        [ReloadHud showReloadMode:self.tableView];
+        [ReloadHud removeHud:self.view animated:YES];
         
         
         
     }];
-  
     
-    [couponService queryRecommandCoupon:@"12345" page:2 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+ 
+    //查询其他优惠券
+    
+    [couponService requestNormalCoupon:self.shopData.id page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
         
-        [ReloadHud removeHud:self.tableView animated:YES];
         
-        self.otherCouponList=data;
+        if (![data isKindOfClass:[NSArray class]]) {
+            
+            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
+            return ;
+        }
+        
+        self.otherCouponList = data;
+        
         
         [self.tableView reloadData];
+        
+        
+        [ReloadHud removeHud:self.view animated:YES];
+        
         
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
         
-        
-        [ReloadHud showReloadMode:self.tableView];
+        [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
+        [ReloadHud removeHud:self.view animated:YES];
         
         
         
     }];
+    
 
+    
+    
+    
     
     
     
@@ -120,7 +153,7 @@
     
     
     
-    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
         [self doLoad];
     }];
     
@@ -236,7 +269,9 @@
     [uv addSubview:shopBgButton];
     
     
-    NSString *urlString =self.shopData[@"couponSmallPhotoUrl"];
+    NSString *urlString =self.shopData.couponSmallPhotoUrl;
+    
+    
     
     
     
@@ -369,7 +404,7 @@
     
     likeLabel.textColor=[GUIConfig grayFontColor];
     likeLabel.font = [UIFont systemFontOfSize:12];
-    likeLabel.text=[NSString stringWithFormat:@"%@",self.shopData[@"good"]];
+    likeLabel.text=[NSString stringWithFormat:@"%ld",self.shopData.good];
     
     
     [likeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -410,7 +445,7 @@
     unlikeLabel.textColor=[GUIConfig grayFontColor];
     unlikeLabel.font = [UIFont systemFontOfSize:12];
     
-    unlikeLabel.text=[NSString stringWithFormat:@"%@",self.shopData[@"good"]];
+    unlikeLabel.text=[NSString stringWithFormat:@"%ld",self.shopData.good];
     
     [unlikeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -473,7 +508,7 @@
     if ([indexPath section]==0) {
         
         
-        vc.data = self.limitCouponList[indexPath.row];
+        vc.data = self.realTimeCouponList[indexPath.row];
         
     }else{
         
@@ -561,7 +596,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section==0) {
-        return [self.limitCouponList count];
+        return [self.realTimeCouponList count];
     }else{
         return [self.otherCouponList count];
         
@@ -584,7 +619,7 @@
         
         cell.couponActionType = CouponTypeLimited;
         
-        NSDictionary *d = self.limitCouponList[indexPath.row];
+        NSDictionary *d = self.realTimeCouponList[indexPath.row];
         
         cell.data = d;
         

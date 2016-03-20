@@ -50,7 +50,7 @@
     
     
     
-    [service queryRecommandShop:@"123456" page:2 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+    [service requestRecommendShop:@"123456" page:2 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
         
         
         

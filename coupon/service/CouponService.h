@@ -16,7 +16,7 @@
 
 
 /**
- *  查询推荐的优惠券
+ *  查询推荐的优惠券，用于商城首页请求
  *
  *  @param mallid    商场id
  *  @param page      当前页
@@ -25,12 +25,52 @@
  *  @param success   成功回调
  *  @param failure   失败回调
  */
--(void)queryRecommandCoupon:(NSString*)mallid
+-(void)requestRecommendCoupon:(NSString*)mallid
                        page:(NSInteger)page
                   pageCount:(NSInteger)pageCount
                        sort:(NSString*)sort
                  success:(void(^)(NSInteger code,NSString *message,id data))success
                  failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
+/**
+ *  查询商店里面实时推荐优惠的优惠券
+ *
+ *  @param shopId    商店id
+ *  @param page      当前页
+ *  @param pageCount 每页数量
+ *  @param success   成功回调信息
+ *  @param failure   失败回调信息
+ */
+
+-(void)requestRealTimeCoupon:(NSString*)shopId
+                       page:(NSInteger)page
+                  pageCount:(NSInteger)pageCount
+                    success:(void(^)(NSInteger code,NSString *message,id data))success
+                    failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+/**
+ *  查询商店里面其他优惠的优惠券
+ *
+ *  @param shopId    商店id
+ *  @param page      当前页
+ *  @param pageCount 每页数量
+ *  @param success   成功回调信息
+ *  @param failure   失败回调信息
+ */
+
+
+
+-(void)requestNormalCoupon:(NSString*)shopId
+                        page:(NSInteger)page
+                   pageCount:(NSInteger)pageCount
+                     success:(void(^)(NSInteger code,NSString *message,id data))success
+                     failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
 
 
 

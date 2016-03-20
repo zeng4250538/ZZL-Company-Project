@@ -53,7 +53,7 @@
     
     
     
-    [couponService queryRecommandCoupon:@"12345" page:2 pageCount:30 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:@"12345" page:2 pageCount:30 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         
         [ReloadHud removeHud:self.tableView animated:YES];
