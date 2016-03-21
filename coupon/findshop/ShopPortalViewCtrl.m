@@ -24,6 +24,7 @@
 #import "Shop.h"
 
 
+
 @interface ShopPortalViewCtrl ()
 
 @property(nonatomic,strong)UISearchBar *searchBar;
@@ -50,9 +51,27 @@
     [self makeSearchBar];
     
     
+    
+    
     [self loadData];
     
     [self makeBarItem];
+    
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+            
+        }];
+        
+    
+        
+    }];
     
     
     
@@ -61,7 +80,51 @@
 }
 
 
--(void)doLoad{
+-(void)loadData{
+    
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+}
+
+
+
+-(void)doLoad:(void(^)(BOOL ret))completion{
     
     
     ShopService *service = [ShopService new];
@@ -74,19 +137,20 @@
     [couponService requestRecommendCoupon:@"12345" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         
-        [ReloadHud removeHud:self.tableView animated:YES];
         
         self.couponData=data;
         
         [self.tableView reloadData];
+        
+        completion(YES);
         
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
         
-        
-        [ReloadHud showReloadMode:self.tableView];
+        completion(NO);
+
         
         
         
@@ -109,11 +173,18 @@
         
         self.hotShopData = data;
         
-        [ReloadHud removeHud:self.tableView animated:YES];
+        [self.tableView reloadData];
+        
+        completion(YES);
+        
+        
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
-        [ReloadHud showReloadMode:self.tableView];
+        
+        completion(NO);
+        
+        
         
         
     }];
@@ -124,16 +195,19 @@
     
     [service requestNearbyShop:@"1234556" categoryid:@"11111" sort:@"111111" success:^(NSInteger code, NSString *message, id data) {
         
-        [ReloadHud removeHud:self.tableView animated:YES];
         
         self.hotBrandData = data;
         
         [self.tableView reloadData];
         
+        completion(YES);
+        
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
-        [ReloadHud showReloadMode:self.tableView];
+        
+        completion(NO);
+        
         
         
     }];
@@ -148,35 +222,46 @@
 }
 
 
--(void)loadData{
-    
-    
-    
-    
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-        
-        
-        
-        [self doLoad];
-        
-        
-        
-        
-    
-    }];
-    
-    
-    [self doLoad];
-    
-    
-    
-    
-
-    
-    
-    
-    
-}
+//-(void)loadData{
+//    
+//    
+//    
+//    
+//    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+//        
+//        
+//        
+//        [self doLoad:^(BOOL ret){
+//            
+//       
+//        }];
+//        
+//        
+//        
+//        
+//        
+//    
+//    }];
+//    
+//    [self doLoad:^(BOOL ret){
+//        
+//        
+//    }];
+//    
+//    
+//    
+//    
+//  //  [self doLoad];
+//    
+//    
+//    
+//    
+//
+//    
+//    
+//    
+//    
+//}
 
 #pragma mark- 导航栏按钮
 

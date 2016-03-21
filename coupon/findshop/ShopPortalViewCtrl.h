@@ -10,5 +10,9 @@
 
 @interface ShopPortalViewCtrl : UITableViewController<UISearchBarDelegate>
 
+-(void)doLoad:(void(^)(BOOL ret))completion;
+
+
+
 
 @end

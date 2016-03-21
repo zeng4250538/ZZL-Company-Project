@@ -8,6 +8,7 @@
 
 #import "KeyWordSearchViewCtrl.h"
 #import "SearchResultViewCtrl.h"
+#import "ShopService.h"
 
 @interface KeyWordSearchViewCtrl ()
 
@@ -19,6 +20,8 @@
 @property(nonatomic,strong)UISearchDisplayController *displayCtrl;
 
 @property(nonatomic,strong)UISearchBar *searchBar;
+
+@property(nonatomic,assign)BOOL isLoading;
 
 
 @end
@@ -66,7 +69,7 @@
     
     self.hotWordList = @[@"小吃",@"麦当劳",@"咖啡",@"电影",@"贡茶",@"奶茶",@"西餐",@"蛋糕"];
     
-    self.searchWordList = @[@"贡茶",@"星巴克",@"都城",@"快餐"];
+ //   self.searchWordList = @[@"贡茶",@"星巴克",@"都城",@"快餐"];
     
     
 }
@@ -83,7 +86,6 @@
     
     self.displayCtrl.displaysSearchBarInNavigationBar = YES;
     
-    //displaysSearchBarInNavigationBar
     
     
     
@@ -108,16 +110,6 @@
     
     searchBar.showsCancelButton = YES;
     
-//    searchBar.showsSearchResultsButton = YES;
-//    searchBar.showsCancelButton = YES;
-//    
-    
-    
-    
-    
-    
-   // [searchBar setSearchBarStyle:UISearchBarStyleMinimal];
-    
 
     
     self.searchBar = searchBar;
@@ -126,12 +118,6 @@
     
     searchBar.placeholder=@"搜索优惠券";
     
-    //    searchBar.layer.cornerRadius = 22;
-    //    searchBar.layer.masksToBounds = YES;
-    //
-    
-    
-   // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     
     
     
@@ -232,6 +218,58 @@
     
 }
 
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    NSLog(@"%@",searchText);
+    
+    
+    if (self.isLoading) {
+        return ;
+    }
+    
+    self.isLoading = YES;
+    
+    
+    ShopService *service = [ShopService new];
+    
+    
+    
+    
+    [service requestKeyword:@"mallid"
+                    keyWord:@"xxx"
+                    success:^(NSInteger code, NSString *message, id data) {
+                        
+                        
+                        
+                        
+                        self.searchWordList = data;
+                        
+                        self.isLoading = NO;
+                        
+                        
+                        [self.displayCtrl.searchResultsTableView reloadData];
+                        
+                        
+                        
+                        
+                    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                        
+                        
+                        self.isLoading = NO;
+                        
+                        
+                        
+                        
+                    }];
+
+    
+    
+    
+    
+    
+}
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{                     // called when cancel
 
     [self dismissViewControllerAnimated:YES completion:^{
@@ -252,6 +290,12 @@
     
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    UIView *headView = [UIView new];
+    headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 30);
+    
+    
+    
     UILabel *lab = [UILabel new];
     lab.font = [UIFont systemFontOfSize:14];
     lab.textColor = [GUIConfig grayFontColor];
@@ -274,6 +318,13 @@
     // Return the number of rows in the section.
     
     
+    if (tableView == self.displayCtrl.searchResultsTableView) {
+        
+        return [self.searchWordList count];
+    }
+    
+    
+    
     
     return [self.hotWordList count];
 }
@@ -285,7 +336,15 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         
-        cell.textLabel.text=[self.hotWordList objectAtIndex:[indexPath row]];
+        
+        
+        NSDictionary *d = self.searchWordList[indexPath.row];
+        
+        NSString *name = d[@"name"];
+        
+        
+        
+        cell.textLabel.text=name;
         
         return cell;
         

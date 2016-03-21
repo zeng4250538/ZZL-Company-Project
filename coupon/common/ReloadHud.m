@@ -46,13 +46,21 @@
     
     CGRect r = view.frame;
     
+    view.backgroundColor = [UIColor whiteColor];
+    
     
     ReloadHud *hud = [[ReloadHud alloc] initWithFrame:r];
+    
+
     
     [view addSubview:hud];
     
     
+   // [hud bringSubviewToFront:view];
+    
+    
     [hud mas_makeConstraints:^(MASConstraintMaker *make) {
+        
         make.center.equalTo(view);
         make.width.equalTo(view);
         make.height.equalTo(view);

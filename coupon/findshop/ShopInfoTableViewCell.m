@@ -520,7 +520,6 @@
 
 -(void)updateData{
     
-   // NSString *urlString = self.data[@"imgurl"];
     
     
     self.titleLabel.text = self.data[@"name"];

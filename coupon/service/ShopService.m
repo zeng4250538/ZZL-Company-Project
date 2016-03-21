@@ -108,7 +108,7 @@
 }
 
 
--(void)requestShopByKeyword:(NSString*)mallid keyWord:(NSString*)keyWord
+-(void)requestKeyword:(NSString*)mallid keyWord:(NSString*)keyWord
                     success:(void(^)(NSInteger code,NSString *message,id data))success
                     failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     

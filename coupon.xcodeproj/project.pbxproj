@@ -141,6 +141,7 @@
 		57E364A31C9DA17B003575FC /* Shop.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A21C9DA17B003575FC /* Shop.m */; };
 		57E364A61C9DA293003575FC /* Mall.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A51C9DA293003575FC /* Mall.m */; };
 		57E364A91C9DB347003575FC /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A81C9DB347003575FC /* Coupon.m */; };
+		57E364AC1C9E6FB5003575FC /* UIView+DataLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364AB1C9E6FB5003575FC /* UIView+DataLoad.m */; };
 		57E722C31C670AB7004DBA9C /* CouponService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C21C670AB7004DBA9C /* CouponService.m */; };
 		57E722C61C686A51004DBA9C /* ShakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C51C686A51004DBA9C /* ShakeService.m */; };
 		57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE21C90758B003103B1 /* BaseRequest.m */; };
@@ -366,6 +367,8 @@
 		57E364A51C9DA293003575FC /* Mall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mall.m; sourceTree = "<group>"; };
 		57E364A71C9DB347003575FC /* Coupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coupon.h; sourceTree = "<group>"; };
 		57E364A81C9DB347003575FC /* Coupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coupon.m; sourceTree = "<group>"; };
+		57E364AA1C9E6FB5003575FC /* UIView+DataLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DataLoad.h"; sourceTree = "<group>"; };
+		57E364AB1C9E6FB5003575FC /* UIView+DataLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DataLoad.m"; sourceTree = "<group>"; };
 		57E722C11C670AB7004DBA9C /* CouponService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponService.h; sourceTree = "<group>"; };
 		57E722C21C670AB7004DBA9C /* CouponService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponService.m; sourceTree = "<group>"; };
 		57E722C41C686A51004DBA9C /* ShakeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeService.h; sourceTree = "<group>"; };
@@ -615,6 +618,8 @@
 				5736EA011C5535720055774D /* ThrowLineTool.m */,
 				57EFEEEA1C917B15003103B1 /* ReloadHud.h */,
 				57EFEEEB1C917B15003103B1 /* ReloadHud.m */,
+				57E364AA1C9E6FB5003575FC /* UIView+DataLoad.h */,
+				57E364AB1C9E6FB5003575FC /* UIView+DataLoad.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1111,6 +1116,7 @@
 				571C29781C70AC8F00DDBCE8 /* CartTableViewCell.m in Sources */,
 				5771697E1C81FE0A00223EDB /* ImageDisplayConfigViewCtrl.m in Sources */,
 				577169751C80B0F100223EDB /* SettingViewCtrl.m in Sources */,
+				57E364AC1C9E6FB5003575FC /* UIView+DataLoad.m in Sources */,
 				5736EA021C5535720055774D /* ThrowLineTool.m in Sources */,
 				57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */,
 				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,

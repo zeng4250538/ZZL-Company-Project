@@ -9,7 +9,10 @@
 #import "SearchResultViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
-#import "CouponService.h"
+#import "ShopService.h"
+#import "ReloadHud.h"
+#import "ShopInfoTableViewCell.h"
+#import "ShopInfoViewCtrl.h"
 
 
 
@@ -56,35 +59,84 @@
 
 
 
--(void)loadData{
+-(void)doLoad:(void(^)(BOOL ret))completion{
     
     self.keyWordList = @[@"麦当劳",@"咖啡",@"美甲",@"蛋糕"];
+     
+    
+    ShopService *service = [ShopService new];
     
     
-    CouponService *service = [CouponService new];
-    
-    
-    [service queryByKeyword:nil success:^(int code, NSString *message, id data) {
+    [service requestKeyword:@"mallid"
+                          keyWord:@"xxx"
+                          success:^(NSInteger code, NSString *message, id data) {
+                              
+                              
+                              
+                              self.keyWordList = data;
+                              
+                              [self.tableView reloadData];
+                              
+                              
+                              completion(YES);
+                              
+                              
+                              
         
-        if (code ==0) {
-            
-            self.dataList = data;
-        }
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
+        completion(NO);
         
-    } failure:^(int code, BOOL retry, NSString *message, id data) {
         
     }];
     
     
     
     
+}
+
+
+-(void)loadData{
     
     
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
     
     
     
 }
+
+
+
+
 
 -(void)makeDisplayCtrl{
     
@@ -197,7 +249,7 @@
  
     }else{
         
-        return [CouponInfoTableViewCell height];
+        return [ShopInfoTableViewCell height];
        
         
     }
@@ -227,7 +279,7 @@
     }
     
     
-    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+     ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
     
     // Configure the cell...
     
@@ -265,12 +317,7 @@
         
         
         
-        CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
-        
-        NSDictionary *d = self.dataList[indexPath.row];
-        
-        vc.data= d;
-        
+        ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
         
         [self.navigationController pushViewController:vc animated:YES];
 
