@@ -62,6 +62,7 @@
 		5779BD751C25381600E15934 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5779BD731C25381600E15934 /* LaunchScreen.xib */; };
 		5779BD811C25381600E15934 /* couponTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BD801C25381600E15934 /* couponTests.m */; };
 		5779BD8B1C2539D000E15934 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5779BD8A1C2539D000E15934 /* Podfile */; };
+		577B6CE71CA1666B002BA28F /* PersonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 577B6CE61CA1666B002BA28F /* PersonService.m */; };
 		578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63DD1C254DD200C1FB19 /* GUIConfig.m */; };
 		578E63E11C254DE900C1FB19 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63E01C254DE900C1FB19 /* Utils.m */; };
 		578E63E51C2551B800C1FB19 /* NSObject+NSJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63E31C2551B800C1FB19 /* NSObject+NSJSONSerialization.m */; };
@@ -257,6 +258,8 @@
 		5779BD7F1C25381600E15934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5779BD801C25381600E15934 /* couponTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = couponTests.m; sourceTree = "<group>"; };
 		5779BD8A1C2539D000E15934 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		577B6CE51CA1666B002BA28F /* PersonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonService.h; sourceTree = "<group>"; };
+		577B6CE61CA1666B002BA28F /* PersonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonService.m; sourceTree = "<group>"; };
 		578E63DC1C254DD200C1FB19 /* GUIConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIConfig.h; sourceTree = "<group>"; };
 		578E63DD1C254DD200C1FB19 /* GUIConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIConfig.m; sourceTree = "<group>"; };
 		578E63DF1C254DE900C1FB19 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -813,6 +816,8 @@
 				57EFEEE51C90874E003103B1 /* BaseService.m */,
 				57EFEEE71C9087B8003103B1 /* MallService.h */,
 				57EFEEE81C9087B8003103B1 /* MallService.m */,
+				577B6CE51CA1666B002BA28F /* PersonService.h */,
+				577B6CE61CA1666B002BA28F /* PersonService.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1106,6 +1111,7 @@
 				57F3E2861C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m in Sources */,
 				577169781C80B2A300223EDB /* SettingMessageTypeViewCtrl.m in Sources */,
 				57A94E881C3AB30E00BE0022 /* ShakeCouponViewCtrl.m in Sources */,
+				577B6CE71CA1666B002BA28F /* PersonService.m in Sources */,
 				57A94E661C37EB1200BE0022 /* ShopPortalViewCtrl.m in Sources */,
 				57A94E7E1C38FF5800BE0022 /* CouponInfoTableViewCell.m in Sources */,
 				5736E9F51C4D3E420055774D /* AppShareData.m in Sources */,

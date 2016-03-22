@@ -244,6 +244,141 @@
 }
 
 
+-(void)requestFav:(NSString*)shopid
+             mode:(BOOL)mode
+          success:(void(^)(NSInteger code,NSString *message,id data))success
+          failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+   // http://120.25.66.110:9998/diamond-sis-web/v1/customer/13693284393/shopfavorite/
+    
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    
+    // shop/514344/good
+    
+    
+    NSString *customerId=@"111222";
+    
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    
+    url = [url stringByAppendingString:customerId];
+    url = [url stringByAppendingString:@"/"];
+    
+    
+    
+    
+    NSDictionary *parm = @{@"customerId":@"xxxx",
+                           @"shopId":shopid};
+    
+    if (mode==YES) {
+        
+        [req post:url param:parm success:^(NSInteger code, id object) {
+            
+            success(code,@"",object);
+            
+        } failure:^(NSInteger code, NSString *content) {
+            
+            failure(code,NO,content,nil);
+            
+            
+        }];
+        
+        
+        
+        
+    }else{
+        
+        
+        [req delete:url param:parm success:^(NSInteger code, id object) {
+            
+            success(code,@"",object);
+            
+        } failure:^(NSInteger code, NSString *content) {
+            
+            failure(code,NO,content,nil);
+            
+            
+        }];
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+-(void)requestShopComment:(NSString*)shopid
+                     page:(NSInteger)page
+                pageCount:(NSInteger)pageCount
+                     sort:(NSString*)sort
+                  success:(void(^)(NSInteger code,NSString *message,id data))success
+                  failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/review"];
+    
+    NSDictionary *parm = @{@"shopid":shopid,@"page":@(page),@"per_page":@(pageCount)};
+    
+    
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+        
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+        
+        
+    }];
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
 
 
 

@@ -14,6 +14,7 @@
 #import "MallMapViewCtrl.h"
 #import "CouponService.h"
 #import "ReloadHud.h"
+#import "ShopService.h"
 
 
 @interface ShopInfoViewCtrl ()
@@ -390,9 +391,30 @@
         make.centerY.equalTo(bottomBar);
     }];
     
-    //喜欢按钮
+    //点赞按钮
     
     [likeButton bk_addEventHandler:^(id sender) {
+        
+        
+        ShopService *service = [ShopService new];
+        
+        [service requestDoGood:@"1111" mode:YES success:^(NSInteger code, NSString *message, id data) {
+            
+            
+            
+        
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+            
+            
+        }];
+        
+        
+    
+        
+        
+        
+        
         
     } forControlEvents:UIControlEventTouchUpInside];
     

@@ -281,7 +281,7 @@
     
     
     if (section==2) {
-        return 3;
+        return 1;
     }
     if (section==3) {
         return 1;
@@ -336,7 +336,7 @@
         
         
         if ([indexPath row]==0) {
-            cell.textLabel.text=@"优惠篮子";
+            cell.textLabel.text=@"消费记录";
             
             
         }
