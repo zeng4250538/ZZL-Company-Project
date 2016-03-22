@@ -149,6 +149,102 @@
 }
 
 
+-(void)requestDoGood:(NSString*)shopid
+                mode:(BOOL)mode
+             success:(void(^)(NSInteger code,NSString *message,id data))success
+             failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    
+   // shop/514344/good
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shop/"];
+    
+    url = [url stringByAppendingString:shopid];
+    url = [url stringByAppendingString:@"/good"];
+    
+    
+    
+    
+    NSDictionary *parm = @{@"customerId":@"xxxx",
+                           @"shopId":shopid,
+                           @"isLike":@(YES)};
+    
+    if (mode==YES) {
+        
+        [req post:url param:parm success:^(NSInteger code, id object) {
+            
+            success(code,@"",object);
+            
+        } failure:^(NSInteger code, NSString *content) {
+            
+            failure(code,NO,content,nil);
+            
+            
+        }];
+        
+        
+
+        
+    }else{
+        
+        
+        [req delete:url param:parm success:^(NSInteger code, id object) {
+            
+            success(code,@"",object);
+            
+        } failure:^(NSInteger code, NSString *content) {
+            
+            failure(code,NO,content,nil);
+            
+            
+        }];
+        
+        
+
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+/**
+ *  对商店点差评
+ *
+ *  @param shopid  商店id
+ *  @param mode  mode == YES 点赞，model == NO，取消点赞
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
+
+-(void)requestDoBad:(NSString*)shopid
+               mode:(BOOL)mode
+            success:(void(^)(NSInteger code,NSString *message,id data))success
+            failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+    
+}
+
+
+
 
 
 

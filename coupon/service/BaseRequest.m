@@ -70,13 +70,78 @@
     
 }
 
--(void)put:(NSString*)url success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure {
+-(void)put:(NSString*)url param:(NSDictionary*)param success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure {
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    //传入的参数
+    
+    //NSDictionary *parameters = @{@"1":@"XXXX",@"2":@"XXXX",@"3":@"XXXXX"};
+    //你的接口地址
+    //发送请求
+    [manager PUT:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"JSON: %@", responseObject);
+        
+        
+        success(operation.response.statusCode,responseObject);
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        failure(operation.response.statusCode,error.description);
+        
+        NSLog(@"Error: %@", error);
+    }];
+    
+
+    
+    
+    
     
     
     
 }
 
--(void)delete:(NSString*)url success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure {
+-(void)delete:(NSString*)url param:(NSDictionary*)param  success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure {
+    
+    
+    
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    //传入的参数
+    
+    //NSDictionary *parameters = @{@"1":@"XXXX",@"2":@"XXXX",@"3":@"XXXXX"};
+    //你的接口地址
+    //发送请求
+    [manager DELETE:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"JSON: %@", responseObject);
+        
+        
+        success(operation.response.statusCode,responseObject);
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        failure(operation.response.statusCode,error.description);
+        
+        NSLog(@"Error: %@", error);
+    }];
+    
+    
+
     
     
     

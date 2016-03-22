@@ -61,8 +61,35 @@
                  failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
+/**
+ *  对商店点赞
+ *
+ *  @param shopid  商店id
+ *  @param mode  mode == YES 点赞，model == NO，取消点赞
+ *  @param success 商店成功回调
+ *  @param failure 商店失败回调
+ */
 
 
+-(void)requestDoGood:(NSString*)shopid
+                mode:(BOOL)mode
+             success:(void(^)(NSInteger code,NSString *message,id data))success
+             failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+/**
+ *  对商店点差评
+ *
+ *  @param shopid  商店id
+ *  @param mode  mode == YES 点赞，model == NO，取消点赞
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
+
+-(void)requestDoBad:(NSString*)shopid
+               mode:(BOOL)mode
+             success:(void(^)(NSInteger code,NSString *message,id data))success
+             failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
 -(void)queryShopPortalData:(NSDictionary*)params
