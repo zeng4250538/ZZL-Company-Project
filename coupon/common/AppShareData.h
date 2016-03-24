@@ -25,6 +25,9 @@ extern NSString * const IsLoginKey;
 @property(nonatomic,strong)NSDictionary *currentMall;
 @property(nonatomic,strong)CouponQueue *shakeCouponQueue;
 
+@property(nonatomic,copy)NSString *customId;
+
+@property(nonatomic,copy)NSString *accessToken;
 
 +(instancetype)instance;
 

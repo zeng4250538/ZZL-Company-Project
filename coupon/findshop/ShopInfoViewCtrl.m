@@ -34,8 +34,6 @@
     [self makeHeaderView];
     
     
- 
-    
     
     [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
     
@@ -270,9 +268,6 @@
     
     
     NSString *urlString =self.shopData.couponSmallPhotoUrl;
-    
-    
-    
     
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

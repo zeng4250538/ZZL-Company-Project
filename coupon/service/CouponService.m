@@ -36,6 +36,8 @@
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         
+        
+        
         success(code,@"",object);
         
         

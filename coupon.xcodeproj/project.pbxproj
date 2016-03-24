@@ -108,6 +108,7 @@
 		57A94E841C39901200BE0022 /* handbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E821C39901200BE0022 /* handbg@2x.png */; };
 		57A94E851C39901200BE0022 /* hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E831C39901200BE0022 /* hand@2x.png */; };
 		57A94E881C3AB30E00BE0022 /* ShakeCouponViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A94E871C3AB30E00BE0022 /* ShakeCouponViewCtrl.m */; };
+		57A9CDD91CA2B5BF00A3DBB4 /* TestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A9CDD81CA2B5BF00A3DBB4 /* TestTableViewController.m */; };
 		57B019641C7D8F6300884E0E /* animation_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B019581C7D8F6300884E0E /* animation_03.png */; };
 		57B019651C7D8F6300884E0E /* animation_07.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B019591C7D8F6300884E0E /* animation_07.png */; };
 		57B019661C7D8F6300884E0E /* animation_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B0195A1C7D8F6300884E0E /* animation_02.png */; };
@@ -329,6 +330,8 @@
 		57A94E831C39901200BE0022 /* hand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hand@2x.png"; sourceTree = "<group>"; };
 		57A94E861C3AB30E00BE0022 /* ShakeCouponViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeCouponViewCtrl.h; sourceTree = "<group>"; };
 		57A94E871C3AB30E00BE0022 /* ShakeCouponViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeCouponViewCtrl.m; sourceTree = "<group>"; };
+		57A9CDD71CA2B5BF00A3DBB4 /* TestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableViewController.h; sourceTree = "<group>"; };
+		57A9CDD81CA2B5BF00A3DBB4 /* TestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewController.m; sourceTree = "<group>"; };
 		57B019581C7D8F6300884E0E /* animation_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animation_03.png; sourceTree = "<group>"; };
 		57B019591C7D8F6300884E0E /* animation_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animation_07.png; sourceTree = "<group>"; };
 		57B0195A1C7D8F6300884E0E /* animation_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animation_02.png; sourceTree = "<group>"; };
@@ -808,6 +811,8 @@
 				57E364A51C9DA293003575FC /* Mall.m */,
 				57E364A71C9DB347003575FC /* Coupon.h */,
 				57E364A81C9DB347003575FC /* Coupon.m */,
+				57A9CDD71CA2B5BF00A3DBB4 /* TestTableViewController.h */,
+				57A9CDD81CA2B5BF00A3DBB4 /* TestTableViewController.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1169,6 +1174,7 @@
 				57A94E691C3805E500BE0022 /* ShopInfoTableViewCell.m in Sources */,
 				57CE97CC1C63A9CB00CE0E57 /* ShopListViewCtrl.m in Sources */,
 				577169841C820E9900223EDB /* AboutViewCtrl.m in Sources */,
+				57A9CDD91CA2B5BF00A3DBB4 /* TestTableViewController.m in Sources */,
 				5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */,
 				57F511AA1C5CCF86000DA1A8 /* BasketContainerViewCtrl.m in Sources */,
 			);
@@ -1310,6 +1316,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1329,6 +1336,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
