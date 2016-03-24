@@ -135,14 +135,12 @@
 }
 
 
-#pragma mark - 建立声音图标
+#pragma mark - 声音图标
 
 -(void)makeAudioControl{
     
     
     self.audioOn = YES;
-    
-    
     
     UIButton *audioButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -222,7 +220,6 @@
     [parentView addSubview:imageView];
 
     
-    
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(parentView).offset(100);
         make.centerY.equalTo(parentView).offset(130);
@@ -256,11 +253,13 @@
 }
 
 #pragma mark - 摇一摇主图片
+
+/**
+ *  摇换主界面，
+ */
 -(void)makeShakeBody{
     
     CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
-    
-
     
     
     NSArray *ary = @[@"sampleImg01.png"];
@@ -281,7 +280,6 @@
         
         
         UIImage *img = [UIImage imageNamed:imgFile];
-        
         
         
         

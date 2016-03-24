@@ -22,10 +22,6 @@
 -(void)makeTabViewCtrl{
     
     
-    
-    
-    
-    
     NSArray *titleArray = @[@"摇一摇",@"找商家",/*@"篮子",*/@"我的"];
     NSArray *imageArray = @[[UIImage imageNamed:@"tab_shake_icon.png"],
                             [UIImage imageNamed:@"tab_brand_icon.png"],

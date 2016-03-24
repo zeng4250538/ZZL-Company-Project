@@ -17,6 +17,7 @@ NSString * const AudioStatusCloseKey=@"audiostatusclose";
 
 NSString * const IsLoginKey=@"islogin";
 
+NSString * const CustomIdKey=@"customId";
 
 
 
@@ -49,6 +50,21 @@ static AppShareData *instance;
     
     return instance;
     
+    
+}
+
+
+-(NSString*)accessToken{
+    
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:AccessTokenKey];
+    
+    
+}
+
+-(NSString*)customId{
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:CustomIdKey];
     
 }
 
@@ -112,6 +128,9 @@ static AppShareData *instance;
 -(void)saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken{
     
     [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserNameKey];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:CustomIdKey];
+    
     
     [[NSUserDefaults standardUserDefaults] setObject:password forKey:PasswordKey];
     
