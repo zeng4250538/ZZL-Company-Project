@@ -70,7 +70,7 @@
         
         self.checkButton.selected = YES;
         
-       // self.checkButton setImage:[] forState:<#(UIControlState)#>
+       // self.checkButton setImage:[] forState:(UIControlState)
         
         
         [self.checkButton setImage:[UIImage imageNamed:@"CellNotSelected@2x.png"] forState:UIControlStateNormal];
