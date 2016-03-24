@@ -91,6 +91,38 @@
              success:(void(^)(NSInteger code,NSString *message,id data))success
              failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
+/**
+ *  对商店订阅
+ *
+ *  @param shopid  商店id
+ *  @param mode  mode == YES 点赞，model == NO，取消点赞
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
+
+
+
+-(void)requestFav:(NSString*)shopid
+               mode:(BOOL)mode
+            success:(void(^)(NSInteger code,NSString *message,id data))success
+            failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+/**
+ *  查询商家的评论
+ *
+ *  @param shopid  商店id
+ *  @param success
+ *  @param failure
+ */
+
+-(void)requestShopComment:(NSString*)shopid
+                     page:(NSInteger)page
+                pageCount:(NSInteger)pageCount
+                     sort:(NSString*)sort
+                  success:(void(^)(NSInteger code,NSString *message,id data))success
+                  failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
 
 -(void)queryShopPortalData:(NSDictionary*)params
             success:(void(^)(int code,NSString *message,id data))success
