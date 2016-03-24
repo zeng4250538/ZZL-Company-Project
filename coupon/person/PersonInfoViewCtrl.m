@@ -16,6 +16,7 @@
 #import "SettingViewCtrl.h"
 #import "SettingMessageTypeViewCtrl.h"
 #import "CouponDrawBackListViewCtrl.h"
+#import "HistoryOfConsumptionTableViewController.h"
 
 #import "OrderContainerViewCtrl.h"
 #import "LoginViewCtrl.h"
@@ -281,7 +282,7 @@
     
     
     if (section==2) {
-        return 1;
+        return 2;
     }
     if (section==3) {
         return 1;
@@ -336,23 +337,23 @@
         
         
         if ([indexPath row]==0) {
-            cell.textLabel.text=@"消费记录";
+            cell.textLabel.text=@"优惠篮子";
             
             
         }
         
         if ([indexPath row]==1) {
-            cell.textLabel.text=@"我的订单";
+            cell.textLabel.text=@"消费历史";
             
             
         }
         
         
-        if ([indexPath row]==2) {
-            cell.textLabel.text=@"我的退款";
-            
-            
-        }
+//        if ([indexPath row]==2) {
+//            cell.textLabel.text=@"我的退款";
+//            
+//            
+//        }
         
         
         
@@ -441,7 +442,7 @@
         if (indexPath.row==1) {
             
             
-            OrderContainerViewCtrl *vc = [OrderContainerViewCtrl new];
+            HistoryOfConsumptionTableViewController *vc = [HistoryOfConsumptionTableViewController new];
             
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
@@ -453,19 +454,19 @@
         
         
         
-        if (indexPath.row==2) {
-            
-            CouponDrawBackListViewCtrl *vc =[CouponDrawBackListViewCtrl new];
-            
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-            
-            
-            
-            
-            
-        }
+//        if (indexPath.row==2) {
+//            
+//            CouponDrawBackListViewCtrl *vc =[CouponDrawBackListViewCtrl new];
+//            
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
+//            
+//            
+//            
+//            
+//            
+//            
+//        }
         
     }
     

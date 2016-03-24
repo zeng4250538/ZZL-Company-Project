@@ -159,6 +159,8 @@
 		57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511AC1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m */; };
 		57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */; };
 		57F7B9FB1C624C64002A8A08 /* roommap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7B9FA1C624C64002A8A08 /* roommap@2x.png */; };
+		7F121D591CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D581CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m */; };
+		7F121D5C1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -404,6 +406,10 @@
 		57F511B11C5CD1CF000DA1A8 /* BasketFinishViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketFinishViewCtrl.h; sourceTree = "<group>"; };
 		57F511B21C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketFinishViewCtrl.m; sourceTree = "<group>"; };
 		57F7B9FA1C624C64002A8A08 /* roommap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "roommap@2x.png"; sourceTree = "<group>"; };
+		7F121D571CA2B725005AF53D /* HistoryOfConsumptionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryOfConsumptionTableViewController.h; sourceTree = "<group>"; };
+		7F121D581CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfConsumptionTableViewController.m; sourceTree = "<group>"; };
+		7F121D5A1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryOfConsumptionTableViewCell.h; sourceTree = "<group>"; };
+		7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfConsumptionTableViewCell.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -473,8 +479,8 @@
 		574AE8A51C626C4800928B09 /* shopDetail */ = {
 			isa = PBXGroup;
 			children = (
-				57A94E681C3805E500BE0022 /* ShopInfoTableViewCell.m */,
 				57A94E671C3805E500BE0022 /* ShopInfoTableViewCell.h */,
+				57A94E681C3805E500BE0022 /* ShopInfoTableViewCell.m */,
 				57A94E771C38D99800BE0022 /* ShopInfoViewCtrl.h */,
 				57A94E781C38D99800BE0022 /* ShopInfoViewCtrl.m */,
 				571C29761C70AC7100DDBCE8 /* CartTableViewCell.h */,
@@ -728,6 +734,10 @@
 				57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */,
 				57F3E2871C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.h */,
 				57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */,
+				7F121D571CA2B725005AF53D /* HistoryOfConsumptionTableViewController.h */,
+				7F121D581CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m */,
+				7F121D5A1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.h */,
+				7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */,
 			);
 			path = person;
 			sourceTree = "<group>";
@@ -1109,6 +1119,7 @@
 				5796FA731C460CB1004CA23B /* UIControl+LayoutBlock.m in Sources */,
 				5796FA6A1C456490004CA23B /* SelectMallTableCtrl.m in Sources */,
 				573E51E31C7CB134005DBBC3 /* CouponDrawbackViewCtrl.m in Sources */,
+				7F121D5C1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m in Sources */,
 				57F3E2891C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m in Sources */,
 				5796FA741C460CB1004CA23B /* UIView+LayoutBlock.m in Sources */,
 				57A94E791C38D99800BE0022 /* ShopInfoViewCtrl.m in Sources */,
@@ -1132,6 +1143,7 @@
 				57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */,
 				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,
 				577169811C820D4F00223EDB /* ChangePasswordViewCtrl.m in Sources */,
+				7F121D591CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m in Sources */,
 				57E722C61C686A51004DBA9C /* ShakeService.m in Sources */,
 				573E51D11C7C2561005DBBC3 /* BasketNoUseViewCtrl.m in Sources */,
 				578E63E11C254DE900C1FB19 /* Utils.m in Sources */,
