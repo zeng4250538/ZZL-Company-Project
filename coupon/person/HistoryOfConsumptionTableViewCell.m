@@ -79,6 +79,7 @@
         make.top.equalTo(self.contentView).offset(20);
         make.left.equalTo(self.contentView).offset(20);
     }];
+    _image.backgroundColor = [UIColor orangeColor];
     
     [self.taitleLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@60);

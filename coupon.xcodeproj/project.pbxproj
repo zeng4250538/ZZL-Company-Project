@@ -160,6 +160,7 @@
 		57F7B9FB1C624C64002A8A08 /* roommap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57F7B9FA1C624C64002A8A08 /* roommap@2x.png */; };
 		7F121D591CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D581CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m */; };
 		7F121D5C1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */; };
+		7F121D5F1CA3E08F005AF53D /* HistoryOfConsumptionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D5E1CA3E08F005AF53D /* HistoryOfConsumptionService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -407,6 +408,8 @@
 		7F121D581CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfConsumptionTableViewController.m; sourceTree = "<group>"; };
 		7F121D5A1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryOfConsumptionTableViewCell.h; sourceTree = "<group>"; };
 		7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfConsumptionTableViewCell.m; sourceTree = "<group>"; };
+		7F121D5D1CA3E08F005AF53D /* HistoryOfConsumptionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryOfConsumptionService.h; sourceTree = "<group>"; };
+		7F121D5E1CA3E08F005AF53D /* HistoryOfConsumptionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfConsumptionService.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -828,6 +831,8 @@
 				57EFEEE81C9087B8003103B1 /* MallService.m */,
 				577B6CE51CA1666B002BA28F /* PersonService.h */,
 				577B6CE61CA1666B002BA28F /* PersonService.m */,
+				7F121D5D1CA3E08F005AF53D /* HistoryOfConsumptionService.h */,
+				7F121D5E1CA3E08F005AF53D /* HistoryOfConsumptionService.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -921,7 +926,7 @@
 				TargetAttributes = {
 					5779BD601C25381600E15934 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = NTZL49WB3A;
+						DevelopmentTeam = 2N59778B5Q;
 					};
 					5779BD791C25381600E15934 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1142,6 +1147,7 @@
 				57E722C61C686A51004DBA9C /* ShakeService.m in Sources */,
 				573E51D11C7C2561005DBBC3 /* BasketNoUseViewCtrl.m in Sources */,
 				578E63E11C254DE900C1FB19 /* Utils.m in Sources */,
+				7F121D5F1CA3E08F005AF53D /* HistoryOfConsumptionService.m in Sources */,
 				5796FA5E1C4411AE004CA23B /* PersonInfoViewCtrl.m in Sources */,
 				5796FA6E1C460108004CA23B /* CartViewCtrl.m in Sources */,
 				57CE97D21C63B39500CE0E57 /* MallMapViewCtrl.m in Sources */,
@@ -1295,8 +1301,8 @@
 			baseConfigurationReference = 4B84B3CF55C05AC490E9E3A2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou Yu Hao Information Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou Yu Hao Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/coupon/coupon.pch";
 				INFOPLIST_FILE = coupon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1305,6 +1311,7 @@
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1313,8 +1320,8 @@
 			baseConfigurationReference = A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou Yu Hao Information Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou Yu Hao Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/coupon/coupon.pch";
 				INFOPLIST_FILE = coupon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1323,6 +1330,7 @@
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
