@@ -17,7 +17,7 @@
 
 
 
--(void)requestRecommendShop:(NSString*)mallid page:(NSInteger)page pageCount:(NSInteger)pageCount
+-(void)requestRecommendShop:(NSString*)mallid customerId:(NSInteger)customerId page:(NSInteger)page pageCount:(NSInteger)pageCount
                   success:(void(^)(NSInteger code,NSString *message,id data))success
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
 
@@ -26,9 +26,9 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/realtimepromotion?"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shoprecommend?"];
     
-    NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(pageCount)};
+    NSDictionary *parm = @{@"shopMallId":mallid,@"customerId":@(customerId),@"page":@(page),@"per_page":@(pageCount)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -73,7 +73,7 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby？"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby?"];
     
     NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(per_page)};
     

@@ -162,6 +162,10 @@
 		7F121D591CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D581CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m */; };
 		7F121D5C1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */; };
 		7F121D5F1CA3E08F005AF53D /* HistoryOfConsumptionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D5E1CA3E08F005AF53D /* HistoryOfConsumptionService.m */; };
+		7F121D661CA667F5005AF53D /* BrandStreetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D651CA667F5005AF53D /* BrandStreetModel.m */; };
+		7F121D6C1CA675A8005AF53D /* OptimizingBrandModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D6B1CA675A8005AF53D /* OptimizingBrandModel.m */; };
+		7F121D6F1CA6AF41005AF53D /* SaerchShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D6E1CA6AF41005AF53D /* SaerchShopModel.m */; };
+		7F121D721CA6AF6A005AF53D /* SaerchShopService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D711CA6AF6A005AF53D /* SaerchShopService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -413,6 +417,14 @@
 		7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfConsumptionTableViewCell.m; sourceTree = "<group>"; };
 		7F121D5D1CA3E08F005AF53D /* HistoryOfConsumptionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryOfConsumptionService.h; sourceTree = "<group>"; };
 		7F121D5E1CA3E08F005AF53D /* HistoryOfConsumptionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfConsumptionService.m; sourceTree = "<group>"; };
+		7F121D641CA667F5005AF53D /* BrandStreetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStreetModel.h; sourceTree = "<group>"; };
+		7F121D651CA667F5005AF53D /* BrandStreetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStreetModel.m; sourceTree = "<group>"; };
+		7F121D6A1CA675A8005AF53D /* OptimizingBrandModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptimizingBrandModel.h; sourceTree = "<group>"; };
+		7F121D6B1CA675A8005AF53D /* OptimizingBrandModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptimizingBrandModel.m; sourceTree = "<group>"; };
+		7F121D6D1CA6AF41005AF53D /* SaerchShopModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaerchShopModel.h; sourceTree = "<group>"; };
+		7F121D6E1CA6AF41005AF53D /* SaerchShopModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaerchShopModel.m; sourceTree = "<group>"; };
+		7F121D701CA6AF6A005AF53D /* SaerchShopService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaerchShopService.h; sourceTree = "<group>"; };
+		7F121D711CA6AF6A005AF53D /* SaerchShopService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaerchShopService.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -811,6 +823,12 @@
 				57E364A81C9DB347003575FC /* Coupon.m */,
 				57A9CDD71CA2B5BF00A3DBB4 /* TestTableViewController.h */,
 				57A9CDD81CA2B5BF00A3DBB4 /* TestTableViewController.m */,
+				7F121D641CA667F5005AF53D /* BrandStreetModel.h */,
+				7F121D651CA667F5005AF53D /* BrandStreetModel.m */,
+				7F121D6A1CA675A8005AF53D /* OptimizingBrandModel.h */,
+				7F121D6B1CA675A8005AF53D /* OptimizingBrandModel.m */,
+				7F121D6D1CA6AF41005AF53D /* SaerchShopModel.h */,
+				7F121D6E1CA6AF41005AF53D /* SaerchShopModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -836,6 +854,8 @@
 				577B6CE61CA1666B002BA28F /* PersonService.m */,
 				7F121D5D1CA3E08F005AF53D /* HistoryOfConsumptionService.h */,
 				7F121D5E1CA3E08F005AF53D /* HistoryOfConsumptionService.m */,
+				7F121D701CA6AF6A005AF53D /* SaerchShopService.h */,
+				7F121D711CA6AF6A005AF53D /* SaerchShopService.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1122,18 +1142,21 @@
 				57EFEEE61C90874E003103B1 /* BaseService.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
 				573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */,
+				7F121D721CA6AF6A005AF53D /* SaerchShopService.m in Sources */,
 				574BF3E91C98022A0088A9A6 /* LoginService.m in Sources */,
 				57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */,
 				57017F331C5F4128007B0112 /* SelectMallPopViewCtrl.m in Sources */,
 				574BF3F31C9802640088A9A6 /* RegisterViewCtrl.m in Sources */,
 				574BF3F11C9802640088A9A6 /* ForgetViewCtrl.m in Sources */,
 				573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */,
+				7F121D6F1CA6AF41005AF53D /* SaerchShopModel.m in Sources */,
 				57CE97C11C63231B00CE0E57 /* ShopCommentTableViewCell.m in Sources */,
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
 				57E364A91C9DB347003575FC /* Coupon.m in Sources */,
 				578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */,
 				57E364A61C9DA293003575FC /* Mall.m in Sources */,
 				571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */,
+				7F121D6C1CA675A8005AF53D /* OptimizingBrandModel.m in Sources */,
 				57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */,
 				5796FA831C47E904004CA23B /* CouponView.m in Sources */,
 				57EFEEE91C9087B8003103B1 /* MallService.m in Sources */,
@@ -1189,6 +1212,7 @@
 				571C29C71C787FD100DDBCE8 /* MyRemindViewCtrl.m in Sources */,
 				57A94E691C3805E500BE0022 /* ShopInfoTableViewCell.m in Sources */,
 				57CE97CC1C63A9CB00CE0E57 /* ShopListViewCtrl.m in Sources */,
+				7F121D661CA667F5005AF53D /* BrandStreetModel.m in Sources */,
 				577169841C820E9900223EDB /* AboutViewCtrl.m in Sources */,
 				57A9CDD91CA2B5BF00A3DBB4 /* TestTableViewController.m in Sources */,
 				5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */,

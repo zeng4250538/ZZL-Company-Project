@@ -32,22 +32,13 @@
     
     NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(pageCount),@"sort":sort};
     
-    
     [req get:url param:parm success:^(NSInteger code, id object) {
-        
-        
         
         success(code,@"",object);
         
-        
-        
     } failure:^(NSInteger code, NSString *content) {
         
-        
         failure(code,NO,content,nil);
-        
-        
-        
         
     }];
     
@@ -71,17 +62,19 @@
                      failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
-    
+    NSLog(@"---><%@",shopId);
     
     
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponpromotion"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponPromotion"];
     
-    NSDictionary *parm = @{@"shopid":shopId,@"type":@"realtime",
-                           @"page":@(page),@"per_page":@(pageCount)};
+    NSString *youhuiString = @"普通优惠";
     
+    NSString *string = [youhuiString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *parm = @{@"shopid":shopId,@"type":string};
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         
@@ -110,13 +103,18 @@
                    success:(void(^)(NSInteger code,NSString *message,id data))success
                    failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
+    //http://192.168.6.97:8080/diamond-sis-web/v1/couponPromotion?shopid=11&type=即时优惠
+    
+    NSLog(@"---><%@",shopId);
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponpromotion"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponPromotion?"];
     
-    NSDictionary *parm = @{@"shopid":shopId,@"type":@"normal",
-                           @"page":@(page),@"per_page":@(pageCount)};
+    NSString *youhuiString = @"普通优惠";
+    NSString *string = [youhuiString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *parm = @{@"shopid":shopId,@"type":string};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {

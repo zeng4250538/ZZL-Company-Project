@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, CouponDetailType) {
 @interface CouponDetailViewCtrl : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSDictionary *data;
+@property(nonatomic,strong)NSDictionary *datas;
 @property(nonatomic,assign)CouponDetailType couponDetailType;
 
 

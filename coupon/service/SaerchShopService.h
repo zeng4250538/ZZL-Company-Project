@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SaerchShopService : NSObject
+@interface SaerchShopService : BaseService
+
+-(void)requestSaerchShopKeyWord:(NSString *)keyWord success:(void(^)(id data))success failure:(void(^)(id data))failure;
 
 @end

@@ -10,7 +10,7 @@
 
 @interface Shop : NSObject
 
-@property(nonatomic,copy)NSString *id;
+@property(nonatomic,copy)NSString *ids;
 @property(nonatomic,copy)NSString *mallid;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *city;
@@ -20,7 +20,8 @@
 @property(nonatomic,assign)CGFloat longitude;
 @property(nonatomic,assign)CGFloat latitude;
 @property(nonatomic,assign)CGFloat distance;
-@property(nonatomic,copy)NSString * couponSmallPhotoUrl;
+@property(nonatomic,copy)NSString * smallPhotoUrl;
+//@property(nonatomic,copy)NSString *smallPhotoUrl;
 
 @property(nonatomic,assign)NSInteger subscribeNum;
 

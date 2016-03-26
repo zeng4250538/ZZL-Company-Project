@@ -519,30 +519,32 @@
 
 
 -(void)updateData{
-    
-    
-    
+   
     self.titleLabel.text = self.data[@"name"];
-    
     self.goodLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"good"] integerValue]];
-    
     self.badLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"bad"] integerValue]];
-    
     self.commentLabel.text = self.data[@"prompt"];
     
-    NSString *urlString = self.data[@"couponSmallPhotoUrl"];
+    NSString *urlString = @"";
     
+    if (self.data[@"couponSmallPhotoUrl"] != NULL) {
+        urlString = self.data[@"couponSmallPhotoUrl"];
+    }
+    
+    else if (self.data[@"smallPhotoUrl"] != NULL){
+        urlString = self.data[@"smallPhotoUrl"];
+    }
+    
+    else{
+        urlString = self.data[@"smallPhotoUrl"];
+    }
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
     
     NSURL *url = [NSURL URLWithString:urlString];
     
-    
-    
     [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [self setNeedsLayout];
-        
     }];
     
     

@@ -306,7 +306,7 @@
             
             
             
-            [[AppShareData instance] addCouponToCart:self.data];
+            [[AppShareData instance] addCouponToCart:self.datas];
             
             [self updateCartNum];
             
@@ -402,7 +402,7 @@
         
     }];
     
-    couponNameLabel.text=self.data[@"name"];
+    couponNameLabel.text=self.datas[@"name"];
     
     
     UILabel *priceLabel = [UILabel new];
@@ -419,7 +419,7 @@
         make.height.equalTo(@20);
         
     }];
-    priceLabel.text=[NSString stringWithFormat:@"￥%@元",self.data[@"price"]];
+    priceLabel.text=[NSString stringWithFormat:@"￥%@元",self.datas[@"price"]];
     
     
     
@@ -447,7 +447,7 @@
         
     }];
     
-    addressLabel.text=self.data[@"shop"][@"address"];
+    addressLabel.text=self.datas[@"shop"][@"address"];
     
     UIView *line = [GUIConfig line];
     

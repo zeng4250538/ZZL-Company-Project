@@ -22,7 +22,7 @@
 #import "CouponService.h"
 #import "ReloadHud.h"
 #import "Shop.h"
-
+#import "Coupon.h"
 
 
 @interface ShopPortalViewCtrl ()
@@ -33,6 +33,7 @@
 @property(nonatomic,strong)NSArray *hotBrandData;
 @property(nonatomic,strong)NSArray *otherData;
 @property(nonatomic,strong)NSDictionary *portalData;
+@property(nonatomic,assign)BOOL bools;
 
 @end
 
@@ -47,12 +48,8 @@
     
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell2"];
     
-    
     [self makeSearchBar];
-    
-    
-    
-    
+ 
     [self loadData];
     
     [self makeBarItem];
@@ -132,8 +129,7 @@
     CouponService *couponService = [CouponService new];
     
     
-    
-    
+#pragma mark ---- 即时优惠网络请求
     [couponService requestRecommendCoupon:@"2" page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         
@@ -166,8 +162,8 @@
     
     
     
-    
-    [service requestRecommendShop:@"2" page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
+#pragma mark ---- 优选品牌网络请求
+    [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
         
         
         
@@ -192,7 +188,7 @@
     
     
     
-    
+#pragma mark ---- 品牌街网络请求
     [service requestNearbyShop:@"2" page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
         
         
@@ -466,7 +462,7 @@
     
     
 
-    
+#pragma mark ----- 商家搜索
     KeyWordSearchViewCtrl *vc = [KeyWordSearchViewCtrl new];
     
     
@@ -567,7 +563,7 @@
     return 30;
 }
 
-
+#pragma mark -------- 点击cell跳转 <---> 有转模型
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -580,25 +576,24 @@
             
             NSDictionary *data =  self.hotShopData[indexPath.row];
             
-            vc.shopData = [Shop yy_modelWithDictionary:data];
-            
-            
-            
-            
+            vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
+        
+            self.bools = YES;
             
         }
         
         if (indexPath.section == 2) {
-            
-            
+          
             
             NSDictionary *data =  self.hotBrandData[indexPath.row];
             
             vc.shopData = [Shop yy_modelWithDictionary:data];
             
+            self.bools = NO;
             
         }
         
+        [vc boll:self.bools];
         
         vc.hidesBottomBarWhenPushed = YES;
         
@@ -606,25 +601,18 @@
 
     }else{
         
-        
         CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
         
-        vc.data =self.couponData[indexPath.row];
+        vc.datas =self.couponData[indexPath.row];
         
         vc.hidesBottomBarWhenPushed = YES;
         
         [self.navigationController pushViewController:vc animated:YES];
         
-        
-        
-        
-        
     }
     
-    
-    
-    
 }
+
 
 #pragma mark - Table view data source
 
@@ -650,10 +638,8 @@
     return 2;
 }
 
-
+#pragma mark ------- cell的创建
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     
     if ([indexPath section]==0) {
         
@@ -683,16 +669,10 @@
         
         return cell;
         
-        
-        
-        
-        
     }else if([indexPath section]==2) {
         
         
         ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
-        
-
 
         cell.data = self.hotBrandData[[indexPath row]];
         

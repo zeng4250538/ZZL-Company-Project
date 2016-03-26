@@ -14,12 +14,16 @@
 #import "MallMapViewCtrl.h"
 #import "CouponService.h"
 #import "ReloadHud.h"
+#import "ShopInfoTableViewCell.h"
 
 
 @interface ShopInfoViewCtrl ()
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
 @property(nonatomic,strong)NSArray *otherCouponList;
+@property(nonatomic,strong)id idDaata;
+@property(nonatomic,strong)ShopInfoTableViewCell *cell;
+
 
 @end
 
@@ -51,25 +55,32 @@
 }
 
 
+-(void)boll:(BOOL)bools{
+
+    if (bools == YES) {
+        self.idDaata = self.shopData;
+        
+    }
+    else{
+    
+        self.idDaata = self.OptimizingBrand;
+    
+    }
+
+}
+
 
 -(void)doLoad{
     
-    
-    
     CouponService *couponService = [CouponService new];
     
+    //http://192.168.6.97:8080/diamond-sis-web/v1/couponPromotion?shopid=11&type=即时优惠
     
     //查询实时优惠券信息
     
-    
-    
     //requestRealTimeCoupon
     
-    [couponService requestRealTimeCoupon:self.shopData.id page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
-        
-        
-        
-        
+    [couponService requestRealTimeCoupon:self.shopData.ids page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
         if (![data isKindOfClass:[NSArray class]]) {
             
@@ -79,13 +90,9 @@
         
         self.realTimeCouponList = data;
         
-        
         [self.tableView reloadData];
         
         [ReloadHud removeHud:self.view animated:YES];
-        
-        
-        
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
@@ -98,12 +105,14 @@
         
         
     }];
-    
+  
+    //http://192.168.6.97:8080/diamond-sis-web/v1/couponPromotion?shopid=11&type=普通优惠
  
     //查询其他优惠券
     
-    [couponService requestNormalCoupon:self.shopData.id page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestNormalCoupon:_cell.data[@"mallId"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
+//        NSLog(@"---><%@",_cell.data[@"ids"]);
         
         
         if (![data isKindOfClass:[NSArray class]]) {
@@ -267,7 +276,7 @@
     [uv addSubview:shopBgButton];
     
     
-    NSString *urlString =self.shopData.couponSmallPhotoUrl;
+    NSString *urlString =_cell.data[@"smallPhotoUrl"];
     
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -503,12 +512,12 @@
     if ([indexPath section]==0) {
         
         
-        vc.data = self.realTimeCouponList[indexPath.row];
+        vc.datas = self.realTimeCouponList[indexPath.row];
         
     }else{
         
         
-        vc.data = self.otherCouponList[indexPath.row];
+        vc.datas = self.otherCouponList[indexPath.row];
     }
     
     

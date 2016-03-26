@@ -9,6 +9,7 @@
 #import "KeyWordSearchViewCtrl.h"
 #import "SearchResultViewCtrl.h"
 #import "ShopService.h"
+#import "SaerchShopService.h"
 
 @interface KeyWordSearchViewCtrl ()
 
@@ -117,6 +118,8 @@
     
     
     searchBar.placeholder=@"搜索优惠券";
+    
+    NSLog(@"qweqwe%@",searchBar.placeholder);
     
     
     
