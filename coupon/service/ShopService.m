@@ -26,10 +26,9 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shoprecommand"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/realtimepromotion?"];
     
-    NSDictionary *parm = @{@"shopmallid":mallid,@"userid":@"13693284393",
-                           @"page":@(page),@"per_page":@(pageCount)};
+    NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(pageCount)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -65,19 +64,18 @@
 
 //http://120.25.66.110:9998/diamond-sis-web/v1/nearby?shopmallid=53420473120&customerid=13693284393&categoryid=34624363243&sort=default
 
--(void)requestNearbyShop:(NSString*)mallid categoryid:(NSString*)categoryid sort:(NSString*)sort
-               success:(void(^)(NSInteger code,NSString *message,id data))success
-               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+-(void)requestNearbyShop:(NSString*)mallid page:(NSInteger)page per_page:(NSInteger)per_page
+                 success:(void(^)(NSInteger code,NSString *message,id data))success
+                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
     
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby？"];
     
-    NSDictionary *parm = @{@"shopmallid":mallid,@"customerid":@"13693284393",
-                           @"categoryid":@34624363243,@"sort":@"default"};
+    NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(per_page)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -117,7 +115,7 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/search"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/search?"];
     
     NSDictionary *parm = @{@"shopmallid":mallid,@"keyword":keyWord};
     

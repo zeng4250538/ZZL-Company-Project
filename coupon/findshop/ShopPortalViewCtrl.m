@@ -134,7 +134,7 @@
     
     
     
-    [couponService requestRecommendCoupon:@"12345" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:@"2" page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         
         
@@ -167,7 +167,7 @@
     
     
     
-    [service requestRecommendShop:@"123456" page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
+    [service requestRecommendShop:@"2" page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
         
         
         
@@ -193,7 +193,7 @@
     
     
     
-    [service requestNearbyShop:@"1234556" categoryid:@"11111" sort:@"111111" success:^(NSInteger code, NSString *message, id data) {
+    [service requestNearbyShop:@"2" page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
         
         
         self.hotBrandData = data;

@@ -7,6 +7,7 @@
 //
 
 #import "SelectMallTableCtrl.h"
+#import "Shop.h"
 
 @interface SelectMallTableCtrl ()
 

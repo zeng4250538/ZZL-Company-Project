@@ -28,10 +28,9 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponrecommand"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/realtimepromotion?"];
     
-    NSDictionary *parm = @{@"shopmallid":mallid,@"userid":@"13693284393",
-                           @"page":@(page),@"per_page":@(pageCount),@"sort":sort};
+    NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(pageCount),@"sort":sort};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {

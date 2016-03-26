@@ -12,9 +12,10 @@
 
 -(void)requestHistoryOfConsumptionSuccess:(void(^)(id data))success{
 
-
-
-
+//    BaseRequest *req = [BaseRequest new];
+//    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby"];
+//    NSDictionary *parm =@{};
+//    
 }
 
 @end

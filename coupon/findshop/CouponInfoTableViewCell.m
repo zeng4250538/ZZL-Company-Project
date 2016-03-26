@@ -14,7 +14,7 @@
 @property(nonatomic,strong)UILabel *titleLabel;    //优惠券标题
 @property(nonatomic,strong)UILabel *addtionLabel;    //额外说明
 @property(nonatomic,strong)UILabel *detailLabel;    //明细
-@property(nonatomic,strong)UILabel *priceLabel;    //价格
+//@property(nonatomic,strong)UILabel *priceLabel;    //价格
 @property(nonatomic,strong)UIButton *recommentButton;    //提醒按钮
 @property(nonatomic,strong)UILabel *timeLabel;
 
@@ -45,7 +45,7 @@
         [self.contentView addSubview:self.logoView];
         
         self.titleLabel = [[UILabel alloc] init];
-        self.titleLabel.font = [UIFont systemFontOfSize:16];
+        self.titleLabel.font = [UIFont systemFontOfSize:12];
         self.titleLabel.textColor = [GUIConfig grayFontColorDeep];
         
         [self.contentView addSubview:self.titleLabel];
@@ -57,11 +57,11 @@
         
         [self.contentView addSubview:self.detailLabel];
         
-        self.priceLabel = [UILabel new];
-        self.priceLabel.textColor = [GUIConfig mainColor];
-        self.priceLabel.font = [UIFont boldSystemFontOfSize:16];
-        
-        [self.contentView addSubview:self.priceLabel];
+//        self.priceLabel = [UILabel new];
+//        self.priceLabel.textColor = [GUIConfig mainColor];
+//        self.priceLabel.font = [UIFont boldSystemFontOfSize:16];
+//        
+//        [self.contentView addSubview:self.priceLabel];
         
         self.recommentButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
@@ -107,7 +107,7 @@
         
         [self.contentView addSubview:self.timeLabel];
         
-        self.timeLabel.font = [UIFont boldSystemFontOfSize:12];
+        self.timeLabel.font = [UIFont boldSystemFontOfSize:9];
         self.timeLabel.text=@"12:11:33";
         self.timeLabel.textColor = [GUIConfig mainColor];
         
@@ -183,8 +183,8 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@20);
         make.left.equalTo(self.logoView.mas_right).with.offset(10);
-        make.top.equalTo(self.contentView.mas_top).with.offset(10);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
+        make.top.equalTo(self.contentView.mas_top).with.offset(30);
+//        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
         
     }];
     
@@ -209,19 +209,19 @@
         
     }];
     
-    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@20);
-        make.left.equalTo(self.logoView.mas_right).with.offset(10);
-        make.bottom.equalTo(self.logoView.mas_bottom);
-        
-    }];
+//    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.equalTo(@20);
+//        make.left.equalTo(self.logoView.mas_right).with.offset(10);
+//        make.bottom.equalTo(self.logoView.mas_bottom);
+//        
+//    }];
     
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@25);
         make.width.equalTo(@70);
-        make.top.equalTo(self.logoView);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-15);
+        make.top.equalTo(self.contentView).with.offset(25);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-30);
         
     }];
     
@@ -451,12 +451,12 @@
     
     
     self.titleLabel.text=self.data[@"name"];
-    self.priceLabel.text=[NSString stringWithFormat:@"￥%@",self.data[@"price"]];
+//    self.priceLabel.text=[NSString stringWithFormat:@"￥%@",self.data[@"price"]];
     
     
     // data[@"price"];
     
-    self.detailLabel.text=self.data[@"prompt"];
+    self.detailLabel.text=@"hahaha";
     
     
     

@@ -759,18 +759,16 @@
 		57A94E5F1C37E31C00BE0022 /* shakeCoupon */ = {
 			isa = PBXGroup;
 			children = (
+				7F121D621CA512BF005AF53D /* SelectCityMall */,
+				7F121D611CA5125C005AF53D /* SelectSurroundingMall */,
 				57A94E601C37E34900BE0022 /* ShakeViewCtrl.h */,
 				57A94E611C37E34900BE0022 /* ShakeViewCtrl.m */,
 				57A94E861C3AB30E00BE0022 /* ShakeCouponViewCtrl.h */,
 				57A94E871C3AB30E00BE0022 /* ShakeCouponViewCtrl.m */,
 				5796FA651C45491C004CA23B /* SelectCityTableViewCtrl.h */,
 				5796FA661C45491C004CA23B /* SelectCityTableViewCtrl.m */,
-				5796FA681C456490004CA23B /* SelectMallTableCtrl.h */,
-				5796FA691C456490004CA23B /* SelectMallTableCtrl.m */,
 				5796FA811C47E904004CA23B /* CouponView.h */,
 				5796FA821C47E904004CA23B /* CouponView.m */,
-				57017F311C5F4128007B0112 /* SelectMallPopViewCtrl.h */,
-				57017F321C5F4128007B0112 /* SelectMallPopViewCtrl.m */,
 			);
 			name = shakeCoupon;
 			path = shakecoupon;
@@ -868,6 +866,24 @@
 				57F3E28B1C86D39200A8CCA8 /* OrderContainerViewCtrl.m */,
 			);
 			path = basket;
+			sourceTree = "<group>";
+		};
+		7F121D611CA5125C005AF53D /* SelectSurroundingMall */ = {
+			isa = PBXGroup;
+			children = (
+				57017F311C5F4128007B0112 /* SelectMallPopViewCtrl.h */,
+				57017F321C5F4128007B0112 /* SelectMallPopViewCtrl.m */,
+			);
+			name = SelectSurroundingMall;
+			sourceTree = "<group>";
+		};
+		7F121D621CA512BF005AF53D /* SelectCityMall */ = {
+			isa = PBXGroup;
+			children = (
+				5796FA681C456490004CA23B /* SelectMallTableCtrl.h */,
+				5796FA691C456490004CA23B /* SelectMallTableCtrl.m */,
+			);
+			name = SelectCityMall;
 			sourceTree = "<group>";
 		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {

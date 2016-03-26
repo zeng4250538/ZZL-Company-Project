@@ -40,9 +40,9 @@
  */
 
 
--(void)requestNearbyShop:(NSString*)mallid categoryid:(NSString*)categoryid sort:(NSString*)sort
-               success:(void(^)(NSInteger code,NSString *message,id data))success
-               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+-(void)requestNearbyShop:(NSString*)mallid page:(NSInteger)page per_page:(NSInteger)per_page
+                 success:(void(^)(NSInteger code,NSString *message,id data))success
+                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
 

@@ -22,7 +22,7 @@
         NSLog(@"%@", responseObject);
         // 提问:NSURLConnection异步方法回调,是在子线程
         // 得到回调之后,通常更新UI,是在主线程
-        
+        NSLog(@"%@",responseObject);
         success(operation.response.statusCode,responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
