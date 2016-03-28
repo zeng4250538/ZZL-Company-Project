@@ -10,12 +10,17 @@
 
 @implementation HistoryOfConsumptionService
 
--(void)requestHistoryOfConsumptionSuccess:(void(^)(id data))success{
+-(void)requestHistoryOfConsumptionSuccess:(void(^)(id data))success failure:(void(^)(NSInteger code))failure{
 
-//    BaseRequest *req = [BaseRequest new];
-//    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby"];
-//    NSDictionary *parm =@{};
-//    
+    BaseRequest *req = [BaseRequest new];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby"];
+    NSDictionary *parm =@{};
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+    }];
+//
 }
 
 @end

@@ -575,6 +575,7 @@
         if (indexPath.section == 0) {
             
             NSDictionary *data =  self.hotShopData[indexPath.row];
+            vc.data = self.hotShopData[indexPath.row];
             
             vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
         
@@ -588,6 +589,9 @@
             NSDictionary *data =  self.hotBrandData[indexPath.row];
             
             vc.shopData = [Shop yy_modelWithDictionary:data];
+            
+            vc.data = self.hotBrandData[indexPath.row];
+
             
             self.bools = NO;
             

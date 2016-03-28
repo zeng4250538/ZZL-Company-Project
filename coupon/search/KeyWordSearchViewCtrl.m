@@ -81,16 +81,12 @@
     self.displayCtrl = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
     
     self.displayCtrl.delegate = self;
+    
     self.displayCtrl.searchResultsDataSource = self;
     
     self.displayCtrl.searchResultsDelegate = self;
     
     self.displayCtrl.displaysSearchBarInNavigationBar = YES;
-    
-    
-    
-    
-    
     
     [GUIConfig tableViewGUIFormat:self.tableView];
     
@@ -119,7 +115,7 @@
     
     searchBar.placeholder=@"搜索优惠券";
     
-    NSLog(@"qweqwe%@",searchBar.placeholder);
+    NSLog(@"qweqwe%@",searchBar.text);
     
     
     
@@ -224,27 +220,17 @@
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     
-    NSLog(@"%@",searchText);
-    
-    
     if (self.isLoading) {
         return ;
     }
     
     self.isLoading = YES;
     
-    
     ShopService *service = [ShopService new];
-    
-    
-    
     
     [service requestKeyword:@"mallid"
                     keyWord:@"xxx"
                     success:^(NSInteger code, NSString *message, id data) {
-                        
-                        
-                        
                         
                         self.searchWordList = data;
                         
@@ -253,25 +239,15 @@
                         
                         [self.displayCtrl.searchResultsTableView reloadData];
                         
-                        
-                        
-                        
                     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
                         
                         
                         self.isLoading = NO;
                         
-                        
-                        
-                        
                     }];
-
-    
-    
-    
-    
     
 }
+
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{                     // called when cancel
 

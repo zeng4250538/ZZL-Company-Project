@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HistoryOfConsumptionService : NSObject
+@interface HistoryOfConsumptionService : BaseService
 
--(void)requestHistoryOfConsumptionSuccess:(void(^)(id data))success;
+-(void)requestHistoryOfConsumptionSuccess:(void(^)(id data))success failure:(void(^)(NSInteger code))failure;
 
 @end

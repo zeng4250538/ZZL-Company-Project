@@ -8,6 +8,7 @@
 
 #import "HistoryOfConsumptionTableViewController.h"
 #import "HistoryOfConsumptionTableViewCell.h"
+#import "ChildPagesViewController.h"
 @interface HistoryOfConsumptionTableViewController ()
 
 @end
@@ -62,7 +63,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
- [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ChildPagesViewController *childPages = [ChildPagesViewController new];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController pushViewController:childPages animated:NO];
+    
+    
 
 }
 

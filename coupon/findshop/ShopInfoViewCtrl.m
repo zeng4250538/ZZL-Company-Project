@@ -14,15 +14,13 @@
 #import "MallMapViewCtrl.h"
 #import "CouponService.h"
 #import "ReloadHud.h"
-#import "ShopInfoTableViewCell.h"
-
 
 @interface ShopInfoViewCtrl ()
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
 @property(nonatomic,strong)NSArray *otherCouponList;
 @property(nonatomic,strong)id idDaata;
-@property(nonatomic,strong)ShopInfoTableViewCell *cell;
+
 
 
 @end
@@ -80,7 +78,7 @@
     
     //requestRealTimeCoupon
     
-    [couponService requestRealTimeCoupon:self.shopData.ids page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRealTimeCoupon:_data[@"ids"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
         if (![data isKindOfClass:[NSArray class]]) {
             
@@ -110,7 +108,7 @@
  
     //查询其他优惠券
     
-    [couponService requestNormalCoupon:_cell.data[@"mallId"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestNormalCoupon:@"" page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
 //        NSLog(@"---><%@",_cell.data[@"ids"]);
         
@@ -276,7 +274,7 @@
     [uv addSubview:shopBgButton];
     
     
-    NSString *urlString =_cell.data[@"smallPhotoUrl"];
+    NSString *urlString =@"smallPhotoUrl";
     
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

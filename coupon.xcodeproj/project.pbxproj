@@ -166,6 +166,7 @@
 		7F121D6C1CA675A8005AF53D /* OptimizingBrandModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D6B1CA675A8005AF53D /* OptimizingBrandModel.m */; };
 		7F121D6F1CA6AF41005AF53D /* SaerchShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D6E1CA6AF41005AF53D /* SaerchShopModel.m */; };
 		7F121D721CA6AF6A005AF53D /* SaerchShopService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D711CA6AF6A005AF53D /* SaerchShopService.m */; };
+		7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -425,6 +426,8 @@
 		7F121D6E1CA6AF41005AF53D /* SaerchShopModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaerchShopModel.m; sourceTree = "<group>"; };
 		7F121D701CA6AF6A005AF53D /* SaerchShopService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaerchShopService.h; sourceTree = "<group>"; };
 		7F121D711CA6AF6A005AF53D /* SaerchShopService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaerchShopService.m; sourceTree = "<group>"; };
+		7F121D741CA7DAF7005AF53D /* ChildPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildPagesViewController.h; sourceTree = "<group>"; };
+		7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildPagesViewController.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -496,9 +499,9 @@
 			children = (
 				57A94E671C3805E500BE0022 /* ShopInfoTableViewCell.h */,
 				57A94E681C3805E500BE0022 /* ShopInfoTableViewCell.m */,
+				571C29761C70AC7100DDBCE8 /* CartTableViewCell.h */,
 				57A94E771C38D99800BE0022 /* ShopInfoViewCtrl.h */,
 				57A94E781C38D99800BE0022 /* ShopInfoViewCtrl.m */,
-				571C29761C70AC7100DDBCE8 /* CartTableViewCell.h */,
 				571C29771C70AC8F00DDBCE8 /* CartTableViewCell.m */,
 				574AE8A61C626C8200928B09 /* ShopCommentViewCtrl.h */,
 				574AE8A71C626C8200928B09 /* ShopCommentViewCtrl.m */,
@@ -734,6 +737,7 @@
 		5796FA5B1C44118D004CA23B /* person */ = {
 			isa = PBXGroup;
 			children = (
+				7F121D731CA7DA7A005AF53D /* HistoryOfConsumption */,
 				577169721C80B0DC00223EDB /* setting */,
 				5796FA7E1C46392C004CA23B /* SubTableViewCell.h */,
 				5796FA7F1C463949004CA23B /* SubTableViewCell.m */,
@@ -749,10 +753,6 @@
 				57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */,
 				57F3E2871C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.h */,
 				57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */,
-				7F121D571CA2B725005AF53D /* HistoryOfConsumptionTableViewController.h */,
-				7F121D581CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m */,
-				7F121D5A1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.h */,
-				7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */,
 			);
 			path = person;
 			sourceTree = "<group>";
@@ -904,6 +904,19 @@
 				5796FA691C456490004CA23B /* SelectMallTableCtrl.m */,
 			);
 			name = SelectCityMall;
+			sourceTree = "<group>";
+		};
+		7F121D731CA7DA7A005AF53D /* HistoryOfConsumption */ = {
+			isa = PBXGroup;
+			children = (
+				7F121D571CA2B725005AF53D /* HistoryOfConsumptionTableViewController.h */,
+				7F121D581CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m */,
+				7F121D5A1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.h */,
+				7F121D5B1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m */,
+				7F121D741CA7DAF7005AF53D /* ChildPagesViewController.h */,
+				7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */,
+			);
+			name = HistoryOfConsumption;
 			sourceTree = "<group>";
 		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {
@@ -1198,6 +1211,7 @@
 				57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */,
 				57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */,
 				577169871C82129100223EDB /* GUIHelper.m in Sources */,
+				7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */,
 				573E51E61C7CCF09005DBBC3 /* BasketMessageViewCtrl.m in Sources */,
 				57E722C31C670AB7004DBA9C /* CouponService.m in Sources */,
 				5771697B1C81EEE100223EDB /* MessagePromptConfigViewCtrl.m in Sources */,

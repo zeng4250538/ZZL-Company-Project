@@ -160,7 +160,7 @@
     
    // shop/514344/good
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shop/"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shop"];
     
     url = [url stringByAppendingString:shopid];
     url = [url stringByAppendingString:@"/good"];
