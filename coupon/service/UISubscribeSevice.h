@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UISubscribeSevice : NSObject
+@interface UISubscribeSevice : BaseService
+
+-(void)successful:(void(^)(id data))successful failure:(void(^)(id code))failure;
+
+-(void)cancelSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure;
 
 @end

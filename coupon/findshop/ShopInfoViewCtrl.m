@@ -14,6 +14,7 @@
 #import "MallMapViewCtrl.h"
 #import "CouponService.h"
 #import "ReloadHud.h"
+#import "UISubscribeSevice.h"
 
 @interface ShopInfoViewCtrl ()
 
@@ -141,13 +142,6 @@
     }];
     
 
-    
-    
-    
-    
-    
-    
-    
     
 }
 
@@ -327,15 +321,26 @@
     
     [subButton setTitle:@"订阅" forState:UIControlStateNormal];
  
-    [subButton setTitle:@"取消订阅" forState:UIControlStateSelected];
+//    [subButton setTitle:@"取消订阅" forState:UIControlStateSelected];
+    
+    switch (subButton.state) {
+        case UIControlStateNormal:
+            
+            [subButton addTarget:self action:@selector(subcrideClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            break;
+        case UIControlStateSelected:
+            [subButton addTarget:self action:@selector(cancelSubcrideClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            break;
+        default:
+            break;
+    }
     
     subButton.backgroundColor =UIColorFromRGB(247, 180, 38);
     
     //[GUIConfig greenBackgroundColor];
-    
-    
-    
-    
+
     UILabel *subLabel = [UILabel new];
     [shopBgButton addSubview:subLabel];
     subLabel.font = [UIFont boldSystemFontOfSize:10];
@@ -345,7 +350,7 @@
     subLabel.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
     //[subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    subLabel.text=@"订阅数\n1234\n";
+    subLabel.text=@"订阅数\n666\n";
     subLabel.layer.cornerRadius=4;
     subLabel.clipsToBounds = YES;
     [subLabel sizeToFit];
@@ -359,12 +364,6 @@
         make.height.equalTo(@30);
     }];
     
-    
-    
-    
-    
-    
-    
     UIView *bottomBar = [[UIView alloc] init];
     [uv addSubview:bottomBar];
 
@@ -377,9 +376,7 @@
     }];
     
     bottomBar.backgroundColor = [UIColor colorWithWhite:0.985 alpha:1.0];
-    
-    
-    
+  
     
     UIButton *likeButton = [GUIConfig iconGood];
 
@@ -460,7 +457,7 @@
     
     UIButton *commentButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [commentButton setTitleColor:[GUIConfig mainColor] forState:UIControlStateNormal];
-    [commentButton setTitle:@"网友评论(1245)" forState:UIControlStateNormal];
+    [commentButton setTitle:@"网友评论" forState:UIControlStateNormal];
     
     commentButton.titleLabel.font = [UIFont systemFontOfSize:12];
     
@@ -489,26 +486,51 @@
     
     
     self.tableView.tableHeaderView = uv;
-    
-    
-    
-    
-    
+   
     
 }
+
+#pragma mark ------- 订阅商家点击事件
+-(void)subcrideClick:(UIButton *)button{
+
+    UISubscribeSevice *sevice = [UISubscribeSevice new];
+    [sevice successful:^(id data) {
+        
+        [button setTitle:@"取消订阅" forState:UIControlStateSelected];
+        
+    } failure:^(id code) {
+        
+        [button setTitle:@"订阅" forState:UIControlStateNormal];
+        
+    }];
+
+
+}
+
+#pragma mark ------- 取消订阅商家点击事件
+-(void)cancelSubcrideClick:(UIButton *)button{
+
+    UISubscribeSevice *sevice = [UISubscribeSevice new];
+    [sevice cancelSuccessful:^(id data) {
+        
+        [button setTitle:@"订阅" forState:UIControlStateNormal];
+        
+    } failure:^(id code) {
+        
+        [button setTitle:@"取消订阅" forState:UIControlStateSelected];
+        
+    }];
+
+
+
+}
+
 #pragma mark - Table View Config
-
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     CouponDetailViewCtrl *vc = [[CouponDetailViewCtrl alloc] init];
     
-    
-    
-    
-    if ([indexPath section]==0) {
-        
+    if ([indexPath section]==0) {        
         
         vc.datas = self.realTimeCouponList[indexPath.row];
         
@@ -619,11 +641,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
-    
-    
-
-    
+        
     if ([indexPath section]==0) {
         
         cell.couponActionType = CouponTypeLimited;
