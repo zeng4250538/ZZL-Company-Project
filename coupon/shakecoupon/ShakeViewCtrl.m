@@ -55,8 +55,6 @@
 
 
 #pragma mark - 装载摇一摇优惠券数据
-
-
 -(void)loadShakeData:(void(^)(BOOL ret))completion{
     
     
@@ -66,14 +64,14 @@
     //[SVProgressHUD showWithStatus:@""];
     
     
-    [service requestShakeCoupon:@"12345" success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:@"1" success:^(NSInteger code, NSString *message, id data) {
         
-        
+//        NSLog(@"12313-------------->%@",data);
         self.isShakeDataLoaded = YES;
         
         [[AppShareData instance].shakeCouponQueue resetData:data];
         
-      //  [SVProgressHUD dismiss];
+        [SVProgressHUD dismiss];
         
         completion(YES);
         
@@ -81,7 +79,7 @@
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
         
-    //    [SVProgressHUD dismiss];
+        [SVProgressHUD dismiss];
         
         completion(NO);
         
@@ -89,15 +87,7 @@
         
     }];
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
 }
 
@@ -244,11 +234,6 @@
 //    
     
     //imageView.frame = CGRectMake(SCREEN_WIDTH/2, FrameHeight/2,150 ,150);
-        
-    
-    
-    
-    
     
 }
 
@@ -261,47 +246,36 @@
     
     CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
     
-    
-    NSArray *ary = @[@"sampleImg01.png"];
-    
-    
-    
+    NSArray *ary = @[@"sampleImg010.png"];
+   
     int pos=0;
     
     for (NSString *content in ary) {
-        
-        
+       
         UIView *uv = [UIView new];
         uv.backgroundColor =[GUIConfig mainBackgroundColor];
         
         NSString *imgFile = content;
         
         uv.frame = CGRectMake(0, pos*FrameHeight, SCREEN_WIDTH,FrameHeight);
-        
-        
+       
         UIImage *img = [UIImage imageNamed:imgFile];
-        
-        
-        
+       
         UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
         
         CGFloat x = (uv.frame.size.width - imgView.frame.size.width)/2;
         CGFloat y = (uv.frame.size.height - imgView.frame.size.height)/2;
         
         imgView.userInteractionEnabled = YES;
-        
-        
+       
         UITapGestureRecognizer *rg = [[UITapGestureRecognizer alloc] bk_initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-            
-            
+           
            // [self doLoadShakeView];
-            
             
         }];
         
         [imgView addGestureRecognizer:rg];
-        
-        
+       
         CGRect r = imgView.frame;
         
         r.origin.x = x;
@@ -309,17 +283,13 @@
         
         imgView.frame = r;
         
-        
         [self.contentView addSubview:uv];
-        
         
         UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,FrameHeight)];
         
         bgView.image = [UIImage imageNamed:@"mainpagebg"];
         
-        
         [uv addSubview:bgView];
-        
         
         UIImageView *ballView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guangzhoufood"]];
         
@@ -329,28 +299,15 @@
             make.centerX.equalTo(uv);
             make.centerY.equalTo(uv).offset(-30);
             
-            
         }];
-        
-        
-        
+       
         [self makeAnimateView:imgView parentView:uv];
-        
         
           pos++;
         
     }
-    
-    
 
-    
-    
-    
-    
-    
 }
-
-
 
 
 #pragma mark- 导航栏按钮
@@ -369,31 +326,23 @@
         
         
     }];
-    
-    
-    
+   
     UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"广州" style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
         [self.navigationController pushViewController:vc animated:YES];
         
-        
-        
     }];
     
     
-    UIBarButtonItem *scanerBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"scanner_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-        
-    }];
-    
-    
-    
+//    UIBarButtonItem *scanerBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"scanner_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+//        
+//    }];
+   
     self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
     
   //  self.navigationItem.rightBarButtonItem = scanerBarItem;
-    
-    
     
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
     mallButton.frame = CGRectMake(0, 0, 200, 44);
@@ -410,7 +359,7 @@
     [mallButton bk_addEventHandler:^(id sender) {
         
         
-        MallService *service = [MallService new];
+//        MallService *service = [MallService new];
         
         
         
@@ -442,186 +391,162 @@
             
             
             [self.mallButton setTitle:name forState:UIControlStateNormal];
-            
-            
-            
         };
-        
-        
-        
-         
-        
-        
+      
     } forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
-#pragma mark - 主视图
-/**
- 
- 已经废弃
- 
- */
+//#pragma mark - 主视图
+///**
+// 
+// 已经废弃
+// 
+// */
+//
+//-(UIView*)makeView{
+//    
+//    
+//    UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"handbg.png"]];
+//    
+//    bgView.frame = CGRectMake(0, 0, self.view.frame.size.width,  self.view.frame.size.height);
+//    
+//    
+//    UIImageView *handView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hand.png"]];
+//    
+//    [bgView addSubview:handView];
+//    
+//    [handView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.center.equalTo(bgView);
+//    }];
+//    
+//    
+//    UILabel *lab1 = [UILabel new];
+//    lab1.font = [UIFont boldSystemFontOfSize:20];
+//    lab1.textColor = [GUIConfig grayFontColorDeep];
+//    lab1.text=@"随时随地";
+//    
+//    [bgView addSubview:lab1];
+//    
+//    [lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.bottom.equalTo(bgView.mas_top).offset(-40);
+//      //  make.right.equalTo(self.view).multipliedBy(0.5);
+//        make.left.equalTo(@20);
+//        
+//        
+//    }];
+//    
+//    lab1.textAlignment = NSTextAlignmentCenter;
+//    
+//    
+//    UILabel *lab2 = [UILabel new];
+//    lab2.font = [UIFont boldSystemFontOfSize:20];
+//    lab2.textColor = [GUIConfig grayFontColorDeep];
+//    lab2.text=@"想摇就摇";
+//    
+//    [bgView addSubview:lab2];
+//    
+//    [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.bottom.equalTo(bgView.mas_top).offset(-20);
+//      //  make.right.equalTo(self.view);
+//        make.left.equalTo(@(SCREEN_WIDTH/2));
+//        //make.left.equalTo(self.view);
+//        
+//        
+//    }];
+//    
+//    lab2.textAlignment = NSTextAlignmentCenter;
+//    
+//    
+//    return bgView;
+//    
+//    
+//
+//    
+//    
+//    
+//    
+//    
+//}
 
--(UIView*)makeView{
-    
-    
-    UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"handbg.png"]];
-    
-    bgView.frame = CGRectMake(0, 0, self.view.frame.size.width,  self.view.frame.size.height);
-    
-    
-    UIImageView *handView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hand.png"]];
-    
-    [bgView addSubview:handView];
-    
-    [handView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.center.equalTo(bgView);
-    }];
-    
-    
-    UILabel *lab1 = [UILabel new];
-    lab1.font = [UIFont boldSystemFontOfSize:20];
-    lab1.textColor = [GUIConfig grayFontColorDeep];
-    lab1.text=@"随时随地";
-    
-    [bgView addSubview:lab1];
-    
-    [lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.bottom.equalTo(bgView.mas_top).offset(-40);
-      //  make.right.equalTo(self.view).multipliedBy(0.5);
-        make.left.equalTo(@20);
-        
-        
-    }];
-    
-    lab1.textAlignment = NSTextAlignmentCenter;
-    
-    
-    UILabel *lab2 = [UILabel new];
-    lab2.font = [UIFont boldSystemFontOfSize:20];
-    lab2.textColor = [GUIConfig grayFontColorDeep];
-    lab2.text=@"想摇就摇";
-    
-    [bgView addSubview:lab2];
-    
-    [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.bottom.equalTo(bgView.mas_top).offset(-20);
-      //  make.right.equalTo(self.view);
-        make.left.equalTo(@(SCREEN_WIDTH/2));
-        //make.left.equalTo(self.view);
-        
-        
-    }];
-    
-    lab2.textAlignment = NSTextAlignmentCenter;
-    
-    
-    return bgView;
-    
-    
-
-    
-    
-    
-    
-    
-}
-
-#pragma mark - 摇换的界面
-
-
--(void)makeBody{
-    
-    
-
-    
-    UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"handbg.png"]];
-    
-    [self.contentView addSubview:bgView];
-    
-    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView);
-        make.centerY.equalTo(self.contentView).offset(-20);
-        
-  
-    
-    }];
-    
-    
-    UIImageView *handView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hand.png"]];
-    
-    [bgView addSubview:handView];
-    
-    [handView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.center.equalTo(bgView);
-    }];
-    
-    
-    UILabel *lab1 = [UILabel new];
-    lab1.font = [UIFont boldSystemFontOfSize:20];
-    lab1.textColor = [GUIConfig grayFontColorDeep];
-    lab1.text=@"随时随地";
-    
-    [self.view addSubview:lab1];
-    
-    [lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.bottom.equalTo(bgView.mas_top).offset(-40);
-        make.right.equalTo(self.view).multipliedBy(0.5);
-        make.left.equalTo(@20);
-        
-        
-    }];
-    
-    lab1.textAlignment = NSTextAlignmentCenter;
-    
-    
-    UILabel *lab2 = [UILabel new];
-    lab2.font = [UIFont boldSystemFontOfSize:20];
-    lab2.textColor = [GUIConfig grayFontColorDeep];
-    lab2.text=@"想摇就摇";
-    
-    [self.view addSubview:lab2];
-    
-    [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.bottom.equalTo(bgView.mas_top).offset(-20);
-        make.right.equalTo(self.view);
-        make.left.equalTo(@(SCREEN_WIDTH/2));
-        //make.left.equalTo(self.view);
-        
-        
-    }];
-    
-    lab2.textAlignment = NSTextAlignmentCenter;
-    
-   
-     
-    
-    
-    
-    
-    
-}
+//#pragma mark - 摇换的界面
+//-(void)makeBody{
+//    
+//    
+//
+//    
+//    UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"handbg.png"]];
+//    
+//    [self.contentView addSubview:bgView];
+//    
+//    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.contentView);
+//        make.centerY.equalTo(self.contentView).offset(-20);
+//        
+//  
+//    
+//    }];
+//    
+//    
+//    UIImageView *handView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hand.png"]];
+//    
+//    [bgView addSubview:handView];
+//    
+//    [handView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.center.equalTo(bgView);
+//    }];
+//    
+//    
+//    UILabel *lab1 = [UILabel new];
+//    lab1.font = [UIFont boldSystemFontOfSize:20];
+//    lab1.textColor = [GUIConfig grayFontColorDeep];
+//    lab1.text=@"随时随地";
+//    
+//    [self.view addSubview:lab1];
+//    
+//    [lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.bottom.equalTo(bgView.mas_top).offset(-40);
+//        make.right.equalTo(self.view).multipliedBy(0.5);
+//        make.left.equalTo(@20);
+//        
+//        
+//    }];
+//    
+//    lab1.textAlignment = NSTextAlignmentCenter;
+//    
+//    
+//    UILabel *lab2 = [UILabel new];
+//    lab2.font = [UIFont boldSystemFontOfSize:20];
+//    lab2.textColor = [GUIConfig grayFontColorDeep];
+//    lab2.text=@"想摇就摇";
+//    
+//    [self.view addSubview:lab2];
+//    
+//    [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.bottom.equalTo(bgView.mas_top).offset(-20);
+//        make.right.equalTo(self.view);
+//        make.left.equalTo(@(SCREEN_WIDTH/2));
+//        //make.left.equalTo(self.view);
+//        
+//        
+//    }];
+//    
+//    lab2.textAlignment = NSTextAlignmentCenter;
+//    
+//   
+//     
+//    
+//    
+//    
+//    
+//    
+//}
 
 
 

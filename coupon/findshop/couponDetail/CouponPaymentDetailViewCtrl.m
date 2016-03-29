@@ -68,12 +68,10 @@
         headerView.backgroundColor = [GUIConfig mainBackgroundColor];
         
         UILabel *nameLabel = [UILabel new];
-        
         nameLabel.frame = CGRectMake(0, 20, SCREEN_WIDTH, 30);
         nameLabel.backgroundColor = [UIColor whiteColor];
         nameLabel.font = [UIFont systemFontOfSize:14];
         nameLabel.text=@"   验券码";
-        
         [headerView addSubview:nameLabel];
         
         return headerView;

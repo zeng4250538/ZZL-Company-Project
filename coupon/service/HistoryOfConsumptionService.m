@@ -13,9 +13,10 @@
 -(void)requestHistoryOfConsumptionSuccess:(void(^)(id data))success failure:(void(^)(NSInteger code))failure{
 
     BaseRequest *req = [BaseRequest new];
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby"];
-    NSDictionary *parm =@{};
-    [req get:url param:parm success:^(NSInteger code, id object) {
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby/"];
+    NSString *urls = [NSString stringWithFormat:@"%@15818865760",url];
+    NSDictionary *parm =@{@"status":@""};
+    [req get:urls param:parm success:^(NSInteger code, id object) {
         
     } failure:^(NSInteger code, NSString *content) {
         

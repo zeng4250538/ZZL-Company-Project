@@ -47,7 +47,6 @@
     
     header.image = [UIImage imageNamed:@"personbg.png"];
     
-    
     self.tableView.tableHeaderView = header;
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
@@ -201,23 +200,23 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    if (![[AppShareData instance] isLogin]) {
-        
-        
-        LoginViewCtrl *vc = [LoginViewCtrl new];
-        
-        vc.loginEndBlock = ^(BOOL ret){
-            
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        };
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        return ;
-        
-    }
+//    if (![[AppShareData instance] isLogin]) {
+//        
+//        
+//        LoginViewCtrl *vc = [LoginViewCtrl new];
+//        
+//        vc.loginEndBlock = ^(BOOL ret){
+//            
+//            
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//        };
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//        return ;
+//        
+//    }
     
     
     

@@ -7,6 +7,7 @@
 //
 
 #import "ShopInfoTableViewCell.h"
+#import "HistoryOfConsumptionService.h"
 
 
 @interface ShopInfoTableViewCell()
@@ -16,15 +17,9 @@
 @property(nonatomic,strong)UILabel *goodLabel ;   //顶
 @property(nonatomic,strong)UIImageView *goodImageView ;
 @property(nonatomic,strong)UIImageView *badImageView ;
-
 @property(nonatomic,strong)UILabel *badLabel ;
 @property(nonatomic,strong)UILabel *commentLabel ;  //备注
-
-
 @property(nonatomic,strong)UIButton *subscribeButton ;  //订阅按钮
-
-
-
 
 @end
 
@@ -113,8 +108,6 @@
     [sortBarView addSubview:sortButton];
     
     [sortButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
-
-    
     
     UIView *line2 = [UIView new];
     line2.backgroundColor = [GUIConfig mainBackgroundColor];
@@ -128,16 +121,11 @@
         
         UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
         
-        
-        
-        
         [as bk_addButtonWithTitle:@"全部" handler:^{
-            
             
             [filterButton setTitle:@"全部" forState:UIControlStateNormal];
             
         }];
-        
   
         [as bk_addButtonWithTitle:@"美食" handler:^{
             
@@ -186,20 +174,10 @@
             
             
         }];
-        
-        
-        
-        
-        
-        
-        
+       
         
         [as.window addGestureRecognizer:tap];
-
-    
-        
-        
-        
+       
     } forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -343,7 +321,7 @@
         [self.contentView addSubview:self.logoView];
         
         self.titleLabel = [[UILabel alloc] init];
-        self.titleLabel.font = [UIFont systemFontOfSize:16];
+        self.titleLabel.font = [UIFont systemFontOfSize:12];
         self.titleLabel.textColor = [GUIConfig grayFontColorDeep];
         
         [self.contentView addSubview:self.titleLabel];
@@ -519,6 +497,8 @@
 
 
 -(void)updateData{
+    
+    
    
     self.titleLabel.text = self.data[@"name"];
     self.goodLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"good"] integerValue]];
@@ -546,20 +526,8 @@
     [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [self setNeedsLayout];
     }];
-    
-    
-    
-    
-    
-    
-    
-    
-    
- 
-    
-    
+   
 }
-
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

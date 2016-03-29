@@ -9,6 +9,7 @@
 #import "HistoryOfConsumptionTableViewController.h"
 #import "HistoryOfConsumptionTableViewCell.h"
 #import "ChildPagesViewController.h"
+#import "HistoryOfConsumptionService.h"
 @interface HistoryOfConsumptionTableViewController ()
 
 @end
@@ -17,6 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self netWorkRequst];
     
     [self.navigationItem setTitle:@"消费历史"];
     
@@ -29,6 +32,20 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)netWorkRequst{
+
+
+    HistoryOfConsumptionService *HistoryOfConsumptionRequst = [HistoryOfConsumptionService new];
+    [HistoryOfConsumptionRequst requestHistoryOfConsumptionSuccess:^(id data) {
+        
+    } failure:^(NSInteger code) {
+        
+    }];
+    
+    
+
 }
 
 - (void)didReceiveMemoryWarning {

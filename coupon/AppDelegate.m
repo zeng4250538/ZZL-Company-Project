@@ -11,6 +11,7 @@
 #import "ShopPortalViewCtrl.h"
 #import "PersonInfoViewCtrl.h"
 #import "CartViewCtrl.h"
+#import "MallService.h"
 @interface AppDelegate ()
 
 @end
@@ -149,7 +150,6 @@
     [UINavigationBar appearance].barTintColor = [GUIConfig mainColor];
     
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
-    
     
     
     [SVProgressHUD setBackgroundColor:[UIColor blackColor]];

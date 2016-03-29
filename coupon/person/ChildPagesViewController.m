@@ -28,7 +28,7 @@
     backgroundView.backgroundColor = UIColorFromRGB(242, 242, 242);
     [self.view addSubview:backgroundView];
     [backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(63);
         make.bottom.equalTo(self.view).offset(0);
         make.left.equalTo(self.view).offset(0);
         make.right.equalTo(self.view).offset(0);
@@ -61,11 +61,11 @@
     
     UILabel *titelLabelView = [[UILabel alloc]init];
     titelLabelView.text = @"咖啡";
-    [titelLabelView setFont:[UIFont systemFontOfSize:10]];
+    [titelLabelView setFont:[UIFont systemFontOfSize:12]];
     [titleBackgroundView addSubview:titelLabelView];
     [titelLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleBackgroundView).offset(40);
-        make.left.equalTo(titleBackgroundView).offset(15);
+        make.top.equalTo(titleBackgroundView).offset(20);
+        make.left.equalTo(titleBackgroundView).offset(90);
         make.width.equalTo(@80);
         make.height.equalTo(@30);
     }];
@@ -76,8 +76,8 @@
     subTibleLabel.textColor = UIColorFromRGB(176, 176, 176);
     [titleBackgroundView addSubview:subTibleLabel];
     [subTibleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleBackgroundView).offset(10);
-        make.left.equalTo(titleBackgroundView).offset(10);
+        make.top.equalTo(titleBackgroundView).offset(40);
+        make.left.equalTo(titleBackgroundView).offset(90);
         make.width.equalTo(@80);
         make.height.equalTo(@30);
     }];
@@ -109,9 +109,9 @@
     [consumptionAmountLabel setFont:[UIFont systemFontOfSize:11]];
     [towBackgroundView addSubview:consumptionAmountLabel];
     [consumptionAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(towBackgroundView).offset(0);
-        make.left.equalTo(towBackgroundView).offset(0);
-        make.width.equalTo(@80);
+        make.top.equalTo(towBackgroundView).offset(10);
+        make.left.equalTo(towBackgroundView).offset(20);
+        make.width.equalTo(@200);
         make.height.equalTo(@30);
     }];
     
@@ -120,9 +120,9 @@
     [amountOfRealPayLabel setFont:[UIFont systemFontOfSize:11]];
     [towBackgroundView addSubview:amountOfRealPayLabel];
     [amountOfRealPayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(towBackgroundView).offset(30);
-        make.left.equalTo(towBackgroundView).offset(0);
-        make.width.equalTo(@80);
+        make.top.equalTo(towBackgroundView).offset(40);
+        make.left.equalTo(towBackgroundView).offset(20);
+        make.width.equalTo(@200);
         make.height.equalTo(@30);
     }];
     
@@ -131,9 +131,9 @@
     [methodOfPaymentLable setFont:[UIFont systemFontOfSize:11]];
     [towBackgroundView addSubview:methodOfPaymentLable];
     [methodOfPaymentLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(towBackgroundView).offset(60);
-        make.left.equalTo(towBackgroundView).offset(0);
-        make.width.equalTo(@80);
+        make.top.equalTo(towBackgroundView).offset(70);
+        make.left.equalTo(towBackgroundView).offset(20);
+        make.width.equalTo(@200);
         make.height.equalTo(@30);
     }];
     
@@ -142,9 +142,9 @@
     [timeLabel setFont:[UIFont systemFontOfSize:11]];
     [towBackgroundView addSubview:timeLabel];
     [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(towBackgroundView).offset(90);
-        make.left.equalTo(towBackgroundView).offset(0);
-        make.width.equalTo(@100);
+        make.top.equalTo(towBackgroundView).offset(100);
+        make.left.equalTo(towBackgroundView).offset(20);
+        make.width.equalTo(@200);
         make.height.equalTo(@30);
     }];
     
@@ -154,9 +154,9 @@
     [backgroundView addSubview:toEvaluateButtonView];
     [toEvaluateButtonView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(backgroundView).offset(20);
-        make.right.equalTo(backgroundView).offset(20);
-        make.bottom.equalTo(backgroundView).offset(30);
-        make.height.equalTo(@35);
+        make.right.equalTo(backgroundView).offset(-20);
+        make.bottom.equalTo(backgroundView).offset(-50);
+        make.height.equalTo(@40);
     }];
     
     

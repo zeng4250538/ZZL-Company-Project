@@ -68,7 +68,7 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponPromotion？"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponPromotion"];
     
     NSString *youhuiString = @"普通优惠";
     
@@ -109,7 +109,7 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponPromotion?"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponPromotion"];
     
     NSString *youhuiString = @"普通优惠";
     NSString *string = [youhuiString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

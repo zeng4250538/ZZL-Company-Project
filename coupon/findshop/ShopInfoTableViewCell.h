@@ -17,14 +17,12 @@ typedef NS_ENUM(NSUInteger, SubscribeType) {
 
 @interface ShopInfoTableViewCell : UITableViewCell
 
-
 @property(nonatomic,strong)NSDictionary *data;
 @property(nonatomic,assign)SubscribeType subscribeType;
 
 +(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock;
 
 +(UIView*)headerViewWithSort:(NSString*)title clickBlock:(void(^)())clickBlock;
-
 
 +(CGFloat)height;
 

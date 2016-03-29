@@ -23,6 +23,7 @@
 #import "ReloadHud.h"
 #import "Shop.h"
 #import "Coupon.h"
+#import "MallService.h"
 
 
 @interface ShopPortalViewCtrl ()
@@ -34,13 +35,19 @@
 @property(nonatomic,strong)NSArray *otherData;
 @property(nonatomic,strong)NSDictionary *portalData;
 @property(nonatomic,assign)BOOL bools;
+@property(nonatomic,strong)SelectMallPopViewCtrl *selectTitle;
+@property(nonatomic,strong)NSString *cityString;
 
 @end
 
 @implementation ShopPortalViewCtrl
 
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    [self titleItenLabel];
     
     self.navigationItem.title=@"找商家";
     
@@ -52,38 +59,53 @@
  
     [self loadData];
     
-    [self makeBarItem];
+    self.selectTitle = [[SelectMallPopViewCtrl alloc]init];
+//    [self makeBarItem];
     
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        
         
         [self doLoad:^(BOOL ret) {
             
             
             [self.tableView.mj_header endRefreshing];
             
-            
         }];
-        
-    
         
     }];
     
-    
-    
-    
+    [self makeBarItem];
     
 }
 
+-(void)titleItenLabel{
+
+    
+//    [self.mallArray addObserver:self forKeyPath:@"mallArray" options:1 context:nil];
+//
+//
+//#pragma mark ------ 周边商城网络请求
+//    MallService *services = [[MallService alloc] init];
+//    [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+//        
+//        self.mallArray = data;
+//        
+//        NSLog(@"%@",self.mallArray[0][@"name"]);
+//        
+//        
+//        
+//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+//        
+//    }];
+
+
+
+}
 
 -(void)loadData{
     
-    
-    
     [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-        
-        
+    
         [self doLoad:^(BOOL ret){
             
             if (ret) {
@@ -109,16 +131,9 @@
             [ReloadHud showReloadMode:self.tableView];
         }
         
-        
-    }];
-    
-    
-    
-    
-    
+    }];   
     
 }
-
 
 
 -(void)doLoad:(void(^)(BOOL ret))completion{
@@ -140,48 +155,26 @@
         
         completion(YES);
         
-        
-        
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-        
+       
         completion(NO);
-
-        
-        
-        
-        
-        
-        
+       
         
     }];
-    
-    
-    
-    
-    
-    
+
     
 #pragma mark ---- 优选品牌网络请求
     [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
-        
-        
-        
+       
         self.hotShopData = data;
         
         [self.tableView reloadData];
         
         completion(YES);
         
-        
-        
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
-        
         completion(NO);
-        
-        
-        
         
     }];
     
@@ -191,31 +184,26 @@
 #pragma mark ---- 品牌街网络请求
     [service requestNearbyShop:@"2" page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
         
-        
         self.hotBrandData = data;
         
         [self.tableView reloadData];
         
         completion(YES);
         
-        
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
         
         completion(NO);
         
-        
-        
     }];
     
     
 
-    
-    
-    
-    
+
     
 }
+
+
 
 
 //-(void)loadData{
@@ -264,13 +252,11 @@
 -(void)makeBarItem{
     
     self.navigationController.navigationBar.tintColor =[UIColor whiteColor];
-    
     UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
         [self.navigationController pushViewController:vc animated:YES];
-        
         
     }];
     
@@ -283,31 +269,18 @@
         [self.navigationController pushViewController:vc animated:YES];
         
         
-        
     }];
     
     
     UIBarButtonItem *roomMapBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"roommap"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
-        
         MallMapViewCtrl *vc = [MallMapViewCtrl new];
         
-        
         [self.navigationController pushViewController:vc animated:YES];
-        
-        
-        
-        
-        
-        
+       
     }];
     
     self.navigationItem.rightBarButtonItem = roomMapBarItem;
-    
-    
-    
-
-    
     
 //    UIBarButtonItem *scanerBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"scanner_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
 //        
@@ -319,21 +292,17 @@
     
  //   self.navigationItem.rightBarButtonItem = scanerBarItem;
     
-    
-    
-    UIButton *headButton = [UIButton buttonWithType:UIButtonTypeSystem];
+#pragma mark ----- 周边商城标题
+    UIButton *headButton = [[UIButton alloc]init];;
     headButton.frame = CGRectMake(0, 0, 200, 44);
-    [headButton setTitle:@"天河城(1km)" forState:UIControlStateNormal];
+    
+    [headButton setTitle:@"时尚天河" forState:UIControlStateNormal];
     headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    
-    
+
+    [self.navigationItem setTitle:self.cityString];
     self.navigationItem.titleView = headButton;
     
-    
-    
-    
     [headButton bk_addEventHandler:^(id sender) {
-        
         
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
@@ -348,29 +317,12 @@
     } forControlEvents:UIControlEventTouchUpInside];
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 
 
+
 -(void)makeHeaderSearchBar{
-    
-    
-    
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     
@@ -379,33 +331,20 @@
  
   //  searchBar.placeholder=@"搜索品牌，商家，优惠券";
     searchBar.backgroundImage =[UIImage new];
-    
-    
+
     searchBar.placeholder = self.navigationItem.title;
     // [titleView addSubview:searchBar];
     
     //Set to titleView
     //[self.navigationItem.titleView sizeToFit];
     self.navigationItem.titleView = searchBar;
-    
-    
-    
-    
-    
-    
-    
-    
+  
     // self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
-    
-    
     
 }
 
 
-
 -(void)makeSearchBar{
-    
-    
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     //self.searchBar.searchBarStyle = UISearchBarStyleProminent;
@@ -421,9 +360,6 @@
     self.searchBar.backgroundColor = [GUIConfig mainBackgroundColor];
     
     self.searchBar.placeholder=@"搜索品牌，商家，优惠券";
-
-    
-    
     
     UIView *bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     
@@ -434,18 +370,6 @@
     
     
     self.tableView.tableHeaderView = bgView;
-    
-    
-
-    
-    
-    
-    
-    
-   
-    
-    
-    
     
 }
 
@@ -459,8 +383,6 @@
 #pragma mark - UISearBarDelegate
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
-    
-    
 
 #pragma mark ----- 商家搜索
     KeyWordSearchViewCtrl *vc = [KeyWordSearchViewCtrl new];
@@ -473,18 +395,13 @@
         
     }];
     
-    
-    
-    
-    
     return NO;
 
 
 }
 
-#pragma  mark - Table view config
 
-
+#pragma  mark ---- cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
@@ -618,24 +535,28 @@
 }
 
 
-#pragma mark - Table view data source
+#pragma mark - 创建cell的组数
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 3;
 }
 
+#pragma mark - 创建cell的个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     
     if (section ==0 ) {
+        
         return [self.hotShopData count];
+        
     }else if (section ==1){
+        
         return [self.couponData count];
         
     }else{
-        return [self.hotBrandData count];
         
+        return [self.hotBrandData count];
         
     }
     // Return the number of rows in the section.

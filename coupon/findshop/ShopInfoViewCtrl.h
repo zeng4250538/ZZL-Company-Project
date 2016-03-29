@@ -17,6 +17,7 @@
 
 @property(nonatomic,strong)OptimizingBrandModel *OptimizingBrand;
 
+
 @property(nonatomic,strong)NSDictionary *data;
 
 -(void)boll:(BOOL)bools;

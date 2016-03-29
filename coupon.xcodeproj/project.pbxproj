@@ -480,6 +480,7 @@
 		574AE8A41C626BE000928B09 /* couponDetail */ = {
 			isa = PBXGroup;
 			children = (
+				7F121D771CA90134005AF53D /* Failure */,
 				57A94E7C1C38FF5800BE0022 /* CouponInfoTableViewCell.h */,
 				57A94E7D1C38FF5800BE0022 /* CouponInfoTableViewCell.m */,
 				57A94E7F1C393A3F00BE0022 /* CouponDetailViewCtrl.h */,
@@ -488,8 +489,6 @@
 				57CE97CE1C63A9E800CE0E57 /* CouponListViewCtrl.m */,
 				573E51CD1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.h */,
 				573E51CE1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m */,
-				573E51E11C7CB134005DBBC3 /* CouponDrawbackViewCtrl.h */,
-				573E51E21C7CB134005DBBC3 /* CouponDrawbackViewCtrl.m */,
 			);
 			path = couponDetail;
 			sourceTree = "<group>";
@@ -917,6 +916,15 @@
 				7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */,
 			);
 			name = HistoryOfConsumption;
+			sourceTree = "<group>";
+		};
+		7F121D771CA90134005AF53D /* Failure */ = {
+			isa = PBXGroup;
+			children = (
+				573E51E11C7CB134005DBBC3 /* CouponDrawbackViewCtrl.h */,
+				573E51E21C7CB134005DBBC3 /* CouponDrawbackViewCtrl.m */,
+			);
+			name = Failure;
 			sourceTree = "<group>";
 		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {

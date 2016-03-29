@@ -15,14 +15,13 @@
     
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    
+       
     // 网络访问是异步的,回调是主线程的,因此程序员不用管在主线程更新UI的事情
     [manager GET:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         // 提问:NSURLConnection异步方法回调,是在子线程
         // 得到回调之后,通常更新UI,是在主线程
-        NSLog(@"%@",responseObject);
+//        NSLog(@"%@",responseObject);
         success(operation.response.statusCode,responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

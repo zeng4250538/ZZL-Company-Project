@@ -78,7 +78,7 @@
     
     //requestRealTimeCoupon
     
-    [couponService requestRealTimeCoupon:_data[@"ids"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRealTimeCoupon:_data[@"id"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
         if (![data isKindOfClass:[NSArray class]]) {
             
@@ -108,7 +108,7 @@
  
     //查询其他优惠券
     
-    [couponService requestNormalCoupon:@"" page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestNormalCoupon:self.data[@"id"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
 //        NSLog(@"---><%@",_cell.data[@"ids"]);
         
@@ -274,7 +274,7 @@
     [uv addSubview:shopBgButton];
     
     
-    NSString *urlString =@"smallPhotoUrl";
+    NSString *urlString = self.data[@"smallPhotoUrl"];
     
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -549,7 +549,7 @@
             
             
             
-            NSLog(@"click 即时优惠 ");
+//            NSLog(@"click 即时优惠 ");
             
         }];
 
@@ -574,11 +574,14 @@
     
     
 }
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     return 60;
 }
 
+#pragma mark ------ cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
@@ -598,8 +601,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section==0) {
+        
         return [self.realTimeCouponList count];
-    }else{
+        
+    }
+    else{
+        
         return [self.otherCouponList count];
         
         

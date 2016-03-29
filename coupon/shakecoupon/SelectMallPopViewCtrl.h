@@ -12,6 +12,8 @@ typedef void(^SelectMallBlock)(BOOL ret,NSDictionary *data);
 
 @interface SelectMallPopViewCtrl : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
+@property(nonatomic,strong)NSString *cityString;
+
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *mallList;
 @property(nonatomic,copy)SelectMallBlock selectMallBlock;

@@ -10,7 +10,7 @@
 
 @interface Shop : NSObject
 
-@property(nonatomic,copy)NSString *ids;
+@property(nonatomic,copy)NSString *id;
 @property(nonatomic,copy)NSString *mallid;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *city;

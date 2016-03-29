@@ -99,10 +99,6 @@
             
         } forControlEvents:UIControlEventTouchUpInside];
         
-        
-        
-    
-        
         self.timeLabel = [UILabel new];
         
         [self.contentView addSubview:self.timeLabel];
@@ -118,9 +114,6 @@
             
             [Utils downCountLabel:self.timeLabel];
             
-            
-            
-            
         } repeats:YES];
         
         [timer fire];
@@ -131,24 +124,6 @@
         self.couponStatusLabel.textColor = [GUIConfig mainColor];
         self.couponStatusLabel.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:self.couponStatusLabel];
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-        
-        
-
-        
-        
-        
         
     }
     
@@ -297,16 +272,6 @@
         self.timeLabel.hidden = YES;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 
@@ -335,12 +300,7 @@
         }
     } forControlEvents:UIControlEventTouchUpInside];
     
-    
- 
-    
     touchButton.backgroundColor = [UIColor whiteColor];
-    
-    
     
     UILabel *nameLabel  = [UILabel new];
     [touchButton addSubview:nameLabel];
@@ -372,21 +332,10 @@
     moreLabel.font = [UIFont systemFontOfSize:14];
     moreLabel.textColor = [GUIConfig grayFontColor];
     
-    
-    
-    
-    
-    
-  
-    
-    
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, 60, SCREEN_WIDTH, 1)];
     line.backgroundColor = [GUIConfig mainBackgroundColor];
     
     [uv addSubview:line];
-    
-    
-    
     
     return uv;
     
