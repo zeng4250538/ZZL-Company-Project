@@ -168,6 +168,7 @@
 		7F121D6F1CA6AF41005AF53D /* SaerchShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D6E1CA6AF41005AF53D /* SaerchShopModel.m */; };
 		7F121D721CA6AF6A005AF53D /* SaerchShopService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D711CA6AF6A005AF53D /* SaerchShopService.m */; };
 		7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */; };
+		7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,6 +432,8 @@
 		7F121D711CA6AF6A005AF53D /* SaerchShopService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaerchShopService.m; sourceTree = "<group>"; };
 		7F121D741CA7DAF7005AF53D /* ChildPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildPagesViewController.h; sourceTree = "<group>"; };
 		7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildPagesViewController.m; sourceTree = "<group>"; };
+		7F121D791CAA8499005AF53D /* UISubscribeSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISubscribeSevice.h; sourceTree = "<group>"; };
+		7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubscribeSevice.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -838,6 +841,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7F121D781CAA844E005AF53D /* UISubscribSevice */,
 				574BF3E71C98022A0088A9A6 /* LoginService.h */,
 				574BF3E81C98022A0088A9A6 /* LoginService.m */,
 				574BF3E61C95D28E0088A9A6 /* BaseService.h */,
@@ -930,6 +934,15 @@
 				573E51E21C7CB134005DBBC3 /* CouponDrawbackViewCtrl.m */,
 			);
 			name = Failure;
+			sourceTree = "<group>";
+		};
+		7F121D781CAA844E005AF53D /* UISubscribSevice */ = {
+			isa = PBXGroup;
+			children = (
+				7F121D791CAA8499005AF53D /* UISubscribeSevice.h */,
+				7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */,
+			);
+			name = UISubscribSevice;
 			sourceTree = "<group>";
 		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {
@@ -1211,6 +1224,7 @@
 				577169751C80B0F100223EDB /* SettingViewCtrl.m in Sources */,
 				57E364AC1C9E6FB5003575FC /* UIView+DataLoad.m in Sources */,
 				5736EA021C5535720055774D /* ThrowLineTool.m in Sources */,
+				7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */,
 				57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */,
 				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,
 				577169811C820D4F00223EDB /* ChangePasswordViewCtrl.m in Sources */,

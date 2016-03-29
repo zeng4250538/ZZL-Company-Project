@@ -211,21 +211,35 @@
 
 -(void)makeHeaderView{
     
-    CGFloat rate = 416.0f/750.0f;
+//    CGFloat rate = 416.0f/750.0f;
     
     
-    UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate)];
+    UIImageView *uv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     uv.backgroundColor = [UIColor whiteColor];
+//    [uv setImage:[UIImage imageNamed:@"logo29@2x.png"]];
     
-    UIButton *shopBgButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate);
+//    UIButton *shopBgButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
     
-    [uv addSubview:shopBgButton];
+//        [uv addSubview:shopBgButton];
+    
+//    NSString *url = [Utils getRandomImage:self.datas[@"couponSmallPhotoUrl"]];
+//    NSLog(@"%@",self.datas[@"couponSmallPhotoUrl"]);
+//    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    
+    NSURL *urls = [NSURL URLWithString:self.datas[@"couponSmallPhotoUrl"]];
+    
+    [uv sd_setImageWithURL:urls placeholderImage:[UIImage imageNamed:@"logo29@2x.png"]];
     
     
-    NSString *url = [Utils getRandomImage:@"商家封面"];
+//    [uv sd_setImageWithURL:urls completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        [self reloadInputViews];
+//        
+//    }];
+//    [uv setImageWithURL:urls placeholderImage:nil];
     
-    [shopBgButton setBackgroundImage:[UIImage imageNamed:url] forState:UIControlStateNormal];
+//    [shopBgButton setBackgroundImage:[UIImage imageNamed:url] forState:UIControlStateNormal];
     
     
     self.tableView.tableHeaderView = uv;
@@ -239,32 +253,37 @@
     
     UIView *uv = [UIView new];
     
-    uv.backgroundColor=[GUIConfig mainBackgroundColor];
+    uv.backgroundColor=[UIColor whiteColor];
     
     [self.view addSubview:uv];
     
     [uv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view);
-        make.height.equalTo(@45);
+        make.height.equalTo(@60);
         make.left.right.equalTo(self.view);
         
     }];
     
     
     UIButton *addCartButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    addCartButton.backgroundColor = UIColorFromRGB(249, 191, 66);
     
     [uv addSubview:addCartButton];
     
     [addCartButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         
-        make.width.mas_equalTo(SCREEN_WIDTH/2);
-        make.top.left.and.bottom.equalTo(uv);
+        make.right.equalTo(uv).offset(-40);
+        make.left.equalTo(uv).offset(40);
+//        make.height.equalTo(uv).offset(30);
+        make.top.equalTo(uv).offset(10);
+        make.bottom.equalTo(uv).offset(-10);
     }];
     
+    [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [addCartButton setTitle:@"加入篮子" forState:UIControlStateNormal];
-    
-    [addCartButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
-    
+    addCartButton.layer.cornerRadius = 7;
+//    [addCartButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
+    [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     
     
@@ -337,45 +356,45 @@
     } forControlEvents:UIControlEventTouchUpInside];
     
     
-    UIButton *buyButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    [uv addSubview:buyButton];
-    
-    [buyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(SCREEN_WIDTH/2);
-        
-        make.top.right.and.bottom.equalTo(uv);
-    }];
-    
-    [buyButton setTitle:@"直接购买" forState:UIControlStateNormal];
-    
-    [buyButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
-    
-    [buyButton bk_addEventHandler:^(id sender) {
-        ToPayTableViewCtrl *vc =[ToPayTableViewCtrl new];
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        
-    } forControlEvents:UIControlEventTouchUpInside];
-    
-    
+//    UIButton *buyButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    
+//    [uv addSubview:buyButton];
+//    
+//    [buyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.left.mas_equalTo(SCREEN_WIDTH/2);
+//        
+//        make.top.right.and.bottom.equalTo(uv);
+//    }];
+//    
+//    [buyButton setTitle:@"直接购买" forState:UIControlStateNormal];
+//    
+//    [buyButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
+//    
+//    [buyButton bk_addEventHandler:^(id sender) {
+//        ToPayTableViewCtrl *vc =[ToPayTableViewCtrl new];
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//        
+//    } forControlEvents:UIControlEventTouchUpInside];
     
     
-    UIView *line2 = [GUIConfig line];
-    line2.backgroundColor = [GUIConfig grayFontColorLight];
     
-    [uv addSubview:line2];
     
-    [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.equalTo(@1);
-        make.top.equalTo(buyButton).offset(10);
-        make.bottom.equalTo(buyButton).offset(-10);
-        make.left.equalTo(buyButton);
-        
-    }];
+//    UIView *line2 = [GUIConfig line];
+//    line2.backgroundColor = [GUIConfig grayFontColorLight];
+//    
+//    [uv addSubview:line2];
+//    
+//    [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.width.equalTo(@1);
+//        make.top.equalTo(buyButton).offset(10);
+//        make.bottom.equalTo(buyButton).offset(-10);
+//        make.left.equalTo(buyButton);
+//        
+//    }];
 
     
     
@@ -510,14 +529,7 @@
         make.left.equalTo(gotoButton);
         
     }];
-
-
-    
-    
-    
-    
-    
-    
+  
     
 }
 
