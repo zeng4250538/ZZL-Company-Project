@@ -12,6 +12,7 @@
 #import "CouponService.h"
 #import "CouponPaymentDetailViewCtrl.h"
 #import "CouponDrawbackViewCtrl.h"
+#import "BasketService.h"
 
 @interface BasketNotUseViewCtrl ()
 
@@ -24,7 +25,7 @@
     
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-    [self loadData];
+  //  [self loadData];
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
@@ -36,24 +37,81 @@
 }
 
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    
+    [self loadData];
+    
+    
+    
+}
+
 -(void)loadData{
     
     
-    
-    
-    CouponService *service = [CouponService new];
-    
-    [service queryNoUseCoupon:nil success:^(int code, NSString *message, id data) {
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
         
-        if (code==0) {
-            self.dataList = data;
+        
+        [self doLoad:^(BOOL ret){
             
-            [self.tableView reloadData];
-        }
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
         
-    } failure:^(int code, BOOL retry, NSString *message, id data) {
         
     }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+
+
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    
+    BasketService *service = [BasketService new];
+    
+    
+    
+    [service requestNotUse:^(NSInteger code, NSString *message, id data) {
+        
+        self.dataList = data;
+        
+        
+        [self.tableView reloadData];
+        
+        
+        completion(YES);
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        completion(NO);
+        
+    }];
+    
+    
     
     
     
@@ -89,11 +147,15 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
     CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     
-    cell.couponActionType = CouponTypeToUnPay;
+   
+    // cell.couponActionType = CouponTypeToUnPay;
     
     cell.doActionBlock = ^(NSDictionary *data){
         

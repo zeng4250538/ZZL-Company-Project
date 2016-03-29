@@ -9,7 +9,7 @@
 #import "BasketContainerViewCtrl.h"
 #import "MHTabBarController.h"
 #import "BasketNoPayViewCtrl.h"
-#import "BasketNoUseViewCtrl.h"
+#import "BasketNotUseViewCtrl.h"
 #import "BasketFinishViewCtrl.h"
 #import "BasketMessageViewCtrl.h"
 
@@ -37,18 +37,16 @@
     
     
     
-    BasketNoPayViewCtrl *noPayVc = [BasketNoPayViewCtrl new];
-    noPayVc.title=@"待支付";
     
-    BasketNoUseViewCtrl *noUseVc = [BasketNoUseViewCtrl new];
+    BasketNotUseViewCtrl *noUseVc = [BasketNotUseViewCtrl new];
     
     noUseVc.title=@"未使用";
     BasketFinishViewCtrl *finishedVc = [BasketFinishViewCtrl new];
     
-    finishedVc.title=@"已消费";
+    finishedVc.title=@"已过期";
     
-    self.headTabBar.viewControllers = @[noPayVc, noUseVc, finishedVc];
-    self.headTabBar.selectedViewController = noPayVc;
+    self.headTabBar.viewControllers = @[noUseVc, finishedVc];
+    self.headTabBar.selectedViewController = noUseVc;
     
     
     

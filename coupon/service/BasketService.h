@@ -11,6 +11,21 @@
 @interface BasketService : BaseService
 
 /**
+ *  增加商品到购物篮子
+ *
+ *  @param couponId <#couponId description#>
+ *  @param count    <#count description#>
+ *  @param success  <#success description#>
+ *  @param failure  <#failure description#>
+ */
+-(void)requestADDBasket:(NSString*)couponId count:(NSInteger)count
+                success:(void(^)(NSInteger code,NSString *message,id data))success
+                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
+
+/**
  *  获取没有使用的优惠券信息
  *
  *  @param success 成功回调

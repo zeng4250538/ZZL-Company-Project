@@ -15,6 +15,7 @@
 #import "BasketContainerViewCtrl.h"
 #import "CouponService.h"
 #import "ShakeService.h"
+#import "BasketService.h"
 
 
 
@@ -75,29 +76,9 @@
     
     self.swipeDownCouponRG.direction = UISwipeGestureRecognizerDirectionDown;
 
-//    self.swipeLeftCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipe:)];
-//    
-//    self.swipeLeftCouponRG.direction = UISwipeGestureRecognizerDirectionLeft;
-//    
-    
-   // [self makeCartView];
-   // [self makeAddCommentView];
-    
-    
- //   [self makeRequestCoupon];
     
     
     [self makeMaskCircleView];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -112,69 +93,6 @@
     
     // Do any additional setup after loading the view.
 }
-
-
-#pragma mark - 请求优惠券
-
-
-
-//-(void)makeRequestCouponBlock:( void (^)(NSDictionary *data))completion{
-//    
-//    
-//    
-//    CGFloat viewWidth = SCREEN_WIDTH-120;
-//    CGFloat viewHeight = SCREEN_WIDTH-120+40;
-//    
-//    
-//    
-//    
-//    ShakeService *service = [ShakeService new];
-//    
-//    [service requestShakeCoupon:@"12345" success:^(NSInteger code, NSString *message, id data) {
-//        
-//        
-//        if (code==0) {
-//            
-//            self.shakeCouponList = [data mutableCopy];
-//            
-//            self.couponData = self.shakeCouponList[0];
-//            
-//            
-//            [self.shakeCouponList removeObjectAtIndex:0];
-//            
-//            completion(self.couponData);
-//            
-//            
-//            
-////            CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
-////            
-////            
-////            [self.view addSubview:couponView];
-////            
-////            
-////            self.imgView = couponView;
-////            
-//            
-//            
-//        }
-//        
-//        
-//        
-//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-//        
-//        
-//        
-//        
-//    }];
-//    
-//    
-//    
-//    
-//    
-//    
-//}
-//
-
 
 
 
@@ -230,6 +148,38 @@
 }
 
 
+#pragma mar - 将优惠券添加到篮子里面
+
+
+- (void)addCouponToBasket{
+    
+    
+     BasketService * service  = [BasketService new];
+    
+    
+    NSString *couponId = self.couponData[@"id"];
+    
+    [service requestADDBasket:couponId count:1 success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        [SVProgressHUD showErrorWithStatus:@"加入篮子失败"];
+        
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+}
 
 
 #pragma mark - 抛物线轨迹
@@ -254,22 +204,14 @@
     
     tool.didFinishBlock = ^(){
         
-        
-       
-       // return;
-        
-        
-        
-        
-        
-        
-        
-        
+    
+        [self addCouponToBasket];
         
         
         [[AppShareData instance] addCouponToCart:self.couponData];
         
         [self updateCartNum];
+        
         
         
         view.hidden = YES;
@@ -599,13 +541,6 @@
     
     
     
-    
-    
-    
-    
-    
-   
-    
     self.couponData = [[AppShareData instance].shakeCouponQueue next];
     
     
@@ -738,6 +673,8 @@
         
         
         NSDictionary *couponData = [[AppShareData instance].shakeCouponQueue next];
+        
+        self.couponData = couponData;
         
         if (couponData == nil) {
         
@@ -1072,13 +1009,8 @@
         
         
         
-       // self.imgView.alpha=0.0f;
         
         rr.origin.y = yy;
-//        rr.size.width=0;
-//        
-//        rr.size.height=0;
-//        
         
         self.imgView.frame = rr;
         
