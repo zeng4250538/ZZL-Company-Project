@@ -6,18 +6,18 @@
 //  Copyright (c) 2016年 chijr. All rights reserved.
 //
 
-#import "BasketNoUseViewCtrl.h"
+#import "BasketNotUseViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
 #import "CouponDetailViewCtrl.h"
 #import "CouponService.h"
 #import "CouponPaymentDetailViewCtrl.h"
 #import "CouponDrawbackViewCtrl.h"
 
-@interface BasketNoUseViewCtrl ()
+@interface BasketNotUseViewCtrl ()
 
 @end
 
-@implementation BasketNoUseViewCtrl
+@implementation BasketNotUseViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
