@@ -11,7 +11,7 @@
 #import "BasketContainerViewCtrl.h"
 #import "MHTabBarController.h"
 #import "BasketNoPayViewCtrl.h"
-#import "BasketNoUseViewCtrl.h"
+#import "BasketNotUseViewCtrl.h"
 #import "BasketFinishViewCtrl.h"
 #import "BasketMessageViewCtrl.h"
 
@@ -38,7 +38,7 @@
     
     
     
-    BasketNoUseViewCtrl *noUseVc = [BasketNoUseViewCtrl new];
+    BasketNotUseViewCtrl *noUseVc = [BasketNotUseViewCtrl new];
     
     noUseVc.title=@"未使用";
     BasketFinishViewCtrl *finishedVc = [BasketFinishViewCtrl new];

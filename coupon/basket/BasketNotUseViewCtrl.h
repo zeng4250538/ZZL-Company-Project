@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BasketNoUseViewCtrl : UITableViewController
+@interface BasketNotUseViewCtrl : UITableViewController
 
 @property(nonatomic,strong)NSArray *dataList;
 
