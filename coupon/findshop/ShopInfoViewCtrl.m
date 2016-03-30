@@ -319,8 +319,29 @@
     
     [subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [subButton setTitle:@"订阅" forState:UIControlStateNormal];
- 
+    UISubscribeSevice *sevice = [UISubscribeSevice new];
+    
+    [sevice judgeSuccessful:^(id data) {
+        
+        NSLog(@"------->%@",data);
+        
+        if ((data = nil)) {
+            
+            [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+        }
+        else{
+        
+            [subButton setTitle:@"取消订阅" forState:UIControlStateSelected];
+        
+        }
+        
+        
+    } failure:^(id code) {
+        
+        
+        
+    }];
+    
 //    [subButton setTitle:@"取消订阅" forState:UIControlStateSelected];
     
     switch (subButton.state) {

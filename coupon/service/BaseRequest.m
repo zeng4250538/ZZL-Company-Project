@@ -15,6 +15,7 @@
     
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
        
     // 网络访问是异步的,回调是主线程的,因此程序员不用管在主线程更新UI的事情
     [manager GET:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -14,4 +14,6 @@
 
 -(void)cancelSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure;
 
+-(void)judgeSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure;
+
 @end
