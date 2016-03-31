@@ -500,7 +500,9 @@
     
     
     if (self.data[@"name"] != NULL) {
+        
         self.titleLabel.text = self.data[@"name"];
+        
     }
     else if (self.data[@"shopName"] != NULL){
         
@@ -515,7 +517,9 @@
     NSString *urlString = @"";
     
     if (self.data[@"shopPhotoUrl"] != NULL) {
+        
         urlString = self.data[@"shopPhotoUrl"];
+        
     }
     
     else if (self.data[@"smallPhotoUrl"] != NULL){

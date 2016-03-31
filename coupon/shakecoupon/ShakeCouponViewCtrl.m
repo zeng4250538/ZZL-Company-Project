@@ -108,7 +108,7 @@
     
     ShakeService *service = [ShakeService new];
     
-    [service requestShakeCoupon:@"122344" success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:@"122344" shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
         
         
         if (code==0) {
@@ -1051,7 +1051,7 @@
     
     ShakeService *service = [ShakeService new];
   
-    [service requestShakeCoupon:@"12345" success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:@"12345" shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
        
         [[AppShareData instance].shakeCouponQueue resetData:data];
         

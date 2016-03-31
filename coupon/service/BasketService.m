@@ -62,7 +62,7 @@
 
 
 
--(void)requestNotUse:(void(^)(NSInteger code,NSString *message,id data))success
+-(void)requestUserid:(NSString *)userid NotUse:(void(^)(NSInteger code,NSString *message,id data))success
              failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
@@ -76,7 +76,7 @@
     
     
     
-    NSDictionary *parm = @{@"userid":@"15818865760"};
+    NSDictionary *parm = @{@"userid":userid};
     
     
     //[AppShareData instance].customId

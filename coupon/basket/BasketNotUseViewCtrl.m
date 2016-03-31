@@ -13,7 +13,7 @@
 #import "CouponPaymentDetailViewCtrl.h"
 #import "CouponDrawbackViewCtrl.h"
 #import "BasketService.h"
-
+#import "AppShareData.h"
 @interface BasketNotUseViewCtrl ()
 
 @end
@@ -93,9 +93,10 @@
     
     BasketService *service = [BasketService new];
     
+    AppShareData *app = [AppShareData instance];
     
     
-    [service requestNotUse:^(NSInteger code, NSString *message, id data) {
+    [service requestUserid:app.customId NotUse:^(NSInteger code, NSString *message, id data) {
         
         self.dataList = data;
         

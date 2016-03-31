@@ -14,6 +14,7 @@
 #import "SimpleAudioPlayer.h"
 #import "MallService.h"
 #import "ShakeService.h"
+#import "AppShareData.h"
 
 @interface ShakeViewCtrl ()
 
@@ -57,6 +58,7 @@
 #pragma mark - 装载摇一摇优惠券数据
 -(void)loadShakeData:(void(^)(BOOL ret))completion{
     
+    AppShareData *app = [AppShareData new];
     
     ShakeService *service = [ShakeService new];
     
@@ -64,7 +66,7 @@
     //[SVProgressHUD showWithStatus:@""];
     
     
-    [service requestShakeCoupon:@"1" success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:app.customId shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
         
 //        NSLog(@"12313-------------->%@",data);
         self.isShakeDataLoaded = YES;
@@ -397,159 +399,6 @@
     
 }
 
-//#pragma mark - 主视图
-///**
-// 
-// 已经废弃
-// 
-// */
-//
-//-(UIView*)makeView{
-//    
-//    
-//    UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"handbg.png"]];
-//    
-//    bgView.frame = CGRectMake(0, 0, self.view.frame.size.width,  self.view.frame.size.height);
-//    
-//    
-//    UIImageView *handView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hand.png"]];
-//    
-//    [bgView addSubview:handView];
-//    
-//    [handView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.center.equalTo(bgView);
-//    }];
-//    
-//    
-//    UILabel *lab1 = [UILabel new];
-//    lab1.font = [UIFont boldSystemFontOfSize:20];
-//    lab1.textColor = [GUIConfig grayFontColorDeep];
-//    lab1.text=@"随时随地";
-//    
-//    [bgView addSubview:lab1];
-//    
-//    [lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.bottom.equalTo(bgView.mas_top).offset(-40);
-//      //  make.right.equalTo(self.view).multipliedBy(0.5);
-//        make.left.equalTo(@20);
-//        
-//        
-//    }];
-//    
-//    lab1.textAlignment = NSTextAlignmentCenter;
-//    
-//    
-//    UILabel *lab2 = [UILabel new];
-//    lab2.font = [UIFont boldSystemFontOfSize:20];
-//    lab2.textColor = [GUIConfig grayFontColorDeep];
-//    lab2.text=@"想摇就摇";
-//    
-//    [bgView addSubview:lab2];
-//    
-//    [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.bottom.equalTo(bgView.mas_top).offset(-20);
-//      //  make.right.equalTo(self.view);
-//        make.left.equalTo(@(SCREEN_WIDTH/2));
-//        //make.left.equalTo(self.view);
-//        
-//        
-//    }];
-//    
-//    lab2.textAlignment = NSTextAlignmentCenter;
-//    
-//    
-//    return bgView;
-//    
-//    
-//
-//    
-//    
-//    
-//    
-//    
-//}
-
-//#pragma mark - 摇换的界面
-//-(void)makeBody{
-//    
-//    
-//
-//    
-//    UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"handbg.png"]];
-//    
-//    [self.contentView addSubview:bgView];
-//    
-//    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.equalTo(self.contentView);
-//        make.centerY.equalTo(self.contentView).offset(-20);
-//        
-//  
-//    
-//    }];
-//    
-//    
-//    UIImageView *handView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hand.png"]];
-//    
-//    [bgView addSubview:handView];
-//    
-//    [handView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.center.equalTo(bgView);
-//    }];
-//    
-//    
-//    UILabel *lab1 = [UILabel new];
-//    lab1.font = [UIFont boldSystemFontOfSize:20];
-//    lab1.textColor = [GUIConfig grayFontColorDeep];
-//    lab1.text=@"随时随地";
-//    
-//    [self.view addSubview:lab1];
-//    
-//    [lab1 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.bottom.equalTo(bgView.mas_top).offset(-40);
-//        make.right.equalTo(self.view).multipliedBy(0.5);
-//        make.left.equalTo(@20);
-//        
-//        
-//    }];
-//    
-//    lab1.textAlignment = NSTextAlignmentCenter;
-//    
-//    
-//    UILabel *lab2 = [UILabel new];
-//    lab2.font = [UIFont boldSystemFontOfSize:20];
-//    lab2.textColor = [GUIConfig grayFontColorDeep];
-//    lab2.text=@"想摇就摇";
-//    
-//    [self.view addSubview:lab2];
-//    
-//    [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.bottom.equalTo(bgView.mas_top).offset(-20);
-//        make.right.equalTo(self.view);
-//        make.left.equalTo(@(SCREEN_WIDTH/2));
-//        //make.left.equalTo(self.view);
-//        
-//        
-//    }];
-//    
-//    lab2.textAlignment = NSTextAlignmentCenter;
-//    
-//   
-//     
-//    
-//    
-//    
-//    
-//    
-//}
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
@@ -573,13 +422,7 @@
         
     }
     
-    
-    
-    
-    
-    
-    
-    
+   
     ShakeCouponViewCtrl *vc = [ShakeCouponViewCtrl new];
     
     vc.nav = self.navigationController;
@@ -617,15 +460,15 @@
     
 }
 
-#pragma mark - 摇动感应器触发
 
+#pragma mark ------------------------------ 摇动感应器触发
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     
     [super motionEnded:motion withEvent:event];
 
     
         if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake){
-            
+    
             
             
             
@@ -642,12 +485,7 @@
                 }
                 
             }];
-
-            
-            
-            
-            
-        
+       
         }
  }
 

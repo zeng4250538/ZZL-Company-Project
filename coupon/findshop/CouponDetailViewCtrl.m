@@ -327,7 +327,7 @@
     BasketService *basket = [[BasketService alloc]init];
     
     AppShareData *app = [AppShareData instance];
-    NSDictionary *pram = @{@"userId":app.customId,@"couponPromotionId":@""};
+    NSDictionary *pram = @{@"userId":app.customId,@"couponPromotionId":@"24"};
     
     [basket requestADDBasket:pram count:0 success:^(NSInteger code, NSString *message, id data) {
         

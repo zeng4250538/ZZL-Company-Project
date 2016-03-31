@@ -53,7 +53,6 @@
     [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
         
         
-        [self loadData];
         
         
         
@@ -116,62 +115,31 @@
     }];
     
     
-//    
-//    self.mallList = @[@{@"mall":@"天河城",
-//                        @"distance":@"100米"
-//                        },
-//                      @{@"mall":@"正佳",
-//                        @"distance":@"200米"
-//                        },
-//                      @{@"mall":@"高德置地",
-//                        @"distance":@"2000米"
-//                        },
-//                      @{@"mall":@"全城",
-//                        @"distance":@""
-//                        }
-//                      
-//                      
-//                      ];
-//    
-//    
-//    
-//    [ReloadHud showReloadMode:self.tableView];
-//    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    
-    
+  
     //隐藏导航栏
-    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-
-    
+  
     [self loadData];
-    
-    
-    
+   
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
-    
+   
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
+    
     self.navigationController.navigationBar.shadowImage = nil;
+    
     self.navigationController.navigationBar.translucent = YES;
-    
-    
-    
-    
     
     
 }
@@ -189,11 +157,6 @@
     
     self.tableView.layer.cornerRadius = 6;
     self.tableView.clipsToBounds = YES;
-    
-    
-    
-    
-    
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);

@@ -343,7 +343,7 @@
     [req get:url param:parm success:^(NSInteger code, id object) {
         
         success(1,@"",object);
-        NSLog(@"%@------->",object);
+//        NSLog(@"%@------->",object);
     } failure:^(NSInteger code, NSString *content) {
         
         failure(0,NO,@"",content);

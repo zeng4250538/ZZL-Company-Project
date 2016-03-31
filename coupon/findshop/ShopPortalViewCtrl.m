@@ -38,6 +38,10 @@
 @property(nonatomic,strong)SelectMallPopViewCtrl *selectTitle;
 @property(nonatomic,strong)NSString *cityString;
 
+@property(nonatomic,strong)NSArray *mallArray;
+
+@property(nonatomic,strong)UIButton *headButton;
+
 @end
 
 @implementation ShopPortalViewCtrl
@@ -47,7 +51,9 @@
     
     [super viewDidLoad];
     
-    [self titleItenLabel];
+//    [self titleItenLabel];
+//    
+//    [_headButton setTitle:self.mallArray[0][@"name"] forState:UIControlStateNormal];
     
     self.navigationItem.title=@"找商家";
     
@@ -61,7 +67,6 @@
     
     self.selectTitle = [[SelectMallPopViewCtrl alloc]init];
 //    [self makeBarItem];
-    
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -78,25 +83,24 @@
     
 }
 
--(void)titleItenLabel{
+-(void)titleItenLabel:(void(^)(id data))cityLabel{
 
-    
-//    [self.mallArray addObserver:self forKeyPath:@"mallArray" options:1 context:nil];
-//
-//
-//#pragma mark ------ 周边商城网络请求
-//    MallService *services = [[MallService alloc] init];
-//    [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
-//        
-//        self.mallArray = data;
-//        
-//        NSLog(@"%@",self.mallArray[0][@"name"]);
-//        
-//        
-//        
-//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-//        
-//    }];
+#pragma mark ------ 周边商城网络请求
+    MallService *services = [[MallService alloc] init];
+    [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+        
+        self.mallArray = data;
+        
+        NSLog(@"%@",self.mallArray[0][@"name"]);
+        
+        cityLabel(data);
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+    }];
 
 
 
@@ -204,49 +208,6 @@
 }
 
 
-
-
-//-(void)loadData{
-//    
-//    
-//    
-//    
-//    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-//        
-//        
-//        
-//        [self doLoad:^(BOOL ret){
-//            
-//       
-//        }];
-//        
-//        
-//        
-//        
-//        
-//    
-//    }];
-//    
-//    [self doLoad:^(BOOL ret){
-//        
-//        
-//    }];
-//    
-//    
-//    
-//    
-//  //  [self doLoad];
-//    
-//    
-//    
-//    
-//
-//    
-//    
-//    
-//    
-//}
-
 #pragma mark- 导航栏按钮
 
 -(void)makeBarItem{
@@ -293,17 +254,25 @@
  //   self.navigationItem.rightBarButtonItem = scanerBarItem;
     
 #pragma mark ----- 周边商城标题
-    UIButton *headButton = [[UIButton alloc]init];;
-    headButton.frame = CGRectMake(0, 0, 200, 44);
-    
-    [headButton setTitle:@"时尚天河" forState:UIControlStateNormal];
-    headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    _headButton = [[UIButton alloc]init];;
+    _headButton.frame = CGRectMake(0, 0, 200, 44);
+
+    [_headButton setTitle:@"时尚天河12133" forState:UIControlStateNormal];
+    _headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
 
     [self.navigationItem setTitle:self.cityString];
-    self.navigationItem.titleView = headButton;
+    self.navigationItem.titleView = _headButton;
     
-    [headButton bk_addEventHandler:^(id sender) {
+    [self titleItenLabel:^(id data) {
         
+        [_headButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
+        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+        vc.mallList = data;
+
+    }];
+    
+    [_headButton bk_addEventHandler:^(id sender) {
+
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
         [Utils popTransparentViewCtrl:self childViewCtrl:vc];
