@@ -53,13 +53,11 @@
         
         vc.navigationItem.title = title;
         
-        
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         nav.tabBarItem.image = imageArray[pos];
         nav.tabBarItem.title = title;
         
         [vcArray addObject:nav];
-        
         
         if ([vc isKindOfClass:[CartViewCtrl class]]) {
             self.cartVc = nav;

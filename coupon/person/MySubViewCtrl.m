@@ -44,17 +44,20 @@
     
     ShopService *service = [ShopService new];
     
+    [SVProgressHUD show];
+    
     [service queryMoreHotShop:nil success:
      
      ^(int code, NSString *message, id data) {
          
-         if (code==0) {
+//         if (code==0) {
              self.dataList = data;
-             
+             NSLog(@"asdasdasd%@",self.dataList);
              [self.tableView reloadData];
              
-         }
+//         }
          
+         [SVProgressHUD dismiss];
          
      } failure:
      ^(int code, BOOL retry, NSString *message, id data) {
@@ -92,7 +95,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.dataList count];
+    return self.dataList.count;
 }
 
 

@@ -363,7 +363,7 @@
         
         self.subscribeButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
-        self.subscribeButton.backgroundColor = [GUIConfig greenBackgroundColor];
+//        self.subscribeButton.backgroundColor = [GUIConfig greenBackgroundColor];
         
         [self.subscribeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
@@ -416,8 +416,8 @@
    // self.goodLabel.frame = CGRectMake(140, 30, 60, 20);
     
     [self.goodImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.logoView.mas_right).with.offset(10);
-        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(5);
+        make.left.equalTo(self.logoView.mas_right).with.offset(20);
+        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(10);
         
     }];
 
@@ -425,8 +425,8 @@
     [self.goodLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.height.equalTo(@20);
-        make.width.equalTo(@60);
-        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(5);
+        make.width.equalTo(@20);
+        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(10);
         make.left.equalTo(self.goodImageView.mas_right).with.offset(10);
         
         
@@ -434,16 +434,16 @@
     
     
     [self.badImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.goodLabel.mas_right).with.offset(10);
-        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(5);
+        make.left.equalTo(self.goodLabel.mas_right).with.offset(20);
+        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(10);
         
     }];
 
     [self.badLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.height.equalTo(@20);
-        make.width.equalTo(@60);
-        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(5);
+        make.width.equalTo(@20);
+        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(10);
         make.left.equalTo(self.badImageView.mas_right).with.offset(10);
         
         
@@ -469,27 +469,27 @@
     
     [self.subscribeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.width.equalTo(@70);
-        make.height.equalTo(@30);
-        make.centerY.equalTo(self.contentView).offset(-10);
+        make.width.equalTo(@60);
+        make.height.equalTo(@26);
+        make.top.equalTo(self.contentView).offset(65);
         make.right.equalTo(self.contentView).offset(-10);
-        
-        
-        
-        
-        
-        
+    
     }];
     
+    self.subscribeButton.backgroundColor = [GUIConfig greenBackgroundColor];
+    
     [self.subscribeButton setTitle:@"取消订阅" forState:UIControlStateNormal];
+    
+    self.subscribeButton.titleLabel.font = [UIFont systemFontOfSize:11];
+    
+    self.subscribeButton.layer.cornerRadius = 3;
     
     self.subscribeButton.hidden = YES;
     if (self.subscribeType == SubscribeTypeHave) {
         
         self.subscribeButton.hidden = NO;
         
-        
-    
+
     }
     
     
@@ -499,16 +499,23 @@
 -(void)updateData{
     
     
-   
-    self.titleLabel.text = self.data[@"name"];
+    if (self.data[@"name"] != NULL) {
+        self.titleLabel.text = self.data[@"name"];
+    }
+    else if (self.data[@"shopName"] != NULL){
+        
+       self.titleLabel.text = self.data[@"shopName"];
+    
+    }
+    
     self.goodLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"good"] integerValue]];
     self.badLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"bad"] integerValue]];
     self.commentLabel.text = self.data[@"prompt"];
     
     NSString *urlString = @"";
     
-    if (self.data[@"couponSmallPhotoUrl"] != NULL) {
-        urlString = self.data[@"couponSmallPhotoUrl"];
+    if (self.data[@"shopPhotoUrl"] != NULL) {
+        urlString = self.data[@"shopPhotoUrl"];
     }
     
     else if (self.data[@"smallPhotoUrl"] != NULL){
@@ -518,6 +525,7 @@
     else{
         urlString = self.data[@"smallPhotoUrl"];
     }
+    
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     

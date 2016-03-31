@@ -12,7 +12,7 @@
 
 
 
--(void)requestADDBasket:(NSString*)couponId count:(NSInteger)count
+-(void)requestADDBasket:(NSDictionary*)parm count:(NSInteger)count
                 success:(void(^)(NSInteger code,NSString *message,id data))success
                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
@@ -31,14 +31,11 @@
     BaseRequest *req = [BaseRequest new];
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponbasket/basketitem"];
+ 
+    NSDictionary *parms = parm;
     
     
-    
-    
-    NSDictionary *parm = @{@"customerId":@"15818865760",@"couponId":couponId,@"couponCount":@(count)};
-    
-    
-    [req post:url param:parm success:^(NSInteger code, id object) {
+    [req post:url param:parms success:^(NSInteger code, id object) {
         
         success(code,@"",object);
         

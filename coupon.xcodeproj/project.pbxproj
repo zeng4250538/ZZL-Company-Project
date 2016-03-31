@@ -169,6 +169,7 @@
 		7F121D721CA6AF6A005AF53D /* SaerchShopService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D711CA6AF6A005AF53D /* SaerchShopService.m */; };
 		7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */; };
 		7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */; };
+		7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3557851CACA8E6000DB7EA /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -434,6 +435,8 @@
 		7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildPagesViewController.m; sourceTree = "<group>"; };
 		7F121D791CAA8499005AF53D /* UISubscribeSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISubscribeSevice.h; sourceTree = "<group>"; };
 		7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubscribeSevice.m; sourceTree = "<group>"; };
+		7F3557851CACA8E6000DB7EA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7F3557871CACA914000DB7EA /* coupon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = coupon.entitlements; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -446,6 +449,7 @@
 				578E63F31C25597000C1FB19 /* Security.framework in Frameworks */,
 				578E63F11C25591900C1FB19 /* SystemConfiguration.framework in Frameworks */,
 				578E63EF1C25590500C1FB19 /* MobileCoreServices.framework in Frameworks */,
+				7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */,
 				1E6948255BF932C4567844B2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +467,7 @@
 		49942032E160F0BBC893A916 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F3557851CACA8E6000DB7EA /* MapKit.framework */,
 				578E63F41C25597900C1FB19 /* libc++.dylib */,
 				578E63F21C25597000C1FB19 /* Security.framework */,
 				578E63F01C25591900C1FB19 /* SystemConfiguration.framework */,
@@ -578,6 +583,7 @@
 		5779BD631C25381600E15934 /* coupon */ = {
 			isa = PBXGroup;
 			children = (
+				7F3557871CACA914000DB7EA /* coupon.entitlements */,
 				574BF3EA1C9802640088A9A6 /* auth */,
 				57CE97DA1C65F3CB00CE0E57 /* test */,
 				57CE97D51C65E8E100CE0E57 /* model */,
@@ -841,6 +847,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7F3FB4111CACE3BD0004C456 /* basketSevice */,
 				7F121D781CAA844E005AF53D /* UISubscribSevice */,
 				574BF3E71C98022A0088A9A6 /* LoginService.h */,
 				574BF3E81C98022A0088A9A6 /* LoginService.m */,
@@ -945,6 +952,13 @@
 			name = UISubscribSevice;
 			sourceTree = "<group>";
 		};
+		7F3FB4111CACE3BD0004C456 /* basketSevice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = basketSevice;
+			sourceTree = "<group>";
+		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1007,6 +1021,14 @@
 					5779BD601C25381600E15934 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 2N59778B5Q;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					5779BD791C25381600E15934 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1389,6 +1411,7 @@
 			baseConfigurationReference = 4B84B3CF55C05AC490E9E3A2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/coupon/coupon.pch";
@@ -1409,6 +1432,7 @@
 			baseConfigurationReference = A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/coupon/coupon.pch";

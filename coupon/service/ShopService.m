@@ -46,15 +46,7 @@
         
         
     }];
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
 }
 
@@ -94,14 +86,7 @@
         
     }];
     
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
 }
 
@@ -130,19 +115,8 @@
         
         
         failure(code,NO,content,nil);
-        
-        
-        
-        
+       
     }];
-    
-
-    
-    
-    
-    
-    
-    
     
 }
 
@@ -201,23 +175,9 @@
             
             
         }];
-        
-        
-
-        
-        
-        
-        
-        
-        
+       
     }
-    
-    
-    
-    
-    
-    
-    
+   
 }
 
 
@@ -266,11 +226,9 @@
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
     
     url = [url stringByAppendingString:customerId];
+    
     url = [url stringByAppendingString:@"/"];
-    
-    
-    
-    
+   
     NSDictionary *parm = @{@"customerId":@"xxxx",
                            @"shopId":shopid};
     
@@ -304,28 +262,7 @@
             
         }];
         
-        
-        
-        
-        
-        
-        
-        
-        
     }
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }
@@ -364,43 +301,24 @@
         
         
     }];
-
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }
-
-
-
 
 
 -(void)queryShopPortalData:(NSDictionary*)params
                   success:(void(^)(int code,NSString *message,id data))success
                   failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure{
     
-    
-    
-    
     if (success) {
         
         
         NSArray *hotshop = [[MockData instance] randomShopModel:3];
-                            
-                            
+        
         NSArray *hotbrand = [[MockData instance] randomShopModel:3];
         
         
         NSArray *hotcoupon = [[MockData instance] orderCouponModel:3];
-            
-                             
-                             
         
         NSDictionary *data = @{@"hotshop":hotshop,@"hotcoupon":hotcoupon,@"hotbrand":hotbrand};
         
@@ -412,55 +330,27 @@
     
     return ;
     
-    
-    
-    
-    
-    
 }
-
-
 
 
 -(void)queryMoreHotShop:(NSDictionary*)params
                success:(void(^)(int code,NSString *message,id data))success
                failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure{
-    
-    
-    
-    if (success) {
+   
+    BaseRequest *req = [BaseRequest new];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/15818865756/shopfavorite"];
+    NSDictionary *parm = @{@"shopmallid":@"2",@"categoryid":@"00001"};
+    [req get:url param:parm success:^(NSInteger code, id object) {
         
+        success(1,@"",object);
+        NSLog(@"%@------->",object);
+    } failure:^(NSInteger code, NSString *content) {
         
-        NSArray *hotshop = [[MockData instance] randomShopModel:8];
+        failure(0,NO,@"",content);
         
-        
-        success(0,@"",hotshop);
-        
-        
-    }
-    
-    
-    return ;
-    
-
-    
-    
-    
-    
+    }];
+   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @end

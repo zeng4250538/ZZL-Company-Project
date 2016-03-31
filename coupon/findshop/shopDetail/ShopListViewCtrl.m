@@ -50,7 +50,7 @@
     
     
     
-    [service requestRecommendShop:@"123456" customerId:15818865756 page:2 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+    [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
         
         
         

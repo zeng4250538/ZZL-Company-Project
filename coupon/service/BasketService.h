@@ -18,7 +18,7 @@
  *  @param success  <#success description#>
  *  @param failure  <#failure description#>
  */
--(void)requestADDBasket:(NSString*)couponId count:(NSInteger)count
+-(void)requestADDBasket:(NSDictionary*)parm count:(NSInteger)count
                 success:(void(^)(NSInteger code,NSString *message,id data))success
                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 

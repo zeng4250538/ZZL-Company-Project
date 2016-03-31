@@ -48,7 +48,7 @@
    // NSString *url = [NSString stringWithFormat:@"http://120.25.66.110:9998/diamond-client-security-web"];
     
    
-     NSString *url = [NSString stringWithFormat:@"http://183.6.190.75:9870/diamond-client-security-web"];
+     NSString *url = [NSString stringWithFormat:@"http://183.6.190.75:9780/diamond-client-security-web"];
     
     return url;
     

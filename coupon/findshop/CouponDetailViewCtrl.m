@@ -14,7 +14,7 @@
 #import "AppShareData.h"
 #import "ThrowLineTool.h"
 #import "BasketContainerViewCtrl.h"
-
+#import "BasketService.h"
 
 @interface CouponDetailViewCtrl ()
 @property(nonatomic,strong)UILabel   *cartNumLabel;
@@ -101,7 +101,6 @@
     
     
     UIButton *cartButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
     
     [cartButton setImage:[UIImage imageNamed:@"cart"] forState:UIControlStateNormal];
     
@@ -285,16 +284,11 @@
 //    [addCartButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
     [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    
-    
-    
-    
     [addCartButton bk_addEventHandler:^(id sender) {
         
+        [self loadData];
         
         ThrowLineTool *tool = [[ThrowLineTool alloc] init];
-        
-        
         
         UIView *ballView = [[UIView alloc] initWithFrame:CGRectMake(addCartButton.frame.origin.x+SCREEN_WIDTH/8, SCREEN_HEIGHT-60,20, 20)];
         
@@ -302,10 +296,6 @@
         ballView.layer.cornerRadius =ballView.frame.size.width;
         
         [self.view addSubview:ballView];
-        
-        
-        
-        
         
         CGFloat startX = ballView.frame.origin.x;//arc4random() % (NSInteger)CGRectGetWidth(self.frame);
         CGFloat startY = ballView.frame.origin.y;//CGRectGetHeight(self.frame);
@@ -316,93 +306,38 @@
                      from:CGPointMake(startX, startY)
                        to:CGPointMake(endX, endY)
                    height:height duration:0.5];
-        
-        
-        
+    
         tool.didFinishBlock = ^(){
             
             [ballView removeFromSuperview];
-            
-            
-            
+         
             [[AppShareData instance] addCouponToCart:self.datas];
             
             [self updateCartNum];
-            
-            
+        
         };
         
-        
-            
-            // return;
-            
-            
-            
-            
-            
-     
-        
-        
-        
-        
-        
-        
-        
-        
-//        CartViewCtrl *vc = [CartViewCtrl new];
-//        
-//        [self.navigationController pushViewController:vc animated:YES];
-//        
     } forControlEvents:UIControlEventTouchUpInside];
-    
-    
-//    UIButton *buyButton = [UIButton buttonWithType:UIButtonTypeSystem];
-//    
-//    [uv addSubview:buyButton];
-//    
-//    [buyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.left.mas_equalTo(SCREEN_WIDTH/2);
-//        
-//        make.top.right.and.bottom.equalTo(uv);
-//    }];
-//    
-//    [buyButton setTitle:@"直接购买" forState:UIControlStateNormal];
-//    
-//    [buyButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
-//    
-//    [buyButton bk_addEventHandler:^(id sender) {
-//        ToPayTableViewCtrl *vc =[ToPayTableViewCtrl new];
-//        
-//        [self.navigationController pushViewController:vc animated:YES];
-//        
-//        
-//    } forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
-    
-//    UIView *line2 = [GUIConfig line];
-//    line2.backgroundColor = [GUIConfig grayFontColorLight];
-//    
-//    [uv addSubview:line2];
-//    
-//    [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.width.equalTo(@1);
-//        make.top.equalTo(buyButton).offset(10);
-//        make.bottom.equalTo(buyButton).offset(-10);
-//        make.left.equalTo(buyButton);
-//        
-//    }];
-
-    
     
 }
 
+#pragma mark -------------- 加入篮子网络请求
+-(void)loadData{
+    
+    BasketService *basket = [[BasketService alloc]init];
+    
+    AppShareData *app = [AppShareData instance];
+    NSDictionary *pram = @{@"userId":app.customId,@"couponPromotionId":@""};
+    
+    [basket requestADDBasket:pram count:0 success:^(NSInteger code, NSString *message, id data) {
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+    }];
+
+}
+
 #pragma mark - TableViewCell 
-
-
 -(void)makeCell1:(UITableViewCell*)cell{
     
     
@@ -421,7 +356,7 @@
         
     }];
     
-    couponNameLabel.text=self.datas[@"name"];
+    couponNameLabel.text=self.datas[@"shopName"];
     
     
     UILabel *priceLabel = [UILabel new];
@@ -438,7 +373,7 @@
         make.height.equalTo(@20);
         
     }];
-    priceLabel.text=[NSString stringWithFormat:@"￥%@元",self.datas[@"price"]];
+    priceLabel.text=[NSString stringWithFormat:@"%@",self.datas[@"name"]];
     
     
     
@@ -465,6 +400,7 @@
         make.height.equalTo(@30);
         
     }];
+    
     
     addressLabel.text=self.datas[@"shop"][@"address"];
     

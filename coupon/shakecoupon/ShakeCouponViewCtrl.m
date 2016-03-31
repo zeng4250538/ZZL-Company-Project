@@ -219,13 +219,7 @@
         [view removeFromSuperview];
         
       //  self.imgView = nil;
-        
-        
-        
      
-        
-        
-        
         self.couponData = [[AppShareData instance].shakeCouponQueue next];
         
         if (self.couponData==nil) {
@@ -514,32 +508,16 @@
     }];
     
     downLabel.text=@"扔了";
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-    
+  
     
 }
 
+
 #pragma mark - 准备新的视图
-
-
 -(void)makeNextView{
-    
-    
     
     CGFloat viewWidth = SCREEN_WIDTH-120;
     CGFloat viewHeight = SCREEN_WIDTH-120+40;
-    
-    
-    
     
     self.couponData = [[AppShareData instance].shakeCouponQueue next];
     
@@ -562,9 +540,6 @@
         
     }
     
-    
-
-    
     [self.shakeCouponList removeObjectAtIndex:0];
     
     CouponView *nextView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
@@ -575,12 +550,6 @@
     
     
     self.nextView = nextView;
-    
-    
-    
-    
-    
-    
     
 }
 
@@ -841,12 +810,7 @@
         
         
         [self beginThrowing:rg.view];
-        
-        
-        
-        
-        
-   
+
         
         
         NSLog(@"up");
@@ -856,23 +820,18 @@
     }
     
     if (rg.direction == UISwipeGestureRecognizerDirectionDown){
-        
-        
-        
+       
         [self animationSwipeDown];
-        
-        
-        
+       
         NSLog(@"down");
-        
-        
-        
-        
+       
     }
     
     
     if (rg.direction == UISwipeGestureRecognizerDirectionLeft) {
+        
         [self animationSwipeLeft];
+        
     }
     
     
@@ -881,12 +840,9 @@
 
 
 -(void) viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
-    
-    
-
-    
-    
+  
 }
 
 
@@ -904,9 +860,7 @@
     return ;
     
     [self doAddAction];
-    
-    
-    
+   
     [UIView animateWithDuration:0.3 animations:^{
         
         
@@ -917,30 +871,15 @@
         r.origin.x = x;
         
         self.imgView.frame = r;
-
-        
-        
-        
-        
-        
-    
     
     } completion:^(BOOL finished) {
         
         
     }];
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
 }
+
 
 #pragma mark - 优惠券展现完毕后，增加手势
 -(void)doAddAction{
@@ -954,7 +893,6 @@
     [self.imgView removeGestureRecognizer:self.swipeUpCouponRG];
     
     [self.imgView addGestureRecognizer:self.swipeUpCouponRG];
-    
  
     [self.imgView removeGestureRecognizer:self.swipeDownCouponRG];
     
@@ -969,23 +907,10 @@
 }
 
 
-
-
-
-
-
 -(void)animationSwipeUp{
     
-    
-    
-    
     [self makeNextView];
-
-    
-    
-    
-    
-    
+ 
     [UIView animateWithDuration:0.5 animations:^{
         
         
@@ -1004,18 +929,10 @@
         CGRect rr = self.imgView.frame;
         
         CGFloat yy = self.imgView.frame.size.width*-2.0f;
-        
-        
-        
-        
-        
-        
+       
         rr.origin.y = yy;
         
         self.imgView.frame = rr;
-        
-        
-        
         
     } completion:^(BOOL finished) {
         
@@ -1042,48 +959,32 @@
 }
 
 -(void)animationSwipeDown{
-    
-    
+   
     [self makeNextView];
    
-    
-    
-    
     [UIView animateWithDuration:0.3 animations:^{
-        
-        
         
         CGRect r = self.nextView.frame;
         
         CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
         
         r.origin.x = x;
-        
-        
+       
         self.nextView.frame = r;
-        
-        
-        
-        
-        
+       
         CGRect rr = self.imgView.frame;
         
         CGFloat yy = SCREEN_WIDTH*1.5;
         
        // self.imgView.alpha=0.0f;
-        
-        
-        
+       
         rr.origin.y = yy;
         rr.origin.x = rr.origin.x+SCREEN_WIDTH/5;
         self.imgView.frame = rr;
         
         self.imgView.transform = CGAffineTransformMakeScale(0.2, 0.2);
         
-        
-        
-        
-        
+      
     } completion:^(BOOL finished) {
         
         
@@ -1098,21 +999,15 @@
         [Utils incCoupon];
         
     }];
-    
-    
-    
-    
-    
+   
 }
+
 
 -(void)animationSwipeLeft{
     
     
     [self makeNextView];
    
-    
-    
-    
     [UIView animateWithDuration:0.5 animations:^{
         
         
@@ -1126,19 +1021,13 @@
         
         self.nextView.frame = r;
         
-        
-        
         CGRect rr = self.imgView.frame;
         
         CGFloat xx = self.imgView.frame.size.width*-2.0f;
         
         rr.origin.x = xx;
-        
-        
+       
         self.imgView.frame = rr;
-        
-        
-        
         
     } completion:^(BOOL finished) {
         
@@ -1150,35 +1039,20 @@
         self.imgView = self.nextView;
         
         [self doAddAction];
-        
-        
-        
+       
     }];
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
+
 
 
 -(void)loadShakeData:(void(^)(BOOL ret))completion{
     
     
     ShakeService *service = [ShakeService new];
-    
-    
-    
-    
+  
     [service requestShakeCoupon:@"12345" success:^(NSInteger code, NSString *message, id data) {
-        
-        
-        
+       
         [[AppShareData instance].shakeCouponQueue resetData:data];
         
         
@@ -1249,13 +1123,7 @@
 
 
 -(void)doTapCoupon:(id)sender{
-    
-    
-    
-    
-    
-    
-    
+ 
     [self dismissViewControllerAnimated:NO completion:^{
         
         CouponDetailViewCtrl *vc =  [CouponDetailViewCtrl new];
@@ -1268,10 +1136,6 @@
         [self.nav pushViewController:vc animated:YES];
         
     }];
-    
-    
-    
-    
     
 }
 

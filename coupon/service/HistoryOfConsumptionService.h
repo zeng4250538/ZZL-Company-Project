@@ -12,6 +12,6 @@
 
 @property(nonatomic,strong)id customerid;
 
--(void)requestHistoryOfConsumptionSuccess:(void(^)(id data))success failure:(void(^)(NSInteger code))failure;
+-(void)requestCustomerid:(NSString *)customerid HistoryOfConsumptionSuccess:(void(^)(id data))success failure:(void(^)(NSInteger code))failure;
 
 @end

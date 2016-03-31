@@ -68,7 +68,7 @@
     
     
     [service requestKeyword:@"mallid"
-                          keyWord:@"xxx"
+                          keyWord:_searchBar.text
                           success:^(NSInteger code, NSString *message, id data) {
                               
                               

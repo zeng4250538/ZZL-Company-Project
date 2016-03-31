@@ -10,6 +10,7 @@
 #import "HistoryOfConsumptionTableViewCell.h"
 #import "ChildPagesViewController.h"
 #import "HistoryOfConsumptionService.h"
+#import "AppShareData.h"
 @interface HistoryOfConsumptionTableViewController ()
 
 @end
@@ -35,12 +36,16 @@
 }
 
 -(void)netWorkRequst{
-
-
+    AppShareData *app = [AppShareData instance];
+ 
     HistoryOfConsumptionService *HistoryOfConsumptionRequst = [HistoryOfConsumptionService new];
-    [HistoryOfConsumptionRequst requestHistoryOfConsumptionSuccess:^(id data) {
+    [HistoryOfConsumptionRequst requestCustomerid:app.customId HistoryOfConsumptionSuccess:^(id data) {
+        
+        
         
     } failure:^(NSInteger code) {
+        
+        
         
     }];
     

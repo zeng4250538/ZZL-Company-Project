@@ -422,6 +422,8 @@
     
 }
 
+
+#pragma mark ------------ 设置cell的组头
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     
@@ -429,8 +431,8 @@
         
        return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
            
-           
            ShopListViewCtrl *vc = [ShopListViewCtrl new];
+           
            vc.hidesBottomBarWhenPushed = YES;
            
            [self.navigationController pushViewController:vc animated:YES];

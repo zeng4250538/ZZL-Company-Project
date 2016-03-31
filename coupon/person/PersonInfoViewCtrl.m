@@ -200,23 +200,23 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-//    if (![[AppShareData instance] isLogin]) {
-//        
-//        
-//        LoginViewCtrl *vc = [LoginViewCtrl new];
-//        
-//        vc.loginEndBlock = ^(BOOL ret){
-//            
-//            
-//            [self.navigationController popViewControllerAnimated:YES];
-//            
-//        };
-//        
-//        [self.navigationController pushViewController:vc animated:YES];
-//        
+    if (![[AppShareData instance] isLogin]) {
+        
+        
+        LoginViewCtrl *vc = [LoginViewCtrl new];
+        
+        vc.loginEndBlock = ^(BOOL ret){
+            
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        };
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
 //        return ;
-//        
-//    }
+        
+    }
     
     
     

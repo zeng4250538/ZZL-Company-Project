@@ -39,10 +39,9 @@
     
     
     BasketNotUseViewCtrl *noUseVc = [BasketNotUseViewCtrl new];
-    
     noUseVc.title=@"未使用";
-    BasketFinishViewCtrl *finishedVc = [BasketFinishViewCtrl new];
     
+    BasketFinishViewCtrl *finishedVc = [BasketFinishViewCtrl new];
     finishedVc.title=@"已过期";
     
     self.headTabBar.viewControllers = @[noUseVc, finishedVc];

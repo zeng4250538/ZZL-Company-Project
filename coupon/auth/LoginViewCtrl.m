@@ -116,11 +116,8 @@
         
     }];
     
-    
-    
-    
-    
 }
+
 
 -(void)makeFooterView{
     
@@ -159,7 +156,7 @@
             
             [SVProgressHUD showErrorWithStatus:@"用户名为空"];
             
-            return;
+//            return;
             
         }
         
@@ -168,7 +165,7 @@
             
             [SVProgressHUD showErrorWithStatus:@"密码为空"];
             
-            return ;
+//            return ;
             
         }
         
@@ -181,8 +178,6 @@
         [SVProgressHUD showWithStatus:@""];
         
         [service doLogin:userName password:password success:^(NSInteger code, NSString *message, id data) {
-            
-
             
             if (![data isKindOfClass:[NSDictionary class]]) {
                 
@@ -204,21 +199,13 @@
                 
                 self.loginEndBlock(YES);
             }
-            
-            
+          
             
         } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
             
             [SVProgressHUD showErrorWithStatus:@"登录出错"];
             
-            
-            
-            
-            
         }];
-        
-        
-        
         
         
     } forControlEvents:UIControlEventTouchUpInside];

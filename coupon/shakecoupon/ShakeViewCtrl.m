@@ -303,7 +303,7 @@
        
         [self makeAnimateView:imgView parentView:uv];
         
-          pos++;
+//          pos++;
         
     }
 
@@ -346,14 +346,14 @@
     
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
     mallButton.frame = CGRectMake(0, 0, 200, 44);
-    [mallButton setTitle:@"天河城(1km)" forState:UIControlStateNormal];
+    [mallButton setTitle:@"时尚天河" forState:UIControlStateNormal];
     mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     
     self.mallButton =mallButton;
     
     
-    self.navigationItem.titleView = self.mallButton;
+    self.navigationItem.titleView = mallButton;
     
     
     [mallButton bk_addEventHandler:^(id sender) {

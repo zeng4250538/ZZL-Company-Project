@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Shop.h"
 
 
 typedef NS_ENUM(NSUInteger, SubscribeType) {
@@ -19,6 +20,7 @@ typedef NS_ENUM(NSUInteger, SubscribeType) {
 
 @property(nonatomic,strong)NSDictionary *data;
 @property(nonatomic,assign)SubscribeType subscribeType;
+@property(nonatomic, strong) Shop *model;
 
 +(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock;
 
