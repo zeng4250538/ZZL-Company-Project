@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BasketFinishViewCtrl : UITableViewController
+@interface BasketFinishViewCtrl : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *dataList;
 @end

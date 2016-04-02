@@ -19,14 +19,10 @@
        
     // 网络访问是异步的,回调是主线程的,因此程序员不用管在主线程更新UI的事情
     [manager GET:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"%@", responseObject);
-        // 提问:NSURLConnection异步方法回调,是在子线程
-        // 得到回调之后,通常更新UI,是在主线程
-//        NSLog(@"%@",responseObject);
         success(operation.response.statusCode,responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
+        NSLog(@"GET Method Error param=%@ url=%@ error = %@",param,url, error);
         
         failure(operation.response.statusCode,error.description);
         
@@ -53,8 +49,6 @@
     //发送请求
     [manager POST:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"JSON: %@", responseObject);
-        
         
         success(operation.response.statusCode,responseObject);
         
@@ -62,9 +56,11 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
+        NSLog(@"POST Method Error params=%@ url=%@ error = %@",param,url, error);
+        
+        
         failure(operation.response.statusCode,error.description);
         
-        NSLog(@"Error: %@", error);
     }];
     
 
@@ -95,9 +91,12 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
+        NSLog(@"put Method Error params=%@ url=%@ error = %@",param,url, error);
+
+        
+        
         failure(operation.response.statusCode,error.description);
         
-        NSLog(@"Error: %@", error);
     }];
     
 
@@ -135,10 +134,12 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        NSLog(@"delete Method Error params=%@ url=%@ error = %@",param,url, error);
+
+        
         
         failure(operation.response.statusCode,error.description);
         
-        NSLog(@"Error: %@", error);
     }];
     
     

@@ -13,6 +13,7 @@
 #import "CouponPaymentDetailViewCtrl.h"
 #import "CouponDrawbackViewCtrl.h"
 #import "BasketService.h"
+#import "UseCouponViewCtrl.h"
 
 @interface BasketNotUseViewCtrl ()
 
@@ -21,11 +22,16 @@
 @implementation BasketNotUseViewCtrl
 
 - (void)viewDidLoad {
+    
+    
+    
+    
     [super viewDidLoad];
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-  //  [self loadData];
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+    
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
@@ -52,16 +58,16 @@
 -(void)loadData{
     
     
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
         
         
         [self doLoad:^(BOOL ret){
             
             if (ret) {
-                [ReloadHud removeHud:self.tableView animated:YES];
+                [ReloadHud removeHud:self.view animated:YES];
             }else{
                 
-                [ReloadHud showReloadMode:self.tableView];
+                [ReloadHud showReloadMode:self.view];
             }
             
             
@@ -71,13 +77,14 @@
     }];
     
     
+    
     [self doLoad:^(BOOL ret){
         
         if (ret) {
-            [ReloadHud removeHud:self.tableView animated:YES];
+            [ReloadHud removeHud:self.view animated:YES];
         }else{
             
-            [ReloadHud showReloadMode:self.tableView];
+            [ReloadHud showReloadMode:self.view];
         }
         
         
@@ -106,6 +113,22 @@
         completion(YES);
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        if (code>=400 && code<500) {
+            
+            
+            
+            [SVProgressHUD showErrorWithStatus:@"没有数据"];
+        
+            
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:@"后台数据错误"];
+            
+            
+        }
         
         completion(NO);
         
@@ -197,17 +220,23 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    
-    CouponPaymentDetailViewCtrl *vc = [CouponPaymentDetailViewCtrl new];
-    
-    
-    
+    UseCouponViewCtrl *vc = [UseCouponViewCtrl new];
     
     NSDictionary *d = self.dataList[[indexPath row]];
     
-    vc.data =d;
+  //  vc.data =d;
     
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

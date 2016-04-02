@@ -71,6 +71,36 @@
     
 }
 
++(UITableView*)makeTableView:(UIView*)view delegate:(id)delegate{
+    
+    
+    UITableView *tableView = [UITableView new];
+    [view addSubview:tableView];
+    
+    
+    tableView = [UITableView new];
+    [view addSubview:tableView];
+    tableView.dataSource = delegate;
+    tableView.delegate = delegate;
+    
+    
+    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.center.width.bottom.equalTo(view);
+        
+        
+    }];
+    
+    return tableView;
+
+    
+    
+    
+    
+    
+}
+
+
 
 
 

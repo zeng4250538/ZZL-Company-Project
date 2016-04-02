@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShopPortalViewCtrl : UITableViewController<UISearchBarDelegate>
+@interface ShopPortalViewCtrl : UIViewController<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
+
+@property(nonatomic,strong)UITableView *tableView;
 
 -(void)doLoad:(void(^)(BOOL ret))completion;
 

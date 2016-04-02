@@ -28,7 +28,7 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/realtimepromotion?"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/realtimepromotion"];
     
     NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(pageCount),@"sort":sort};
     

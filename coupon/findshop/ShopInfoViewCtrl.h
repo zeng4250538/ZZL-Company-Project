@@ -11,8 +11,10 @@
 #import "OptimizingBrandModel.h"
 //#import ""
 
-@interface ShopInfoViewCtrl : UITableViewController
+@interface ShopInfoViewCtrl : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
+
+@property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)Shop *shopData;
 
 @property(nonatomic,strong)OptimizingBrandModel *OptimizingBrand;
