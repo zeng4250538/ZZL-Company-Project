@@ -176,27 +176,18 @@
     CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
+    UILongPressGestureRecognizer *longPressed = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressToDo:)];
+    
+    longPressed.minimumPressDuration = 1.0;
+    
+    [cell.contentView addGestureRecognizer:longPressed];
+    
+
+
+    
     
    
-    // cell.couponActionType = CouponTypeToUnPay;
-    
-    cell.doActionBlock = ^(NSDictionary *data){
-        
-        
-        CouponDrawbackViewCtrl *vc = [CouponDrawbackViewCtrl new];
-        vc.hidesBottomBarWhenPushed = YES;
-        
-        NSDictionary *d = self.dataList[[indexPath row]];
-        
-        vc.data =d;
-        
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        
-        
-    };
-    
+   
     
     cell.data  = self.dataList[indexPath.row];
     
@@ -224,7 +215,6 @@
     
     NSDictionary *d = self.dataList[[indexPath row]];
     
-  //  vc.data =d;
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -232,20 +222,68 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
+
+
+#pragma mark - 长按删除
+
+-(void)longPressToDo:(UILongPressGestureRecognizer *)gesture{
+    
+
+    
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        CGPoint point = [gesture locationInView:self.tableView];
+        
+        
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
+        
+        
+        if(indexPath == nil) return ;
+        
+        
+        UIActionSheet *act = [UIActionSheet bk_actionSheetWithTitle:@"操作"];
+        
+        [act bk_addButtonWithTitle:@"删除" handler:^{
+            
+            NSMutableArray *ary = [AppShareData instance].getCartList;
+            
+            [ary removeObjectAtIndex:indexPath.row];
+            
+            
+            
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            
+            
+            // [self.tableView reloadData];
+            
+            
+            
+            
+            
+            
+            
+            
+        }];
+        
+        [act bk_setDestructiveButtonWithTitle:@"关闭" handler:^{
+            
+            
+            
+            
+        }];
+        
+        
+        [act showInView:self.view];
+        
+        //add your code here
+        
+        
+        
+    }
+}
+
+
 
 
 

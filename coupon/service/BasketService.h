@@ -47,4 +47,18 @@
 -(void)requestTimeOut:(void(^)(NSInteger code,NSString *message,id data))success
              failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
+/**
+ *  删除篮子里面的优惠券
+ *
+ *  @param couponId 优惠券id
+ *  @param success  成功回调
+ *  @param failure  失败回调
+ */
+
+-(void)requestDeleteBasket:(NSString*)couponId
+                   success:(void(^)(NSInteger code,NSString *message,id data))success
+                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
 @end

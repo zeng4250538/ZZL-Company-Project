@@ -16,10 +16,32 @@
     //return UIColorFromRGB(235,104,119);
  
     return UIColorFromRGB(233,44,94);
-    //http://www.chinacloud.cn/show.aspx?id=22800&cid=16
     
    // return [UIColor orangeColor];
 }
+
++(UIImage*)placeHolderImage{
+    
+    
+    NSString *imgUrl =  [Utils getRandomImage:@"商家图片"];
+    
+    
+    return [UIImage imageNamed:imgUrl];
+    
+    
+    
+}
+
+
+
++(UIColor*)orangeColor{
+    
+    
+    return UIColorFromRGB(251,193,48);
+    
+    
+}
+
 
 
 +(UIColor*)greenBackgroundColor{

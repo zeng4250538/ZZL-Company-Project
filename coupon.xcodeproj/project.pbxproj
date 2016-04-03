@@ -20,6 +20,7 @@
 		571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */; };
 		5727C4CB1CB0293800C92BF0 /* detailback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5727C4CA1CB0293800C92BF0 /* detailback@2x.png */; };
 		5727C4CE1CB0390E00C92BF0 /* UseCouponViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */; };
+		5727C4D01CB0EE1B00C92BF0 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */; };
 		5728FDBD1C5765460051F01E /* history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5728FDBC1C5765460051F01E /* history@2x.png */; };
 		5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736E9F11C4BADA20055774D /* KeyWordSearchViewCtrl.m */; };
 		5736E9F51C4D3E420055774D /* AppShareData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736E9F41C4D3E420055774D /* AppShareData.m */; };
@@ -206,6 +207,7 @@
 		5727C4CA1CB0293800C92BF0 /* detailback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detailback@2x.png"; sourceTree = "<group>"; };
 		5727C4CC1CB0390E00C92BF0 /* UseCouponViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseCouponViewCtrl.h; sourceTree = "<group>"; };
 		5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseCouponViewCtrl.m; sourceTree = "<group>"; };
+		5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash@2x.png"; sourceTree = "<group>"; };
 		5728FDBC1C5765460051F01E /* history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history@2x.png"; sourceTree = "<group>"; };
 		5736E9F01C4BADA20055774D /* KeyWordSearchViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyWordSearchViewCtrl.h; sourceTree = "<group>"; };
 		5736E9F11C4BADA20055774D /* KeyWordSearchViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyWordSearchViewCtrl.m; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 		578E63F61C255B4800C1FB19 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */,
 				5727C4CA1CB0293800C92BF0 /* detailback@2x.png */,
 				57B57CD91C95C74C009F4EB2 /* logo29@2x.png */,
 				57B57CDA1C95C74C009F4EB2 /* logo40@2x.png */,
@@ -1073,6 +1076,7 @@
 				578E63FB1C255BD900C1FB19 /* tab_home1@2x.png in Resources */,
 				57B57CE21C95C74C009F4EB2 /* logo29@3x.png in Resources */,
 				57A94E5A1C37DBFD00BE0022 /* tab_shake_icon@2x.png in Resources */,
+				5727C4D01CB0EE1B00C92BF0 /* trash@2x.png in Resources */,
 				57A94E5D1C37E2C500BE0022 /* scanner_icon@2x.png in Resources */,
 				574EE03D1C7DD9E40009D6EF /* soundon@2x.png in Resources */,
 				57B0196D1C7D8F6300884E0E /* animation_10.png in Resources */,

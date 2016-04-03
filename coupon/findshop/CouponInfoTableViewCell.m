@@ -395,7 +395,7 @@
     
     NSURL *url = [NSURL URLWithString:urlString];
     
-    [self.logoView sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.logoView sd_setImageWithURL:url placeholderImage:[GUIConfig placeHolderImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         [self setNeedsLayout];
         

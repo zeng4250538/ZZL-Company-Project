@@ -12,6 +12,13 @@
  *  使用优惠券去支付页面
  */
 
-@interface UseCouponViewCtrl : UITableViewController
+typedef NS_ENUM(NSUInteger, PayMode) {
+    PayModeWeChat, //微信支付
+    PayModeAliPay   //淘宝支付
+};
+
+@interface UseCouponViewCtrl : UITableViewController<UITextFieldDelegate,UIGestureRecognizerDelegate>
+
+@property(nonatomic,assign)PayMode payMode;
 
 @end
