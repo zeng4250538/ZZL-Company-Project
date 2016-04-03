@@ -245,13 +245,44 @@
         
         [act bk_addButtonWithTitle:@"删除" handler:^{
             
-            NSMutableArray *ary = [AppShareData instance].getCartList;
             
-            [ary removeObjectAtIndex:indexPath.row];
+            BasketService *service =[BasketService new];
+            
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             
             
+            NSString *itemId = self.dataList[indexPath.row][@"id"];
             
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [service requestDeleteBasket:itemId success:^(NSInteger code, NSString *message, id data) {
+                
+                
+                [SVProgressHUD dismiss];
+                
+                NSMutableArray *ary = [self.dataList mutableCopy];
+                
+                [ary removeObjectAtIndex:indexPath.row];
+                
+                self.dataList = ary;
+                
+                
+                
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                
+                
+                
+                
+                
+                
+            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                
+                
+                [SVProgressHUD showErrorWithStatus:@"删除出错！"];
+                
+                [SVProgressHUD dismiss];
+                
+                
+            }];
+            
             
             
             

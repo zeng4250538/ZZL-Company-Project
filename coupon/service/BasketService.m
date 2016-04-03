@@ -128,15 +128,16 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponbasket/basketitem/"];
     url = [url stringByAppendingString:couponId];
+    url = [url stringByAppendingString:@"/"];
     
     
-    NSDictionary *parm = @{@"userid":@"15818865760"};
+    //NSDictionary *parm = @{@"userid":@"15818865760"};
     
     
     //[AppShareData instance].customId
     
     
-    [req delete:url param:parm success:^(NSInteger code, id object) {
+    [req delete:url param:nil success:^(NSInteger code, id object) {
         
         success(code,@"",object);
         

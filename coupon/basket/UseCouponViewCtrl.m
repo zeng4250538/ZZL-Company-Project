@@ -41,6 +41,9 @@
     [self makeFooterView];
     
     
+    self.navigationItem.title=@"优惠券支付";
+    
+    
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] bk_initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         
