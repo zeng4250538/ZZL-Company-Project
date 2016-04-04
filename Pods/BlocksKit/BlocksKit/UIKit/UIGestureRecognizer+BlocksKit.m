@@ -29,7 +29,6 @@ static const void *BKGestureRecognizerShouldHandleActionKey = &BKGestureRecogniz
 {
 	self = [self initWithTarget:self action:@selector(bk_handleAction:)];
 	if (!self) return nil;
-
 	self.bk_handler = block;
 	self.bk_handlerDelay = delay;
 

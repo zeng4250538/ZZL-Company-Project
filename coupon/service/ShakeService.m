@@ -16,10 +16,11 @@
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     BaseRequest *req = [BaseRequest new];
-    
+    //http://192.168.6.97:8080/diamond-sis-web/v1/couponrecommend?shopMallId=2&customerId=15818865756&page=1&per_page=10
+    //http://183.6.190.75:9780/diamond-sis-web/v1/couponrecommend?customerId=15818865760&shopMallId=2
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponrecommend"];
     
-    NSDictionary *parm = @{@"customerId":@"15818865756",@"shopMallId":mallid};
+    NSDictionary *parm = @{@"customerId":mallid,@"shopMallId":@"2"};
   
     [req get:url param:parm success:^(NSInteger code, id object) {
         

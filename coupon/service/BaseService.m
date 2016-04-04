@@ -13,10 +13,7 @@
 -(NSString*)getBaseUrl{
     
     
-    
 //    NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-sis-web/%@",[self version]];
-    
-  
     
   //  192.168.6.97:8080 BasePath: /diamond-sis-web
     
@@ -34,14 +31,10 @@
     
     return url;
     
-    
-    
 }
 
 -(NSString*)getBaseLoginUrl{
-    
-    
-    
+   
    //     NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-sis-web/%@",[self version]];
 
     

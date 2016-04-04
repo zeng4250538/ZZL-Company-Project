@@ -52,7 +52,7 @@
          
 //         if (code==0) {
              self.dataList = data;
-             NSLog(@"asdasdasd%@",self.dataList);
+//             NSLog(@"asdasdasd%@",self.dataList);
              [self.tableView reloadData];
              
 //         }

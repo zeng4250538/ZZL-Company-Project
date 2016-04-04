@@ -131,24 +131,20 @@ static AppShareData *instance;
     
     [[NSUserDefaults standardUserDefaults] setObject:userName forKey:CustomIdKey];
     
-    
     [[NSUserDefaults standardUserDefaults] setObject:password forKey:PasswordKey];
     
     [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:AccessTokenKey];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:IsLoginKey];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
     
     
 }
 
 -(BOOL)isLogin{
     
-    
-    
     return [[NSUserDefaults standardUserDefaults] boolForKey:IsLoginKey];
-    
     
 }
 

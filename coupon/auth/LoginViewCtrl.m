@@ -31,18 +31,6 @@
     
     self.navigationItem.title=@"登录";
     
-    
-    
-//    self.tableView.separatorColor = [GUIConfig mainBackgroundColor];
-//    
-//    self.tableView.separatorStyle  = UITableViewCellSeparatorStyleSingleLine;
-//    
-    
-   // [ self . tableView setSeparatorColor : kGetColor ( 18.0 , 18.0 , 18.0 )];
-    
-    
-    
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] bk_initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         
         
@@ -51,15 +39,7 @@
     }];
     
     [self.view addGestureRecognizer:tap];
-    
-    
-
-    
-    
-    
-    
-    
-    
+  
     [self makeHeaderView];
     
     [self makeFooterView];
@@ -181,9 +161,8 @@
             
             if (![data isKindOfClass:[NSDictionary class]]) {
                 
-                
                 [SVProgressHUD showErrorWithStatus:@"数据格式错误！"];
-                return;
+//                return;
                 
             }
             

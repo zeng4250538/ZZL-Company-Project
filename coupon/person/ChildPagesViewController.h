@@ -10,4 +10,8 @@
 
 @interface ChildPagesViewController : UIViewController
 
+-(void)lodeData:(NSDictionary *)data;
+
+@property(nonatomic,strong)NSDictionary *data;
+
 @end

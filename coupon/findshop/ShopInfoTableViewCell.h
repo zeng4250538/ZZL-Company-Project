@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, SubscribeType) {
 @property(nonatomic,assign)SubscribeType subscribeType;
 @property(nonatomic, strong) Shop *model;
 
+
 +(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock;
 
 +(UIView*)headerViewWithSort:(NSString*)title clickBlock:(void(^)())clickBlock;

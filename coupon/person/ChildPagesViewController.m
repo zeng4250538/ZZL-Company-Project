@@ -50,7 +50,10 @@
     [titleBackgroundView addGestureRecognizer:tap];
     
     UIImageView *titelImageView = [[UIImageView alloc]init];
-    titelImageView.backgroundColor = [UIColor orangeColor];
+    [titelImageView sd_setImageWithURL:self.data[@"couponPhotoUrl"] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self reloadInputViews];
+    }];
+    titelImageView.backgroundColor = [UIColor whiteColor];
     [titleBackgroundView addSubview:titelImageView];
     [titelImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleBackgroundView).offset(20);
@@ -60,18 +63,18 @@
     }];
     
     UILabel *titelLabelView = [[UILabel alloc]init];
-    titelLabelView.text = @"咖啡";
+    titelLabelView.text = self.data[@"shopName"];
     [titelLabelView setFont:[UIFont systemFontOfSize:12]];
     [titleBackgroundView addSubview:titelLabelView];
     [titelLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleBackgroundView).offset(20);
         make.left.equalTo(titleBackgroundView).offset(90);
-        make.width.equalTo(@80);
+        make.width.equalTo(@150);
         make.height.equalTo(@30);
     }];
     
     UILabel *subTibleLabel = [[UILabel alloc]init];
-    subTibleLabel.text = @"五折优惠";
+    subTibleLabel.text = self.data[@"couponName"];
     [subTibleLabel setFont:[UIFont systemFontOfSize:9]];
     subTibleLabel.textColor = UIColorFromRGB(176, 176, 176);
     [titleBackgroundView addSubview:subTibleLabel];
@@ -165,7 +168,11 @@
 
 }
 
+-(void)lodeData:(NSDictionary *)data{
 
+
+
+}
 
 -(void)cilck{
 

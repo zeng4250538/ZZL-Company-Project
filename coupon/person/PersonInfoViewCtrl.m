@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [SVProgressHUD dismiss];
     
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -143,16 +144,13 @@
             
             [[AppShareData instance] loginOut];
             
-            
             LoginViewCtrl *vc = [LoginViewCtrl new];
             
             vc.loginEndBlock = ^(BOOL ret){
                 
-                
                 [self.navigationController popViewControllerAnimated:YES];
                 
             };
-            
             
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -197,7 +195,9 @@
     }
 }
 
+
 -(void)viewDidAppear:(BOOL)animated{
+    
     [super viewDidAppear:animated];
     
     if (![[AppShareData instance] isLogin]) {
@@ -207,7 +207,6 @@
         
         vc.loginEndBlock = ^(BOOL ret){
             
-            
             [self.navigationController popViewControllerAnimated:YES];
             
         };
@@ -215,13 +214,8 @@
         [self.navigationController pushViewController:vc animated:YES];
         
 //        return ;
-        
     }
-    
-    
-    
-    
-    
+   
 }
 
 

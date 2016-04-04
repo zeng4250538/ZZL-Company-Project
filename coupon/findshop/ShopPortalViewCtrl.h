@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^myBlock)(NSString *string);
+typedef void (^myBlock)(NSString *data);
 
 @interface ShopPortalViewCtrl : UITableViewController<UISearchBarDelegate>
 
 -(void)doLoad:(void(^)(BOOL ret))completion;
 
-@property(nonatomic,strong)myBlock block;
+@property(nonatomic,copy)myBlock block;
 
+//-(void)bolciView:(myBlock) blockView;
+
+//-(void)myblockViewSuccesst:(void (^)(id data))successt;
+
+-(void)lodeDataView;
 
 @end

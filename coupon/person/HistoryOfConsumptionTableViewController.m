@@ -13,18 +13,21 @@
 #import "AppShareData.h"
 @interface HistoryOfConsumptionTableViewController ()
 
+@property(nonatomic,strong)NSArray *dataArray;
+
 @end
 
 @implementation HistoryOfConsumptionTableViewController
 
 - (void)viewDidLoad {
+    [SVProgressHUD dismiss];
     [super viewDidLoad];
     
-    [self netWorkRequst];
-    
+//    [self netWorkRequst];
+    [SVProgressHUD show];
     [self.navigationItem setTitle:@"消费历史"];
     
-    
+//    [];
     
     [self.tableView registerClass:[HistoryOfConsumptionTableViewCell class] forCellReuseIdentifier:@"cell"];
     
@@ -41,10 +44,11 @@
     HistoryOfConsumptionService *HistoryOfConsumptionRequst = [HistoryOfConsumptionService new];
     [HistoryOfConsumptionRequst requestCustomerid:app.customId HistoryOfConsumptionSuccess:^(id data) {
         
-        
-        
+//        NSLog(@"%@",data);
+        self.dataArray = data;
+        [self.tableView reloadData];
+        [SVProgressHUD dismiss];
     } failure:^(NSInteger code) {
-        
         
         
     }];
@@ -67,7 +71,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //#warning Incomplete implementation, return the number of rows
-    return 10;
+    [self netWorkRequst];
+//    NSLog(@"%@",self.dataArray);
+    return self.dataArray.count;
+    
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,7 +86,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     HistoryOfConsumptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    [cell lodeData:self.dataArray[indexPath.row]];
     
     return cell;
 }
@@ -86,8 +94,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     ChildPagesViewController *childPages = [ChildPagesViewController new];
+    
+    childPages.data = self.dataArray[indexPath.row];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:childPages animated:NO];
+    [self.navigationController pushViewController:childPages animated:YES];
     
     
 

@@ -10,4 +10,6 @@
 
 @interface HistoryOfConsumptionTableViewCell : UITableViewCell
 
+-(void)lodeData:(NSDictionary *)data;
+
 @end

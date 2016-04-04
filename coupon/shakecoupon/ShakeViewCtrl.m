@@ -54,6 +54,29 @@
     
 }
 
+-(void)titleItenLabel:(void(^)(id data))cityLabel{
+    
+#pragma mark ------ 周边商城网络请求
+    MallService *services = [[MallService alloc] init];
+    [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+        
+//        self.mallArray = data;
+        
+//        NSLog(@"%@",self.mallArray[0][@"name"]);
+        
+        cityLabel(data);
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+    }];
+    
+    
+    
+}
+
 
 #pragma mark - 装载摇一摇优惠券数据
 -(void)loadShakeData:(void(^)(BOOL ret))completion{
@@ -346,16 +369,24 @@
     
   //  self.navigationItem.rightBarButtonItem = scanerBarItem;
     
+    
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    mallButton.frame = CGRectMake(0, 0, 200, 44);
+    mallButton.frame = CGRectMake(0, 0, 100, 44);
     [mallButton setTitle:@"时尚天河" forState:UIControlStateNormal];
     mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    
+    [self titleItenLabel:^(id data) {
+        
+        [mallButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
+        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+        vc.mallList = data;
+        
+    }];
     
     self.mallButton =mallButton;
     
     
     self.navigationItem.titleView = mallButton;
+    
     
     
     [mallButton bk_addEventHandler:^(id sender) {
@@ -443,22 +474,13 @@
         self.modalPresentationStyle=UIModalPresentationCurrentContext;
         
     }
-    
-    
-    
-    
+   
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:vc animated:NO completion:^{
         
     }];
     
-    
-    
-
-    
-    
-    
-    
 }
+
 
 
 #pragma mark ------------------------------ 摇动感应器触发
@@ -469,9 +491,6 @@
     
         if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake){
     
-            
-            
-            
             [self loadShakeData:^(BOOL ret){
                 
                 if (ret) {

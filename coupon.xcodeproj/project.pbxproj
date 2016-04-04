@@ -170,6 +170,7 @@
 		7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */; };
 		7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */; };
 		7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3557851CACA8E6000DB7EA /* MapKit.framework */; };
+		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -437,6 +438,8 @@
 		7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubscribeSevice.m; sourceTree = "<group>"; };
 		7F3557851CACA8E6000DB7EA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7F3557871CACA914000DB7EA /* coupon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = coupon.entitlements; sourceTree = "<group>"; };
+		7F4C6ACA1CAE6D1200ADD0F8 /* BrandStreetButtonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStreetButtonService.h; sourceTree = "<group>"; };
+		7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStreetButtonService.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -748,6 +751,7 @@
 		5796FA5B1C44118D004CA23B /* person */ = {
 			isa = PBXGroup;
 			children = (
+				7F4C6ACD1CB2205B00ADD0F8 /* Failure */,
 				7F121D731CA7DA7A005AF53D /* HistoryOfConsumption */,
 				577169721C80B0DC00223EDB /* setting */,
 				5796FA7E1C46392C004CA23B /* SubTableViewCell.h */,
@@ -760,10 +764,6 @@
 				571C29C61C787FD100DDBCE8 /* MyRemindViewCtrl.m */,
 				571C29C81C78CC7500DDBCE8 /* FeedBackViewCtrl.h */,
 				571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */,
-				57F3E2841C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.h */,
-				57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */,
-				57F3E2871C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.h */,
-				57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */,
 			);
 			path = person;
 			sourceTree = "<group>";
@@ -847,6 +847,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7F4C6AC61CAE6C6A00ADD0F8 /* BrandStreetButtonService */,
 				7F3FB4111CACE3BD0004C456 /* basketSevice */,
 				7F121D781CAA844E005AF53D /* UISubscribSevice */,
 				574BF3E71C98022A0088A9A6 /* LoginService.h */,
@@ -957,6 +958,26 @@
 			children = (
 			);
 			name = basketSevice;
+			sourceTree = "<group>";
+		};
+		7F4C6AC61CAE6C6A00ADD0F8 /* BrandStreetButtonService */ = {
+			isa = PBXGroup;
+			children = (
+				7F4C6ACA1CAE6D1200ADD0F8 /* BrandStreetButtonService.h */,
+				7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */,
+			);
+			name = BrandStreetButtonService;
+			sourceTree = "<group>";
+		};
+		7F4C6ACD1CB2205B00ADD0F8 /* Failure */ = {
+			isa = PBXGroup;
+			children = (
+				57F3E2841C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.h */,
+				57F3E2851C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m */,
+				57F3E2871C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.h */,
+				57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */,
+			);
+			name = Failure;
 			sourceTree = "<group>";
 		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {
@@ -1234,6 +1255,7 @@
 				577169781C80B2A300223EDB /* SettingMessageTypeViewCtrl.m in Sources */,
 				57A94E881C3AB30E00BE0022 /* ShakeCouponViewCtrl.m in Sources */,
 				577B6CE71CA1666B002BA28F /* PersonService.m in Sources */,
+				7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */,
 				57A94E661C37EB1200BE0022 /* ShopPortalViewCtrl.m in Sources */,
 				57A94E7E1C38FF5800BE0022 /* CouponInfoTableViewCell.m in Sources */,
 				5736E9F51C4D3E420055774D /* AppShareData.m in Sources */,

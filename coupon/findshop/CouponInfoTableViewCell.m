@@ -222,36 +222,42 @@
     if (self.couponActionType == CouponTypeNormal) {
         self.recommentButton.hidden = YES;
  
-    }else if (self.couponActionType == CouponTypeLimited) {
+    }
+    else if (self.couponActionType == CouponTypeLimited) {
             self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
 
-    }else if (self.couponActionType == CouponTypeUnLimited) {
+    }
+    else if (self.couponActionType == CouponTypeUnLimited) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"取消提醒" forState:UIControlStateNormal];
     
-    }else if (self.couponActionType == CouponTypeToPay) {
+    }
+    else if (self.couponActionType == CouponTypeToPay) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"支付" forState:UIControlStateNormal];
         
         
      
-    }else if (self.couponActionType == CouponTypeToUse) {
+    }
+    else if (self.couponActionType == CouponTypeToUse) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"退款" forState:UIControlStateNormal];
     
-    }else if (self.couponActionType == CouponTypeToComment) {
+    }
+    else if (self.couponActionType == CouponTypeToComment) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"去评论" forState:UIControlStateNormal];
         
        
             
-    }else if (self.couponActionType == CouponTypeToUnPay) {
+    }
+    else if (self.couponActionType == CouponTypeToUnPay) {
         self.recommentButton.hidden = NO;
         
         [self.recommentButton setTitle:@"退款" forState:UIControlStateNormal];
@@ -259,7 +265,8 @@
         
 
         
-    }else{
+    }
+    else{
         self.recommentButton.hidden = NO;
     }
     

@@ -26,8 +26,8 @@
     if (self) {
         
         _image = [[UIImageView alloc]init];
-        _image.backgroundColor = [UIColor orangeColor];
-        _image.image = [UIImage imageNamed:@"sampleImg001b.png"];
+//        _image.backgroundColor = [UIColor whiteColor];
+//        _image.image = [UIImage imageNamed:@"sampleImg001b.png"];
         
         
         [self.contentView addSubview:_image];
@@ -36,10 +36,10 @@
 //        _taitleLable.backgroundColor = [UIColor orangeColor];
         _taitleLable.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:_taitleLable];
-        _taitleLable.text = @"咖啡陪你";
+//        _taitleLable.text = @"咖啡陪你";
         
         _detailsTaitleLable = [[UILabel alloc]init];
-        _detailsTaitleLable.text = @"五折优惠券";
+//        _detailsTaitleLable.text = @"五折优惠券";
         [_detailsTaitleLable setFont:[UIFont systemFontOfSize:10]];
         [_detailsTaitleLable setTextColor:UIColorFromRGB(174, 174, 174)];
         [self.contentView addSubview:_detailsTaitleLable];
@@ -79,10 +79,10 @@
         make.top.equalTo(self.contentView).offset(20);
         make.left.equalTo(self.contentView).offset(20);
     }];
-    _image.backgroundColor = [UIColor orangeColor];
+//    _image.backgroundColor = [UIColor whiteColor];
     
     [self.taitleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@60);
+        make.width.equalTo(@150);
         make.height.equalTo(@30);
         make.top.equalTo(self.contentView).offset(20);
         make.left.equalTo(self.contentView).offset(90);
@@ -105,6 +105,28 @@
 
     
 }
+
+#pragma mark ------- 加载数据
+-(void)lodeData:(NSDictionary *)data{
+
+
+    
+    [_image sd_setImageWithURL:data[@"couponPhotoUrl"] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+//        [self setNeedsLayout];
+        
+    }];
+    
+    _taitleLable.text = data[@"shopName"];
+    _detailsTaitleLable.text = data[@"couponName"];
+
+
+
+//    [self.contentView reloadInputViews];
+
+
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

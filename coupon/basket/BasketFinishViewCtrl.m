@@ -147,9 +147,7 @@
     vc.data =d;
     
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
-    
+
     
 }
 
