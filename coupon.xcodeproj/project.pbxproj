@@ -21,6 +21,7 @@
 		5727C4CB1CB0293800C92BF0 /* detailback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5727C4CA1CB0293800C92BF0 /* detailback@2x.png */; };
 		5727C4CE1CB0390E00C92BF0 /* UseCouponViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */; };
 		5727C4D01CB0EE1B00C92BF0 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */; };
+		5727C54C1CB3BFA700C92BF0 /* NSNull+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727C54B1CB3BFA700C92BF0 /* NSNull+Json.m */; };
 		5728FDBD1C5765460051F01E /* history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5728FDBC1C5765460051F01E /* history@2x.png */; };
 		5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736E9F11C4BADA20055774D /* KeyWordSearchViewCtrl.m */; };
 		5736E9F51C4D3E420055774D /* AppShareData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736E9F41C4D3E420055774D /* AppShareData.m */; };
@@ -210,6 +211,8 @@
 		5727C4CC1CB0390E00C92BF0 /* UseCouponViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseCouponViewCtrl.h; sourceTree = "<group>"; };
 		5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseCouponViewCtrl.m; sourceTree = "<group>"; };
 		5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash@2x.png"; sourceTree = "<group>"; };
+		5727C54A1CB3BFA700C92BF0 /* NSNull+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+Json.h"; sourceTree = "<group>"; };
+		5727C54B1CB3BFA700C92BF0 /* NSNull+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Json.m"; sourceTree = "<group>"; };
 		5728FDBC1C5765460051F01E /* history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history@2x.png"; sourceTree = "<group>"; };
 		5736E9F01C4BADA20055774D /* KeyWordSearchViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyWordSearchViewCtrl.h; sourceTree = "<group>"; };
 		5736E9F11C4BADA20055774D /* KeyWordSearchViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyWordSearchViewCtrl.m; sourceTree = "<group>"; };
@@ -674,6 +677,8 @@
 				57EFEEEB1C917B15003103B1 /* ReloadHud.m */,
 				57E364AA1C9E6FB5003575FC /* UIView+DataLoad.h */,
 				57E364AB1C9E6FB5003575FC /* UIView+DataLoad.m */,
+				5727C54A1CB3BFA700C92BF0 /* NSNull+Json.h */,
+				5727C54B1CB3BFA700C92BF0 /* NSNull+Json.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1292,6 +1297,7 @@
 				57E364A31C9DA17B003575FC /* Shop.m in Sources */,
 				57CE97CF1C63A9E800CE0E57 /* CouponListViewCtrl.m in Sources */,
 				571C29781C70AC8F00DDBCE8 /* CartTableViewCell.m in Sources */,
+				5727C54C1CB3BFA700C92BF0 /* NSNull+Json.m in Sources */,
 				5771697E1C81FE0A00223EDB /* ImageDisplayConfigViewCtrl.m in Sources */,
 				577169751C80B0F100223EDB /* SettingViewCtrl.m in Sources */,
 				57E364AC1C9E6FB5003575FC /* UIView+DataLoad.m in Sources */,

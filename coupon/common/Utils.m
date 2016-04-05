@@ -15,6 +15,26 @@
 
 
 
+NSString *SafeString(id content){
+    
+    if (content==nil) {
+        return @"";
+    }
+    
+    if ((NSNull*)content==[NSNull null]) {
+        return @"";
+    }
+    
+    
+    return [NSString stringWithFormat:@"%@",content];
+    
+    
+}
+
+
+
+
+
 +(void)playShakeSound{
 
 

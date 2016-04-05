@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+
+NSString *SafeString(id content);
+
+
+
 @interface Utils : NSObject
 
 +(NSArray*)getImagePath:(NSString*)addPath;
@@ -32,6 +37,7 @@
 
 
 +(void)downCountLabel:(UILabel*)label;
+
 
 
 
