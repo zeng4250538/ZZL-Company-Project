@@ -56,6 +56,9 @@
     [view addSubview:hud];
     
     
+    [view bringSubviewToFront:hud];
+    
+    
    // [hud bringSubviewToFront:view];
     
     

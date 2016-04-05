@@ -357,35 +357,6 @@
 
 
 
-//-(void)updateData:(NSDictionary*)data{
-//    
-//    
-//    
-//    NSString *urlString =data[@"couponSmallPhotoUrl"];
-//    
-//    
-//    NSURL *url = [NSURL URLWithString:urlString];
-//    
-//    [self.logoView sd_setImageWithURL:url  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//        [self setNeedsLayout];
-//        
-//    }];
-//
-//    
-//    self.titleLabel.text=data[@"name"];
-//    self.priceLabel.text=[NSString stringWithFormat:@"￥%@",data[@"price"]];
-//    
-//    
-//   // data[@"price"];
-//    
-//    self.detailLabel.text=data[@"prompt"];
-//    
-//    
-//    
-//}
-
-
 
 -(void)updateData{
     

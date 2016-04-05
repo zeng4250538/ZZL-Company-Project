@@ -18,6 +18,11 @@
 +(UILabel*)makeTableCellLabel:(NSString*)title cell:(UITableViewCell*)cell;
 
 
++(UITableView*)makeTableView:(UIView*)view delegate:(id)delegate;
+
+
+
+
 
 
 

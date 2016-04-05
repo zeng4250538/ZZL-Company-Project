@@ -9,7 +9,7 @@
 #import "SelectMallTableCtrl.h"
 #import "Shop.h"
 
-@interface SelectMallTableCtrl ()
+@interface SelectMallTableCtrl ()<UISearchBarDelegate,UISearchDisplayDelegate>
 
 @property(nonatomic,strong)NSArray *sectionList;
 @property(nonatomic,strong)NSDictionary *mallList;
@@ -89,6 +89,11 @@
     
 }
 
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+
+    
+
+}
 
 -(void)loadData{
     

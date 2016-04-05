@@ -162,7 +162,6 @@
         hotWordButton.layer.borderWidth=1;
         hotWordButton.layer.borderColor = [[GUIConfig mainBackgroundColor] CGColor];
         
-        
         [hotWordButton setTitle:title forState:UIControlStateNormal];
         [hotWordButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
         
@@ -223,20 +222,20 @@
     if (self.isLoading) {
         return ;
     }
-    
+//    NSLog(@"搜索关键字：%@",searchText);
     self.isLoading = YES;
     
     ShopService *service = [ShopService new];
     
     [service requestKeyword:@"mallid"
-                    keyWord:@"xxx"
+                    keyWord:searchText
                     success:^(NSInteger code, NSString *message, id data) {
                         
                         self.searchWordList = data;
                         
                         self.isLoading = NO;
                         
-                        
+//                        NSLog(@"%@",data);
                         [self.displayCtrl.searchResultsTableView reloadData];
                         
                     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {

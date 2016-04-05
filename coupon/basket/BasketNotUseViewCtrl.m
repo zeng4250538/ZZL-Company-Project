@@ -13,7 +13,12 @@
 #import "CouponPaymentDetailViewCtrl.h"
 #import "CouponDrawbackViewCtrl.h"
 #import "BasketService.h"
+//<<<<<<< HEAD
 #import "AppShareData.h"
+//=======
+#import "UseCouponViewCtrl.h"
+
+//>>>>>>> 33fe839e0654da87eda8e68b79b7d17fea1112af
 @interface BasketNotUseViewCtrl ()
 
 @end
@@ -21,11 +26,16 @@
 @implementation BasketNotUseViewCtrl
 
 - (void)viewDidLoad {
+    
+    
+    
+    
     [super viewDidLoad];
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-  //  [self loadData];
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+    
+    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
@@ -52,16 +62,16 @@
 -(void)loadData{
     
     
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
         
         
         [self doLoad:^(BOOL ret){
             
             if (ret) {
-                [ReloadHud removeHud:self.tableView animated:YES];
+                [ReloadHud removeHud:self.view animated:YES];
             }else{
                 
-                [ReloadHud showReloadMode:self.tableView];
+                [ReloadHud showReloadMode:self.view];
             }
             
             
@@ -71,13 +81,14 @@
     }];
     
     
+    
     [self doLoad:^(BOOL ret){
         
         if (ret) {
-            [ReloadHud removeHud:self.tableView animated:YES];
+            [ReloadHud removeHud:self.view animated:YES];
         }else{
             
-            [ReloadHud showReloadMode:self.tableView];
+            [ReloadHud showReloadMode:self.view];
         }
         
         
@@ -107,6 +118,22 @@
         completion(YES);
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        if (code>=400 && code<500) {
+            
+            
+            
+            [SVProgressHUD showErrorWithStatus:@"没有数据"];
+        
+            
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:@"后台数据错误"];
+            
+            
+        }
         
         completion(NO);
         
@@ -154,27 +181,18 @@
     CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
+    UILongPressGestureRecognizer *longPressed = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressToDo:)];
+    
+    longPressed.minimumPressDuration = 1.0;
+    
+    [cell.contentView addGestureRecognizer:longPressed];
+    
+
+
+    
     
    
-    // cell.couponActionType = CouponTypeToUnPay;
-    
-    cell.doActionBlock = ^(NSDictionary *data){
-        
-        
-        CouponDrawbackViewCtrl *vc = [CouponDrawbackViewCtrl new];
-        vc.hidesBottomBarWhenPushed = YES;
-        
-        NSDictionary *d = self.dataList[[indexPath row]];
-        
-        vc.data =d;
-        
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        
-        
-    };
-    
+   
     
     cell.data  = self.dataList[indexPath.row];
     
@@ -198,26 +216,110 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    
-    CouponPaymentDetailViewCtrl *vc = [CouponPaymentDetailViewCtrl new];
-    
-    
-    
+    UseCouponViewCtrl *vc = [UseCouponViewCtrl new];
     
     NSDictionary *d = self.dataList[[indexPath row]];
     
-    vc.data =d;
     
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    
-    
+//    [self.navigationController pushViewController:vc animated:YES];
     
     
     
     
     
 }
+
+
+#pragma mark - 长按删除
+
+-(void)longPressToDo:(UILongPressGestureRecognizer *)gesture{
+    
+
+    
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        CGPoint point = [gesture locationInView:self.tableView];
+        
+        
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
+        
+        
+        if(indexPath == nil) return ;
+        
+        
+        UIActionSheet *act = [UIActionSheet bk_actionSheetWithTitle:@"操作"];
+        
+        [act bk_addButtonWithTitle:@"删除" handler:^{
+            
+            
+            BasketService *service =[BasketService new];
+            
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+            
+            
+            NSString *itemId = self.dataList[indexPath.row][@"id"];
+            
+            [service requestDeleteBasket:itemId success:^(NSInteger code, NSString *message, id data) {
+                
+                
+                [SVProgressHUD dismiss];
+                
+                NSMutableArray *ary = [self.dataList mutableCopy];
+                
+                [ary removeObjectAtIndex:indexPath.row];
+                
+                self.dataList = ary;
+                
+                
+                
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                
+                
+                
+                
+                
+                
+            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                
+                
+                [SVProgressHUD showErrorWithStatus:@"删除出错！"];
+                
+                [SVProgressHUD dismiss];
+                
+                
+            }];
+            
+            
+            
+            
+            // [self.tableView reloadData];
+            
+            
+            
+            
+            
+            
+            
+            
+        }];
+        
+        [act bk_setDestructiveButtonWithTitle:@"关闭" handler:^{
+            
+            
+            
+            
+        }];
+        
+        
+        [act showInView:self.view];
+        
+        //add your code here
+        
+        
+        
+    }
+}
+
+
 
 
 

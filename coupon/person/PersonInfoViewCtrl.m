@@ -20,6 +20,7 @@
 
 #import "OrderContainerViewCtrl.h"
 #import "LoginViewCtrl.h"
+#import "MyInformationViewController.h"
 
 
 
@@ -29,6 +30,8 @@
 
 @interface PersonInfoViewCtrl ()
 
+@property(nonatomic,strong)MyInformationViewController *my;
+
 @end
 
 @implementation PersonInfoViewCtrl
@@ -37,6 +40,8 @@
     [super viewDidLoad];
     [SVProgressHUD dismiss];
     
+    
+   
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
@@ -55,15 +60,40 @@
     [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
     
     
+    /**
+     *  头像显示（个人信息入口）
+     */
+    UIImageView *myInfromation = [[UIImageView alloc]init];
+    myInfromation.backgroundColor = [UIColor orangeColor];
+    myInfromation.layer.cornerRadius = 65/2;
+    [header addSubview:myInfromation];
+    
+    /**
+     *  开启交互
+     */
+    [myInfromation setUserInteractionEnabled:YES];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick)];
+    tap.numberOfTapsRequired = 1;
+    tap.numberOfTouchesRequired = 1;
+    [myInfromation addGestureRecognizer:tap];
+    [myInfromation mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.equalTo(@65);
+        make.height.equalTo(@65);
+        make.left.equalTo(header).offset(20);
+        make.bottom.equalTo(header).offset(-20);
+    }];
+    
+    
+    
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"setting_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         SettingViewCtrl *set = [SettingViewCtrl new];
         
         set.hidesBottomBarWhenPushed = YES;
         
-        
         [self.navigationController pushViewController:set animated:YES];
-        
         
     }];
     
@@ -91,7 +121,7 @@
     
     
     
-    
+    self.my = [MyInformationViewController new];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -100,7 +130,14 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+#pragma mark ---------- 头像的点击方法
+-(void)tapClick{
 
+    NSLog(@"hahahahahhahah");
+    [self.navigationController pushViewController:self.my animated:YES];
+
+
+}
 
 
 -(void)makeFooterView{

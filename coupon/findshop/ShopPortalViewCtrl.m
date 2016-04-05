@@ -57,16 +57,33 @@
     
     self.navigationItem.title=@"找商家";
     
+    
+ 
+    
+    self.selectTitle = [[SelectMallPopViewCtrl alloc]init];
+    
+    
+    
+    //table view
+    
+    self.tableView = [UITableView new];
+    [self.view addSubview:self.tableView];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.center.width.bottom.equalTo(self.view);
+        
+        
+    }];
+    
     [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell1"];
     
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell2"];
     
-    [self makeSearchBar];
- 
-    [self loadData];
     
-    self.selectTitle = [[SelectMallPopViewCtrl alloc]init];
-//    [self makeBarItem];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -79,7 +96,15 @@
         
     }];
     
+    
+    [self makeSearchBar];
+
+    
     [self makeBarItem];
+    
+    
+    [self loadData];
+
     
 }
 
@@ -108,15 +133,15 @@
 
 -(void)loadData{
     
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
     
         [self doLoad:^(BOOL ret){
             
             if (ret) {
-                [ReloadHud removeHud:self.tableView animated:YES];
+                [ReloadHud removeHud:self.view animated:YES];
             }else{
                 
-                [ReloadHud showReloadMode:self.tableView];
+                [ReloadHud showReloadMode:self.view];
             }
             
             
@@ -129,10 +154,10 @@
     [self doLoad:^(BOOL ret){
         
         if (ret) {
-            [ReloadHud removeHud:self.tableView animated:YES];
+            [ReloadHud removeHud:self.view animated:YES];
         }else{
             
-            [ReloadHud showReloadMode:self.tableView];
+            [ReloadHud showReloadMode:self.view];
         }
         
     }];   

@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+    
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [self loadData];
@@ -39,6 +41,43 @@
 -(void)loadData{
     
     
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+
+
+-(void)doLoad:(void(^)(BOOL ret))completion{
     
     
     CouponService *service = [CouponService new];
@@ -49,9 +88,17 @@
             self.dataList = data;
             
             [self.tableView reloadData];
+            
+            
+            completion(YES);
         }
         
     } failure:^(int code, BOOL retry, NSString *message, id data) {
+        
+        
+        completion(NO);
+        
+        
         
     }];
     
@@ -59,7 +106,10 @@
     
     
     
+    
+    
 }
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -31,6 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+    
+    
     
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
@@ -46,12 +52,30 @@
     [self loadData];
     
     
+    self.navigationController.navigationBar.tintColor = [GUIConfig mainColor];
+    
+    
+    
+//    UIImage *backImage = [UIImage imageNamed:@"detailback.png"];
+//    
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:backImage style:UIBarButtonItemStylePlain handler:^(id sender) {
+//        
+//    }];
+//    
+//    self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+//    
+    
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
 
 
 -(void)boll:(BOOL)bools{
@@ -69,7 +93,7 @@
 }
 
 
--(void)doLoad{
+-(void)doLoad:(void(^)(BOOL ret))completion{
     
     CouponService *couponService = [CouponService new];
     
@@ -91,7 +115,9 @@
         
         [self.tableView reloadData];
         
-        [ReloadHud removeHud:self.view animated:YES];
+        
+        completion(YES);
+        
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
@@ -99,7 +125,10 @@
         
         [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
         
-        [ReloadHud removeHud:self.view animated:YES];
+        
+        completion(NO);
+        
+        
         
         
         
@@ -111,7 +140,6 @@
     
     [couponService requestNormalCoupon:self.data[@"id"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
-//        NSLog(@"---><%@",_cell.data[@"ids"]);
         
         
         if (![data isKindOfClass:[NSArray class]]) {
@@ -126,7 +154,9 @@
         [self.tableView reloadData];
         
         
-        [ReloadHud removeHud:self.view animated:YES];
+        completion(YES);
+        
+        
         
         
         
@@ -135,7 +165,9 @@
         
         
         [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
-        [ReloadHud removeHud:self.view animated:YES];
+        
+        completion(NO);
+        
         
         
         
@@ -144,26 +176,46 @@
 
     
 }
-
-
 
 -(void)loadData{
     
     
-    
-    
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-        [self doLoad];
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.view animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.view];
+            }
+            
+            
+        }];
+        
+        
     }];
     
     
-    [self doLoad];
-    
-    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.view animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.view];
+        }
+        
+        
+    }];
     
     
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -192,6 +244,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+    
+    self.navigationController.navigationBar.tintColor = [GUIConfig mainColor];
     
     
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -224,6 +279,9 @@
 -(void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     
     
     self.navigationController.automaticallyAdjustsScrollViewInsets=YES;

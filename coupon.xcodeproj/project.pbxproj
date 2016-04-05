@@ -18,6 +18,9 @@
 		571C297B1C70D55000DDBCE8 /* NumSpanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 571C29791C70D55000DDBCE8 /* NumSpanView.m */; };
 		571C29C71C787FD100DDBCE8 /* MyRemindViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 571C29C61C787FD100DDBCE8 /* MyRemindViewCtrl.m */; };
 		571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */; };
+		5727C4CB1CB0293800C92BF0 /* detailback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5727C4CA1CB0293800C92BF0 /* detailback@2x.png */; };
+		5727C4CE1CB0390E00C92BF0 /* UseCouponViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */; };
+		5727C4D01CB0EE1B00C92BF0 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */; };
 		5728FDBD1C5765460051F01E /* history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5728FDBC1C5765460051F01E /* history@2x.png */; };
 		5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736E9F11C4BADA20055774D /* KeyWordSearchViewCtrl.m */; };
 		5736E9F51C4D3E420055774D /* AppShareData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736E9F41C4D3E420055774D /* AppShareData.m */; };
@@ -171,6 +174,7 @@
 		7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */; };
 		7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3557851CACA8E6000DB7EA /* MapKit.framework */; };
 		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
+		7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +206,10 @@
 		571C29C61C787FD100DDBCE8 /* MyRemindViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRemindViewCtrl.m; sourceTree = "<group>"; };
 		571C29C81C78CC7500DDBCE8 /* FeedBackViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewCtrl.h; sourceTree = "<group>"; };
 		571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewCtrl.m; sourceTree = "<group>"; };
+		5727C4CA1CB0293800C92BF0 /* detailback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detailback@2x.png"; sourceTree = "<group>"; };
+		5727C4CC1CB0390E00C92BF0 /* UseCouponViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseCouponViewCtrl.h; sourceTree = "<group>"; };
+		5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseCouponViewCtrl.m; sourceTree = "<group>"; };
+		5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash@2x.png"; sourceTree = "<group>"; };
 		5728FDBC1C5765460051F01E /* history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history@2x.png"; sourceTree = "<group>"; };
 		5736E9F01C4BADA20055774D /* KeyWordSearchViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyWordSearchViewCtrl.h; sourceTree = "<group>"; };
 		5736E9F11C4BADA20055774D /* KeyWordSearchViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyWordSearchViewCtrl.m; sourceTree = "<group>"; };
@@ -440,6 +448,8 @@
 		7F3557871CACA914000DB7EA /* coupon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = coupon.entitlements; sourceTree = "<group>"; };
 		7F4C6ACA1CAE6D1200ADD0F8 /* BrandStreetButtonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStreetButtonService.h; sourceTree = "<group>"; };
 		7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStreetButtonService.m; sourceTree = "<group>"; };
+		7F4C6ACE1CB33C4F00ADD0F8 /* MyInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationViewController.h; sourceTree = "<group>"; };
+		7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationViewController.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -679,6 +689,8 @@
 		578E63F61C255B4800C1FB19 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */,
+				5727C4CA1CB0293800C92BF0 /* detailback@2x.png */,
 				57B57CD91C95C74C009F4EB2 /* logo29@2x.png */,
 				57B57CDA1C95C74C009F4EB2 /* logo40@2x.png */,
 				57B57CDB1C95C74C009F4EB2 /* logo40@3x.png */,
@@ -751,6 +763,7 @@
 		5796FA5B1C44118D004CA23B /* person */ = {
 			isa = PBXGroup;
 			children = (
+				7F4C6AD11CB33C5700ADD0F8 /* MyInformation */,
 				7F4C6ACD1CB2205B00ADD0F8 /* Failure */,
 				7F121D731CA7DA7A005AF53D /* HistoryOfConsumption */,
 				577169721C80B0DC00223EDB /* setting */,
@@ -900,6 +913,8 @@
 				573E51E51C7CCF09005DBBC3 /* BasketMessageViewCtrl.m */,
 				57F3E28A1C86D39200A8CCA8 /* OrderContainerViewCtrl.h */,
 				57F3E28B1C86D39200A8CCA8 /* OrderContainerViewCtrl.m */,
+				5727C4CC1CB0390E00C92BF0 /* UseCouponViewCtrl.h */,
+				5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */,
 			);
 			path = basket;
 			sourceTree = "<group>";
@@ -978,6 +993,15 @@
 				57F3E2881C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m */,
 			);
 			name = Failure;
+			sourceTree = "<group>";
+		};
+		7F4C6AD11CB33C5700ADD0F8 /* MyInformation */ = {
+			isa = PBXGroup;
+			children = (
+				7F4C6ACE1CB33C4F00ADD0F8 /* MyInformationViewController.h */,
+				7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */,
+			);
+			name = MyInformation;
 			sourceTree = "<group>";
 		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {
@@ -1086,6 +1110,7 @@
 				578E63FB1C255BD900C1FB19 /* tab_home1@2x.png in Resources */,
 				57B57CE21C95C74C009F4EB2 /* logo29@3x.png in Resources */,
 				57A94E5A1C37DBFD00BE0022 /* tab_shake_icon@2x.png in Resources */,
+				5727C4D01CB0EE1B00C92BF0 /* trash@2x.png in Resources */,
 				57A94E5D1C37E2C500BE0022 /* scanner_icon@2x.png in Resources */,
 				574EE03D1C7DD9E40009D6EF /* soundon@2x.png in Resources */,
 				57B0196D1C7D8F6300884E0E /* animation_10.png in Resources */,
@@ -1123,6 +1148,7 @@
 				574EE02C1C7DC79C0009D6EF /* mask_right@2x.png in Resources */,
 				57B019661C7D8F6300884E0E /* animation_02.png in Resources */,
 				574EE03E1C7DD9E40009D6EF /* soundoff@2x.png in Resources */,
+				5727C4CB1CB0293800C92BF0 /* detailback@2x.png in Resources */,
 				57CE97D41C63C13100CE0E57 /* spring.png in Resources */,
 				57CE97C61C634A5900CE0E57 /* head_icon4.png in Resources */,
 				57B0196C1C7D8F6300884E0E /* animation_09.png in Resources */,
@@ -1236,12 +1262,14 @@
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
 				5718A27C1CAAABE0008191F8 /* BasketService.m in Sources */,
 				57E364A91C9DB347003575FC /* Coupon.m in Sources */,
+				7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */,
 				578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */,
 				57E364A61C9DA293003575FC /* Mall.m in Sources */,
 				571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */,
 				7F121D6C1CA675A8005AF53D /* OptimizingBrandModel.m in Sources */,
 				57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */,
 				5796FA831C47E904004CA23B /* CouponView.m in Sources */,
+				5727C4CE1CB0390E00C92BF0 /* UseCouponViewCtrl.m in Sources */,
 				57EFEEE91C9087B8003103B1 /* MallService.m in Sources */,
 				5796FA731C460CB1004CA23B /* UIControl+LayoutBlock.m in Sources */,
 				5796FA6A1C456490004CA23B /* SelectMallTableCtrl.m in Sources */,

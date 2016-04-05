@@ -102,7 +102,7 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/search?"];
     
-    NSDictionary *parm = @{@"shopmallid":mallid,@"keyword":keyWord};
+    NSDictionary *parm = @{@"shopMallId":mallid,@"keyword":keyWord};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {

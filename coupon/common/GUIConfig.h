@@ -14,6 +14,8 @@
 
 +(UIColor*)mainBackgroundColor;
 
++(UIColor*)orangeColor;
+
 +(UIColor*)grayFontColorLight;
 
 +(UIColor*)grayFontColor;
@@ -24,6 +26,9 @@
 +(UIButton*)iconBad;
 
 +(UIColor*)greenBackgroundColor;
+
+
++(UIImage*)placeHolderImage;
 
 
 

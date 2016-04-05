@@ -46,9 +46,7 @@
     
     [SVProgressHUD show];
     
-    [service queryMoreHotShop:nil success:
-     
-     ^(int code, NSString *message, id data) {
+    [service queryMoreHotShop:nil success:^(int code, NSString *message, id data) {
          
 //         if (code==0) {
              self.dataList = data;
@@ -59,9 +57,9 @@
          
          [SVProgressHUD dismiss];
          
-     } failure:
-     ^(int code, BOOL retry, NSString *message, id data) {
+     } failure:^(int code, BOOL retry, NSString *message, id data) {
          
+         [SVProgressHUD dismiss];
      }];
     
     

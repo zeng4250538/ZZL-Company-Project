@@ -22,7 +22,8 @@
 - (void)viewDidLoad {
     [SVProgressHUD dismiss];
     [super viewDidLoad];
-    
+//    view=bigimgView.userInteractionEnabled=YES
+    [self.view setUserInteractionEnabled:YES];
 //    [self netWorkRequst];
     [SVProgressHUD show];
     [self.navigationItem setTitle:@"消费历史"];
@@ -50,10 +51,7 @@
         [SVProgressHUD dismiss];
     } failure:^(NSInteger code) {
         
-        
     }];
-    
-    
 
 }
 
