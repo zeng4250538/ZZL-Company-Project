@@ -54,7 +54,7 @@
     header.image = [UIImage imageNamed:@"personbg.png"];
     
     self.tableView.tableHeaderView = header;
-    
+    [self.tableView.tableHeaderView setUserInteractionEnabled:YES];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
     
     [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];

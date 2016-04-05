@@ -89,7 +89,7 @@
     //[SVProgressHUD showWithStatus:@""];
     
     
-    [service requestShakeCoupon:app.customId shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:app.customId shopMallId:@"11" success:^(NSInteger code, NSString *message, id data) {
         
 //        NSLog(@"12313-------------->%@",data);
         self.isShakeDataLoaded = YES;
@@ -440,8 +440,6 @@
 
 #pragma mark - 装载摇一摇控制器
 -(void)doLoadShakeView{
-    
-    
     
     if ([AppShareData instance].isAudioOpen) {
         

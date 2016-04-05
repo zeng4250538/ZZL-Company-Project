@@ -196,7 +196,7 @@
     [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
        
         self.hotShopData = data;
-        
+        NSLog(@"asdadada---->%@",data);
         [self.tableView reloadData];
         
         completion(YES);
@@ -214,7 +214,7 @@
     [service requestNearbyShop:@"2" page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
         
         self.hotBrandData = data;
-        
+        NSLog(@"12313-------->%@",data);
         [self.tableView reloadData];
         
         completion(YES);
@@ -477,7 +477,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     
     if (indexPath.section == 0 || indexPath.section==2) {
         ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
