@@ -363,7 +363,7 @@
     
     
     
-    NSString *urlString =self.data[@"couponSmallPhotoUrl"];
+    NSString *urlString =SafeString(self.data[@"couponSmallPhotoUrl"]);
     
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -379,26 +379,7 @@
         
     }];
     
-    
-    self.titleLabel.text=self.data[@"name"];
-//    self.priceLabel.text=[NSString stringWithFormat:@"￥%@",self.data[@"price"]];
-    
-    
-    // data[@"price"];
-    
-    self.detailLabel.text=@"hahaha";
-    
-    
-    
-    
-//    NSString *imgUrl = [Utils getRandomImage:@"商家图片"];
-//    
-//    self.logoView.image = [UIImage imageNamed:imgUrl];
-//    self.titleLabel.text=@"代金券";
-//    self.priceLabel.text=@"20";
-//    
-//    self.detailLabel.text=@"满100送20，全天通用，消费满100";
-    
+    self.titleLabel.text=SafeString(self.data[@"name"]);
     
     
 }

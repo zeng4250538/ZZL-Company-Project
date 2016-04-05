@@ -493,36 +493,22 @@
 -(void)updateData{
     
     
-    if (self.data[@"name"] != NULL) {
-        
-        self.titleLabel.text = self.data[@"name"];
-        
-    }
-    else if (self.data[@"shopName"] != NULL){
-        
-       self.titleLabel.text = self.data[@"shopName"];
+    self.titleLabel.text = SafeString(self.data[@"name"]);
     
-    }
+ 
+    self.titleLabel.text = SafeString(self.data[@"shopName"]);
     
-    self.goodLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"good"] integerValue]];
-    self.badLabel.text =[NSString stringWithFormat:@"%ld",[self.data[@"bad"] integerValue]];
-    self.commentLabel.text = self.data[@"prompt"];
+    self.goodLabel.text = SafeString(self.data[@"good"]);
     
-    NSString *urlString = @"";
+    self.badLabel.text = SafeString(self.data[@"bad"]);
     
-    if (self.data[@"shopPhotoUrl"] != NULL) {
-        
-        urlString = self.data[@"shopPhotoUrl"];
-        
-    }
     
-    else if (self.data[@"smallPhotoUrl"] != NULL){
-        urlString = self.data[@"smallPhotoUrl"];
-    }
+    self.commentLabel.text = SafeString(self.data[@"prompt"]);
     
-    else{
-        urlString = self.data[@"smallPhotoUrl"];
-    }
+    NSString *urlString = SafeString(self.data[@"smallPhotoUrl"]);
+    
+    
+    
     
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

@@ -116,6 +116,9 @@
         
         self.mallArray = data;
         
+        
+        
+        
         NSLog(@"%@",self.mallArray[0][@"name"]);
         
         cityLabel(data);
@@ -572,6 +575,9 @@
         
         
         CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+        
+        
+        NSLog(@" couponData %@",self.couponData[indexPath.row]);
         
         
         cell.data = self.couponData[indexPath.row];

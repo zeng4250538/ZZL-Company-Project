@@ -20,6 +20,10 @@
     //http://183.6.190.75:9780/diamond-sis-web/v1/couponrecommend?customerId=15818865760&shopMallId=2
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponrecommend"];
     
+    if (mallid==nil) {
+        mallid=@"";
+    }
+    
     NSDictionary *parm = @{@"customerId":mallid,@"shopMallId":@"2"};
   
     [req get:url param:parm success:^(NSInteger code, id object) {
