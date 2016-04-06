@@ -38,9 +38,11 @@
 @implementation PersonInfoViewCtrl
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [SVProgressHUD dismiss];
 
+    [self.tabBarController.tabBar setHidden:NO];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     

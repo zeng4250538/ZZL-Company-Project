@@ -105,11 +105,11 @@
     
     [couponService requestRealTimeCoupon:_data[@"id"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
-        if (![data isKindOfClass:[NSArray class]]) {
-            
-            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
-            return ;
-        }
+//        if (![data isKindOfClass:[NSArray class]]) {
+//            
+//            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
+//            return ;
+//        }
         
         self.realTimeCouponList = data;
         

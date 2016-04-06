@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, SubscribeType) {
 
 +(UIView*)headerView:(NSString*)title clickBlock:(void(^)())clickBlock;
 
-+(UIView*)headerViewWithSort:(NSString*)title clickBlock:(void(^)())clickBlock;
+//+(UIView*)headerViewWithSort:(NSString*)title clickBlock:(void(^)())clickBlock;
 
 +(CGFloat)height;
 

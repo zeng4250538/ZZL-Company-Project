@@ -37,23 +37,16 @@
 @property(nonatomic,assign)BOOL bools;
 @property(nonatomic,strong)SelectMallPopViewCtrl *selectTitle;
 @property(nonatomic,strong)NSString *cityString;
-
 @property(nonatomic,strong)NSArray *mallArray;
-
 @property(nonatomic,strong)UIButton *headButton;
 
 @end
 
 @implementation ShopPortalViewCtrl
 
-
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-//    [self titleItenLabel];
-//    
-//    [_headButton setTitle:self.mallArray[0][@"name"] forState:UIControlStateNormal];
     
     self.navigationItem.title=@"找商家";
     
@@ -115,10 +108,7 @@
     [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
         self.mallArray = data;
-        
-        
-        
-        
+    
         NSLog(@"%@",self.mallArray[0][@"name"]);
         
         cityLabel(data);
@@ -147,9 +137,7 @@
                 [ReloadHud showReloadMode:self.view];
             }
             
-            
         }];
-        
         
     }];
     
@@ -170,7 +158,6 @@
 
 -(void)doLoad:(void(^)(BOOL ret))completion{
     
-    
     ShopService *service = [ShopService new];
     
     CouponService *couponService = [CouponService new];
@@ -178,8 +165,6 @@
     
 #pragma mark ---- 即时优惠网络请求
     [couponService requestRecommendCoupon:@"2" page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
-        
-        
         
         self.couponData=data;
         
@@ -271,15 +256,9 @@
     
     self.navigationItem.rightBarButtonItem = roomMapBarItem;
     
-//    UIBarButtonItem *scanerBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"scanner_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-//        
-//    }];
-//    
-//    
     
     self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
     
- //   self.navigationItem.rightBarButtonItem = scanerBarItem;
     
 #pragma mark ----- 周边商城标题
     _headButton = [[UIButton alloc]init];;
@@ -326,17 +305,12 @@
     searchBar.delegate = self;
     searchBar.frame = CGRectMake(-30, 4, SCREEN_WIDTH-100, 28);
  
-  //  searchBar.placeholder=@"搜索品牌，商家，优惠券";
     searchBar.backgroundImage =[UIImage new];
 
     searchBar.placeholder = self.navigationItem.title;
-    // [titleView addSubview:searchBar];
     
-    //Set to titleView
-    //[self.navigationItem.titleView sizeToFit];
     self.navigationItem.titleView = searchBar;
   
-    // self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     
 }
 
@@ -344,14 +318,13 @@
 -(void)makeSearchBar{
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-    //self.searchBar.searchBarStyle = UISearchBarStyleProminent;
+    
     self.searchBar.barTintColor = [GUIConfig mainBackgroundColor];
     
     self.searchBar.backgroundImage =[UIImage new];
     
     self.searchBar.delegate= self;
     
-    //self.searchBar.barStyle = UIBarStyleDefault;
     self.searchBar.backgroundColor = [UIColor whiteColor];
     
     self.searchBar.backgroundColor = [GUIConfig mainBackgroundColor];
@@ -453,12 +426,9 @@
     }else{
         return  [self headerViewWithSort:@"品牌街" clickBlock:^{
             
-            
             ShopListViewCtrl *vc = [ShopListViewCtrl new];
             vc.hidesBottomBarWhenPushed = YES;
-            
             [self.navigationController pushViewController:vc animated:YES];
-            
             
         }];
         
@@ -603,16 +573,22 @@
         
         BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
         
+         __weak ShopPortalViewCtrl *weakSelf = self;
+        
         self.block = ^(NSString *data){
             
             [brandStreetButton requestButtonString:data shopMallId:@"2" success:^(id data) {
                 
-                NSLog(@"%@",data);
+                NSLog(@"asdada->>>>>>>%@",data);
+                
+                cell.data = data[indexPath.row];
                 
                 [cell updateData];
                 
+//                __weak ShopPortalViewCtrl *weakSelf = self;
                 
-                [cell reloadInputViews];
+                [weakSelf.tableView reloadData];
+                
                 
             } failure:^(id code) {
                 
@@ -639,32 +615,20 @@
 
 -(UIView*)headerViewWithSort:(NSString*)title clickBlock:(void(^)())clickBlock{
     
-    
-    
     UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30+50)];
     uv.backgroundColor = [GUIConfig mainBackgroundColor];
-    
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH/2, 30)];
     lab.textColor = [GUIConfig grayFontColorDeep];
     lab.font = [UIFont systemFontOfSize:14];
     lab.text = title;
-    
     [uv addSubview:lab];
-    
-    
-    
     UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [moreButton setTitle:@"更多 >>" forState:UIControlStateNormal];
-    
     moreButton.frame = CGRectMake(SCREEN_WIDTH-80, 0, 80, 30);
     moreButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    
     [moreButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
-    
     [uv addSubview:moreButton];
-    
     [moreButton bk_addEventHandler:^(id sender) {
-        
         if (clickBlock) {
             clickBlock();
             
@@ -799,21 +763,15 @@
         
         UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
         
-        
-        
-        
         [as bk_addButtonWithTitle:@"默认排序" handler:^{
-            
-            
+           
             [sortButton setTitle:@"默认排序" forState:UIControlStateNormal];
             
         }];
         
-        
         [as bk_addButtonWithTitle:@"价格排序" handler:^{
             
             [sortButton setTitle:@"价格排序" forState:UIControlStateNormal];
-            
             
         }];
         
@@ -821,29 +779,20 @@
             
             [sortButton setTitle:@"金额排序" forState:UIControlStateNormal];
             
-            
         }];
         
         [as bk_addButtonWithTitle:@"时间排序" handler:^{
             
             [sortButton setTitle:@"时间排序" forState:UIControlStateNormal];
             
-            
         }];
         
         [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{
             
         }];
-        
-        
-        
+       
         [as showInView:[UIApplication sharedApplication].keyWindow];
-        
-        
-        
-        
-        
-        
+       
     } forControlEvents:UIControlEventTouchUpInside];
     
     return uv;
