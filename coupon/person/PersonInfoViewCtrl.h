@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^myInformationBlock)();
 @interface PersonInfoViewCtrl : UITableViewController
+
+@property(nonatomic,copy)myInformationBlock informationBlock;
 
 @end

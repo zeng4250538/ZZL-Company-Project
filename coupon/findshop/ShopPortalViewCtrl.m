@@ -199,7 +199,7 @@
     [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
        
         self.hotShopData = data;
-        NSLog(@"asdadada---->%@",data);
+//        NSLog(@"asdadada---->%@",data);
         [self.tableView reloadData];
         
         completion(YES);
@@ -217,7 +217,7 @@
     [service requestNearbyShop:@"2" page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
         
         self.hotBrandData = data;
-        NSLog(@"12313-------->%@",data);
+//        NSLog(@"12313-------->%@",data);
         [self.tableView reloadData];
         
         completion(YES);
@@ -577,7 +577,7 @@
         CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         
         
-        NSLog(@" couponData %@",self.couponData[indexPath.row]);
+//        NSLog(@" couponData %@",self.couponData[indexPath.row]);
         
         
         cell.data = self.couponData[indexPath.row];

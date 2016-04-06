@@ -7,8 +7,11 @@
 //
 
 #import "MyInformationViewController.h"
-
+#import "AppShareData.h"
 @interface MyInformationViewController ()
+
+@property(nonatomic,strong)AppShareData *appShareData;
+@property(nonatomic,strong)NSDictionary *dic;
 
 @end
 
@@ -16,9 +19,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadData];
     [self layoutView];
     [self.navigationItem setTitle:@"我的信息"];
     [self.tabBarController.tabBar setHidden:YES];
+}
+
+-(void)loadData{
+
+    self.appShareData = [AppShareData new];
+    
+    self.dic = [self.appShareData getMyInfromationData];
+    
+
 }
 
 -(void)layoutView{
@@ -61,6 +74,8 @@
     }];
     
     UIImageView *headportraitView = [UIImageView new];
+    [headportraitView sd_setImageWithURL:_dic[@"smallPhotoUrl"] placeholderImage:nil];
+    headportraitView.layer.masksToBounds = YES;
     headportraitView.layer.cornerRadius = 80/2;
     headportraitView.backgroundColor = [UIColor orangeColor];
     [titleBackground addSubview:headportraitView];
@@ -105,7 +120,7 @@
     }];
     
     UILabel *useNameLabel = [UILabel new];
-    useNameLabel.text = @"奥欧尼亚";
+    useNameLabel.text = _dic[@"phoneMsisdn"];
     useNameLabel.textColor = UIColorFromRGB(200, 200, 200);
     useNameLabel.font = [UIFont systemFontOfSize:15];
     [useBackground addSubview:useNameLabel];
@@ -152,7 +167,7 @@
     }];
     
     UILabel *sexNameLabel = [UILabel new];
-    sexNameLabel.text = @"男";
+    sexNameLabel.text = _dic[@"gender"];
     sexNameLabel.textColor = UIColorFromRGB(200, 200, 200);
     sexNameLabel.font = [UIFont systemFontOfSize:15];
     [sexBackground addSubview:sexNameLabel];
@@ -199,7 +214,7 @@
     }];
     
     UILabel *phoneNumberLabel = [UILabel new];
-    phoneNumberLabel.text = @"15976548532";
+    phoneNumberLabel.text = _dic[@"phoneMsisdn"];
     phoneNumberLabel.textColor = UIColorFromRGB(200, 200, 200);
     phoneNumberLabel.font = [UIFont systemFontOfSize:15];
     [phoneBackground addSubview:phoneNumberLabel];
@@ -243,7 +258,7 @@
     }];
     
     UILabel *cityNameLabel = [UILabel new];
-    cityNameLabel.text = @"广东广州";
+    cityNameLabel.text = _dic[@"cityName"];
     cityNameLabel.font = [UIFont systemFontOfSize:15];
     cityNameLabel.textColor = UIColorFromRGB(200, 200, 200);
     [cityBackground addSubview:cityNameLabel];

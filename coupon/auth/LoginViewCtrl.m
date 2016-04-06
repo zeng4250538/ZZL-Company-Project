@@ -10,7 +10,7 @@
 #import "LoginService.h"
 #import "RegisterViewCtrl.h"
 #import "ForgetViewCtrl.h"
-
+#import "MyInformationSevice.h"
 @interface LoginViewCtrl ()
 
 @property(nonatomic,strong)UITextField *userNameTextField;
@@ -23,7 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     
     
@@ -44,7 +43,7 @@
     
     [self makeFooterView];
     
-    
+
     
   //
     
@@ -131,6 +130,10 @@
     
     [loginButton bk_addEventHandler:^(id sender) {
         
+#if DEBUG
+        _userNameTextField.text = @"15818865756";
+        _passwordTextField.text = @"123456";
+#endif
         
         if ([self.userNameTextField.text length]<1) {
             
@@ -151,6 +154,7 @@
         
         NSString *userName = self.userNameTextField.text;
         NSString *password = self.passwordTextField.text;
+        
         
         
         LoginService * service = [LoginService new];
@@ -178,6 +182,21 @@
                 
                 self.loginEndBlock(YES);
             }
+            
+#pragma mark ------------------- 个人资料网络请求
+                AppShareData *app = [AppShareData instance];
+                MyInformationSevice *information = [MyInformationSevice new];
+                NSLog(@"%@",app.customId);
+                [information requestMyInformationCustomerID:app.customId success:^(id data) {
+//                    NSLog(@"%@", data);
+                    [app myInformationData:data];
+                    
+                } failure:^(id code) {
+                    
+                }];
+                
+                
+            
           
             
         } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
