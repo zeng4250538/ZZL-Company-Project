@@ -66,17 +66,23 @@
     [self.view addGestureRecognizer:rg];
   
     
+    
+    
     self.tapCouponRG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTapCoupon:)];
     
+    //上滑
     self.swipeUpCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipe:)];
     
     self.swipeUpCouponRG.direction = UISwipeGestureRecognizerDirectionUp;
   
+    
+    //下滑
     self.swipeDownCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipe:)];
     
     self.swipeDownCouponRG.direction = UISwipeGestureRecognizerDirectionDown;
 
     
+    //制作遮罩
     
     [self makeMaskCircleView];
     
@@ -600,10 +606,7 @@
     self.leftMaskView = maskLeft;
     self.rightMaskView = maskRight;
     
-    
-    
-    
-    
+      
     
     
     

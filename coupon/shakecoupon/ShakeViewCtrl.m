@@ -60,7 +60,7 @@
     MallService *services = [[MallService alloc] init];
     [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
-//        self.mallArray = data;
+       // self.mallArray = data;
         
 //        NSLog(@"%@",self.mallArray[0][@"name"]);
         
@@ -79,24 +79,28 @@
 
 
 #pragma mark - 装载摇一摇优惠券数据
+
+
 -(void)loadShakeData:(void(^)(BOOL ret))completion{
     
-    AppShareData *app = [AppShareData new];
+    
     
     ShakeService *service = [ShakeService new];
+    
+    
+    NSString *customId = [AppShareData instance].customId;
     
     
     //[SVProgressHUD showWithStatus:@""];
     
     
-    [service requestShakeCoupon:app.customId shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:customId shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
         
-//        NSLog(@"12313-------------->%@",data);
         self.isShakeDataLoaded = YES;
         
         [[AppShareData instance].shakeCouponQueue resetData:data];
         
-        [SVProgressHUD dismiss];
+        //[SVProgressHUD dismiss];
         
         completion(YES);
         

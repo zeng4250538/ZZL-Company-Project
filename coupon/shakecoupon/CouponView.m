@@ -48,18 +48,8 @@
         }else{
         
             
-            NSString *urlString = self.data[@"couponSmallPhotoUrl"];
-            
-            
-            urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            
-            
-//            urlString = [urlString stringByReplacingOccurrencesOfString:@"http://183.6.190.75:9780" withString:@"http://183.6.190.75:9780"];
-            
-            
-            
-            
-            NSURL *url = [NSURL URLWithString:urlString];
+             
+            NSURL *url = SafeUrl(self.data[@"couponSmallPhotoUrl"]);
             
             
             [uv sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -125,7 +115,7 @@
         
         
         
-        priceLabel.text =[NSString stringWithFormat:@"￥%@元",self.data[@"price"]];
+        priceLabel.text =[NSString stringWithFormat:@"￥%@元",self.data[@"sellingPrice"]];
         
         //self.data[@"price"];
         

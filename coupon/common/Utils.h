@@ -10,6 +10,8 @@
 
 
 NSString *SafeString(id content);
+NSURL *SafeUrl(id content);
+
 
 
 

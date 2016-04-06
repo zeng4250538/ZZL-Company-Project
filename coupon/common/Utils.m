@@ -15,6 +15,38 @@
 
 
 
+NSURL *SafeUrl(id content){
+    
+    if (content==nil) {
+        return nil;
+    }
+    
+    if ((NSNull*)content==[NSNull null]) {
+        return nil;
+    }
+
+    
+    if (![content isKindOfClass:[NSString class]]) {
+        
+        return nil;
+    }
+    
+    
+    NSString *url = [content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    url = [url stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
+    
+    
+    return [NSURL URLWithString:url];
+    
+    
+    
+}
+
+
+
+
 NSString *SafeString(id content){
     
     if (content==nil) {

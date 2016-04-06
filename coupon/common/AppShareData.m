@@ -62,9 +62,13 @@ static AppShareData *instance;
     
 }
 
+
 -(NSString*)customId{
     
-    return [[NSUserDefaults standardUserDefaults] objectForKey:CustomIdKey];
+
+    return @"15818865756";
+    
+   // return [[NSUserDefaults standardUserDefaults] objectForKey:CustomIdKey];
     
 }
 
