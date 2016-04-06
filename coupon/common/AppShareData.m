@@ -19,6 +19,8 @@ NSString * const IsLoginKey=@"islogin";
 
 NSString * const CustomIdKey=@"customId";
 
+NSString * const myInformationDataKey = @"myInformationData";
+
 
 
 @interface AppShareData()
@@ -104,9 +106,39 @@ static AppShareData *instance;
     [[NSUserDefaults standardUserDefaults] setBool:!on forKey:AudioStatusCloseKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+}
+
+
+-(void)myInformationData:(NSDictionary *)data{
+
+    
+//    {
+//        "id": "15818865756"
+//        "phoneMsisdn": "15818865756"
+//        "phoneImei": null
+//        "name": null
+//        "nickname": null
+//        "gender": "男"
+//        "countryName": null
+//        "cityName": "广州"
+//        "photoUrl": null
+//        "smallPhotoUrl": "http://192.168.6.97:8080/image/4.png"
+//        "passwordCredential": null
+//        "disable": false
+//    }
+    NSDictionary *dic = @{@"phoneMsisdn":data[@"phoneMsisdn"],@"gender":data[@"gender"],@"cityName":data[@"cityName"],@"smallPhotoUrl":data[@"smallPhotoUrl"]};
+    
+    [[NSUserDefaults standardUserDefaults]setObject:dic forKey:@"myInformation"];
+
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 
+
+-(NSDictionary *)getMyInfromationData{
+
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"myInformation"];
+}
 
 
 -(BOOL)isAudioOpen{
@@ -118,14 +150,11 @@ static AppShareData *instance;
 
 -(void)loginOut{
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:UserNameKey];
-    
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:PasswordKey];
-    
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AccessTokenKey];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:IsLoginKey];
-    
+    [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"myInformation"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
     
 }
 

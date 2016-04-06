@@ -17,11 +17,11 @@
 #import "SettingMessageTypeViewCtrl.h"
 #import "CouponDrawBackListViewCtrl.h"
 #import "HistoryOfConsumptionTableViewController.h"
-
+#import "AppShareData.h"
 #import "OrderContainerViewCtrl.h"
 #import "LoginViewCtrl.h"
 #import "MyInformationViewController.h"
-
+#import "MyInformationSevice.h"
 
 
 
@@ -30,18 +30,19 @@
 
 @interface PersonInfoViewCtrl ()
 
-@property(nonatomic,strong)MyInformationViewController *my;
+@property(nonatomic,strong)NSDictionary *myInformationDictionary;
 
+@property(nonatomic,strong)MyInformationViewController *my;
 @end
 
 @implementation PersonInfoViewCtrl
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [SVProgressHUD dismiss];
-    
-    
-   
+
+    [self.tabBarController.tabBar setHidden:NO];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
@@ -54,7 +55,7 @@
     header.image = [UIImage imageNamed:@"personbg.png"];
     
     self.tableView.tableHeaderView = header;
-    
+    [self.tableView.tableHeaderView setUserInteractionEnabled:YES];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
     
     [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
@@ -64,10 +65,28 @@
      *  头像显示（个人信息入口）
      */
     UIImageView *myInfromation = [[UIImageView alloc]init];
-    myInfromation.backgroundColor = [UIColor orangeColor];
+    AppShareData *app = [AppShareData new];
+    NSDictionary *dci = [app getMyInfromationData];
+    NSURL *url = [NSURL URLWithString:dci[@"smallPhotoUrl"]];
+    [myInfromation sd_setImageWithURL:url placeholderImage:nil];
+    myInfromation.backgroundColor = [UIColor whiteColor];
+    myInfromation.layer.masksToBounds = YES;
     myInfromation.layer.cornerRadius = 65/2;
     [header addSubview:myInfromation];
     
+    UILabel *myInformationTitleLabel = [UILabel new];
+    myInformationTitleLabel.text = dci[@"phoneMsisdn"];
+    myInformationTitleLabel.font = [UIFont systemFontOfSize:15];
+    myInformationTitleLabel.textColor = [UIColor whiteColor];
+    [header addSubview:myInformationTitleLabel];
+    [myInformationTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.equalTo(@110);
+        make.height.equalTo(@65);
+        make.left.equalTo(header).offset(95);
+        make.bottom.equalTo(header).offset(-20);
+        
+    }];
     /**
      *  开启交互
      */
@@ -78,7 +97,6 @@
     tap.numberOfTouchesRequired = 1;
     [myInfromation addGestureRecognizer:tap];
     [myInfromation mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.width.equalTo(@65);
         make.height.equalTo(@65);
         make.left.equalTo(header).offset(20);
@@ -88,11 +106,8 @@
     
     
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"setting_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-        
         SettingViewCtrl *set = [SettingViewCtrl new];
-        
         set.hidesBottomBarWhenPushed = YES;
-        
         [self.navigationController pushViewController:set animated:YES];
         
     }];
@@ -118,6 +133,8 @@
     
     
     [self makeFooterView];
+    
+    
     
     
     
@@ -232,7 +249,7 @@
     }
 }
 
-
+#pragma mark -------------- 是否登陆判断
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];

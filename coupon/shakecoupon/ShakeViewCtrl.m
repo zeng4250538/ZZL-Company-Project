@@ -445,8 +445,6 @@
 #pragma mark - 装载摇一摇控制器
 -(void)doLoadShakeView{
     
-    
-    
     if ([AppShareData instance].isAudioOpen) {
         
             [SimpleAudioPlayer playFile:@"shake_sound_male1.mp3"  volume:1.0f loops:0 withCompletionBlock:^(BOOL finished) {

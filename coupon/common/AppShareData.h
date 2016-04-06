@@ -38,10 +38,7 @@ extern NSString * const IsLoginKey;
 
 -(BOOL)isLogin;
 
-
 -(NSUInteger)addCouponToCart:(NSDictionary*)data;
-
-
 
 -(NSUInteger)getCartCount;
 
@@ -51,6 +48,8 @@ extern NSString * const IsLoginKey;
 
 -(BOOL)isAudioOpen;
 
+-(void)myInformationData:(NSDictionary *)data;
 
+-(NSDictionary *)getMyInfromationData;
 
 @end
