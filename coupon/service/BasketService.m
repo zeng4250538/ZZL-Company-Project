@@ -12,7 +12,7 @@
 
 
 
--(void)requestADDBasket:(NSString*)couponId count:(NSInteger)count
+-(void)requestADDBasket:(NSString *)couponId count:(NSInteger)count
                 success:(void(^)(NSInteger code,NSString *message,id data))success
                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
@@ -31,8 +31,8 @@
     BaseRequest *req = [BaseRequest new];
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponbasket/basketitem"];
- 
-    NSDictionary *parms =@{@"customerId":[AppShareData instance].customId,@"couponId":couponId,@"couponCount":@1};
+    AppShareData *app = [AppShareData instance];
+    NSDictionary *parms =@{@"userId":app.customId,@"couponPromotionId":@"24"};
     
     
     
@@ -40,7 +40,7 @@
         
         success(code,@"",object);
         
-        
+        NSLog(@"%@",object);
         
     } failure:^(NSInteger code, NSString *content) {
         

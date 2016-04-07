@@ -86,21 +86,10 @@
     
     [self makeMaskCircleView];
     
-    
-    
-    
-    
-    
-
-    
-
-    
    // [UIColor colorWithWhite:0.5f alpha:0.5f];
     
     // Do any additional setup after loading the view.
 }
-
-
 
 #pragma mark - 初始化优惠券
 
@@ -182,20 +171,12 @@
         
         
     }];
-    
-    
-    
-    
-    
-    
-    
+   
 }
 
 
-#pragma mark - 抛物线轨迹
-- (void)beginThrowing:(UIView *)view
-{
-    
+#pragma mark ------------------------- 抛物线轨迹
+- (void)beginThrowing:(UIView *)view{
     
     ThrowLineTool *tool = [ThrowLineTool sharedTool];
     
@@ -299,13 +280,7 @@
             
             
         }];
-        
-
-        
-        
-        
-        
-        
+ 
         
     };
 }

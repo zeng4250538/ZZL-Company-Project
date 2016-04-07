@@ -32,7 +32,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
+
     
     self.tableView = [GUIHelper makeTableView:self.view delegate:self];
     
@@ -52,27 +52,10 @@
     [self loadData];
     
     
-    self.navigationController.navigationBar.tintColor = [GUIConfig mainColor];
     
     
     
-//    UIImage *backImage = [UIImage imageNamed:@"detailback.png"];
-//    
-//    
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:backImage style:UIBarButtonItemStylePlain handler:^(id sender) {
-//        
-//    }];
-//    
-//    self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithWhite:0.8 alpha:1.0];
-//    
     
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
@@ -246,7 +229,7 @@
     [super viewWillAppear:animated];
     
     
-    self.navigationController.navigationBar.tintColor = [GUIConfig mainColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -281,7 +264,6 @@
     [super viewWillDisappear:animated];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
     
     
     self.navigationController.automaticallyAdjustsScrollViewInsets=YES;
@@ -328,6 +310,7 @@
     
     NSString *urlString = self.data[@"smallPhotoUrl"];
     
+    self.navigationItem.title = self.data[@"name"];
     
     urlString = [urlString stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
 
@@ -343,14 +326,6 @@
    
     [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
     
-    
-    
-    
-    
-    
-    
-    
-  //  [shopBgButton setBackgroundImage:[UIImage imageNamed:url] forState:UIControlStateNormal];
     
     
     UIButton *subButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -408,19 +383,6 @@
     }];
     
 
-//    switch (subButton.state) {
-//        case UIControlStateNormal:
-//            
-//            [subButton addTarget:self action:@selector(subcrideClick:) forControlEvents:UIControlEventTouchUpInside];
-//            
-//            break;
-//        case UIControlStateSelected:
-//            [subButton addTarget:self action:@selector(cancelSubcrideClick:) forControlEvents:UIControlEventTouchUpInside];
-//            
-//            break;
-//        default:
-//            break;
-//    }
     
     subButton.backgroundColor =UIColorFromRGB(247, 180, 38);
     
@@ -606,12 +568,13 @@
         
     }];
 
-
-
 }
+
 
 #pragma mark - Table View Config
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     CouponDetailViewCtrl *vc = [[CouponDetailViewCtrl alloc] init];
     
@@ -620,7 +583,6 @@
         vc.datas = self.realTimeCouponList[indexPath.row];
         
     }else{
-        
         
         vc.datas = self.otherCouponList[indexPath.row];
     }
@@ -643,6 +605,7 @@
 
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
     
     if (section==0) {
         

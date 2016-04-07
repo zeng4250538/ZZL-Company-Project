@@ -90,11 +90,7 @@
     
     NSString *customId = [AppShareData instance].customId;
     
-    
-    //[SVProgressHUD showWithStatus:@""];
-    
-    
-    [service requestShakeCoupon:customId shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:customId shopMallId:@"2" success:^(NSInteger code, NSString *message, id data) {
         
         self.isShakeDataLoaded = YES;
         
@@ -131,14 +127,11 @@
     
     [self.view addSubview:self.contentView];
     
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     
     CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
     
     self.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, FrameHeight);
-    
     
     //暂时只用一个页面
     self.contentView.contentSize = CGSizeMake(self.view.frame.size.width, FrameHeight);
@@ -291,25 +284,25 @@
         UIImage *img = [UIImage imageNamed:imgFile];
        
         UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-        
+
         CGFloat x = (uv.frame.size.width - imgView.frame.size.width)/2;
         CGFloat y = (uv.frame.size.height - imgView.frame.size.height)/2;
-        
+
         imgView.userInteractionEnabled = YES;
        
         UITapGestureRecognizer *rg = [[UITapGestureRecognizer alloc] bk_initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
            
-           // [self doLoadShakeView];
+           
             
         }];
         
         [imgView addGestureRecognizer:rg];
-       
+
         CGRect r = imgView.frame;
-        
+
         r.origin.x = x;
         r.origin.y = y;
-        
+
         imgView.frame = r;
         
         [self.contentView addSubview:uv];
@@ -451,27 +444,22 @@
                 // NSLog(@"Finished playing %");
                 
             }];
-            
         
     }
     
-   
     ShakeCouponViewCtrl *vc = [ShakeCouponViewCtrl new];
     
     vc.nav = self.navigationController;
     
-    
-    
-    
     self.definesPresentationContext = NO; //self is presenting view controller
-    
-    
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
         
         vc.modalPresentationStyle=UIModalPresentationOverCurrentContext;
         
-    }else{
+    }
+    
+    else{
         
         self.modalPresentationStyle=UIModalPresentationCurrentContext;
         

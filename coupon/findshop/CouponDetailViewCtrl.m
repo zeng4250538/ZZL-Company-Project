@@ -215,31 +215,10 @@
     
     UIImageView *uv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     uv.backgroundColor = [UIColor whiteColor];
-//    [uv setImage:[UIImage imageNamed:@"logo29@2x.png"]];
     
-//    UIButton *shopBgButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
-    
-//        [uv addSubview:shopBgButton];
-    
-//    NSString *url = [Utils getRandomImage:self.datas[@"couponSmallPhotoUrl"]];
-//    NSLog(@"%@",self.datas[@"couponSmallPhotoUrl"]);
-//    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    
     NSURL *urls = [NSURL URLWithString:self.datas[@"couponSmallPhotoUrl"]];
     
     [uv sd_setImageWithURL:urls placeholderImage:[UIImage imageNamed:@"logo29@2x.png"]];
-    
-    
-//    [uv sd_setImageWithURL:urls completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//        [self reloadInputViews];
-//        
-//    }];
-//    [uv setImageWithURL:urls placeholderImage:nil];
-    
-//    [shopBgButton setBackgroundImage:[UIImage imageNamed:url] forState:UIControlStateNormal];
-    
     
     self.tableView.tableHeaderView = uv;
     
