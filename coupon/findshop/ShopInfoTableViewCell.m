@@ -80,8 +80,8 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
     if (self) {
-        
         
         self.logoView = [[UIImageView alloc] init];
         
@@ -137,15 +137,7 @@
         self.subscribeButton.titleLabel.font = [UIFont systemFontOfSize:12];
         
         [self.contentView addSubview:self.subscribeButton];
-        
-        
-        
-        
-        
-        
-        
-        
-        
+      
     }
     return self;
 }
@@ -269,8 +261,6 @@
     
     
     self.titleLabel.text = SafeString(self.data[@"name"]);
-    
-    self.titleLabel.text = SafeString(self.data[@"shopName"]);
     
     self.goodLabel.text = SafeString(self.data[@"good"]);
     

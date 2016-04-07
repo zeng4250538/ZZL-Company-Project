@@ -24,7 +24,7 @@
         mallid=@"";
     }
     
-    NSDictionary *parm = @{@"customerId":mallid,@"shopMallId":@"2"};
+    NSDictionary *parm = @{@"customerId":mallid,@"shopMallId":shopMallId};
   
     [req get:url param:parm success:^(NSInteger code, id object) {
         

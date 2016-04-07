@@ -17,12 +17,6 @@
 @property(nonatomic,strong)UILabel *priceLabel;    //价格
 @property(nonatomic,strong)UIButton *recommentButton;    //提醒按钮
 
-
-
-
-
-
-
 @end
 
 
@@ -66,23 +60,15 @@
         
         [self.contentView addSubview:self.recommentButton];
         
-        
-        
-        
-
-        
-        
-        
-        
     }
     
     return self;
     
 }
 
+
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
     
     [self.logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -254,19 +240,12 @@
 
 
 -(void)updateData{
-    
-    
-    
-    
+   
     NSString *imgUrl = [Utils getRandomImage:@"商家图片"];
-    
     self.logoView.image = [UIImage imageNamed:imgUrl];
     self.titleLabel.text=@"代金券";
     self.priceLabel.text=@"20";
-    
     self.detailLabel.text=@"满100送20，全天通用，消费满100";
-    
-    
     
 }
 
