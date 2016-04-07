@@ -47,7 +47,10 @@
     
     ShopService *service = [ShopService new];
     
-    [service requestRecommendShop:@"2" customerId:@"15818865756" page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
+    
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    [service requestRecommendShop:mallId page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
        
         self.shopList = data;
         

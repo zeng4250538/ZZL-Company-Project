@@ -21,7 +21,7 @@
  *http://120.25.66.110:9998/diamond-sis-web/v1/shoprecommand?shopmallid=53420473120&userid=13693284393&page=1&per_page=3
   */
 
--(void)requestRecommendShop:(NSString*)mallid customerId:(NSInteger)customerId page:(NSInteger)page pageCount:(NSInteger)pageCount
+-(void)requestRecommendShop:(NSString*)mallid  page:(NSInteger)page pageCount:(NSInteger)pageCount
                   success:(void(^)(NSInteger code,NSString *message,id data))success
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 

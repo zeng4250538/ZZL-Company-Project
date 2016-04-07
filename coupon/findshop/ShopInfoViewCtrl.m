@@ -86,7 +86,10 @@
     
     //requestRealTimeCoupon
     
-    [couponService requestRealTimeCoupon:_data[@"id"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
+    
+    NSString *shopId = SafeString(self.data[@"id"]);
+    
+    [couponService requestRealTimeCoupon:shopId page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
 //        if (![data isKindOfClass:[NSArray class]]) {
 //            
@@ -121,7 +124,7 @@
  
     //查询其他优惠券
     
-    [couponService requestNormalCoupon:self.data[@"id"] page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestNormalCoupon:shopId page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
         
         

@@ -151,13 +151,17 @@
 
 -(void)doLoad:(void(^)(BOOL ret))completion{
     
+    
+    NSString *mallId = [AppShareData instance].mallId;
+
+    
     ShopService *service = [ShopService new];
     
     CouponService *couponService = [CouponService new];
     
     
 #pragma mark ---- 即时优惠网络请求
-    [couponService requestRecommendCoupon:@"2" page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:mallId page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         self.couponData=data;
         
@@ -174,15 +178,19 @@
 
     
 #pragma mark ---- 优选品牌网络请求
-    [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
+    
+    
+    [service requestRecommendShop:mallId page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
        
-        self.hotShopData = data;
-//        NSLog(@"asdadada---->%@",data);
-        [self.tableView reloadData];
+       self.hotShopData = data;
+       [self.tableView reloadData];
         
         completion(YES);
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
         
         completion(NO);
         
@@ -192,15 +200,20 @@
     
     
 #pragma mark ---- 品牌街网络请求
-    [service requestNearbyShop:@"2" page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
+    
+    
+    [service requestNearbyShop:mallId page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
         
         self.hotBrandData = data;
-//        NSLog(@"12313-------->%@",data);
         [self.tableView reloadData];
         
         completion(YES);
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        
         
         
         completion(NO);
