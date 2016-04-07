@@ -21,6 +21,8 @@ pod 'YYCache'
 pod 'YYImage'
 pod 'LTNavigationBar'
 pod 'AFNetworking'
+pod 'BaiduMapKit'
+
 
 
 #pod 'KMNavigationBarTransition'

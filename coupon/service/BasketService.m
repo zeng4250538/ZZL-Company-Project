@@ -17,8 +17,6 @@
                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
-   
-    
     
     BaseRequest *req = [BaseRequest new];
     
@@ -55,11 +53,10 @@
 
 
 
--(void)requestUserid:(NSString *)userid NotUse:(void(^)(NSInteger code,NSString *message,id data))success
+-(void)requestNotUse:(void(^)(NSInteger code,NSString *message,id data))success
              failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
-    //http://120.25.66.110:9998/diamond-sis-web/v1/couponbasket/basketitem?userid=2347313464
     
     
     BaseRequest *req = [BaseRequest new];
@@ -67,9 +64,7 @@
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponbasket/basketitem"];
     
     
-    
-    
-    NSDictionary *parm = @{@"userid":userid};
+    NSDictionary *parm = @{@"userid":[AppShareData instance].customId};
     
     
     //[AppShareData instance].customId
