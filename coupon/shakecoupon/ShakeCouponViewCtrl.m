@@ -157,7 +157,7 @@
 #pragma mar - 将优惠券添加到篮子里面
 
 
-- (void)addCouponToBasket{
+- (void)addCouponToBasket:(void(^)(BOOL ret))completion{
     
     
      BasketService * service  = [BasketService new];
@@ -168,9 +168,13 @@
     [service requestADDBasket:couponId count:1 success:^(NSInteger code, NSString *message, id data) {
         
         
+        completion(YES);
+        
+        
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
+        completion(NO);
         
         
         [SVProgressHUD showErrorWithStatus:@"加入篮子失败"];
@@ -210,19 +214,31 @@
     
     tool.didFinishBlock = ^(){
         
+        
+        
+        __weak id weakSelf =self;
+        
     
-        [self addCouponToBasket];
+        [self addCouponToBasket:^(BOOL ret){
+            
+            if (ret) {
+                [weakSelf updateCartNum];
+                
+            }
+            
+            view.hidden = YES;
+            
+            [view removeFromSuperview];
+
+            
+            
+            
+        }];
         
         
-        [[AppShareData instance] addCouponToCart:self.couponData];
-        
-        [self updateCartNum];
         
         
         
-        view.hidden = YES;
-        
-        [view removeFromSuperview];
         
       //  self.imgView = nil;
      
@@ -1053,8 +1069,12 @@
     
     
     ShakeService *service = [ShakeService new];
+    
+    NSString *customerId = [AppShareData instance].customId;
+    NSString *mallId = @"2";
+    
   
-    [service requestShakeCoupon:@"12345" shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:customerId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
        
         [[AppShareData instance].shakeCouponQueue resetData:data];
         

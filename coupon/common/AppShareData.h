@@ -25,7 +25,9 @@ extern NSString * const IsLoginKey;
 @property(nonatomic,strong)NSDictionary *currentMall;
 @property(nonatomic,strong)CouponQueue *shakeCouponQueue;
 
-@property(nonatomic,copy)NSString *customId;
+@property(nonatomic,copy,readonly)NSString *customId;
+@property(nonatomic,copy,readonly)NSString *mallId;
+
 
 @property(nonatomic,copy)NSString *accessToken;
 
@@ -41,6 +43,8 @@ extern NSString * const IsLoginKey;
 -(NSUInteger)addCouponToCart:(NSDictionary*)data;
 
 -(NSUInteger)getCartCount;
+
+
 
 -(NSMutableArray*)getCartList;
 
