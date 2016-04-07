@@ -19,7 +19,7 @@
 @implementation AppDelegate
 
 
-BOOL InLan = YES;
+BOOL InLan = NO;
 
 
 

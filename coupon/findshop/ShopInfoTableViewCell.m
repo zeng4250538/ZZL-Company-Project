@@ -212,9 +212,6 @@
     
     
      
-    //self.commentLabel.frame = CGRectMake(140, 50, 60, 20);
-    
-   // self.commentLabel.backgroundColor=[UIColor yellowColor];
     
     [self.commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.logoView.mas_right).with.offset(10);
@@ -224,7 +221,6 @@
     }];
     
     [self.commentLabel sizeToFit];
-    
     
     
     
@@ -261,20 +257,10 @@
     
     
     self.titleLabel.text = SafeString(self.data[@"name"]);
-    
     self.goodLabel.text = SafeString(self.data[@"good"]);
-    
     self.badLabel.text = SafeString(self.data[@"bad"]);
-    
     self.commentLabel.text = SafeString(self.data[@"prompt"]);
-    
-    NSString *urlString = SafeString(self.data[@"smallPhotoUrl"]);
-
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    urlString = [urlString stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
-
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
     
     [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         

@@ -17,22 +17,14 @@
                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
-   // http://120.25.66.110:9998/diamond-sis-web/v1/couponbasket/basketitem
-    
-//    {
-//        "customerId":"35124123",
-//        "couponId":"325431214",
-//        "couponCount":1
-//    }
-//
-    
+   
     
     
     BaseRequest *req = [BaseRequest new];
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponbasket/basketitem"];
     AppShareData *app = [AppShareData instance];
-    NSDictionary *parms =@{@"userId":app.customId,@"couponPromotionId":@"24"};
+    NSDictionary *parms =@{@"userId":app.customId,@"couponPromotionId":couponId};
     
     
     

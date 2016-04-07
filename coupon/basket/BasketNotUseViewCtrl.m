@@ -221,7 +221,7 @@
     NSDictionary *d = self.dataList[[indexPath row]];
     
     
-//    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
     
     
     

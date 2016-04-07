@@ -51,11 +51,7 @@
     self.navigationItem.title=@"找商家";
     
     
- 
-    
     self.selectTitle = [[SelectMallPopViewCtrl alloc]init];
-    
-    
     
     //table view
     
@@ -64,18 +60,15 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.center.width.bottom.equalTo(self.view);
-        
         
     }];
     
     [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell1"];
     
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell2"];
-    
     
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{

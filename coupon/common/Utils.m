@@ -51,18 +51,26 @@ NSURL *SafeUrl(id content){
 }
 
 
-
+id safeArrayValue(id array,NSInteger pos){
+    
+    if (pos<[array count]) {
+        return  nil;
+    }
+    
+    return array[pos];
+    
+    
+}
 
 NSString *SafeString(id content){
+    
     
     if (content==nil) {
         return @"";
     }
-    
     if ((NSNull*)content==[NSNull null]) {
         return @"";
     }
-    
     
     return [NSString stringWithFormat:@"%@",content];
     

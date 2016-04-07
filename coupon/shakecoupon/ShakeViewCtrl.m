@@ -29,7 +29,6 @@
 
 @implementation ShakeViewCtrl
 
-
 -(void)viewDidLoad{
     [super viewDidLoad];
     
@@ -51,6 +50,13 @@
     }];
     
     
+}
+
+#pragma mark - 请求定位数据
+-(void)requestLocation{
+    
+    
+    
     
 }
 
@@ -60,12 +66,7 @@
     MallService *services = [[MallService alloc] init];
     [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
-       // self.mallArray = data;
-        
-//        NSLog(@"%@",self.mallArray[0][@"name"]);
-        
         cityLabel(data);
-        
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
@@ -80,9 +81,7 @@
 
 #pragma mark - 装载摇一摇优惠券数据
 
-
 -(void)loadShakeData:(void(^)(BOOL ret))completion{
-    
     
     
     ShakeService *service = [ShakeService new];
@@ -90,13 +89,14 @@
     
     NSString *customId = [AppShareData instance].customId;
     
-    [service requestShakeCoupon:customId shopMallId:@"2" success:^(NSInteger code, NSString *message, id data) {
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    [service requestShakeCoupon:customId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
         
         self.isShakeDataLoaded = YES;
         
         [[AppShareData instance].shakeCouponQueue resetData:data];
         
-        //[SVProgressHUD dismiss];
         
         completion(YES);
         
@@ -107,7 +107,6 @@
         [SVProgressHUD dismiss];
         
         completion(NO);
-        
         
         
     }];
@@ -162,9 +161,6 @@
     [audioButton setImage:[UIImage imageNamed:@"soundoff"] forState:UIControlStateSelected];
     
     
-    //audioButton.frame = CGRectMake(100, 100, 100, 30);
-    
-    // [audioButton setTitle:@"播放声音" forState:UIControlStateNormal];
     
     
     [audioButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -242,20 +238,6 @@
     
     
     
-   // CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
-    
-//    CGRect r = imageView.frame;
-//    r.origin.x = SCREEN_WIDTH/2+60;
-//    r.origin.y = shakeLogo.frame.origin.y+shakeLogo.frame.size.height;
-//    r.size.width = r.size.width/2;
-//    
-//    r.size.height = r.size.height/2;
-//    
-//    
-//    imageView.frame = r;
-//    
-    
-    //imageView.frame = CGRectMake(SCREEN_WIDTH/2, FrameHeight/2,150 ,150);
     
 }
 
@@ -265,6 +247,7 @@
  *  摇换主界面，
  */
 -(void)makeShakeBody{
+    
     
     CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
     
@@ -325,7 +308,6 @@
        
         [self makeAnimateView:imgView parentView:uv];
         
-//          pos++;
         
     }
 
@@ -389,26 +371,6 @@
     [mallButton bk_addEventHandler:^(id sender) {
         
         
-//        MallService *service = [MallService new];
-        
-        
-        
-        
-        
-//        [service queryMallByCity:@"1" success:^(NSInteger code, NSString *message, id data) {
-//            
-//            NSLog(@"success %@",data);
-//            
-//            
-//        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-//            
-//            
-//            NSLog(@"error %@",data);
-//            
-//            
-//            
-//        }];
-//        
         
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         

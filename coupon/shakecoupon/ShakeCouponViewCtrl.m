@@ -84,64 +84,28 @@
     
     //制作遮罩
     
-    [self makeMaskCircleView];
     
    // [UIColor colorWithWhite:0.5f alpha:0.5f];
     
     // Do any additional setup after loading the view.
+    
+    
+    [self animationDidStart];
 }
 
-#pragma mark - 初始化优惠券
 
--(void)makeRequestCoupon{
-    
-    
-    CGFloat viewWidth = SCREEN_WIDTH-120;
-    CGFloat viewHeight = SCREEN_WIDTH-120+40;
+#pragma mark - 动画开始
+
+-(void)animationDidStart{
     
     
     
-    ShakeService *service = [ShakeService new];
-    
-    [service requestShakeCoupon:@"122344" shopMallId:@"" success:^(NSInteger code, NSString *message, id data) {
-        
-        
-        if (code==0) {
-            
-            self.shakeCouponList = [data mutableCopy];
-            
-            self.couponData = self.shakeCouponList[0];
-            
-            
-            [self.shakeCouponList removeObjectAtIndex:0];
-            
-            
-            
-            CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
-            
-            
-            [self.view addSubview:couponView];
-            
-            
-            self.imgView = couponView;
-            
-            
-            
-        }
-        
-        
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-    }];
-    
-    
+    [self makeMaskCircleView];
     
     
     
     
 }
-
 
 #pragma mar - 将优惠券添加到篮子里面
 
@@ -176,7 +140,7 @@
 
 
 #pragma mark ------------------------- 抛物线轨迹
-- (void)beginThrowing:(UIView *)view{
+- (void)addBasketWithAnimation:(UIView *)view{
     
     ThrowLineTool *tool = [ThrowLineTool sharedTool];
     
@@ -803,11 +767,10 @@
         
         
         
-        [self beginThrowing:rg.view];
+        [self addBasketWithAnimation:rg.view];
 
         
         
-        NSLog(@"up");
         
         
         
@@ -901,57 +864,57 @@
 }
 
 
--(void)animationSwipeUp{
-    
-    [self makeNextView];
- 
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        
-        
-        CGRect r = self.nextView.frame;
-        
-        CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
-        
-        r.origin.x = x;
-        
-        
-        self.nextView.frame = r;
-        
-        
-        
-        CGRect rr = self.imgView.frame;
-        
-        CGFloat yy = self.imgView.frame.size.width*-2.0f;
-       
-        rr.origin.y = yy;
-        
-        self.imgView.frame = rr;
-        
-    } completion:^(BOOL finished) {
-        
-        
-        [self.imgView removeFromSuperview];
-        
-        self.imgView = nil;
-        
-        self.imgView = self.nextView;
-        
-        [self doAddAction];
-        
-        
-    }];
-    
-    
-    
-    
-
-    
-    
-    
-    
-}
-
+//-(void)animationSwipeUp{
+//    
+//    [self makeNextView];
+// 
+//    [UIView animateWithDuration:0.5 animations:^{
+//        
+//        
+//        
+//        CGRect r = self.nextView.frame;
+//        
+//        CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
+//        
+//        r.origin.x = x;
+//        
+//        
+//        self.nextView.frame = r;
+//        
+//        
+//        
+//        CGRect rr = self.imgView.frame;
+//        
+//        CGFloat yy = self.imgView.frame.size.width*-2.0f;
+//       
+//        rr.origin.y = yy;
+//        
+//        self.imgView.frame = rr;
+//        
+//    } completion:^(BOOL finished) {
+//        
+//        
+//        [self.imgView removeFromSuperview];
+//        
+//        self.imgView = nil;
+//        
+//        self.imgView = self.nextView;
+//        
+//        [self doAddAction];
+//        
+//        
+//    }];
+//    
+//    
+//    
+//    
+//
+//    
+//    
+//    
+//    
+//}
+//
 -(void)animationSwipeDown{
    
     [self makeNextView];
@@ -1046,7 +1009,8 @@
     ShakeService *service = [ShakeService new];
     
     NSString *customerId = [AppShareData instance].customId;
-    NSString *mallId = @"2";
+    NSString *mallId = [AppShareData instance].mallId;
+    
     
   
     [service requestShakeCoupon:customerId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
@@ -1059,6 +1023,20 @@
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
+        
+        if (code>=400 && code<500) {
+            
+            [SVProgressHUD showErrorWithStatus:@"无数据"];
+            
+        }
+        
+        if (code>=500) {
+            
+            [SVProgressHUD showErrorWithStatus:@"服务端错误"];
+            
+        }
+        
+
         
         
         completion(NO);

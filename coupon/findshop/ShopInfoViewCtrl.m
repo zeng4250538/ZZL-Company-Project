@@ -308,22 +308,14 @@
     [uv addSubview:shopBgButton];
     
     
-    NSString *urlString = self.data[@"smallPhotoUrl"];
     
-    self.navigationItem.title = self.data[@"name"];
-    
-    urlString = [urlString stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
-
-    
-    
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    
-    NSURL *url = [NSURL URLWithString:urlString];
+    self.navigationItem.title = SafeString(self.data[@"name"]);
     
     
     
-   
+    NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
+    
+    
     [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
     
     
