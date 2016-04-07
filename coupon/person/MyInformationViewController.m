@@ -23,6 +23,7 @@
     [self layoutView];
     [self.navigationItem setTitle:@"我的信息"];
     [self.tabBarController.tabBar setHidden:YES];
+//    self.automaticallyAdjustsScrollViewInsets=NO;
 }
 
 -(void)loadData{
@@ -271,9 +272,25 @@
         
         
     }];
-    
-    
 
+
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+
+    [self.tabBarController.tabBar setHidden:YES];
+    self.navigationController.automaticallyAdjustsScrollViewInsets=NO;
+
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+
+
+    [super viewWillDisappear:animated];
+    [self.tabBarController.tabBar setHidden:NO];
+    self.navigationController.automaticallyAdjustsScrollViewInsets=YES;
 
 
 }

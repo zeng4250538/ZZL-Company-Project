@@ -285,6 +285,7 @@
     
     self.automaticallyAdjustsScrollViewInsets=NO;
     
+    [self.navigationController.navigationBar setHidden:NO];
     
     
 }
