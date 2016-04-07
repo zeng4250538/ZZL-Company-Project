@@ -227,7 +227,9 @@
     
     ShopService *service = [ShopService new];
     
-    [service requestKeyword:@"mallid"
+   AppShareData *app = [AppShareData instance];
+    
+    [service requestKeyword:app.mallId
                     keyWord:searchText
                     success:^(NSInteger code, NSString *message, id data) {
                         

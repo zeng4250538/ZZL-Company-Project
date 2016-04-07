@@ -720,12 +720,12 @@
             
         }];
         
-        [as bk_addButtonWithTitle:@"服饰" handler:^{
-            
-            [filterButton setTitle:@"服饰" forState:UIControlStateNormal];
-            
-            
-        }];
+//        [as bk_addButtonWithTitle:@"服饰" handler:^{
+//            
+//            [filterButton setTitle:@"服饰" forState:UIControlStateNormal];
+//            
+//            
+//        }];
         
         
         
