@@ -38,6 +38,9 @@ extern NSString * const IsLoginKey;
 
 -(void)saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken ;
 
+
+-(void)saveMallId:(NSString*)mallId;
+
 -(BOOL)isLogin;
 
 -(NSUInteger)addCouponToCart:(NSDictionary*)data;

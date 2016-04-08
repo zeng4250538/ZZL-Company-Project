@@ -60,13 +60,42 @@
     
 }
 
--(void)titleItenLabel:(void(^)(id data))cityLabel{
+
+/**
+ *  请求当前的商场
+ *
+ *  @param completion 完成回调
+ 
+ */
+-(void)requestCurrentMall:(void(^)(id data))completion{
     
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
     [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
-        cityLabel(data);
+        
+    
+        if (data ==nil) {
+            completion(nil);
+            return ;
+        }
+        
+        if (![data isKindOfClass:[NSArray class]]) {
+            completion(nil);
+            return ;
+            
+        }
+        
+        
+        if([data count]<1){
+            
+            completion(nil);
+            return ;
+        }
+        
+        //获取第一个默认的商城
+        completion(data[0]);
+       // completion();
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
@@ -351,14 +380,20 @@
     
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
     mallButton.frame = CGRectMake(0, 0, 100, 44);
-    [mallButton setTitle:@"时尚天河" forState:UIControlStateNormal];
+    [mallButton setTitle:@"选择商城" forState:UIControlStateNormal];
     mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    [self titleItenLabel:^(id data) {
+
+    
+    [self requestCurrentMall:^(id data) {
         
-        [mallButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
-        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
-        vc.mallList = data;
+        NSString *mallId = SafeString(data[@"id"]);
         
+        //存储为当前的mallid
+        
+        [[AppShareData instance] saveMallId:mallId];
+        
+        
+        [mallButton setTitle:SafeString(data[@"name"]) forState:UIControlStateNormal];
     }];
     
     self.mallButton =mallButton;
@@ -379,7 +414,8 @@
         vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
             
             
-            NSString *name = [NSString stringWithFormat:@"%@(%@)",mall[@"name"],mall[@"distance"]];
+            NSString *name = [NSString stringWithFormat:@"%@(%@)",SafeString(mall[@"name"]),SafeString(mall[@"distance"])];
+            
             
             
             [self.mallButton setTitle:name forState:UIControlStateNormal];
