@@ -161,7 +161,7 @@
     
     
 #pragma mark ---- 即时优惠网络请求
-    [couponService requestRecommendCoupon:mallId page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:mallId page:1 pageCount:5 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         self.couponData=data;
         
@@ -180,7 +180,7 @@
 #pragma mark ---- 优选品牌网络请求
     
     
-    [service requestRecommendShop:mallId page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
+    [service requestRecommendShop:mallId page:1 pageCount:5 success:^(NSInteger code, NSString *message, id data) {
        
        self.hotShopData = data;
        [self.tableView reloadData];
@@ -202,7 +202,7 @@
 #pragma mark ---- 品牌街网络请求
     
     
-    [service requestNearbyShop:mallId page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
+    [service requestNearbyShop:mallId page:1 per_page:5  success:^(NSInteger code, NSString *message, id data) {
         
         self.hotBrandData = data;
         [self.tableView reloadData];
@@ -411,6 +411,8 @@
            
            vc.hidesBottomBarWhenPushed = YES;
            
+           vc.navigationItem.title=@"优选品牌";
+           
            [self.navigationController pushViewController:vc animated:YES];
            
            
@@ -424,6 +426,8 @@
             
             vc.hidesBottomBarWhenPushed = YES;
             
+            
+            
             [self.navigationController pushViewController:vc animated:YES];
             
         }];
@@ -434,6 +438,7 @@
             
             ShopListViewCtrl *vc = [ShopListViewCtrl new];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.navigationItem.title=@"品牌街";
             [self.navigationController pushViewController:vc animated:YES];
             
         }];

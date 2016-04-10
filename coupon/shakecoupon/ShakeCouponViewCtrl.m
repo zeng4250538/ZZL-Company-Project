@@ -55,32 +55,12 @@
     [super viewDidLoad];
     
     
-    
-    self.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    
     self.view.backgroundColor =[UIColor colorWithWhite:0.1f alpha:0.0f];
     
     
-    UITapGestureRecognizer *rg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTap:)];
-    
-    [self.view addGestureRecognizer:rg];
-  
     
     
     
-    self.tapCouponRG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTapCoupon:)];
-    
-    //上滑
-    self.swipeUpCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipe:)];
-    
-    self.swipeUpCouponRG.direction = UISwipeGestureRecognizerDirectionUp;
-  
-    
-    //下滑
-    self.swipeDownCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipe:)];
-    
-    self.swipeDownCouponRG.direction = UISwipeGestureRecognizerDirectionDown;
-
     
     //制作遮罩
     
@@ -90,9 +70,43 @@
     // Do any additional setup after loading the view.
     
     
+    [self makeRecognizer];
+    
     [self animationDidStart];
 }
 
+
+#pragma mark - 手势定义
+
+-(void)makeRecognizer{
+    
+    
+    //
+    
+    UITapGestureRecognizer *rg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTap:)];
+    
+    [self.view addGestureRecognizer:rg];
+    
+    
+    
+    //点击优惠券
+    self.tapCouponRG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTapCoupon:)];
+    
+    //上滑
+    self.swipeUpCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipeUp:)];
+    
+    self.swipeUpCouponRG.direction = UISwipeGestureRecognizerDirectionUp;
+    
+    
+    //下滑
+    self.swipeDownCouponRG = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(doSwipeDown:)];
+    
+    self.swipeDownCouponRG.direction = UISwipeGestureRecognizerDirectionDown;
+    
+    
+    
+    
+}
 
 #pragma mark - 动画开始
 
@@ -121,6 +135,10 @@
     [service requestADDBasket:couponId count:1 success:^(NSInteger code, NSString *message, id data) {
         
         
+        
+        [[AppShareData instance] addCouponToCart:self.currentData];
+        
+        
         completion(YES);
         
         
@@ -144,7 +162,6 @@
     
     ThrowLineTool *tool = [ThrowLineTool sharedTool];
     
-    
     CGFloat startX = view.frame.origin.x*1.5f;//arc4random() % (NSInteger)CGRectGetWidth(self.frame);
     CGFloat startY = view.frame.origin.y;//CGRectGetHeight(self.frame);
     CGFloat endX = CGRectGetMidX(self.cartButton.frame) + 10;
@@ -161,6 +178,13 @@
         
         
         
+        view.hidden = YES;
+        
+        [view removeFromSuperview];
+        
+
+        
+        
         __weak id weakSelf =self;
         
     
@@ -170,11 +194,6 @@
                 [weakSelf updateCartNum];
                 
             }
-            
-            view.hidden = YES;
-            
-            [view removeFromSuperview];
-
             
             
             
@@ -326,7 +345,6 @@
 
 -(void)updateCartNum{
     
-    
     NSUInteger count = [[AppShareData instance] getCartCount];
     
     if (count==0) {
@@ -348,9 +366,6 @@
 #pragma mark - 额外相关的视图
 
 -(void)makeAddCommentView{
-    
-    //加入
-    
     
     
     self.placeHolderView = [UIView new];
@@ -417,6 +432,8 @@
     [upLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(upImageView1.mas_right).offset(5);
+        make.width.equalTo(@100);
+        make.height.equalTo(@20);
         make.centerY.equalTo(upImageView1).offset(10);
         
         
@@ -461,6 +478,10 @@
     downLabel.font = [UIFont boldSystemFontOfSize:14];
     downLabel.textColor = [UIColor whiteColor];
     [downLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.equalTo(@100);
+        make.height.equalTo(@20);
+        
         
         make.left.equalTo(downImageView1.mas_right).offset(10);
         make.centerY.equalTo(downImageView1).offset(5);
@@ -522,9 +543,6 @@
     
     UIView *maskView = [UIView new];
     
-   // maskView.backgroundColor = [UIColor whiteColor];
-    
-   // maskView.layer.borderWidth=2;
     
     [self.view addSubview:maskView];
 
@@ -756,44 +774,125 @@
 
 
 
+#pragma mark - 手势向上滑动
 
-
-
-#pragma mark - 滑动手势出发
--(void)doSwipe:(UISwipeGestureRecognizer*)rg{
+-(void)doSwipeUp:(UISwipeGestureRecognizer*)rg{
     
     if (rg.direction == UISwipeGestureRecognizerDirectionUp){
         
         
-        
-        
         [self addBasketWithAnimation:rg.view];
-
-        
-        
-        
-        
         
     }
+    
+
+    
+    
+}
+
+#pragma mark - 手势向下滑动
+
+-(void)doSwipeDown:(UISwipeGestureRecognizer*)rg{
     
     if (rg.direction == UISwipeGestureRecognizerDirectionDown){
-       
-        [self animationSwipeDown];
-       
-        NSLog(@"down");
-       
+        
+        
+        [self makeNextView];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            
+            CGRect r = self.nextView.frame;
+            
+            CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
+            
+            r.origin.x = x;
+            
+            self.nextView.frame = r;
+            
+            CGRect rr = self.imgView.frame;
+            
+            CGFloat yy = SCREEN_WIDTH*1.5;
+            
+            
+            rr.origin.y = yy;
+            rr.origin.x = rr.origin.x+SCREEN_WIDTH/5;
+            self.imgView.frame = rr;
+            
+            self.imgView.transform = CGAffineTransformMakeScale(0.2, 0.2);
+            
+            
+        } completion:^(BOOL finished) {
+            
+            
+            [self.imgView removeFromSuperview];
+            
+            self.imgView = nil;
+            
+            self.imgView = self.nextView;
+            
+            [self doAddAction];
+            
+            [Utils incCoupon];
+            
+        }];
+        
     }
     
-    
-    if (rg.direction == UISwipeGestureRecognizerDirectionLeft) {
-        
-        [self animationSwipeLeft];
-        
-    }
     
     
     
 }
+
+-(void)doSwipeLeft:(UISwipeGestureRecognizer*)rg{
+    
+    
+    if (rg.direction == UISwipeGestureRecognizerDirectionLeft) {
+        
+        [self makeNextView];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            
+            CGRect r = self.nextView.frame;
+            
+            CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
+            
+            r.origin.x = x;
+            
+            
+            self.nextView.frame = r;
+            
+            CGRect rr = self.imgView.frame;
+            
+            CGFloat xx = self.imgView.frame.size.width*-2.0f;
+            
+            rr.origin.x = xx;
+            
+            self.imgView.frame = rr;
+            
+        } completion:^(BOOL finished) {
+            
+            
+            [self.imgView removeFromSuperview];
+            
+            self.imgView = nil;
+            
+            self.imgView = self.nextView;
+            
+            [self doAddAction];
+            
+        }];
+    }
+    
+
+    
+    
+    
+    
+    
+}
+
+
 
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -808,31 +907,7 @@
     [super viewDidAppear:animated];
     
    [self makeMaskCircleViewClose];
-    
-    
-   // -(void)makeMaskCircleViewMove{
-
-    
-    
-    return ;
-    
-    [self doAddAction];
    
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        
-        CGRect r = self.imgView.frame;
-        
-        CGFloat x = (SCREEN_WIDTH-self.imgView.frame.size.width)/2;
-        
-        r.origin.x = x;
-        
-        self.imgView.frame = r;
-    
-    } completion:^(BOOL finished) {
-        
-        
-    }];
    
     
 }
@@ -864,33 +939,84 @@
 }
 
 
-//-(void)animationSwipeUp{
-//    
+////-(void)animationSwipeUp{
+////    
+////    [self makeNextView];
+//// 
+////    [UIView animateWithDuration:0.5 animations:^{
+////        
+////        
+////        
+////        CGRect r = self.nextView.frame;
+////        
+////        CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
+////        
+////        r.origin.x = x;
+////        
+////        
+////        self.nextView.frame = r;
+////        
+////        
+////        
+////        CGRect rr = self.imgView.frame;
+////        
+////        CGFloat yy = self.imgView.frame.size.width*-2.0f;
+////       
+////        rr.origin.y = yy;
+////        
+////        self.imgView.frame = rr;
+////        
+////    } completion:^(BOOL finished) {
+////        
+////        
+////        [self.imgView removeFromSuperview];
+////        
+////        self.imgView = nil;
+////        
+////        self.imgView = self.nextView;
+////        
+////        [self doAddAction];
+////        
+////        
+////    }];
+////    
+////    
+////    
+////    
+////
+////    
+////    
+////    
+////    
+////}
+////
+//-(void)animationSwipeDown{
+//   
 //    [self makeNextView];
-// 
-//    [UIView animateWithDuration:0.5 animations:^{
-//        
-//        
+//   
+//    [UIView animateWithDuration:0.3 animations:^{
 //        
 //        CGRect r = self.nextView.frame;
 //        
 //        CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
 //        
 //        r.origin.x = x;
-//        
-//        
+//       
 //        self.nextView.frame = r;
-//        
-//        
-//        
+//       
 //        CGRect rr = self.imgView.frame;
 //        
-//        CGFloat yy = self.imgView.frame.size.width*-2.0f;
+//        CGFloat yy = SCREEN_WIDTH*1.5;
+//        
+//       // self.imgView.alpha=0.0f;
 //       
 //        rr.origin.y = yy;
-//        
+//        rr.origin.x = rr.origin.x+SCREEN_WIDTH/5;
 //        self.imgView.frame = rr;
 //        
+//        self.imgView.transform = CGAffineTransformMakeScale(0.2, 0.2);
+//        
+//      
 //    } completion:^(BOOL finished) {
 //        
 //        
@@ -902,63 +1028,12 @@
 //        
 //        [self doAddAction];
 //        
+//        [Utils incCoupon];
 //        
 //    }];
-//    
-//    
-//    
-//    
-//
-//    
-//    
-//    
-//    
+//   
 //}
 //
--(void)animationSwipeDown{
-   
-    [self makeNextView];
-   
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        CGRect r = self.nextView.frame;
-        
-        CGFloat x = (SCREEN_WIDTH-self.nextView.frame.size.width)/2;
-        
-        r.origin.x = x;
-       
-        self.nextView.frame = r;
-       
-        CGRect rr = self.imgView.frame;
-        
-        CGFloat yy = SCREEN_WIDTH*1.5;
-        
-       // self.imgView.alpha=0.0f;
-       
-        rr.origin.y = yy;
-        rr.origin.x = rr.origin.x+SCREEN_WIDTH/5;
-        self.imgView.frame = rr;
-        
-        self.imgView.transform = CGAffineTransformMakeScale(0.2, 0.2);
-        
-      
-    } completion:^(BOOL finished) {
-        
-        
-        [self.imgView removeFromSuperview];
-        
-        self.imgView = nil;
-        
-        self.imgView = self.nextView;
-        
-        [self doAddAction];
-        
-        [Utils incCoupon];
-        
-    }];
-   
-}
-
 
 -(void)animationSwipeLeft{
     
@@ -1001,7 +1076,11 @@
     
 }
 
-
+/**
+ *  装载摇换数据
+ *
+ *  @param completion 完成后回调
+ */
 
 -(void)loadShakeData:(void(^)(BOOL ret))completion{
     
@@ -1036,10 +1115,7 @@
             
         }
         
-
-        
-        
-        completion(NO);
+       completion(NO);
         
         
         
@@ -1049,7 +1125,12 @@
     
 
 
-
+/**
+ *  摇一摇触发
+ *
+ *  @param motion
+ *  @param event
+ */
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     
@@ -1072,21 +1153,20 @@
                 
                 [self animationSwipeLeft];
                 
-            }else{
-                
-                
-                UIAlertView *av = [[UIAlertView alloc] bk_initWithTitle:@"警告" message:@"获取优惠券失败,请重试获取"];
-                
-                
-                [av bk_addButtonWithTitle:@"关闭" handler:^{
-                    
-                    [av dismissWithClickedButtonIndex:0 animated:YES];
-                    
-                }];
-                
-                [av show];
+                return ;
                 
             }
+            
+            UIAlertView *av = [[UIAlertView alloc] bk_initWithTitle:@"警告" message:@"获取优惠券失败,请重试获取"];
+            
+            
+            [av bk_addButtonWithTitle:@"关闭" handler:^{
+                
+                [av dismissWithClickedButtonIndex:0 animated:YES];
+                
+            }];
+            
+            [av show];
             
         }];
 
@@ -1097,6 +1177,9 @@
     }
 }
 
+
+
+#pragma mark - 优惠券点击
 
 -(void)doTapCoupon:(id)sender{
  
@@ -1117,7 +1200,7 @@
 
 
 
-
+#pragma mark - 点击退出
 -(void)doTap:(id)sender{
     
     

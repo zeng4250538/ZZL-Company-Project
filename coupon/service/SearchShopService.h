@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SaerchShopService : BaseService
+@interface SearchShopService : BaseService
 
--(void)requestSaerchShopKeyWord:(NSString *)keyWord success:(void(^)(id data))success failure:(void(^)(id data))failure;
+-(void)requestSearchShopKeyWord:(NSString *)keyWord success:(void(^)(id data))success failure:(void(^)(id data))failure;
 
 @end

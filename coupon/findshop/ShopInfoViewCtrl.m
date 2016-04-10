@@ -91,11 +91,6 @@
     
     [couponService requestRealTimeCoupon:shopId page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
-//        if (![data isKindOfClass:[NSArray class]]) {
-//            
-//            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
-//            return ;
-//        }
         
         self.realTimeCouponList = data;
         
@@ -233,10 +228,7 @@
     
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
-    
     self.automaticallyAdjustsScrollViewInsets=NO;
-    
     
     self.tableView.delegate = self;
     [self scrollViewDidScroll:self.tableView];
@@ -246,14 +238,6 @@
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -271,19 +255,11 @@
     
     self.navigationController.automaticallyAdjustsScrollViewInsets=YES;
     
-  //  self.automaticallyAdjustsScrollViewInsets=YES;
     
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
     
     
-    
-    //self.parentViewController.navigationItem.leftBarButtonItem = nil;
-    
-    
-    
-    
-    //  self.navigationController.navigationBar.translucent = YES;
     
     
     
@@ -298,33 +274,37 @@
 #pragma mark - 头部信息
 -(void)makeHeaderView{
     
+    UIButton *shopBgButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     CGFloat rate = 416.0f/750.0f;
-    
-    
     UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate+30)];
     uv.backgroundColor = [UIColor whiteColor];
     
-    UIButton *shopBgButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate);
-    
     [uv addSubview:shopBgButton];
-    
-    
-    
-    self.navigationItem.title = SafeString(self.data[@"name"]);
-    
-    
-    
-    NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
-    
-    
-    [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
-    
-    
-    
-    UIButton *subButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
+    
+    
+    
+    {
+        //按iphone6 的尺寸设置比率
+        
+        
+        self.navigationItem.title = SafeString(self.data[@"name"]);
+        NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
+        
+        
+        [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
+        
+        shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate);
+        
+        
+        
+    
+    
+    
+    }
+
+    UIButton *subButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [shopBgButton addSubview:subButton];
     
@@ -357,7 +337,6 @@
     
     [sevice judgeSuccessful:^(id data) {
         
-//        NSLog(@"------->%@",data);
         
         if (data) {
             [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
@@ -379,7 +358,7 @@
     
 
     
-    subButton.backgroundColor =UIColorFromRGB(247, 180, 38);
+    subButton.backgroundColor =[GUIConfig orangeColor];
     
     //[GUIConfig greenBackgroundColor];
 
@@ -392,7 +371,8 @@
     subLabel.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
     //[subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    subLabel.text=@"订阅数\n666\n";
+    subLabel.text=[NSString stringWithFormat:@"订阅数 %@",SafeString(self.data[@"orderedCouponCount"])];
+    
     subLabel.layer.cornerRadius=4;
     subLabel.clipsToBounds = YES;
     [subLabel sizeToFit];
@@ -418,8 +398,6 @@
     }];
     
     bottomBar.backgroundColor = [UIColor colorWithWhite:0.985 alpha:1.0];
-  
-    
     UIButton *likeButton = [GUIConfig iconGood];
 
     
@@ -438,63 +416,64 @@
     } forControlEvents:UIControlEventTouchUpInside];
     
     
+    //喜欢和不喜欢按钮
     
-    UILabel *likeLabel = [UILabel new];
-    [bottomBar addSubview:likeLabel];
+    {
+        UILabel *likeLabel = [UILabel new];
+        [bottomBar addSubview:likeLabel];
 
-    
-    likeLabel.textColor=[GUIConfig grayFontColor];
-    likeLabel.font = [UIFont systemFontOfSize:12];
-    likeLabel.text=[NSString stringWithFormat:@"%ld",self.shopData.good];
-    
-    
-    [likeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        //make.width.equalTo(@40);
-        make.left.equalTo(likeButton.mas_right).with.offset(10);
-        make.centerY.equalTo(bottomBar.mas_centerY);
+        likeLabel.textColor=[GUIConfig grayFontColor];
+        likeLabel.font = [UIFont systemFontOfSize:12];
+        likeLabel.text=[NSString stringWithFormat:@"%@",SafeString(self.data[@"good"])];
         
-    }];
-    
-  
-    
-    UIButton *unlikeButton = [GUIConfig iconBad];
-    
-    
-    
-    
-    [bottomBar addSubview:unlikeButton];
-    
-    
-    //不喜欢按钮
-    [unlikeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [likeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            //make.width.equalTo(@40);
+            make.left.equalTo(likeButton.mas_right).with.offset(10);
+            make.centerY.equalTo(bottomBar.mas_centerY);
+            
+        }];
+            
         
-        make.left.equalTo(likeLabel.mas_right).with.offset(20);
-        make.centerY.equalTo(bottomBar);
-    }];
-    
-    
-    [unlikeButton bk_addEventHandler:^(id sender) {
+      
         
-    } forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    UILabel *unlikeLabel = [UILabel new];
-    [bottomBar addSubview:unlikeLabel];
-    
-    
-    unlikeLabel.textColor=[GUIConfig grayFontColor];
-    unlikeLabel.font = [UIFont systemFontOfSize:12];
-    
-    unlikeLabel.text=[NSString stringWithFormat:@"%ld",self.shopData.good];
-    
-    [unlikeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIButton *unlikeButton = [GUIConfig iconBad];
         
-        make.width.equalTo(@40);
-        make.left.equalTo(unlikeButton.mas_right).with.offset(10);
-        make.centerY.equalTo(bottomBar);
         
-    }];
+        [bottomBar addSubview:unlikeButton];
+        
+        
+        //不喜欢按钮
+        [unlikeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(likeLabel.mas_right).with.offset(20);
+            make.centerY.equalTo(bottomBar);
+        }];
+        
+        
+        [unlikeButton bk_addEventHandler:^(id sender) {
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        UILabel *unlikeLabel = [UILabel new];
+        [bottomBar addSubview:unlikeLabel];
+        
+        
+        unlikeLabel.textColor=[GUIConfig grayFontColor];
+        unlikeLabel.font = [UIFont systemFontOfSize:12];
+        
+        unlikeLabel.text=[NSString stringWithFormat:@"%@",SafeString(self.data[@"bad"])];
+        
+        [unlikeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.width.equalTo(@40);
+            make.left.equalTo(unlikeButton.mas_right).with.offset(10);
+            make.centerY.equalTo(bottomBar);
+            
+        }];
+    }
     
     
     UIButton *commentButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -610,6 +589,12 @@
             
             CouponListViewCtrl *vc =[CouponListViewCtrl new];
             
+            
+            NSString *shopId = SafeString(self.data[@"id"]);
+            
+            vc.shopId = shopId;
+            
+            
             [self.navigationController pushViewController:vc animated:YES];
             
             
@@ -626,6 +611,12 @@
         return [CouponInfoTableViewCell headerView:@"其他优惠" clickBlock:^{
             
             CouponListViewCtrl *vc =[CouponListViewCtrl new];
+            
+            
+            NSString *shopId = SafeString(self.data[@"id"]);
+            
+            vc.shopId = shopId;
+            
             
             [self.navigationController pushViewController:vc animated:YES];
             

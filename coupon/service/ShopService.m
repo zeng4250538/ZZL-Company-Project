@@ -222,7 +222,7 @@
     // shop/514344/good
     
     
-    NSString *customerId=@"111222";
+    NSString *customerId=[AppShareData instance].customId;
     
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
@@ -231,8 +231,7 @@
     
     url = [url stringByAppendingString:@"/"];
    
-    NSDictionary *parm = @{@"customerId":@"xxxx",
-                           @"shopId":shopid};
+    NSDictionary *parm = @{@"shopId":shopid};
     
     if (mode==YES) {
         

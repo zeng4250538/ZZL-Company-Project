@@ -9,7 +9,7 @@
 #import "KeyWordSearchViewCtrl.h"
 #import "SearchResultViewCtrl.h"
 #import "ShopService.h"
-#import "SaerchShopService.h"
+#import "SearchShopService.h"
 
 @interface KeyWordSearchViewCtrl ()
 
@@ -68,7 +68,7 @@
 -(void)loadData{
     
     
-    self.hotWordList = @[@"小吃",@"麦当劳",@"咖啡",@"电影",@"贡茶",@"奶茶",@"西餐",@"蛋糕"];
+    self.hotWordList = @[@"美食",@"天河",@"优惠",@"店3",@"店4",@"奶茶",@"西餐",@"蛋糕"];
     
  //   self.searchWordList = @[@"贡茶",@"星巴克",@"都城",@"快餐"];
     

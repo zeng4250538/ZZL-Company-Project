@@ -170,7 +170,7 @@
 		7F121D661CA667F5005AF53D /* BrandStreetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D651CA667F5005AF53D /* BrandStreetModel.m */; };
 		7F121D6C1CA675A8005AF53D /* OptimizingBrandModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D6B1CA675A8005AF53D /* OptimizingBrandModel.m */; };
 		7F121D6F1CA6AF41005AF53D /* SaerchShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D6E1CA6AF41005AF53D /* SaerchShopModel.m */; };
-		7F121D721CA6AF6A005AF53D /* SaerchShopService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D711CA6AF6A005AF53D /* SaerchShopService.m */; };
+		7F121D721CA6AF6A005AF53D /* SearchShopService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D711CA6AF6A005AF53D /* SearchShopService.m */; };
 		7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */; };
 		7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */; };
 		7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3557851CACA8E6000DB7EA /* MapKit.framework */; };
@@ -442,8 +442,8 @@
 		7F121D6B1CA675A8005AF53D /* OptimizingBrandModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptimizingBrandModel.m; sourceTree = "<group>"; };
 		7F121D6D1CA6AF41005AF53D /* SaerchShopModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaerchShopModel.h; sourceTree = "<group>"; };
 		7F121D6E1CA6AF41005AF53D /* SaerchShopModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaerchShopModel.m; sourceTree = "<group>"; };
-		7F121D701CA6AF6A005AF53D /* SaerchShopService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaerchShopService.h; sourceTree = "<group>"; };
-		7F121D711CA6AF6A005AF53D /* SaerchShopService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaerchShopService.m; sourceTree = "<group>"; };
+		7F121D701CA6AF6A005AF53D /* SearchShopService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchShopService.h; sourceTree = "<group>"; };
+		7F121D711CA6AF6A005AF53D /* SearchShopService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchShopService.m; sourceTree = "<group>"; };
 		7F121D741CA7DAF7005AF53D /* ChildPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildPagesViewController.h; sourceTree = "<group>"; };
 		7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildPagesViewController.m; sourceTree = "<group>"; };
 		7F121D791CAA8499005AF53D /* UISubscribeSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISubscribeSevice.h; sourceTree = "<group>"; };
@@ -890,8 +890,8 @@
 				577B6CE61CA1666B002BA28F /* PersonService.m */,
 				7F121D5D1CA3E08F005AF53D /* HistoryOfConsumptionService.h */,
 				7F121D5E1CA3E08F005AF53D /* HistoryOfConsumptionService.m */,
-				7F121D701CA6AF6A005AF53D /* SaerchShopService.h */,
-				7F121D711CA6AF6A005AF53D /* SaerchShopService.m */,
+				7F121D701CA6AF6A005AF53D /* SearchShopService.h */,
+				7F121D711CA6AF6A005AF53D /* SearchShopService.m */,
 				5718A27A1CAAABE0008191F8 /* BasketService.h */,
 				5718A27B1CAAABE0008191F8 /* BasketService.m */,
 			);
@@ -1269,7 +1269,7 @@
 				7FF596751CB3F0FF008BDE5A /* MyInformationSevice.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
 				573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */,
-				7F121D721CA6AF6A005AF53D /* SaerchShopService.m in Sources */,
+				7F121D721CA6AF6A005AF53D /* SearchShopService.m in Sources */,
 				574BF3E91C98022A0088A9A6 /* LoginService.m in Sources */,
 				57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */,
 				57017F331C5F4128007B0112 /* SelectMallPopViewCtrl.m in Sources */,

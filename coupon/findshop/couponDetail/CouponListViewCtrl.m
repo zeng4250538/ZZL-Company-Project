@@ -42,6 +42,88 @@
 }
 
 
+-(void)loadData{
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    
+    
+    CouponService *couponService = [CouponService new];
+    
+    
+    
+    
+    
+    
+    [couponService requestRealTimeCoupon:self.shopId page:1 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+        
+         
+        self.data = data;
+        
+        [self.tableView reloadData];
+        
+        
+        completion(YES);
+        
+        
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
+        
+        
+        completion(NO);
+        
+        
+        
+        
+        
+    }];
+
+    
+    
+}
+
+
+
 
 
 -(void)doLoad{
@@ -49,6 +131,43 @@
     
     
     CouponService *couponService = [CouponService new];
+    
+    
+    
+    
+    
+    
+    [couponService requestRealTimeCoupon:self.shopId page:1 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+        
+        //        if (![data isKindOfClass:[NSArray class]]) {
+        //
+        //            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
+        //            return ;
+        //        }
+        
+        self.data = data;
+        
+        [self.tableView reloadData];
+        
+        
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
+        
+        
+       // completion(NO);
+        
+        
+        
+        
+        
+    }];
+    
+
     
     
     
@@ -73,9 +192,6 @@
         
         
         
-        
-        
-        
     }];
     
     
@@ -95,35 +211,6 @@
 }
 
 
--(void)loadData{
-    
-    
-    
-    
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-        
-        
-        
-        [self doLoad];
-        
-        
-        
-        
-        
-    }];
-    
-    
-    [self doLoad];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
 
 
 

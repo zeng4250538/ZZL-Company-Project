@@ -6,12 +6,12 @@
 //  Copyright © 2016年 chijr. All rights reserved.
 //
 
-#import "SaerchShopService.h"
+#import "SearchShopService.h"
 
-@implementation SaerchShopService
+@implementation SearchShopService
 
 
--(void)requestSaerchShopKeyWord:(NSString *)keyWord success:(void(^)(id data))success failure:(void(^)(id data))failure{
+-(void)requestSearchShopKeyWord:(NSString *)keyWord success:(void(^)(id data))success failure:(void(^)(id data))failure{
 
      BaseRequest *req = [BaseRequest new];
 

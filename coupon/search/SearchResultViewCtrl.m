@@ -26,8 +26,6 @@
 @property(nonatomic,strong)NSArray *dataList;
 
 
-
-
 @end
 
 @implementation SearchResultViewCtrl
@@ -41,7 +39,7 @@
     
     [self makeDisplayCtrl];
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell1"];
+    [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell1"];
     
     
     [self.displayCtrl.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell2"];
@@ -61,19 +59,23 @@
 
 -(void)doLoad:(void(^)(BOOL ret))completion{
     
-    self.keyWordList = @[@"麦当劳",@"咖啡",@"美甲",@"蛋糕"];
-     
+    
     
     ShopService *service = [ShopService new];
     
+    NSString *mallId = [AppShareData instance].mallId;
     
-    [service requestKeyword:@"mallid"
-                          keyWord:_searchBar.text
+    
+    
+    
+    
+    [service requestKeyword:mallId
+                          keyWord:self.keyWord
                           success:^(NSInteger code, NSString *message, id data) {
                               
                               
                               
-                              self.keyWordList = data;
+                              self.dataList = data;
                               
                               [self.tableView reloadData];
                               
@@ -318,6 +320,12 @@
         
         
         ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+        
+        
+        NSDictionary *currentData = self.dataList[indexPath.row];
+        
+        
+        vc.data = currentData;
         
         [self.navigationController pushViewController:vc animated:YES];
 

@@ -18,6 +18,7 @@
 
 @property(nonatomic,strong)NSArray *shopList;
 
+
 @end
 
 @implementation ShopListViewCtrl
@@ -28,7 +29,6 @@
     
     [self loadData];
     
-    self.navigationItem.title=@"商家列表";
     
     [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
 
@@ -42,6 +42,84 @@
 }
 
 
+-(void)loadData{
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    
+    
+    ShopService *service = [ShopService new];
+    
+    
+    
+    
+    
+    
+    
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    
+    
+    
+    [service requestRecommendShop:mallId page:1 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+        
+        self.shopList = data;
+        
+        [ReloadHud removeHud:self.tableView animated:YES];
+        
+        [self.tableView reloadData];
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        [ReloadHud showReloadMode:self.tableView];
+        
+    }];
+
+    
+    
+}
+
+
+
+
+
+
+
 
 -(void)doLoad{
     
@@ -50,7 +128,7 @@
     
     NSString *mallId = [AppShareData instance].mallId;
     
-    [service requestRecommendShop:mallId page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
+    [service requestRecommendShop:mallId page:1 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
        
         self.shopList = data;
         
@@ -68,18 +146,6 @@
 
 
 
-
--(void)loadData{
-    
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-        
-        [self doLoad];
-      
-    }];
-    
-    [self doLoad];
-    
-}
 
 
 

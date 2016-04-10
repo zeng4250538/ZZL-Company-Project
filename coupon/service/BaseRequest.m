@@ -16,13 +16,26 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-       
     // 网络访问是异步的,回调是主线程的,因此程序员不用管在主线程更新UI的事情
     [manager GET:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        NSLog(@"======================>\n[DEBUG][GET][Request] url = %@ param = %@ [/DEBUG]",url,param);
+        
+        
+        NSLog(@"[DEBUG][GET][Response] %@ [/DEBUG]\n<<===============================",responseObject);
+        
+        
+        
+        
         success(operation.response.statusCode,responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"GET Method Error param=%@ url=%@ error = %@",param,url, error);
+        
+        
+        NSLog(@"======================>\n[DEBUG][GET][Request] url = %@ param = %@ [/DEBUG]",url,param);
+
+        NSLog(@"[ERROR]GET Method Error error = %@[/ERROR]\n<<<=====================", error);
         
         failure(operation.response.statusCode,error.description);
         
@@ -50,13 +63,24 @@
     [manager POST:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
+        
+        NSLog(@"======================>\n[DEBUG][POST][Request] url = %@ param = %@ [/DEBUG]",url,param);
+        
+        
+        NSLog(@"[DEBUG][POST][Response] %@ [/DEBUG]\n<<===============================",responseObject);
+        
+
+        
+        
         success(operation.response.statusCode,responseObject);
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        NSLog(@"POST Method Error params=%@ url=%@ error = %@",param,url, error);
+        NSLog(@"======================>\n[DEBUG][POST][Request] url = %@ param = %@ [/DEBUG]",url,param);
+        
+        NSLog(@"[ERROR]POST Method Error error = %@[/ERROR]\n<<<=====================", error);
         
         
         failure(operation.response.statusCode,error.description);
