@@ -478,7 +478,11 @@
     
     UIButton *commentButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [commentButton setTitleColor:[GUIConfig mainColor] forState:UIControlStateNormal];
-    [commentButton setTitle:@"网友评论" forState:UIControlStateNormal];
+    
+    NSString *commentString = [NSString stringWithFormat:@"评论(%@)",SafeString(self.data[@"reviewcount"])];
+    
+    
+    [commentButton setTitle:commentString forState:UIControlStateNormal];
     
     commentButton.titleLabel.font = [UIFont systemFontOfSize:12];
     
