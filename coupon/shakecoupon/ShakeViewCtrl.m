@@ -29,7 +29,6 @@
 
 @implementation ShakeViewCtrl
 
-
 -(void)viewDidLoad{
     [super viewDidLoad];
     
@@ -51,22 +50,52 @@
     }];
     
     
+}
+
+#pragma mark - 请求定位数据
+-(void)requestLocation{
+    
+    
+    
     
 }
 
--(void)titleItenLabel:(void(^)(id data))cityLabel{
+
+/**
+ *  请求当前的商场
+ *
+ *  @param completion 完成回调
+ 
+ */
+-(void)requestCurrentMall:(void(^)(id data))completion{
     
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
     [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
         
-        cityLabel(data);
+    
+        if (data ==nil) {
+            completion(nil);
+            return ;
+        }
         
-        SelectMallPopViewCtrl *se = [SelectMallPopViewCtrl new];
-//        [se loadData];
-//        se.cityArrayBlock(data);
+        if (![data isKindOfClass:[NSArray class]]) {
+            completion(nil);
+            return ;
+            
+        }
         
+        
+        if([data count]<1){
+            
+            completion(nil);
+            return ;
+        }
+        
+        //获取第一个默认的商城
+        completion(data[0]);
+       // completion();
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
@@ -81,9 +110,7 @@
 
 #pragma mark - 装载摇一摇优惠券数据
 
-
 -(void)loadShakeData:(void(^)(BOOL ret))completion{
-    
     
     
     ShakeService *service = [ShakeService new];
@@ -91,13 +118,14 @@
     
     NSString *customId = [AppShareData instance].customId;
     
-    [service requestShakeCoupon:customId shopMallId:@"2" success:^(NSInteger code, NSString *message, id data) {
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    [service requestShakeCoupon:customId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
         
         self.isShakeDataLoaded = YES;
         
         [[AppShareData instance].shakeCouponQueue resetData:data];
         
-        //[SVProgressHUD dismiss];
         
         completion(YES);
         
@@ -108,7 +136,6 @@
         [SVProgressHUD dismiss];
         
         completion(NO);
-        
         
         
     }];
@@ -163,9 +190,6 @@
     [audioButton setImage:[UIImage imageNamed:@"soundoff"] forState:UIControlStateSelected];
     
     
-    //audioButton.frame = CGRectMake(100, 100, 100, 30);
-    
-    // [audioButton setTitle:@"播放声音" forState:UIControlStateNormal];
     
     
     [audioButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -243,20 +267,6 @@
     
     
     
-   // CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
-    
-//    CGRect r = imageView.frame;
-//    r.origin.x = SCREEN_WIDTH/2+60;
-//    r.origin.y = shakeLogo.frame.origin.y+shakeLogo.frame.size.height;
-//    r.size.width = r.size.width/2;
-//    
-//    r.size.height = r.size.height/2;
-//    
-//    
-//    imageView.frame = r;
-//    
-    
-    //imageView.frame = CGRectMake(SCREEN_WIDTH/2, FrameHeight/2,150 ,150);
     
 }
 
@@ -266,6 +276,7 @@
  *  摇换主界面，
  */
 -(void)makeShakeBody{
+    
     
     CGFloat FrameHeight = self.view.frame.size.height-[GUIConfig tabBarHeight];
     
@@ -326,7 +337,6 @@
        
         [self makeAnimateView:imgView parentView:uv];
         
-//          pos++;
         
     }
 
@@ -370,14 +380,20 @@
     
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
     mallButton.frame = CGRectMake(0, 0, 100, 44);
-    [mallButton setTitle:@"时尚天河" forState:UIControlStateNormal];
+    [mallButton setTitle:@"选择商城" forState:UIControlStateNormal];
     mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    [self titleItenLabel:^(id data) {
+
+    
+    [self requestCurrentMall:^(id data) {
         
-        [mallButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
-        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
-        vc.mallList = data;
+        NSString *mallId = SafeString(data[@"id"]);
         
+        //存储为当前的mallid
+        
+        [[AppShareData instance] saveMallId:mallId];
+        
+        
+        [mallButton setTitle:SafeString(data[@"name"]) forState:UIControlStateNormal];
     }];
     
     self.mallButton =mallButton;
@@ -390,26 +406,6 @@
     [mallButton bk_addEventHandler:^(id sender) {
         
         
-//        MallService *service = [MallService new];
-        
-        
-        
-        
-        
-//        [service queryMallByCity:@"1" success:^(NSInteger code, NSString *message, id data) {
-//            
-//            NSLog(@"success %@",data);
-//            
-//            
-//        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-//            
-//            
-//            NSLog(@"error %@",data);
-//            
-//            
-//            
-//        }];
-//        
         
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
@@ -418,7 +414,8 @@
         vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
             
             
-            NSString *name = [NSString stringWithFormat:@"%@(%@)",mall[@"name"],mall[@"distance"]];
+            NSString *name = [NSString stringWithFormat:@"%@(%@)",SafeString(mall[@"name"]),SafeString(mall[@"distance"])];
+            
             
             
             [self.mallButton setTitle:name forState:UIControlStateNormal];

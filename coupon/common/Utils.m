@@ -35,7 +35,13 @@ NSURL *SafeUrl(id content){
     NSString *url = [content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     
-    url = [url stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
+    if (!InLan) {
+        
+        url = [url stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
+        
+    }
+    
+    
     
     
     return [NSURL URLWithString:url];
@@ -45,18 +51,26 @@ NSURL *SafeUrl(id content){
 }
 
 
-
+id safeArrayValue(id array,NSInteger pos){
+    
+    if (pos<[array count]) {
+        return  nil;
+    }
+    
+    return array[pos];
+    
+    
+}
 
 NSString *SafeString(id content){
+    
     
     if (content==nil) {
         return @"";
     }
-    
     if ((NSNull*)content==[NSNull null]) {
         return @"";
     }
-    
     
     return [NSString stringWithFormat:@"%@",content];
     

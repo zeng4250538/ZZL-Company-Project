@@ -13,6 +13,8 @@ NSString * const UserNameKey=@"username";
 NSString * const PasswordKey=@"password";
 NSString * const AccessTokenKey=@"accesstoken";
 
+NSString * const MallIdKey=@"mallid";
+
 NSString * const AudioStatusCloseKey=@"audiostatusclose";
 
 NSString * const IsLoginKey=@"islogin";
@@ -20,6 +22,12 @@ NSString * const IsLoginKey=@"islogin";
 NSString * const CustomIdKey=@"customId";
 
 NSString * const myInformationDataKey = @"myInformationData";
+
+NSString * const CityKey = @"city";
+
+
+
+
 
 
 
@@ -60,6 +68,18 @@ static AppShareData *instance;
     
     
     return [[NSUserDefaults standardUserDefaults] objectForKey:AccessTokenKey];
+    
+    
+}
+
+
+-(void)saveMallId:(NSString*)mallId{
+    
+    
+    [[NSUserDefaults standardUserDefaults] objectForKey:mallId];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     
     
 }

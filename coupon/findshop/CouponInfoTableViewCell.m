@@ -184,13 +184,6 @@
         
     }];
     
-//    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.height.equalTo(@20);
-//        make.left.equalTo(self.logoView.mas_right).with.offset(10);
-//        make.bottom.equalTo(self.logoView.mas_bottom);
-//        
-//    }];
-    
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@25);
@@ -363,15 +356,9 @@
     
     
     
-    NSString *urlString =SafeString(self.data[@"couponSmallPhotoUrl"]);
     
+    NSURL *url =SafeUrl(self.data[@"couponSmallPhotoUrl"]);
     
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    
-    urlString = [urlString stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
-    
-    NSURL *url = [NSURL URLWithString:urlString];
     
     [self.logoView sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         

@@ -51,11 +51,7 @@
     self.navigationItem.title=@"找商家";
     
     
- 
-    
     self.selectTitle = [[SelectMallPopViewCtrl alloc]init];
-    
-    
     
     //table view
     
@@ -64,18 +60,15 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.center.width.bottom.equalTo(self.view);
-        
         
     }];
     
     [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell1"];
     
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell2"];
-    
     
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -158,13 +151,17 @@
 
 -(void)doLoad:(void(^)(BOOL ret))completion{
     
+    
+    NSString *mallId = [AppShareData instance].mallId;
+
+    
     ShopService *service = [ShopService new];
     
     CouponService *couponService = [CouponService new];
     
     
 #pragma mark ---- 即时优惠网络请求
-    [couponService requestRecommendCoupon:@"2" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:mallId page:1 pageCount:5 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         self.couponData=data;
         
@@ -181,15 +178,19 @@
 
     
 #pragma mark ---- 优选品牌网络请求
-    [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
+    
+    
+    [service requestRecommendShop:mallId page:1 pageCount:5 success:^(NSInteger code, NSString *message, id data) {
        
-        self.hotShopData = data;
-//        NSLog(@"asdadada---->%@",data);
-        [self.tableView reloadData];
+       self.hotShopData = data;
+       [self.tableView reloadData];
         
         completion(YES);
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
         
         completion(NO);
         
@@ -199,15 +200,20 @@
     
     
 #pragma mark ---- 品牌街网络请求
-    [service requestNearbyShop:@"2" page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
+    
+    
+    [service requestNearbyShop:mallId page:1 per_page:5  success:^(NSInteger code, NSString *message, id data) {
         
         self.hotBrandData = data;
-//        NSLog(@"12313-------->%@",data);
         [self.tableView reloadData];
         
         completion(YES);
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        
         
         
         completion(NO);
@@ -270,11 +276,13 @@
     [self.navigationItem setTitle:self.cityString];
     self.navigationItem.titleView = _headButton;
     
-    _cityBlock = ^ (NSString *cityData){
-    
-    
-    
-    };
+    [self titleItenLabel:^(id data) {
+        
+        [_headButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
+        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+        vc.mallList = data;
+
+    }];
     
     [_headButton bk_addEventHandler:^(id sender) {
 
@@ -286,15 +294,16 @@
         //
         //        [self.navigationController pushViewController:vc animated:YES];
         //
+        
         vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
             
             
-            NSString *name = [NSString stringWithFormat:@"%@(%@)",mall[@"name"],mall[@"distance"]];
+            NSString *name = [NSString stringWithFormat:@"%@(%@)",SafeString(mall[@"name"]),SafeString(mall[@"distance"])];
+            
             
             
             [_headButton setTitle:name forState:UIControlStateNormal];
         };
-        
         
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -411,6 +420,8 @@
            
            vc.hidesBottomBarWhenPushed = YES;
            
+           vc.navigationItem.title=@"优选品牌";
+           
            [self.navigationController pushViewController:vc animated:YES];
            
            
@@ -424,6 +435,8 @@
             
             vc.hidesBottomBarWhenPushed = YES;
             
+            
+            
             [self.navigationController pushViewController:vc animated:YES];
             
         }];
@@ -434,6 +447,7 @@
             
             ShopListViewCtrl *vc = [ShopListViewCtrl new];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.navigationItem.title=@"品牌街";
             [self.navigationController pushViewController:vc animated:YES];
             
         }];
@@ -585,7 +599,7 @@
             
             [brandStreetButton requestButtonString:data shopMallId:@"2" success:^(id data) {
                 
-//                NSLog(@"asdada->>>>>>>%@",data);
+                NSLog(@"asdada->>>>>>>%@",data);
                 
                 cell.data = data[indexPath.row];
                 
@@ -689,7 +703,7 @@
         UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
         
         
-//        BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
+        BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
         
         // ShopPortalViewCtrl *shop = [ShopPortalViewCtrl new];
         //

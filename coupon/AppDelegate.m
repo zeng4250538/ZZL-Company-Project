@@ -19,6 +19,10 @@
 @implementation AppDelegate
 
 
+BOOL InLan = NO;
+
+
+
 #pragma mark - tab控制器创建
 -(void)makeTabViewCtrl{
     
@@ -29,7 +33,6 @@
                            /* [UIImage imageNamed:@"gocart.png"],*/
                             [UIImage imageNamed:@"tab_person_icon.png"]
                             ];
-    
     
     
     NSArray *vcList = @[[[ShakeViewCtrl alloc] init],

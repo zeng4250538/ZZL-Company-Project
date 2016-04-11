@@ -104,10 +104,9 @@
     
     BasketService *service = [BasketService new];
     
-    AppShareData *app = [AppShareData instance];
     
     
-    [service requestUserid:app.customId NotUse:^(NSInteger code, NSString *message, id data) {
+    [service requestNotUse:^(NSInteger code, NSString *message, id data) {
         
         self.dataList = data;
         
@@ -221,7 +220,7 @@
     NSDictionary *d = self.dataList[[indexPath row]];
     
     
-//    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
     
     
     

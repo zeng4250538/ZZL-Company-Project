@@ -62,8 +62,6 @@
                      failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
-    NSLog(@"---><%@",shopId);
-    
     
     
     BaseRequest *req = [BaseRequest new];
@@ -74,7 +72,11 @@
     
     NSString *string = [youhuiString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSDictionary *parm = @{@"shopid":shopId,@"type":string};
+    
+    NSString *notNullshopId = SafeString(shopId);
+    
+    NSDictionary *parm = @{@"shopid":notNullshopId,@"type":string,@"page":@(page),@"per_page":@(pageCount)};
+    
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         
@@ -105,7 +107,6 @@
     
     //http://192.168.6.97:8080/diamond-sis-web/v1/couponPromotion?shopid=11&type=即时优惠
     
-    NSLog(@"---><%@",shopId);
     
     BaseRequest *req = [BaseRequest new];
     
@@ -114,7 +115,7 @@
     NSString *youhuiString = @"普通优惠";
     NSString *string = [youhuiString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSDictionary *parm = @{@"shopid":shopId,@"type":string};
+    NSDictionary *parm = @{@"shopid":shopId,@"type":string,@"page":@(page),@"per_page":@(pageCount)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {

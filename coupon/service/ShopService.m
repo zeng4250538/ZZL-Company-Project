@@ -17,7 +17,7 @@
 
 
 
--(void)requestRecommendShop:(NSString*)mallid customerId:(NSInteger)customerId page:(NSInteger)page pageCount:(NSInteger)pageCount
+-(void)requestRecommendShop:(NSString*)mallid  page:(NSInteger)page pageCount:(NSInteger)pageCount
                   success:(void(^)(NSInteger code,NSString *message,id data))success
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
 
@@ -28,7 +28,9 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shoprecommend?"];
     
-    NSDictionary *parm = @{@"shopMallId":mallid,@"customerId":@(customerId),@"page":@(page),@"per_page":@(pageCount)};
+    NSString *customerId = [AppShareData instance].customId;
+    
+    NSDictionary *parm = @{@"shopMallId":mallid,@"customerId":customerId,@"page":@(page),@"per_page":@(pageCount)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -220,7 +222,7 @@
     // shop/514344/good
     
     
-    NSString *customerId=@"111222";
+    NSString *customerId=[AppShareData instance].customId;
     
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
@@ -229,8 +231,7 @@
     
     url = [url stringByAppendingString:@"/"];
    
-    NSDictionary *parm = @{@"customerId":@"xxxx",
-                           @"shopId":shopid};
+    NSDictionary *parm = @{@"shopId":shopid};
     
     if (mode==YES) {
         

@@ -10,4 +10,6 @@
 
 @interface CouponListViewCtrl : UITableViewController
 
+@property(nonatomic,copy)NSString *shopId;
+
 @end

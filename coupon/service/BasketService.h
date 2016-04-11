@@ -31,8 +31,10 @@
  *  @param success 成功回调
  *  @param failure 失败回调
  */
--(void)requestUserid:(NSString *)userid NotUse:(void(^)(NSInteger code,NSString *message,id data))success
-                     failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+-(void)requestNotUse:(void(^)(NSInteger code,NSString *message,id data))success
+             failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
 
 
 /**
