@@ -10,4 +10,6 @@
 
 @interface ShopListViewCtrl : UITableViewController
 
+@property(nonatomic,strong)NSDictionary *dic;
+
 @end

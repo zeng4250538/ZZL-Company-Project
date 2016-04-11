@@ -164,7 +164,7 @@
     
     
 #pragma mark ---- 即时优惠网络请求
-    [couponService requestRecommendCoupon:@"2" page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:@"2" page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         self.couponData=data;
         
@@ -181,7 +181,7 @@
 
     
 #pragma mark ---- 优选品牌网络请求
-    [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:13 success:^(NSInteger code, NSString *message, id data) {
+    [service requestRecommendShop:@"2" customerId:15818865756 page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
        
         self.hotShopData = data;
 //        NSLog(@"asdadada---->%@",data);
@@ -270,13 +270,11 @@
     [self.navigationItem setTitle:self.cityString];
     self.navigationItem.titleView = _headButton;
     
-    [self titleItenLabel:^(id data) {
-        
-        [_headButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
-        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
-        vc.mallList = data;
-
-    }];
+    _cityBlock = ^ (NSString *cityData){
+    
+    
+    
+    };
     
     [_headButton bk_addEventHandler:^(id sender) {
 
@@ -288,6 +286,14 @@
         //
         //        [self.navigationController pushViewController:vc animated:YES];
         //
+        vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
+            
+            
+            NSString *name = [NSString stringWithFormat:@"%@(%@)",mall[@"name"],mall[@"distance"]];
+            
+            
+            [_headButton setTitle:name forState:UIControlStateNormal];
+        };
         
         
     } forControlEvents:UIControlEventTouchUpInside];
@@ -579,7 +585,7 @@
             
             [brandStreetButton requestButtonString:data shopMallId:@"2" success:^(id data) {
                 
-                NSLog(@"asdada->>>>>>>%@",data);
+//                NSLog(@"asdada->>>>>>>%@",data);
                 
                 cell.data = data[indexPath.row];
                 
@@ -683,7 +689,7 @@
         UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
         
         
-        BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
+//        BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
         
         // ShopPortalViewCtrl *shop = [ShopPortalViewCtrl new];
         //

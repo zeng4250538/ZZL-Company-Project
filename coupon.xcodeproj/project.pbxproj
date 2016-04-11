@@ -1491,7 +1491,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rechstone.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1513,7 +1513,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rechstone.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

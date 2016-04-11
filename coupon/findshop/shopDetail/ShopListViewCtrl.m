@@ -11,7 +11,7 @@
 #import "ShopService.h"
 #import "ShopInfoViewCtrl.h"
 #import "ReloadHud.h"
-
+#import "AppShareData.h"
 
 
 @interface ShopListViewCtrl ()
@@ -46,8 +46,9 @@
 -(void)doLoad{
     
     ShopService *service = [ShopService new];
-    
-    [service requestRecommendShop:@"2" customerId:@"15818865756" page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
+    AppShareData *app = [AppShareData instance];
+    NSInteger customeerID = [NSString stringWithFormat:@"%@",app.customId];
+    [service requestRecommendShop:@"2" customerId:customeerID page:1 pageCount:12 success:^(NSInteger code, NSString *message, id data) {
        
         self.shopList = data;
         

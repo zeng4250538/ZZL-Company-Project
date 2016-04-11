@@ -60,11 +60,12 @@
     MallService *services = [[MallService alloc] init];
     [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
-       // self.mallArray = data;
-        
-//        NSLog(@"%@",self.mallArray[0][@"name"]);
         
         cityLabel(data);
+        
+        SelectMallPopViewCtrl *se = [SelectMallPopViewCtrl new];
+//        [se loadData];
+//        se.cityArrayBlock(data);
         
         
         
