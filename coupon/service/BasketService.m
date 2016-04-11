@@ -42,29 +42,20 @@
         
     }];
     
-
-    
-    
-    
-    
-    
     
 }
 
 
 
--(void)requestNotUse:(void(^)(NSInteger code,NSString *message,id data))success
+-(void)requestNotUseStatus:(NSString *)status success:(void(^)(NSInteger code,NSString *message,id data))success
              failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
-    
-    
-    
     
     BaseRequest *req = [BaseRequest new];
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponbasket/basketitem"];
     
     
-    NSDictionary *parm = @{@"userid":[AppShareData instance].customId};
+    NSDictionary *parm = @{@"userid":[AppShareData instance].customId,@"status":status};
     
     
     //[AppShareData instance].customId

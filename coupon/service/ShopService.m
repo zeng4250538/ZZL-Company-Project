@@ -7,7 +7,7 @@
 //
 
 #import "ShopService.h"
-
+#import "AppShareData.h"
 @implementation ShopService
 
 
@@ -337,11 +337,12 @@
 -(void)queryMoreHotShop:(NSDictionary*)params
                success:(void(^)(int code,NSString *message,id data))success
                failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure{
-   
+    AppShareData *app = [AppShareData new];
     BaseRequest *req = [BaseRequest new];
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/15818865756/shopfavorite"];
-    NSDictionary *parm = @{@"shopmallid":@"2",@"categoryid":@"00001"};
-    [req get:url param:parm success:^(NSInteger code, id object) {
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/customer/%@/favorite",app.customId];
+//    NSDictionary *parm = @{@"shopmallid":@"2",@"categoryid":@"00001"};
+    [req get:url param:nil success:^(NSInteger code, id object) {
+        
         
         success(1,@"",object);
 //        NSLog(@"%@------->",object);
