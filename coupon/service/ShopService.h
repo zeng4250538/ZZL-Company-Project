@@ -95,7 +95,6 @@
  *  对商店订阅
  *
  *  @param shopid  商店id
- *  @param mode  mode == YES 点赞，model == NO，取消点赞
  *  @param success 成功回调
  *  @param failure 失败回调
  */
@@ -103,9 +102,36 @@
 
 
 -(void)requestFav:(NSString*)shopid
-               mode:(BOOL)mode
             success:(void(^)(NSInteger code,NSString *message,id data))success
             failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+/**
+ *  订阅该商店
+ *
+ *  @param shopid  商店id
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
+
+-(void)doFav:(NSString*)shopid
+          success:(void(^)(NSInteger code,NSString *message,id data))success
+          failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+/**
+ *  取消商店订阅
+ *
+ *  @param shopid  商店id
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
+
+
+
+-(void)doUnFav:(NSString*)shopid
+     success:(void(^)(NSInteger code,NSString *message,id data))success
+     failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
 /**

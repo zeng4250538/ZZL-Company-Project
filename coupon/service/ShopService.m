@@ -205,7 +205,6 @@
 
 
 -(void)requestFav:(NSString*)shopid
-             mode:(BOOL)mode
           success:(void(^)(NSInteger code,NSString *message,id data))success
           failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
@@ -227,44 +226,29 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
     
-    url = [url stringByAppendingString:customerId];
+    url = [url stringByAppendingString:shopid];
     
-    url = [url stringByAppendingString:@"/"];
+    url = [url stringByAppendingString:@"/favorite"];
+    
+    
+    
    
-    NSDictionary *parm = @{@"shopId":shopid};
+    NSDictionary *parm = @{@"customerId":customerId};
     
-    if (mode==YES) {
-        
-        [req post:url param:parm success:^(NSInteger code, id object) {
-            
-            success(code,@"",object);
-            
-        } failure:^(NSInteger code, NSString *content) {
-            
-            failure(code,NO,content,nil);
-            
-            
-        }];
-        
-        
-        
-        
-    }else{
-        
-        
-        [req delete:url param:parm success:^(NSInteger code, id object) {
-            
-            success(code,@"",object);
-            
-        } failure:^(NSInteger code, NSString *content) {
-            
-            failure(code,NO,content,nil);
-            
-            
-        }];
-        
-    }
     
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+        
+        
+        
     
 }
 
@@ -352,6 +336,66 @@
     }];
    
 }
+
+-(void)doFav:(NSString*)shopid
+     success:(void(^)(NSInteger code,NSString *message,id data))success
+     failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    
+    
+    
+    NSString *customerId=[AppShareData instance].customId;
+    
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    
+    url = [url stringByAppendingString:shopid];
+    
+    url = [url stringByAppendingString:@"/favorite"];
+    
+    
+    
+    
+    NSDictionary *parm = @{@"customerId":customerId};
+    
+    
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+    
+
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+-(void)doUnFav:(NSString*)shopid
+       success:(void(^)(NSInteger code,NSString *message,id data))success
+       failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+}
+
+
 
 
 @end

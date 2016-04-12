@@ -15,6 +15,7 @@
 #import "CouponService.h"
 #import "ReloadHud.h"
 #import "UISubscribeSevice.h"
+#import "ShopService.h"
 
 @interface ShopInfoViewCtrl ()
 
@@ -333,29 +334,76 @@
     
     [subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    UISubscribeSevice *sevice = [UISubscribeSevice new];
     
-    [sevice judgeSuccessful:^(id data) {
+    
+    ShopService *service = [ShopService new];
+    
+    NSString *shopId = SafeString(self.data[@"id"]);
+    
+    
+    [service requestFav:shopId  success:^(NSInteger code, NSString *message, id data) {
         
         
-        if (data) {
-            [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
-            [subButton addTarget:self action:@selector(cancelSubcrideClick:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        
-        else{
+        if ([data isKindOfClass:[NSArray class]]) {
+            if ([data count]>0) {
+                [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
+                
+                [subButton bk_addEventHandler:^(id sender) {
+                    
+                } forControlEvents:UIControlEventTouchUpInside];
+                
+                
+            }else{
+                [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+                
+                [subButton bk_addEventHandler:^(id sender) {
+                    
+                    
+                    
+                } forControlEvents:UIControlEventTouchUpInside];
+                
+                
+                
+            }
             
-            [subButton setTitle:@"订阅" forState:UIControlStateNormal];
-            [subButton addTarget:self action:@selector(subcrideClick:) forControlEvents:UIControlEventTouchUpInside];
-        
         }
         
         
+        NSLog(@"fav data %@",data);
         
-    } failure:^(id code) {
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+
+        
+        
         
     }];
     
+    
+//    UISubscribeSevice *sevice = [UISubscribeSevice new];
+//    
+//    [sevice judgeSuccessful:^(id data) {
+//        
+//        
+//        if (data) {
+//            [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
+//            [subButton addTarget:self action:@selector(cancelSubcrideClick:) forControlEvents:UIControlEventTouchUpInside];
+//        }
+//        
+//        else{
+//            
+//            [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+//            [subButton addTarget:self action:@selector(subcrideClick:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        }
+//        
+//        
+//        
+//    } failure:^(id code) {
+//        
+//    }];
+//    
 
     
     subButton.backgroundColor =[GUIConfig orangeColor];
