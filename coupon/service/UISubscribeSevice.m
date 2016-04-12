@@ -16,9 +16,9 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/15818865756/shopfavorite/"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/15818865756/shopfavorite"];
     
-    NSDictionary *param = @{@"favoriteId":@"12",@"customerId":@"12"};
+    NSDictionary *param = @{@"favoriteId":@"2",@"customerId":@"15818865756"};
     
     NSLog(@"%@",param);
     
@@ -40,9 +40,9 @@
 
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/15818865756/shopfavorite/"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/shopfavorite"];
     
-    NSDictionary *param = @{@"shopid":@"12",@"customerid":@"12"};
+    NSDictionary *param = @{@"shopid":@"2",@"customerid":@"15818865756"};
     
     [req delete:url param:param success:^(NSInteger code, id object) {
         
@@ -55,15 +55,15 @@
     }];
 
 }
-
-
+//http://183.6.190.75:9780/diamond-sis-web/v1/shop/2/favorite?customerId=15818865756
+//http://183.6.190.75:9780/diamond-sis-web/v1shop/2/favorite?customerId=15818865756
 -(void)judgeSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure{
 
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/15818865756/shopfavorite"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shop/2/favorite"];
     
-    NSDictionary *param = @{@"shopid":@"12"};
+    NSDictionary *param = @{@"customerId":@"15818865756"};
     
     [req get:url param:param success:^(NSInteger code, id object) {
         

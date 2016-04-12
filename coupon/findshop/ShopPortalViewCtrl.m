@@ -102,7 +102,7 @@
         
         self.mallArray = data;
     
-        NSLog(@"%@",self.mallArray[0][@"name"]);
+//        NSLog(@"%@",self.mallArray[0][@"name"]);
         
         cityLabel(data);
         

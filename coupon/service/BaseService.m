@@ -15,15 +15,15 @@
     
     
     
-    if (!InLan) {
+//    if (!InLan) {
         NSString *url = [NSString stringWithFormat:@"http://183.6.190.75:9780/diamond-sis-web/%@",[self version]];
 
         return url;
-    }else{
-        NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-sis-web/%@",[self version]];
-        
-        return url;
-    }
+//    }else{
+//        NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-sis-web/%@",[self version]];
+//        
+//        return url;
+//    }
     
     
     
@@ -34,21 +34,20 @@
    
    //
     
-   // NSString *url = [NSString stringWithFormat:@"http://120.25.66.110:9998/diamond-client-security-web"];
     
     
-    if (!InLan) {
+//    if (!InLan) {
         NSString *url = [NSString stringWithFormat:@"http://183.6.190.75:9780/diamond-client-security-web"];
         return url;
 
-    }else{
-        
-        NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-client-security-web"];
-        
-        return url;
-
-        
-    }
+//    }else{
+//        
+//        NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-client-security-web"];
+//        
+//        return url;
+//
+//        
+//    }
    
     
     

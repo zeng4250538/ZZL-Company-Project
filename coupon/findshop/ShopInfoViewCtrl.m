@@ -226,21 +226,20 @@
     
     [super viewWillAppear:animated];
     
-    
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     self.tableView.delegate = self;
-    [self scrollViewDidScroll:self.tableView];
     
+    [self scrollViewDidScroll:self.tableView];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
+    
     self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
     self.navigationController.navigationBar.translucent = YES;
-    
-    
-    
     
 }
 
@@ -258,13 +257,7 @@
     
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
-    
-    
-    
-    
-    
-    
-    
+   
     
 }
 
@@ -281,17 +274,14 @@
     uv.backgroundColor = [UIColor whiteColor];
     
     [uv addSubview:shopBgButton];
-
-    
-    
     
     {
         //按iphone6 的尺寸设置比率
         
         
         self.navigationItem.title = SafeString(self.data[@"name"]);
-        NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
         
+        NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
         
         [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
         
@@ -299,9 +289,6 @@
         
         
         
-    
-    
-    
     }
 
     UIButton *subButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -337,8 +324,8 @@
     
     [sevice judgeSuccessful:^(id data) {
         
-        
-        if (data) {
+        NSLog(@".............................=========>%@",data);
+        if (![data isEqual: @"[]"]&&[data count]>0) {
             [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
             [subButton addTarget:self action:@selector(cancelSubcrideClick:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -351,10 +338,11 @@
         }
         
         
-        
     } failure:^(id code) {
         
     }];
+    
+    
     
 
     
@@ -520,7 +508,7 @@
 
     UISubscribeSevice *sevice = [UISubscribeSevice new];
     [sevice successful:^(id data) {
-        
+        NSLog(@"订阅成功了");
         [button setTitle:@"取消订阅" forState:UIControlStateNormal];
         
     } failure:^(id code) {
@@ -539,6 +527,7 @@
     [sevice cancelSuccessful:^(id data) {
         
         [button setTitle:@"订阅" forState:UIControlStateNormal];
+        
         
     } failure:^(id code) {
         
