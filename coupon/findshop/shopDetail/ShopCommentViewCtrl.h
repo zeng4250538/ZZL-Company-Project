@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShopCommentViewCtrl : UITableViewController
+@interface ShopCommentViewCtrl : UIViewController
 
 @end

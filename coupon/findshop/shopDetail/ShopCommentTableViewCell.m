@@ -10,12 +10,11 @@
 
 @interface ShopCommentTableViewCell()
 
-@property(nonatomic,strong)UIImageView *personImageView;
 @property(nonatomic,strong)UILabel *nameLabel;
 @property(nonatomic,strong)UILabel *contentLabel;
 @property(nonatomic,strong)UILabel *timeLabel;
-
-
+@property(nonatomic,strong)UIImageView *lineImage;
+@property(nonatomic,strong)UIImageView *coarsLineImage;
 
 
 @end
@@ -32,13 +31,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.personImageView = [UIImageView new];
-        [self.contentView addSubview:self.personImageView];
-        
-        self.personImageView.layer.cornerRadius=20;
-       // self.personImageView.layer.borderWidth=1;
-        self.personImageView.clipsToBounds = YES;
-        
         
         self.nameLabel =[UILabel new];
         [self.contentView addSubview:self.nameLabel];
@@ -51,6 +43,11 @@
         
         [self.contentView addSubview:self.timeLabel];
         
+        self.lineImage = [UIImageView new];
+        [self.contentView addSubview:self.lineImage];
+        
+        self.coarsLineImage = [UIImageView new];
+        [self.contentView addSubview:self.coarsLineImage];
         
         
     }
@@ -64,51 +61,76 @@
     
     [super layoutSubviews];
     
-    [self.personImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.contentView).offset(15);
-        make.centerY.equalTo(self.contentView);
-        make.width.equalTo(@40);
-        make.height.equalTo(@40);
-        
-        
+    [self.coarsLineImage setBackgroundColor:UIColorFromRGB(245, 245, 245)];
+    [self.coarsLineImage mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.bottom.equalTo(self.contentView).offset(0);
+        make.left.equalTo(self.contentView).offset(0);
+        make.right.equalTo(self.contentView).offset(0);
+        make.height.equalTo(@8);
         
     }];
     
-    self.personImageView.image = [UIImage imageNamed:@"head_icon1.png"];
-    
+    [self.lineImage setBackgroundColor:UIColorFromRGB(235, 235, 235)];
+    [self.lineImage mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.top.equalTo(self.contentView).offset(40);
+        make.height.equalTo(@1);
+        make.left.equalTo(self.contentView).offset(0);
+        make.right.equalTo(self.contentView).offset(0);
+        
+    }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.personImageView.mas_right).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
         make.top.equalTo(self.contentView).offset(10);
-        make.width.equalTo(@100);
+        make.width.equalTo(@180);
         make.height.equalTo(@20);
         
     }];
+    [self.nameLabel setFont:[UIFont systemFontOfSize:15]];
     
-    self.nameLabel.text=@"无缺小鱼儿";
+//    self.nameLabel.text=@"无缺小鱼儿";
     
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.nameLabel);
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(5);
-        make.right.equalTo(self.contentView.mas_right).offset(-10);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-5);
+        make.left.equalTo(self.contentView).offset(10);
+        make.top.equalTo(self.contentView).offset(20);
+        make.right.equalTo(self.contentView).offset(-10);
+        make.bottom.equalTo(self.contentView).offset(-5);
         
     }];
     
     self.contentLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.contentLabel.font = [UIFont systemFontOfSize:14];
+    self.contentLabel.font = [UIFont systemFontOfSize:13];
     self.contentLabel.numberOfLines = 0;
     
-    self.contentLabel.text=@"测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试";
+//    self.contentLabel.text=@"测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试";
     
-    
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.bottom.equalTo(self.contentView).offset(-10);
+        make.left.equalTo(self.contentView).offset(10);
+        make.width.equalTo(@200);
+        make.height.equalTo(@20);
+        
+    }];
+//    self.timeLabel.text = @"2016.12.7";
+    self.timeLabel.font = [UIFont systemFontOfSize:10];
+    self.timeLabel.textColor = [UIColor grayColor];
     
     
 }
 
+-(void)data:(NSDictionary *)data{
+
+    NSLog(@"-----------我的评价数据cell------------%@",data);
+    self.nameLabel.text= SafeString(data[@"customerName"]);
+    self.contentLabel.text= SafeString(data[@"comment"]);
+    self.timeLabel.text = SafeString(data[@"time"]);
+
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

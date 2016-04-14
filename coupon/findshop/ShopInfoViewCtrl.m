@@ -343,9 +343,6 @@
     }];
     
     
-    
-
-    
     subButton.backgroundColor =[GUIConfig orangeColor];
     
     //[GUIConfig greenBackgroundColor];

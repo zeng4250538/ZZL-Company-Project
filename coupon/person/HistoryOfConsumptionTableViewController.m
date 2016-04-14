@@ -19,6 +19,12 @@
 
 @implementation HistoryOfConsumptionTableViewController
 
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [SVProgressHUD dismiss];
+
+}
+
 - (void)viewDidLoad {
     [SVProgressHUD dismiss];
     [super viewDidLoad];
