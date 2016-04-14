@@ -51,11 +51,7 @@
     
     
     [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-        
-        
-        
-        
-        
+    
     }];
     
     
@@ -87,17 +83,15 @@
     [service queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
         
-//        [ReloadHud re:self.tableView];
-        
         [ReloadHud showReloadMode:self.tableView];
         
         [ReloadHud removeHud:self.tableView animated:YES];
         
         self.mallList = data;
         
-        self.cityString = self.mallList[0][@"name"];
+//        self.cityString = self.mallList[0][@"name"];
         
-        NSLog(@"%@",self.cityString);
+//        NSLog(@"%@",self.cityString);
         
         [self.tableView reloadData];
         
@@ -114,9 +108,20 @@
         
     }];
     
+//    __weak SelectMallPopViewCtrl *selfWeak = self;
+//    
+//    self.cityArrayBlock = ^(id cityArray){
+//        
+//       selfWeak.mallList = cityArray;
+//        NSLog(@"-------------->%@",cityArray);
+//        [selfWeak.tableView reloadData];
+//    
+//    };
     
 }
 
+
+#pragma mark ------------------------- 即将显示
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
@@ -134,8 +139,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
    
-    [self.navigationController.navigationBar setBackgroundImage:nil
-                                                  forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     self.navigationController.navigationBar.shadowImage = nil;
     
@@ -284,8 +288,7 @@
     }];
     
     NSDictionary *mallDict = self.mallList[[indexPath row]];
-    
-    
+    NSLog(@"1231313%@",self.mallList);
     nameLabel.text=mallDict[@"name"];
 
     UILabel *distanceLabel = [UILabel new];

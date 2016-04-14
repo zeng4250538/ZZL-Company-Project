@@ -12,7 +12,7 @@
 #import "CouponService.h"
 #import "CouponPaymentDetailViewCtrl.h"
 #import "ShopCommentEditViewCtrl.h"
-
+#import "BasketService.h"
 @interface BasketFinishViewCtrl ()
 
 @end
@@ -26,7 +26,7 @@
     
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-    [self loadData];
+//    [self loadData];
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
@@ -37,20 +37,31 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    
+    [self loadData];
+    
+    
+    
+}
+
 
 -(void)loadData{
     
     
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
         
         
         [self doLoad:^(BOOL ret){
             
             if (ret) {
-                [ReloadHud removeHud:self.tableView animated:YES];
+                [ReloadHud removeHud:self.view animated:YES];
             }else{
                 
-                [ReloadHud showReloadMode:self.tableView];
+                [ReloadHud showReloadMode:self.view];
             }
             
             
@@ -60,18 +71,18 @@
     }];
     
     
+    
     [self doLoad:^(BOOL ret){
         
         if (ret) {
-            [ReloadHud removeHud:self.tableView animated:YES];
+            [ReloadHud removeHud:self.view animated:YES];
         }else{
             
-            [ReloadHud showReloadMode:self.tableView];
+            [ReloadHud showReloadMode:self.view];
         }
         
         
     }];
-    
     
     
 }
@@ -80,33 +91,41 @@
 -(void)doLoad:(void(^)(BOOL ret))completion{
     
     
-    CouponService *service = [CouponService new];
+    BasketService *service = [BasketService new];
     
-    [service queryFinishCoupon:nil success:^(int code, NSString *message, id data) {
+    
+    
+    [service requestNotUseStatus:@"已过期" success:^(NSInteger code, NSString *message, id data) {
         
-        if (code==0) {
-            self.dataList = data;
+        self.dataList = data;
+        
+        NSLog(@"1231312313131231231231============>>>>>>>>>%@",data);
+        [self.tableView reloadData];
+        
+        
+        completion(YES);
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        if (code>=400 && code<500) {
             
-            [self.tableView reloadData];
             
             
-            completion(YES);
+            [SVProgressHUD showErrorWithStatus:@"没有数据"];
+            
+            
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:@"后台数据错误"];
+            
         }
-        
-    } failure:^(int code, BOOL retry, NSString *message, id data) {
-        
         
         completion(NO);
         
-        
-        
     }];
-    
-    
-    
-    
-    
-    
+   
     
 }
 
@@ -165,7 +184,7 @@
         
         [self.navigationController pushViewController:vc animated:YES];
         
-      
+        
         
         
     };

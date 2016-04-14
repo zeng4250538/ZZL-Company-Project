@@ -106,7 +106,7 @@
     
     
     
-    [service requestNotUse:^(NSInteger code, NSString *message, id data) {
+    [service requestNotUseStatus:@"未消费" success:^(NSInteger code, NSString *message, id data) {
         
         self.dataList = data;
         
@@ -185,14 +185,7 @@
     longPressed.minimumPressDuration = 1.0;
     
     [cell.contentView addGestureRecognizer:longPressed];
-    
-
-
-    
-    
-   
-   
-    
+  
     cell.data  = self.dataList[indexPath.row];
     
     [cell updateData];
@@ -217,7 +210,7 @@
     
     UseCouponViewCtrl *vc = [UseCouponViewCtrl new];
     
-    NSDictionary *d = self.dataList[[indexPath row]];
+//    NSDictionary *d = self.dataList[[indexPath row]];
     
     
     [self.navigationController pushViewController:vc animated:YES];

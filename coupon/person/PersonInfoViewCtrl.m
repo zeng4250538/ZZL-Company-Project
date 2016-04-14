@@ -23,6 +23,8 @@
 #import "MyInformationViewController.h"
 #import "MyInformationSevice.h"
 
+#import "CustomerService.h"
+
 
 
 #define NAVBAR_CHANGE_POINT 50
@@ -40,25 +42,90 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    [SVProgressHUD dismiss];
-
-    [self.tabBarController.tabBar setHidden:NO];
+    
+    
+    
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+  
+    //[self.tabBarController.tabBar setHidden:NO];
+    
+    
+    self.view.backgroundColor = [GUIConfig mainBackgroundColor];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
-    CGFloat rate = 420.0f/750.0f;
+    
+    {
+    
+        CGFloat rate = 420.0f/750.0f;
+        
+        
+        UIImageView *header = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_WIDTH*rate )];
+        
+        header.image = [UIImage imageNamed:@"personbg.png"];
+        
+        self.tableView.tableHeaderView = header;
+        [self.tableView.tableHeaderView setUserInteractionEnabled:YES];
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
+        
+        [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
+        
+        
+        [self makeHeader:header];
+        
+    }
+    
+    {
+    
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"setting_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+            SettingViewCtrl *set = [SettingViewCtrl new];
+            set.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:set animated:YES];
+            
+        }];
+        
+        
+        
+        
+        self.navigationItem.leftBarButtonItem=leftBarButton;
+        
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"message_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+            
+            
+            SettingMessageTypeViewCtrl *vc = [SettingMessageTypeViewCtrl new];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }];
+        
+        self.navigationItem.rightBarButtonItem=rightBarButton;
+        
+    }
     
     
-    UIImageView *header = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_WIDTH*rate )];
+    //  [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
-    header.image = [UIImage imageNamed:@"personbg.png"];
     
-    self.tableView.tableHeaderView = header;
-    [self.tableView.tableHeaderView setUserInteractionEnabled:YES];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
+    [self makeFooterView];
     
-    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
+    
+    
+    
+    
+    self.my = [MyInformationViewController new];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+
+-(void)makeHeader:(UIImageView*)header{
+
     
     
     /**
@@ -87,6 +154,36 @@
         make.bottom.equalTo(header).offset(-20);
         
     }];
+    
+    
+    CustomerService *service = [CustomerService new];
+    
+    
+    NSString *customerId = [AppShareData instance].customId;
+    
+    
+    [service requestCustomer:customerId success:^(NSInteger code, NSString *message, id data) {
+        
+        NSLog(@"data = %@ ",data);
+        
+        
+        NSURL *url =SafeUrl(data[@"smallPhotoUrl"]);
+        
+        
+        [myInfromation sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            
+            
+        }];
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
+    
+    
     /**
      *  开启交互
      */
@@ -103,50 +200,12 @@
         make.bottom.equalTo(header).offset(-20);
     }];
     
-    
-    
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"setting_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-        SettingViewCtrl *set = [SettingViewCtrl new];
-        set.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:set animated:YES];
-        
-    }];
-    
-    
-    
-    
-    self.navigationItem.leftBarButtonItem=leftBarButton;
-    
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"message_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-        
-        
-        SettingMessageTypeViewCtrl *vc = [SettingMessageTypeViewCtrl new];
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }];
-    
-    self.navigationItem.rightBarButtonItem=rightBarButton;
-    
-    
-    //  [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
-    
-    
-    [self makeFooterView];
-    
-    
-    
-    
-    
-    self.my = [MyInformationViewController new];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
 
+    
+    
+    
+    
+}
 #pragma mark ---------- 头像的点击方法
 -(void)tapClick{
 
@@ -254,21 +313,21 @@
     
     [super viewDidAppear:animated];
     
-    if (![[AppShareData instance] isLogin]) {
-        
-        
-        LoginViewCtrl *vc = [LoginViewCtrl new];
-        
-        vc.loginEndBlock = ^(BOOL ret){
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        };
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-//        return ;
-    }
+//    if (![[AppShareData instance] isLogin]) {
+//        
+//        
+//        LoginViewCtrl *vc = [LoginViewCtrl new];
+//        
+//        vc.loginEndBlock = ^(BOOL ret){
+//            
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//        };
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+////        return ;
+//    }
    
 }
 

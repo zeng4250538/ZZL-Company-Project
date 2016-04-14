@@ -21,7 +21,7 @@
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
 @property(nonatomic,strong)NSArray *otherCouponList;
-@property(nonatomic,strong)id idDaata;
+//@property(nonatomic,strong)id shopData;
 
 
 
@@ -36,6 +36,9 @@
 
     
     self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+    
+    
+    self.tableView.backgroundColor = [UIColor whiteColor];
     
     
     
@@ -65,12 +68,12 @@
 -(void)boll:(BOOL)bools{
 
     if (bools == YES) {
-        self.idDaata = self.shopData;
+        self.shopData = self.shopData;
         
     }
     else{
     
-        self.idDaata = self.OptimizingBrand;
+        self.shopData = self.OptimizingBrand;
     
     }
 
@@ -228,23 +231,23 @@
     [super viewWillAppear:animated];
     
     
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     self.tableView.delegate = self;
-    [self scrollViewDidScroll:self.tableView];
     
+    [self scrollViewDidScroll:self.tableView];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
+    
     self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
     self.navigationController.navigationBar.translucent = YES;
     
-    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     
 }
-
 
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -254,6 +257,10 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     
+  //  self.automaticallyAdjustsScrollViewInsets=YES;
+    
+    
+    
     self.navigationController.automaticallyAdjustsScrollViewInsets=YES;
     
     
@@ -261,11 +268,9 @@
                                                   forBarMetrics:UIBarMetricsDefault];
     
     
-    
-    
-    
-    
-    
+   // self.navigationController.navigationBar.translucent = NO;
+
+   
     
 }
 
@@ -282,27 +287,18 @@
     uv.backgroundColor = [UIColor whiteColor];
     
     [uv addSubview:shopBgButton];
-
-    
-    
     
     {
         //按iphone6 的尺寸设置比率
         
-        
         self.navigationItem.title = SafeString(self.data[@"name"]);
-        NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
         
+        NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
         
         [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
         
         shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate);
         
-        
-        
-    
-    
-    
     }
 
     UIButton *subButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -310,6 +306,8 @@
     [shopBgButton addSubview:subButton];
     
     subButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    [subButton setTitle:@"订阅" forState:UIControlStateNormal];
     
     [subButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -330,6 +328,12 @@
     subButton.layer.cornerRadius=4;
     subButton.clipsToBounds = YES;
     
+    
+    subButton.backgroundColor = [GUIConfig orangeColor];
+    
+    [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+    
+    
 
     
     [subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -348,25 +352,65 @@
             if ([data count]>0) {
                 [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
                 
-                [subButton bk_addEventHandler:^(id sender) {
-                    
-                } forControlEvents:UIControlEventTouchUpInside];
-                
-                
             }else{
+                
+                
                 [subButton setTitle:@"订阅" forState:UIControlStateNormal];
-                
-                [subButton bk_addEventHandler:^(id sender) {
-                    
-                    
-                    
-                } forControlEvents:UIControlEventTouchUpInside];
-                
-                
-                
             }
             
+                
+            [subButton bk_addEventHandler:^(id sender) {
+                
+             
+                UIButton *btn = (UIButton*)sender;
+                NSString *title = btn.titleLabel.text;
+                
+                if ([title isEqualToString:@"订阅"]) {
+                    
+                    
+                    [service doFav:shopId success:^(NSInteger code, NSString *message, id data) {
+                        [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
+                        
+                    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                        
+                        [SVProgressHUD showErrorWithStatus:@"取消订阅失败"];
+                        
+                        
+                    }];
+                    
+
+                    
+                }else{
+                    
+                    [service doUnFav:shopId success:^(NSInteger code, NSString *message, id data) {
+                        [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+                        
+                    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                        
+                        
+                        [SVProgressHUD showErrorWithStatus:@"取消订阅失败"];
+                        
+                        
+                        
+                    }];
+                    
+                    
+
+                    
+                    
+                }
+                
+               // [self subcrideClick:sender];
+                
+                
+                
+                
+            } forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            
         }
+        
         
         
         NSLog(@"fav data %@",data);
@@ -375,7 +419,6 @@
         
         [subButton setTitle:@"订阅" forState:UIControlStateNormal];
 
-        
         
         
     }];
@@ -548,6 +591,7 @@
         
         ShopCommentViewCtrl *vc = [ShopCommentViewCtrl new];
         
+        vc.shopId = SafeString(self.data[@"id"]);
         [self.navigationController pushViewController:vc animated:YES];
         
         
@@ -568,7 +612,7 @@
 
     UISubscribeSevice *sevice = [UISubscribeSevice new];
     [sevice successful:^(id data) {
-        
+        NSLog(@"订阅成功了");
         [button setTitle:@"取消订阅" forState:UIControlStateNormal];
         
     } failure:^(id code) {
@@ -587,6 +631,7 @@
     [sevice cancelSuccessful:^(id data) {
         
         [button setTitle:@"订阅" forState:UIControlStateNormal];
+        
         
     } failure:^(id code) {
         

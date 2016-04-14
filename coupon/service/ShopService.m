@@ -7,7 +7,7 @@
 //
 
 #import "ShopService.h"
-
+#import "AppShareData.h"
 @implementation ShopService
 
 
@@ -321,11 +321,12 @@
 -(void)queryMoreHotShop:(NSDictionary*)params
                success:(void(^)(int code,NSString *message,id data))success
                failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure{
-   
+    AppShareData *app = [AppShareData new];
     BaseRequest *req = [BaseRequest new];
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/15818865756/shopfavorite"];
-    NSDictionary *parm = @{@"shopmallid":@"2",@"categoryid":@"00001"};
-    [req get:url param:parm success:^(NSInteger code, id object) {
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/customer/%@/favorite",app.customId];
+//    NSDictionary *parm = @{@"shopmallid":@"2",@"categoryid":@"00001"};
+    [req get:url param:nil success:^(NSInteger code, id object) {
+        
         
         success(1,@"",object);
 //        NSLog(@"%@------->",object);
@@ -342,6 +343,11 @@
      failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
+//    POST /v1/customer/{customerid}/shopfavorite [摇折扣]订阅商家
+//    Implementation Notes
+//    用户订阅商家
+//    
+    
     
     BaseRequest *req = [BaseRequest new];
     
@@ -353,17 +359,15 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
     
-    url = [url stringByAppendingString:shopid];
+    url = [url stringByAppendingString:customerId];
     
-    url = [url stringByAppendingString:@"/favorite"];
-    
-    
+    url = [url stringByAppendingString:@"/shopfavorite"];
     
     
-    NSDictionary *parm = @{@"customerId":customerId};
+    NSDictionary *parm = @{@"favoriteId":shopid};
     
     
-    [req get:url param:parm success:^(NSInteger code, id object) {
+    [req post:url param:parm success:^(NSInteger code, id object) {
         
         success(code,@"",object);
         
@@ -389,6 +393,47 @@
 -(void)doUnFav:(NSString*)shopid
        success:(void(^)(NSInteger code,NSString *message,id data))success
        failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    
+  //  DELETE /v1/customer/shopfavorite [摇折扣]取消订阅商家
+
+    
+    
+    
+    
+    NSString *customerId=[AppShareData instance].customId;
+    
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    
+    url = [url stringByAppendingString:customerId];
+    
+    url = [url stringByAppendingString:@"/shopfavorite"];
+    
+    
+    NSDictionary *parm = @{@"customerId":customerId,@"shopId":shopid};
+    
+    
+    [req delete:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+    
+    
+
+    
+    
+    
     
     
     

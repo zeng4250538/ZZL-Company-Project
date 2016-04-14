@@ -34,10 +34,6 @@
     self.headTabBar.inactiveTitleColor = [GUIConfig mainColor];
     self.headTabBar.barBackgroundColor = [UIColor whiteColor];
     
-    
-    
-    
-    
     BasketNotUseViewCtrl *noUseVc = [BasketNotUseViewCtrl new];
     noUseVc.title=@"未使用";
     

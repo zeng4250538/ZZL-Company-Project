@@ -238,7 +238,6 @@
 }
 
 
-
 -(void)updateData{
    
     NSString *imgUrl = [Utils getRandomImage:@"商家图片"];

@@ -87,7 +87,8 @@
         
     }];
     
-    self.nameLabel.text=@"无缺小鱼儿";
+    self.nameLabel.text=SafeString(self.data[@"customerName"]);
+    
     
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -102,7 +103,8 @@
     self.contentLabel.font = [UIFont systemFontOfSize:14];
     self.contentLabel.numberOfLines = 0;
     
-    self.contentLabel.text=@"测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试，测试测试测试";
+    self.contentLabel.text=SafeString(self.data[@"comment"]);
+    
     
     
     
@@ -110,6 +112,25 @@
 }
 
 
+-(void)updateData{
+    
+//http://192.168.6.97:8080/images/9.jpg";
+    
+    NSURL *url = SafeUrl(self.data[@"photoUrl"]);
+    
+    
+    [self.personImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        [self setNeedsLayout];
+    }];
+    
+    
+   // self.personImageView.image = [UIImage imageNamed:@"head_icon1.png"];
+    
+
+    
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

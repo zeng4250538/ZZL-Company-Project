@@ -8,9 +8,10 @@
 
 #import "ShopCommentViewCtrl.h"
 #import "ShopCommentTableViewCell.h"
+#import "CommentService.h"
 
 @interface ShopCommentViewCtrl ()
-
+@property(nonatomic,strong)NSArray *data;
 @end
 
 @implementation ShopCommentViewCtrl
@@ -19,11 +20,21 @@
     [super viewDidLoad];
     
     
-    self.navigationItem.title=@"商店评论";
+  //  self.tableView = [];
     
+    
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+
+    
+    self.navigationItem.title=@"商店评论";
     
     [self.tableView registerClass:[ShopCommentTableViewCell class] forCellReuseIdentifier:@"cell"];
     
+    
+    [self loadData];
+    
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -32,10 +43,87 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+-(void)loadData{
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    
+    
+    CommentService * service = [CommentService new];
+    
+    
+    [service requestCommentWithShop:self.shopId page:1 per_page:10 sort:@"" success:^(NSInteger code, NSString *message, id data) {
+        
+        self.data = data;
+        
+        [self.tableView reloadData];
+        
+        completion(YES);
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+ 
+        completion(NO);
+        
+        
+    }];
+    
+    
+    
+}
+
+
+
+
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -50,12 +138,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return [self.data count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShopCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
+    
+    
+    cell.data = self.data[indexPath.row];
+    
+    
+    [cell updateData];
     // Configure the cell...
     
     return cell;

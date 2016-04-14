@@ -47,7 +47,7 @@
     [SVProgressHUD show];
     
     [service queryMoreHotShop:nil success:^(int code, NSString *message, id data) {
-         
+        
 //         if (code==0) {
              self.dataList = data;
 //             NSLog(@"asdasdasd%@",self.dataList);
@@ -61,10 +61,7 @@
          
          [SVProgressHUD dismiss];
      }];
-    
-    
-    
-    
+
     
 }
 

@@ -52,6 +52,9 @@
 		574EE03D1C7DD9E40009D6EF /* soundon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 574EE03B1C7DD9E40009D6EF /* soundon@2x.png */; };
 		574EE03E1C7DD9E40009D6EF /* soundoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 574EE03C1C7DD9E40009D6EF /* soundoff@2x.png */; };
 		574EE0401C7F0F4C0009D6EF /* guangzhoufood@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 574EE03F1C7F0F4C0009D6EF /* guangzhoufood@2x.png */; };
+		576E789D1CBE9B6C00E19BDB /* CommentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E789C1CBE9B6C00E19BDB /* CommentService.m */; };
+		576E78A01CBEBF7400E19BDB /* CustomerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E789F1CBEBF7400E19BDB /* CustomerService.m */; };
+		576E78A31CBF31F300E19BDB /* CouponMessageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E78A21CBF31F300E19BDB /* CouponMessageService.m */; };
 		577169751C80B0F100223EDB /* SettingViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 577169741C80B0F100223EDB /* SettingViewCtrl.m */; };
 		577169781C80B2A300223EDB /* SettingMessageTypeViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 577169771C80B2A300223EDB /* SettingMessageTypeViewCtrl.m */; };
 		5771697B1C81EEE100223EDB /* MessagePromptConfigViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5771697A1C81EEE100223EDB /* MessagePromptConfigViewCtrl.m */; };
@@ -67,7 +70,6 @@
 		5779BD751C25381600E15934 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5779BD731C25381600E15934 /* LaunchScreen.xib */; };
 		5779BD811C25381600E15934 /* couponTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BD801C25381600E15934 /* couponTests.m */; };
 		5779BD8B1C2539D000E15934 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5779BD8A1C2539D000E15934 /* Podfile */; };
-		577B6CE71CA1666B002BA28F /* PersonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 577B6CE61CA1666B002BA28F /* PersonService.m */; };
 		578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63DD1C254DD200C1FB19 /* GUIConfig.m */; };
 		578E63E11C254DE900C1FB19 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63E01C254DE900C1FB19 /* Utils.m */; };
 		578E63E51C2551B800C1FB19 /* NSObject+NSJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E63E31C2551B800C1FB19 /* NSObject+NSJSONSerialization.m */; };
@@ -257,6 +259,12 @@
 		574EE03B1C7DD9E40009D6EF /* soundon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soundon@2x.png"; sourceTree = "<group>"; };
 		574EE03C1C7DD9E40009D6EF /* soundoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soundoff@2x.png"; sourceTree = "<group>"; };
 		574EE03F1C7F0F4C0009D6EF /* guangzhoufood@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guangzhoufood@2x.png"; sourceTree = "<group>"; };
+		576E789B1CBE9B6C00E19BDB /* CommentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentService.h; sourceTree = "<group>"; };
+		576E789C1CBE9B6C00E19BDB /* CommentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentService.m; sourceTree = "<group>"; };
+		576E789E1CBEBF7400E19BDB /* CustomerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerService.h; sourceTree = "<group>"; };
+		576E789F1CBEBF7400E19BDB /* CustomerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerService.m; sourceTree = "<group>"; };
+		576E78A11CBF31F300E19BDB /* CouponMessageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponMessageService.h; sourceTree = "<group>"; };
+		576E78A21CBF31F300E19BDB /* CouponMessageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponMessageService.m; sourceTree = "<group>"; };
 		577169731C80B0F100223EDB /* SettingViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCtrl.h; sourceTree = "<group>"; };
 		577169741C80B0F100223EDB /* SettingViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCtrl.m; sourceTree = "<group>"; };
 		577169761C80B2A300223EDB /* SettingMessageTypeViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingMessageTypeViewCtrl.h; sourceTree = "<group>"; };
@@ -285,8 +293,6 @@
 		5779BD7F1C25381600E15934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5779BD801C25381600E15934 /* couponTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = couponTests.m; sourceTree = "<group>"; };
 		5779BD8A1C2539D000E15934 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		577B6CE51CA1666B002BA28F /* PersonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonService.h; sourceTree = "<group>"; };
-		577B6CE61CA1666B002BA28F /* PersonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonService.m; sourceTree = "<group>"; };
 		578E63DC1C254DD200C1FB19 /* GUIConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIConfig.h; sourceTree = "<group>"; };
 		578E63DD1C254DD200C1FB19 /* GUIConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIConfig.m; sourceTree = "<group>"; };
 		578E63DF1C254DE900C1FB19 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -886,14 +892,18 @@
 				57EFEEE51C90874E003103B1 /* BaseService.m */,
 				57EFEEE71C9087B8003103B1 /* MallService.h */,
 				57EFEEE81C9087B8003103B1 /* MallService.m */,
-				577B6CE51CA1666B002BA28F /* PersonService.h */,
-				577B6CE61CA1666B002BA28F /* PersonService.m */,
 				7F121D5D1CA3E08F005AF53D /* HistoryOfConsumptionService.h */,
 				7F121D5E1CA3E08F005AF53D /* HistoryOfConsumptionService.m */,
 				7F121D701CA6AF6A005AF53D /* SearchShopService.h */,
 				7F121D711CA6AF6A005AF53D /* SearchShopService.m */,
 				5718A27A1CAAABE0008191F8 /* BasketService.h */,
 				5718A27B1CAAABE0008191F8 /* BasketService.m */,
+				576E789B1CBE9B6C00E19BDB /* CommentService.h */,
+				576E789C1CBE9B6C00E19BDB /* CommentService.m */,
+				576E789E1CBEBF7400E19BDB /* CustomerService.h */,
+				576E789F1CBEBF7400E19BDB /* CustomerService.m */,
+				576E78A11CBF31F300E19BDB /* CouponMessageService.h */,
+				576E78A21CBF31F300E19BDB /* CouponMessageService.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1276,9 +1286,11 @@
 				574BF3F31C9802640088A9A6 /* RegisterViewCtrl.m in Sources */,
 				574BF3F11C9802640088A9A6 /* ForgetViewCtrl.m in Sources */,
 				573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */,
+				576E78A31CBF31F300E19BDB /* CouponMessageService.m in Sources */,
 				7F121D6F1CA6AF41005AF53D /* SaerchShopModel.m in Sources */,
 				57CE97C11C63231B00CE0E57 /* ShopCommentTableViewCell.m in Sources */,
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
+				576E789D1CBE9B6C00E19BDB /* CommentService.m in Sources */,
 				5718A27C1CAAABE0008191F8 /* BasketService.m in Sources */,
 				57E364A91C9DB347003575FC /* Coupon.m in Sources */,
 				7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */,
@@ -1301,7 +1313,6 @@
 				57F3E2861C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m in Sources */,
 				577169781C80B2A300223EDB /* SettingMessageTypeViewCtrl.m in Sources */,
 				57A94E881C3AB30E00BE0022 /* ShakeCouponViewCtrl.m in Sources */,
-				577B6CE71CA1666B002BA28F /* PersonService.m in Sources */,
 				7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */,
 				57A94E661C37EB1200BE0022 /* ShopPortalViewCtrl.m in Sources */,
 				57A94E7E1C38FF5800BE0022 /* CouponInfoTableViewCell.m in Sources */,
@@ -1324,6 +1335,7 @@
 				57E722C61C686A51004DBA9C /* ShakeService.m in Sources */,
 				573E51D11C7C2561005DBBC3 /* BasketNotUseViewCtrl.m in Sources */,
 				578E63E11C254DE900C1FB19 /* Utils.m in Sources */,
+				576E78A01CBEBF7400E19BDB /* CustomerService.m in Sources */,
 				7F121D5F1CA3E08F005AF53D /* HistoryOfConsumptionService.m in Sources */,
 				5796FA5E1C4411AE004CA23B /* PersonInfoViewCtrl.m in Sources */,
 				5796FA6E1C460108004CA23B /* CartViewCtrl.m in Sources */,
@@ -1491,7 +1503,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rechstone.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1513,7 +1525,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rechstone.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
