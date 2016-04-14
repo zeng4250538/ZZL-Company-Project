@@ -66,22 +66,17 @@
     
     self.navigationItem.hidesBackButton = YES;
     
-    
-    
 }
 
 
 
-
 -(void)makeHeaderView{
-    
     
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180)];
     
     self.tableView.tableHeaderView = header;
     
     header.backgroundColor = [UIColor whiteColor];
-    
     
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
     
@@ -96,6 +91,7 @@
     }];
     
 }
+
 
 
 -(void)makeFooterView{
