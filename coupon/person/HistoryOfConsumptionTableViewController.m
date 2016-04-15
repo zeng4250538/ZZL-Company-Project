@@ -33,7 +33,7 @@
 //    [self netWorkRequst];
     [SVProgressHUD show];
     [self.navigationItem setTitle:@"消费历史"];
-    
+    [self netWorkRequst];
 //    [];
     
     [self.tableView registerClass:[HistoryOfConsumptionTableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -75,7 +75,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //#warning Incomplete implementation, return the number of rows
-    [self netWorkRequst];
+    
 //    NSLog(@"%@",self.dataArray);
     return self.dataArray.count;
     

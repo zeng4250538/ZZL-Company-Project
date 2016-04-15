@@ -15,7 +15,7 @@
 #import "CouponService.h"
 #import "ReloadHud.h"
 #import "UISubscribeSevice.h"
-
+#import "MallShopCommentViewController.h"
 @interface ShopInfoViewCtrl ()
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
@@ -483,7 +483,9 @@
     
     [commentButton bk_addEventHandler:^(id sender) {
         
-        ShopCommentViewCtrl *vc = [ShopCommentViewCtrl new];
+        MallShopCommentViewController *vc = [MallShopCommentViewController new];
+        
+        vc.shopId = SafeString(self.data[@"id"]);
         
         [self.navigationController pushViewController:vc animated:YES];
         

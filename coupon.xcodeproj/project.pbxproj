@@ -177,6 +177,8 @@
 		7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3557851CACA8E6000DB7EA /* MapKit.framework */; };
 		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
 		7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */; };
+		7FD418B51CC07A6400A59E5F /* MallShopCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FD418B41CC07A6400A59E5F /* MallShopCommentViewController.m */; };
+		7FD418B81CC07A8400A59E5F /* MallShopCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FD418B71CC07A8400A59E5F /* MallShopCommentTableViewCell.m */; };
 		7FF596751CB3F0FF008BDE5A /* MyInformationSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */; };
 /* End PBXBuildFile section */
 
@@ -457,6 +459,10 @@
 		7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStreetButtonService.m; sourceTree = "<group>"; };
 		7F4C6ACE1CB33C4F00ADD0F8 /* MyInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationViewController.h; sourceTree = "<group>"; };
 		7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationViewController.m; sourceTree = "<group>"; };
+		7FD418B31CC07A6400A59E5F /* MallShopCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallShopCommentViewController.h; sourceTree = "<group>"; };
+		7FD418B41CC07A6400A59E5F /* MallShopCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallShopCommentViewController.m; sourceTree = "<group>"; };
+		7FD418B61CC07A8400A59E5F /* MallShopCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallShopCommentTableViewCell.h; sourceTree = "<group>"; };
+		7FD418B71CC07A8400A59E5F /* MallShopCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallShopCommentTableViewCell.m; sourceTree = "<group>"; };
 		7FF596731CB3F0FF008BDE5A /* MyInformationSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationSevice.h; sourceTree = "<group>"; };
 		7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationSevice.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -770,7 +776,7 @@
 		5796FA5B1C44118D004CA23B /* person */ = {
 			isa = PBXGroup;
 			children = (
-				7F14D0071CBED4AB00C726E2 /* ShopCommentVeiw */,
+				7F14D0071CBED4AB00C726E2 /* MyCommentVeiw */,
 				7F4C6AD11CB33C5700ADD0F8 /* MyInformation */,
 				7F4C6ACD1CB2205B00ADD0F8 /* Failure */,
 				7F121D731CA7DA7A005AF53D /* HistoryOfConsumption */,
@@ -821,6 +827,7 @@
 		57A94E631C37EAD500BE0022 /* findShop */ = {
 			isa = PBXGroup;
 			children = (
+				7FD418A91CBFB89E00A59E5F /* ShopComment */,
 				574AE8A51C626C4800928B09 /* shopDetail */,
 				574AE8A41C626BE000928B09 /* couponDetail */,
 				57A94E641C37EB1200BE0022 /* ShopPortalViewCtrl.h */,
@@ -987,7 +994,7 @@
 			name = ShopCommentSevice;
 			sourceTree = "<group>";
 		};
-		7F14D0071CBED4AB00C726E2 /* ShopCommentVeiw */ = {
+		7F14D0071CBED4AB00C726E2 /* MyCommentVeiw */ = {
 			isa = PBXGroup;
 			children = (
 				574AE8A61C626C8200928B09 /* ShopCommentViewCtrl.h */,
@@ -995,7 +1002,7 @@
 				57CE97BF1C63231B00CE0E57 /* ShopCommentTableViewCell.h */,
 				57CE97C01C63231B00CE0E57 /* ShopCommentTableViewCell.m */,
 			);
-			name = ShopCommentVeiw;
+			name = MyCommentVeiw;
 			sourceTree = "<group>";
 		};
 		7F3FB4111CACE3BD0004C456 /* basketSevice */ = {
@@ -1032,6 +1039,17 @@
 				7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */,
 			);
 			name = MyInformation;
+			sourceTree = "<group>";
+		};
+		7FD418A91CBFB89E00A59E5F /* ShopComment */ = {
+			isa = PBXGroup;
+			children = (
+				7FD418B31CC07A6400A59E5F /* MallShopCommentViewController.h */,
+				7FD418B41CC07A6400A59E5F /* MallShopCommentViewController.m */,
+				7FD418B61CC07A8400A59E5F /* MallShopCommentTableViewCell.h */,
+				7FD418B71CC07A8400A59E5F /* MallShopCommentTableViewCell.m */,
+			);
+			name = ShopComment;
 			sourceTree = "<group>";
 		};
 		7FF596721CB3F0D7008BDE5A /* MyInformationSevice */ = {
@@ -1306,6 +1324,7 @@
 				578E63DE1C254DD200C1FB19 /* GUIConfig.m in Sources */,
 				57E364A61C9DA293003575FC /* Mall.m in Sources */,
 				571C29CA1C78CC7500DDBCE8 /* FeedBackViewCtrl.m in Sources */,
+				7FD418B81CC07A8400A59E5F /* MallShopCommentTableViewCell.m in Sources */,
 				7F121D6C1CA675A8005AF53D /* OptimizingBrandModel.m in Sources */,
 				57F511A21C5B90D2000DA1A8 /* SearchResultViewCtrl.m in Sources */,
 				5796FA831C47E904004CA23B /* CouponView.m in Sources */,
@@ -1358,6 +1377,7 @@
 				57E722C31C670AB7004DBA9C /* CouponService.m in Sources */,
 				5771697B1C81EEE100223EDB /* MessagePromptConfigViewCtrl.m in Sources */,
 				571C297B1C70D55000DDBCE8 /* NumSpanView.m in Sources */,
+				7FD418B51CC07A6400A59E5F /* MallShopCommentViewController.m in Sources */,
 				57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */,
 				57CE97DD1C65F41300CE0E57 /* MockData.m in Sources */,
 				574BF3F21C9802640088A9A6 /* LoginViewCtrl.m in Sources */,
@@ -1509,10 +1529,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/coupon/coupon.pch";
 				INFOPLIST_FILE = coupon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rechstone.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1531,10 +1548,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/coupon/coupon.pch";
 				INFOPLIST_FILE = coupon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rechstone.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

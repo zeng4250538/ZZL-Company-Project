@@ -261,12 +261,7 @@
                 
                 self.dataList = ary;
                 
-                
-                
                 [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                
-                
-                
                 
                 
                 

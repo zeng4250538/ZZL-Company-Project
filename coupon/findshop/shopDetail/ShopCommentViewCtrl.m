@@ -25,6 +25,7 @@
 
     [self loadData];
     
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -39,7 +40,7 @@
     
     _shopSevice = [ShopCommentSevice new];
     
-    self.navigationItem.title=@"商店评论";
+    self.navigationItem.title=@"我的评论";
     
     
     
@@ -150,16 +151,14 @@
         [act bk_addButtonWithTitle:@"删除" handler:^{
             
             
-            BasketService *service =[BasketService new];
+            
             
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             
             
             NSString *itemId = self.dataArray[indexPath.row][@"id"];
-            
-            [service requestDeleteBasket:itemId success:^(NSInteger code, NSString *message, id data) {
-                
-                
+            NSLog(@"-----------我的评论删除的ID%@",itemId);
+            [_shopSevice removeRaviewRequestCommentID:itemId success:^(id data) {
                 [SVProgressHUD dismiss];
                 
                 NSMutableArray *ary = [self.dataArray mutableCopy];
@@ -169,21 +168,11 @@
                 self.dataArray = ary;
                 
                 
-                
                 [self.tableViewView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                
-                
-                
-                
-                
-                
-            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-                
-                
+            } failure:^(id code) {
                 [SVProgressHUD showErrorWithStatus:@"删除出错！"];
                 
                 [SVProgressHUD dismiss];
-                
                 
             }];
             
