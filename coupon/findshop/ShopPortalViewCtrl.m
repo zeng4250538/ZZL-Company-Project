@@ -567,6 +567,7 @@
         CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         
         
+//        NSLog(@" couponData %@",self.couponData[indexPath.row]);
         
         
         cell.data = self.couponData[indexPath.row];

@@ -8,33 +8,43 @@
 
 #import "ShopCommentViewCtrl.h"
 #import "ShopCommentTableViewCell.h"
-#import "CommentService.h"
-
-@interface ShopCommentViewCtrl ()
-@property(nonatomic,strong)NSArray *data;
+#import "ShopCommentSevice.h"
+#import "BasketService.h"
+@interface ShopCommentViewCtrl ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong) ShopCommentSevice *shopSevice;
+@property (nonatomic,strong) ShopCommentTableViewCell *cell;
+@property (nonatomic,strong) UITableView *tableViewView;
+@property (nonatomic,strong) NSArray *dataArray;
 @end
 
 @implementation ShopCommentViewCtrl
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    
-  //  self.tableView = [];
-    
-    
-    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+-(void)viewWillAppear:(BOOL)animated{
 
-    
-    self.navigationItem.title=@"商店评论";
-    
-    [self.tableView registerClass:[ShopCommentTableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-    
+    [SVProgressHUD show];
+
     [self loadData];
     
     
-    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [SVProgressHUD dismiss];
+
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    _shopSevice = [ShopCommentSevice new];
+    
+    self.navigationItem.title=@"我的评论";
+    
+    
+    
+    [self tableView];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -43,88 +53,42 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-
--(void)viewWillAppear:(BOOL)animated{
-    
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.translucent = NO;
-
-    
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
 -(void)loadData{
-    
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-        
-        
-        [self doLoad:^(BOOL ret){
-            
-            if (ret) {
-                [ReloadHud removeHud:self.tableView animated:YES];
-            }else{
-                
-                [ReloadHud showReloadMode:self.tableView];
-            }
-            
-            
-        }];
-        
+//http://183.6.190.75:9780/diamond-sis-web/v1/customer/15818865756/review?page=1&per_page=10&sort=-time
+//page=1&per_page=10&sort=-time
+    NSDictionary *parma = @{@"page":@"1",@"per_page":@"10",@"sort":@"-time"};
+    [_shopSevice requestParam:parma success:^(id data) {
+        [SVProgressHUD dismiss];
+       NSLog(@"-----------我的评价数据------------%@",data);
+        _dataArray = data;
+        [_tableViewView reloadData];
+    } failure:^(id coad) {
         
     }];
-    
-    
-    [self doLoad:^(BOOL ret){
-        
-        if (ret) {
-            [ReloadHud removeHud:self.tableView animated:YES];
-        }else{
-            
-            [ReloadHud showReloadMode:self.tableView];
-        }
-        
-        
-    }];
-    
-    
-    
-}
--(void)doLoad:(void(^)(BOOL ret))completion{
-    
-    
-    
-    CommentService * service = [CommentService new];
-    
-    
-    [service requestCommentWithShop:self.shopId page:1 per_page:10 sort:@"" success:^(NSInteger code, NSString *message, id data) {
-        
-        self.data = data;
-        
-        [self.tableView reloadData];
-        
-        completion(YES);
-        
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
- 
-        completion(NO);
-        
-        
-    }];
-    
-    
-    
+
 }
 
+-(void)tableView{
 
+    _tableViewView = [UITableView new];
+    _tableViewView.dataSource = self;
+    _tableViewView.delegate = self;
+    [self.view addSubview:_tableViewView];
+    [_tableViewView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(0);
+        make.left.and.right.and.bottom.equalTo(self.view).offset(0);
+    }];
+    
+    _tableViewView.separatorStyle = UITableViewCellSelectionStyleNone;
 
+    
 
-
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -138,21 +102,116 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.data count];
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ShopCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    static NSString *identify = @"cell";
+    _cell = [tableView dequeueReusableCellWithIdentifier:identify];
     
     
+    if (_cell == nil) {
+        _cell = [[ShopCommentTableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];}
+//    [self loadData];
+    [_cell data:_dataArray[indexPath.row]];
     
-    cell.data = self.data[indexPath.row];
-    
-    
-    [cell updateData];
+//    [tableView reloadData];
+    //ShopCommentTableViewCell
     // Configure the cell...
     
-    return cell;
+    UILongPressGestureRecognizer *longPressed = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressToDo:)];
+    
+    longPressed.minimumPressDuration = 1.0;
+    
+    [_cell.contentView addGestureRecognizer:longPressed];
+    
+    return _cell;
+}
+
+
+#pragma mark - 长按删除
+
+-(void)longPressToDo:(UILongPressGestureRecognizer *)gesture{
+    
+    
+    
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        CGPoint point = [gesture locationInView:self.tableViewView];
+        
+        
+        NSIndexPath * indexPath = [self.tableViewView indexPathForRowAtPoint:point];
+        
+        
+        if(indexPath == nil) return ;
+        
+        
+        UIActionSheet *act = [UIActionSheet bk_actionSheetWithTitle:@"操作"];
+        
+        [act bk_addButtonWithTitle:@"删除" handler:^{
+            
+            
+            
+            
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+            
+            
+            NSString *itemId = self.dataArray[indexPath.row][@"id"];
+            NSLog(@"-----------我的评论删除的ID%@",itemId);
+            [_shopSevice removeRaviewRequestCommentID:itemId success:^(id data) {
+                [SVProgressHUD dismiss];
+                
+                NSMutableArray *ary = [self.dataArray mutableCopy];
+                
+                [ary removeObjectAtIndex:indexPath.row];
+                
+                self.dataArray = ary;
+                
+                
+                [self.tableViewView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            } failure:^(id code) {
+                [SVProgressHUD showErrorWithStatus:@"删除出错！"];
+                
+                [SVProgressHUD dismiss];
+                
+            }];
+            
+            
+            
+            
+            // [self.tableView reloadData];
+            
+            
+            
+            
+            
+            
+            
+            
+        }];
+        
+        [act bk_setDestructiveButtonWithTitle:@"关闭" handler:^{
+            
+            
+            
+            
+        }];
+        
+        
+        [act showInView:self.view];
+        
+        //add your code here
+        
+        
+        
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [_tableViewView deselectRowAtIndexPath:indexPath animated:YES];
+
+
 }
 
 /*

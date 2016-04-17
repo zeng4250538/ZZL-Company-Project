@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShopCommentViewCtrl : UIViewController<UITableViewDataSource,UITabBarDelegate>
-
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,copy)NSString *shopId;
+@interface ShopCommentViewCtrl : UIViewController
 
 @end
