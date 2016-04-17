@@ -471,7 +471,7 @@
     NSMutableDictionary *d = [AppShareData instance].getCartList[ [indexPath row]];
     
     
-    vc.datas = d;
+    vc.data = d;
     
     
     

@@ -43,30 +43,45 @@
 }
 
 
+
 -(void)loadData{
     
     
-    CouponService *service = [CouponService new];
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
     
     
-    [service queryRemindCoupon:nil success:
-     ^(int code, NSString *message, id data) {
-         
-         if (code==0) {
-             
-             self.data = data;
-             
-             [self.tableView reloadData];
-             
-         }
-         
-     } failure:
-     ^(int code, BOOL retry, NSString *message, id data) {
-         
-         
-     }];
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
     
-    //service qu
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
     
     
     
@@ -76,6 +91,44 @@
 }
 
 
+
+
+
+
+
+//-(void)loadData{
+//    
+//    
+//    CouponService *service = [CouponService new];
+//    
+//    
+//    [service queryRemindCoupon:nil success:
+//     ^(int code, NSString *message, id data) {
+//         
+//         if (code==0) {
+//             
+//             self.data = data;
+//             
+//             [self.tableView reloadData];
+//             
+//         }
+//         
+//     } failure:
+//     ^(int code, BOOL retry, NSString *message, id data) {
+//         
+//         
+//     }];
+//    
+//    //service qu
+//    
+//    
+//    
+//    
+//    
+//    
+//}
+//
+//
 
 
 

@@ -299,7 +299,7 @@
     
     CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
     
-    vc.datas = d;
+    vc.data = d;
     
     [self.navigationController pushViewController:vc animated:YES];
   

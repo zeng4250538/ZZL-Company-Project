@@ -22,4 +22,22 @@
                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
+
+
+/**
+ *  获取消费信息
+ *
+ *  @param customerId <#customerId description#>
+ *  @param success    <#success description#>
+ *  @param failure    <#failure description#>
+ */
+
+-(void)requestCuponHistoryWithPage:(NSUInteger)page per_page:(NSUInteger)per_page
+                           success:(void(^)(NSInteger code,NSString *message,id data))success
+                           failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
+
+
 @end

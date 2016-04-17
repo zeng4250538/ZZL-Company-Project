@@ -364,7 +364,7 @@
     url = [url stringByAppendingString:@"/shopfavorite"];
     
     
-    NSDictionary *parm = @{@"favoriteId":shopid};
+    NSDictionary *parm = @{@"favoriteId":shopid,@"customerId":customerId};
     
     
     [req post:url param:parm success:^(NSInteger code, id object) {
@@ -408,14 +408,19 @@
     NSString *customerId=[AppShareData instance].customId;
     
     
+  //  NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/shopfavorite"];
+    
+  ///  NSDictionary *param = @{@"shopid":@"2",@"customerid":@"15818865756"};
+    
+    
+    
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
     
-    url = [url stringByAppendingString:customerId];
     
     url = [url stringByAppendingString:@"/shopfavorite"];
     
     
-    NSDictionary *parm = @{@"customerId":customerId,@"shopId":shopid};
+    NSDictionary *parm = @{@"customerid":customerId,@"shopid":shopid};
     
     
     [req delete:url param:parm success:^(NSInteger code, id object) {
@@ -439,6 +444,58 @@
     
     
 }
+
+
+-(void)requestMyFavList:(void(^)(NSInteger code,NSString *message,id data))success
+                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    // GET /v1/customer/{customerId}/favorite [摇折扣]获取用户订阅的商家
+
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    
+    
+    
+    NSString *customerId=[AppShareData instance].customId;
+    
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    
+    url = [url stringByAppendingString:customerId];
+    
+    url = [url stringByAppendingString:@"/favorite"];
+    
+    
+    NSDictionary *parm = @{@"customerId":customerId};
+    
+    
+    [req get:url param:parm success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
 
 
 

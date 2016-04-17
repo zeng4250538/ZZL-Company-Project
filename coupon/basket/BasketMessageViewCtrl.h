@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, CouponMessageType) {
+    CouponMessageTypeBasket,
+    CouponMessageTypeCoupon,
+    CouponMessageTypeShop
+};
+
 @interface BasketMessageViewCtrl : UITableViewController
+
+@property(nonatomic,assign)CouponMessageType couponMessageType;
 
 @end

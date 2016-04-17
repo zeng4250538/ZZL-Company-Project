@@ -7,6 +7,7 @@
 //
 
 #import "UseCouponViewCtrl.h"
+#import "PayUtils.h"
 
 @interface UseCouponViewCtrl ()
 
@@ -144,7 +145,34 @@
     
     
     [payButton bk_addEventHandler:^(id sender) {
+        
+        
+        
+        
 #pragma mark 支付功能
+        
+        
+        NSString *moneyString = self.payMoneyTextField.text;
+        
+        if ([moneyString floatValue]<=0.0){
+            
+            [SVProgressHUD showErrorWithStatus:@"支付金额为空！"];
+            return ;
+            
+            
+        }
+        
+        
+        NSTimeInterval tm = [NSDate timeIntervalSinceReferenceDate];
+        
+        NSString *orderId = [NSString stringWithFormat:@"%.0f",tm];
+        
+        
+        
+        [PayUtils aliPay:orderId orderSn:orderId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
+        
+        
+        
         
 
         NSLog(@"支付。。。。。");
@@ -234,7 +262,7 @@
     
     
     UILabel *nameLabel = [UILabel new];
-    nameLabel.text=@"咖啡懂你优惠券";
+    nameLabel.text=SafeString(self.data[@"name"]);
     nameLabel.font = [UIFont systemFontOfSize:14];
     //nameLabel.backgroundColor=[UIColor greenColor];
     [cell.contentView addSubview:nameLabel];

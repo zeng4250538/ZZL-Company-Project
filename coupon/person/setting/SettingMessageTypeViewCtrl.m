@@ -7,6 +7,8 @@
 //
 
 #import "SettingMessageTypeViewCtrl.h"
+#import "BasketMessageViewCtrl.h"
+#import "ShopMessageViewCtrl.h"
 
 @interface SettingMessageTypeViewCtrl ()
 
@@ -18,6 +20,8 @@
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    self.navigationItem.title=@"消息列表";
     
     
     
@@ -82,6 +86,35 @@
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    
+    if (indexPath.row==0) {
+        
+        
+        BasketMessageViewCtrl *vc = [BasketMessageViewCtrl new];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.couponMessageType=CouponMessageTypeCoupon;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }
+
+    if (indexPath.row==1) {
+        
+        
+        
+        ShopMessageViewCtrl *vc = [ShopMessageViewCtrl new];
+        
+        
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+    }
+
 }
 
 /*

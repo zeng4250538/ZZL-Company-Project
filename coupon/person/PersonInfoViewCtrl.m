@@ -22,8 +22,10 @@
 #import "LoginViewCtrl.h"
 #import "MyInformationViewController.h"
 #import "MyInformationSevice.h"
+#import "MyCommentViewCtrl.h"
 
 #import "CustomerService.h"
+#import "HistoryCouponUsageViewCtrl.h"
 
 
 
@@ -34,7 +36,6 @@
 
 @property(nonatomic,strong)NSDictionary *myInformationDictionary;
 
-@property(nonatomic,strong)MyInformationViewController *my;
 @end
 
 @implementation PersonInfoViewCtrl
@@ -113,7 +114,6 @@
     
     
     
-    self.my = [MyInformationViewController new];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -132,17 +132,12 @@
      *  头像显示（个人信息入口）
      */
     UIImageView *myInfromation = [[UIImageView alloc]init];
-    AppShareData *app = [AppShareData new];
-    NSDictionary *dci = [app getMyInfromationData];
-    NSURL *url = [NSURL URLWithString:dci[@"smallPhotoUrl"]];
-    [myInfromation sd_setImageWithURL:url placeholderImage:nil];
     myInfromation.backgroundColor = [UIColor whiteColor];
     myInfromation.layer.masksToBounds = YES;
     myInfromation.layer.cornerRadius = 65/2;
     [header addSubview:myInfromation];
     
     UILabel *myInformationTitleLabel = [UILabel new];
-    myInformationTitleLabel.text = dci[@"phoneMsisdn"];
     myInformationTitleLabel.font = [UIFont systemFontOfSize:15];
     myInformationTitleLabel.textColor = [UIColor whiteColor];
     [header addSubview:myInformationTitleLabel];
@@ -210,7 +205,11 @@
 -(void)tapClick{
 
     NSLog(@"hahahahahhahah");
-    [self.navigationController pushViewController:self.my animated:YES];
+    
+    
+    MyInformationViewController *vc = [MyInformationViewController new];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 
 
 }
@@ -343,6 +342,9 @@
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
     self.automaticallyAdjustsScrollViewInsets=NO;
+    
+    self.navigationController.navigationBar.translucent = YES;
+
     
     [self.navigationController.navigationBar setHidden:NO];
     
@@ -506,7 +508,7 @@
         if (indexPath.row==1) {
             
             
-            ShopCommentViewCtrl *vc = [ShopCommentViewCtrl new];
+            MyCommentViewCtrl *vc = [MyCommentViewCtrl new];
             
             vc.hidesBottomBarWhenPushed = YES;
             
@@ -549,7 +551,7 @@
         if (indexPath.row==1) {
             
             
-            HistoryOfConsumptionTableViewController *vc = [HistoryOfConsumptionTableViewController new];
+            HistoryCouponUsageViewCtrl *vc = [HistoryCouponUsageViewCtrl new];
             
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];

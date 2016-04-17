@@ -13,6 +13,7 @@
 #import "CouponPaymentDetailViewCtrl.h"
 #import "ShopCommentEditViewCtrl.h"
 #import "BasketService.h"
+#import "BasketNotUseTableViewCell.h"
 @interface BasketFinishViewCtrl ()
 
 @end
@@ -22,13 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+    //self.tableView = [GUIHelper makeTableView:self.view delegate:self];
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[BasketNotUseTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-//    [self loadData];
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    [self loadData];
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -42,7 +45,6 @@
     [super viewWillAppear:animated];
     
     
-    [self loadData];
     
     
     
@@ -99,7 +101,6 @@
         
         self.dataList = data;
         
-        NSLog(@"1231312313131231231231============>>>>>>>>>%@",data);
         [self.tableView reloadData];
         
         
@@ -156,41 +157,17 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
-    
-    
-    
-    
+    BasketNotUseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     NSDictionary *d = self.dataList[[indexPath row]];
     
-    cell.couponActionType = CouponTypeToComment;
     
     cell.data = d;
     
     [cell updateData];
-    
-    
-    cell.doActionBlock = ^(NSDictionary *data){
-        
-        
-        ShopCommentEditViewCtrl *vc = [ShopCommentEditViewCtrl new];
-        
-        vc.data = d;
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        
-        
-        
-    };
-    
-    
-    
     
     
     // Configure the cell...
@@ -204,7 +181,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     
     
     CouponPaymentDetailViewCtrl *vc = [CouponPaymentDetailViewCtrl new];

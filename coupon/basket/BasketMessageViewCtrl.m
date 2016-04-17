@@ -8,6 +8,8 @@
 
 #import "BasketMessageViewCtrl.h"
 #import "CouponInfoTableViewCell.h"
+#import "CouponMessageService.h"
+#import "BasketMessageCell.h"
 
 @interface BasketMessageViewCtrl ()
 
@@ -20,12 +22,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-    self.navigationItem.title=@"篮子消息";
+    [self.tableView registerClass:[BasketMessageCell class] forCellReuseIdentifier:@"cell"];
     
     
-    self.dataList = [[MockData instance] randomCouponModel:4];
+    if (self.couponMessageType == CouponMessageTypeBasket) {
+        self.navigationItem.title=@"篮子消息";
+        
+    }
+    
+    if (self.couponMessageType == CouponMessageTypeCoupon) {
+        self.navigationItem.title=@"优惠券消息";
+       
+        
+    }
+    
+    if (self.couponMessageType == CouponMessageTypeShop) {
+        self.navigationItem.title=@"商店消息";
+        
+        
+    }
+    
+    
+
+    
+    
+    
+    [self loadData];
+    
     
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
@@ -35,6 +58,74 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)loadData{
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    CouponMessageService *service = [CouponMessageService new];
+    
+    [service requestCouponMessageWithPage:1 per_page:10 isRead:NO sort:@""
+            success:^(NSInteger code, NSString *message, id data) {
+                
+                self.dataList = data;
+                
+                [self.tableView reloadData];
+                
+                completion(YES);
+                
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        completion(NO);
+        
+    }];
+    
+    
+    
+}
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -61,25 +152,35 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    BasketMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     NSDictionary *d = self.dataList[indexPath.row];
     
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    
+    
+    
     cell.data = d;
     
     
-    cell.couponStatusLabel.text =[NSString stringWithFormat:@"%d天过期",arc4random()%4+1];
     
-    
-    
-    
-    [cell updateData];
     
     
     // Configure the cell...
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    
+    
 }
 
 

@@ -48,7 +48,6 @@
 //        NSLog(@"%@",data);
         self.dataArray = data;
         [self.tableView reloadData];
-        [SVProgressHUD dismiss];
     } failure:^(NSInteger code) {
         
     }];
@@ -69,8 +68,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //#warning Incomplete implementation, return the number of rows
-    [self netWorkRequst];
-//    NSLog(@"%@",self.dataArray);
+ //    NSLog(@"%@",self.dataArray);
     return self.dataArray.count;
     
     

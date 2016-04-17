@@ -8,10 +8,28 @@
 
 #import "MyInformationViewController.h"
 #import "AppShareData.h"
+#import "CustomerService.h"
+
+
 @interface MyInformationViewController ()
 
 @property(nonatomic,strong)AppShareData *appShareData;
 @property(nonatomic,strong)NSDictionary *dic;
+@property(nonatomic,strong)UILabel *useNameLabel;
+@property(nonatomic,strong)UILabel *sexNameLabel;
+@property(nonatomic,strong)UILabel *phoneNumberLabel;
+@property(nonatomic,strong)UILabel *cityNameLabel;
+@property(nonatomic,strong)UIImageView *headportraitView;
+
+
+
+
+
+
+
+
+
+
 
 @end
 
@@ -26,14 +44,95 @@
 //    self.automaticallyAdjustsScrollViewInsets=NO;
 }
 
+
 -(void)loadData{
-
-    self.appShareData = [AppShareData new];
     
-    self.dic = [self.appShareData getMyInfromationData];
     
-
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.view animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.view];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.view animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.view];
+        }
+        
+        
+    }];
+    
+    
+    
 }
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    
+    CustomerService *service = [CustomerService new];
+    
+    
+    NSString *customerId = [AppShareData instance].customId;
+    
+    
+    [service requestCustomer:customerId success:^(NSInteger code, NSString *message, id data) {
+        
+ //       NSLog(@"data = %@ ",data);
+        
+        self.useNameLabel.text = SafeString(data[@"nickname"]);
+        self.cityNameLabel.text = SafeString(data[@"cityName"]);
+        self.sexNameLabel.text = SafeString(data[@"gender"]);
+        
+        self.phoneNumberLabel.text = SafeString(data[@"phoneMsisdn"]);
+        
+        
+        NSURL *url = SafeUrl(data[@"smallPhotoUrl"]);
+        
+        
+        [self.headportraitView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            
+        }];
+        
+        
+        
+    
+            
+            
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
 
 -(void)layoutView{
 
@@ -90,6 +189,9 @@
     }];
     
     
+    self.headportraitView = headportraitView;
+    
+    
     
    //------------------------>
     
@@ -133,6 +235,9 @@
         make.height.equalTo(@30);
         
     }];
+    
+    
+    self.useNameLabel = useNameLabel;
     
     
     
@@ -181,6 +286,8 @@
         
     }];
     
+    self.sexNameLabel = sexNameLabel;
+    
     
     
     
@@ -228,6 +335,8 @@
         
     }];
     
+    self.phoneNumberLabel = phoneNumberLabel;
+    
     
     
     //------------------------>
@@ -272,6 +381,9 @@
         
         
     }];
+    
+    
+    self.cityNameLabel = cityNameLabel;
 
 
 

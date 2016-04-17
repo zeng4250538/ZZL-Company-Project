@@ -14,6 +14,23 @@
 @implementation Utils
 
 
+NSString *SafeLeft(NSString *content,NSUInteger length){
+    
+    NSString *str = SafeString(content);
+    
+    NSUInteger len = [str length];
+    
+    if (len<length) {
+        return str;
+    }else{
+        
+        return [str substringToIndex:length];
+    }
+    
+    
+    
+}
+
 
 NSURL *SafeUrl(id content){
     

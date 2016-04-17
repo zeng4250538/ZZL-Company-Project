@@ -13,6 +13,9 @@
 #import "CouponPaymentDetailViewCtrl.h"
 #import "CouponDrawbackViewCtrl.h"
 #import "BasketService.h"
+#import "BasketNotUseTableViewCell.h"
+
+
 //<<<<<<< HEAD
 #import "AppShareData.h"
 //=======
@@ -35,9 +38,12 @@
     
     self.tableView = [GUIHelper makeTableView:self.view delegate:self];
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[BasketNotUseTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    [self loadData];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -53,7 +59,6 @@
     [super viewWillAppear:animated];
     
     
-    [self loadData];
     
     
     
@@ -177,7 +182,7 @@
     
     
     
-    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    BasketNotUseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     UILongPressGestureRecognizer *longPressed = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressToDo:)];
@@ -210,7 +215,10 @@
     
     UseCouponViewCtrl *vc = [UseCouponViewCtrl new];
     
-//    NSDictionary *d = self.dataList[[indexPath row]];
+    NSDictionary *d = self.dataList[[indexPath row]];
+    
+    vc.data = d;
+    
     
     
     [self.navigationController pushViewController:vc animated:YES];

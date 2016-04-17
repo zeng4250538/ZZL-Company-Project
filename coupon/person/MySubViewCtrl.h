@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MySubViewCtrl : UITableViewController
+@interface MySubViewCtrl : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)UITableView *tableView;
 
 @end

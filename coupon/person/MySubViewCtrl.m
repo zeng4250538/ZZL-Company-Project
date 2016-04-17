@@ -10,6 +10,7 @@
 #import "SubTableViewCell.h"
 #import "ShopInfoTableViewCell.h"
 #import "ShopService.h"
+#import "FavShopCell.h"
 
 @interface MySubViewCtrl ()
 
@@ -24,9 +25,22 @@
     [super viewDidLoad];
     
     
-    [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
+    self.tableView =  [GUIHelper makeTableView:self.view delegate:self];
+    
+    
+    [self.tableView registerClass:[FavShopCell class] forCellReuseIdentifier:@"cell"];
     
     self.navigationItem.title=@"消息订阅";
+    
+    
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    
+    
+    
+    
+
     
     
     [self loadData];
@@ -39,33 +53,78 @@
 }
 
 
--(void)loadData{
+-(void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillAppear:animated];
     
-    ShopService *service = [ShopService new];
+    self.navigationController.navigationBar.translucent = NO;
     
-    [SVProgressHUD show];
+    //self.automaticallyAdjustsScrollViewInsets = NO;
     
-    [service queryMoreHotShop:nil success:^(int code, NSString *message, id data) {
-        
-//         if (code==0) {
-             self.dataList = data;
-//             NSLog(@"asdasdasd%@",self.dataList);
-             [self.tableView reloadData];
-             
-//         }
-         
-         [SVProgressHUD dismiss];
-         
-     } failure:^(int code, BOOL retry, NSString *message, id data) {
-         
-         [SVProgressHUD dismiss];
-     }];
-
     
 }
 
+-(void)loadData{
+
+
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
     
+    
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+    
+    
+}];
+
+
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+
+
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    ShopService *service = [ShopService new];
+    
+    [service requestMyFavList:^(NSInteger code, NSString *message, id data) {
+        
+        
+        self.dataList = data;
+        
+        
+        [self.tableView reloadData];
+        
+        completion(YES);
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+ 
+        completion(NO);
+        
+    }];
+    
+}
+
+
+
+
     
     
     
@@ -95,14 +154,42 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    FavShopCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
     
-    cell.data = self.dataList[indexPath.row];
+    NSDictionary *data = self.dataList[indexPath.row];
     
     
-    cell.subscribeType = SubscribeTypeHave;
+    
+    cell.data = data;
+    
+    NSString *shopId = SafeString(data[@"id"]);
+    
+    cell.unFavBlock = ^(){
+        
+        
+        ShopService *service = [ShopService new];
+        
+        [service doUnFav:shopId success:^(NSInteger code, NSString *message, id data) {
+            
+            [self loadData];
+            
+            [SVProgressHUD showSuccessWithStatus:@"取消订阅成功"];
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+            [SVProgressHUD showErrorWithStatus:@"取消订阅失败"];
+            
+        }];
+        
+        
+        
+        
+        
+    };
+    
+    
     
     [cell updateData];
     // Configure the cell...

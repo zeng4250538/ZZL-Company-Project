@@ -1187,7 +1187,7 @@
         
         CouponDetailViewCtrl *vc =  [CouponDetailViewCtrl new];
         
-        vc.datas = self.couponData;
+        vc.data = self.couponData;
         
         
         vc.hidesBottomBarWhenPushed = YES;

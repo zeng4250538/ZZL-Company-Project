@@ -216,9 +216,10 @@
     UIImageView *uv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     uv.backgroundColor = [UIColor whiteColor];
     
-    NSURL *urls = [NSURL URLWithString:self.datas[@"couponSmallPhotoUrl"]];
+    NSURL *url = SafeUrl(self.data[@"couponSmallPhotoUrl"]);
     
-    [uv sd_setImageWithURL:urls placeholderImage:[UIImage imageNamed:@"logo29@2x.png"]];
+    
+    [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo29@2x.png"]];
     
     self.tableView.tableHeaderView = uv;
     
@@ -290,7 +291,7 @@
             
             [ballView removeFromSuperview];
          
-            [[AppShareData instance] addCouponToCart:self.datas];
+            [[AppShareData instance] addCouponToCart:self.data];
             
             [self updateCartNum];
         
@@ -307,7 +308,7 @@
     
     AppShareData *app = [AppShareData instance];
     
-    [basket requestADDBasket:self.datas[@"id"] count:0 success:^(NSInteger code, NSString *message, id data) {
+    [basket requestADDBasket:SafeString(self.data[@"id"]) count:0 success:^(NSInteger code, NSString *message, id data) {
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
@@ -334,7 +335,7 @@
         
     }];
     
-    couponNameLabel.text=self.datas[@"shopName"];
+    couponNameLabel.text=SafeString(self.data[@"shopName"]);
     
     
     UILabel *priceLabel = [UILabel new];
@@ -351,7 +352,7 @@
         make.height.equalTo(@20);
         
     }];
-    priceLabel.text=[NSString stringWithFormat:@"%@",self.datas[@"name"]];
+    priceLabel.text=[NSString stringWithFormat:@"%@",SafeString(self.data[@"name"])];
     
     
     
@@ -380,7 +381,7 @@
     }];
     
     
-    addressLabel.text=self.datas[@"shop"][@"address"];
+    addressLabel.text=SafeString(self.data[@"shop"][@"address"]);
     
     UIView *line = [GUIConfig line];
     

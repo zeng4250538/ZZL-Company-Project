@@ -651,11 +651,11 @@
     
     if ([indexPath section]==0) {        
         
-        vc.datas = self.realTimeCouponList[indexPath.row];
+        vc.data = self.realTimeCouponList[indexPath.row];
         
     }else{
         
-        vc.datas = self.otherCouponList[indexPath.row];
+        vc.data = self.otherCouponList[indexPath.row];
     }
     
     

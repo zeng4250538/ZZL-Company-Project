@@ -135,6 +135,18 @@
 
 
 /**
+ *  获取我订阅的商家信息
+ *
+ *  @param success <#success description#>
+ *  @param failure <#failure description#>
+ */
+
+-(void)requestMyFavList:(void(^)(NSInteger code,NSString *message,id data))success
+          failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
+/**
  *  查询商家的评论
  *
  *  @param shopid  商店id

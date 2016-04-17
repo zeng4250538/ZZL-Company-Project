@@ -47,5 +47,59 @@
     
 }
 
+/**
+ *  获取消费信息
+ *
+ *  @param customerId <#customerId description#>
+ *  @param success    <#success description#>
+ *  @param failure    <#failure description#>
+ */
+
+
+-(void)requestCuponHistoryWithPage:(NSUInteger)page per_page:(NSUInteger)per_page
+                   success:(void(^)(NSInteger code,NSString *message,id data))success
+                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    
+  //  GET /v1/customer/{customerid}/couponinstances [摇折扣]消费历史
+    
+    
+    NSString *custormId = [AppShareData instance].customId;
+
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    url = [url stringByAppendingString:custormId];
+    url = [url stringByAppendingString:@"/couponinstances"];
+    
+    NSDictionary *param =@{@"page":@(page),@"per_page":@(per_page)};
+    
+    
+    
+    [req get:url param:param success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+
+    
+    
+    
+    
+    
+    
+    
+}
+
+
 
 @end

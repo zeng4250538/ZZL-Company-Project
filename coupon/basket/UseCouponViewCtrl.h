@@ -20,5 +20,7 @@ typedef NS_ENUM(NSUInteger, PayMode) {
 @interface UseCouponViewCtrl : UITableViewController<UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property(nonatomic,assign)PayMode payMode;
+@property(nonatomic,strong)NSDictionary *data;
+
 
 @end
