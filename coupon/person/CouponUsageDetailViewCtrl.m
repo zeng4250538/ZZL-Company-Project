@@ -23,6 +23,8 @@
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
+    self.navigationItem.title=@"消费明细";
+    
     
     
     

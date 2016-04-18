@@ -70,7 +70,11 @@
     
     
     
-    [service  postReview:@"11" comment:commentString isLike:1 success:^(NSInteger code, NSString *message, id data) {
+    NSString *shopId = SafeString(self.data[@"shopId"]);
+    
+    
+    
+    [service  postReview:shopId comment:commentString isLike:1 success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD showSuccessWithStatus:@"评论更新成功"];
         

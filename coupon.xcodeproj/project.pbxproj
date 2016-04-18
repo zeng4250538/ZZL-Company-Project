@@ -23,6 +23,9 @@
 		5727C4D01CB0EE1B00C92BF0 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */; };
 		5727C54C1CB3BFA700C92BF0 /* NSNull+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727C54B1CB3BFA700C92BF0 /* NSNull+Json.m */; };
 		5728FDBD1C5765460051F01E /* history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5728FDBC1C5765460051F01E /* history@2x.png */; };
+		5735A2551CC3F49F0001B239 /* ShopCommentSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */; };
+		5735A25A1CC3F7920001B239 /* MallShopCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5735A2581CC3F7920001B239 /* MallShopCommentTableViewCell.m */; };
+		5735A25B1CC3F7920001B239 /* MallShopCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5735A2591CC3F7920001B239 /* MallShopCommentViewController.m */; };
 		5736E9F21C4BADA20055774D /* KeyWordSearchViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736E9F11C4BADA20055774D /* KeyWordSearchViewCtrl.m */; };
 		5736E9F51C4D3E420055774D /* AppShareData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736E9F41C4D3E420055774D /* AppShareData.m */; };
 		5736E9FD1C5521520055774D /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 5736E9FC1C5521520055774D /* up.png */; };
@@ -244,6 +247,12 @@
 		5727C54A1CB3BFA700C92BF0 /* NSNull+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+Json.h"; sourceTree = "<group>"; };
 		5727C54B1CB3BFA700C92BF0 /* NSNull+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Json.m"; sourceTree = "<group>"; };
 		5728FDBC1C5765460051F01E /* history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history@2x.png"; sourceTree = "<group>"; };
+		5735A2531CC3F49F0001B239 /* ShopCommentSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopCommentSevice.h; path = coupon/service/ShopCommentSevice.h; sourceTree = "<group>"; };
+		5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopCommentSevice.m; path = coupon/service/ShopCommentSevice.m; sourceTree = "<group>"; };
+		5735A2561CC3F7920001B239 /* MallShopCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallShopCommentTableViewCell.h; sourceTree = "<group>"; };
+		5735A2571CC3F7920001B239 /* MallShopCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallShopCommentViewController.h; sourceTree = "<group>"; };
+		5735A2581CC3F7920001B239 /* MallShopCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallShopCommentTableViewCell.m; sourceTree = "<group>"; };
+		5735A2591CC3F7920001B239 /* MallShopCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallShopCommentViewController.m; sourceTree = "<group>"; };
 		5736E9F01C4BADA20055774D /* KeyWordSearchViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyWordSearchViewCtrl.h; sourceTree = "<group>"; };
 		5736E9F11C4BADA20055774D /* KeyWordSearchViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyWordSearchViewCtrl.m; sourceTree = "<group>"; };
 		5736E9F31C4D3E420055774D /* AppShareData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppShareData.h; sourceTree = "<group>"; };
@@ -881,6 +890,8 @@
 		5779BD581C25381600E15934 = {
 			isa = PBXGroup;
 			children = (
+				5735A2531CC3F49F0001B239 /* ShopCommentSevice.h */,
+				5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */,
 				574911201CC00AAE00FB2B14 /* payutils */,
 				574910D41CC00A3D00FB2B14 /* openssl */,
 				574910C11CC0084B00FB2B14 /* pay */,
@@ -1124,6 +1135,10 @@
 		57A94E631C37EAD500BE0022 /* findShop */ = {
 			isa = PBXGroup;
 			children = (
+				5735A2561CC3F7920001B239 /* MallShopCommentTableViewCell.h */,
+				5735A2571CC3F7920001B239 /* MallShopCommentViewController.h */,
+				5735A2581CC3F7920001B239 /* MallShopCommentTableViewCell.m */,
+				5735A2591CC3F7920001B239 /* MallShopCommentViewController.m */,
 				574AE8A51C626C4800928B09 /* shopDetail */,
 				574AE8A41C626BE000928B09 /* couponDetail */,
 				57A94E641C37EB1200BE0022 /* ShopPortalViewCtrl.h */,
@@ -1616,6 +1631,7 @@
 				573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */,
 				576E78A31CBF31F300E19BDB /* CouponMessageService.m in Sources */,
 				7F121D6F1CA6AF41005AF53D /* SaerchShopModel.m in Sources */,
+				5735A2551CC3F49F0001B239 /* ShopCommentSevice.m in Sources */,
 				57CE97C11C63231B00CE0E57 /* ShopCommentTableViewCell.m in Sources */,
 				5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */,
 				576E789D1CBE9B6C00E19BDB /* CommentService.m in Sources */,
@@ -1667,6 +1683,7 @@
 				7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */,
 				57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */,
 				57D148101CC1392300F9E40C /* ShopMessageViewCtrl.m in Sources */,
+				5735A25B1CC3F7920001B239 /* MallShopCommentViewController.m in Sources */,
 				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,
 				574910D31CC0084B00FB2B14 /* WXUtil.mm in Sources */,
 				577169811C820D4F00223EDB /* ChangePasswordViewCtrl.m in Sources */,
@@ -1676,6 +1693,7 @@
 				573E51D11C7C2561005DBBC3 /* BasketNotUseViewCtrl.m in Sources */,
 				578E63E11C254DE900C1FB19 /* Utils.m in Sources */,
 				576E78A01CBEBF7400E19BDB /* CustomerService.m in Sources */,
+				5735A25A1CC3F7920001B239 /* MallShopCommentTableViewCell.m in Sources */,
 				574911361CC00AAE00FB2B14 /* NSDataEx.m in Sources */,
 				574910CF1CC0084B00FB2B14 /* ApiXml.mm in Sources */,
 				7F121D5F1CA3E08F005AF53D /* HistoryOfConsumptionService.m in Sources */,
@@ -1886,7 +1904,7 @@
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 					"$(PROJECT_DIR)/thirdparty",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupontest3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1945,7 +1963,7 @@
 					"$(PROJECT_DIR)/thirdparty/WeChatSDK_1.5",
 					"$(PROJECT_DIR)/thirdparty",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richstone.coupontest3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

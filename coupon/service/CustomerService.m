@@ -71,11 +71,11 @@
     NSString *custormId = [AppShareData instance].customId;
 
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    NSString *url = [[self getBaseUrlNoVersion] stringByAppendingString:@"/customer/"];
     url = [url stringByAppendingString:custormId];
     url = [url stringByAppendingString:@"/couponinstances"];
     
-    NSDictionary *param =@{@"page":@(page),@"per_page":@(per_page)};
+    NSDictionary *param =@{@"status":@"已消费",@"page":@(page),@"per_page":@(per_page)};
     
     
     

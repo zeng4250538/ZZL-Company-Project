@@ -8,6 +8,7 @@
 
 #import "HistoryCouponCell.h"
 
+
 @interface HistoryCouponCell()
 
 @property(nonatomic,strong)UIImageView *logoImageView;
@@ -16,6 +17,7 @@
 
 @property(nonatomic,strong)UIButton *commentButton;
 @property(nonatomic,strong)UILabel *typeLabel;
+
 
 @end
 
@@ -86,16 +88,33 @@
         
         [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView).offset(-10);
-            make.height.equalTo(@25);
-            make.width.equalTo(@50);
+            make.height.equalTo(@22);
+            make.width.equalTo(@45);
             make.bottom.equalTo(self.contentView).offset(-5);
         }];
         
+        self.commentButton.clipsToBounds = YES;
+        self.commentButton.layer.cornerRadius=4;
         self.commentButton.backgroundColor = [GUIConfig orangeColor];
         
         [self.commentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.commentButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.commentButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [self.commentButton setTitle:@"评论" forState:UIControlStateNormal];
+        
+        [self.commentButton bk_addEventHandler:^(id sender) {
+            
+            
+            if (self.commentTouchBlock) {
+                
+                self.commentTouchBlock(self.data);
+            }
+            
+            
+            
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
+        
         
         
         

@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef void(^CommentTouchBlock)(NSDictionary *data);
+
 @interface HistoryCouponCell : UITableViewCell
 
 @property(nonatomic,strong)NSDictionary *data;
+
+
+@property(nonatomic,copy)CommentTouchBlock commentTouchBlock;
+
 @end

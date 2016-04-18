@@ -10,6 +10,7 @@
 #import "CustomerService.h"
 #import "HistoryCouponCell.h"
 #import "CouponUsageDetailViewCtrl.h"
+#import "CommentSubmitViewCtrl.h"
 
 
 
@@ -142,6 +143,25 @@
     
     cell.data = self.data[indexPath.row];
     
+    
+    cell.commentTouchBlock = ^(NSDictionary *data){
+        
+        CommentSubmitViewCtrl *vc = [CommentSubmitViewCtrl new];
+        
+        vc.data= data;
+        
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
+        
+    };
+    
+    
+    
+
     
     
     // Configure the cell...

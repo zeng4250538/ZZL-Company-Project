@@ -48,7 +48,6 @@
     
     self.tableView = [GUIHelper makeTableView:self.view delegate:self];
   
-    //[self.tabBarController.tabBar setHidden:NO];
     
     
     self.view.backgroundColor = [GUIConfig mainBackgroundColor];
@@ -312,21 +311,6 @@
     
     [super viewDidAppear:animated];
     
-//    if (![[AppShareData instance] isLogin]) {
-//        
-//        
-//        LoginViewCtrl *vc = [LoginViewCtrl new];
-//        
-//        vc.loginEndBlock = ^(BOOL ret){
-//            
-//            [self.navigationController popViewControllerAnimated:YES];
-//            
-//        };
-//        
-//        [self.navigationController pushViewController:vc animated:YES];
-//        
-////        return ;
-//    }
    
 }
 
@@ -458,11 +442,6 @@
         }
         
         
-//        if ([indexPath row]==2) {
-//            cell.textLabel.text=@"我的退款";
-//            
-//            
-//        }
         
         
         
@@ -499,8 +478,7 @@
             MySubViewCtrl *vc = [MySubViewCtrl new];
             
             vc.hidesBottomBarWhenPushed = YES;
-            
-            
+              
             [self.navigationController pushViewController:vc animated:YES];
             
         }
@@ -540,7 +518,6 @@
             
             
             BasketContainerViewCtrl *vc = [BasketContainerViewCtrl new];
-            
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -550,32 +527,15 @@
         
         if (indexPath.row==1) {
             
-            
             HistoryCouponUsageViewCtrl *vc = [HistoryCouponUsageViewCtrl new];
             
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             
             
-            
         }
         
         
-        
-        
-//        if (indexPath.row==2) {
-//            
-//            CouponDrawBackListViewCtrl *vc =[CouponDrawBackListViewCtrl new];
-//            
-//            vc.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            
-//            
-//            
-//            
-//            
-//        }
         
     }
     
