@@ -8,17 +8,20 @@
 
 #import "AFNetWorking.h"
 #import "UISubscribeSevice.h"
+#import "AppShareData.h"
 
 @implementation UISubscribeSevice
 
--(void)successful:(void(^)(id data))successful failure:(void(^)(id code))failure{
+-(void)string:(NSString *)string successful:(void(^)(id data))successful failure:(void(^)(id code))failure{
     
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/15818865756/shopfavorite"];
+    AppShareData *app = [AppShareData instance];
     
-    NSDictionary *param = @{@"favoriteId":@"2",@"customerId":@"15818865756"};
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/customer/%@/shopfavorite",app.customId];
+    
+    NSDictionary *param = @{@"favoriteId":string,@"customerId":app.customId};
     
     NSLog(@"%@",param);
     
@@ -36,13 +39,15 @@
  // http://183.6.190.75:9780/diamond-sis-web/v1/customer/15818865756/shopfavorite/
 }
 
--(void)cancelSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure{
+-(void)string:(NSString *)string cancelSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure{
 
     BaseRequest *req = [BaseRequest new];
     
+    AppShareData *app = [AppShareData instance];
+    
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/shopfavorite"];
     
-    NSDictionary *param = @{@"shopid":@"2",@"customerid":@"15818865756"};
+    NSDictionary *param = @{@"shopid":string,@"customerid":app.customId};
     
     [req delete:url param:param success:^(NSInteger code, id object) {
         
@@ -57,13 +62,16 @@
 }
 //http://183.6.190.75:9780/diamond-sis-web/v1/shop/2/favorite?customerId=15818865756
 //http://183.6.190.75:9780/diamond-sis-web/v1shop/2/favorite?customerId=15818865756
--(void)judgeSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure{
+-(void)string:(NSString *)string judgeSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure{
 
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shop/2/favorite"];
+    AppShareData *app = [AppShareData instance];
+
     
-    NSDictionary *param = @{@"customerId":@"15818865756"};
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/shop/%@/favorite",string];
+    
+    NSDictionary *param = @{@"customerId":app.customId};
     
     [req get:url param:param success:^(NSInteger code, id object) {
         

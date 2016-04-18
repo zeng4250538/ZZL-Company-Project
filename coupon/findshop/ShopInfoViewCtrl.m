@@ -322,7 +322,7 @@
     
     UISubscribeSevice *sevice = [UISubscribeSevice new];
     
-    [sevice judgeSuccessful:^(id data) {
+    [sevice string:SafeString(self.data[@"id"]) judgeSuccessful:^(id data) {
         
         NSLog(@".............................=========>%@",data);
         if (![data isEqual: @"[]"]&&[data count]>0) {
@@ -506,7 +506,7 @@
 -(void)subcrideClick:(UIButton *)button{
 
     UISubscribeSevice *sevice = [UISubscribeSevice new];
-    [sevice successful:^(id data) {
+    [sevice string:SafeString(self.data[@"id"])  successful:^(id data) {
         NSLog(@"订阅成功了");
         [button setTitle:@"取消订阅" forState:UIControlStateNormal];
         
@@ -523,7 +523,7 @@
 -(void)cancelSubcrideClick:(UIButton *)button{
 
     UISubscribeSevice *sevice = [UISubscribeSevice new];
-    [sevice cancelSuccessful:^(id data) {
+    [sevice string:SafeString(self.data[@"id"]) cancelSuccessful:^(id data) {
         
         [button setTitle:@"订阅" forState:UIControlStateNormal];
         

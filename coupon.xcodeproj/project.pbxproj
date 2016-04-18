@@ -247,8 +247,8 @@
 		5727C54A1CB3BFA700C92BF0 /* NSNull+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+Json.h"; sourceTree = "<group>"; };
 		5727C54B1CB3BFA700C92BF0 /* NSNull+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Json.m"; sourceTree = "<group>"; };
 		5728FDBC1C5765460051F01E /* history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history@2x.png"; sourceTree = "<group>"; };
-		5735A2531CC3F49F0001B239 /* ShopCommentSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopCommentSevice.h; path = coupon/service/ShopCommentSevice.h; sourceTree = "<group>"; };
-		5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopCommentSevice.m; path = coupon/service/ShopCommentSevice.m; sourceTree = "<group>"; };
+		5735A2531CC3F49F0001B239 /* ShopCommentSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCommentSevice.h; sourceTree = "<group>"; };
+		5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCommentSevice.m; sourceTree = "<group>"; };
 		5735A2561CC3F7920001B239 /* MallShopCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallShopCommentTableViewCell.h; sourceTree = "<group>"; };
 		5735A2571CC3F7920001B239 /* MallShopCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallShopCommentViewController.h; sourceTree = "<group>"; };
 		5735A2581CC3F7920001B239 /* MallShopCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallShopCommentTableViewCell.m; sourceTree = "<group>"; };
@@ -890,8 +890,6 @@
 		5779BD581C25381600E15934 = {
 			isa = PBXGroup;
 			children = (
-				5735A2531CC3F49F0001B239 /* ShopCommentSevice.h */,
-				5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */,
 				574911201CC00AAE00FB2B14 /* payutils */,
 				574910D41CC00A3D00FB2B14 /* openssl */,
 				574910C11CC0084B00FB2B14 /* pay */,
@@ -1186,6 +1184,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7F375F651CC4E23D0007098C /* ShopCommentSevice */,
 				7FF596721CB3F0D7008BDE5A /* MyInformationSevice */,
 				7F4C6AC61CAE6C6A00ADD0F8 /* BrandStreetButtonService */,
 				7F3FB4111CACE3BD0004C456 /* basketSevice */,
@@ -1323,6 +1322,15 @@
 				7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */,
 			);
 			name = UISubscribSevice;
+			sourceTree = "<group>";
+		};
+		7F375F651CC4E23D0007098C /* ShopCommentSevice */ = {
+			isa = PBXGroup;
+			children = (
+				5735A2531CC3F49F0001B239 /* ShopCommentSevice.h */,
+				5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */,
+			);
+			name = ShopCommentSevice;
 			sourceTree = "<group>";
 		};
 		7F3FB4111CACE3BD0004C456 /* basketSevice */ = {

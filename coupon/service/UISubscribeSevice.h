@@ -10,10 +10,10 @@
 
 @interface UISubscribeSevice : BaseService
 
--(void)successful:(void(^)(id data))successful failure:(void(^)(id code))failure;
+-(void)string:(NSString *)string successful:(void(^)(id data))successful failure:(void(^)(id code))failure;
 
--(void)cancelSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure;
+-(void)string:(NSString *)string cancelSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure;
 
--(void)judgeSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure;
+-(void)string:(NSString *)string judgeSuccessful:(void(^)(id data))successful failure:(void(^)(id code))failure;
 
 @end
