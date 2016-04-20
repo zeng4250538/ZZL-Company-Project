@@ -15,6 +15,7 @@
 #import "ThrowLineTool.h"
 #import "BasketContainerViewCtrl.h"
 #import "BasketService.h"
+#import "CouponService.h"
 
 @interface CouponDetailViewCtrl ()
 @property(nonatomic,strong)UILabel   *cartNumLabel;
@@ -85,6 +86,14 @@
     
     
     
+    if (self.couponViewMode == CouponViewModeNetwork) { //需要通过网络装载
+        
+        
+        [self loadData];
+    }
+    
+    
+    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -93,6 +102,90 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)loadData{
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    
+    CouponService *service = [CouponService new];
+    
+    
+    
+    
+    [service requestCouponInfo:self.couponId success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        self.data = data[@"coupon"];
+        
+        [self makeHeaderView];
+        
+        [self.tableView reloadData];
+        
+        completion(YES);
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        [self makeHeaderView];
+        
+        
+        
+        
+        completion(NO);
+        
+        
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+}
+
+
+
 
 
 
@@ -218,6 +311,11 @@
     
     NSURL *url = SafeUrl(self.data[@"couponSmallPhotoUrl"]);
     
+    if (!url) {
+        url =  SafeUrl(self.data[@"smallPhotoUrl"]);
+
+    }
+    
     
     [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo29@2x.png"]];
     
@@ -302,19 +400,19 @@
 }
 
 #pragma mark -------------- 加入篮子网络请求
--(void)loadData{
-    
-    BasketService *basket = [[BasketService alloc]init];
-    
-    AppShareData *app = [AppShareData instance];
-    
-    [basket requestADDBasket:SafeString(self.data[@"id"]) count:0 success:^(NSInteger code, NSString *message, id data) {
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-    }];
-
-}
+//-(void)loadData{
+//    
+//    BasketService *basket = [[BasketService alloc]init];
+//    
+//    AppShareData *app = [AppShareData instance];
+//    
+//    [basket requestADDBasket:SafeString(self.data[@"id"]) count:0 success:^(NSInteger code, NSString *message, id data) {
+//        
+//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+//        
+//    }];
+//
+//}
 
 #pragma mark - TableViewCell 
 -(void)makeCell1:(UITableViewCell*)cell{

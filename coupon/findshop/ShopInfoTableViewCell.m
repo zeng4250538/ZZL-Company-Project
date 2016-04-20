@@ -262,6 +262,11 @@
     self.commentLabel.text = SafeString(self.data[@"prompt"]);
     NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
     
+    
+    if (url==nil) {
+        SafeUrl(self.data[@"photoUrl"]);
+    }
+    
     [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         [self setNeedsLayout];

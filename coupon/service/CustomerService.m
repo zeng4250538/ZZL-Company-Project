@@ -71,7 +71,7 @@
     NSString *custormId = [AppShareData instance].customId;
 
     
-    NSString *url = [[self getBaseUrlNoVersion] stringByAppendingString:@"/customer/"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
     url = [url stringByAppendingString:custormId];
     url = [url stringByAppendingString:@"/couponinstances"];
     

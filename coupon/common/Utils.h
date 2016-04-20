@@ -11,6 +11,7 @@
 
 NSString *SafeString(id content);
 NSURL *SafeUrl(id content);
+BOOL SafeEmpty(id content);
 id safeArrayValue(id array,NSInteger pos);
 
 NSString *SafeLeft(NSString *content,NSUInteger length);

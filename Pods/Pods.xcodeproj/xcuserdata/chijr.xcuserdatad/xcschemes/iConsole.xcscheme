@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '05C53E55188C7B9BA642FB98'
+               BlueprintIdentifier = '73D12A4F4EC35AF346ED7F66'
                BlueprintName = 'iConsole'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libiConsole.a'>

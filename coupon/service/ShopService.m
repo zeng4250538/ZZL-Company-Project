@@ -290,6 +290,42 @@
     
 }
 
+-(void)requestShopInfo:(NSString*)shopId
+               success:(void(^)(NSInteger code,NSString *message,id data))success
+               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shop/"];
+    url = [url stringByAppendingString:shopId];
+ 
+    
+    [req get:url param:nil success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+         
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+        
+        
+    }];
+
+    
+    
+    
+    
+    
+}
+
+
 
 -(void)queryShopPortalData:(NSDictionary*)params
                   success:(void(^)(int code,NSString *message,id data))success

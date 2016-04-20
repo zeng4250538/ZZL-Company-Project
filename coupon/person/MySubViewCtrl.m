@@ -11,6 +11,7 @@
 #import "ShopInfoTableViewCell.h"
 #import "ShopService.h"
 #import "FavShopCell.h"
+#import "ShopInfoViewCtrl.h"
 
 @interface MySubViewCtrl ()
 
@@ -203,6 +204,32 @@
     return cell;
 }
 
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+    
+    NSDictionary *d = self.dataList[indexPath.row];
+    
+    vc.shopMode = ShopViewModeNetwork;
+    vc.shopId  = SafeString(d[@"shopId"]);
+    
+    vc.data = d;
+    
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+    
+    
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

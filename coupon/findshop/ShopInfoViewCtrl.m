@@ -16,6 +16,7 @@
 #import "ReloadHud.h"
 #import "UISubscribeSevice.h"
 #import "MallShopCommentViewController.h"
+#import "ShopService.h"
 @interface ShopInfoViewCtrl ()
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
@@ -49,7 +50,33 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 48, 0);
     
     
-    [self loadData];
+    
+    if (self.shopMode==ShopViewModeLocal) {
+        
+        [self loadData];
+        
+        
+    }else{  //
+        
+        
+        [self preLoadData:^(BOOL ret) {
+            
+            
+            if (ret) {
+                [self loadData];
+            }
+            
+            
+            
+        }];
+        
+        
+        
+        
+        
+    }
+    
+    
     
     
     
@@ -59,20 +86,38 @@
 }
 
 
-
-
--(void)boll:(BOOL)bools{
-
-    if (bools == YES) {
-        self.idDaata = self.shopData;
+//远程模式，需要预先载入
+-(void)preLoadData:(void(^)(BOOL ret))completion{
+    
+    
+    ShopService *service = [ShopService new];
+    
+    [service requestShopInfo:self.shopId success:^(NSInteger code, NSString *message, id data) {
+        self.data = data;
         
-    }
-    else{
+        completion(YES);
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        [SVProgressHUD showErrorWithStatus:@"数据装载错误"];
+        
+        completion(NO);
+        
+        
+    }];
     
-        self.idDaata = self.OptimizingBrand;
     
-    }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -135,6 +180,7 @@
         [self.tableView reloadData];
         
         
+        
         completion(YES);
         
         
@@ -168,6 +214,7 @@
             
             if (ret) {
                 [ReloadHud removeHud:self.view animated:YES];
+                [self makeHeaderView];
             }else{
                 
                 [ReloadHud showReloadMode:self.view];
@@ -184,6 +231,9 @@
         
         if (ret) {
             [ReloadHud removeHud:self.view animated:YES];
+            
+            [self makeHeaderView];
+            
         }else{
             
             [ReloadHud showReloadMode:self.view];
@@ -324,8 +374,9 @@
     
     [sevice string:SafeString(self.data[@"id"]) judgeSuccessful:^(id data) {
         
-        NSLog(@".............................=========>%@",data);
-        if (![data isEqual: @"[]"]&&[data count]>0) {
+        
+        
+        if (SafeEmpty(data)) {
             [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
             [subButton addTarget:self action:@selector(cancelSubcrideClick:) forControlEvents:UIControlEventTouchUpInside];
         }

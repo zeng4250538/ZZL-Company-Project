@@ -73,8 +73,18 @@
     NSString *shopId = SafeString(self.data[@"shopId"]);
     
     
+    NSInteger isLike = 0;
     
-    [service  postReview:shopId comment:commentString isLike:1 success:^(NSInteger code, NSString *message, id data) {
+    if (self.likeButton.selected) {
+        isLike = 1;  //1为喜欢
+    }
+    
+    if (self.notLikeButton.selected) {
+        isLike = 2;   //2为不喜欢
+    }
+    
+    
+    [service  postReview:shopId comment:commentString isLike:isLike success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD showSuccessWithStatus:@"评论更新成功"];
         
