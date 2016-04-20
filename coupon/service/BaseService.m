@@ -16,7 +16,7 @@
     
     
     //    if (!InLan) {
-    NSString *url = [NSString stringWithFormat:@"http://183.6.190.75:9780/diamond-sis-web/"];
+    NSString *url = [NSString stringWithFormat:@"http://183.6.190.75:9780/diamond-sis-web/%@",[self version]];
     
     return url;
     //    }else{

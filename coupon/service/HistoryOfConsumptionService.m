@@ -14,9 +14,9 @@
     
     //http://183.6.190.75:9780/diamond-sis-web/v1/shop/11/couponInstance?status=%E5%B7%B2%E6%B6%88%E8%B4%B9&page=1&per_page=10  ———消费历史
     
-    BaseRequest *req = [BaseRequest new];
+    BaseRequest *req = [BaseRequest new];       
     NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/customer/%@/couponinstances",customerid];
-//    NSLog(@"-------?>>>%@",url);
+    NSLog(@"-------?>>>%@",url);
 //    NSString *urls = [NSString stringWithFormat:@"%@15818865756",url];
     NSDictionary *parm =@{@"status":@""};
     [req get:url param:parm success:^(NSInteger code, id object) {
