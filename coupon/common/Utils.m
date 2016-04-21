@@ -14,6 +14,41 @@
 @implementation Utils
 
 
+BOOL SafeEmpty(id content){
+    
+    if (content==nil) {
+        return YES;
+    }
+    
+    if ((NSNull*)content==[NSNull null]) {
+        return YES;
+    }
+    
+    if ([content isKindOfClass:[NSArray class]]) {
+        if ([content count]==0) {
+            return YES;
+        }
+        
+    }
+    
+    if ([content isKindOfClass:[NSDictionary class]]) {
+        if ([content count]==0) {
+            return YES;
+        }
+        
+    }
+    
+    
+    return NO;
+    
+    
+   
+    
+    
+}
+
+
+
 NSString *SafeLeft(NSString *content,NSUInteger length){
     
     NSString *str = SafeString(content);

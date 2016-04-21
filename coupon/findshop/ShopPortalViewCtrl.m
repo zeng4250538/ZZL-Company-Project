@@ -499,7 +499,7 @@
             
         }
         
-        [vc boll:self.bools];
+       // [vc boll:self.bools];
         
         vc.hidesBottomBarWhenPushed = YES;
         

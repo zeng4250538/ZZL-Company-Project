@@ -14,11 +14,23 @@ typedef NS_ENUM(NSUInteger, CouponDetailType) {
 };
 
 
+typedef NS_ENUM(NSUInteger, CouponViewMode) {
+    CouponViewModeLocal,
+    CouponViewModeNetwork
+};
+
+
 @interface CouponDetailViewCtrl : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSDictionary *data;
+@property(nonatomic,strong)NSString *couponId;
+
 @property(nonatomic,assign)CouponDetailType couponDetailType;
+@property(nonatomic,assign)CouponViewMode couponViewMode;
+
+
+
 
 
 @end

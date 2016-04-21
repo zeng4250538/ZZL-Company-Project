@@ -8,6 +8,7 @@
 
 #import "CouponUsageDetailViewCtrl.h"
 #import "CommentSubmitViewCtrl.h"
+#import "CouponDetailViewCtrl.h"
 
 @interface CouponUsageDetailViewCtrl ()
 
@@ -204,6 +205,9 @@
         couponLabel.font = [UIFont systemFontOfSize:12];
         couponLabel.textColor = [GUIConfig grayFontColorLight];
         
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
         return cell;
 
         
@@ -364,6 +368,35 @@
     
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *couponId = SafeString(self.data[@"id"]);
+    
+    
+    
+    
+    CouponDetailViewCtrl *vc =[CouponDetailViewCtrl new];
+    
+    vc.couponViewMode = CouponViewModeNetwork;
+    
+    vc.couponDetailType = CouponDetailTypeNotHaveCart;
+    
+    vc.couponId = couponId;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+    
+
+    
+    
+    
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

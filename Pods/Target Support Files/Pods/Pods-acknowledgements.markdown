@@ -788,6 +788,11 @@ third-party archives.
    limitations under the License.
 
 
+## UMengAnalytics-NO-IDFA
+
+Copyright 2011 - 2015 UMeng.com. All rights reserved.
+
+
 ## YYCache
 
 The MIT License (MIT)

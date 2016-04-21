@@ -66,6 +66,7 @@ PODS:
   - SVProgressHUD (1.1.3)
   - SVWebViewController (1.0)
   - SWTableViewCell (0.3.7)
+  - UMengAnalytics-NO-IDFA (3.6.7)
   - YYCache (0.9.3)
   - YYCategories (0.9.3):
     - YYCategories/no-arc (= 0.9.3)
@@ -94,6 +95,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SVWebViewController (~> 1.0)
   - SWTableViewCell (~> 0.3.7)
+  - UMengAnalytics-NO-IDFA
   - YYCache
   - YYCategories
   - YYImage
@@ -120,6 +122,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  UMengAnalytics-NO-IDFA: 6d02561a00579b2e37718f204eb81347df5d7b8b
   YYCache: 9a9bba3cdd2adcd89a7b61f9b1a6d6c31aab2cb6
   YYCategories: 44fa4213d3d0ebc7fc165f3b56e9f745e2ab8afb
   YYImage: c66b043440e5d5899f7d926396ff3098ec809d9a

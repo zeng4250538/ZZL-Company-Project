@@ -162,6 +162,14 @@
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
+
+
+-(void)requestShopInfo:(NSString*)shopId
+               success:(void(^)(NSInteger code,NSString *message,id data))success
+               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
 -(void)queryShopPortalData:(NSDictionary*)params
             success:(void(^)(int code,NSString *message,id data))success
             failure:(void(^)(int code,BOOL retry,NSString*message,id data))failure;

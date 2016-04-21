@@ -70,6 +70,22 @@
                      failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
+/**
+ *  根据id获取优惠券详细信息
+ 
+ *
+ *  @param couponId <#couponId description#>
+ *  @param success  <#success description#>
+ *  @param failure  <#failure description#>
+ */
+
+-(void)requestCouponInfo:(NSString*)couponId
+                 success:(void(^)(NSInteger code,NSString *message,id data))success
+                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
+
 
 
 

@@ -22,6 +22,7 @@ pod 'YYImage'
 pod 'LTNavigationBar'
 pod 'AFNetworking'
 pod 'BaiduMapKit'
+pod 'UMengAnalytics-NO-IDFA'
 
 
 

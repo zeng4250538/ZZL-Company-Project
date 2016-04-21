@@ -8,6 +8,8 @@
 
 #import "MyCommentViewCtrl.h"
 #import "CommentService.h"
+#import "CouponDetailViewCtrl.h"
+#import "ShopInfoViewCtrl.h"
 
 @interface MyCommentViewCtrl ()
 
@@ -212,7 +214,11 @@
     [cell.contentView addSubview:dateLabel];
     
     dateLabel.text = SafeString(d[@"time"]);
-
+    
+    
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     
     
     
@@ -222,6 +228,33 @@
     // Configure the cell...
     
     return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    NSDictionary * d = self.data[indexPath.row];
+    
+    NSString *shopId = SafeString(d[@"shopId"]);
+    
+    ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+    
+    vc.shopId = shopId;
+    vc.shopMode = ShopViewModeNetwork;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
 }
 
 
