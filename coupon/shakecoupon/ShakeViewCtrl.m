@@ -355,6 +355,8 @@
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
+        vc.hidesBottomBarWhenPushed = YES;
+        
         [self.navigationController pushViewController:vc animated:YES];
         
         
@@ -363,6 +365,9 @@
     UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"广州" style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
         
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -379,7 +384,7 @@
     
     
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    mallButton.frame = CGRectMake(0, 0, 100, 44);
+    mallButton.frame = CGRectMake(0, 0, 150, 44);
     [mallButton setTitle:@"选择商城" forState:UIControlStateNormal];
     mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
 

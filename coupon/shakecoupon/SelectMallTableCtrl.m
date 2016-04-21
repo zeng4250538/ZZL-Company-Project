@@ -8,12 +8,20 @@
 
 #import "SelectMallTableCtrl.h"
 #import "Shop.h"
+#import "MallService.h"
+
 
 @interface SelectMallTableCtrl ()<UISearchBarDelegate,UISearchDisplayDelegate>
 
 @property(nonatomic,strong)NSArray *sectionList;
 @property(nonatomic,strong)NSDictionary *mallList;
 @property(nonatomic,strong)UISearchBar *searchBar;
+
+@property(nonatomic,strong)NSArray *data;
+@property(nonatomic,strong)NSArray *keyList;
+@property(nonatomic,strong)NSDictionary *dataMap;
+
+
 
 
 
@@ -28,9 +36,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
-    [self loadData];
-    
-    [self makeSearchBar];
+     [self makeSearchBar];
     self.navigationItem.title=@"选择商城";
     
     
@@ -38,6 +44,10 @@
     
     
     self.navigationController.navigationBar.barTintColor = [GUIConfig mainColor];
+    
+    [self loadData];
+    
+    
     
     
     
@@ -78,16 +88,134 @@
     [bgView addSubview:self.searchBar];
     
     
-    //  [self.searchBar becomeFirstResponder];
-    
     
     self.tableView.tableHeaderView = bgView;
     
     
     
     
+}
+
+-(void)makeSortData{
+    
+    
+    
+    
+    NSMutableDictionary *dict=[@{} mutableCopy];
+    
+    
+    //将列表变成 字典 ，结构如下 @{"a":@[@{"cccc"},@{"bbbbbb"}]};
+    for (NSDictionary *d in self.data) {
+        NSString *name = d[@"name"];
+        
+        NSString *letter = [Utils firstLetter:name];
+        
+        NSMutableArray *ary = dict[letter];
+        
+        if (ary==nil) {
+            ary = [@[] mutableCopy];
+            dict[letter]=ary;
+        }
+        
+        [ary addObject:d];
+        
+    }
+    
+    
+    
+    self.dataMap =dict;
+    
+    self.keyList = [self.dataMap allKeys];
+    
+    
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    self.keyList = [self.keyList sortedArrayUsingDescriptors:@[sd]];
+    
+    [self.tableView reloadData];
+    
+    
+    
+    
+    
+    
     
 }
+
+
+-(void)loadData{
+    
+    
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    MallService *service = [MallService new];
+    
+    
+    [service queryMallByCity:@"广州" success:^(NSInteger code, NSString *message, id data) {
+        
+        self.data = data;
+        
+        [self makeSortData];
+        
+        
+
+        
+        [self.tableView reloadData];
+        
+        completion(YES);
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        completion(NO);
+        
+    }];
+    
+    
+}
+
+
+
+
+-(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return self.keyList;
+}
+
+
+
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
 
@@ -95,24 +223,24 @@
 
 }
 
--(void)loadData{
-    
-    
-    self.sectionList=@[@"位置",@"T",@"W"];
-    
-    self.mallList = @{@"位置":@[@"正佳广场"],
-                      @"T":@[@"天河城",@"太古汇"],
-                      @"W":@[@"万达广场",@"万象城"]
-                      };
-    
-    
-    
-    
-    
-    
-    
-    
-}
+//-(void)loadData{
+//    
+//    
+//    self.sectionList=@[@"位置",@"T",@"W"];
+//    
+//    self.mallList = @{@"位置":@[@"正佳广场"],
+//                      @"T":@[@"天河城",@"太古汇"],
+//                      @"W":@[@"万达广场",@"万象城"]
+//                      };
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -129,7 +257,7 @@
     
     lab.backgroundColor = [GUIConfig mainBackgroundColor];
     
-    NSString *name = self.sectionList[section];
+    NSString *name = self.keyList[section];
     
     lab.text = [NSString stringWithFormat:@"  %@",name];
     
@@ -153,15 +281,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return [self.mallList count];
+    return [self.keyList count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
-    NSString *name = self.sectionList[section];
+    NSString *key = self.keyList[section];
     
-    return [self.mallList[name] count];
+    return [[self.dataMap objectForKey:key] count];
+    
+    
+    
     
     
 }
@@ -175,16 +306,23 @@
     //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     
+    NSString *key = self.keyList[indexPath.section];
+    
+    NSArray *dataList = [self.dataMap objectForKey:key];
+    
+    NSDictionary * d= dataList[indexPath.row];
+    
+    
     cell.textLabel.font = [UIFont systemFontOfSize:14];
-    NSString *section = self.sectionList[[indexPath section]];
+    cell.textLabel.textColor = [GUIConfig grayFontColor];
     
     
+    cell.textLabel.text =SafeString(d[@"name"]);
     
-    NSArray * currentCityList  = self.mallList[section];
+    //cell.textLabel.text=@"xxxxx"
     
     
-    
-    cell.textLabel.text = currentCityList[[indexPath row]];
+   // currentCityList[[indexPath row]];
     
     
     
@@ -197,6 +335,25 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *key = self.keyList[indexPath.section];
+    
+    NSArray *dataList = [self.dataMap objectForKey:key];
+    
+    NSDictionary * d= dataList[indexPath.row];
+    
+    
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+        if (self.selectMallBlock) {
+            self.selectMallBlock(YES,d);
+        }
+        
+    }];
+    
+  //  [self.navigationController popToRootViewControllerAnimated:YES];
+    
     
     
     

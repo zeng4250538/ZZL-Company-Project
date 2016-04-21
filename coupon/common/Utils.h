@@ -43,6 +43,11 @@ NSString *SafeLeft(NSString *content,NSUInteger length);
 
 +(void)downCountLabel:(UILabel*)label;
 
++(NSString*)firstLetter:(NSString*)szString;
+
+
+
+
 
 
 

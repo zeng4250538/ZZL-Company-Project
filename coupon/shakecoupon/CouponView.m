@@ -31,11 +31,11 @@
     
     if (self) {
         
-        UIImageView *uv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
+        UIImageView *uv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width-60)];
         
         
         
-        uv.contentMode = UIViewContentModeScaleToFill;
+       // uv.contentMode = UIViewContentModeScaleToFill;
         
         
         
@@ -81,41 +81,61 @@
             make.left.right.equalTo(uv).offset(10);
             make.right.right.equalTo(uv);
             
-            make.height.equalTo(@35);
+            make.height.equalTo(@30);
         }];
         
         nameLabel.textAlignment = NSTextAlignmentLeft;
         
         nameLabel.backgroundColor = [UIColor whiteColor];
         
-        nameLabel.font = [UIFont boldSystemFontOfSize:15];
+        nameLabel.font = [UIFont systemFontOfSize:12];
         
-        nameLabel.text = self.data[@"name"];
-        
-        nameLabel.textColor = [UIColor darkGrayColor];
+        nameLabel.text =SafeString(self.data[@"name"]);
         
         
-        UILabel *priceLabel = [UILabel new];
-        
-        [self addSubview:priceLabel];
+        nameLabel.textColor = [GUIConfig grayFontColorDeep];
         
         
-        [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(uv.mas_bottom);
-            make.right.equalTo(uv).offset(-10);
-            make.height.equalTo(@35);
+        
+        
+        
+        UILabel *shopNameLabel = [UILabel new];
+        
+        [self addSubview:shopNameLabel];
+        
+        
+        [shopNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(nameLabel.mas_bottom).offset(0);
+            make.left.equalTo(uv).offset(10);
+            make.height.equalTo(@30);
             
             
         }];
         
-        priceLabel.textAlignment = NSTextAlignmentCenter;
-        priceLabel.backgroundColor = [UIColor whiteColor];
-        priceLabel.font = [UIFont boldSystemFontOfSize:16];
-        priceLabel.textColor = [UIColor redColor];
+        shopNameLabel.textAlignment = NSTextAlignmentCenter;
+       // shopNameLabel.backgroundColor = [UIColor whiteColor];
+        shopNameLabel.font = [UIFont systemFontOfSize:12];
+        shopNameLabel.textColor = [GUIConfig grayFontColorDeep];
         
         
         
-        priceLabel.text =[NSString stringWithFormat:@"￥%@元",self.data[@"sellingPrice"]];
+        shopNameLabel.text =[NSString stringWithFormat:@"%@(100米)",SafeString(self.data[@"shopName"])];
+        
+        
+        UIView *line = [UIView new];
+        
+        [uv addSubview:line];
+        
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(nameLabel.mas_bottom);
+            make.left.equalTo(uv);
+            make.right.equalTo(uv);
+            make.height.equalTo(@1);
+        }];
+        
+        line.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+
         
         //self.data[@"price"];
         

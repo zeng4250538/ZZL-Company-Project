@@ -433,6 +433,41 @@ NSString *SafeString(id content){
     
 }
 
++(NSString*)firstLetter:(NSString*)szString{
+    
+    NSString *pyName = [Utils chineseToPy:szString];
+    
+    if ([pyName length]>0) {
+        NSString *let = [pyName substringToIndex:1];
+        
+        let = [let uppercaseString];
+        return let;
+        
+    }else{
+        
+        return @"";
+        
+    }
+    
+    
+    
+}
+
+
++(NSString*)chineseToPy:(NSString*)szString{
+    if ([szString length]) {
+        NSMutableString *ms = [[NSMutableString alloc] initWithString:szString];
+        if (CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformMandarinLatin, NO)) {
+        }
+        if (CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformStripDiacritics, NO)) {
+        }
+        return ms;
+    }
+    return @"";
+}
+
+
+
 
 
 

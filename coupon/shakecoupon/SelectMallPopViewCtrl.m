@@ -87,11 +87,11 @@
         
         [ReloadHud removeHud:self.tableView animated:YES];
         
+        
+        //NSDictionary *allCity = @{@"city":@"全城",}
+        
         self.mallList = data;
         
-//        self.cityString = self.mallList[0][@"name"];
-        
-//        NSLog(@"%@",self.cityString);
         
         [self.tableView reloadData];
         
@@ -108,15 +108,6 @@
         
     }];
     
-//    __weak SelectMallPopViewCtrl *selfWeak = self;
-//    
-//    self.cityArrayBlock = ^(id cityArray){
-//        
-//       selfWeak.mallList = cityArray;
-//        NSLog(@"-------------->%@",cityArray);
-//        [selfWeak.tableView reloadData];
-//    
-//    };
     
 }
 
@@ -214,12 +205,18 @@
             
             SelectMallTableCtrl *vc = [SelectMallTableCtrl new];
             
+            vc.selectMallBlock = self.selectMallBlock;
+            
+//            if (self.selectMallBlock) {
+//                self.selectMallBlock(YES,mallDict);
+//                
+//            }
+
+            
+            
+            
             
             [self.navigationController pushViewController:vc animated:YES];
-            
-            
-            
-            
             
             
     
@@ -289,7 +286,7 @@
     
     NSDictionary *mallDict = self.mallList[[indexPath row]];
     NSLog(@"1231313%@",self.mallList);
-    nameLabel.text=mallDict[@"name"];
+    nameLabel.text=SafeString(mallDict[@"name"]);
 
     UILabel *distanceLabel = [UILabel new];
     distanceLabel.font = [UIFont systemFontOfSize:14];
@@ -302,7 +299,7 @@
     }];
     distanceLabel.textColor = [GUIConfig grayFontColor];
     
-    distanceLabel.text=[NSString stringWithFormat:@"%@",mallDict[@"distance"]];
+    distanceLabel.text=[NSString stringWithFormat:@"%@",SafeString(mallDict[@"distance"])];
     
    // mallDict[@"distance"];
 
