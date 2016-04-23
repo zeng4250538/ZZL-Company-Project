@@ -202,7 +202,7 @@
 #pragma mark ---- 品牌街网络请求
     
     
-    [service requestNearbyShop:mallId page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
+    [service requestNearbyShop:mallId page:1 per_page:10  success:^(NSInteger code, NSString *message, id data) {
         
         self.hotBrandData = data;
         [self.tableView reloadData];

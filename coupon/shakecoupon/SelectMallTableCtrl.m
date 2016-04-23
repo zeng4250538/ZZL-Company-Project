@@ -314,7 +314,7 @@
     
     
     cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.textLabel.textColor = [GUIConfig grayFontColor];
+    cell.textLabel.textColor = [GUIConfig grayFontColorDeep];
     
     
     cell.textLabel.text =SafeString(d[@"name"]);
