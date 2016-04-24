@@ -261,7 +261,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.mallList count];
+    
+    if ([self.mallList count]>4) {
+        return 4;
+    }else{
+        return [self.mallList count];
+    }
+    
 
 }
 

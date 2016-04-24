@@ -86,29 +86,29 @@
     CouponService *couponService = [CouponService new];
     
     
+    NSString *mallId = [AppShareData instance].mallId;
+
     
     
     
-    
-    [couponService requestRealTimeCoupon:self.shopId page:1 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:mallId page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
-         
-        self.data = data;
+        
+        [ReloadHud removeHud:self.tableView animated:YES];
+        
+        self.data=data;
         
         [self.tableView reloadData];
         
-        
         completion(YES);
-        
-        
         
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
         
-        [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
         
+        [ReloadHud showReloadMode:self.tableView];
         
         completion(NO);
         
@@ -117,7 +117,13 @@
         
         
     }];
-
+    
+    
+    
+    
+    
+    
+    
     
     
 }
@@ -137,42 +143,15 @@
     
     
     
-    [couponService requestRealTimeCoupon:self.shopId page:1 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
-        
-        //        if (![data isKindOfClass:[NSArray class]]) {
-        //
-        //            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
-        //            return ;
-        //        }
-        
-        self.data = data;
-        
-        [self.tableView reloadData];
-        
-        
-        
-        
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-        
-        [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
-        
-        
-       // completion(NO);
-        
-        
-        
-        
-        
-    }];
-    
-
     
     
     
     
-    [couponService requestRecommendCoupon:@"2" page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    
+    
+    [couponService requestRecommendCoupon:mallId page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         
         [ReloadHud removeHud:self.tableView animated:YES];
