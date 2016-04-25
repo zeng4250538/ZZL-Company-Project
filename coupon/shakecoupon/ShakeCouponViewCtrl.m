@@ -19,6 +19,13 @@
 
 
 
+#define CouponWidth  (SCREEN_WIDTH-60)
+#define CouponHeight  (SCREEN_WIDTH-60)
+
+
+
+
+
 @interface ShakeCouponViewCtrl ()
 
 @property(nonatomic,strong)CouponView *imgView;
@@ -43,6 +50,9 @@
 @property(nonatomic,strong)UIImageView *rightMaskView;
 
 
+@property(nonatomic,assign)BOOL isFirstIn;
+
+
 
 
 
@@ -51,11 +61,18 @@
 
 @implementation ShakeCouponViewCtrl
 
+
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
     self.view.backgroundColor =[UIColor colorWithWhite:0.1f alpha:0.0f];
+    
+    self.isFirstIn = YES;
     
     
     
@@ -177,25 +194,19 @@
     tool.didFinishBlock = ^(){
         
         
-        
         view.hidden = YES;
         
         [view removeFromSuperview];
         
-
-        
         
         __weak id weakSelf =self;
         
-    
         [self addCouponToBasket:^(BOOL ret){
             
             if (ret) {
                 [weakSelf updateCartNum];
                 
             }
-            
-            
             
         }];
         
@@ -223,10 +234,8 @@
         
         
         
-        CGFloat viewWidth = SCREEN_WIDTH-120;
-        CGFloat viewHeight = SCREEN_WIDTH-120+40;
         
-        CouponView *nextView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
+        CouponView *nextView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-CouponHeight)/2, CouponWidth, CouponHeight) data:self.couponData];
         
         
         
@@ -379,8 +388,8 @@
         
         make.center.equalTo(self.view);
         
-        make.width.equalTo(@(SCREEN_WIDTH-120));
-        make.height.equalTo(@(SCREEN_WIDTH-120+40));
+        make.width.equalTo(@(CouponWidth));
+        make.height.equalTo(@(CouponHeight));
         
         
     }];
@@ -420,6 +429,39 @@
         
         
     }];
+    
+    
+    UIButton *upButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [self.view addSubview:upButton];
+
+    [upButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.placeHolderView.mas_top).offset(-60);
+        make.centerX.equalTo(self.view);
+        make.width.equalTo(@100);
+        make.height.equalTo(@60);
+        
+        
+        
+    }];
+    
+    
+//    upButton.layer.borderWidth=1;
+//    upButton.layer.borderColor = [[UIColor redColor] CGColor];
+    
+    
+    [upButton bk_addEventHandler:^(id sender) {
+        
+        
+        
+        
+        [self addBasketWithAnimation:self.imgView];
+
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
     
     
     
@@ -490,6 +532,42 @@
     }];
     
     downLabel.text=@"扔了";
+    
+    
+    UIButton *downButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [self.view addSubview:downButton];
+    
+    [downButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.placeHolderView.mas_bottom);
+        make.centerX.equalTo(self.view);
+        make.width.equalTo(@100);
+        make.height.equalTo(@60);
+        
+        
+        
+    }];
+    
+    
+//    downButton.layer.borderWidth=1;
+//    downButton.layer.borderColor = [[UIColor redColor] CGColor];
+//    
+    
+    [downButton bk_addEventHandler:^(id sender) {
+        
+        
+        
+        
+        [self doSwipeDown:nil];
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    
+ 
   
     
 }
@@ -498,9 +576,9 @@
 #pragma mark - 准备新的视图
 -(void)makeNextView{
     
-    CGFloat viewWidth = SCREEN_WIDTH-120;
-    CGFloat viewHeight = SCREEN_WIDTH-120+40;
-    
+//    CGFloat viewWidth = SCREEN_WIDTH-120;
+//    CGFloat viewHeight = SCREEN_WIDTH-120+40;
+//    
     self.couponData = [[AppShareData instance].shakeCouponQueue next];
     
     
@@ -524,7 +602,7 @@
     
     [self.shakeCouponList removeObjectAtIndex:0];
     
-    CouponView *nextView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.couponData];
+    CouponView *nextView = [[CouponView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, (SCREEN_HEIGHT-CouponHeight)/2, CouponWidth, CouponHeight) data:self.couponData];
     
     
     
@@ -641,11 +719,9 @@
         }
         
         
-        CGFloat viewWidth = SCREEN_WIDTH-120;
-        CGFloat viewHeight = SCREEN_WIDTH-120+40;
         
         
-        CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, viewHeight) data:couponData];
+        CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake(0, 0, CouponWidth, CouponHeight) data:couponData];
         
         self.currentData = couponData;
         
@@ -708,27 +784,23 @@
         
         [self.rightMaskView removeFromSuperview];
         
-        CGFloat viewWidth = (SCREEN_WIDTH-120)*0.9;
-        CGFloat viewHeight = (SCREEN_WIDTH-120+40)*0.9;
-        
         
         [self.imgView removeFromSuperview];
         
-
+        
+        CGFloat rate  = 0.9f;
         
         
         
-        CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-viewWidth)/2,
-                                                                              (SCREEN_HEIGHT-viewHeight)/2, viewWidth, viewHeight) data:self.currentData];
+        
+        CouponView *couponView = [[CouponView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-CouponWidth*rate)/2,
+                                                                              (SCREEN_HEIGHT-CouponHeight*rate)/2, CouponWidth*rate, CouponHeight*rate) data:self.currentData];
         
         
         
         [self.view addSubview:couponView];
         
         self.imgView = couponView;
-        
-        
-        
         
         
         
@@ -778,12 +850,12 @@
 
 -(void)doSwipeUp:(UISwipeGestureRecognizer*)rg{
     
-    if (rg.direction == UISwipeGestureRecognizerDirectionUp){
+   // if (rg.direction == UISwipeGestureRecognizerDirectionUp){
         
         
         [self addBasketWithAnimation:rg.view];
         
-    }
+    //}
     
 
     
@@ -794,8 +866,7 @@
 
 -(void)doSwipeDown:(UISwipeGestureRecognizer*)rg{
     
-    if (rg.direction == UISwipeGestureRecognizerDirectionDown){
-        
+    
         
         [self makeNextView];
         
@@ -836,7 +907,6 @@
             
         }];
         
-    }
     
     
     
@@ -906,7 +976,15 @@
     
     [super viewDidAppear:animated];
     
-   [self makeMaskCircleViewClose];
+    
+    //
+    if (self.isFirstIn) {
+        [self makeMaskCircleViewClose];
+        
+        self.isFirstIn = NO;
+
+    }
+    
    
    
     
@@ -1183,18 +1261,39 @@
 
 -(void)doTapCoupon:(id)sender{
  
-    [self dismissViewControllerAnimated:NO completion:^{
-        
+//    [self dismissViewControllerAnimated:NO completion:^{
+    
         CouponDetailViewCtrl *vc =  [CouponDetailViewCtrl new];
         
         vc.data = self.couponData;
-        
-        
+    
         vc.hidesBottomBarWhenPushed = YES;
-        
-        [self.nav pushViewController:vc animated:YES];
+    
+    vc.couponDetailPushMode = CouponDetailPushModePresent;
+    
+    
+    
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    nav.navigationBar.barTintColor = [GUIConfig mainColor];
+    
+    nav.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"关闭" style:UIBarButtonItemStylePlain handler:^(id sender) {
         
     }];
+    
+        
+    
+    
+    
+    
+    
+        [self presentViewController:nav animated:YES completion:^{
+            
+        }];
+        
+        //[self.nav pushViewController:vc animated:YES];
+        
+ //   }];
     
 }
 

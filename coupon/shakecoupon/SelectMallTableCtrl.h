@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^SelectMallBlock_t)(NSDictionary *data);
+#import "SelectMallPopViewCtrl.h"
+
 
 @interface SelectMallTableCtrl : UITableViewController
-@property(nonatomic,copy)SelectMallBlock_t completion;
+
+@property(nonatomic,copy)SelectMallBlock selectMallBlock;
+
+
 
 @end

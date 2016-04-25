@@ -81,6 +81,20 @@
     }
     
     
+    if (self.couponDetailPushMode == CouponDetailPushModePresent) {
+        
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"关闭" style:UIBarButtonItemStylePlain handler:^(id sender) {
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+            
+        }];
+        
+    }
+    
+    
  
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[UIColor whiteColor]];
     

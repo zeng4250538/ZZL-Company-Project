@@ -160,6 +160,28 @@
     CouponService *couponService = [CouponService new];
     
     
+#pragma mark ---- 优选品牌网络请求
+    
+    
+    [service requestRecommendShop:mallId page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
+        
+        self.hotShopData = data;
+        [self.tableView reloadData];
+        
+        completion(YES);
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        
+        completion(NO);
+        
+    }];
+    
+    
+    
+    
 #pragma mark ---- 即时优惠网络请求
     [couponService requestRecommendCoupon:mallId page:1 pageCount:3 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
@@ -177,32 +199,11 @@
     }];
 
     
-#pragma mark ---- 优选品牌网络请求
-    
-    
-    [service requestRecommendShop:mallId page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
-       
-       self.hotShopData = data;
-       [self.tableView reloadData];
-        
-        completion(YES);
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-        
-        
-        
-        completion(NO);
-        
-    }];
-    
-    
-    
     
 #pragma mark ---- 品牌街网络请求
     
     
-    [service requestNearbyShop:mallId page:1 per_page:3  success:^(NSInteger code, NSString *message, id data) {
+    [service requestNearbyShop:mallId page:1 per_page:10  success:^(NSInteger code, NSString *message, id data) {
         
         self.hotBrandData = data;
         [self.tableView reloadData];
@@ -255,6 +256,8 @@
     UIBarButtonItem *roomMapBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"roommap"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         MallMapViewCtrl *vc = [MallMapViewCtrl new];
+        
+        vc.hidesBottomBarWhenPushed = YES;
         
         [self.navigationController pushViewController:vc animated:YES];
        

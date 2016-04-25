@@ -20,6 +20,12 @@ typedef NS_ENUM(NSUInteger, CouponViewMode) {
 };
 
 
+typedef NS_ENUM(NSUInteger, CouponDetailPushMode) {
+    CouponDetailPushModePush,
+    CouponDetailPushModePresent
+};
+
+
 @interface CouponDetailViewCtrl : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -28,6 +34,10 @@ typedef NS_ENUM(NSUInteger, CouponViewMode) {
 
 @property(nonatomic,assign)CouponDetailType couponDetailType;
 @property(nonatomic,assign)CouponViewMode couponViewMode;
+@property(nonatomic,assign)CouponDetailPushMode couponDetailPushMode;
+
+
+
 
 
 

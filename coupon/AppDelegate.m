@@ -14,7 +14,11 @@
 #import "MallService.h"
 #import "MobClick.h"
 #import "UMessage.h"
+
+#import <CoreLocation/CoreLocation.h>
 @interface AppDelegate ()
+
+@property (nonatomic, strong) CLLocationManager *lcManager;
 
 @end
 
@@ -186,6 +190,18 @@ BOOL InLan = NO;
     [MobClick startWithAppkey:@"56e906e267e58e54f2000607" reportPolicy:REALTIME   channelId:nil];
     
     
+    
+    if ([CLLocationManager locationServicesEnabled]) {
+        // 创建位置管理者对象
+        self.lcManager = [[CLLocationManager alloc] init];
+        self.lcManager.delegate = self; // 设置代理
+        // 设置定位距离过滤参数 (当本次定位和上次定位之间的距离大于或等于这个值时，调用代理方法)
+        self.lcManager.distanceFilter = 100;
+        self.lcManager.desiredAccuracy = kCLLocationAccuracyBest; // 设置定位精度(精度越高越耗电)
+        [self.lcManager startUpdatingLocation]; // 开始更新位置
+    }
+    
+    
 //    56e906e267e58e54f2000607  复制
 //    App Master Secret：eex4ihtajreb2ca4t8mdsd0plwivb9vx
     
@@ -197,7 +213,32 @@ BOOL InLan = NO;
     [self makeTabViewCtrl];
     [self setUmengMessage:launchOptions];
     
+    
+    
+    
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8) {
+//        //由于IOS8中定位的授权机制改变 需要进行手动授权
+//        CLLocationManager  *locationManager = [[CLLocationManager alloc] init];
+//        //获取授权认证
+//        [locationManager requestAlwaysAuthorization];
+//        [locationManager requestWhenInUseAuthorization];
+//    }
+//    
+    
+    
+    
+    
     return YES;
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    NSLog(@"定位到了");
+}
+/** 不能获取位置信息时调用*/
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"获取定位失败");
 }
 
 
