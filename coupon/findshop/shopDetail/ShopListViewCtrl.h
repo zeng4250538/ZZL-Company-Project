@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
-typedef NS_ENUM(NSUInteger, QueryType) {
-    QueryTypeRecommend=0,  //优选品牌
-    QueryTypeBrand         //品牌街
+typedef NS_ENUM(NSUInteger, ShopQueryType) {
+    ShopQueryTypeRecommend=0,  //优选品牌
+    ShopQueryTypeNearBy=1         //品牌街
     
 };
 @interface ShopListViewCtrl : UITableViewController
 
-@property(nonatomic,assign)QueryType queryType;
+@property(nonatomic,assign)ShopQueryType shopQueryType;
 @end

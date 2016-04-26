@@ -65,6 +65,192 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //微信支付消息通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wechatPayResult:) name:[WechatPayNotice copy] object:nil];
+    
+    
+    //淘宝支付消息通知
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(aliPayResult:) name:[ALiPayNotice copy] object:nil];
+    
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:[WechatPayNotice copy] object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:[ALiPayNotice copy] object:nil];
+    
+    
+
+    
+    
+    
+    
+}
+
+
+-(void)wechatPayResult:(id)sender{
+    
+    NSNotification *notice = (NSNotification*)sender;
+    
+    NSString *result = (NSString*)notice.object;
+    
+    if ([result isEqualToString:@"1"]){  //支付成功
+        
+        
+        UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"微信支付成功！"];
+        [av bk_addButtonWithTitle:@"关闭" handler:^{
+            
+        }];
+        
+        [av show];
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        PaySuccessViewCtrl *vc = [[PaySuccessViewCtrl alloc] init];
+//        
+//        vc.orderId = self.orderId;
+//        
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
+    }else{     //支付失败
+        
+        
+//        
+//        UINavigationController *nav = self.navigationController;
+//        
+//        
+//        [self.navigationController popToRootViewControllerAnimated:NO];
+//        
+//        OrderDetailViewCtrl *vc = [[OrderDetailViewCtrl alloc] init];
+//        vc.orderId = self.orderId;
+//        
+//        [nav pushViewController:vc animated:YES];
+        
+        
+        
+        
+        
+        
+        
+        
+        UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"微信支付失败！"];
+        [av bk_addButtonWithTitle:@"关闭" handler:^{
+            
+        }];
+        
+        [av show];
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+#pragma mark - 淘宝支付结果通知
+
+-(void)aliPayResult:(id)sender{
+    
+    
+    NSNotification *notice = (NSNotification*)sender;
+    
+    NSString *result = (NSString*)notice.object;
+    
+    if ([result isEqualToString:@"1"]){  //支付成功
+        
+        
+        UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"支付宝支付成功！"];
+        [av bk_addButtonWithTitle:@"关闭" handler:^{
+            
+        }];
+        
+        [av show];
+        
+        
+        
+//        PaySuccessViewCtrl *vc = [[PaySuccessViewCtrl alloc] init];
+//        
+//        vc.orderId = self.orderId;
+//        // vc.data = self.data[@"orderinfo"];
+//        
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
+    }else{     //支付失败
+        
+        
+        
+        
+        
+        UINavigationController *nav = self.navigationController;
+        
+        // NSString *order
+        
+//        [self.navigationController popToRootViewControllerAnimated:NO];
+//        
+//        OrderDetailViewCtrl *vc = [[OrderDetailViewCtrl alloc] init];
+//        vc.orderId = self.orderId;
+//        
+//        [nav pushViewController:vc animated:YES];
+//        
+        
+        
+        UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"支付宝支付失败！"];
+        [av bk_addButtonWithTitle:@"关闭" handler:^{
+            
+        }];
+        
+        [av show];
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
@@ -167,9 +353,24 @@
         
         NSString *orderId = [NSString stringWithFormat:@"%.0f",tm];
         
+#pragma mark - 去支付
         
+        if (self.wechatPayButton.selected){
+            
+            [PayUtils wechatPay:orderId orderSn:orderId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
+
+            
+            
+            
+        }
         
-        [PayUtils aliPay:orderId orderSn:orderId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
+        if (self.aliPayButton.selected) {
+            
+            [PayUtils aliPay:orderId orderSn:orderId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
+
+            
+        }
+        
         
         
         

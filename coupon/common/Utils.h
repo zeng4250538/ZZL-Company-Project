@@ -16,6 +16,9 @@ id safeArrayValue(id array,NSInteger pos);
 
 NSString *SafeLeft(NSString *content,NSUInteger length);
 
+void SafePostMessage(NSString* messageName,id body);
+
+
 
 
 @interface Utils : NSObject

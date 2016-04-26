@@ -15,6 +15,21 @@
 #import "MobClick.h"
 #import "UMessage.h"
 
+#import "UMSocial.h"
+
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+//#import "UMSocialSinaHandler.h"
+#import "UMSocialSinaSSOHandler.h"
+
+#import <AlipaySDK/AlipaySDK.h>
+
+//#import "UMSocialTencentWeiboHandler.h"
+
+#import "WXApi.h"
+
+
+
 #import <CoreLocation/CoreLocation.h>
 @interface AppDelegate ()
 
@@ -26,6 +41,13 @@
 
 
 BOOL InLan = NO;
+
+NSString *ALiPayNotice=@"alipaynotice";
+NSString *WechatPayNotice=@"wechatpaynotice";
+
+NSString *UmengKey=@"56e906e267e58e54f2000607";
+NSString *WeChatAppId=@"wx77914cc659d2889c";
+NSString *WeChatAppSecret=@"";
 
 
 
@@ -187,8 +209,15 @@ BOOL InLan = NO;
     // Override point for customization after application launch.
     
     
-    [MobClick startWithAppkey:@"56e906e267e58e54f2000607" reportPolicy:REALTIME   channelId:nil];
     
+    
+    [WXApi registerApp:WeChatAppId withDescription:@"摇折扣"];
+    
+    
+    
+    
+    
+  
     
     
     if ([CLLocationManager locationServicesEnabled]) {
@@ -207,11 +236,12 @@ BOOL InLan = NO;
     
     
     
-//    
+//
+    
+    [self setUmengParam:launchOptions];
     
     [self setAppearance];
     [self makeTabViewCtrl];
-    [self setUmengMessage:launchOptions];
     
     
     
@@ -242,10 +272,38 @@ BOOL InLan = NO;
 }
 
 
--(void)setUmengMessage:(NSDictionary*)launchOptions{
+
+#pragma mark - 设置友盟相关参数
+-(void)setUmengParam:(NSDictionary*)launchOptions{
     
     
-    [UMessage startWithAppkey:@"56e906e267e58e54f2000607" launchOptions:launchOptions];
+    
+    //统计
+    [MobClick startWithAppkey:UmengKey reportPolicy:REALTIME   channelId:nil];
+    
+    //社交分享
+    [UMSocialData setAppKey:UmengKey];
+    
+    [UMSocialData openLog:YES];
+    
+    //微信分享接口
+    [UMSocialWechatHandler setWXAppId:WeChatAppId appSecret:@"d9ea274d9e5e60d83a462dc60d27d382" url:@"http://www.umeng.com/social"];
+    //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
+    
+    //QQ分享接口
+    [UMSocialQQHandler setQQWithAppId:@"1105243920" appKey:@"qwXUdQcP6OtqHMBU" url:@"http://www.umeng.com/social"];
+    //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。需要 #import "UMSocialSinaSSOHandler.h"
+    //新浪分享接口
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"643547533"
+                                              secret:@"e4509cf7d0480042690de0553e283609"
+                                         RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    
+
+    
+    
+    //推送消息
+    
+    [UMessage startWithAppkey:UmengKey launchOptions:launchOptions];
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
@@ -297,6 +355,74 @@ BOOL InLan = NO;
     
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    
+    
+   [UMSocialSnsService handleOpenURL:url];
+    
+    
+    
+    
+    return  [WXApi handleOpenURL:url delegate:self];
+}
+
+
+
+//return [TencentOAuth HandleOpenURL:url] ||
+//[WeiboSDK handleOpenURL:url delegate:self] ||
+//[WXApi handleOpenURL:url delegate:self];;
+//}
+
+
+
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation{
+    
+    
+    [iConsole log:@"openURL %@",url];
+    
+    
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result) {
+        
+        return result;
+        
+        //调用其他SDK，例如支付宝SDK等
+    }
+    
+    
+    
+    
+    BOOL ret = [WXApi handleOpenURL:url delegate:self] ;
+    
+    
+    
+    
+    [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+        
+        
+        [iConsole log:@" AlipaySDK result  %@",resultDic];
+        
+        NSLog(@"result = %@",resultDic);
+    }];
+    
+    
+    return ret;
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [UMessage didReceiveRemoteNotification:userInfo];
@@ -329,5 +455,53 @@ BOOL InLan = NO;
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+#pragma mark - 微信回调接口
+
+
+-(void) onResp:(BaseResp*)resp{
+    
+    
+    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    NSString *strTitle;
+    
+    if([resp isKindOfClass:[SendMessageToWXResp class]]){
+        strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
+    }
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        
+        switch (resp.errCode) {
+                //微信支付成功
+            case WXSuccess:{
+                strMsg = @"支付结果：成功！";
+                
+                [iConsole log:@"支付成功－PaySuccess，retcode = %@", resp];
+                
+                SafePostMessage(WechatPayNotice, @"1");
+                break;
+            }
+            default:{
+                
+                //微信支付失败
+                
+                
+                [iConsole log:@"支付失败－PaySuccess，retcode = %@", resp];
+                SafePostMessage(WechatPayNotice, @"0");
+                
+                
+                
+                break;
+            }
+        }
+    }
+    
+    
+    
+}
+
+
+
+
 
 @end

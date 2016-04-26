@@ -13,6 +13,16 @@
 
 @implementation Utils
 
+void SafePostMessage(NSString* messageName,id body){
+    
+    NSNotification *notification = [NSNotification notificationWithName:messageName object:body];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    
+    
+}
+
+
 
 BOOL SafeEmpty(id content){
     
@@ -465,6 +475,17 @@ NSString *SafeString(id content){
     }
     return @"";
 }
+
+
++(void)postMessage:(NSString*)messageName body:(NSObject*)body{
+    
+    NSNotification *notification = [NSNotification notificationWithName:messageName object:body];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    
+    
+}
+
 
 
 

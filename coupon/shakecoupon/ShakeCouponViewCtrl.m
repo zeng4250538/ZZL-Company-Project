@@ -700,6 +700,10 @@
         self.couponData = couponData;
         
         if (couponData == nil) {
+            
+            
+            [self makeMaskCircleViewOpenNoData];
+
         
             
             UIAlertView *av = [[UIAlertView alloc] bk_initWithTitle:@"错误" message:@"当前无优惠券，请重新摇一摇"];
@@ -749,6 +753,40 @@
 }
 
 
+
+-(void)makeMaskCircleViewOpenNoData{
+    
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        self.leftMaskView.frame = CGRectMake(0-109, 0, 109, 218);
+        
+        
+    } completion:^(BOOL finished) {
+        
+        
+    }];
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        self.rightMaskView.frame = CGRectMake(109+109, 0, 109, 218);
+        
+        
+        
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+     
+     
+    
+    
+    
+}
 
 -(void)makeMaskCircleViewOpen{
     

@@ -85,10 +85,7 @@
     
     ShopService *service = [ShopService new];
     
-    
-    
-    
-    
+     
     
     
     NSString *mallId = [AppShareData instance].mallId;
@@ -96,20 +93,52 @@
     
     
     
-    [service requestRecommendShop:mallId page:1 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+    if (self.shopQueryType == ShopQueryTypeRecommend) {
         
-        self.shopList = data;
         
-        [ReloadHud removeHud:self.tableView animated:YES];
-        
-        [self.tableView reloadData];
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-        [ReloadHud showReloadMode:self.tableView];
-        
-    }];
+        [service requestRecommendShop:mallId page:1 pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+            
+            self.shopList = data;
+            
+            
+            [self.tableView reloadData];
+            
+            completion(YES);
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+            
+            completion(NO);
+            
+        }];
 
+        
+    }
+  
+    if (self.shopQueryType == ShopQueryTypeNearBy) {
+        
+        
+        
+        [service requestNearbyShop:mallId page:1 per_page:10 success:^(NSInteger code, NSString *message, id data) {
+            self.shopList = data;
+            
+            
+            [self.tableView reloadData];
+            
+            completion(YES);
+
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            completion(NO);
+            
+        }];
+        
+        
+        
+          
+    }
+    
+    
+  
     
     
 }

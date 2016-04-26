@@ -120,11 +120,15 @@
     
     NSString *mallId = [AppShareData instance].mallId;
     
+    [SVProgressHUD showWithStatus:@""];
+    
     [service requestShakeCoupon:customId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
         
         self.isShakeDataLoaded = YES;
         
         [[AppShareData instance].shakeCouponQueue resetData:data];
+        
+        [SVProgressHUD dismiss];
         
         
         completion(YES);

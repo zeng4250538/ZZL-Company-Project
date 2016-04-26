@@ -41,16 +41,21 @@
 // 账号帐户资料
 //更改商户把相关参数后可测试
 
-#define APP_ID          @""               //APPID
-#define APP_SECRET      @"" //appsecret
+//AppSecret：d9ea274d9e5e60d83a462dc60d27d382
+
+#define APP_ID          @"wx77914cc659d2889c"               //APPID
+#define APP_SECRET      @"d9ea274d9e5e60d83a462dc60d27d382" //appsecret
 //商户号，填写商户对应参数
-#define MCH_ID          @""
+#define MCH_ID          @"1332430001"
 //商户API密钥，填写相应参数
-#define PARTNER_ID      @""
+#define PARTNER_ID      @"fengshiguangzhoutianhehuitong160"
 //支付结果回调页面
 #define NOTIFY_URL      @"http://wxpay.weixin.qq.com/pub_v2/pay/notify.v2.php"
 //获取服务器端支付数据地址（商户自定义）
 #define SP_URL          @"http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php"
+
+
+
 
 
 @interface payRequsestHandler : NSObject{
@@ -67,6 +72,10 @@
 -(BOOL) init:(NSString *)app_id mch_id:(NSString *)mch_id;
 -(NSString *) getDebugifo;
 -(long) getLasterrCode;
+
+- ( NSMutableDictionary *)sendPay:(NSString*)orderName price:(NSString*)price;
+
+
 //设置商户密钥
 -(void) setKey:(NSString *)key;
 //创建package签名

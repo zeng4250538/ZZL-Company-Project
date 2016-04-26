@@ -17,9 +17,13 @@
 #import "BasketService.h"
 #import "CouponService.h"
 
+
+
 @interface CouponDetailViewCtrl ()
 @property(nonatomic,strong)UILabel   *cartNumLabel;
 @property(nonatomic,strong)UIButton *cartButton;
+@property(nonatomic,strong)UIImage *couponImage;
+
 
 
 @end
@@ -107,6 +111,30 @@
     }
     
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"分享" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+        
+        //注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
+        
+        
+        NSString *couponName= SafeString(self.data[@"name"]);
+        
+        
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:UmengKey
+                                          shareText:couponName
+                                         shareImage:self.couponImage
+                                    shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToSina,nil]
+                                           delegate:self];
+        
+        
+
+        
+        
+    }];
+    
+    
     
     
     
@@ -116,6 +144,14 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response{
+    
+    
+    
+}
+
 
 
 -(void)loadData{
@@ -331,7 +367,19 @@
     }
     
     
-    [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo29@2x.png"]];
+    
+    
+    [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo60@3x.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        
+        self.couponImage = image;
+        
+        
+        
+        
+    }];
+    
+    
     
     self.tableView.tableHeaderView = uv;
     

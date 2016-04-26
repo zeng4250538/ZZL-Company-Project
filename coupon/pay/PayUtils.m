@@ -14,6 +14,26 @@
 
 #import "APAuthV2Info.h"
 
+#import "WXApi.h"
+
+/**
+ *  淘宝支付参数
+ */
+
+ NSString *ALiPay_Partner=@"2088801900305895";
+ NSString *ALiPay_Seller=@"2088801900305895";
+ NSString *ALiPay_Private=@"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJ/Dr1+h3bnaiStwth2AYQD/XxYRiK/0KCmKrhCXRufIAqSOztlS1XZepdu1OquGRsRlfYntr1+GpKH1sPYi6K2JMyzSQzNBM/cX8/wJl1Ewk3ERe35iKcW+sSJf0G+HBoWpdDO8ROHorFkKIb/UOs3P/D3o37WSF2ICSo5hW8oNAgMBAAECgYAyWEvvauagJomLMt1wtn/a/J5OKgBU0i/Fx3nKqKEjcRfEG2x7d2rk/jZt4dI3Mv0h7ol86XWWOKuwjefR6HZBmbBA8jmeR60oDBiGXVITM0gqN0KpaV0MgBMTK8QzbxGu0yMDiC/uum6AFf1Sd/G6bVJsu1aueZHIUPqBMBJY0QJBANDPP1Vo8AlfwbgXUogCyE1CNXNuM40+I4s0XMYKb/eQ1OBlIoC9iCFEcnRLKcu1Tlk6irHQDGUcFxpKz2SuWxMCQQDD3ulw0lKsD1DHVfZv35kJDuvLglnOPukw3V66p7ZvBKqHFwRmeYfDX9ZEKBiFhOxPxf0F7l4nE/Y7nI1SacpfAkBkTKinZhim6BAtVUaXfn6oXb0/DRhGKCr6mtRVbH4L9M3MW8gO/vt8v1wa8F/LMfPIeI5WixDpIG0YfAbS3c1xAkEAtGnFYbsIlR1CTWk7pc4xuqs4u2nkaFmAFxdAIvNJ0bZdkDK+RdlZGLdUt9CqzYki1VPLfEQUCzCS1FOdxDRXRwJAXTjH8DYxCwr2/G+6yUvpgsKtALxE8anWl98TJT/l5WzLQlIwQmuN4R2JnBxPaZ6heZmu+98lI4F8t+zGPFxZHw==";
+
+
+
+
+//微信支付参数
+NSString *WechatPay_API_KEY = @"fengshiguangzhoutianhehuitong160";  //注意保密
+NSString *WechatPay_APP_ID =@"wx77914cc659d2889c";
+NSString *WechatPay_MCH_ID =@"1332430001";
+
+
+
 
 
 @implementation PayUtils
@@ -21,15 +41,61 @@
 
 #pragma mark 微信支付
 
+
+
+
 +(void)wechatPay:(NSString*)orderId orderSn:(NSString*)orderSn orderName:(NSString*)orderName money:(CGFloat)money{
     
     
-    
+    NSString *priceString = [NSString stringWithFormat:@"%.0f",money*100];
+    [self sendWechatPay:orderName price:priceString];
     
     
     
     
 }
+
+
++ (void)sendWechatPay:(NSString*)orderName price:(NSString*)price
+{
+    //创建支付签名对象
+    payRequsestHandler *req = [[payRequsestHandler alloc] init];
+    //初始化支付签名对象
+    [req init:WechatPay_APP_ID mch_id:WechatPay_MCH_ID];
+    //设置密钥
+    [req setKey:WechatPay_API_KEY];
+    
+    //}}}
+    
+    //获取到实际调起微信支付的参数后，在app端调起支付
+    NSMutableDictionary *dict = [req sendPay:orderName price:price];
+    
+    if(dict == nil){
+        //错误提示
+        NSString *debug = [req getDebugifo];
+        
+        
+        NSLog(@"%@\n\n",debug);
+    }else{
+        NSLog(@"%@\n\n",[req getDebugifo]);
+        //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
+        
+        NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+        
+        //调起微信支付
+        PayReq * req             = [[PayReq alloc] init];
+        req.openID              = [dict objectForKey:@"appid"];
+        req.partnerId           = [dict objectForKey:@"partnerid"];
+        req.prepayId            = [dict objectForKey:@"prepayid"];
+        req.nonceStr            = [dict objectForKey:@"noncestr"];
+        req.timeStamp           = stamp.intValue;
+        req.package             = [dict objectForKey:@"package"];
+        req.sign                = [dict objectForKey:@"sign"];
+        
+        [WXApi sendReq:req];
+    }
+}
+
 
 
 +(NSString*)encodeString:(NSString*)unencodedString{
@@ -57,8 +123,11 @@
     
     
     
-    order.partner = @"2088701080647832";
-    order.seller = @"lingshi040404@163.com";
+    order.partner =[ALiPay_Partner copy];
+    order.seller = [ALiPay_Seller copy];
+    
+    
+    
     
     
     
@@ -89,71 +158,6 @@
     
     
 
-    
-    
-    
-    
-        
-    
-        
-        
-        
-        NSString   *privateKey= @"MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAMH/0NJDQdE0DnW+C64mIZA23VM4mpuYfeNS08G1SqS0H4lXi09LQG6kTQOskVMB2qTxDidViZcIJiTZAykhQhleunlY1dOpbilM7vODQGUAjsyzFwXOj+NA/XwyFez8WdH/rMQB+ESLsYHVq8rHfMo48anAT3Tt+4sXj7rz04ElAgMBAAECgYA5a8SdV7b1exkElLnUVAj/LJ4Z8dkhUOOCE5QF8+kiEwZ6mmTrlXR+yzbYbY2eKiBTTd5ImjLdd1YC9hDPbb6oSzuvn8lfB4BubOuXutu/Zmd5Yway1nuiTIgGtCAaHe6EjriLMRZIWEVHnWSMAQFrIFS3ELEx5gOVSQKViEHAAQJBAPRWHuCy0wnxzKBRhvzmmDWvsu/AukEVyqDTHeAEsX+Ac7CJ3TvZ4X5ll1IjWxIdYC5dK5bJ0JwCG7khuxwE2SUCQQDLQo6huKX5DKKaDzOxCZwyv6QkhTnuk3NyZKhUJE/4J9vuM4f4Rm9RbPaleV+CGIsXLBxTYVd4TlQzfNNvt4gBAkEA1LTIarqiqCydBBAVYMLqTQpozvlL6+8pmDpR7ryHPUU48b4DH+B8wsl0I2huFuYF3jb0BHAqsDXRpqhruGesFQJBAJmsh4Pzw+Bo0iLiLXXDS0n/JE3MQEGFT7qEKdP75E49bIVKhpmKPy1z0YLIIhKNFdP+MKhFp0k5B2YqEP2c6AECQQCyOhychGbpStoIfvcOwVqR/nsJTFu4JccIY6BTgC9MgwZdbJSNXOC4G/lWJsSWDePMCpeIG+zd1zzsfm5nIumI";
-        
-        
-         privateKey = @"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJ/Dr1+h3bnaiStwth2AYQD/XxYRiK/0KCmKrhCXRufIAqSOztlS1XZepdu1OquGRsRlfYntr1+GpKH1sPYi6K2JMyzSQzNBM/cX8/wJl1Ewk3ERe35iKcW+sSJf0G+HBoWpdDO8ROHorFkKIb/UOs3P/D3o37WSF2ICSo5hW8oNAgMBAAECgYAyWEvvauagJomLMt1wtn/a/J5OKgBU0i/Fx3nKqKEjcRfEG2x7d2rk/jZt4dI3Mv0h7ol86XWWOKuwjefR6HZBmbBA8jmeR60oDBiGXVITM0gqN0KpaV0MgBMTK8QzbxGu0yMDiC/uum6AFf1Sd/G6bVJsu1aueZHIUPqBMBJY0QJBANDPP1Vo8AlfwbgXUogCyE1CNXNuM40+I4s0XMYKb/eQ1OBlIoC9iCFEcnRLKcu1Tlk6irHQDGUcFxpKz2SuWxMCQQDD3ulw0lKsD1DHVfZv35kJDuvLglnOPukw3V66p7ZvBKqHFwRmeYfDX9ZEKBiFhOxPxf0F7l4nE/Y7nI1SacpfAkBkTKinZhim6BAtVUaXfn6oXb0/DRhGKCr6mtRVbH4L9M3MW8gO/vt8v1wa8F/LMfPIeI5WixDpIG0YfAbS3c1xAkEAtGnFYbsIlR1CTWk7pc4xuqs4u2nkaFmAFxdAIvNJ0bZdkDK+RdlZGLdUt9CqzYki1VPLfEQUCzCS1FOdxDRXRwJAXTjH8DYxCwr2/G+6yUvpgsKtALxE8anWl98TJT/l5WzLQlIwQmuN4R2JnBxPaZ6heZmu+98lI4F8t+zGPFxZHw==";
-        
-        
-        privateKey = @"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAO7ANGi6HmaUKhCS"
-        "J2NrrhmSs/CU31JzkOhClipw2dsz17aW9DQO9EmiDyix34ktSLxys4YjJ9k0Z+HZ"
-        "ER9avqGL7K34R2/8zRoyX7Q2bU9AL7QgljJfl6wrqK0zY8gGRVJl8MX9r/+arVjc"
-        "htE4kSEodDEVXewKufPpY4mH8j0fAgMBAAECgYAmIKe9+csVEqBNGSoVJIMfLmBy"
-        "ETRA1JfVn5yflnoUGYlfbWf+UE0O3USSeSV7oLG29pJY35BjjYzxclrbqQA8OUb4"
-        "3mNNSwOdy6cTAQsim6pzFSepkH0Lbp1yh6TTGNTmQQxxAhJgQzu5foVNXzKcgfn7"
-        "UjQRcWzB+dU24dl+QQJBAPlw/YJ30vDp04za3O+NrTkyUNecAjE3iXCV7mZ8FnSv"
-        "JcKLOCJlF+5JQaJPQzPFJKVktoU6nKYl5UMXM0JLbvECQQD1B0FguN+SAUsROFzH"
-        "CpfuHMa/7us/ra0ieCEN/B/LaReakvNnEq/2dObKURgCvhmncfj39jbY5+vaUf6I"
-        "LI0PAkBmSRkLeQs80wV2ywCyEsynmaRg5Y5YlEd9rV2XFOc4beH0Bpa8M+w+QDfz"
-        "0MDj58GBOO1HcKNv1jZO7qKMWtZhAkA8KC3a60iodfzSG35bt7QZV6NMGAJVvfQV"
-        "1Fx5LH8513FeF9n+Yk4lOgo3fbVhZv6xZ3/ykNZiZn43OY4+LIHtAkB5HlJPXc8o"
-        "KygzVTAexTk8rXQMmQ1+qBZLREWPsdopqqCJjxnQT4yq7xb1QS09M+Ht4uzYaAxo"
-        "ZfdeabJakfkR";
-    
-    
-//    privateKey=@"MIICXwIBAAKBgQC67zHqzNhXVLDdChWSD2g/jqZFltgkRRSvpE6MiUkkUJQU231g"
-//    "1YQzvXrvkpqLO4Iz9siew5CTCsI916Aoapzs5/XKK0khBguqB7ueR4VvC5u+pSGx"
-//    "6oXFiIxW5o+nAzC23/BCVot9zo3oR+hCqmqznVq37O/i1CZQYq8iRqns+wIDAQAB"
-//    "AoGBAIy3vsXXyguDj1f1XWOEAZ/GjFfaQ36aGgZWE2MrfUm+9pn02B7q3Afu3Po3"
-//    "S+r/svXXEhKheNWXxbyz8rY5+0H5phXPL4yzT51YPFEhKFmWnoTzzqv5p1kKQphd"
-//    "SN6FrMblYnRsPCLxn01tEvMQoKxwYzZhI04AaVz+wX6d5XMxAkEA4SYenOZFK3Oe"
-//    "KJQwMfLceikB6t0c7C1yUAmdwytozUJuD6gzejD5pUkQhFsc78lECR4gFEtBKwOv"
-//    "Q4ftlB6PZwJBANSMkThSoLl/ABKJ1vrXRcjwqJo+G2vRdM6Hq52z/YqBtvemRc9Y"
-//    "xD+CGaHx1hlYARjh/LXl/NsReivqdHRA/U0CQQC3aWJO1pdKimkxDWcliX5qVbWm"
-//    "KnJBQ9R3tx25vEcnzxHx10f4JqV4LEk0STUNcZvnAY+IeLWh4OKJ1NWJcEvJAkEA"
-//    "hYTcAOafAofOMtcWDjNHKkhLkcEsFpnYZ5kAbKvRvL1pg76Wof8gIMkIcxvpI7iN"
-//    "z+S+jEGyiqc6+PVqPFFLDQJBAMnKCXqySYT2nXEzjvV6CjZMBuH1xxb+IOz0bT76"
-//    "COP0JakJ3NV9p5+VpPqK1q9/WccWtYuQkSk9RBQhhNPtCGE=";
-    
-    
-//    MIICXwIBAAKBgQC67zHqzNhXVLDdChWSD2g/jqZFltgkRRSvpE6MiUkkUJQU231g
-//    1YQzvXrvkpqLO4Iz9siew5CTCsI916Aoapzs5/XKK0khBguqB7ueR4VvC5u+pSGx
-//    6oXFiIxW5o+nAzC23/BCVot9zo3oR+hCqmqznVq37O/i1CZQYq8iRqns+wIDAQAB
-//    AoGBAIy3vsXXyguDj1f1XWOEAZ/GjFfaQ36aGgZWE2MrfUm+9pn02B7q3Afu3Po3
-//    S+r/svXXEhKheNWXxbyz8rY5+0H5phXPL4yzT51YPFEhKFmWnoTzzqv5p1kKQphd
-//    SN6FrMblYnRsPCLxn01tEvMQoKxwYzZhI04AaVz+wX6d5XMxAkEA4SYenOZFK3Oe
-//    KJQwMfLceikB6t0c7C1yUAmdwytozUJuD6gzejD5pUkQhFsc78lECR4gFEtBKwOv
-//    Q4ftlB6PZwJBANSMkThSoLl/ABKJ1vrXRcjwqJo+G2vRdM6Hq52z/YqBtvemRc9Y
-//    xD+CGaHx1hlYARjh/LXl/NsReivqdHRA/U0CQQC3aWJO1pdKimkxDWcliX5qVbWm
-//    KnJBQ9R3tx25vEcnzxHx10f4JqV4LEk0STUNcZvnAY+IeLWh4OKJ1NWJcEvJAkEA
-//    hYTcAOafAofOMtcWDjNHKkhLkcEsFpnYZ5kAbKvRvL1pg76Wof8gIMkIcxvpI7iN
-//    z+S+jEGyiqc6+PVqPFFLDQJBAMnKCXqySYT2nXEzjvV6CjZMBuH1xxb+IOz0bT76
-//    COP0JakJ3NV9p5+VpPqK1q9/WccWtYuQkSk9RBQhhNPtCGE=
-//    
-    
-    
-    
-        
-
         
 
         
@@ -161,7 +165,7 @@
 //            NSString *oderStringSource=@"partner=\"2088021577004853\"&seller_id=\"vab_pm@cmi.chinamobile.com\"&out_trade_no=\"RY2IA4Z78BYYCW1\"&subject=\"1\"&body=\"我是测试数据\"&total_fee=\"0.02\"&notify_url=\"http://www.xxx.com\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&show_url=\"m.alipay.com\"";
 //            
         
-        id<DataSigner> signer = CreateRSADataSigner(privateKey);
+        id<DataSigner> signer = CreateRSADataSigner([ALiPay_Private copy]);
          NSString *signKey = [signer signString:[order description]];
 
         
@@ -178,16 +182,15 @@
             NSInteger  statusCode = [resultDic[@"resultStatus"] integerValue];
             
             if (statusCode == 9000) {
+                //成功发布消息
                 
+                SafePostMessage(ALiPayNotice, @"1");
                 
-              //  [Utils postMessage:[AliPayNotice copy] body:@"1"];
-       
                 
             }else{
                 
-           
-           //     [Utils postMessage:[AliPayNotice copy] body:@"0"];
-                
+                //失败发送消息
+                SafePostMessage(ALiPayNotice, @"0");
                 
                 
             }

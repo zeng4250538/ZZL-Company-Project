@@ -425,6 +425,8 @@
            
            vc.navigationItem.title=@"优选品牌";
            
+           vc.shopQueryType = ShopQueryTypeRecommend;
+           
            [self.navigationController pushViewController:vc animated:YES];
            
            
@@ -440,6 +442,8 @@
             
             
             
+            
+            
             [self.navigationController pushViewController:vc animated:YES];
             
         }];
@@ -451,6 +455,8 @@
             ShopListViewCtrl *vc = [ShopListViewCtrl new];
             vc.hidesBottomBarWhenPushed = YES;
             vc.navigationItem.title=@"品牌街";
+            vc.shopQueryType = ShopQueryTypeNearBy;
+            
             [self.navigationController pushViewController:vc animated:YES];
             
         }];
