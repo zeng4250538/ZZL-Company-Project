@@ -43,12 +43,7 @@
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
-    
-    
-    
-    
-
-    
+     
     
     [self loadData];
     
@@ -171,18 +166,40 @@
     
     cell.data = data;
     
-    NSString *shopId = SafeString(data[@"id"]);
+    NSString *shopId = SafeString(data[@"shopId"]);
     
     cell.unFavBlock = ^(){
         
+        
+        
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         
         ShopService *service = [ShopService new];
         
         [service doUnFav:shopId success:^(NSInteger code, NSString *message, id data) {
             
-            [self loadData];
             
-            [SVProgressHUD showSuccessWithStatus:@"取消订阅成功"];
+            [SVProgressHUD dismiss];
+            
+            
+            NSMutableArray *ary = [self.dataList mutableCopy];
+            
+            
+            
+            [ary removeObjectAtIndex:indexPath.row];
+            
+            self.dataList = ary;
+            
+            
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [self.tableView reloadData];
+            
+            
+            
+            
+            
+            
             
         } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
             

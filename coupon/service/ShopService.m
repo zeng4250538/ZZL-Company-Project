@@ -289,7 +289,7 @@
     NSString *customerId=[AppShareData instance].customId;
     
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shop/"];
     
     url = [url stringByAppendingString:shopid];
     
@@ -298,7 +298,7 @@
     
     
    
-    NSDictionary *parm = @{@"customerId":customerId,@"shopId":shopid};
+    NSDictionary *parm = @{@"customerId":customerId};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -516,11 +516,10 @@
     
     
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/shopfavorite/"];
     
     
-    url = [url stringByAppendingString:@"/shopfavorite"];
-    
+     
     
     NSDictionary *parm = @{@"customerId":customerId,@"shopId":shopid};
     
@@ -566,15 +565,17 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
     
+    
+    
     url = [url stringByAppendingString:customerId];
     
     url = [url stringByAppendingString:@"/favorite"];
     
     
-    NSDictionary *parm = @{@"customerId":customerId};
+   // NSDictionary *parm = @{@"customerId":customerId};
     
     
-    [req get:url param:parm success:^(NSInteger code, id object) {
+    [req get:url param:nil success:^(NSInteger code, id object) {
         
         success(code,@"",object);
         

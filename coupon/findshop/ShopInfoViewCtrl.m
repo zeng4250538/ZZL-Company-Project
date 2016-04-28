@@ -434,7 +434,10 @@
             
             ShopService *service = [ShopService new];
             
-            [SVProgressHUD showWithStatus:@"" maskType:SVProgressHUDMaskTypeBlack];
+            
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+            
+           // [SVProgressHUD showWithStatus:@"" maskType:SVProgressHUDMaskTypeBlack];
             
             [service doFav:shopId success:^(NSInteger code, NSString *message, id data) {
                 
@@ -460,13 +463,22 @@
             
             ShopService *service = [ShopService new];
             
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+            
+            
             [service doUnFav:shopId success:^(NSInteger code, NSString *message, id data) {
                 
                 [btn setTitle:@"订阅" forState:UIControlStateNormal];
                 btn.selected = NO;
                 
+                [SVProgressHUD dismiss];
+                
                 
             } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                
+                
+                [SVProgressHUD dismiss];
+                
                 
                 
                 

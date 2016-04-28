@@ -99,13 +99,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "coupon/findshop/ShopInfoViewCtrl.m"
-            timestampString = "483510959.505355"
+            filePath = "coupon/person/MyRemindViewCtrl.m"
+            timestampString = "483532369.222216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "441"
-            endingLineNumber = "441"
-            landmarkName = "-makeHeaderView"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-doLoad:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
