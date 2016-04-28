@@ -1,40 +1,42 @@
 //
-//  MyRemindViewCtrl.m
+//  ShopDetailViewCtrl.m
 //  coupon
 //
-//  Created by chijr on 16/2/20.
-//  Copyright (c) 2016年 chijr. All rights reserved.
+//  Created by chijr on 16/4/28.
+//  Copyright © 2016年 chijr. All rights reserved.
 //
 
-#import "MyRemindViewCtrl.h"
+#import "ShopDetailViewCtrl.h"
+#import "ShopService.h"
 
-#import "CouponService.h"
-#import "CouponDetailViewCtrl.h"
-#import "CouponInfoTableViewCell.h"
+@interface ShopDetailViewCtrl ()
 
-#import "ReminderService.h"
+@property(nonatomic,strong)NSDictionary *data;
 
-
-
-@interface MyRemindViewCtrl ()
-
-@property(nonatomic,strong)NSArray *data;
 
 @end
 
-@implementation MyRemindViewCtrl
+@implementation ShopDetailViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
-    [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
-    self.navigationItem.title=@"我的提醒";
     
     
     [self loadData];
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    
+    self.navigationItem.title=@"商店详情";
+    
+    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -45,6 +47,50 @@
 }
 
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    //self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    self.navigationController.navigationBar.translucent = NO;
+
+    
+    
+}
+
+-(void)makeHeaderView{
+    
+    
+    UIView *uv = [UIView new];
+    
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+    
+    NSURL *url = SafeUrl(self.data[@"photoUrl"]);
+    
+    
+    
+    
+    [imageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        
+        
+    }];
+    
+    uv.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
+    
+    self.tableView.tableHeaderView = imageView;
+    
+    
+    
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 -(void)loadData{
     
@@ -86,22 +132,22 @@
 -(void)doLoad:(void(^)(BOOL ret))completion{
     
     
-    ReminderService *service = [ReminderService new];
+    ShopService *service = [ShopService new];
     
-    
-    [service requestReminder:1 per_page:10 success:^(NSInteger code, NSString *message, id data) {
+    [service requestShopInfo:self.shopId success:^(NSInteger code, NSString *message, id data) {
         
         self.data = data;
         
         [self.tableView reloadData];
         
+        [self makeHeaderView];
+        
         completion(YES);
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
-        
         completion(NO);
-
+        
         
     }];
     
@@ -110,95 +156,79 @@
     
     
     
+    
+    
+    
 }
 
 
 
 
 
-
-
-//-(void)loadData{
-//    
-//    
-//    CouponService *service = [CouponService new];
-//    
-//    
-//    [service queryRemindCoupon:nil success:
-//     ^(int code, NSString *message, id data) {
-//         
-//         if (code==0) {
-//             
-//             self.data = data;
-//             
-//             [self.tableView reloadData];
-//             
-//         }
-//         
-//     } failure:
-//     ^(int code, BOOL retry, NSString *message, id data) {
-//         
-//         
-//     }];
-//    
-//    //service qu
-//    
-//    
-//    
-//    
-//    
-//    
-//}
-//
-//
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return [CouponInfoTableViewCell height];
-    
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [self.data count];
+    return 4;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
+//    for(UIView *uv in [cell.contentView subviews]){
+//        [uv removeFromSuperview];
+//    }
+//    
+//    UILabel *nameLabel = [UILabel new];
     
     
     
+//    
+    
+    if (indexPath.row==0) {
+        
+        cell.textLabel.text =[NSString stringWithFormat:@"店名：%@",SafeString(self.data[@"name"])];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+
+        
+    }
+    
+    if (indexPath.row==1) {
+        
+        cell.textLabel.text =[NSString stringWithFormat:@"电话：%@",SafeString(self.data[@"phone"])];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        
+        
+    }
+    
+    if (indexPath.row==2) {
+        
+        cell.textLabel.text =[NSString stringWithFormat:@"地址：%@",SafeString(self.data[@"address"])];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        
+        
+    }
+  
+    if (indexPath.row==3) {
+        
+        cell.textLabel.text =[NSString stringWithFormat:@"描述：%@",SafeString(self.data[@"description"])];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        
+        
+    }
     
     
-    NSDictionary *d = self.data[indexPath.row];
     
-    cell.data =d;
-    
-    
-    
-    
-    cell.couponActionType = CouponTypeUnLimited;
-    
-    
-    [cell updateData];
-    
-    //cell.textLabel.text=@"我的提醒";
     
     // Configure the cell...
     

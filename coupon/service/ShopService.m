@@ -30,7 +30,10 @@
     
     NSString *customerId = [AppShareData instance].customId;
     
-    NSDictionary *parm = @{@"shopMallId":mallid,@"customerId":customerId,@"page":@(page),@"per_page":@(pageCount)};
+    NSDictionary *parm = @{@"shopMallId":mallid,
+                           @"customerId":customerId,
+                           @"page":@(page),
+                           @"per_page":@(pageCount)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -91,6 +94,68 @@
    
     
 }
+
+-(void)requestNearbyShopWithFilter:(NSString*)mallid page:(NSInteger)page per_page:(NSInteger)per_page
+                               cat:(NSString*)cat sort:(NSString*)sort
+                 success:(void(^)(NSInteger code,NSString *message,id data))success
+                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby?"];
+    
+    NSDictionary *param =nil;
+    
+  
+    
+    if ([sort length]==0) {
+        sort=@"default";
+    }
+    
+    if ([cat length]>0) {
+        
+        
+        param= @{@"shopMallId":mallid,
+            @"sort":sort,
+            @"categoryId":cat,
+            @"page":@(page),@"per_page":@(per_page)};
+        
+        
+
+    }else{
+        
+        param= @{@"shopMallId":mallid,
+                 @"sort":sort,
+                 @"page":@(page),@"per_page":@(per_page)};
+        
+        
+        
+    }
+    
+    
+    [req get:url param:param success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+        
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+        
+        
+    }];
+    
+    
+    
+}
+
 
 
 -(void)requestKeyword:(NSString*)mallid keyWord:(NSString*)keyWord
@@ -233,11 +298,12 @@
     
     
    
-    NSDictionary *parm = @{@"customerId":customerId};
+    NSDictionary *parm = @{@"customerId":customerId,@"shopId":shopid};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         
+         
         success(code,@"",object);
         
     } failure:^(NSInteger code, NSString *content) {
@@ -290,7 +356,7 @@
     
 }
 
--(void)requestShopInfo:(NSString*)shopId
+-(void)requestShopInfo:(NSString* )shopId
                success:(void(^)(NSInteger code,NSString *message,id data))success
                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
@@ -456,7 +522,7 @@
     url = [url stringByAppendingString:@"/shopfavorite"];
     
     
-    NSDictionary *parm = @{@"customerid":customerId,@"shopid":shopid};
+    NSDictionary *parm = @{@"customerId":customerId,@"shopId":shopid};
     
     
     [req delete:url param:parm success:^(NSInteger code, id object) {

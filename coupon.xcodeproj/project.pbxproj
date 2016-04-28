@@ -151,6 +151,8 @@
 		5796FA801C463949004CA23B /* SubTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796FA7F1C463949004CA23B /* SubTableViewCell.m */; };
 		5796FA831C47E904004CA23B /* CouponView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796FA821C47E904004CA23B /* CouponView.m */; };
 		5796FA871C481AB6004CA23B /* gocart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5796FA861C481AB6004CA23B /* gocart@2x.png */; };
+		579E54201CD1A00900B6C9E4 /* ShopDetailViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E541F1CD1A00900B6C9E4 /* ShopDetailViewCtrl.m */; };
+		579E54231CD1D2BA00B6C9E4 /* ReminderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E54221CD1D2BA00B6C9E4 /* ReminderService.m */; };
 		57A4F6D01CCA00D2004B6549 /* GoToMapViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4F6CF1CCA00D2004B6549 /* GoToMapViewCtrl.m */; };
 		57A94E581C37DBFD00BE0022 /* tab_brand_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E551C37DBFD00BE0022 /* tab_brand_icon@2x.png */; };
 		57A94E591C37DBFD00BE0022 /* tab_person_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E561C37DBFD00BE0022 /* tab_person_icon@2x.png */; };
@@ -577,6 +579,10 @@
 		5796FA811C47E904004CA23B /* CouponView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponView.h; sourceTree = "<group>"; };
 		5796FA821C47E904004CA23B /* CouponView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponView.m; sourceTree = "<group>"; };
 		5796FA861C481AB6004CA23B /* gocart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gocart@2x.png"; sourceTree = "<group>"; };
+		579E541E1CD1A00900B6C9E4 /* ShopDetailViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailViewCtrl.h; sourceTree = "<group>"; };
+		579E541F1CD1A00900B6C9E4 /* ShopDetailViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopDetailViewCtrl.m; sourceTree = "<group>"; };
+		579E54211CD1D2BA00B6C9E4 /* ReminderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderService.h; sourceTree = "<group>"; };
+		579E54221CD1D2BA00B6C9E4 /* ReminderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderService.m; sourceTree = "<group>"; };
 		57A4F6CE1CCA00D2004B6549 /* GoToMapViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoToMapViewCtrl.h; sourceTree = "<group>"; };
 		57A4F6CF1CCA00D2004B6549 /* GoToMapViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoToMapViewCtrl.m; sourceTree = "<group>"; };
 		57A94E551C37DBFD00BE0022 /* tab_brand_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_brand_icon@2x.png"; sourceTree = "<group>"; };
@@ -1085,6 +1091,8 @@
 				57CE97CB1C63A9CB00CE0E57 /* ShopListViewCtrl.m */,
 				573E51D21C7C5407005DBBC3 /* ShopCommentEditViewCtrl.h */,
 				573E51D31C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m */,
+				579E541E1CD1A00900B6C9E4 /* ShopDetailViewCtrl.h */,
+				579E541F1CD1A00900B6C9E4 /* ShopDetailViewCtrl.m */,
 			);
 			path = shopDetail;
 			sourceTree = "<group>";
@@ -1466,6 +1474,8 @@
 				57D1480B1CC136F100F9E40C /* ShopMessageService.m */,
 				57D148D11CC3413900F9E40C /* ReviewService.h */,
 				57D148D21CC3413900F9E40C /* ReviewService.m */,
+				579E54211CD1D2BA00B6C9E4 /* ReminderService.h */,
+				579E54221CD1D2BA00B6C9E4 /* ReminderService.m */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1897,6 +1907,7 @@
 				7FF596751CB3F0FF008BDE5A /* MyInformationSevice.m in Sources */,
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
 				573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */,
+				579E54201CD1A00900B6C9E4 /* ShopDetailViewCtrl.m in Sources */,
 				7F121D721CA6AF6A005AF53D /* SearchShopService.m in Sources */,
 				574911331CC00AAE00FB2B14 /* DataSigner.m in Sources */,
 				574910D01CC0084B00FB2B14 /* Order.m in Sources */,
@@ -1932,6 +1943,7 @@
 				573E51E31C7CB134005DBBC3 /* CouponDrawbackViewCtrl.m in Sources */,
 				7F121D5C1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m in Sources */,
 				57F3E2891C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m in Sources */,
+				579E54231CD1D2BA00B6C9E4 /* ReminderService.m in Sources */,
 				5796FA741C460CB1004CA23B /* UIView+LayoutBlock.m in Sources */,
 				57A94E791C38D99800BE0022 /* ShopInfoViewCtrl.m in Sources */,
 				5779BD6A1C25381600E15934 /* AppDelegate.m in Sources */,

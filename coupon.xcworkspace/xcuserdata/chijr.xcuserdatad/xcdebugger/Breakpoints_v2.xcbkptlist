@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "coupon/basket/UseCouponViewCtrl.m"
-            timestampString = "483380695.175507"
+            timestampString = "483414027.313003"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "-makeFooterView"
             landmarkType = "5">
          </BreakpointContent>
@@ -68,12 +68,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "coupon/basket/UseCouponViewCtrl.m"
-            timestampString = "483379824.777996"
+            timestampString = "483414027.313003"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "-wechatPayResult:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "coupon/findshop/CouponDetailViewCtrl.m"
+            timestampString = "483446347.398297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "coupon/findshop/ShopInfoViewCtrl.m"
+            timestampString = "483510959.505355"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
+            landmarkName = "-makeHeaderView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

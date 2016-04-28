@@ -34,6 +34,7 @@
 @interface AppDelegate ()
 
 @property (nonatomic, strong) CLLocationManager *lcManager;
+@property(nonatomic,strong)NSString *city;
 
 @end
 
@@ -228,8 +229,19 @@ NSString *WeChatAppSecret=@"";
         self.lcManager.distanceFilter = 100;
         self.lcManager.desiredAccuracy = kCLLocationAccuracyBest; // 设置定位精度(精度越高越耗电)
         [self.lcManager startUpdatingLocation]; // 开始更新位置
+        
+        
+        
     }
     
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
+        [self.lcManager requestWhenInUseAuthorization];//⓵只在前台开启定位
+        //[self.lcManager requestAlwaysAuthorization];//⓶在后台也可定位
+    }
+    // 5.iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+        //self.lcManager.allowsBackgroundLocationUpdates = YES;
+    }
     
 //    56e906e267e58e54f2000607  复制
 //    App Master Secret：eex4ihtajreb2ca4t8mdsd0plwivb9vx
@@ -261,14 +273,37 @@ NSString *WeChatAppSecret=@"";
     return YES;
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    NSLog(@"定位到了");
-}
 /** 不能获取位置信息时调用*/
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"获取定位失败");
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *currentLocation = [locations lastObject]; // 最后一个值为最新位置
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    // 根据经纬度反向得出位置城市信息
+    [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (placemarks.count > 0) {
+            CLPlacemark *placeMark = placemarks[0];
+            self.city = placeMark.locality;
+            
+            [[AppShareData instance] setCity:self.city];
+            // ? placeMark.locality : placeMark.administrativeArea;
+            if (!self.city) {
+                self.city = NSLocalizedString(@"home_cannot_locate_city", comment:@"无法定位当前城市");
+            }
+            // 获取城市信息后, 异步更新界面信息.      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+    } else if (error == nil && placemarks.count == 0) {
+        NSLog(@"No location and error returned");
+    } else if (error) {
+        NSLog(@"Location error: %@", error);
+    }
+     }];
+    
+    [manager stopUpdatingLocation];
 }
 
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,CLLocationManagerDelegate>
 
 @property (strong, nonatomic)UIWindow *window;
 @property (strong,nonatomic)UITabBarController *tabViewCtrl;

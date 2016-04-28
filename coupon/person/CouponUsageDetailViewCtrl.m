@@ -13,12 +13,18 @@
 @interface CouponUsageDetailViewCtrl ()
 
 
+@property(nonatomic,assign)BOOL isSubmitReturn;
+@property(nonatomic,strong)UIButton *toCommentButton;
+
+
 @end
 
 @implementation CouponUsageDetailViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.isSubmitReturn = NO;
     
     
     
@@ -43,6 +49,18 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (self.isSubmitReturn) {
+        
+        self.toCommentButton.hidden = YES;
+        
+        
+    }
+    
+    
+}
 
 -(void)makeFooterView{
     
@@ -51,6 +69,7 @@
     
     UIButton *toCommentButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
+    self.toCommentButton = toCommentButton;
     [self.tableView.tableFooterView addSubview:toCommentButton];
     
     [toCommentButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,6 +91,8 @@
         
         CommentSubmitViewCtrl *vc =[CommentSubmitViewCtrl new];
         vc.data =self.data;
+        
+        self.isSubmitReturn = YES;
         
         [self.navigationController pushViewController:vc animated:YES];
         

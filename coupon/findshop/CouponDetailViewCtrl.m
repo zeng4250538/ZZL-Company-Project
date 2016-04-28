@@ -198,7 +198,6 @@
     
     
     
-    
     [service requestCouponInfo:self.couponId success:^(NSInteger code, NSString *message, id data) {
         
         
@@ -426,7 +425,7 @@
     
     [addCartButton bk_addEventHandler:^(id sender) {
         
-        [self loadData];
+        // [self loadData];
         
         ThrowLineTool *tool = [[ThrowLineTool alloc] init];
         

@@ -29,9 +29,9 @@
 @interface ShopPortalViewCtrl ()
 
 @property(nonatomic,strong)UISearchBar *searchBar;
-@property(nonatomic,strong)NSArray *hotShopData;
+@property(nonatomic,strong)NSArray *recommendShopData;        
 @property(nonatomic,strong)NSArray *couponData;
-@property(nonatomic,strong)NSArray *hotBrandData;
+@property(nonatomic,strong)NSArray *nearByShopData;
 @property(nonatomic,strong)NSArray *otherData;
 @property(nonatomic,strong)NSDictionary *portalData;
 @property(nonatomic,assign)BOOL bools;
@@ -39,6 +39,14 @@
 @property(nonatomic,strong)NSString *cityString;
 @property(nonatomic,strong)NSArray *mallArray;
 @property(nonatomic,strong)UIButton *headButton;
+
+@property(nonatomic,strong)NSString *filterString;  //分类过滤数据
+@property(nonatomic,strong)NSString *sortString;    //排序数据
+
+@property(nonatomic,strong)NSString *filterTitle;  //分类过滤数据
+@property(nonatomic,strong)NSString *sortTitle;    //排序数据
+
+
 
 @end
 
@@ -165,7 +173,7 @@
     
     [service requestRecommendShop:mallId page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
         
-        self.hotShopData = data;
+        self.recommendShopData = data;
         [self.tableView reloadData];
         
         completion(YES);
@@ -205,7 +213,7 @@
     
     [service requestNearbyShop:mallId page:1 per_page:10  success:^(NSInteger code, NSString *message, id data) {
         
-        self.hotBrandData = data;
+        self.nearByShopData = data;
         [self.tableView reloadData];
         
         completion(YES);
@@ -292,11 +300,6 @@
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
         [Utils popTransparentViewCtrl:self childViewCtrl:vc];
-        
-        //        SelectMallTableCtrl *vc = [SelectMallTableCtrl new];
-        //
-        //        [self.navigationController pushViewController:vc animated:YES];
-        //
         
         vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
             
@@ -485,8 +488,8 @@
         
         if (indexPath.section == 0) {
             
-            NSDictionary *data =  self.hotShopData[indexPath.row];
-            vc.data = self.hotShopData[indexPath.row];
+            NSDictionary *data =  self.recommendShopData[indexPath.row];
+            vc.data = self.recommendShopData[indexPath.row];
             
             vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
         
@@ -497,11 +500,11 @@
         if (indexPath.section == 2) {
           
             
-            NSDictionary *data =  self.hotBrandData[indexPath.row];
+            NSDictionary *data =  self.nearByShopData[indexPath.row];
             
             vc.shopData = [Shop yy_modelWithDictionary:data];
             
-            vc.data = self.hotBrandData[indexPath.row];
+            vc.data = self.nearByShopData[indexPath.row];
 
             
             self.bools = NO;
@@ -542,7 +545,7 @@
     
     if (section ==0 ) {
         
-        return [self.hotShopData count];
+        return [self.recommendShopData count];
         
     }else if (section ==1){
         
@@ -550,7 +553,7 @@
         
     }else{
         
-        return [self.hotBrandData count];
+        return [self.nearByShopData count];
         
     }
     // Return the number of rows in the section.
@@ -564,7 +567,7 @@
         
         ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
  
-        cell.data = self.hotShopData[[indexPath row]];
+        cell.data = self.recommendShopData[[indexPath row]];
         
         [cell updateData];
         
@@ -575,8 +578,6 @@
         
         CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         
-        
-//        NSLog(@" couponData %@",self.couponData[indexPath.row]);
         
         
         cell.data = self.couponData[indexPath.row];
@@ -596,7 +597,7 @@
         
         ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
 
-        cell.data = self.hotBrandData[[indexPath row]];
+        cell.data = self.nearByShopData[[indexPath row]];
         
         [cell updateData];
         
@@ -608,7 +609,6 @@
             
             [brandStreetButton requestButtonString:data shopMallId:@"2" success:^(id data) {
                 
-                NSLog(@"asdada->>>>>>>%@",data);
                 
                 cell.data = data[indexPath.row];
                 
@@ -641,6 +641,122 @@
     // Configure the cell...
     
 }
+-(void)doFilterSortData:(NSString*)filter sort:(NSString*)sort{
+    
+    
+    
+    self.filterString = filter;
+    self.sortString = sort;
+
+    if ([filter isEqualToString:@"全部"]) {
+        self.filterTitle=@"全部";
+        self.filterString=@"";
+        
+    }
+
+    
+    
+    if ([filter isEqualToString:@"美食"]) {
+        self.filterTitle=@"美食";
+        self.filterString=@"00001";
+        
+    }
+    if ([filter isEqualToString:@"电影"]) {
+        self.filterTitle=@"电影";
+        self.filterString=@"00002";
+        
+    }
+
+    if ([filter isEqualToString:@"休闲娱乐"]) {
+        self.filterTitle=@"休闲娱乐";
+        self.filterString=@"00003";
+    }
+
+    if ([sort isEqualToString:@"默认排序"]) {
+        self.sortTitle=@"默认排序";
+        self.sortString=@"default";
+    }
+    
+    if ([sort isEqualToString:@"点赞升序"]) {
+        self.sortTitle=@"点赞升序";
+        self.sortString=@"good";
+        
+        
+    }
+    
+    if ([sort isEqualToString:@"点赞降序"]) {
+        self.sortTitle=@"点赞降序";
+        self.sortString=@"-good";
+        
+        
+    }
+    
+    
+    if ([sort isEqualToString:@"收藏降序"]) {
+        self.sortTitle=@"收藏降序";
+        self.sortString=@"-favor_count";
+        
+        
+    }
+
+    if ([sort isEqualToString:@"领取降序"]) {
+        self.sortTitle=@"领取降序";
+        self.sortString=@"-ordered_coupon_count";
+        
+        
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ShopService *service = [ShopService new];
+    
+    NSString *mallId = [AppShareData instance].mallId;
+
+    
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [service requestNearbyShopWithFilter:mallId page:1 per_page:10 cat:self.filterString sort:self.sortString success:^(NSInteger code, NSString *message, id data) {
+        
+        [SVProgressHUD dismiss];
+        
+        
+        self.nearByShopData = data;
+        
+        [self.tableView reloadData];
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        [SVProgressHUD dismiss];
+        
+        
+        if (code==404) {
+            
+            self.nearByShopData = nil;
+            [self.tableView reloadData];
+            
+        }
+        
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+}
+
 
 -(UIView*)headerViewWithSort:(NSString*)title clickBlock:(void(^)())clickBlock{
     
@@ -686,6 +802,15 @@
     UIButton *filterButton = [UIButton buttonWithType:UIButtonTypeSystem];
     filterButton.frame = CGRectMake(0, 0, SCREEN_WIDTH/2, 50);
     [filterButton setTitle:@"全部" forState:UIControlStateNormal];
+    
+    if ([self.filterTitle length]==0) {
+        [filterButton setTitle:@"全部" forState:UIControlStateNormal];
+
+    }else{
+        [filterButton setTitle:self.filterTitle forState:UIControlStateNormal];
+        
+        
+    }
     [sortBarView addSubview:filterButton];
     
     [filterButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
@@ -694,7 +819,16 @@
     
     UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeSystem];
     sortButton.frame = CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 50);
-    [sortButton setTitle:@"排序" forState:UIControlStateNormal];
+    
+    if ([self.sortTitle length]==0) {
+        [sortButton setTitle:@"排序" forState:UIControlStateNormal];
+
+    }else{
+        
+        [sortButton setTitle:self.sortTitle forState:UIControlStateNormal];
+       
+    }
+    
     [sortBarView addSubview:sortButton];
     
     [sortButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
@@ -707,16 +841,16 @@
     [sortBarView addSubview:line2];
     
     
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    
     [filterButton bk_addEventHandler:^(id sender) {
         
         UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
         
         
-        BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
+          
         
-        // ShopPortalViewCtrl *shop = [ShopPortalViewCtrl new];
-        //
-        //
         
         [as bk_addButtonWithTitle:@"全部" handler:^{
             
@@ -724,37 +858,38 @@
             
             
             
+            [self doFilterSortData:@"全部" sort:self.sortString];
+            
+            
+            
+            
         }];
         
         [as bk_addButtonWithTitle:@"美食" handler:^{
             
-            [filterButton setTitle:@"美食" forState:UIControlStateNormal];
-                         self.block(@"00001");
-                        NSLog(@"点击了美食");
+            
+            [self doFilterSortData:@"美食" sort:self.sortString];
+            
             
         }];
         
         [as bk_addButtonWithTitle:@"电影" handler:^{
             
-            self.block(@"00002");
-            [filterButton setTitle:@"电影" forState:UIControlStateNormal];
             
+            [self doFilterSortData:@"电影" sort:self.sortString];
             
-        }];
-        
-        [as bk_addButtonWithTitle:@"美容" handler:^{
-            self.block(@"00003");
-            [filterButton setTitle:@"美容" forState:UIControlStateNormal];
             
             
         }];
         
-//        [as bk_addButtonWithTitle:@"服饰" handler:^{
-//            
-//            [filterButton setTitle:@"服饰" forState:UIControlStateNormal];
-//            
-//            
-//        }];
+        [as bk_addButtonWithTitle:@"休闲娱乐" handler:^{
+            
+            [self doFilterSortData:@"休闲娱乐" sort:self.sortString];
+            
+            
+            
+        }];
+        
         
         
         
@@ -786,6 +921,8 @@
     //    [tan release];
     
     
+    ShopService *service = [ShopService new];
+    
     
     [sortButton bk_addEventHandler:^(id sender) {
         
@@ -793,28 +930,55 @@
         UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
         
         [as bk_addButtonWithTitle:@"默认排序" handler:^{
+            
+            
+            
+            [self doFilterSortData:self.filterString sort:@"默认排序"];
+            
+            
+            
            
-            [sortButton setTitle:@"默认排序" forState:UIControlStateNormal];
+        
+
             
         }];
         
-        [as bk_addButtonWithTitle:@"价格排序" handler:^{
+        [as bk_addButtonWithTitle:@"点赞降序" handler:^{
             
-            [sortButton setTitle:@"价格排序" forState:UIControlStateNormal];
             
-        }];
-        
-        [as bk_addButtonWithTitle:@"金额排序" handler:^{
+            [self doFilterSortData:self.filterString sort:@"点赞降序"];
             
-            [sortButton setTitle:@"金额排序" forState:UIControlStateNormal];
+ 
             
         }];
         
-        [as bk_addButtonWithTitle:@"时间排序" handler:^{
+        [as bk_addButtonWithTitle:@"点赞升序" handler:^{
             
-            [sortButton setTitle:@"时间排序" forState:UIControlStateNormal];
+            [self doFilterSortData:self.filterString sort:@"点赞升序"];
+
+            
+            
+            
+ 
             
         }];
+        
+        [as bk_addButtonWithTitle:@"收藏降序" handler:^{
+            
+            
+            [self doFilterSortData:self.filterString sort:@"收藏降序"];
+
+            
+    
+            
+        }];
+ 
+        [as bk_addButtonWithTitle:@"领取降序" handler:^{
+            
+            [sortButton setTitle:@"领取降序" forState:UIControlStateNormal];
+            
+        }];
+
         
         [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{
             

@@ -64,6 +64,29 @@ static AppShareData *instance;
 }
 
 
+-(void)setCity:(NSString *)city{
+    
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:city forKey:CityKey];
+    
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    
+    
+    
+}
+
+-(NSString*)city{
+    
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:CityKey];
+
+    
+}
+
 -(NSString*)accessToken{
     
     

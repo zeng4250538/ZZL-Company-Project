@@ -17,6 +17,7 @@
 #import "UISubscribeSevice.h"
 #import "MallShopCommentViewController.h"
 #import "ShopService.h"
+#import "ShopDetailViewCtrl.h"
 @interface ShopInfoViewCtrl ()
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
@@ -131,7 +132,6 @@
     
     //requestRealTimeCoupon
     
-    
     NSString *shopId = SafeString(self.data[@"id"]);
     
     [couponService requestRealTimeCoupon:shopId page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
@@ -214,7 +214,7 @@
             
             if (ret) {
                 [ReloadHud removeHud:self.view animated:YES];
-                [self makeHeaderView];
+               // [self makeHeaderView];
             }else{
                 
                 [ReloadHud showReloadMode:self.view];
@@ -232,7 +232,7 @@
         if (ret) {
             [ReloadHud removeHud:self.view animated:YES];
             
-            [self makeHeaderView];
+          //  [self makeHeaderView];
             
         }else{
             
@@ -325,6 +325,19 @@
     
     [uv addSubview:shopBgButton];
     
+    
+    [shopBgButton bk_addEventHandler:^(id sender) {
+        
+        ShopDetailViewCtrl *vc = [ShopDetailViewCtrl new];
+        
+        vc.shopId =SafeString(self.data[@"id"]);
+        
+         
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
     {
         //按iphone6 的尺寸设置比率
         
@@ -356,43 +369,164 @@
         
     }];
     
-    [subButton bk_addEventHandler:^(id sender) {
-        
-        subButton.selected = !subButton.selected;
-        
-    } forControlEvents:UIControlEventTouchUpInside];
-    
     
     subButton.layer.cornerRadius=4;
     subButton.clipsToBounds = YES;
+    
+    
+    [subButton setTitle:@"订阅" forState:UIControlStateNormal];
     
 
     
     [subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    UISubscribeSevice *sevice = [UISubscribeSevice new];
     
-    [sevice string:SafeString(self.data[@"id"]) judgeSuccessful:^(id data) {
+    ShopService *service = [ShopService new];
+    
+    
+    NSString *shopId=@"";
+    
+    if (!SafeEmpty(self.shopId)) {
+        shopId = self.shopId;
+    }else{
+        
+        shopId = SafeString(self.data[@"id"]);
+        
+    }
+    
+    [service requestFav:shopId success:^(NSInteger code, NSString *message, id data) {
         
         
-        
-        if (SafeEmpty(data)) {
-            [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
-            [subButton addTarget:self action:@selector(cancelSubcrideClick:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        
-        else{
+        if ([data isKindOfClass:[NSArray class]]) {
+            if ([data count]>0) {  //数组有参数才能算订阅成功
+                
+                
+                [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
+                subButton.selected = YES;
+                
+                return ;
+                
+                
+            }
             
-            [subButton setTitle:@"订阅" forState:UIControlStateNormal];
-            [subButton addTarget:self action:@selector(subcrideClick:) forControlEvents:UIControlEventTouchUpInside];
-        
         }
+            
+        [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+        
+        subButton.selected = NO;
+            
+            
         
         
-    } failure:^(id code) {
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+       // [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+        
         
     }];
     
+    [subButton bk_addEventHandler:^(id sender) {
+        
+        
+        UIButton *btn = (UIButton*)sender;
+        
+        if (!btn.selected) {
+            
+            ShopService *service = [ShopService new];
+            
+            [SVProgressHUD showWithStatus:@"" maskType:SVProgressHUDMaskTypeBlack];
+            
+            [service doFav:shopId success:^(NSInteger code, NSString *message, id data) {
+                
+                [btn setTitle:@"取消订阅" forState:UIControlStateNormal];
+                btn.selected = YES;
+                
+                [SVProgressHUD dismiss];
+                
+                
+            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                
+                
+                [SVProgressHUD dismiss];
+                
+                
+                
+                
+            }];
+
+           
+        }else{
+            
+            
+            ShopService *service = [ShopService new];
+            
+            [service doUnFav:shopId success:^(NSInteger code, NSString *message, id data) {
+                
+                [btn setTitle:@"订阅" forState:UIControlStateNormal];
+                btn.selected = NO;
+                
+                
+            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                
+                
+                
+            }];
+            
+
+            
+            
+            
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        //subButton.selected = !subButton.selected;
+        
+        
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    UISubscribeSevice *sevice = [UISubscribeSevice new];
+//    
+//    [sevice string:SafeString(self.data[@"id"]) judgeSuccessful:^(id data) {
+//        
+//        
+//        
+//        if (SafeEmpty(data)) {
+//            [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
+//            [subButton addTarget:self action:@selector(cancelSubcrideClick:) forControlEvents:UIControlEventTouchUpInside];
+//        }
+//        
+//        else{
+//            
+//            [subButton setTitle:@"订阅" forState:UIControlStateNormal];
+//            [subButton addTarget:self action:@selector(subcrideClick:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        }
+//        
+//        
+//    } failure:^(id code) {
+//        
+//    }];
+//    
     
     subButton.backgroundColor =[GUIConfig orangeColor];
     
@@ -536,10 +670,14 @@
         
         MallShopCommentViewController *vc = [MallShopCommentViewController new];
         
+        vc.hidesBottomBarWhenPushed = YES;
+        
+//        ShopCommentViewCtrl *vc = [ShopCommentViewCtrl new];
+//        
         vc.shopId = SafeString(self.data[@"id"]);
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
+//        
+       [self.navigationController pushViewController:vc animated:YES];
+//        
         
         
         

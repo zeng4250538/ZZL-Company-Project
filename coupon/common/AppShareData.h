@@ -27,6 +27,8 @@ extern NSString * const IsLoginKey;
 
 @property(nonatomic,copy,readonly)NSString *customId;
 @property(nonatomic,copy,readonly)NSString *mallId;
+@property(nonatomic,copy,readonly)NSString *city;
+
 
 
 @property(nonatomic,copy)NSString *accessToken;
@@ -37,6 +39,8 @@ extern NSString * const IsLoginKey;
 -(void)loginOut;
 
 -(void)saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken ;
+
+-(void)setCity:(NSString *)city;
 
 
 -(void)saveMallId:(NSString*)mallId;
