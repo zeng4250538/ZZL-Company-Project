@@ -35,6 +35,8 @@
 
 @property (nonatomic, strong) CLLocationManager *lcManager;
 @property(nonatomic,strong)NSString *city;
+@property(nonatomic,strong)BMKMapManager* mapManager;
+
 
 @end
 
@@ -49,6 +51,9 @@ NSString *WechatPayNotice=@"wechatpaynotice";
 NSString *UmengKey=@"56e906e267e58e54f2000607";
 NSString *WeChatAppId=@"wx77914cc659d2889c";
 NSString *WeChatAppSecret=@"";
+
+NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id = com.richstone.coupontest3
+
 
 
 
@@ -110,9 +115,6 @@ NSString *WeChatAppSecret=@"";
     self.window.rootViewController = tabViewCtrl;
     
     [self.window makeKeyAndVisible];
-    
-    
-    
     
     
     
@@ -194,8 +196,13 @@ NSString *WeChatAppSecret=@"";
     
     
     
-    
+    //微信
     [WXApi registerApp:WeChatAppId withDescription:@"摇折扣"];
+    
+    self.mapManager = [BMKMapManager new];
+    [self.mapManager start:BaiduMapKey generalDelegate:self];
+    
+    
     
     
     
@@ -494,6 +501,28 @@ NSString *WeChatAppSecret=@"";
     
     
 }
+
+- (void)onGetNetworkState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"百度地图联网成功");
+    }
+    else{
+        NSLog(@"百度地图 联网错误 onGetNetworkState %d",iError);
+    }
+    
+}
+
+- (void)onGetPermissionState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"授权成功");
+    }
+    else {
+        NSLog(@"百度地图 联网错误 onGetPermissionState %d",iError);
+    }
+}
+
 
 
 

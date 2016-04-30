@@ -313,6 +313,10 @@
     
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
+    
+    
+  //  self.navigationController.navigationBar.translucent = NO;
+
    
     
 }
@@ -694,7 +698,7 @@
     
     [commentButton bk_addEventHandler:^(id sender) {
         
-        MallShopCommentViewController *vc = [MallShopCommentViewController new];
+        ShopCommentViewCtrl *vc = [ShopCommentViewCtrl new];
         
         vc.hidesBottomBarWhenPushed = YES;
         

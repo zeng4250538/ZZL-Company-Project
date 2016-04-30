@@ -10,6 +10,7 @@
 
 @interface ShopCommentTableViewCell : UITableViewCell
 
--(void)data:(NSDictionary *)data;
+@property(nonatomic,strong)NSDictionary *data;
+
 
 @end

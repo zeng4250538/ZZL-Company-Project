@@ -119,17 +119,14 @@
     self.timeLabel.font = [UIFont systemFontOfSize:10];
     self.timeLabel.textColor = [UIColor grayColor];
     
+    self.nameLabel.text= SafeString(self.data[@"customerName"]);
+    self.contentLabel.text= SafeString(self.data[@"comment"]);
+    self.timeLabel.text = SafeString(self.data[@"time"]);
+
+    
     
 }
 
--(void)data:(NSDictionary *)data{
-
-    NSLog(@"-----------我的评价数据cell------------%@",data);
-    self.nameLabel.text= SafeString(data[@"customerName"]);
-    self.contentLabel.text= SafeString(data[@"comment"]);
-    self.timeLabel.text = SafeString(data[@"time"]);
-
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

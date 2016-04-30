@@ -40,6 +40,7 @@
 		5701F4811CCF2D9100AC5C25 /* ios-social-sdk-share-quick.html in Resources */ = {isa = PBXBuildFile; fileRef = 5701F4621CCF2D9000AC5C25 /* ios-social-sdk-share-quick.html */; };
 		5701F4821CCF2D9100AC5C25 /* ios-social-sdk-socialbar.html in Resources */ = {isa = PBXBuildFile; fileRef = 5701F4631CCF2D9000AC5C25 /* ios-social-sdk-socialbar.html */; };
 		5701F4831CCF2D9100AC5C25 /* markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = 5701F4641CCF2D9000AC5C25 /* markdown.css */; };
+		570EA8DB1CD4FF1300CAE0AB /* QuickTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 570EA8DA1CD4FF1200CAE0AB /* QuickTableViewCell.m */; };
 		5718A27C1CAAABE0008191F8 /* BasketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A27B1CAAABE0008191F8 /* BasketService.m */; };
 		571C29721C707D8800DDBCE8 /* CellBlueSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 571C296E1C707D8800DDBCE8 /* CellBlueSelected@2x.png */; };
 		571C29731C707D8800DDBCE8 /* CellGraySelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 571C296F1C707D8800DDBCE8 /* CellGraySelected@2x.png */; };
@@ -320,6 +321,8 @@
 		5701F4621CCF2D9000AC5C25 /* ios-social-sdk-share-quick.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-share-quick.html"; sourceTree = "<group>"; };
 		5701F4631CCF2D9000AC5C25 /* ios-social-sdk-socialbar.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-socialbar.html"; sourceTree = "<group>"; };
 		5701F4641CCF2D9000AC5C25 /* markdown.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = markdown.css; sourceTree = "<group>"; };
+		570EA8D91CD4FF1200CAE0AB /* QuickTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickTableViewCell.h; sourceTree = "<group>"; };
+		570EA8DA1CD4FF1200CAE0AB /* QuickTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickTableViewCell.m; sourceTree = "<group>"; };
 		5718A27A1CAAABE0008191F8 /* BasketService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketService.h; sourceTree = "<group>"; };
 		5718A27B1CAAABE0008191F8 /* BasketService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketService.m; sourceTree = "<group>"; };
 		571C296E1C707D8800DDBCE8 /* CellBlueSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellBlueSelected@2x.png"; sourceTree = "<group>"; };
@@ -1250,6 +1253,8 @@
 				57E364AB1C9E6FB5003575FC /* UIView+DataLoad.m */,
 				5727C54A1CB3BFA700C92BF0 /* NSNull+Json.h */,
 				5727C54B1CB3BFA700C92BF0 /* NSNull+Json.m */,
+				570EA8D91CD4FF1200CAE0AB /* QuickTableViewCell.h */,
+				570EA8DA1CD4FF1200CAE0AB /* QuickTableViewCell.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1996,6 +2001,7 @@
 				57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */,
 				57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */,
 				577169871C82129100223EDB /* GUIHelper.m in Sources */,
+				570EA8DB1CD4FF1300CAE0AB /* QuickTableViewCell.m in Sources */,
 				7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */,
 				573E51E61C7CCF09005DBBC3 /* BasketMessageViewCtrl.m in Sources */,
 				57E722C31C670AB7004DBA9C /* CouponService.m in Sources */,

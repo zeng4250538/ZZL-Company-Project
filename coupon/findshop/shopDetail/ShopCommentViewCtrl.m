@@ -10,29 +10,15 @@
 #import "ShopCommentTableViewCell.h"
 #import "ShopCommentSevice.h"
 #import "BasketService.h"
+#import "CommentService.h"
+#import "QuickTableViewCell.h"
 @interface ShopCommentViewCtrl ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic,strong) ShopCommentSevice *shopSevice;
-@property (nonatomic,strong) ShopCommentTableViewCell *cell;
-@property (nonatomic,strong) UITableView *tableViewView;
-@property (nonatomic,strong) NSArray *dataArray;
+@property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) NSArray *data;
 @end
 
 @implementation ShopCommentViewCtrl
 
--(void)viewWillAppear:(BOOL)animated{
-
-    [SVProgressHUD show];
-
-    [self loadData];
-    
-    
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-
-    [SVProgressHUD dismiss];
-
-}
 
 
 - (void)viewDidLoad {
@@ -41,17 +27,81 @@
     self.navigationItem.title=@"我的评论";
     
     
-    self.tableViewView = [GUIHelper makeTableView:self.view delegate:self];
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
+    
+    [self.tableView registerClass:[QuickTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    
+    [self loadData];
     
     
     
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)loadData{
+    
+    
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.view animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.view];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.view animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.view];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    CommentService *service = [CommentService new];
+    
+    [service requestCommentWithShop:self.shopId page:1 per_page:10 sort:@""
+    success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        self.data = data;
+        
+        [self.tableView reloadData];
+        
+        completion(YES);
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+
+        completion(NO);
+
+    }];
+
+
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -60,20 +110,17 @@
 
 
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    
+    self.navigationController.navigationBar.translucent = NO;
 
--(void)loadData{
-//http://183.6.190.75:9780/diamond-sis-web/v1/customer/15818865756/review?page=1&per_page=10&sort=-time
-//page=1&per_page=10&sort=-time
-    NSDictionary *parma = @{@"page":@"1",@"per_page":@"10",@"sort":@"-time"};
-    [_shopSevice requestParam:parma success:^(id data) {
-        [SVProgressHUD dismiss];
-       NSLog(@"-----------我的评价数据------------%@",data);
-        _dataArray = data;
-        [_tableViewView reloadData];
-    } failure:^(id coad) {
-        
-    }];
-
+    
+    
+    
+    
+    
 }
 
 
@@ -89,32 +136,128 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.dataArray.count;
+    return self.data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identify = @"cell";
-    _cell = [tableView dequeueReusableCellWithIdentifier:identify];
     
     
-    if (_cell == nil) {
-        _cell = [[ShopCommentTableViewCell alloc]
-                initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];}
-//    [self loadData];
-    [_cell data:_dataArray[indexPath.row]];
+    QuickTableViewCell *cell =(QuickTableViewCell*) [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-//    [tableView reloadData];
-    //ShopCommentTableViewCell
-    // Configure the cell...
     
-    UILongPressGestureRecognizer *longPressed = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressToDo:)];
     
-    longPressed.minimumPressDuration = 1.0;
+    NSDictionary *d = self.data[indexPath.row];
     
-    [_cell.contentView addGestureRecognizer:longPressed];
+  
     
-    return _cell;
-}
+    cell.layoutBlock = ^(QuickTableViewCell *theCell){
+        
+        [theCell.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(theCell.contentView).offset(10);
+            make.top.equalTo(theCell.contentView).offset(10);
+            make.width.equalTo(@40);
+            make.height.equalTo(@40);
+            
+        }];
+        
+        theCell.iconImageView.layer.cornerRadius = 20;
+        theCell.iconImageView.clipsToBounds = YES;
+    
+    
+        [theCell.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(theCell.iconImageView.mas_right).offset(10);
+            make.top.equalTo(theCell.iconImageView);
+            make.width.equalTo(@100);
+            make.height.equalTo(@20);
+        }];
+    
+        theCell.titleLabel.font = [UIFont systemFontOfSize:15];
+        theCell.titleLabel.textColor = [GUIConfig grayFontColorDeep];
+    
+        [theCell.detailLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(theCell.iconImageView.mas_right).offset(10);
+            make.top.equalTo(theCell.titleLabel.mas_bottom).offset(5);
+            make.right.equalTo(theCell.contentView).offset(-10);
+            make.bottom.equalTo(theCell.contentView).offset(-10);
+        }];
+        
+        
+        [theCell.dateTimeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.right.equalTo(theCell.contentView.mas_right).offset(-10);
+            make.top.equalTo(theCell.titleLabel);
+            make.left.equalTo(theCell.titleLabel.mas_right).offset(5);
+            make.height.equalTo(@20);
+        }];
+        
+        theCell.dateTimeLabel.font = [UIFont systemFontOfSize:12];
+        theCell.dateTimeLabel.textColor = [GUIConfig grayFontColorLight];
+        theCell.dateTimeLabel.textAlignment = NSTextAlignmentRight;
+
+    
+        theCell.detailLabel.font = [UIFont systemFontOfSize:14];
+        theCell.detailLabel.textColor = [GUIConfig grayFontColor];
+        theCell.detailLabel.numberOfLines=0;
+        theCell.detailLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        
+        
+        
+        
+        
+    };
+    
+     cell.updateBlock = ^(QuickTableViewCell *theCell){
+         
+         theCell.titleLabel.text =SafeString(d[@"customerName"]);
+         theCell.detailLabel.text =SafeString(d[@"comment"]);
+         theCell.dateTimeLabel.text =SafeLeft((NSString*)SafeString(d[@"time"]), 10);
+         
+         
+        // [theCell sizeToFit];
+         
+         NSURL *url = SafeUrl(d[@"smallPhotoUrl"]);
+         
+         [theCell.iconImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+             
+         }];
+         
+         
+         
+     };
+    
+    [cell updateData];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    return cell;
+    
+    
+    
+    
+    
+ }
 
 
 #pragma mark - 长按删除
@@ -124,10 +267,10 @@
     
     
     if(gesture.state == UIGestureRecognizerStateBegan){
-        CGPoint point = [gesture locationInView:self.tableViewView];
+        CGPoint point = [gesture locationInView:self.tableView];
+                         
         
-        
-        NSIndexPath * indexPath = [self.tableViewView indexPathForRowAtPoint:point];
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
         
         
         if(indexPath == nil) return ;
@@ -138,30 +281,11 @@
         [act bk_addButtonWithTitle:@"删除" handler:^{
             
             
-            
-            
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             
             
-            NSString *itemId = self.dataArray[indexPath.row][@"id"];
+            NSString *itemId = self.data[indexPath.row][@"id"];
             NSLog(@"-----------我的评论删除的ID%@",itemId);
-            [_shopSevice removeRaviewRequestCommentID:itemId success:^(id data) {
-                [SVProgressHUD dismiss];
-                
-                NSMutableArray *ary = [self.dataArray mutableCopy];
-                
-                [ary removeObjectAtIndex:indexPath.row];
-                
-                self.dataArray = ary;
-                
-                
-                [self.tableViewView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            } failure:^(id code) {
-                [SVProgressHUD showErrorWithStatus:@"删除出错！"];
-                
-                [SVProgressHUD dismiss];
-                
-            }];
             
             
             
@@ -196,8 +320,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    [_tableViewView deselectRowAtIndexPath:indexPath animated:YES];
-
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 }
 
