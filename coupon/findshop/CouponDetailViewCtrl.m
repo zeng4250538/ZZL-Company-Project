@@ -26,6 +26,8 @@
 
 
 
+
+
 @end
 
 @implementation CouponDetailViewCtrl
@@ -403,6 +405,22 @@
     }];
     
     
+    UIView *hLine = [UIView new];
+    [uv addSubview:hLine];
+    [hLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.height.equalTo(@1);
+        make.width.equalTo(uv);
+        make.left.equalTo(uv);
+        make.top.equalTo(uv);
+        
+        
+    }];
+    
+    hLine.backgroundColor = [GUIConfig mainBackgroundColor];
+
+    
+    
     UIButton *addCartButton = [UIButton buttonWithType:UIButtonTypeSystem];
     addCartButton.backgroundColor = UIColorFromRGB(249, 191, 66);
     
@@ -412,7 +430,6 @@
         
         make.right.equalTo(uv).offset(-40);
         make.left.equalTo(uv).offset(40);
-//        make.height.equalTo(uv).offset(30);
         make.top.equalTo(uv).offset(10);
         make.bottom.equalTo(uv).offset(-10);
     }];
@@ -420,7 +437,6 @@
     [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [addCartButton setTitle:@"加入篮子" forState:UIControlStateNormal];
     addCartButton.layer.cornerRadius = 7;
-//    [addCartButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
     [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [addCartButton bk_addEventHandler:^(id sender) {
@@ -460,64 +476,44 @@
     
 }
 
-#pragma mark -------------- 加入篮子网络请求
-//-(void)loadData{
-//    
-//    BasketService *basket = [[BasketService alloc]init];
-//    
-//    AppShareData *app = [AppShareData instance];
-//    
-//    [basket requestADDBasket:SafeString(self.data[@"id"]) count:0 success:^(NSInteger code, NSString *message, id data) {
-//        
-//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-//        
-//    }];
-//
-//}
 
 #pragma mark - TableViewCell 
 -(void)makeCell1:(UITableViewCell*)cell{
     
     
     
+//    UILabel *shopNameLabel = [UILabel new];
+//    
+//    [cell.contentView addSubview:shopNameLabel];
+//    
+//    shopNameLabel.font = [UIFont boldSystemFontOfSize:16];
+//    shopNameLabel.textColor = [GUIConfig grayFontColorDeep];
+//    [shopNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(cell.contentView.mas_left).with.offset(15);
+//        make.top.equalTo(cell.contentView.mas_top).with.offset(20);
+//        make.right.equalTo(cell.contentView.mas_right).with.offset(-15);
+//        make.height.equalTo(@20);
+//        
+//    }];
+    
+//    shopNameLabel.text=SafeString(self.data[@"shopName"]);
+    
+    
     UILabel *couponNameLabel = [UILabel new];
-    
     [cell.contentView addSubview:couponNameLabel];
+    couponNameLabel.font = [UIFont systemFontOfSize:18];
+    couponNameLabel.textColor = [GUIConfig mainColor];
     
-    couponNameLabel.font = [UIFont boldSystemFontOfSize:16];
-    couponNameLabel.textColor = [GUIConfig grayFontColorDeep];
     [couponNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(cell.contentView.mas_left).with.offset(15);
-        make.top.equalTo(cell.contentView.mas_top).with.offset(20);
-        make.right.equalTo(cell.contentView.mas_right).with.offset(-15);
+        
+        
+        make.left.equalTo(cell.contentView).offset(20);
+        
+        make.centerY.equalTo(cell.contentView);
         make.height.equalTo(@20);
         
     }];
-    
-    couponNameLabel.text=SafeString(self.data[@"shopName"]);
-    
-    
-    UILabel *priceLabel = [UILabel new];
-    [cell.contentView addSubview:priceLabel];
-    priceLabel.font = [UIFont systemFontOfSize:18];
-    priceLabel.textColor = [GUIConfig mainColor];
-    
-    [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        
-        make.left.equalTo(couponNameLabel);
-        
-        make.bottom.equalTo(cell.contentView).offset(-15);
-        make.height.equalTo(@20);
-        
-    }];
-    priceLabel.text=[NSString stringWithFormat:@"%@",SafeString(self.data[@"name"])];
-    
-    
-    
-    
-    
-    
+    couponNameLabel.text=[NSString stringWithFormat:@"%@",SafeString(self.data[@"name"])];
     
     
 }
@@ -540,7 +536,7 @@
     }];
     
     
-    addressLabel.text=SafeString(self.data[@"shop"][@"address"]);
+    addressLabel.text=SafeString(self.data[@"shopName"]);
     
     UIView *line = [GUIConfig line];
     
@@ -607,8 +603,50 @@
     
 }
 
-
 -(void)makeCell3:(UITableViewCell*)cell{
+    
+    
+    UILabel *nameLabel = [UILabel new];
+    
+    [cell.contentView addSubview:nameLabel];
+    
+    nameLabel.font = [UIFont boldSystemFontOfSize:14];
+    nameLabel.textColor = [GUIConfig grayFontColorDeep];
+    [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(cell.contentView.mas_left).with.offset(15);
+        make.centerY.equalTo(cell.contentView);
+        make.width.equalTo(@100);
+        make.height.equalTo(@20);
+        
+    }];
+    
+    nameLabel.text=@"有效时间:";
+ 
+    UILabel *limitTimeLabel = [UILabel new];
+    
+    [cell.contentView addSubview:limitTimeLabel];
+    
+    limitTimeLabel.font = [UIFont systemFontOfSize:14];
+    limitTimeLabel.textColor = [GUIConfig grayFontColor];
+    [limitTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(nameLabel.mas_right).with.offset(20);
+        make.centerY.equalTo(cell.contentView);
+        make.right.equalTo(cell.contentView).offset(-20);
+        make.height.equalTo(@20);
+        
+    }];
+    
+    limitTimeLabel.textAlignment = NSTextAlignmentCenter;
+    
+    limitTimeLabel.text=@"2016-06-30 23:59:59";
+
+    
+}
+
+
+
+
+-(void)makeCell4:(UITableViewCell*)cell{
     
     
     UILabel *commentTitleLabel = [UILabel new];
@@ -625,7 +663,7 @@
         
     }];
     
-    commentTitleLabel.text=@"使用说明:";
+    commentTitleLabel.text=@"使用须知:";
     
     UIView *line = [GUIConfig line];
     
@@ -652,16 +690,16 @@
         make.left.equalTo(cell.contentView.mas_left).with.offset(15);
         make.top.equalTo(line.mas_top).with.offset(5);
         make.right.equalTo(cell.contentView.mas_right).with.offset(-15);
-        make.height.equalTo(@50);
+        make.height.equalTo(@80);
         
     }];
     
     
     commentLabel.textColor = [GUIConfig grayFontColor];
-    commentLabel.font = [UIFont systemFontOfSize:12];
+    commentLabel.font = [UIFont systemFontOfSize:14];
     commentLabel.numberOfLines=0;
     commentLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    commentLabel.text=@"1.解释权归商家所有\n2.用餐前先预约\n3.用餐高峰需要排队\n4.有效期为一年";
+    commentLabel.text=@"1、商品说明：一次消费只能使用一张优惠券\n2、预约：免预约，消费高峰期可能";
     
     
     
@@ -679,10 +717,19 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    if ([indexPath section]==2) {
-        return 130;
+    if ([indexPath section]==0) {
+        return 50;
     }
     
+    
+    if ([indexPath section]==2) {
+        return 50;
+    }
+
+    if ([indexPath section]==3) {
+        return 130;
+    }
+
     return 100;
     
 }
@@ -691,6 +738,9 @@
     
     if (section==0) {
         return 0;
+    }else if(section==4){
+    
+        return 60;
     }else{
         
         return 20;
@@ -701,11 +751,87 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
+    if (section == 4) {
+        
+        UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20+40)];
+        
+        uv.backgroundColor = [GUIConfig mainBackgroundColor];
+        
+        
+        UIButton *otherButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [otherButton setTitle:@"其他优惠" forState:UIControlStateNormal];
+        [uv addSubview:otherButton];
+        [otherButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(uv);
+            make.top.equalTo(uv).offset(20);
+            make.bottom.equalTo(uv);
+            make.width.equalTo(@(SCREEN_WIDTH/2));
+        }];
+        
+        [otherButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
+        
+        otherButton.backgroundColor = [UIColor whiteColor];
+ 
+        
+        UIButton *likeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [likeButton setTitle:@"猜你喜欢" forState:UIControlStateNormal];
+        [uv addSubview:likeButton];
+        [likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(otherButton.mas_right);
+            make.top.equalTo(uv).offset(20);
+            make.bottom.equalTo(uv);
+            make.width.equalTo(@(SCREEN_WIDTH/2));
+        }];
+        
+        likeButton.backgroundColor = [UIColor whiteColor];
+        
+        [likeButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
+        
+        
+        UIView *vLine = [UIView new];
+        [uv addSubview:vLine];
+        [vLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.width.equalTo(@1);
+            make.height.equalTo(@30);
+            make.centerX.equalTo(uv);
+            make.top.equalTo(uv).offset(25);
+            
+            
+        }];
+        
+        vLine.backgroundColor = [GUIConfig mainBackgroundColor];
+        
+        UIView *hLine = [UIView new];
+        [uv addSubview:hLine];
+        [hLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.height.equalTo(@1);
+            make.width.equalTo(uv);
+            make.left.equalTo(uv);
+            make.bottom.equalTo(uv);
+            
+            
+        }];
+        
+        hLine.backgroundColor = [GUIConfig mainBackgroundColor];
+
+        
+       // btn1.layer.borderWidth=1;
+        
+        return uv;
+ 
+    }
+    
+    
     UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
     
     uv.backgroundColor = [GUIConfig mainBackgroundColor];
     
     return uv;
+    
     
     
     
@@ -715,7 +841,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -750,10 +876,17 @@
  
         
     }
- 
+    
     if ([indexPath section]==2) {
         
         [self makeCell3:cell];
+        
+    }
+    
+ 
+    if ([indexPath section]==3) {
+        
+        [self makeCell4:cell];
         
     }
     

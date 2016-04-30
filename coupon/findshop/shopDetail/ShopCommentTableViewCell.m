@@ -116,7 +116,6 @@
         make.height.equalTo(@20);
         
     }];
-//    self.timeLabel.text = @"2016.12.7";
     self.timeLabel.font = [UIFont systemFontOfSize:10];
     self.timeLabel.textColor = [UIColor grayColor];
     

@@ -120,7 +120,7 @@
     
     NSString *mallId = [AppShareData instance].mallId;
     
-    [SVProgressHUD showWithStatus:@""];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
     [service requestShakeCoupon:customId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
         
@@ -138,6 +138,7 @@
         
         
         [SVProgressHUD dismiss];
+        
         
         completion(NO);
         

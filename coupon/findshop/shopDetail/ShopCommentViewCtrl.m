@@ -38,13 +38,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _shopSevice = [ShopCommentSevice new];
-    
     self.navigationItem.title=@"我的评论";
     
     
+    self.tableViewView = [GUIHelper makeTableView:self.view delegate:self];
     
-    [self tableView];
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -57,6 +57,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 
 -(void)loadData{
 //http://183.6.190.75:9780/diamond-sis-web/v1/customer/15818865756/review?page=1&per_page=10&sort=-time
@@ -73,22 +76,6 @@
 
 }
 
--(void)tableView{
-
-    _tableViewView = [UITableView new];
-    _tableViewView.dataSource = self;
-    _tableViewView.delegate = self;
-    [self.view addSubview:_tableViewView];
-    [_tableViewView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(0);
-        make.left.and.right.and.bottom.equalTo(self.view).offset(0);
-    }];
-    
-    _tableViewView.separatorStyle = UITableViewCellSelectionStyleNone;
-
-    
-
-}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     

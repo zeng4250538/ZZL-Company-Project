@@ -23,10 +23,12 @@ typedef NS_ENUM(NSUInteger, CouponViewMode) {
 };
 
 
-typedef NS_ENUM(NSUInteger, CouponDetailPushMode) {
-    CouponDetailPushModePush,
-    CouponDetailPushModePresent
+typedef NS_ENUM(NSUInteger, CouponDetailPushMode) {  //优惠券显示
+    CouponDetailPushModePush,                       //显示购物车
+    CouponDetailPushModePresent                     //不显示购物车
 };
+
+
 
 
 @class UMSocialUIDelegate;
@@ -38,6 +40,9 @@ typedef NS_ENUM(NSUInteger, CouponDetailPushMode) {
 
 @property(nonatomic,assign)CouponDetailType couponDetailType;
 @property(nonatomic,assign)CouponViewMode couponViewMode;
+
+
+
 @property(nonatomic,assign)CouponDetailPushMode couponDetailPushMode;
 
 

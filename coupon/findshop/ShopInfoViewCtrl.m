@@ -96,6 +96,10 @@
     [service requestShopInfo:self.shopId success:^(NSInteger code, NSString *message, id data) {
         self.data = data;
         
+        [self.tableView reloadData];
+        
+        [self makeHeaderView];
+        
         completion(YES);
         
         
@@ -140,6 +144,8 @@
         self.realTimeCouponList = data;
         
         [self.tableView reloadData];
+        
+        [self makeHeaderView];
         
         
         completion(YES);
@@ -345,6 +351,14 @@
         self.navigationItem.title = SafeString(self.data[@"name"]);
         
         NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
+        
+        if (url==nil) {
+            
+            url = SafeUrl(self.data[@"photoUrl"]);
+            
+        }
+        
+    
         
         [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
         
@@ -703,39 +717,9 @@
     
 }
 
-#pragma mark ------- 订阅商家点击事件
--(void)subcrideClick:(UIButton *)button{
-
-    UISubscribeSevice *sevice = [UISubscribeSevice new];
-    [sevice string:SafeString(self.data[@"id"])  successful:^(id data) {
-        NSLog(@"订阅成功了");
-        [button setTitle:@"取消订阅" forState:UIControlStateNormal];
-        
-    } failure:^(id code) {
-        
-        [button setTitle:@"订阅" forState:UIControlStateNormal];
-        
-    }];
 
 
-}
-
-#pragma mark ------- 取消订阅商家点击事件
--(void)cancelSubcrideClick:(UIButton *)button{
-
-    UISubscribeSevice *sevice = [UISubscribeSevice new];
-    [sevice string:SafeString(self.data[@"id"]) cancelSuccessful:^(id data) {
-        
-        [button setTitle:@"订阅" forState:UIControlStateNormal];
-        
-        
-    } failure:^(id code) {
-        
-        [button setTitle:@"取消订阅" forState:UIControlStateNormal];
-        
-    }];
-
-}
+#pragma mark - 生成
 
 
 #pragma mark - Table View Config

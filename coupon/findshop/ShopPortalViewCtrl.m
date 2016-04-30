@@ -519,9 +519,14 @@
 
     }else{
         
+#pragma mark - 点击进入即时优惠
         CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
         
-        vc.data =self.couponData[indexPath.row];
+       // vc.couponViewMode = CouponViewModeNetwork;
+        vc.data = self.couponData[indexPath.row];
+       // NSString *couponId = SafeString(self.couponData[indexPath.row][@"couponId"]);
+        //vc.couponId = couponId;
+        
         
         vc.hidesBottomBarWhenPushed = YES;
         

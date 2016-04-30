@@ -56,23 +56,19 @@ NSString *WeChatAppSecret=@"";
 -(void)makeTabViewCtrl{
     
     
-    NSArray *titleArray = @[@"摇一摇",@"找商家",/*@"篮子",*/@"我的"];
+    NSArray *titleArray = @[@"摇一摇",@"找商家",@"我的"];
     NSArray *imageArray = @[[UIImage imageNamed:@"tab_shake_icon.png"],
                             [UIImage imageNamed:@"tab_brand_icon.png"],
-                           /* [UIImage imageNamed:@"gocart.png"],*/
                             [UIImage imageNamed:@"tab_person_icon.png"]
                             ];
     
     
     NSArray *vcList = @[[[ShakeViewCtrl alloc] init],
                         [[ShopPortalViewCtrl alloc] init],
-                       /* [[CartViewCtrl alloc] init],*/
-                        
-                        [[PersonInfoViewCtrl alloc] init]
+                         [[PersonInfoViewCtrl alloc] init]
                         ];
     
     
-  //  self.cartVc = vcList[2];
     
     
     int pos=0;
@@ -114,18 +110,6 @@ NSString *WeChatAppSecret=@"";
     self.window.rootViewController = tabViewCtrl;
     
     [self.window makeKeyAndVisible];
-    
-    
-    
-   // UITabBarItem *tabBarItem1 = self.tabViewCtrl.tabBar.items[0];
-    
-    
-    
-    
-
-    
-    
-    
     
     
     
@@ -185,10 +169,9 @@ NSString *WeChatAppSecret=@"";
     [SVProgressHUD setBackgroundColor:[UIColor blackColor]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
-     [[UITabBar appearance]setSelectedImageTintColor:[UIColor redColor]];
     
     
-    [UITabBar appearance].selectedImageTintColor = [GUIConfig mainColor];
+    [UITabBar appearance].tintColor = [GUIConfig mainColor];
     
    
     
@@ -216,11 +199,6 @@ NSString *WeChatAppSecret=@"";
     
     
     
-    
-    
-  
-    
-    
     if ([CLLocationManager locationServicesEnabled]) {
         // 创建位置管理者对象
         self.lcManager = [[CLLocationManager alloc] init];
@@ -243,12 +221,8 @@ NSString *WeChatAppSecret=@"";
         //self.lcManager.allowsBackgroundLocationUpdates = YES;
     }
     
-//    56e906e267e58e54f2000607  复制
-//    App Master Secret：eex4ihtajreb2ca4t8mdsd0plwivb9vx
     
     
-    
-//
     
     [self setUmengParam:launchOptions];
     
@@ -258,15 +232,7 @@ NSString *WeChatAppSecret=@"";
     
     
     
-//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8) {
-//        //由于IOS8中定位的授权机制改变 需要进行手动授权
-//        CLLocationManager  *locationManager = [[CLLocationManager alloc] init];
-//        //获取授权认证
-//        [locationManager requestAlwaysAuthorization];
-//        [locationManager requestWhenInUseAuthorization];
-//    }
-//    
-    
+  
     
     
     
@@ -390,8 +356,7 @@ NSString *WeChatAppSecret=@"";
     
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     
     
    [UMSocialSnsService handleOpenURL:url];
@@ -403,11 +368,6 @@ NSString *WeChatAppSecret=@"";
 }
 
 
-
-//return [TencentOAuth HandleOpenURL:url] ||
-//[WeiboSDK handleOpenURL:url delegate:self] ||
-//[WXApi handleOpenURL:url delegate:self];;
-//}
 
 
 
