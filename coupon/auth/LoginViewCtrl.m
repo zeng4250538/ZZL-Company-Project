@@ -43,6 +43,21 @@
     
     [self makeFooterView];
     
+    
+    if (self.loginViewMode == LoginViewModePresent) {
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"关闭" style:UIBarButtonItemStylePlain handler:^(id sender) {
+            
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+            
+            
+        }];
+        
+    }
+    
 
     
   //

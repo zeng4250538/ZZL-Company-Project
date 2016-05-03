@@ -60,22 +60,89 @@
     }else{  //
         
         
-        [self preLoadData:^(BOOL ret) {
-            
-            
-            if (ret) {
-                [self loadData];
-            }
-            
-            
-            
-        }];
+        
+        [self loadShop];
+        
+//        [self preLoadData:^(BOOL ret) {
+//            
+//            
+//            if (ret) {
+//                [self loadData];
+//            }
+//            
+//            
+//            
+//        }];
         
         
         
         
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+-(void)loadShop{
+    
+    
+    [ReloadHud showHUDAddedTo:self.view reloadBlock:^{
+        
+        
+        [self doLoadShop:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.view animated:YES];
+                 [self makeHeaderView];
+                [self doLoad:^(BOOL ret) {
+                    
+                    [self.tableView reloadData];
+                    
+                    
+                }];
+                
+            }else{
+                
+                [ReloadHud showReloadMode:self.view];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoadShop:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.view animated:YES];
+            
+            [self doLoad:^(BOOL ret) {
+                
+                [self.tableView reloadData];
+                
+            }];
+            
+            
+            //  [self makeHeaderView];
+            
+        }else{
+            
+            [ReloadHud showReloadMode:self.view];
+        }
+        
+        
+    }];
+    
+
     
     
     
@@ -124,6 +191,44 @@
     
     
 }
+
+-(void)doLoadShop:(void(^)(BOOL ret))completion{
+    
+    
+    ShopService *service = [ShopService new];
+    
+    [service requestShopInfo:self.shopId success:^(NSInteger code, NSString *message, id data) {
+        self.data = data;
+        
+        [self.tableView reloadData];
+        
+        [self makeHeaderView];
+        
+        completion(YES);
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        [SVProgressHUD showErrorWithStatus:@"数据装载错误"];
+        
+        completion(NO);
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
 
 
 -(void)doLoad:(void(^)(BOOL ret))completion{
@@ -770,11 +875,13 @@
             
             CouponListViewCtrl *vc =[CouponListViewCtrl new];
             
+            vc.couponListType = CouponListTypeReminder;
             
-            NSString *shopId = SafeString(self.data[@"id"]);
             
-            vc.shopId = shopId;
-            
+//            NSString *shopId = SafeString(self.data[@"id"]);
+//            
+//            vc.shopId = shopId;
+//            
             
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -793,10 +900,11 @@
             
             CouponListViewCtrl *vc =[CouponListViewCtrl new];
             
+             
             
-            NSString *shopId = SafeString(self.data[@"id"]);
+            vc.couponListType = CouponListTypeNormal;
             
-            vc.shopId = shopId;
+            //vc.shopId = shopId;
             
             
             [self.navigationController pushViewController:vc animated:YES];

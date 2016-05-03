@@ -255,6 +255,16 @@
     
     
     
+    if (self.couponListType == CouponListTypeReminder) {
+        cell.couponActionType = CouponTypeLimited;
+        
+    }else{
+        
+        cell.couponActionType = CouponTypeNormal;
+    }
+    
+    
+    
     NSDictionary *d = self.data[indexPath.row];
     
     cell.data = d;

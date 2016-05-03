@@ -274,6 +274,9 @@
         
         
         cell.textLabel.text=self.keyWordList[[indexPath row]];
+        
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [GUIConfig grayFontColor];
 
         
         

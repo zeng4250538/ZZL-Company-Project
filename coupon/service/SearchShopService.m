@@ -14,10 +14,13 @@
 -(void)requestSearchShopKeyWord:(NSString *)keyWord success:(void(^)(id data))success failure:(void(^)(id data))failure{
 
      BaseRequest *req = [BaseRequest new];
+    
+    
+    NSString *shopMallId = [AppShareData instance].mallId;
 
      NSString *url = [[self getBaseUrl] stringByAppendingString:@"/search?"];
     
-    NSDictionary *parm = @{@"shopmall":@2,@"keyWord":keyWord};
+    NSDictionary *parm = @{@"shopMallId":shopMallId,@"keyword":keyWord};
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         

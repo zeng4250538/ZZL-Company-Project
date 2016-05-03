@@ -19,22 +19,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "coupon/search/SearchResultViewCtrl.m"
-            timestampString = "481910628.280751"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "coupon/person/setting/message/ShopMessageViewCtrl.m"
             timestampString = "482474652.713406"
             startingColumnNumber = "9223372036854775807"
@@ -83,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "coupon/person/MyRemindViewCtrl.m"
-            timestampString = "483532369.222216"
+            filePath = "coupon/findshop/ShopInfoViewCtrl.m"
+            timestampString = "483980564.940849"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "-doLoad:"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-loadShop"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -10,6 +10,7 @@
 #import "SearchResultViewCtrl.h"
 #import "ShopService.h"
 #import "SearchShopService.h"
+#import "ShopInfoViewCtrl.h"
 
 @interface KeyWordSearchViewCtrl ()
 
@@ -229,6 +230,8 @@
     
    AppShareData *app = [AppShareData instance];
     
+    
+    
     [service requestKeyword:app.mallId
                     keyWord:searchText
                     success:^(NSInteger code, NSString *message, id data) {
@@ -325,6 +328,8 @@
         
         
         cell.textLabel.text=name;
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [GUIConfig grayFontColorDeep];
         
         return cell;
         
@@ -359,6 +364,26 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (tableView == self.displayCtrl.searchResultsTableView) {
+        
+        NSDictionary *d = self.searchWordList[indexPath.row];
+        
+        
+        ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.data = d;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    
+        
+        
+        NSLog(@"keyword %@",d);
+        
+        
+        
+        return;
+    }
     
     
     

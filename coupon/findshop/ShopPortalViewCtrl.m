@@ -441,6 +441,7 @@
             
             CouponListViewCtrl *vc = [CouponListViewCtrl new];
             
+            vc.couponListType = CouponListTypeReminder;
             vc.hidesBottomBarWhenPushed = YES;
             
             

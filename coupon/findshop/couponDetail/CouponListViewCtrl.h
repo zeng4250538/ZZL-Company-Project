@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, CouponListType) {
+    
+    CouponListTypeNormal,
+    CouponListTypeReminder
+ };
+
 @interface CouponListViewCtrl : UITableViewController
 
-@property(nonatomic,copy)NSString *shopId;
+
+@property(nonatomic,assign)CouponListType couponListType;
 
 
 @end

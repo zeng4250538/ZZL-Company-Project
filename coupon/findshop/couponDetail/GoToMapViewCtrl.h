@@ -24,5 +24,10 @@
 @property(nonatomic,assign)BOOL isFirst;
 @property(nonatomic,strong)BMKGeoCodeSearch *codeSearch;
 
+@property(nonatomic,assign)CLLocationCoordinate2D endLocation;
+
+
+
+
 
 @end

@@ -16,6 +16,7 @@
 #import "BasketContainerViewCtrl.h"
 #import "BasketService.h"
 #import "CouponService.h"
+#import "GoToMapViewCtrl.h"
 
 
 
@@ -568,6 +569,17 @@
     
     [callPhoneButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
     
+    
+    [callPhoneButton bk_addEventHandler:^(id sender) {
+        
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"15888991234"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        
+        
+
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
  
     UIButton *gotoButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
@@ -585,6 +597,29 @@
     
     [gotoButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
     
+    
+    [gotoButton bk_addEventHandler:^(id sender) {
+        
+        GoToMapViewCtrl *vc = [GoToMapViewCtrl new];
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        
+        CLLocationCoordinate2D loc;
+        loc.latitude = 23.138756;
+        loc.longitude = 113.32881;
+        vc.endLocation = loc;
+        
+        
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
+        
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
     
     
     UIView *line2 = [GUIConfig line];

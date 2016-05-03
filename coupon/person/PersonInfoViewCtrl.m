@@ -257,14 +257,28 @@
             
             LoginViewCtrl *vc = [LoginViewCtrl new];
             
-            vc.loginEndBlock = ^(BOOL ret){
-                
-                [self.navigationController popViewControllerAnimated:YES];
-                
-            };
             
-            [self.navigationController pushViewController:vc animated:YES];
             
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            
+            [self presentViewController:nav animated:YES completion:^{
+                
+            }];
+            
+            
+            
+            
+            
+            
+            
+//            vc.loginEndBlock = ^(BOOL ret){
+//                
+//                [self.navigationController popViewControllerAnimated:YES];
+//                
+//            };
+//            
+//            [self.navigationController pushViewController:vc animated:YES];
+//            
         }];
         
         [av bk_addButtonWithTitle:@"取消" handler:^{

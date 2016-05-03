@@ -32,6 +32,9 @@
     [self.tableView registerClass:[QuickTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    
     [self loadData];
     
     

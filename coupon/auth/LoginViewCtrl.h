@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef NS_ENUM(NSUInteger, LoginViewMode) {
+    LoginViewModePresent,
+    LoginViewModePush
+};
+
 typedef void(^LoginEndBlock)(BOOL isLogin);
 
 @interface LoginViewCtrl : UITableViewController
 @property(nonatomic,copy)LoginEndBlock loginEndBlock;
+@property(nonatomic,assign)LoginViewMode loginViewMode;
+
 
 @end
