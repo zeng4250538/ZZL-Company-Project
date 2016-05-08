@@ -379,10 +379,6 @@
     }];
     
     
-//    UIBarButtonItem *scanerBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"scanner_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-//        
-//    }];
-   
     self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
     
   //  self.navigationItem.rightBarButtonItem = scanerBarItem;
