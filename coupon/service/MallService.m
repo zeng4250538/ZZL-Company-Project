@@ -51,13 +51,13 @@
                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     
-    
+    //http://183.6.190.75:9780/diamond-sis-web/v1/shopmall?city=%E5%B9%BF%E5%B7%9E%E5%B8%82&longitude=10&latitude=10&fields=id%2Cname%2Ccity%2Cdistance%2CmapPhotoUrl
     
     BaseRequest *req = [BaseRequest new];
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shopmall"];
     
-    NSDictionary *parm = @{@"city":cityName,@"lon":@(lon),@"lat":@(lat)};
+    NSDictionary *parm = @{@"city":cityName,@"longitude":@(lon),@"latitude":@(lat),@"fields":@"id,name,city,distance,mapPhotoUrl"};
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         

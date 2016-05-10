@@ -71,7 +71,7 @@
     
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
-    [services queryMallByNear:@"广州" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+    [services queryMallByNear:@"广州市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
         
     

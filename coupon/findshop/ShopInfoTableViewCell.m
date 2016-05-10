@@ -262,12 +262,15 @@
     self.commentLabel.text = SafeString(self.data[@"prompt"]);
     NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
     
+    NSString *stringUrl = [[NSString stringWithFormat:@"%@",url] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *utlasd = [NSURL URLWithString:stringUrl];
+   
     
-    if (url==nil) {
-        SafeUrl(self.data[@"photoUrl"]);
-    }
+//    if (url==nil) {
+//        SafeUrl(self.data[@"photoUrl"]);
+//    }
     
-    [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.logoView sd_setImageWithURL:utlasd completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         [self setNeedsLayout];
         
