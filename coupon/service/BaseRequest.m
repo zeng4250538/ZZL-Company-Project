@@ -106,6 +106,10 @@
     //发送请求
     [manager PUT:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        
+        NSLog(@"======================>\n[DEBUG][PUT][Request] url = %@ param = %@ [/DEBUG]",url,param);
+        
+        
         NSLog(@"JSON: %@", responseObject);
         
         

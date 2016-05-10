@@ -101,5 +101,78 @@
 }
 
 
+-(void)updateCustomer:(NSString*)customerId
+            fieldType:(CustomerFieldType)fieldType
+                value:(NSString*)value
+              success:(void(^)(NSInteger code,NSString *message,id data))success
+              failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    
+    
+    
+    NSString *custormId = [AppShareData instance].customId;
+    
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/"];
+    url = [url stringByAppendingString:custormId];
+    
+   
+    NSDictionary *param;
+   
+    if (fieldType == CustomerFieldTypeName) {
+        
+        param =@{@"nickname":value};
+       
+    }
+    
+    if (fieldType == CustomerFieldTypeSex) {
+        
+        param =@{@"gender":value};
+        
+    }
+ 
+    if (fieldType == CustomerFieldTypeCity) {
+        
+        param =@{@"cityName":value};
+        
+    }
+
+    if (fieldType == CustomerFieldTypePhoto) {
+        
+        param =@{@"photoUrl":value};
+        
+    }
+    
+
+    
+    
+    [req put:url param:param success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
 
 @end

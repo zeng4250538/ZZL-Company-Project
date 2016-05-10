@@ -213,6 +213,7 @@
 		57D148D01CC2AAA900F9E40C /* CommentSubmitViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D148CF1CC2AAA900F9E40C /* CommentSubmitViewCtrl.m */; };
 		57D148D31CC3413900F9E40C /* ReviewService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D148D21CC3413900F9E40C /* ReviewService.m */; };
 		57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D238831C9AC41500CE5331 /* CouponQueue.m */; };
+		57D8D0531CE1FDD300196583 /* EditViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D8D0521CE1FDD300196583 /* EditViewCtrl.m */; };
 		57E364A31C9DA17B003575FC /* Shop.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A21C9DA17B003575FC /* Shop.m */; };
 		57E364A61C9DA293003575FC /* Mall.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A51C9DA293003575FC /* Mall.m */; };
 		57E364A91C9DB347003575FC /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364A81C9DB347003575FC /* Coupon.m */; };
@@ -220,6 +221,7 @@
 		57E722C31C670AB7004DBA9C /* CouponService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C21C670AB7004DBA9C /* CouponService.m */; };
 		57E722C61C686A51004DBA9C /* ShakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C51C686A51004DBA9C /* ShakeService.m */; };
 		57E7E6B01CE0BF3000F5247D /* Test2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E7E6AF1CE0BF3000F5247D /* Test2TableViewController.m */; };
+		57E7E6B31CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E7E6B21CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m */; };
 		57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE21C90758B003103B1 /* BaseRequest.m */; };
 		57EFEEE61C90874E003103B1 /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE51C90874E003103B1 /* BaseService.m */; };
 		57EFEEE91C9087B8003103B1 /* MallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE81C9087B8003103B1 /* MallService.m */; };
@@ -669,6 +671,8 @@
 		57D148D21CC3413900F9E40C /* ReviewService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewService.m; sourceTree = "<group>"; };
 		57D238821C9AC41500CE5331 /* CouponQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponQueue.h; sourceTree = "<group>"; };
 		57D238831C9AC41500CE5331 /* CouponQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponQueue.m; sourceTree = "<group>"; };
+		57D8D0511CE1FDD300196583 /* EditViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewCtrl.h; sourceTree = "<group>"; };
+		57D8D0521CE1FDD300196583 /* EditViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewCtrl.m; sourceTree = "<group>"; };
 		57E364A11C9DA17B003575FC /* Shop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shop.h; sourceTree = "<group>"; };
 		57E364A21C9DA17B003575FC /* Shop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shop.m; sourceTree = "<group>"; };
 		57E364A41C9DA293003575FC /* Mall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mall.h; sourceTree = "<group>"; };
@@ -683,6 +687,8 @@
 		57E722C51C686A51004DBA9C /* ShakeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeService.m; sourceTree = "<group>"; };
 		57E7E6AE1CE0BF3000F5247D /* Test2TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test2TableViewController.h; sourceTree = "<group>"; };
 		57E7E6AF1CE0BF3000F5247D /* Test2TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test2TableViewController.m; sourceTree = "<group>"; };
+		57E7E6B11CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDetailInfoViewCtrl.h; sourceTree = "<group>"; };
+		57E7E6B21CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDetailInfoViewCtrl.m; sourceTree = "<group>"; };
 		57EFEEE11C90758B003103B1 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		57EFEEE21C90758B003103B1 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		57EFEEE51C90874E003103B1 /* BaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseService.m; sourceTree = "<group>"; };
@@ -1362,6 +1368,10 @@
 				571C29C61C787FD100DDBCE8 /* MyRemindViewCtrl.m */,
 				571C29C81C78CC7500DDBCE8 /* FeedBackViewCtrl.h */,
 				571C29C91C78CC7500DDBCE8 /* FeedBackViewCtrl.m */,
+				57E7E6B11CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.h */,
+				57E7E6B21CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m */,
+				57D8D0511CE1FDD300196583 /* EditViewCtrl.h */,
+				57D8D0521CE1FDD300196583 /* EditViewCtrl.m */,
 			);
 			path = person;
 			sourceTree = "<group>";
@@ -1706,7 +1716,7 @@
 				TargetAttributes = {
 					5779BD601C25381600E15934 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2D588MM827;
+						DevelopmentTeam = AVH25LS467;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -1961,6 +1971,7 @@
 				57F3E2861C85A3BF00A8CCA8 /* CouponDrawBackListViewCtrl.m in Sources */,
 				577169781C80B2A300223EDB /* SettingMessageTypeViewCtrl.m in Sources */,
 				57A94E881C3AB30E00BE0022 /* ShakeCouponViewCtrl.m in Sources */,
+				57D8D0531CE1FDD300196583 /* EditViewCtrl.m in Sources */,
 				57D1480C1CC136F100F9E40C /* ShopMessageService.m in Sources */,
 				574910D21CC0084B00FB2B14 /* PayUtils.m in Sources */,
 				576E78A61CBF7C4A00E19BDB /* FavShopCell.m in Sources */,
@@ -2004,6 +2015,7 @@
 				5796FA5E1C4411AE004CA23B /* PersonInfoViewCtrl.m in Sources */,
 				5796FA6E1C460108004CA23B /* CartViewCtrl.m in Sources */,
 				57CE97D21C63B39500CE0E57 /* MallMapViewCtrl.m in Sources */,
+				57E7E6B31CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m in Sources */,
 				57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */,
 				57F511B31C5CD1CF000DA1A8 /* BasketFinishViewCtrl.m in Sources */,
 				577169871C82129100223EDB /* GUIHelper.m in Sources */,
@@ -2172,8 +2184,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2224,7 +2236,7 @@
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qwelll;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baichen.coupo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2237,8 +2249,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2289,7 +2301,7 @@
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qwelll;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baichen.coupo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

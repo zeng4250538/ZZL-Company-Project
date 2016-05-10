@@ -357,7 +357,7 @@
     
     
     
-    NSURL *url =SafeUrl(self.data[@"couponSmallPhotoUrl"]);
+    NSURL *url =SafeUrl(self.data[@"smallPhotoUrl"]);
     
     
     [self.logoView sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

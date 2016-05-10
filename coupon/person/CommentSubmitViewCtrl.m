@@ -84,7 +84,12 @@
     }
     
     
-    [service  postReview:shopId comment:commentString isLike:isLike success:^(NSInteger code, NSString *message, id data) {
+    
+    
+    NSString *couponInstanceId= SafeString(self.data[@"id"]);
+    
+    [service  postReview:shopId
+                 comment:commentString couponInstanceId:couponInstanceId isLike:isLike success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD showSuccessWithStatus:@"评论更新成功"];
         
@@ -94,13 +99,10 @@
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
         
-        
         [SVProgressHUD showErrorWithStatus:@"评论更新错误！"];
         
         
     }];
-    
-    
     
     
     

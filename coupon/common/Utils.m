@@ -93,20 +93,38 @@ NSURL *SafeUrl(id content){
         return nil;
     }
     
+    NSString *urlString=@"";
+    if ([Utils containsString:content substring:@"%"]) {
+        
+        urlString = content;
+        
+    }else{
+        
+          urlString = [content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        
+    }
+        
     
-    NSString *url = [content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    
+ //   http://183.6.190.75:9780/images/demo/%E5%A4%A7%E5%BF%AB%E6%B4%BB.jpg
+    
+     
     
     
     if (!InLan) {
         
-        url = [url stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
+        urlString = [urlString stringByReplacingOccurrencesOfString:@"http://192.168.6.97:8080" withString:@"http://183.6.190.75:9780"];
         
     }
     
     
     
     
-    return [NSURL URLWithString:url];
+    
+    return [NSURL URLWithString:urlString];
     
     
     

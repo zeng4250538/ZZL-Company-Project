@@ -110,7 +110,7 @@ static AppShareData *instance;
 
 -(NSString*)mallId{
     
-    return @"2";
+    return @"11";
 }
 
 
