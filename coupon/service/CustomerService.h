@@ -8,6 +8,14 @@
 
 #import "BaseService.h"
 
+
+typedef NS_ENUM(NSUInteger, CustomerFieldType) {
+    CustomerFieldTypeName,
+    CustomerFieldTypeCity,
+    CustomerFieldTypeSex,
+    CustomerFieldTypePhoto
+};
+
 @interface CustomerService : BaseService
 
 /**
@@ -20,6 +28,18 @@
 -(void)requestCustomer:(NSString*)customerId
                 success:(void(^)(NSInteger code,NSString *message,id data))success
                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
+
+
+
+
+-(void)updateCustomer:(NSString*)customerId
+          fieldType:(CustomerFieldType)fieldType
+              value:(NSString*)value
+               success:(void(^)(NSInteger code,NSString *message,id data))success
+               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
 

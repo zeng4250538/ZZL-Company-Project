@@ -27,6 +27,10 @@
 #import "CustomerService.h"
 #import "HistoryCouponUsageViewCtrl.h"
 
+#import "PersonDetailInfoViewCtrl.h"
+
+
+
 
 
 #define NAVBAR_CHANGE_POINT 50
@@ -206,7 +210,12 @@
     NSLog(@"hahahahahhahah");
     
     
-    MyInformationViewController *vc = [MyInformationViewController new];
+    PersonDetailInfoViewCtrl *vc = [PersonDetailInfoViewCtrl new];
+    
+    vc.hidesBottomBarWhenPushed = YES;
+    
+    
+    
     
     [self.navigationController pushViewController:vc animated:YES];
 

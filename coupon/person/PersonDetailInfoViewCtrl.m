@@ -1,0 +1,492 @@
+//
+//  PersonDetailInfoViewCtrl.m
+//  coupon
+//
+//  Created by chijr on 16/5/10.
+//  Copyright © 2016年 chijr. All rights reserved.
+//
+
+#import "PersonDetailInfoViewCtrl.h"
+#import "CustomerService.h"
+#import "QuickTableViewCell.h"
+#import "EditViewCtrl.h"
+
+@interface PersonDetailInfoViewCtrl ()
+
+@property(nonatomic,strong)NSDictionary *data;
+
+@end
+
+@implementation PersonDetailInfoViewCtrl
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+    [self.tableView registerClass:[QuickTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    
+    [self loadData];
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    
+    
+    self.navigationItem.title=@"用户信息";
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+-(void)loadData{
+    
+    
+    [ReloadHud showHUDAddedTo:self.navigationController.view reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                [ReloadHud removeHud:self.navigationController.view animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.navigationController.view];
+            }
+            
+            
+        }];
+        
+        
+    }];
+    
+    
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.navigationController.view animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.navigationController.view];
+        }
+        
+        
+    }];
+    
+    
+    
+}
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    
+    
+    CustomerService *service = [CustomerService new];
+    
+    
+    
+    NSString *customerId = [AppShareData instance].customId;
+    
+    
+    [service requestCustomer:customerId success:^(NSInteger code, NSString *message, id data) {
+        
+        //       NSLog(@"data = %@ ",data);
+        
+//        self.useNameLabel.text = SafeString(data[@"nickname"]);
+//        self.cityNameLabel.text = SafeString(data[@"cityName"]);
+//        self.sexNameLabel.text = SafeString(data[@"gender"]);
+//        
+//        self.phoneNumberLabel.text = SafeString(data[@"phoneMsisdn"]);
+//        
+//        
+//        NSURL *url = SafeUrl(data[@"smallPhotoUrl"]);
+//        
+//        
+//        [self.headportraitView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//            
+//            
+//        }];
+//        
+//
+        
+        
+        self.data = data;
+        
+        [self.tableView reloadData];
+        
+        
+        completion(YES);
+        
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        completion(NO);
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+#pragma mark - Table view data source
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row == 0) {
+        
+        return 60;
+    }
+    
+    return 40;
+}
+
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QuickTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
+  
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    
+    cell.layoutBlock = ^(QuickTableViewCell *theCell){
+        
+        [theCell.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(theCell.contentView).offset(15);
+            make.centerY.equalTo(theCell.contentView);
+            make.width.equalTo(@100);
+            make.height.equalTo(@20);
+            
+            
+        }];
+        
+        theCell.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        theCell.titleLabel.textColor = [GUIConfig grayFontColorDeep];
+        
+        
+
+        [theCell.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.right.equalTo(theCell.contentView).offset(-15);
+            make.centerY.equalTo(theCell.contentView);
+            make.width.equalTo(@100);
+            make.height.equalTo(@20);
+            
+            
+            
+            
+            
+        }];
+        
+        
+        theCell.detailLabel.font = [UIFont systemFontOfSize:14];
+        
+        theCell.detailLabel.textColor = [GUIConfig grayFontColor];
+        
+        theCell.detailLabel.textAlignment = NSTextAlignmentRight;
+        
+        
+        
+        
+        
+
+        
+        
+        
+    };
+    
+    
+    cell.updateBlock = ^(QuickTableViewCell *theCell){
+        
+        
+        if (indexPath.row==0) {
+            
+            
+            theCell.titleLabel.text=@"头像";
+            
+            
+          NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
+            
+            
+            
+            
+            
+            [theCell.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.width.equalTo(@50);
+                make.centerY.equalTo(theCell.contentView);
+                make.height.equalTo(@50);
+                make.right.equalTo(theCell.contentView).offset(-10);
+                
+                }];
+            
+            
+            [theCell.iconImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                
+            }];
+            
+            
+        
+            
+        }
+        
+        
+        if (indexPath.row==1) {
+            
+            
+            theCell.titleLabel.text=@"名字";
+            
+            theCell.detailLabel.text = SafeString(self.data[@"nickname"]);
+            
+        }
+ 
+        
+        if (indexPath.row==2) {
+            
+            
+            theCell.titleLabel.text=@"城市";
+            
+            
+            theCell.detailLabel.text = SafeString(self.data[@"cityName"]);
+
+            
+        }
+
+        
+        if (indexPath.row==3) {
+            
+            
+            theCell.titleLabel.text=@"性别";
+            
+            
+            theCell.detailLabel.text = SafeString(self.data[@"gender"]);
+
+            
+        }
+
+        
+        
+    };
+    
+    
+    [cell updateData];
+    
+    // Configure the cell...
+    
+    return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    if (indexPath.row==0) {
+   
+        UIActionSheet *act = [UIActionSheet bk_actionSheetWithTitle:@"操作"];
+        
+        [act bk_addButtonWithTitle:@"拍照" handler:^{
+            
+            
+            [self takePhoto];
+            
+            //            [self computeTotalPrice];
+            
+            
+            // [self.tableView reloadData];
+            
+        }];
+ 
+        [act bk_addButtonWithTitle:@"上传照片" handler:^{
+            
+            
+            [self LocalPhoto];
+            
+            
+            
+            // [self.tableView reloadData];
+            
+        }];
+
+        
+        [act showInView:self.view];
+        
+        return ;
+        
+        
+    }
+    
+    
+    EditViewCtrl *vc = [EditViewCtrl new];
+    
+    if (indexPath.row==1) {
+        vc.editFieldType = EditFieldTypeName;
+        vc.value =SafeString(self.data[@"nickname"]);
+    }
+ 
+    if (indexPath.row==2) {
+        vc.editFieldType = EditFieldTypeCity;
+        
+        vc.value =SafeString(self.data[@"cityName"]);
+
+    }
+
+    
+    if (indexPath.row==3) {
+        vc.editFieldType = EditFieldTypeSex;
+        
+        vc.value =SafeString(self.data[@"gender"]);
+        
+    }
+
+    
+    
+    
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
+}
+
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+    
+    
+    
+    
+     //
+    //
+    
+    [self dismissViewControllerAnimated:NO completion:^(){
+        
+        
+       // [self.navigationController presentViewController:nvc animated:YES completion:nil];
+        
+        
+    }];
+    
+    //  [self presentViewController:vc animated:YES completion:nil];
+    
+}
+
+
+
+-(void)takePhoto{
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        //设置拍照后的图片可被编辑
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [self presentViewController:picker animated:YES completion:nil];
+    }else{
+        NSLog(@"模拟其中无法打开照相机,请在真机中使用");
+    }
+}
+
+
+-(void)LocalPhoto{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    //设置选择后的图片可被编辑
+    picker.allowsEditing = YES;
+    [self presentViewController:picker animated:YES completion:nil];
+    
+}
+
+
+
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -47,6 +47,7 @@
 
 -(void)postReview:(NSString*)shopId
           comment:(NSString*)comment
+ couponInstanceId:(NSString*)couponInstanceId
            isLike:(NSUInteger)isLike
           success:(void(^)(NSInteger code,NSString *message,id data))success
           failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
