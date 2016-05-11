@@ -106,7 +106,7 @@
 
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
-    [services queryMallByNear:@"广州市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+    [services queryMallByNear:@"北京市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
         self.mallArray = data;
     
@@ -251,7 +251,7 @@
     
     
     
-    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"广州" style:UIBarButtonItemStylePlain handler:^(id sender) {
+    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"北京市" style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
@@ -281,7 +281,7 @@
     _headButton = [[UIButton alloc]init];;
     _headButton.frame = CGRectMake(0, 0, 100, 44);
 
-    [_headButton setTitle:@"时尚天河" forState:UIControlStateNormal];
+    [_headButton setTitle:@"选择商城" forState:UIControlStateNormal];
     _headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
 
     [self.navigationItem setTitle:self.cityString];
