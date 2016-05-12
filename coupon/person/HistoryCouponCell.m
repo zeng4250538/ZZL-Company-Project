@@ -82,7 +82,7 @@
         }];
         
         self.detailLabel.font = [UIFont systemFontOfSize:12];
-        self.detailLabel.textColor = [GUIConfig grayFontColorLight];
+        self.detailLabel.textColor = [GUIConfig grayFontColor];
         
         
         
@@ -141,12 +141,12 @@
     }];
   
     
-    if (SafeEmpty(self.data[@"reviewId"])) {
+    if (!SafeEmpty(self.data[@"reviewId"])) {
         
         self.commentButton.backgroundColor = [UIColor whiteColor];
         [self.commentButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         self.commentButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-        [self.commentButton setTitle:@"评论" forState:UIControlStateNormal];
+        [self.commentButton setTitle:@"已评论" forState:UIControlStateNormal];
         
         
         
@@ -157,7 +157,7 @@
         
         [self.commentButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
         self.commentButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-        [self.commentButton setTitle:@"已评论" forState:UIControlStateNormal];
+        [self.commentButton setTitle:@"评论" forState:UIControlStateNormal];
         
 
         

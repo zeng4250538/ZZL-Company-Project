@@ -15,7 +15,7 @@
 
 
 @interface HistoryCouponUsageViewCtrl ()
-@property(nonatomic,strong)NSArray *data;
+@property(nonatomic,strong)NSMutableArray *data;
 @end
 
 @implementation HistoryCouponUsageViewCtrl
@@ -34,6 +34,10 @@
     
     [self loadData];
     
+    
+  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(printName:) name: @"reviewUpdate" object:nil];  
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -45,6 +49,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -102,7 +108,7 @@
                          success:^(NSInteger code, NSString *message, id data) {
         
         
-        self.data = data;
+        self.data = [data mutableCopy];
         
         [self.tableView reloadData];
         

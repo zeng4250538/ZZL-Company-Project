@@ -26,6 +26,8 @@ NSString * const myInformationDataKey = @"myInformationData";
 NSString * const CityKey = @"city";
 
 
+NSString *const ReviewUpdateNotice=@"ReviewUpdate";
+
 
 
 

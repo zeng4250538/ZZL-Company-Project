@@ -103,12 +103,12 @@
     
     if (SafeEmpty(self.data[@"reviewId"])) {
         
-        toCommentButton.hidden = YES;
+        toCommentButton.hidden = NO;
         
         
     }else{
         
-        toCommentButton.hidden = NO;
+        toCommentButton.hidden = YES;
         
     }
     

@@ -100,7 +100,7 @@
                   moduleName = "coupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chijr/working/coupon/coupon/person/PersonDetailInfoViewCtrl.m"
-                  timestampString = "484718398.22147"
+                  timestampString = "484719992.716286"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "437"
@@ -115,7 +115,7 @@
                   moduleName = "coupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chijr/working/coupon/coupon/person/PersonDetailInfoViewCtrl.m"
-                  timestampString = "484718398.223076"
+                  timestampString = "484719992.716493"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "443"
@@ -186,6 +186,22 @@
             startingLineNumber = "86"
             endingLineNumber = "86"
             landmarkName = "-requestRealTimeCoupon:page:pageCount:success:failure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "coupon/person/CouponUsageDetailViewCtrl.m"
+            timestampString = "484719724.59348"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "-makeFooterView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
