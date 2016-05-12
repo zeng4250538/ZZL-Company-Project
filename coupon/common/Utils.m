@@ -413,13 +413,47 @@ NSString *SafeString(id content){
     
 }
 
-+(void)downCountLabel:(UILabel*)label{
+
++(NSString*)downCountFormat:(NSString*)ymdFormat{
+
+    NSDateFormatter *fm = [NSDateFormatter new];
+    
+    fm.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    
+    NSDate *nextDate = [fm dateFromString:ymdFormat];
+    
+    NSTimeInterval totalSecond = [nextDate timeIntervalSinceNow];
     
     
-    NSString *timeString = label.text;
+    NSInteger hourValue = totalSecond/3600;
+    
+    NSInteger minuteValue = (totalSecond - hourValue*3600)/60;
+    
+    NSInteger secondValue = totalSecond - hourValue*3600-minuteValue*60;
+    
+    
+    NSString *lastValue = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)hourValue,(long)minuteValue,(long)secondValue];
+    
+    return lastValue;
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
++(NSString*)downCountString:(NSString*)value{
+    
+    
+    NSString *timeString = value;
     
     if ([timeString length]!=8) {
-        return ;
+        return @"00:00:00";
     }
     
     NSString *hour = [timeString substringWithRange:NSMakeRange(0,2)];
@@ -427,6 +461,58 @@ NSString *SafeString(id content){
     NSString *minute = [timeString substringWithRange:NSMakeRange(3,2)];
     
     NSString *second = [timeString substringWithRange:NSMakeRange(6,2)];
+    
+    
+    NSInteger totalSecond = [hour integerValue]*3600+[minute integerValue]*60+[second integerValue];
+    
+    if (totalSecond>0) {
+        
+        totalSecond --;
+        
+    }else{
+        
+        return @"00:00:00";
+    }
+    
+    NSInteger hourValue = totalSecond/3600;
+    
+    NSInteger minuteValue = (totalSecond - hourValue*3600)/60;
+    
+    NSInteger secondValue = totalSecond - hourValue*3600-minuteValue*60;
+    
+    
+    NSString *lastValue = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)hourValue,(long)minuteValue,(long)secondValue];
+    
+   return  lastValue;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
++(void)downCountLabel:(UILabel*)label{
+    
+    
+    NSString *timeString = label.text;
+    
+    if ([timeString length]<8) {
+        return ;
+    }
+    
+    NSArray *ay = [timeString componentsSeparatedByString:@":"];
+    
+    NSString *hour = ay[0];
+    
+    NSString *minute = ay[1];
+    
+    NSString *second =ay[2];
     
     
     NSInteger totalSecond = [hour integerValue]*3600+[minute integerValue]*60+[second integerValue];
@@ -447,7 +533,7 @@ NSString *SafeString(id content){
     NSInteger secondValue = totalSecond - hourValue*3600-minuteValue*60;
     
     
-    NSString *lastValue = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)hourValue,(long)minuteValue,(long)secondValue];
+    NSString *lastValue = [NSString stringWithFormat:@"%ld:%02ld:%02ld",(long)hourValue,(long)minuteValue,(long)secondValue];
     
     label.text = lastValue;
     

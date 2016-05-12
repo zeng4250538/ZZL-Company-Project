@@ -48,6 +48,9 @@ void SafePostMessage(NSString* messageName,id body);
 
 +(NSString*)firstLetter:(NSString*)szString;
 
++(NSString*)downCountFormat:(NSString*)ymdFormat;
+
+
 
 
 

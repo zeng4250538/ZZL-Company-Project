@@ -19,6 +19,9 @@ extern NSString * const AudioStatusCloseKey;
 
 extern NSString * const IsLoginKey;
 
+extern NSString *const ReviewUpdateNotice;
+
+
 
 @interface AppShareData : NSObject
 

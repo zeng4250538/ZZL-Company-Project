@@ -63,22 +63,13 @@
         
         [self loadShop];
         
-//        [self preLoadData:^(BOOL ret) {
-//            
-//            
-//            if (ret) {
-//                [self loadData];
-//            }
-//            
-//            
-//            
-//        }];
-        
-        
-        
         
         
     }
+    
+    
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
     
     

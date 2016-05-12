@@ -104,9 +104,12 @@
         [self.contentView addSubview:self.timeLabel];
         
         self.timeLabel.font = [UIFont boldSystemFontOfSize:9];
+        
+        
+        
+        
         self.timeLabel.text=@"12:11:33";
         self.timeLabel.textColor = [GUIConfig mainColor];
-        
         
         
         NSTimer *timer = [NSTimer bk_scheduledTimerWithTimeInterval:1.0 block:^(NSTimer *timer) {
@@ -194,6 +197,11 @@
     }];
     
     self.timeLabel.textAlignment = NSTextAlignmentRight;
+    
+    
+    NSString *endTime = [Utils downCountFormat:SafeString(self.data[@"startTime"])];
+    
+    self.timeLabel.text =endTime;
     
     
     [self.recommentButton mas_makeConstraints:^(MASConstraintMaker *make) {

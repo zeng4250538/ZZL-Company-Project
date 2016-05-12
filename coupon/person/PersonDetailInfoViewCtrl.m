@@ -13,7 +13,7 @@
 
 @interface PersonDetailInfoViewCtrl ()
 
-@property(nonatomic,strong)NSDictionary *data;
+@property(nonatomic,strong)NSMutableDictionary *data;
 
 @end
 
@@ -117,7 +117,7 @@
 //
         
         
-        self.data = data;
+        self.data = [data mutableCopy];
         
         [self.tableView reloadData];
         
@@ -191,7 +191,7 @@
             
             make.left.equalTo(theCell.contentView).offset(15);
             make.centerY.equalTo(theCell.contentView);
-            make.width.equalTo(@100);
+            make.width.equalTo(@150);
             make.height.equalTo(@20);
             
             
@@ -243,7 +243,7 @@
             theCell.titleLabel.text=@"头像";
             
             
-          NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
+          NSURL *url = SafeUrl(self.data[@"photoUrl"]);
             
             
             
@@ -260,6 +260,8 @@
             
             [theCell.iconImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 
+                
+                [theCell setNeedsLayout];
                 
             }];
             
@@ -359,12 +361,12 @@
     EditViewCtrl *vc = [EditViewCtrl new];
     
     if (indexPath.row==1) {
-        vc.editFieldType = EditFieldTypeName;
+        vc.editFieldType = CustomerFieldTypeName;
         vc.value =SafeString(self.data[@"nickname"]);
     }
  
     if (indexPath.row==2) {
-        vc.editFieldType = EditFieldTypeCity;
+        vc.editFieldType = CustomerFieldTypeCity;
         
         vc.value =SafeString(self.data[@"cityName"]);
 
@@ -372,11 +374,39 @@
 
     
     if (indexPath.row==3) {
-        vc.editFieldType = EditFieldTypeSex;
+        vc.editFieldType = CustomerFieldTypeSex;
         
         vc.value =SafeString(self.data[@"gender"]);
         
     }
+    
+    
+    vc.updateBlock = ^(CustomerFieldType fieldType ,NSString *value){
+        
+        
+        if (fieldType == CustomerFieldTypeName) {
+            
+            self.data[@"nickname"]=value;
+        }
+        if (fieldType == CustomerFieldTypeSex) {
+            
+            self.data[@"gender"]=value;
+        }
+      
+        if (fieldType == CustomerFieldTypeCity) {
+            
+            self.data[@"cityName"]=value;
+        }
+        
+        
+        [self.tableView reloadData];
+        
+        
+        
+        
+        
+    };
+    
 
     
     
