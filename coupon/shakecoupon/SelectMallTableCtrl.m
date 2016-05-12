@@ -184,7 +184,7 @@
     MallService *service = [MallService new];
     
     
-    [service queryMallByCity:@"广州" success:^(NSInteger code, NSString *message, id data) {
+    [service queryMallByCity:@"广州市" success:^(NSInteger code, NSString *message, id data) {
         
         self.data = data;
         

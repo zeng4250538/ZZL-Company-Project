@@ -57,7 +57,7 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shopmall"];
     
-    NSDictionary *parm = @{@"city":cityName,@"longitude":@(lon),@"latitude":@(lat),@"fields":@"id,name,city,distance,mapPhotoUrl"};
+    NSDictionary *parm = @{@"city":cityName,@"longitude":@(lon),@"latitude":@(lat)};
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         

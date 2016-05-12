@@ -361,7 +361,7 @@
     UIImageView *uv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     uv.backgroundColor = [UIColor whiteColor];
     
-    NSURL *url = SafeUrl(self.data[@"couponSmallPhotoUrl"]);
+    NSURL *url = SafeUrl(self.data[@"photoUrl"]);
     
     if (!url) {
         url =  SafeUrl(self.data[@"smallPhotoUrl"]);
@@ -572,8 +572,16 @@
     
     [callPhoneButton bk_addEventHandler:^(id sender) {
         
-        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"15888991234"];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        
+        //phone
+        
+        NSString *phone = SafeString(self.data[@"phone"]);
+        
+        NSString *phoneString=[NSString stringWithFormat:@"telprompt://%@",phone];
+        
+        NSLog(@"phoneString %@",phoneString);
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
         
         
 
@@ -673,7 +681,8 @@
     
     limitTimeLabel.textAlignment = NSTextAlignmentCenter;
     
-    limitTimeLabel.text=@"2016-06-30 23:59:59";
+    limitTimeLabel.text=SafeString(self.data[@"validEndDate"]);
+    
 
     
 }

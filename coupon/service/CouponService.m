@@ -66,16 +66,19 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponPromotion"];
-    
-    NSString *youhuiString = @"即时优惠";
-    
-    NSString *string = [youhuiString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    shopId = @"1";
     
     
-    NSString *notNullshopId = SafeString(shopId);
+   // shop/{shopid}/couponPromotion
     
-    NSDictionary *parm = @{@"shopid":notNullshopId,@"type":string,@"page":@(page),@"per_page":@(pageCount)};
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/shop/%@/couponPromotion",SafeString(shopId)];
+    
+    
+    
+    NSString *promotionType = [@"即时优惠" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSDictionary *parm = @{@"type":promotionType};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -110,12 +113,13 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponPromotion"];
     
-    NSString *youhuiString = @"普通优惠";
-    NSString *string = [youhuiString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    shopId=@"11";
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/shop/%@/couponPromotion",SafeString(shopId)];
     
-    NSDictionary *parm = @{@"shopid":shopId,@"type":string,@"page":@(page),@"per_page":@(pageCount)};
+      NSString *promotionType = [@"普通优惠" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *parm = @{@"shopid":shopId,@"type":promotionType,@"page":@(page),@"per_page":@(pageCount)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {

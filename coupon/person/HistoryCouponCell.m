@@ -95,12 +95,6 @@
         
         self.commentButton.clipsToBounds = YES;
         self.commentButton.layer.cornerRadius=4;
-        self.commentButton.backgroundColor = [GUIConfig orangeColor];
-        
-        [self.commentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.commentButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-        [self.commentButton setTitle:@"评论" forState:UIControlStateNormal];
-        
         [self.commentButton bk_addEventHandler:^(id sender) {
             
             
@@ -134,6 +128,9 @@
     NSURL *url = SafeUrl(self.data[@"couponPhotoUrl"]);
     
     
+    
+    
+    
     self.detailLabel.text = SafeString(self.data[@"couponName"]);
     
     
@@ -143,6 +140,32 @@
         
     }];
   
+    
+    if (SafeEmpty(self.data[@"reviewId"])) {
+        
+        self.commentButton.backgroundColor = [UIColor whiteColor];
+        [self.commentButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        self.commentButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+        [self.commentButton setTitle:@"评论" forState:UIControlStateNormal];
+        
+        
+        
+    }else{
+        
+        
+        self.commentButton.backgroundColor = [GUIConfig orangeColor];
+        
+        [self.commentButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
+        self.commentButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+        [self.commentButton setTitle:@"已评论" forState:UIControlStateNormal];
+        
+
+        
+        
+        
+        
+        
+    }
     
     //self.endTimeLabel.text =[NSString stringWithFormat:@"截止时间:%@", SafeString(self.data[@"endTime"])];
     

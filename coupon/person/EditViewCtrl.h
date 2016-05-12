@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, EditFieldType) {
-    EditFieldTypeName,
-    EditFieldTypeCity,
-    EditFieldTypeSex
-,
-};
+#import "CustomerService.h"
 
+
+typedef void(^CustomUpdateBlock)(CustomerFieldType fieldType,NSString *value);
 @interface EditViewCtrl : UIViewController
 
-@property(nonatomic,copy)NSString *value;
-@property(nonatomic,assign)EditFieldType editFieldType;
+@property(nonatomic,strong)NSString *value;
+@property(nonatomic,assign)CustomerFieldType editFieldType;
+@property(nonatomic,copy)CustomUpdateBlock updateBlock;
+
 
 @end

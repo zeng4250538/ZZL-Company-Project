@@ -165,7 +165,7 @@
         NSLog(@"data = %@ ",data);
         
         
-        NSURL *url =SafeUrl(data[@"smallPhotoUrl"]);
+        NSURL *url =SafeUrl(data[@"photoUrl"]);
         
         
         [myInfromation sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

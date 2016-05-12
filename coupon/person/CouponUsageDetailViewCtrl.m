@@ -101,6 +101,18 @@
     } forControlEvents:UIControlEventTouchUpInside];
     
     
+    if (SafeEmpty(self.data[@"reviewId"])) {
+        
+        toCommentButton.hidden = YES;
+        
+        
+    }else{
+        
+        toCommentButton.hidden = NO;
+        
+    }
+    
+    
     
     
     
