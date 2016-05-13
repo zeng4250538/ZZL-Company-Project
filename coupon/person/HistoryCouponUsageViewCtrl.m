@@ -16,6 +16,9 @@
 
 @interface HistoryCouponUsageViewCtrl ()
 @property(nonatomic,strong)NSMutableArray *data;
+
+//准备修改的行
+@property(nonatomic,assign)NSUInteger updateRow;
 @end
 
 @implementation HistoryCouponUsageViewCtrl
@@ -36,13 +39,44 @@
     
     
   
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(printName:) name: @"reviewUpdate" object:nil];  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotice:) name: ReviewUpdateNotice object:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+
+-(void)updateNotice:(id)sender{
+    
+    
+    NSLog(@"NSNotificationCenter update %@",sender);
+    
+    
+    NSMutableDictionary *d = [self.data[self.updateRow] mutableCopy];
+    
+    d[@"reviewId"]=@0;
+    
+    
+    self.data[self.updateRow]=d;
+    
+    
+    [self.tableView reloadData];
+    
+    
+    
+    
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -194,6 +228,8 @@
     
     vc.data =self.data[indexPath.row];
     
+    
+    self.updateRow =indexPath.row;
     
     
     [self.navigationController pushViewController:vc animated:YES];

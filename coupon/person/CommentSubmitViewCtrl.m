@@ -92,6 +92,10 @@
                  comment:commentString couponInstanceId:couponInstanceId isLike:isLike success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD showSuccessWithStatus:@"评论更新成功"];
+                     
+                     
+                     SafePostMessage(ReviewUpdateNotice, @"update");
+                     
         
         [self.navigationController popViewControllerAnimated:YES];
         

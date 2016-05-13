@@ -101,8 +101,7 @@
 }
 
 
--(void)updateCustomer:(NSString*)customerId
-            fieldType:(CustomerFieldType)fieldType
+-(void)updateCustomer:(CustomerFieldType)fieldType
                 value:(NSString*)value
               success:(void(^)(NSInteger code,NSString *message,id data))success
               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
