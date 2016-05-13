@@ -99,7 +99,7 @@
         
         CustomerService *service = [CustomerService new];
         
-        [service updateCustomer:@"" fieldType:self.editFieldType value:self.inputTextField.text success:^(NSInteger code, NSString *message, id data) {
+        [service updateCustomer:self.editFieldType value:self.inputTextField.text success:^(NSInteger code, NSString *message, id data) {
             
             
             self.isUpdated = YES;

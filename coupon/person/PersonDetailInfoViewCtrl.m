@@ -10,6 +10,7 @@
 #import "CustomerService.h"
 #import "QuickTableViewCell.h"
 #import "EditViewCtrl.h"
+#import "ImageUploadService.h"
 
 @interface PersonDetailInfoViewCtrl ()
 
@@ -426,21 +427,81 @@
 }
 
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+
     
     
     
+    
+     UIImage *image = info[UIImagePickerControllerEditedImage];
+    
+    
+    CustomerService *cv = [CustomerService new];
+    
+    
+    
+    
+    ImageUploadService *service = [ImageUploadService new];
+    
+    
+    [service uploadImage:image success:^(NSInteger code, id object) {
+        
+         
+        NSString *fileName = object[@"responseCode"];
+        
+        
+        
+        [cv updateCustomer:CustomerFieldTypePhoto value:fileName success:^(NSInteger code, NSString *message, id data) {
+            
+            
+             
+            
+            [SVProgressHUD showSuccessWithStatus:@"头像上传成功"];
+            
+            
+            [picker dismissViewControllerAnimated:YES completion:^{
+                [self.tableView reloadData];
+
+            }];
+            
+            
+              
+       
+            
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+            
+            [SVProgressHUD showErrorWithStatus:@"修改用户头像错误"];
+            
+            
+        }];
+        
+        
+
+        
+        
+        
+        
+        
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        
+        [SVProgressHUD showErrorWithStatus:@"文件上传错误"];
+        
+    }];
+    
+    
+    
+    
+    
+    
+      
     
      //
     //
     
-    [self dismissViewControllerAnimated:NO completion:^(){
-        
-        
-       // [self.navigationController presentViewController:nvc animated:YES completion:nil];
-        
-        
-    }];
     
     //  [self presentViewController:vc animated:YES completion:nil];
     
@@ -473,6 +534,41 @@
     
 }
 
+
+
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+//{
+//    NSLog(@"图片选中");
+//    //截取图片
+//    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+//    NSData *imageData = UIImageJPEGRepresentation(image, 0.001);
+//    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer.acceptableContentTypes =
+//    [NSSet setWithObjects:@"text/html",@"text/plain", nil,nil];
+//    // 参数
+//    NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
+//    parameter[@"token"] = @"param....";
+//    // 访问路径
+//    NSString *stringURL = @"xxx";
+//    
+//    
+//    [manager POST:stringURL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        // 上传文件
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        formatter.dateFormat = @"yyyyMMddHHmmss";
+//        NSString *str = [formatter stringFromDate:[NSDate date]];
+//        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+//        
+//        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
+//        
+//    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"上传成功");
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"上传错误");
+//    }];
+//}
+//
 
 
 /*

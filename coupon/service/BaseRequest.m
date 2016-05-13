@@ -177,5 +177,43 @@
     
 }
 
+-(void)uploadImage:(NSString*)url  image:(UIImage*)image success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure {
+    
+    
+    
+    NSString *fileName=@"aaaa.jpg";
+    
+    
+      NSData *imageData = UIImageJPEGRepresentation(image, 0.8);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes =
+    [NSSet setWithObjects:@"text/html",@"text/plain", @"application/json",nil];
+    // 参数
+    // 访问路径
+    
+    url = [url stringByAppendingString:@"?fileName=aaaa.jpg"];
+    
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        // 上传文件
+        
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpg"];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        success(operation.response.statusCode,responseObject);
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        failure(operation.response.statusCode,error.description);
+    }];
+
+    
+}
+
+
+
 
 @end

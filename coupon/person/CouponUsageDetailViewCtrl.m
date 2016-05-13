@@ -42,6 +42,9 @@
     
     [self makeFooterView];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotice:) name: ReviewUpdateNotice object:nil];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -49,15 +52,38 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+-(void)updateNotice:(id)sender{
+    
+    
+    NSLog(@"NSNotificationCenter update %@",sender);
+    
+    self.toCommentButton.hidden = YES;
+    
+    
+    
+    
+    
+    
+    
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
+    
+}
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if (self.isSubmitReturn) {
+    
+  //  self.toCommentButton.hidden = YES;
         
-        self.toCommentButton.hidden = YES;
         
-        
-    }
     
     
 }

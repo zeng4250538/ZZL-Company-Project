@@ -23,6 +23,12 @@
 -(void)delete:(NSString*)url param:(NSDictionary*)param  success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure;
 
 
+-(void)uploadImage:(NSString*)url  image:(UIImage*)image success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure;
+
+
+
+
+
 
 
 @end
