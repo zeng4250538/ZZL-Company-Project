@@ -80,7 +80,7 @@
     
     MallService *service = [[MallService alloc] init];
     
-    [service queryMallByNear:@"广州市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+    [service queryMallByNear:@"北京市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
         
         [ReloadHud showReloadMode:self.tableView];

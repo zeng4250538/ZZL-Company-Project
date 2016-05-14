@@ -71,7 +71,7 @@
     
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
-    [services queryMallByNear:@"广州市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+    [services queryMallByNear:@"北京市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
         
         
     
@@ -330,11 +330,13 @@
         
         [uv addSubview:bgView];
         
-        UIImageView *ballView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guangzhoufood"]];
+        UIImageView *ballView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guangzhoufood.png"]];
         
         [uv addSubview:ballView];
         
         [ballView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@200);
+            make.width.equalTo(@200);
             make.centerX.equalTo(uv);
             make.centerY.equalTo(uv).offset(-30);
             
@@ -367,7 +369,7 @@
         
     }];
    
-    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"广州" style:UIBarButtonItemStylePlain handler:^(id sender) {
+    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"北京市" style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
