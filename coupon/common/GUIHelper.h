@@ -21,7 +21,7 @@
 +(UITableView*)makeTableView:(UIView*)view delegate:(id)delegate;
 
 
-
++(UITableView*)zzl_makeTableView:(UIView *)view dalegate:(id)delegate;
 
 
 

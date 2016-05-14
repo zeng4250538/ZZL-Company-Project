@@ -92,15 +92,25 @@
     }];
     
     return tableView;
-
-    
-    
-    
-    
     
 }
 
++(UITableView*)zzl_makeTableView:(UIView *)view dalegate:(id)delegate{
 
+    UITableView *tableView = [[UITableView alloc]init];
+    [view addSubview:tableView];
+    tableView.dataSource = delegate;
+    tableView.delegate = delegate;
+
+    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(view).offset(50);
+        make.bottom.equalTo(view).offset(0);
+        make.right.and.left.equalTo(view).offset(0);
+    }];
+
+    return tableView;
+
+}
 
 
 

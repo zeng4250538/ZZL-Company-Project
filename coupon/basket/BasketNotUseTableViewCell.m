@@ -14,7 +14,7 @@
 @property(nonatomic,strong)UILabel *nameLabel;
 @property(nonatomic,strong)UILabel *endTimeLabel;
 @property(nonatomic,strong)UILabel *typeLabel;
-
+@property(nonatomic,strong)UILabel *subNameLabel;
 @end
 
 
@@ -45,6 +45,10 @@
         
         [self.contentView addSubview:self.endTimeLabel];
         
+        self.subNameLabel = [UILabel new];
+        
+        [self.contentView addSubview:self.subNameLabel];
+        
         
         [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset(20);
@@ -74,6 +78,16 @@
         
         self.endTimeLabel.textColor  = [GUIConfig grayFontColorLight];
         self.endTimeLabel.font = [UIFont systemFontOfSize:12];
+        
+        
+        [self.subNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.logoImageView.mas_right).offset(10);
+            make.top.equalTo(self.logoImageView).offset(10);
+            make.right.equalTo(self.contentView).offset(-10);
+            make.height.equalTo(@20);
+            
+        }];
         
         
     }
