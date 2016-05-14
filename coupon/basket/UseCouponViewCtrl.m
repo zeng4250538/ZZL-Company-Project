@@ -419,7 +419,7 @@
     UITextField *moneyTextField = [UITextField new];
     moneyTextField.placeholder = @"询问服务员后输入金额";
     
-    moneyTextField.keyboardType = UIKeyboardTypeNumberPad;
+    moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
     
     moneyTextField.delegate = self;
     moneyTextField.font = [UIFont systemFontOfSize:14];

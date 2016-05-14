@@ -365,13 +365,11 @@
     
     
     
-    NSURL *url =SafeUrl(self.data[@"smallPhotoUrl"]);
+    NSURL *url = [NSURL URLWithString:SafeString(self.data[@"smallPhotoUrl"])];
+//    SafeUrl(self.data[@"smallPhotoUrl"]);
     
-    NSString *stringUrl = [[NSString stringWithFormat:@"%@",url] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSURL *utlasd = [NSURL URLWithString:stringUrl];
-    
-    [self.logoView sd_setImageWithURL:utlasd placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.logoView sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         [self setNeedsLayout];
         
