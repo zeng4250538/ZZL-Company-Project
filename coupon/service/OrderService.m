@@ -38,13 +38,18 @@
 //        "sellingPrice": 0
 //    }
     
+    NSString *originalPriceStr = [NSString stringWithFormat:@"%.2f",originalPrice];
+
+    NSString *sellPriceStr = [NSString stringWithFormat:@"%.2f",sellingPrice];
     
     
-    NSDictionary *parm = @{@"couponInstanceId":couponInstanceId,@"originalPrice":@(originalPrice),@"sellingPrice":@(sellingPrice)};
+ 
+    NSDictionary *parm = @{@"couponInstanceId":couponInstanceId,@"originalPrice":originalPriceStr,@"sellingPrice":sellPriceStr};
     
     
-    [req get:url param:parm success:^(NSInteger code, id object) {
+    [req post:url param:parm success:^(NSInteger code, id object) {
         
+         
         success(code,@"",object);
         
     } failure:^(NSInteger code, NSString *content) {

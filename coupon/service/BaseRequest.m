@@ -54,7 +54,11 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
 
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
+    
+    manager.responseSerializer.acceptableContentTypes =
+    [NSSet setWithObjects:@"text/html",@"text/plain", @"application/json",nil];
+
     //传入的参数
     
     //NSDictionary *parameters = @{@"1":@"XXXX",@"2":@"XXXX",@"3":@"XXXXX"};

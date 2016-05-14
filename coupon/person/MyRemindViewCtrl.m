@@ -191,12 +191,25 @@
     
     NSDictionary *d = self.data[indexPath.row];
     
-    cell.data =d;
+    NSDictionary *promotion = d[@"couponPromotion"];
+    
+    NSDictionary *couponData =@{
+                                @"startTime":d[@"startTime"],
+                                @"name":promotion[@"couponName"],
+                                @"smallPhotoUrl":promotion[@"smallPhotoUrl"],
+                                @"shopId":promotion[@"shopId"],
+                                @"status":promotion[@"status"]
+                                };
     
     
     
     
-    cell.couponActionType = CouponTypeUnLimited;
+    cell.data =couponData;
+    
+    
+    
+    
+ //   cell.couponActionType = CouponTypeUnLimited;
     
     
     [cell updateData];

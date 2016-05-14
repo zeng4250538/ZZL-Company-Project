@@ -9,6 +9,7 @@
 #import "UseCouponViewCtrl.h"
 #import "PayUtils.h"
 #import "OrderService.h"
+#import "WXUtil.h"
 
 @interface UseCouponViewCtrl ()
 
@@ -64,6 +65,9 @@
     
     
     [self.view addGestureRecognizer:tap];
+    
+    
+    
     
     
     
@@ -351,25 +355,76 @@
         
         NSTimeInterval tm = [NSDate timeIntervalSinceReferenceDate];
         
-        NSString *orderId = [NSString stringWithFormat:@"%.0f",tm];
+        //该id作为优惠券id
+        
+        NSString *couponInstanceId = SafeString(self.data[@"id"]);
         
 #pragma mark - 微信支付
         
         if (self.wechatPayButton.selected){
             
             
+            //本地支付测试使用
+//            [self doWeChatLocalPay:@"优惠券001" price:1.0];
+//            
+//            return;
+            
+            
+            
+           // -(void)doWeChatLocalPay:(NSString*)orderName price:(CGFloat)price{
+
+            
+            //远程支付
+            
+            
             OrderService *service = [OrderService new];
             
-            NSString *couponInstanceId = SafeString(self.data[@"id"]);
             
             
             
-            
+            [SVProgressHUD showWithStatus:@"支付中..." maskType:SVProgressHUDMaskTypeBlack];
             
             [service requestPrepayId:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice success:^(NSInteger code, NSString *message, id data) {
                 
                 
-                NSLog(@"pay result data = %@",data);
+                NSString *returnCode = data[@"returnCode"];
+                
+                if (![returnCode isEqualToString:@"SUCCESS"]) {
+                    
+                    [SVProgressHUD showErrorWithStatus:@"微信预支付失败" maskType:SVProgressHUDMaskTypeBlack];
+                    
+                    return ;
+                    
+                }
+                
+                
+                NSString *prepayId = SafeString(data[@"prepayId"]);
+                
+                
+               // NSDictionary *dict = [PayUtils weChatSign:prepayId];
+                
+                
+                
+                NSInteger timeStamp = [data[@"timestamp"] integerValue];
+                
+                
+                [PayUtils callWeChatPay:prepayId sign:SafeString(data[@"sign"])
+                               noncestr:SafeString(data[@"nonceStr"])
+                              timeStamp:timeStamp];
+                
+                
+                [SVProgressHUD dismiss];
+                
+                
+                
+                
+//                PayUtils +(void)callWeChatPay:(NSString*)prepayId sign:(NSString*)sign noncestr:(NSString*)noncestr timeStamp:(UInt32)timeStamp;
+
+                
+                
+                
+
+                
                 
                 
                 
@@ -379,7 +434,12 @@
             } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
                 
                 
+                [SVProgressHUD dismiss];
+                
+                
+                
                 [SVProgressHUD showErrorWithStatus:@"支付服务器繁忙" maskType:SVProgressHUDMaskTypeBlack];
+                
                 
                 
             }];
@@ -400,7 +460,7 @@
 #pragma mark - 淘宝支付
         if (self.aliPayButton.selected) {
             
-            [PayUtils aliPay:orderId orderSn:orderId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
+            [PayUtils aliPay:couponInstanceId orderSn:couponInstanceId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
 
             
         }
@@ -419,6 +479,33 @@
     
     
 }
+
+
+-(void)doWeChatLocalPay:(NSString*)orderName price:(CGFloat)price{
+    
+    
+    
+    [PayUtils sendWechatPay:orderName price:[NSString stringWithFormat:@"%.0f",price*100]];
+    
+    
+    
+    
+    
+    
+//    + (void)sendWechatPay:(NSString*)orderName price:(NSString*)price
+//
+//    
+//    [PayUtils aliPay:orderId orderSn:orderId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
+//
+    
+    
+    
+    
+    
+}
+
+
+
 
 
 - (void)didReceiveMemoryWarning {

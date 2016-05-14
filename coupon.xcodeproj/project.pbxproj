@@ -222,7 +222,6 @@
 		57E364AC1C9E6FB5003575FC /* UIView+DataLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E364AB1C9E6FB5003575FC /* UIView+DataLoad.m */; };
 		57E722C31C670AB7004DBA9C /* CouponService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C21C670AB7004DBA9C /* CouponService.m */; };
 		57E722C61C686A51004DBA9C /* ShakeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E722C51C686A51004DBA9C /* ShakeService.m */; };
-		57E7E6B01CE0BF3000F5247D /* Test2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E7E6AF1CE0BF3000F5247D /* Test2TableViewController.m */; };
 		57E7E6B31CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57E7E6B21CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m */; };
 		57EFEEE31C90758B003103B1 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE21C90758B003103B1 /* BaseRequest.m */; };
 		57EFEEE61C90874E003103B1 /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EFEEE51C90874E003103B1 /* BaseService.m */; };
@@ -691,8 +690,6 @@
 		57E722C21C670AB7004DBA9C /* CouponService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponService.m; sourceTree = "<group>"; };
 		57E722C41C686A51004DBA9C /* ShakeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeService.h; sourceTree = "<group>"; };
 		57E722C51C686A51004DBA9C /* ShakeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeService.m; sourceTree = "<group>"; };
-		57E7E6AE1CE0BF3000F5247D /* Test2TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test2TableViewController.h; sourceTree = "<group>"; };
-		57E7E6AF1CE0BF3000F5247D /* Test2TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test2TableViewController.m; sourceTree = "<group>"; };
 		57E7E6B11CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDetailInfoViewCtrl.h; sourceTree = "<group>"; };
 		57E7E6B21CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDetailInfoViewCtrl.m; sourceTree = "<group>"; };
 		57EFEEE11C90758B003103B1 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
@@ -1152,8 +1149,6 @@
 		5779BD581C25381600E15934 = {
 			isa = PBXGroup;
 			children = (
-				57E7E6AE1CE0BF3000F5247D /* Test2TableViewController.h */,
-				57E7E6AF1CE0BF3000F5247D /* Test2TableViewController.m */,
 				574911201CC00AAE00FB2B14 /* payutils */,
 				574910D41CC00A3D00FB2B14 /* openssl */,
 				574910C11CC0084B00FB2B14 /* pay */,
@@ -1973,7 +1968,6 @@
 				5796FA6A1C456490004CA23B /* SelectMallTableCtrl.m in Sources */,
 				573E51E31C7CB134005DBBC3 /* CouponDrawbackViewCtrl.m in Sources */,
 				7F121D5C1CA2B78F005AF53D /* HistoryOfConsumptionTableViewCell.m in Sources */,
-				57E7E6B01CE0BF3000F5247D /* Test2TableViewController.m in Sources */,
 				57F3E2891C86CBB100A8CCA8 /* CouponDrawBackDetailViewCtrl.m in Sources */,
 				579E54231CD1D2BA00B6C9E4 /* ReminderService.m in Sources */,
 				5796FA741C460CB1004CA23B /* UIView+LayoutBlock.m in Sources */,

@@ -20,10 +20,24 @@
  *  淘宝支付参数
  */
 
- NSString *ALiPay_Partner=@"2088801900305895";
- NSString *ALiPay_Seller=@"2088801900305895";
- NSString *ALiPay_Private=@"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJ/Dr1+h3bnaiStwth2AYQD/XxYRiK/0KCmKrhCXRufIAqSOztlS1XZepdu1OquGRsRlfYntr1+GpKH1sPYi6K2JMyzSQzNBM/cX8/wJl1Ewk3ERe35iKcW+sSJf0G+HBoWpdDO8ROHorFkKIb/UOs3P/D3o37WSF2ICSo5hW8oNAgMBAAECgYAyWEvvauagJomLMt1wtn/a/J5OKgBU0i/Fx3nKqKEjcRfEG2x7d2rk/jZt4dI3Mv0h7ol86XWWOKuwjefR6HZBmbBA8jmeR60oDBiGXVITM0gqN0KpaV0MgBMTK8QzbxGu0yMDiC/uum6AFf1Sd/G6bVJsu1aueZHIUPqBMBJY0QJBANDPP1Vo8AlfwbgXUogCyE1CNXNuM40+I4s0XMYKb/eQ1OBlIoC9iCFEcnRLKcu1Tlk6irHQDGUcFxpKz2SuWxMCQQDD3ulw0lKsD1DHVfZv35kJDuvLglnOPukw3V66p7ZvBKqHFwRmeYfDX9ZEKBiFhOxPxf0F7l4nE/Y7nI1SacpfAkBkTKinZhim6BAtVUaXfn6oXb0/DRhGKCr6mtRVbH4L9M3MW8gO/vt8v1wa8F/LMfPIeI5WixDpIG0YfAbS3c1xAkEAtGnFYbsIlR1CTWk7pc4xuqs4u2nkaFmAFxdAIvNJ0bZdkDK+RdlZGLdUt9CqzYki1VPLfEQUCzCS1FOdxDRXRwJAXTjH8DYxCwr2/G+6yUvpgsKtALxE8anWl98TJT/l5WzLQlIwQmuN4R2JnBxPaZ6heZmu+98lI4F8t+zGPFxZHw==";
+ NSString *ALiPay_Partner=@"2088221016697815";
+ NSString *ALiPay_Seller=@"paytreasuredeveloper@richstonedt.com";
+NSString *ALiPay_Private=@"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALGbvIyBvJFMBBr2"
+"z+EdgHQ+SRc1xAJRIuboEjFNoltKh5m6Wy81jm61kq5LHQGhPO4zUjfwygYeqNqh"
+"vXiWEFJYnNsBqOR5NNhf74SjA6LXYLflLiyz1yQG9IQeNetl98FBZGTLvZWXjnJc"
+"dT2KC38gTRYXcafGTNAbHDX5IgzpAgMBAAECgYAQBkYfw0DZNyuTpzsgS4IgetIr"
+"Zu11bA6jGMMzcZa5d+L+KsM5YjKkqHtAgIRwdjTCJR1A8Ne5b6C6gSdQLvHv5ZRv"
+"FtPRVR983eumy6+HDqXVeZXYLmeuS3U+RlMQ7SzaeRUF9SMSkIqBmNJKAzaUhILZ"
+"0Z+X6Scfzh2/a6st5QJBANmxoXY88f+M+mz82rJC7HKKibVq1PI7mQxEaQnhAEvm"
+"xbMKM/4iAu5mOwHmXuHHJJBK6uRa1/r6yAB3yqDs9hsCQQDQ3GOdkOnnzfduh/SQ"
+"wUlT3rRAVLxRhjYz5l2DBVUTfr/QAivcU5ZQcZglWqnyO0YJeglozLY326qe+Cu6"
+"HQlLAkAqa93974Rs+yj1whRP9pCjBXIuYyIaDhkV9eLOJQVsxQyzhgJ5vGD72foX"
+"ta+5qZfrcl3xn+5En0gIJ0/aKjMPAkB53u+dhG6IHS3w6BHz2WURNFUXaJpOM7Mz"
+"C4urJRRkgMQp+upe8MM4A2CVA1dBCgcvBm+xICp/Y4Ump4bUXZcLAkBWz925BV3r"
+"/e/QVR8eaeg9phdXl59MhY4rviwjvfOCucWH43fxOllqtetY47iOrMoYtggUBnDj"
+"8NIpoCfgpC2y";
 
+NSString *CallBackUrl = @"http://183.6.190.75:9780/diamond-sis-web/v1/payment/wechat/result";
 
 
 
@@ -58,7 +72,7 @@ NSString *WechatPay_MCH_ID =@"1332430001";
     req.prepayId            = prepayId;
     req.nonceStr            = noncestr;
     req.timeStamp           = timeStamp;
-    req.package             = @"Sign=WXPa";
+    req.package             = @"Sign=WXPay";
     req.sign                = sign;
     
     [WXApi sendReq:req];
@@ -116,6 +130,82 @@ NSString *WechatPay_MCH_ID =@"1332430001";
 
 
 
++(NSDictionary*)weChatSign:(NSString*)prePayId{
+    
+    
+        //订单标题，展示给用户
+    
+        
+        //================================
+        //预付单参数订单设置
+        //================================
+        srand( (unsigned)time(0) );
+    
+            //获取到prepayid后进行第二次签名
+            
+        NSString    *package, *time_stamp, *nonce_str;
+            //设置支付参数
+        time_t now;
+        time(&now);
+        time_stamp  = [NSString stringWithFormat:@"%ld", now];
+        nonce_str	= [WXUtil md5:time_stamp];
+            //重新按提交格式组包，微信客户端暂只支持package=Sign=WXPay格式，须考虑升级后支持携带package具体参数的情况
+            //package       = [NSString stringWithFormat:@"Sign=%@",package];
+        package         = @"Sign=WXPay";
+            //第二次签名参数列表
+        NSMutableDictionary *signParams = [NSMutableDictionary dictionary];
+        [signParams setObject: WechatPay_APP_ID        forKey:@"appid"];
+        [signParams setObject: nonce_str    forKey:@"noncestr"];
+        [signParams setObject: package      forKey:@"package"];
+        [signParams setObject: WechatPay_MCH_ID        forKey:@"partnerid"];
+        [signParams setObject: time_stamp   forKey:@"timestamp"];
+        [signParams setObject: prePayId     forKey:@"prepayid"];
+        //[signParams setObject: @"MD5"       forKey:@"signType"];
+        //生成签名
+        NSString *sign  = [self createWeChatMd5Sign:signParams];
+        
+        [signParams setObject: sign         forKey:@"sign"];
+        
+    
+            //返回参数列表
+        return signParams;
+            
+    
+    
+    
+}
+
+
+
++(NSString*) createWeChatMd5Sign:(NSMutableDictionary*)dict
+{
+    NSMutableString *contentString  =[NSMutableString string];
+    NSArray *keys = [dict allKeys];
+    //按字母顺序排序
+    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    //拼接字符串
+    for (NSString *categoryId in sortedArray) {
+        if (   ![[dict objectForKey:categoryId] isEqualToString:@""]
+            && ![categoryId isEqualToString:@"sign"]
+            && ![categoryId isEqualToString:@"key"]
+            )
+        {
+            [contentString appendFormat:@"%@=%@&", categoryId, [dict objectForKey:categoryId]];
+        }
+        
+    }
+    //添加key字段
+    [contentString appendFormat:@"key=%@", WechatPay_API_KEY];
+    //得到MD5 sign签名
+    NSString *md5Sign =[WXUtil md5:contentString];
+    
+    //输出Debug Info
+    
+    return md5Sign;
+}
+
 +(NSString*)encodeString:(NSString*)unencodedString{
     
     // CharactersToBeEscaped = @":/?&=;+!@#$()~',*";
@@ -160,7 +250,7 @@ NSString *WechatPay_MCH_ID =@"1332430001";
     order.productDescription = orderName; //商品描述
     
     order.amount = [NSString stringWithFormat:@"%.2f",money]; //商品价格
-    order.notifyURL =  @"http://m.lingshi.com/app/callback/alipay.php"; //回调URL
+    order.notifyURL =  CallBackUrl; //回调URL
     
     
     order.service = @"mobile.securitypay.pay";

@@ -8,7 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
+
+extern NSString *WechatPay_API_KEY ;  //注意保密
+extern NSString *WechatPay_APP_ID ;
+extern NSString *WechatPay_MCH_ID ;
+
+
 @interface PayUtils : NSObject
+
+
+//微信支付2
+
++ (void)sendWechatPay:(NSString*)orderName price:(NSString*)price;
+
++(NSDictionary*)weChatSign:(NSString*)prePayId;
+
+
+
+
+
+
 
 
 //微信支付

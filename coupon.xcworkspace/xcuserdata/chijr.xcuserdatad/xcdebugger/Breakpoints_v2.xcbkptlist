@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "coupon/basket/UseCouponViewCtrl.m"
-            timestampString = "484889516.831705"
+            timestampString = "484911886.954047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "-wechatPayResult:"
             landmarkType = "5">
          </BreakpointContent>
@@ -100,12 +100,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "coupon/basket/UseCouponViewCtrl.m"
-            timestampString = "484889751.787139"
+            timestampString = "484916798.326216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "372"
-            endingLineNumber = "372"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
             landmarkName = "-makeFooterView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "coupon/pay/PayUtils.m"
+            timestampString = "484916948.530918"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "+callWeChatPay:sign:noncestr:timeStamp:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
