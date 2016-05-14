@@ -34,6 +34,9 @@
     self.navigationItem.title=@"我的提醒";
     
     
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    
     [self loadData];
     
     
@@ -49,16 +52,16 @@
 -(void)loadData{
     
     
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+    [ReloadHud showHUDAddedTo:self.navigationController.view reloadBlock:^{
         
         
         [self doLoad:^(BOOL ret){
             
             if (ret) {
-                [ReloadHud removeHud:self.tableView animated:YES];
+                [ReloadHud removeHud:self.navigationController.view animated:YES];
             }else{
                 
-                [ReloadHud showReloadMode:self.tableView];
+                [ReloadHud showReloadMode:self.navigationController.view];
             }
             
             
@@ -71,10 +74,10 @@
     [self doLoad:^(BOOL ret){
         
         if (ret) {
-            [ReloadHud removeHud:self.tableView animated:YES];
+            [ReloadHud removeHud:self.navigationController.view animated:YES];
         }else{
             
-            [ReloadHud showReloadMode:self.tableView];
+            [ReloadHud showReloadMode:self.navigationController.view];
         }
         
         

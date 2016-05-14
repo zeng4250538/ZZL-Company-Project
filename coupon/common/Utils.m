@@ -11,7 +11,31 @@
 #import "SimpleAudioPlayer.h"
 
 
+
 @implementation Utils
+
+
+NSDate *SafeDate(NSString* ymd){
+    
+    NSString *ymdString =  SafeString(ymd);
+    
+    if ([ymdString length]<19) {
+        return nil;
+    }
+    
+    
+    NSDateFormatter *fm = [NSDateFormatter new];
+    
+    fm.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    
+    NSDate *date = [fm dateFromString:ymdString];
+    
+    return date;
+    
+
+    
+    
+}
 
 void SafePostMessage(NSString* messageName,id body){
     
@@ -412,6 +436,8 @@ NSString *SafeString(id content){
     
     
 }
+
+
 
 
 +(NSString*)downCountFormat:(NSString*)ymdFormat{

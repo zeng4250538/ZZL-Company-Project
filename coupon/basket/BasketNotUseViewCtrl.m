@@ -217,6 +217,8 @@
     
     NSDictionary *d = self.dataList[[indexPath row]];
     
+    
+    
     vc.data = d;
     
     

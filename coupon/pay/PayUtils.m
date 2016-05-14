@@ -44,11 +44,29 @@ NSString *WechatPay_MCH_ID =@"1332430001";
 
 
 
-+(void)wechatPay:(NSString*)orderId orderSn:(NSString*)orderSn orderName:(NSString*)orderName money:(CGFloat)money{
+
+    
+
++(void)callWeChatPay:(NSString*)prepayId sign:(NSString*)sign noncestr:(NSString*)noncestr timeStamp:(UInt32)timeStamp{
     
     
-    NSString *priceString = [NSString stringWithFormat:@"%.0f",money*100];
-    [self sendWechatPay:orderName price:priceString];
+    
+    
+    PayReq * req             = [[PayReq alloc] init];
+    req.openID              = WeChatAppId;
+    req.partnerId           = MCH_ID;
+    req.prepayId            = prepayId;
+    req.nonceStr            = noncestr;
+    req.timeStamp           = timeStamp;
+    req.package             = @"Sign=WXPa";
+    req.sign                = sign;
+    
+    [WXApi sendReq:req];
+
+    
+    
+    
+    
     
     
     

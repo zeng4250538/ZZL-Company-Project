@@ -18,5 +18,9 @@
 +(void)aliPay:(NSString*)orderId orderSn:(NSString*)orderSn orderName:(NSString*)orderName money:(CGFloat)money;
 
 
+//调起微信客户端
+
++(void)callWeChatPay:(NSString*)prepayId sign:(NSString*)sign noncestr:(NSString*)noncestr timeStamp:(UInt32)timeStamp;
+
 
 @end

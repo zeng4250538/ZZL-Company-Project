@@ -14,8 +14,7 @@
 @property(nonatomic,strong)UILabel *titleLabel;    //优惠券标题
 @property(nonatomic,strong)UILabel *addtionLabel;    //额外说明
 @property(nonatomic,strong)UILabel *detailLabel;    //明细
-//@property(nonatomic,strong)UILabel *priceLabel;    //价格
-@property(nonatomic,strong)UIButton *recommentButton;    //提醒按钮
+@property(nonatomic,strong)UIButton *reminderButton;    //提醒按钮
 @property(nonatomic,strong)UILabel *timeLabel;
 
 
@@ -45,27 +44,22 @@
         [self.contentView addSubview:self.logoView];
         
         self.titleLabel = [[UILabel alloc] init];
-        self.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.titleLabel.font = [UIFont systemFontOfSize:14];
         self.titleLabel.textColor = [GUIConfig grayFontColorDeep];
         
         [self.contentView addSubview:self.titleLabel];
         
         
         self.detailLabel = [UILabel new];
-        self.detailLabel.font = [UIFont systemFontOfSize:12];
+        self.detailLabel.font = [UIFont systemFontOfSize:14];
         self.detailLabel.textColor = [GUIConfig grayFontColor];
         
         [self.contentView addSubview:self.detailLabel];
         
-//        self.priceLabel = [UILabel new];
-//        self.priceLabel.textColor = [GUIConfig mainColor];
-//        self.priceLabel.font = [UIFont boldSystemFontOfSize:16];
-//        
-//        [self.contentView addSubview:self.priceLabel];
         
-        self.recommentButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.reminderButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
-        [self.contentView addSubview:self.recommentButton];
+        [self.contentView addSubview:self.reminderButton];
         
         
         self.couponStatusLabel = [UILabel new];
@@ -75,22 +69,22 @@
         [self.contentView addSubview:self.couponStatusLabel];
         
         
-        [self.recommentButton bk_addEventHandler:^(id sender) {
+        [self.reminderButton bk_addEventHandler:^(id sender) {
             
             
             
-            if (self.couponActionType == CouponTypeLimited) {
-                
-                [self.recommentButton setTitle:@"取消提醒" forState:UIControlStateNormal];
-                
-                self.couponActionType = CouponTypeUnLimited;
-            }else if(self.couponActionType == CouponTypeUnLimited){
-          
-                [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
-                self.couponActionType = CouponTypeLimited;
-                
-                
-            }
+//            if (self.couponActionType == CouponTypeLimited) {
+//                
+//                [self.reminderButton setTitle:@"取消提醒" forState:UIControlStateNormal];
+//                
+//                self.couponActionType = CouponTypeUnLimited;
+//            }else if(self.couponActionType == CouponTypeUnLimited){
+//          
+//                [self.reminderButton setTitle:@"提醒" forState:UIControlStateNormal];
+//                self.couponActionType = CouponTypeLimited;
+//                
+//                
+//            }
             
             if (self.doActionBlock) {
                 self.doActionBlock(nil);
@@ -103,13 +97,11 @@
         
         [self.contentView addSubview:self.timeLabel];
         
-        self.timeLabel.font = [UIFont boldSystemFontOfSize:9];
+        self.timeLabel.font = [UIFont boldSystemFontOfSize:10];
         
         
         
         
-        self.timeLabel.text=@"12:11:33";
-        self.timeLabel.textColor = [GUIConfig mainColor];
         
         
         NSTimer *timer = [NSTimer bk_scheduledTimerWithTimeInterval:1.0 block:^(NSTimer *timer) {
@@ -199,12 +191,29 @@
     self.timeLabel.textAlignment = NSTextAlignmentRight;
     
     
-    NSString *endTime = [Utils downCountFormat:SafeString(self.data[@"startTime"])];
-    
-    self.timeLabel.text =endTime;
     
     
-    [self.recommentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    NSDate* startTime =  SafeDate(self.data[@"startTime"]);
+    
+    if ([startTime timeIntervalSinceNow]>0) {
+        
+        NSString *startTimeString = [Utils downCountFormat:SafeString(self.data[@"startTime"])];
+        self.timeLabel.text =startTimeString;
+        self.timeLabel.hidden = NO;
+        self.reminderButton.hidden = NO;
+        
+        self.timeLabel.textColor = [GUIConfig mainColor];
+        
+        
+    }else{
+        
+        self.timeLabel.hidden = YES;
+        self.reminderButton.hidden = YES;
+    }
+     
+    
+    
+    [self.reminderButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.height.equalTo(@25);
         make.width.equalTo(@60);
@@ -212,63 +221,65 @@
         make.right.equalTo(self.contentView.mas_right).with.offset(-15);
     }];
     
-    self.recommentButton.backgroundColor = UIColorFromRGB(40, 162, 123);
+    self.reminderButton.backgroundColor = UIColorFromRGB(40, 162, 123);
     
-    self.recommentButton.layer.cornerRadius = 4;
-    self.recommentButton.clipsToBounds = YES;
-    self.recommentButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
-    [self.recommentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.reminderButton.layer.cornerRadius = 4;
+    self.reminderButton.clipsToBounds = YES;
+    self.reminderButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.reminderButton setTitle:@"提醒" forState:UIControlStateNormal];
+    [self.reminderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    self.reminderButton.titleLabel.font = [UIFont systemFontOfSize:12];
     
     if (self.couponActionType == CouponTypeNormal) {
-        self.recommentButton.hidden = YES;
+        self.reminderButton.hidden = YES;
  
     }
     else if (self.couponActionType == CouponTypeLimited) {
-            self.recommentButton.hidden = NO;
+            self.reminderButton.hidden = NO;
         
-        [self.recommentButton setTitle:@"提醒" forState:UIControlStateNormal];
+        [self.reminderButton setTitle:@"提醒" forState:UIControlStateNormal];
 
     }
     else if (self.couponActionType == CouponTypeUnLimited) {
-        self.recommentButton.hidden = NO;
+        self.reminderButton.hidden = NO;
         
-        [self.recommentButton setTitle:@"取消提醒" forState:UIControlStateNormal];
+        [self.reminderButton setTitle:@"取消提醒" forState:UIControlStateNormal];
     
     }
     else if (self.couponActionType == CouponTypeToPay) {
-        self.recommentButton.hidden = NO;
+        self.reminderButton.hidden = NO;
         
-        [self.recommentButton setTitle:@"支付" forState:UIControlStateNormal];
+        [self.reminderButton setTitle:@"支付" forState:UIControlStateNormal];
         
         
      
     }
     else if (self.couponActionType == CouponTypeToUse) {
-        self.recommentButton.hidden = NO;
+        self.reminderButton.hidden = NO;
         
-        [self.recommentButton setTitle:@"退款" forState:UIControlStateNormal];
+        [self.reminderButton setTitle:@"退款" forState:UIControlStateNormal];
     
     }
     else if (self.couponActionType == CouponTypeToComment) {
-        self.recommentButton.hidden = NO;
+        self.reminderButton.hidden = NO;
         
-        [self.recommentButton setTitle:@"去评论" forState:UIControlStateNormal];
+        [self.reminderButton setTitle:@"去评论" forState:UIControlStateNormal];
         
        
             
     }
     else if (self.couponActionType == CouponTypeToUnPay) {
-        self.recommentButton.hidden = NO;
+        self.reminderButton.hidden = NO;
         
-        [self.recommentButton setTitle:@"退款" forState:UIControlStateNormal];
+        [self.reminderButton setTitle:@"退款" forState:UIControlStateNormal];
         
         
 
         
     }
     else{
-        self.recommentButton.hidden = NO;
+        self.reminderButton.hidden = NO;
     }
     
     
