@@ -15,6 +15,7 @@
 @interface PersonDetailInfoViewCtrl ()
 
 @property(nonatomic,strong)NSMutableDictionary *data;
+@property(nonatomic,strong)UIImageView *imageView;
 
 @end
 
@@ -244,7 +245,7 @@
             theCell.titleLabel.text=@"头像";
             
             
-          NSURL *url = SafeUrl(self.data[@"photoUrl"]);
+            NSURL *url = SafeUrl(self.data[@"photoUrl"]);
             
             
             
@@ -259,12 +260,12 @@
                 }];
             
             
-            [theCell.iconImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
-                
-                [theCell setNeedsLayout];
-                
-            }];
+            
+          //  [theCell.iconImageView sd_setImageWithURL:nil placeholderImage:nil options:SDWebImageCacheMemoryOnly];
+            
+            [theCell.iconImageView sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
+            self.imageView = theCell.iconImageView;
+            
             
             
         
@@ -458,9 +459,11 @@
             
             [SVProgressHUD showSuccessWithStatus:@"头像上传成功"];
             
+            self.imageView.image = image;
+            
             
             [picker dismissViewControllerAnimated:YES completion:^{
-                [self.tableView reloadData];
+                //[self.tableView reloadData];
 
             }];
             

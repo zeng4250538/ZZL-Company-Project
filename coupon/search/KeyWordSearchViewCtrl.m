@@ -371,7 +371,7 @@
         
         ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.data = d;
+        vc.shopId = SafeString(d[@"id"]);
         
         [self.navigationController pushViewController:vc animated:YES];
         

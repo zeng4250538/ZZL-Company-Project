@@ -168,11 +168,9 @@
         NSURL *url =SafeUrl(data[@"photoUrl"]);
         
         
-        [myInfromation sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-            
-            
-        }];
+        [myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
+        
+        
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         

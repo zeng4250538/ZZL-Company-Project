@@ -8,6 +8,7 @@
 
 #import "UseCouponViewCtrl.h"
 #import "PayUtils.h"
+#import "OrderService.h"
 
 @interface UseCouponViewCtrl ()
 
@@ -28,6 +29,11 @@
 @property(nonatomic,strong)UITextField *payMoneyTextField;
 
 
+@property(nonatomic,assign)CGFloat originPrice;
+@property(nonatomic,assign)CGFloat sellPrice;
+
+
+
 @end
 
 @implementation UseCouponViewCtrl
@@ -40,6 +46,9 @@
     
     
     [self makeFooterView];
+    
+    
+    self.originPrice = 0.0f;
     
     
     self.navigationItem.title=@"优惠券支付";
@@ -216,15 +225,6 @@
         
         UINavigationController *nav = self.navigationController;
         
-        // NSString *order
-        
-//        [self.navigationController popToRootViewControllerAnimated:NO];
-//        
-//        OrderDetailViewCtrl *vc = [[OrderDetailViewCtrl alloc] init];
-//        vc.orderId = self.orderId;
-//        
-//        [nav pushViewController:vc animated:YES];
-//        
         
         
         UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"支付宝支付失败！"];
@@ -353,17 +353,51 @@
         
         NSString *orderId = [NSString stringWithFormat:@"%.0f",tm];
         
-#pragma mark - 去支付
+#pragma mark - 微信支付
         
         if (self.wechatPayButton.selected){
             
-            [PayUtils wechatPay:orderId orderSn:orderId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
-
+            
+            OrderService *service = [OrderService new];
+            
+            NSString *couponInstanceId = SafeString(self.data[@"id"]);
+            
+            
+            
+            
+            
+            [service requestPrepayId:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice success:^(NSInteger code, NSString *message, id data) {
+                
+                
+                NSLog(@"pay result data = %@",data);
+                
+                
+                
+                
+                
+                
+            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                
+                
+                [SVProgressHUD showErrorWithStatus:@"支付服务器繁忙" maskType:SVProgressHUDMaskTypeBlack];
+                
+                
+            }];
+            
+            
+            
+            
+            
+            
+            
             
             
             
         }
         
+        
+        
+#pragma mark - 淘宝支付
         if (self.aliPayButton.selected) {
             
             [PayUtils aliPay:orderId orderSn:orderId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
@@ -376,7 +410,7 @@
         
         
 
-        NSLog(@"支付。。。。。");
+        NSLog(@"支付中。。。。。");
         
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -419,7 +453,7 @@
     UITextField *moneyTextField = [UITextField new];
     moneyTextField.placeholder = @"询问服务员后输入金额";
     
-    moneyTextField.keyboardType = UIKeyboardTypeNumberPad;
+    moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
     
     moneyTextField.delegate = self;
     moneyTextField.font = [UIFont systemFontOfSize:14];
@@ -432,14 +466,26 @@
         
     }];
     
+    moneyTextField.text =[NSString stringWithFormat:@"%.2f",self.originPrice];
     
-    //按钮修改后
+    
+    
+#pragma  mark - 修改moneyTextField
+    
     [moneyTextField bk_addEventHandler:^(id sender) {
         NSLog(@"money %@",moneyTextField.text);
         
         CGFloat money = [moneyTextField.text floatValue];
         
-        CGFloat payMoney = money *0.7f;
+        
+        self.originPrice = money;
+        
+        
+        CGFloat discountRate = [SafeString(self.data[@"discountRate"]) floatValue];
+        
+        CGFloat payMoney = money *discountRate;
+        
+        self.sellPrice = payMoney;
         
         self.payMoneyTextField.text = [NSString stringWithFormat:@"%.2f元",payMoney];
         
@@ -458,6 +504,8 @@
  *
  *  @param cell 单元格变量
  */
+
+#pragma mark - 选择优惠券单元格
 -(void)makeSelectCoupon:(UITableViewCell*)cell{
     
     

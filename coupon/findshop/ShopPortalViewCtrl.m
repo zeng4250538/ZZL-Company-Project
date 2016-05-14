@@ -491,6 +491,8 @@
             NSDictionary *data =  self.recommendShopData[indexPath.row];
             vc.data = self.recommendShopData[indexPath.row];
             
+            vc.shopId = SafeString(data[@"id"]);
+        
             vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
         
             self.bools = YES;
@@ -505,6 +507,9 @@
             vc.shopData = [Shop yy_modelWithDictionary:data];
             
             vc.data = self.nearByShopData[indexPath.row];
+            
+            vc.shopId = SafeString(data[@"id"]);
+            
 
             
             self.bools = NO;

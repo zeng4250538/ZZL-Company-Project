@@ -88,7 +88,7 @@
         [self.contentView addSubview:self.logoView];
         
         self.titleLabel = [[UILabel alloc] init];
-        self.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.titleLabel.font = [UIFont systemFontOfSize:14];
         self.titleLabel.textColor = [GUIConfig grayFontColorDeep];
         
         [self.contentView addSubview:self.titleLabel];

@@ -50,6 +50,9 @@ void SafePostMessage(NSString* messageName,id body);
 
 +(NSString*)downCountFormat:(NSString*)ymdFormat;
 
+NSDate *SafeDate(NSString* ymd);
+
+
 
 
 

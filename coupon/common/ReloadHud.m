@@ -144,7 +144,9 @@
             [self.actView startAnimating];
             
             [self.actView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.equalTo(self);
+                make.centerX.equalTo(self);
+                make.centerY.equalTo(self).offset(-30);
+                
                 
             }];
 

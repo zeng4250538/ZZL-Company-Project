@@ -227,6 +227,8 @@
     
     ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
     
+    vc.shopId = SafeString(data[@"id"]);
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }

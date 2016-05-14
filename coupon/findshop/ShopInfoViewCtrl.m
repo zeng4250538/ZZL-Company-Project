@@ -23,6 +23,9 @@
 @property(nonatomic,strong)NSArray *realTimeCouponList;
 @property(nonatomic,strong)NSArray *otherCouponList;
 @property(nonatomic,strong)id idDaata;
+@property(nonatomic,strong)UILabel *subLabel;
+
+
 
 
 
@@ -52,20 +55,12 @@
     
     
     
-    if (self.shopMode==ShopViewModeLocal) {
+    
         
-        [self loadData];
-        
-        
-    }else{  //
+    [self loadShop];
         
         
         
-        [self loadShop];
-        
-        
-        
-    }
     
     
     
@@ -558,6 +553,8 @@
                 [btn setTitle:@"取消订阅" forState:UIControlStateNormal];
                 btn.selected = YES;
                 
+                
+                
                 [SVProgressHUD dismiss];
                 
                 
@@ -672,6 +669,8 @@
     subLabel.layer.cornerRadius=4;
     subLabel.clipsToBounds = YES;
     [subLabel sizeToFit];
+    
+    self.subLabel = subLabel;
     
     subLabel.textAlignment = NSTextAlignmentCenter;
     
