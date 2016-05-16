@@ -32,6 +32,7 @@ extern NSString *const ReviewUpdateNotice;
 @property(nonatomic,copy,readonly)NSString *mallId;
 @property(nonatomic,copy,readonly)NSString *city;
 
+@property(nonatomic,copy,readonly)NSString *deviceToken;
 
 
 @property(nonatomic,copy)NSString *accessToken;
@@ -44,6 +45,11 @@ extern NSString *const ReviewUpdateNotice;
 -(void)saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken ;
 
 -(void)setCity:(NSString *)city;
+
+-(void)setDeviceToken:(NSString *)deviceToken;
+
+
+
 
 
 -(void)saveMallId:(NSString*)mallId;

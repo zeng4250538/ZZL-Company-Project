@@ -28,6 +28,10 @@ NSString * const CityKey = @"city";
 
 NSString *const ReviewUpdateNotice=@"ReviewUpdate";
 
+NSString *const DeviceTokenKey=@"DeviceToken";
+
+
+
 
 
 
@@ -78,6 +82,25 @@ static AppShareData *instance;
     
     
     
+    
+}
+
+-(void)setDeviceToken:(NSString *)deviceToken{
+    
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:DeviceTokenKey];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+}
+
+
+-(NSString*)deviceToken{
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:DeviceTokenKey];
+   
     
 }
 

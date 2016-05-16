@@ -31,6 +31,8 @@
 
 
 #import <CoreLocation/CoreLocation.h>
+
+#import "ConfigService.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) CLLocationManager *lcManager;
@@ -197,6 +199,13 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
     
     
     //微信
+    
+    self.window = [[iConsoleWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    
     [WXApi registerApp:WeChatAppId withDescription:@"摇折扣"];
     
     self.mapManager = [BMKMapManager new];
@@ -233,6 +242,28 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
     
     [self setUmengParam:launchOptions];
     
+    
+    
+    
+    
+    
+    NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    
+    if ([bundleId isEqualToString:@"com.cmcc.qixincloud"]) {
+        [iConsole sharedConsole].enabled = NO;
+        
+    }else{
+        
+        [iConsole sharedConsole].enabled = YES;
+        
+    }
+
+    
+    [iConsole sharedConsole].simulatorShakeToShow = YES;
+    
+    [iConsole sharedConsole].deviceShakeToShow = NO;
+    
+    
     [self setAppearance];
     [self makeTabViewCtrl];
     
@@ -262,6 +293,8 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
             CLPlacemark *placeMark = placemarks[0];
             self.city = placeMark.locality;
             
+            
+            [iConsole info:@"当前定位城市 %@",self.city ];
             [[AppShareData instance] setCity:self.city];
             // ? placeMark.locality : placeMark.administrativeArea;
             if (!self.city) {
@@ -272,7 +305,8 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
     } else if (error == nil && placemarks.count == 0) {
         NSLog(@"No location and error returned");
     } else if (error) {
-        NSLog(@"Location error: %@", error);
+        [iConsole error:@"定位出错 %@",error];
+        
     }
      }];
     
@@ -352,7 +386,14 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
     
 #endif
     //for log
-    [UMessage setLogEnabled:YES];
+   // [UMessage setLogEnabled:YES];
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -431,8 +472,63 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 }
 
 
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    
+    
+    
+    [iConsole error:@"消息通知出错 %@",err];
+    
+    
+   // NSLog(@"didFailToRegisterForRemoteNotificationsWithError error %@",err);
+   
+    
+}
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    
+    NSString* deviceTokenNString = [[[[deviceToken description]
+                               stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                              stringByReplacingOccurrencesOfString: @">" withString: @""]
+                             stringByReplacingOccurrencesOfString: @" " withString: @""] ;
+    
+    
+    
+    
+    
+    [iConsole info:@"token = %@",deviceTokenNString];
+    
+    
+    [[AppShareData instance] setDeviceToken:deviceTokenNString];
+    
+    
+    ConfigService *service = [ConfigService new];
+    
+    
+    [service putDeviceToken:deviceTokenNString success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        
+        [iConsole info:@"token 上传成功  token= %@",deviceTokenNString];
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        [iConsole info:@"token 上传失败  token= %@",deviceTokenNString];
+        
+        
+    }];
+    
+    
+//    servi
+//    [ConfigService ]
+//    
+    
+    
+    
+    
     [UMessage registerDeviceToken:deviceToken];
 }
 

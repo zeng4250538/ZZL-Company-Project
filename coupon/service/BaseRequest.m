@@ -20,10 +20,11 @@
     [manager GET:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
-        NSLog(@"======================>\n[DEBUG][GET][Request] url = %@ param = %@ [/DEBUG]",url,param);
         
+        [iConsole info:@"======================>\n[DEBUG][GET][Request] url = %@ param = %@ [/DEBUG]",url,param];
         
-        NSLog(@"[DEBUG][GET][Response] %@ [/DEBUG]\n<<===============================",responseObject);
+        [iConsole info:@"======================>\n[DEBUG][GET][Respone] %@ [/DEBUG]",responseObject];
+        
         
         
         
@@ -33,9 +34,12 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        NSLog(@"======================>\n[DEBUG][GET][Request] url = %@ param = %@ [/DEBUG]",url,param);
-
-        NSLog(@"[ERROR]GET Method Error error = %@[/ERROR]\n<<<=====================", error);
+        
+        
+        
+        [iConsole info:@"[ERROR]GET Method Error url = %@ param = %@  error = %@[/ERROR]\n<<<=====================", url,param,error];
+        
+        
         
         failure(operation.response.statusCode,error.description);
         
@@ -68,10 +72,16 @@
         
         
         
-        NSLog(@"======================>\n[DEBUG][POST][Request] url = %@ param = %@ [/DEBUG]",url,param);
+//        NSLog(@"======================>\n[DEBUG][POST][Request] url = %@ param = %@ [/DEBUG]",url,param);
+//        
+//        
+//        NSLog(@"[DEBUG][POST][Response] %@ [/DEBUG]\n<<===============================",responseObject);
         
         
-        NSLog(@"[DEBUG][POST][Response] %@ [/DEBUG]\n<<===============================",responseObject);
+        [iConsole info:@"======================>\n[DEBUG][POST][Request] url = %@ param = %@ [/DEBUG]",url,param];
+        
+        [iConsole info:@"======================>\n[DEBUG][POST][Respone] %@ [/DEBUG]",responseObject];
+        
         
 
         
@@ -82,9 +92,12 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        NSLog(@"======================>\n[DEBUG][POST][Request] url = %@ param = %@ [/DEBUG]",url,param);
         
-        NSLog(@"[ERROR]POST Method Error error = %@[/ERROR]\n<<<=====================", error);
+        
+        [iConsole info:@"[ERROR]POST Method Error url = %@ param = %@  error = %@[/ERROR]\n<<<=====================", url,param,error];
+        
+        
+        
         
         
         failure(operation.response.statusCode,error.description);
@@ -111,10 +124,12 @@
     [manager PUT:url parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
-        NSLog(@"======================>\n[DEBUG][PUT][Request] url = %@ param = %@ [/DEBUG]",url,param);
+        
+        [iConsole info:@"======================>\n[DEBUG][PUT][Request] url = %@ param = %@ [/DEBUG]",url,param];
+        
+        [iConsole info:@"======================>\n[DEBUG][PUT][Respone] %@ [/DEBUG]",responseObject];
         
         
-        NSLog(@"JSON: %@", responseObject);
         
         
         success(operation.response.statusCode,responseObject);
@@ -124,6 +139,10 @@
         
         
         NSLog(@"put Method Error params=%@ url=%@ error = %@",param,url, error);
+        
+        
+        [iConsole info:@"[ERROR]PUT Method Error url = %@ param = %@  error = %@[/ERROR]\n<<<=====================", url,param,error];
+        
 
         
         
@@ -161,12 +180,22 @@
         NSLog(@"JSON: %@", responseObject);
         
         
+        [iConsole info:@"======================>\n[DEBUG][DELETE][Request] url = %@ param = %@ [/DEBUG]",url,param];
+        
+        [iConsole info:@"======================>\n[DEBUG][DELETE][Respone] %@ [/DEBUG]",responseObject];
+        
+        
+        
+        
         success(operation.response.statusCode,responseObject);
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"delete Method Error params=%@ url=%@ error = %@",param,url, error);
+        
+        
+        [iConsole info:@"[ERROR]delete Method Error url = %@ param = %@  error = %@[/ERROR]\n<<<=====================", url,param,error];
+
 
         
         
