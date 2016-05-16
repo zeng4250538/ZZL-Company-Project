@@ -28,7 +28,7 @@
     NSString *customerId=[AppShareData instance].customId;
     
     
-    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"customer/%@/deviceToken",SafeString(customerId)];
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/customer/%@/deviceToken",SafeString(customerId)];
      
     
     NSDictionary *parm = @{@"deviceToken":deviceToken};

@@ -77,8 +77,9 @@
 //        
 //        NSLog(@"[DEBUG][POST][Response] %@ [/DEBUG]\n<<===============================",responseObject);
         
+    
         
-        [iConsole info:@"======================>\n[DEBUG][POST][Request] url = %@ param = %@ [/DEBUG]",url,param];
+        [iConsole info:@"======================>\n[DEBUG][POST][Request] header=%@ url = %@ param = %@ [/DEBUG]",operation.response.allHeaderFields, url,param];
         
         [iConsole info:@"======================>\n[DEBUG][POST][Respone] %@ [/DEBUG]",responseObject];
         
@@ -125,8 +126,8 @@
         
         
         
-        [iConsole info:@"======================>\n[DEBUG][PUT][Request] url = %@ param = %@ [/DEBUG]",url,param];
-        
+        [iConsole info:@"======================>\n[DEBUG][PUT][Request] header=%@ url = %@ param = %@ [/DEBUG]",operation.response.allHeaderFields, url,param];
+      
         [iConsole info:@"======================>\n[DEBUG][PUT][Respone] %@ [/DEBUG]",responseObject];
         
         
@@ -180,8 +181,8 @@
         NSLog(@"JSON: %@", responseObject);
         
         
-        [iConsole info:@"======================>\n[DEBUG][DELETE][Request] url = %@ param = %@ [/DEBUG]",url,param];
-        
+        [iConsole info:@"======================>\n[DEBUG][DELETE][Request] header=%@ url = %@ param = %@ [/DEBUG]",operation.response.allHeaderFields, url,param];
+     
         [iConsole info:@"======================>\n[DEBUG][DELETE][Respone] %@ [/DEBUG]",responseObject];
         
         

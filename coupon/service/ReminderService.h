@@ -16,7 +16,7 @@
                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
--(void)deleteReminder:(NSUInteger)reminderId
+-(void)deleteReminder:(NSString*)reminderId
                success:(void(^)(NSInteger code,NSString *message,id data))success
                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 

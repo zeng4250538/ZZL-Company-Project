@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, CouponStatus) {
 
 
 
-typedef void(^PayBlock)(NSDictionary *data);
+typedef void(^PayBlock)(id sender);
 
 @interface CouponInfoTableViewCell : UITableViewCell
 
