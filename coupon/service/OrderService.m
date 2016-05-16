@@ -49,7 +49,7 @@
     
     [req post:url param:parm success:^(NSInteger code, id object) {
         
-         
+         NSLog(@"<----点击支付后的信息----object----》%@",object);
         success(code,@"",object);
         
     } failure:^(NSInteger code, NSString *content) {

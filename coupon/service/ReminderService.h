@@ -21,4 +21,12 @@
                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
+
+-(void)addReminder:(NSString*)couponPromotionId
+           success:(void(^)(NSInteger code,NSString *message,id data))success
+           failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+
+
 @end
