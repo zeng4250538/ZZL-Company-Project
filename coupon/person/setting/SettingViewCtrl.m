@@ -12,7 +12,7 @@
 #import "ChangePasswordViewCtrl.h"
 #import "SettingViewCtrl.h"
 #import "AboutViewCtrl.h"
-
+#import "ClearCache.h"
 @interface SettingViewCtrl ()
 
 @end
@@ -128,6 +128,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (indexPath.row==0 && indexPath.section==0) {
         
         
@@ -148,11 +150,14 @@
  
     if (indexPath.row==2 && indexPath.section==0) {
         
+        float i =  [ClearCache queryCache];
         
-        UIAlertView *av  = [UIAlertView bk_alertViewWithTitle:@"" message:@"请确认是否清除缓存信息"];
+        NSString *string = [NSString stringWithFormat:@"有%.2f MB的缓存请确认是否清除",i];
+        
+        UIAlertView *av  = [UIAlertView bk_alertViewWithTitle:@"" message:string];
         
         [av bk_addButtonWithTitle:@"确定" handler:^{
-            
+            [ClearCache removedCache];
         }];
         
         [av bk_addButtonWithTitle:@"取消" handler:^{

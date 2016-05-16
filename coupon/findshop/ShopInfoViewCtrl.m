@@ -18,7 +18,7 @@
 #import "MallShopCommentViewController.h"
 #import "ShopService.h"
 #import "ShopDetailViewCtrl.h"
-@interface ShopInfoViewCtrl ()
+@interface ShopInfoViewCtrl ()<UMSocialUIDelegate>
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
 @property(nonatomic,strong)NSArray *otherCouponList;
@@ -68,7 +68,28 @@
     
     
     
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"分享" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+        
+        //注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
+        
+        
+        NSString *couponName= SafeString(self.data[@"name"]);
+        
+        
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:UmengKey
+                                          shareText:couponName
+                                         shareImage:@""
+                                    shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToSina,nil]
+                                           delegate:self];
+        
+        
+        
+        
+        
+    }];
     
     
     

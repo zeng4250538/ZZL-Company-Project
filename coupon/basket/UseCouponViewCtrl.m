@@ -386,7 +386,7 @@
             
             [service requestPrepayId:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice success:^(NSInteger code, NSString *message, id data) {
                 
-                
+                NSLog(@"<----点击支付后的信息----》%@",data);
                 NSString *returnCode = data[@"returnCode"];
                 
                 if (![returnCode isEqualToString:@"SUCCESS"]) {

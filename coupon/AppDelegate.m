@@ -433,6 +433,7 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    NSLog(@"<-------我就是deviceToken--------->%@",deviceToken);
     [UMessage registerDeviceToken:deviceToken];
 }
 

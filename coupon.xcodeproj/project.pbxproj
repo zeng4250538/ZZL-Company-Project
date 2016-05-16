@@ -247,6 +247,7 @@
 		7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3557851CACA8E6000DB7EA /* MapKit.framework */; };
 		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
 		7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */; };
+		7F5E98A01CE9579C00EB365A /* ClearCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E989F1CE9579C00EB365A /* ClearCache.m */; };
 		7FF39E3D1CE57B96007810BC /* guangzhoufood.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF39E3C1CE57B96007810BC /* guangzhoufood.png */; };
 		7FF596751CB3F0FF008BDE5A /* MyInformationSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */; };
 /* End PBXBuildFile section */
@@ -740,6 +741,8 @@
 		7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStreetButtonService.m; sourceTree = "<group>"; };
 		7F4C6ACE1CB33C4F00ADD0F8 /* MyInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationViewController.h; sourceTree = "<group>"; };
 		7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationViewController.m; sourceTree = "<group>"; };
+		7F5E989E1CE9579C00EB365A /* ClearCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearCache.h; sourceTree = "<group>"; };
+		7F5E989F1CE9579C00EB365A /* ClearCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearCache.m; sourceTree = "<group>"; };
 		7FF39E3C1CE57B96007810BC /* guangzhoufood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guangzhoufood.png; sourceTree = "<group>"; };
 		7FF596731CB3F0FF008BDE5A /* MyInformationSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationSevice.h; sourceTree = "<group>"; };
 		7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationSevice.m; sourceTree = "<group>"; };
@@ -1354,8 +1357,8 @@
 		5796FA5B1C44118D004CA23B /* person */ = {
 			isa = PBXGroup;
 			children = (
+				7FAB49EA1CE9547B00A101E0 /* ClearCacheUnitKit */,
 				57D1480D1CC1390100F9E40C /* message */,
-				7F4C6AD11CB33C5700ADD0F8 /* MyInformation */,
 				7F4C6ACD1CB2205B00ADD0F8 /* Failure */,
 				7F121D731CA7DA7A005AF53D /* HistoryOfConsumption */,
 				577169721C80B0DC00223EDB /* setting */,
@@ -1628,6 +1631,7 @@
 		7F4C6ACD1CB2205B00ADD0F8 /* Failure */ = {
 			isa = PBXGroup;
 			children = (
+				7F4C6AD11CB33C5700ADD0F8 /* MyInformation */,
 				7F121D741CA7DAF7005AF53D /* ChildPagesViewController.h */,
 				7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */,
 				7F121D571CA2B725005AF53D /* HistoryOfConsumptionTableViewController.h */,
@@ -1649,6 +1653,15 @@
 				7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */,
 			);
 			name = MyInformation;
+			sourceTree = "<group>";
+		};
+		7FAB49EA1CE9547B00A101E0 /* ClearCacheUnitKit */ = {
+			isa = PBXGroup;
+			children = (
+				7F5E989E1CE9579C00EB365A /* ClearCache.h */,
+				7F5E989F1CE9579C00EB365A /* ClearCache.m */,
+			);
+			name = ClearCacheUnitKit;
 			sourceTree = "<group>";
 		};
 		7FF596721CB3F0D7008BDE5A /* MyInformationSevice */ = {
@@ -1992,6 +2005,7 @@
 				57E364A31C9DA17B003575FC /* Shop.m in Sources */,
 				574910B71CBFCEB000FB2B14 /* BasketNotUseTableViewCell.m in Sources */,
 				574911391CC00AAE00FB2B14 /* RSADataVerifier.m in Sources */,
+				7F5E98A01CE9579C00EB365A /* ClearCache.m in Sources */,
 				57CE97CF1C63A9E800CE0E57 /* CouponListViewCtrl.m in Sources */,
 				571C29781C70AC8F00DDBCE8 /* CartTableViewCell.m in Sources */,
 				572B5C191CE4F93600BC1C37 /* ImageUploadService.m in Sources */,
