@@ -575,11 +575,10 @@
         
         //phone
         
-        NSString *phone = SafeString(self.data[@"phone"]);
+        NSString *phone = SafeString(self.data[@"shopPhone"]);
         
         NSString *phoneString=[NSString stringWithFormat:@"telprompt://%@",phone];
-        
-        NSLog(@"phoneString %@",phoneString);
+        NSLog(@"phoneString电话-----》 %@",phoneString);
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
         

@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,CLLocationManagerDelegate,BMKGeneralDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,CLLocationManagerDelegate,BMKGeneralDelegate>     
 
 @property (strong, nonatomic)UIWindow *window;
 @property (strong,nonatomic)UITabBarController *tabViewCtrl;
 
 @property (strong, nonatomic) UIViewController *cartVc;
 
+@property(nonatomic,strong)NSString *city;
 
 @end
 

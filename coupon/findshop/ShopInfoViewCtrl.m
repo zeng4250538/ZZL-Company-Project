@@ -18,6 +18,8 @@
 #import "MallShopCommentViewController.h"
 #import "ShopService.h"
 #import "ShopDetailViewCtrl.h"
+#import "ShopPortalViewCtrl.h"
+
 @interface ShopInfoViewCtrl ()<UMSocialUIDelegate>
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
@@ -555,11 +557,20 @@
         
     }];
     
+    
+#pragma mark ----- 点击订阅时的事件
     [subButton bk_addEventHandler:^(id sender) {
         
+        NSString *asdasd = SafeString(self.data[@"favorcount"]);
         
+        NSInteger inter = [asdasd integerValue];
+        
+        __block  NSInteger inets = 0;
+        
+        //拿到按钮的状态
         UIButton *btn = (UIButton*)sender;
         
+        //如果按钮为未选中状态（未选中就是taitel为订阅 否则选中状态taitel为未订阅）
         if (!btn.selected) {
             
             ShopService *service = [ShopService new];
@@ -574,7 +585,10 @@
                 [btn setTitle:@"取消订阅" forState:UIControlStateNormal];
                 btn.selected = YES;
                 
+                _subButtonHandle();
                 
+                inets = 1;
+                _subLabel.text=[NSString stringWithFormat:@"订阅数 %ld",inter+1];
                 
                 [SVProgressHUD dismiss];
                 
@@ -601,8 +615,19 @@
             [service doUnFav:shopId success:^(NSInteger code, NSString *message, id data) {
                 
                 [btn setTitle:@"订阅" forState:UIControlStateNormal];
+                _subButtonHandle();
                 btn.selected = NO;
+                NSString *asdasd = SafeString(self.data[@"favorcount"]);
+                NSInteger inter = [asdasd integerValue];
                 
+                if (inets > 0) {
+                    
+                    _subLabel.text=[NSString stringWithFormat:@"订阅数 %ld",inter];
+                    
+                }
+                else{
+                _subLabel.text=[NSString stringWithFormat:@"订阅数 %ld",inter-1];
+                }
                 [SVProgressHUD dismiss];
                 
                 
@@ -676,26 +701,26 @@
     
     //[GUIConfig greenBackgroundColor];
 
-    UILabel *subLabel = [UILabel new];
-    [shopBgButton addSubview:subLabel];
-    subLabel.font = [UIFont boldSystemFontOfSize:10];
-    subLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    subLabel.numberOfLines = 2;
-    subLabel.textColor = [UIColor whiteColor];
-    subLabel.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
+    _subLabel = [UILabel new];
+    [shopBgButton addSubview:_subLabel];
+    _subLabel.font = [UIFont boldSystemFontOfSize:10];
+    _subLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    _subLabel.numberOfLines = 2;
+    _subLabel.textColor = [UIColor whiteColor];
+    _subLabel.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.7f];
     //[subButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    subLabel.text=[NSString stringWithFormat:@"订阅数 %@",SafeString(self.data[@"orderedCouponCount"])];
+    _subLabel.text=[NSString stringWithFormat:@"订阅数 %@",SafeString(self.data[@"favorcount"])];
     
-    subLabel.layer.cornerRadius=4;
-    subLabel.clipsToBounds = YES;
-    [subLabel sizeToFit];
+    _subLabel.layer.cornerRadius=4;
+    _subLabel.clipsToBounds = YES;
+    [_subLabel sizeToFit];
     
-    self.subLabel = subLabel;
+//    self.subLabel = _subLabel;
     
-    subLabel.textAlignment = NSTextAlignmentCenter;
+    _subLabel.textAlignment = NSTextAlignmentCenter;
     
-    [subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(subButton.mas_left).offset(-5);
         make.bottom.equalTo(subButton);
         make.width.equalTo(@50);

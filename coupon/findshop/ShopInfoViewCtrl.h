@@ -17,6 +17,8 @@ typedef NS_ENUM(NSUInteger, ShopViewMode) {
 };
 
 
+typedef void(^SubButtonHandle)();
+
 @interface ShopInfoViewCtrl : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 
@@ -28,7 +30,7 @@ typedef NS_ENUM(NSUInteger, ShopViewMode) {
 
 @property(nonatomic,strong)OptimizingBrandModel *OptimizingBrand;
 @property(nonatomic,assign)ShopViewMode shopMode;
-
+@property(nonatomic,copy)SubButtonHandle subButtonHandle;
 
 
 @property(nonatomic,strong)NSDictionary *data;

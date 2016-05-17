@@ -10,7 +10,7 @@
 
 typedef void (^myBlock)(NSString *data);
 
-typedef void (^cityBlock)(NSString *city);
+//typedef void (^cityBlock)(NSString *city);
 
 @interface ShopPortalViewCtrl : UIViewController<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -18,12 +18,14 @@ typedef void (^cityBlock)(NSString *city);
 
 -(void)doLoad:(void(^)(BOOL ret))completion;
 
+-(void)subRefreshView;
+
 @property(nonatomic,copy)myBlock block;
 
-@property(nonatomic,copy)cityBlock cityBlock;//传城市
+//@property(nonatomic,copy)cityBlock cityBlockView;//传城市
 
-@property(nonatomic,strong)NSString *findShopId;
+//@property(nonatomic,strong)NSString *findShopId;
 
-@property(nonatomic,strong)NSString *city;
+//@property(nonatomic,strong)NSString *cityName;
 
 @end

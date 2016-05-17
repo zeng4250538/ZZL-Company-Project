@@ -33,10 +33,11 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "ConfigService.h"
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) CLLocationManager *lcManager;
-@property(nonatomic,strong)NSString *city;
+
 @property(nonatomic,strong)BMKMapManager* mapManager;
 
 
@@ -285,6 +286,7 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
     CLLocation *currentLocation = [locations lastObject]; // 最后一个值为最新位置
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
     // 根据经纬度反向得出位置城市信息
@@ -292,8 +294,8 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
         if (placemarks.count > 0) {
             CLPlacemark *placeMark = placemarks[0];
             self.city = placeMark.locality;
-            
-            
+//            SPVC.cityBlockView(self.city);
+        
             [iConsole info:@"当前定位城市 %@",self.city ];
             [[AppShareData instance] setCity:self.city];
             // ? placeMark.locality : placeMark.administrativeArea;

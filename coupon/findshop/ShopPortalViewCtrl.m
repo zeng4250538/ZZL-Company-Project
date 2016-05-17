@@ -28,6 +28,8 @@
 
 @interface ShopPortalViewCtrl ()
 
+@property(nonatomic,strong)NSString *city;
+
 @property(nonatomic,strong)UISearchBar *searchBar;
 @property(nonatomic,strong)NSArray *recommendShopData;        
 @property(nonatomic,strong)NSArray *couponData;
@@ -98,11 +100,15 @@
     
     
     [self loadData];
-
+    
+    
+    
+    
     
 }
 
--(void)titleItenLabel:(void(^)(id data))cityLabel{
+
+-(void)titleItenLabelString:(NSString *)city andcityLabel:(void(^)(id data))cityLabel{
 
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
@@ -167,22 +173,16 @@
     
     CouponService *couponService = [CouponService new];
     
-    
 #pragma mark ---- 优选品牌网络请求
-    
-    
     [service requestRecommendShop:mallId page:1 pageCount:3 success:^(NSInteger code, NSString *message, id data) {
         
         self.recommendShopData = data;
         [self.tableView reloadData];
-        
+
         completion(YES);
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-        
-        
-        
+      
         completion(NO);
         
     }];
@@ -250,8 +250,15 @@
     }];
     
     
-    
     UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"北京市" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        /**-------------------------------------------------
+         *  这里要拿到定位后的城市名称
+         *
+         *
+         *
+         *
+         -----------------------------------------------------*/
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
@@ -259,6 +266,8 @@
         
         
     }];
+    
+    
     
     
     UIBarButtonItem *roomMapBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"roommap"] style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -287,7 +296,18 @@
     [self.navigationItem setTitle:self.cityString];
     self.navigationItem.titleView = _headButton;
     
-    [self titleItenLabel:^(id data) {
+    /**-------------------------------------------------
+     *  这里要拿到定位后的城市名称
+     *
+     *
+     *
+     *
+     -----------------------------------------------------*/
+    
+    
+    
+    
+    [self titleItenLabelString:@"" andcityLabel:^(id data) {
         
         [_headButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
@@ -494,7 +514,7 @@
             vc.shopId = SafeString(data[@"id"]);
         
             vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
-        
+            
             self.bools = YES;
             
         }
@@ -510,8 +530,6 @@
             
             vc.shopId = SafeString(data[@"id"]);
             
-
-            
             self.bools = NO;
             
         }
@@ -519,6 +537,11 @@
        // [vc boll:self.bools];
         
         vc.hidesBottomBarWhenPushed = YES;
+        
+        //回调刷新
+        vc.subButtonHandle = ^{
+            [self.tableView reloadData];
+        };
         
         [self.navigationController pushViewController:vc animated:YES];
 
