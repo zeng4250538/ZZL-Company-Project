@@ -28,9 +28,12 @@
     
     BaseRequest *req = [BaseRequest new];
     
+    
+    NSString *customerId = SafeString([AppShareData instance].customId);
+    
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/realtimepromotion"];
     
-    NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(pageCount),@"sort":sort};
+    NSDictionary *parm = @{@"shopMallId":mallid,@"customerId":customerId,@"page":@(page),@"per_page":@(pageCount),@"sort":sort};
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         

@@ -50,9 +50,41 @@
     
 }
 
--(void)deleteReminder:(NSUInteger)reminderId
+-(void)deleteReminder:(NSString*)reminderId
               success:(void(^)(NSInteger code,NSString *message,id data))success
               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+    
+    
+    
+    BaseRequest *req = [BaseRequest new];
+    
+    
+    
+    
+    NSString *customerId=[AppShareData instance].customId;
+    
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/reminder/%@",reminderId];
+    
+    
+    [req delete:url param:nil success:^(NSInteger code, id object) {
+        
+        success(code,@"",object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        failure(code,NO,content,nil);
+        
+        
+    }];
+    
+
+    
+    
+
+    
+    
     
     
     

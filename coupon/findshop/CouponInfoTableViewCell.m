@@ -72,22 +72,8 @@
         [self.reminderButton bk_addEventHandler:^(id sender) {
             
             
-            
-//            if (self.couponActionType == CouponTypeLimited) {
-//                
-//                [self.reminderButton setTitle:@"取消提醒" forState:UIControlStateNormal];
-//                
-//                self.couponActionType = CouponTypeUnLimited;
-//            }else if(self.couponActionType == CouponTypeUnLimited){
-//          
-//                [self.reminderButton setTitle:@"提醒" forState:UIControlStateNormal];
-//                self.couponActionType = CouponTypeLimited;
-//                
-//                
-//            }
-            
             if (self.doActionBlock) {
-                self.doActionBlock(nil);
+                self.doActionBlock(self.reminderButton);
                 
             }
             

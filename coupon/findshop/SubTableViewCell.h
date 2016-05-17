@@ -12,7 +12,7 @@
 #import "CouponInfoTableViewCell.h"
 
 
-typedef void(^PayBlock)(NSDictionary *data);
+typedef void(^PayBlock)(id sender);
 
 @interface SubTableViewCell : UITableViewCell
 
