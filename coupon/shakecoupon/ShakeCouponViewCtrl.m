@@ -16,7 +16,7 @@
 #import "CouponService.h"
 #import "ShakeService.h"
 #import "BasketService.h"
-
+#import "ShoppingCartSevice.h"
 
 
 #define CouponWidth  (SCREEN_WIDTH-60)
@@ -75,7 +75,7 @@
     self.isFirstIn = YES;
     
     
-    
+    [self shoppingCartLoadDate];
     
     
     
@@ -92,6 +92,17 @@
     [self animationDidStart];
 }
 
+-(void)shoppingCartLoadDate{
+
+    AppShareData *app = [AppShareData instance];
+    ShoppingCartSevice *spc = [ShoppingCartSevice new];
+    [spc soppingCartRequestUserId:app.customId withstatus:@"未消费" withSuccessful:^(id data) {
+        
+    } withFailure:^(id data) {
+        
+    }];
+
+}
 
 #pragma mark - 手势定义
 

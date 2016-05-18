@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^shoppingCartBlock)(NSString *string);
+
 @interface ShakeCouponViewCtrl : UIViewController
+
+@property(nonatomic,copy)shoppingCartBlock shppingCartData;
 
 @property(nonatomic,weak)UINavigationController *nav;
 

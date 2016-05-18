@@ -21,6 +21,7 @@
 @property(nonatomic,strong)UILabel *badLabel ;
 @property(nonatomic,strong)UILabel *commentLabel ;  //备注
 @property(nonatomic,strong)UIButton *subscribeButton ;  //订阅按钮
+@property(nonatomic,strong)UILabel *preferentialInformationLabel; //优惠信息
 
 @end
 
@@ -137,6 +138,12 @@
         self.subscribeButton.titleLabel.font = [UIFont systemFontOfSize:12];
         
         [self.contentView addSubview:self.subscribeButton];
+        
+        //优惠信息
+        self.preferentialInformationLabel = [[UILabel alloc]init];
+        self.preferentialInformationLabel.font = [UIFont systemFontOfSize:12];
+        self.preferentialInformationLabel.textColor = UIColorFromRGB(180, 180, 180);
+        [self.contentView addSubview:self.preferentialInformationLabel];
       
     }
     return self;
@@ -181,6 +188,15 @@
         make.top.equalTo(self.titleLabel.mas_bottom).with.offset(10);
         
     }];
+    
+    [self.preferentialInformationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@20);
+        make.left.equalTo(self.logoView.mas_right).with.offset(10);
+        make.top.equalTo(self.goodImageView).offset(20);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
+
+    }];
+//    self.preferentialInformationLabel.backgroundColor = [UIColor orangeColor];
 
     
     [self.goodLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -192,6 +208,8 @@
         
         
     }];
+    
+    
     
     
     [self.badImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -255,7 +273,7 @@
 
 -(void)updateData{
     
-    
+    self.preferentialInformationLabel.text = SafeString(self.data[@"description"]);
     self.titleLabel.text = SafeString(self.data[@"name"]);
     self.goodLabel.text = SafeString(self.data[@"good"]);
     self.badLabel.text = SafeString(self.data[@"bad"]);
