@@ -61,12 +61,12 @@
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(self.logoImageView.mas_right).offset(10);
-            make.top.equalTo(self.logoImageView);
+            make.top.equalTo(self.logoImageView).offset(5);
             make.right.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@20);
         }];
         
-        self.nameLabel.font = [UIFont systemFontOfSize:14];
+        self.nameLabel.font = [UIFont systemFontOfSize:16];
         self.nameLabel.textColor = [GUIConfig grayFontColorDeep];
         
         [self.endTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,12 +83,13 @@
         [self.subNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(self.logoImageView.mas_right).offset(10);
-            make.top.equalTo(self.logoImageView).offset(10);
+            make.top.equalTo(self.logoImageView).offset(35);
             make.right.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@20);
             
         }];
-        
+        self.subNameLabel.font = [UIFont systemFontOfSize:14];
+        self.subNameLabel.textColor = [UIColor grayColor];
         
     }
     
@@ -112,7 +113,9 @@
 
 -(void)updateData{
     
-    self.nameLabel.text = SafeString(self.data[@"name"]);
+    self.nameLabel.text = SafeString(self.data[@"shopName"]);
+    
+    self.subNameLabel.text = SafeString(self.data[@"name"]);
     
     NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
     

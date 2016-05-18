@@ -204,8 +204,6 @@
         make.width.equalTo(@30);
         make.height.equalTo(@30);
         
-        
-        
     }];
     
     
@@ -217,7 +215,6 @@
         
         
         [[AppShareData instance] openAudio:!audioButton.selected];
-        
         
         
     } forControlEvents:UIControlEventTouchUpInside];

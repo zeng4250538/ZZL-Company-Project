@@ -72,7 +72,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
    
     if (indexPath.section==0) {
         
@@ -113,11 +112,6 @@
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    
-    
-    
-    
     
     
     // Configure the cell...
