@@ -65,9 +65,9 @@
     [self.inputTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.view).offset(100);
-        make.centerX.equalTo(self.view);
-        make.width.equalTo(self.view);
-        make.height.equalTo(@30);
+        make.left.equalTo(self.view).offset(-1);
+        make.right.equalTo(self.view).offset(1);
+        make.height.equalTo(@50);
         
     }];
     
@@ -78,13 +78,25 @@
     
     self.inputTextField.leftView.backgroundColor = [UIColor whiteColor];
     
-    self.inputTextField.leftView.frame = CGRectMake(0, 0, 10, 30);
+    self.inputTextField.leftView.frame = CGRectMake(0, 0, 10, 50);
+    
+    self.inputTextField.textColor = [GUIConfig grayFontColorDeep];
+    
+    self.inputTextField.clearButtonMode = UITextFieldViewModeAlways;
+    
+
     
     
     
     self.inputTextField.backgroundColor = [UIColor whiteColor];
     
-    self.inputTextField.font = [UIFont systemFontOfSize:14];
+    self.inputTextField.font = [UIFont systemFontOfSize:16];
+    
+    
+    self.inputTextField.layer.borderColor = [[GUIConfig grayFontColorLight] CGColor];
+    
+    self.inputTextField.layer.borderWidth=1;
+    
     
     
     

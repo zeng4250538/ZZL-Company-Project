@@ -18,8 +18,8 @@
 #import "MallShopCommentViewController.h"
 #import "ShopService.h"
 #import "ShopDetailViewCtrl.h"
-#import "ShopPortalViewCtrl.h"
 
+#import "ReminderService.h"
 @interface ShopInfoViewCtrl ()<UMSocialUIDelegate>
 
 @property(nonatomic,strong)NSArray *realTimeCouponList;
@@ -67,6 +67,17 @@
     
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        
+        
+    }];
     
     
     
@@ -1011,11 +1022,115 @@
         
         cell.couponActionType = CouponTypeLimited;
         
-        NSDictionary *d = self.realTimeCouponList[indexPath.row];
+        
+        
+        
+        
+        
+        NSMutableDictionary *d = [self.realTimeCouponList[indexPath.row] mutableCopy];
         
         cell.data = d;
         
+     
+        
+        
+        NSString *isRemider  = SafeString(d[@"setReminder"]);
+        
+        if ([isRemider isEqualToString:@"1"]) {
+            
+            cell.couponActionType = CouponTypeUnLimited;
+        }else{
+            
+            cell.couponActionType = CouponTypeLimited;
+            
+        }
+        
+        
+        
+        cell.doActionBlock = ^(id sender){
+            
+            
+            NSString *isReminder = SafeString(d[@"setReminder"]);
+            
+            if ([ isReminder isEqualToString:@"0"]) {
+                
+                NSString *promotionId = SafeString(d[@"couponPromotionId"]);
+                ReminderService *service = [ReminderService new];
+                [service addReminder:promotionId success:^(NSInteger code, NSString *message, id data) {
+                    UIButton *button = (UIButton*)sender;
+                    [button setTitle:@"取消提醒" forState:UIControlStateNormal];
+                    d[@"setReminder"]=@1;
+                    NSString * reminderId = data[@"reminderId"];
+                    
+                    d[@"reminderId"]=SafeString(reminderId);
+                    [SVProgressHUD showSuccessWithStatus:@"提醒成功"];
+                    
+                } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                    
+                    
+                    [SVProgressHUD showErrorWithStatus:@"提醒失败"];
+                    
+                    
+                }];
+                
+                
+                
+            }else{
+                
+                
+                
+                NSString *reminderId = SafeString(d[@"reminderId"]);
+                
+                
+                ReminderService *service = [ReminderService new];
+                
+                
+                [service deleteReminder:reminderId success:^(NSInteger code, NSString *message, id data) {
+                    
+                    
+                    UIButton *button = (UIButton*)sender;
+                    
+                    [button setTitle:@"提醒" forState:UIControlStateNormal];
+                    
+                    d[@"setReminder"]=@0;
+                    
+                    
+                    [SVProgressHUD showSuccessWithStatus:@"取消提醒成功"];
+                    
+                    
+                } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                    
+                    
+                    [SVProgressHUD showErrorWithStatus:@"取消提醒失败"];
+                    
+                    
+                }];
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+            
+            
+        };
+        
+        
         [cell updateData];
+        
+        
+        
+
+        
+         
+        
+        
+        
+        
+        
         
     }else{
         

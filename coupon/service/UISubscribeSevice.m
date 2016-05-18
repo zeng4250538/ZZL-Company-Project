@@ -26,7 +26,7 @@
     NSLog(@"%@",param);
     
     
-    [req post:url param:param success:^(NSInteger code, id object) {
+    [req post:url param:param success:^(NSInteger code, id object,AFHTTPRequestOperation *operation) {
         
         successful(object);
         

@@ -52,7 +52,7 @@
     
 }
 
--(void)post:(NSString*)url param:(NSDictionary*)param success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure  {
+-(void)post:(NSString*)url param:(NSDictionary*)param success:(void(^)(NSInteger code,id object,AFHTTPRequestOperation *operation))success  failure:(void(^)(NSInteger code,NSString *content))failure  {
     
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -88,7 +88,7 @@
 
         
         
-        success(operation.response.statusCode,responseObject);
+        success(operation.response.statusCode,responseObject,operation);
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

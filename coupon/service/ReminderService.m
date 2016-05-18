@@ -121,9 +121,18 @@
     
               
     
-    [req post:url param:parm success:^(NSInteger code, id object) {
+    [req post:url param:parm success:^(NSInteger code, id object,AFHTTPRequestOperation *operation) {
         
-        success(code,@"",object);
+        
+        NSString * location = operation.response.allHeaderFields[@"Location"];
+        
+        NSString *reminderId = SafeString([location lastPathComponent]);
+        
+        NSDictionary *d = @{@"reminderId":reminderId};
+        
+        
+        
+        success(code,@"",d);
         
     } failure:^(NSInteger code, NSString *content) {
         

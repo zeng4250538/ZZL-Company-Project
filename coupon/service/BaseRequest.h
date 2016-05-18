@@ -13,7 +13,7 @@
 
 -(void)get:(NSString*)url param:(NSDictionary*)param success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure  ;
 
--(void)post:(NSString*)url param:(NSDictionary*)param success:(void(^)(NSInteger code,id object))success  failure:(void(^)(NSInteger code,NSString *content))failure  ;
+-(void)post:(NSString*)url param:(NSDictionary*)param success:(void(^)(NSInteger code,id object,AFHTTPRequestOperation *operation))success  failure:(void(^)(NSInteger code,NSString *content))failure  ;
 
 
 

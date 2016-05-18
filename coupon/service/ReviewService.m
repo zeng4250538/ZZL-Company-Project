@@ -39,7 +39,7 @@
                            @"isLike":@(isLike)};
     
     
-    [req post:url param:parm success:^(NSInteger code, id object) {
+    [req post:url param:parm success:^(NSInteger code, id object,AFHTTPRequestOperation *operation) {
         
         success(code,@"",object);
         
