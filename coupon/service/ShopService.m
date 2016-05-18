@@ -215,7 +215,7 @@
     
     if (mode==YES) {
         
-        [req post:url param:parm success:^(NSInteger code, id object) {
+        [req post:url param:parm success:^(NSInteger code, id object,AFHTTPRequestOperation *operation) {
             
             success(code,@"",object);
             
@@ -469,7 +469,7 @@
     NSDictionary *parm = @{@"favoriteId":shopid,@"customerId":customerId};
     
     
-    [req post:url param:parm success:^(NSInteger code, id object) {
+    [req post:url param:parm success:^(NSInteger code, id object,AFHTTPRequestOperation *operation) {
         
         success(code,@"",object);
         

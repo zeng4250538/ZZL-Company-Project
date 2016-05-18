@@ -47,7 +47,7 @@
     NSDictionary *parm = @{@"couponInstanceId":couponInstanceId,@"originalPrice":originalPriceStr,@"sellingPrice":sellPriceStr};
     
     
-    [req post:url param:parm success:^(NSInteger code, id object) {
+    [req post:url param:parm success:^(NSInteger code, id object,AFHTTPRequestOperation *operation) {
         
          NSLog(@"<----点击支付后的信息----object----》%@",object);
         success(code,@"",object);

@@ -614,31 +614,20 @@
         cell.doActionBlock = ^(id sender){
             
             
-            
-        
-            
             NSString *isReminder = SafeString(d[@"setReminder"]);
             
             if ([ isReminder isEqualToString:@"0"]) {
                 
                 NSString *promotionId = SafeString(d[@"couponPromotionId"]);
-                
-                
                 ReminderService *service = [ReminderService new];
-                
-                
                 [service addReminder:promotionId success:^(NSInteger code, NSString *message, id data) {
-                    
-                    
                     UIButton *button = (UIButton*)sender;
-                    
                     [button setTitle:@"取消提醒" forState:UIControlStateNormal];
-                    
                     d[@"setReminder"]=@1;
+                    NSString * reminderId = data[@"reminderId"];
                     
-                    
+                    d[@"reminderId"]=SafeString(reminderId);
                     [SVProgressHUD showSuccessWithStatus:@"提醒成功"];
-                    
                     
                 } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
                     

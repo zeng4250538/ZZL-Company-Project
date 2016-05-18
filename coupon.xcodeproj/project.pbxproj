@@ -58,6 +58,7 @@
 		572B5C191CE4F93600BC1C37 /* ImageUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = 572B5C181CE4F93600BC1C37 /* ImageUploadService.m */; };
 		572B5C1C1CE6064500BC1C37 /* OrderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 572B5C1B1CE6064500BC1C37 /* OrderService.m */; };
 		572B5C1F1CE86D3A00BC1C37 /* ConfigService.m in Sources */ = {isa = PBXBuildFile; fileRef = 572B5C1E1CE86D3A00BC1C37 /* ConfigService.m */; };
+		572B5C211CEA2ACB00BC1C37 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 572B5C201CEA2ACB00BC1C37 /* arrow@2x.png */; };
 		5735A2551CC3F49F0001B239 /* ShopCommentSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */; };
 		5735A25A1CC3F7920001B239 /* MallShopCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5735A2581CC3F7920001B239 /* MallShopCommentTableViewCell.m */; };
 		5735A25B1CC3F7920001B239 /* MallShopCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5735A2591CC3F7920001B239 /* MallShopCommentViewController.m */; };
@@ -356,6 +357,7 @@
 		572B5C1B1CE6064500BC1C37 /* OrderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderService.m; sourceTree = "<group>"; };
 		572B5C1D1CE86D3A00BC1C37 /* ConfigService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigService.h; sourceTree = "<group>"; };
 		572B5C1E1CE86D3A00BC1C37 /* ConfigService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigService.m; sourceTree = "<group>"; };
+		572B5C201CEA2ACB00BC1C37 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		5735A2531CC3F49F0001B239 /* ShopCommentSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCommentSevice.h; sourceTree = "<group>"; };
 		5735A2541CC3F49F0001B239 /* ShopCommentSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCommentSevice.m; sourceTree = "<group>"; };
 		5735A2561CC3F7920001B239 /* MallShopCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallShopCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -1289,6 +1291,7 @@
 		578E63F61C255B4800C1FB19 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				572B5C201CEA2ACB00BC1C37 /* arrow@2x.png */,
 				7FF39E3C1CE57B96007810BC /* guangzhoufood.png */,
 				5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */,
 				5727C4CA1CB0293800C92BF0 /* detailback@2x.png */,
@@ -1787,6 +1790,7 @@
 				57B57CE21C95C74C009F4EB2 /* logo29@3x.png in Resources */,
 				57A94E5A1C37DBFD00BE0022 /* tab_shake_icon@2x.png in Resources */,
 				5727C4D01CB0EE1B00C92BF0 /* trash@2x.png in Resources */,
+				572B5C211CEA2ACB00BC1C37 /* arrow@2x.png in Resources */,
 				57A94E5D1C37E2C500BE0022 /* scanner_icon@2x.png in Resources */,
 				574EE03D1C7DD9E40009D6EF /* soundon@2x.png in Resources */,
 				57B0196D1C7D8F6300884E0E /* animation_10.png in Resources */,

@@ -120,6 +120,8 @@
     if ([result isEqualToString:@"1"]){  //支付成功
         
         
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
         UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"微信支付成功！"];
         [av bk_addButtonWithTitle:@"关闭" handler:^{
             
