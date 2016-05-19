@@ -26,7 +26,7 @@
 @property(nonatomic,strong)NSArray *otherCouponList;
 @property(nonatomic,strong)id idDaata;
 @property(nonatomic,strong)UILabel *subLabel;
-
+@property(nonatomic,assign)__block  NSInteger inets;
 
 
 
@@ -460,6 +460,7 @@
     
     [uv addSubview:shopBgButton];
     
+//     __block  NSInteger inets = 0;
     
     [shopBgButton bk_addEventHandler:^(id sender) {
         
@@ -543,6 +544,7 @@
         if ([data isKindOfClass:[NSArray class]]) {
             if ([data count]>0) {  //数组有参数才能算订阅成功
                 
+                _inets = 1;
                 
                 [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
                 subButton.selected = YES;
@@ -553,7 +555,8 @@
             }
             
         }
-            
+        
+        _inets = 0;
         [subButton setTitle:@"订阅" forState:UIControlStateNormal];
         
         subButton.selected = NO;
@@ -568,15 +571,16 @@
         
     }];
     
-    
+    NSString *asdasd = SafeString(self.data[@"favorcount"]);
+    int inter = [asdasd intValue];
+    __block int i = inter;
 #pragma mark ----- 点击订阅时的事件
     [subButton bk_addEventHandler:^(id sender) {
         
-        NSString *asdasd = SafeString(self.data[@"favorcount"]);
         
-        NSInteger inter = [asdasd integerValue];
+         _subButtonHandle();
         
-        __block  NSInteger inets = 0;
+       
         
         //拿到按钮的状态
         UIButton *btn = (UIButton*)sender;
@@ -596,11 +600,18 @@
                 [btn setTitle:@"取消订阅" forState:UIControlStateNormal];
                 btn.selected = YES;
                 
-                _subButtonHandle();
-                
-                inets = 1;
-                _subLabel.text=[NSString stringWithFormat:@"订阅数 %ld",inter+1];
-                
+                /**
+                 *  逻辑有待修改
+                 */
+                if (inter>0) {
+                    i = inter;
+                }
+                else{
+                i = inter+1;
+                }
+                _subLabel.text=[NSString stringWithFormat:@"订阅数 %d",i];
+
+               
                 [SVProgressHUD dismiss];
                 
                 
@@ -626,19 +637,14 @@
             [service doUnFav:shopId success:^(NSInteger code, NSString *message, id data) {
                 
                 [btn setTitle:@"订阅" forState:UIControlStateNormal];
-                _subButtonHandle();
-                btn.selected = NO;
-                NSString *asdasd = SafeString(self.data[@"favorcount"]);
-                NSInteger inter = [asdasd integerValue];
                 
-                if (inets > 0) {
-                    
-                    _subLabel.text=[NSString stringWithFormat:@"订阅数 %ld",inter];
-                    
-                }
-                else{
-                _subLabel.text=[NSString stringWithFormat:@"订阅数 %ld",inter-1];
-                }
+                btn.selected = NO;
+                
+                _subLabel.text=[NSString stringWithFormat:@"订阅数 %d",i-1];
+                
+                
+                
+
                 [SVProgressHUD dismiss];
                 
                 

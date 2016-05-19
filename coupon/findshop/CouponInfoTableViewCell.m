@@ -16,7 +16,7 @@
 @property(nonatomic,strong)UILabel *detailLabel;    //明细
 @property(nonatomic,strong)UIButton *reminderButton;    //提醒按钮
 @property(nonatomic,strong)UILabel *timeLabel;
-
+@property(nonatomic,strong)UILabel *subTitleLatbel;
 
 
 
@@ -39,6 +39,7 @@
     if (self) {
         
         
+        
         self.logoView = [[UIImageView alloc] init];
         
         [self.contentView addSubview:self.logoView];
@@ -48,6 +49,14 @@
         self.titleLabel.textColor = [GUIConfig grayFontColorDeep];
         
         [self.contentView addSubview:self.titleLabel];
+        
+        
+        self.subTitleLatbel = [[UILabel alloc]init];
+        self.subTitleLatbel.font = [UIFont systemFontOfSize:12];
+        self.subTitleLatbel.textColor = UIColorFromRGB(180, 180, 180);
+        
+        [self.contentView addSubview:self.subTitleLatbel];
+        
         
         
         self.detailLabel = [UILabel new];
@@ -124,6 +133,7 @@
     [super layoutSubviews];
     
     
+    
     [self.logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerY.equalTo(self.contentView);
@@ -144,6 +154,13 @@
         
     }];
     
+    [self.subTitleLatbel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@20);
+        make.left.equalTo(self.contentView).offset(140);
+        make.right.equalTo(self.contentView).offset(-80);
+        make.top.equalTo(self.titleLabel).offset(30);
+    }];
+
     
     [self.couponStatusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -374,8 +391,8 @@
         
     }];
     
-    self.titleLabel.text=SafeString(self.data[@"name"]);
-    
+    self.titleLabel.text=SafeString(self.data[@"shopName"]);
+    self.subTitleLatbel.text = SafeString(self.data[@"name"]);
     
 }
 

@@ -294,7 +294,7 @@
         UILabel *originPriceValueLabel = [UILabel new];
         originPriceValueLabel.font = [UIFont systemFontOfSize:14];
         originPriceValueLabel.textColor = [GUIConfig grayFontColor];
-        originPriceValueLabel.text=@"100元";
+        originPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"originalPrice"])];
         
         [cell.contentView addSubview:originPriceValueLabel];
         
@@ -329,7 +329,7 @@
         UILabel *realPriceValueLabel = [UILabel new];
         realPriceValueLabel.font = [UIFont systemFontOfSize:14];
         realPriceValueLabel.textColor = [GUIConfig grayFontColor];
-        realPriceValueLabel.text=@"50元";
+        realPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"sellingPrice"])];
         
         [cell.contentView addSubview:realPriceValueLabel];
         
@@ -362,7 +362,7 @@
         UILabel *payMethodValueLabel = [UILabel new];
         payMethodValueLabel.font = [UIFont systemFontOfSize:14];
         payMethodValueLabel.textColor = [GUIConfig grayFontColor];
-        payMethodValueLabel.text=@"支付宝";
+        payMethodValueLabel.text = SafeString(self.data[@"paymentServiceProvider"]);
         
         [cell.contentView addSubview:payMethodValueLabel];
         
@@ -393,7 +393,7 @@
         UILabel *payTimeValueLabel = [UILabel new];
         payTimeValueLabel.font = [UIFont systemFontOfSize:14];
         payTimeValueLabel.textColor = [GUIConfig grayFontColor];
-        payTimeValueLabel.text=@"2016-4-14 20:00:00";
+        payTimeValueLabel.text=SafeString(self.data[@"consumedTime"]);
         
         [cell.contentView addSubview:payTimeValueLabel];
         

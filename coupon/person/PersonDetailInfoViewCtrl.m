@@ -350,6 +350,10 @@
             // [self.tableView reloadData];
             
         }];
+        
+        [act bk_setDestructiveButtonWithTitle:@"取消" handler:^{
+            
+        }];
 
         
         [act showInView:self.view];
