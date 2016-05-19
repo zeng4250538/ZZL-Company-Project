@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ShakeViewCtrl : UIViewController
+@interface ShakeViewCtrl : UIViewController<CLLocationManagerDelegate>
 
 
 

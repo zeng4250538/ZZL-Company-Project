@@ -112,6 +112,72 @@ static AppShareData *instance;
     
 }
 
+-(void)setLat:(double)lat{
+    
+    
+    [[NSUserDefaults standardUserDefaults] setDouble:lat forKey:@"lat"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+-(void)setLon:(double)lon{
+    
+    
+    [[NSUserDefaults standardUserDefaults] setDouble:lon forKey:@"lon"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+
+-(double)lat{
+    
+    
+    return [[NSUserDefaults standardUserDefaults] doubleForKey:@"lat"];
+    
+  
+}
+
+-(double)lon{
+    
+    
+    return [[NSUserDefaults standardUserDefaults] doubleForKey:@"lon"];
+    
+    
+}
+
+-(void)setLastLocationDate:(NSDate *)lastLocationDate{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:lastLocationDate forKey:@"lastDate"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+-(NSDate*)lastLocationDate{
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"lastDate"];
+    
+}
+
+
+-(NSString*)mallName{
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"mallName"];
+}
+
+-(void)setMallName:(NSString *)mallName{
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:mallName forKey:@"mallName"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    
+    
+}
+
+
 -(NSString*)accessToken{
     
     
@@ -124,7 +190,7 @@ static AppShareData *instance;
 -(void)saveMallId:(NSString*)mallId{
     
     
-    [[NSUserDefaults standardUserDefaults] objectForKey:mallId];
+    [[NSUserDefaults standardUserDefaults] setObject:mallId forKey:MallIdKey];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -135,18 +201,48 @@ static AppShareData *instance;
 
 -(NSString*)mallId{
     
-    return @"11";
+    //return @"11";
+    
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:MallIdKey];
+
+    
+    
+}
+
+
+-(NSString*)customTestId{
+    
+    
+    return @"15818865756";
+    
+    
 }
 
 
 -(NSString*)customId{
     
 
-    return @"15818865756";
+    //return @"15818865756";
     
-   // return [[NSUserDefaults standardUserDefaults] objectForKey:CustomIdKey];
+   return SafeString([[NSUserDefaults standardUserDefaults] objectForKey:CustomIdKey]);
     
 }
+
+
+-(void)setCustomId:(NSString *)customId{
+    
+    
+     
+    [[NSUserDefaults standardUserDefaults] setObject:customId forKey:CustomIdKey];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    
+    
+}
+
+
 
 -(NSMutableArray*)getCartList{
     
@@ -226,6 +322,8 @@ static AppShareData *instance;
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:UserNameKey];
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:PasswordKey];
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AccessTokenKey];
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:CustomIdKey];
+    
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:IsLoginKey];
     [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"myInformation"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -251,9 +349,35 @@ static AppShareData *instance;
 
 -(BOOL)isLogin{
     
-    return [[NSUserDefaults standardUserDefaults] boolForKey:IsLoginKey];
+    
+    NSString *customId = [[NSUserDefaults standardUserDefaults] objectForKey:CustomIdKey];
+    
+    if (SafeEmpty(customId)) {
+        return NO;
+    }else{
+        
+        return YES;
+    }
+    
     
 }
+
+-(BOOL)isNeedLocationUpdate{
+    
+    NSDate *lastUpdate = self.lastLocationDate;
+    
+    
+    double passTime = [[NSDate date] timeIntervalSinceNow] - [lastUpdate timeIntervalSinceNow];
+    
+    if (passTime> 60*5*passTime ) {
+        return YES;
+    }
+    return NO;
+    
+    
+    
+}
+
 
 
 

@@ -29,8 +29,19 @@ extern NSString *const ReviewUpdateNotice;
 @property(nonatomic,strong)CouponQueue *shakeCouponQueue;
 
 @property(nonatomic,copy,readonly)NSString *customId;
+
 @property(nonatomic,copy,readonly)NSString *mallId;
 @property(nonatomic,copy,readonly)NSString *city;
+@property(nonatomic,assign,readonly)double lon;
+@property(nonatomic,assign,readonly)double lat;
+@property(nonatomic,strong,readonly)NSDate  *lastLocationDate;
+
+@property(nonatomic,copy,readonly)NSString  *mallName;
+
+
+
+
+
 
 @property(nonatomic,copy,readonly)NSString *deviceToken;
 
@@ -38,6 +49,9 @@ extern NSString *const ReviewUpdateNotice;
 @property(nonatomic,copy)NSString *accessToken;
 
 +(instancetype)instance;
+
+
+-(BOOL)isNeedLocationUpdate;
 
 
 -(void)loginOut;
@@ -71,5 +85,22 @@ extern NSString *const ReviewUpdateNotice;
 -(void)myInformationData:(NSDictionary *)data;
 
 -(NSDictionary *)getMyInfromationData;
+
+-(void)setLat:(double)lat;
+
+-(void)setLon:(double)lon;
+
+-(void)setLastLocationDate:(NSDate *)lastLocationDate;
+
+-(void)setMallName:(NSString *)mallName;
+
+
+
+-(NSString*)customTestId;
+
+
+
+
+
 
 @end

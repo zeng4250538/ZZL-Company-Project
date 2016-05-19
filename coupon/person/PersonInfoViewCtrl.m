@@ -127,6 +127,8 @@
 
 
 
+
+
 -(void)makeHeader:(UIImageView*)header{
 
     
@@ -152,6 +154,12 @@
         make.bottom.equalTo(header).offset(-20);
         
     }];
+    
+    
+    if (![AppShareData instance].isLogin) {
+        myInformationTitleLabel.text=@"未登录";
+        return ;
+    }
     
     
     CustomerService *service = [CustomerService new];
@@ -244,6 +252,9 @@
         
     }];
     
+    
+    
+    
     exitButton.backgroundColor = [GUIConfig mainColor];
     
     [exitButton setTitle:@"退出" forState:UIControlStateNormal];
@@ -257,6 +268,10 @@
         
         
         UIAlertView *av = [UIAlertView bk_alertViewWithTitle:@"注意" message:@"是否退出系统？"];
+        
+        
+        
+        
         
         [av bk_addButtonWithTitle:@"确认" handler:^{
             
@@ -299,6 +314,17 @@
         
         
     } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if ([[AppShareData instance] isLogin]) {
+        
+        exitButton.hidden = NO;
+        
+    }else{
+        
+        exitButton.hidden = YES;
+        
+    }
     
     
     
@@ -352,6 +378,8 @@
 
     
     [self.navigationController.navigationBar setHidden:NO];
+    
+    [self makeFooterView];
     
     
 }
@@ -496,6 +524,16 @@
     if ([indexPath section]==0) {
         
         if (indexPath.row==0) {
+            
+            if (![AppShareData instance].isLogin) {
+                
+                SafePostMessage(NoLoginNotice, @"");
+                
+                return ;
+                
+            }
+            
+            
             MySubViewCtrl *vc = [MySubViewCtrl new];
             
             vc.hidesBottomBarWhenPushed = YES;
@@ -505,6 +543,15 @@
         }
         
         if (indexPath.row==1) {
+            
+            if (![AppShareData instance].isLogin) {
+                
+                SafePostMessage(NoLoginNotice, @"");
+                
+                return ;
+                
+            }
+            
             
             
             MyCommentViewCtrl *vc = [MyCommentViewCtrl new];
@@ -524,6 +571,16 @@
     if ([indexPath section]==1) {
         
         
+        if (![AppShareData instance].isLogin) {
+            
+            SafePostMessage(NoLoginNotice, @"");
+            
+            return ;
+            
+        }
+        
+        
+        
         MyRemindViewCtrl *vc = [MyRemindViewCtrl new];
         vc.hidesBottomBarWhenPushed = YES;
         
@@ -538,6 +595,16 @@
         if (indexPath.row==0) {
             
             
+            if (![AppShareData instance].isLogin) {
+                
+                SafePostMessage(NoLoginNotice, @"");
+                
+                return ;
+                
+            }
+            
+            
+            
             BasketContainerViewCtrl *vc = [BasketContainerViewCtrl new];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
@@ -547,6 +614,16 @@
         }
         
         if (indexPath.row==1) {
+            
+            
+            if (![AppShareData instance].isLogin) {
+                
+                SafePostMessage(NoLoginNotice, @"");
+                
+                return ;
+                
+            }
+            
             
             HistoryCouponUsageViewCtrl *vc = [HistoryCouponUsageViewCtrl new];
             

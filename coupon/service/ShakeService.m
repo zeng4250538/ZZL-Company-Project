@@ -24,7 +24,9 @@
         mallid=@"";
     }
     
-    NSDictionary *parm = @{@"customerId":mallid,@"shopMallId":shopMallId};
+    NSString *customerId = SafeString([AppShareData instance].customId);
+    
+    NSDictionary *parm = @{@"customerId":SafeString(customerId),@"shopMallId":SafeString(shopMallId)};
   
     [req get:url param:parm success:^(NSInteger code, id object) {
         

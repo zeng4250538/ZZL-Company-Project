@@ -102,6 +102,9 @@ extern BOOL InLan;
 
 extern NSString *ALiPayNotice;
 extern NSString *WechatPayNotice;
+
+extern NSString *NoLoginNotice;
+
 extern NSString *UmengKey;
 extern NSString *WeChatAppId;
 
