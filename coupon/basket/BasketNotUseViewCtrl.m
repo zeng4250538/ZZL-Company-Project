@@ -14,7 +14,7 @@
 #import "CouponDrawbackViewCtrl.h"
 #import "BasketService.h"
 #import "BasketNotUseTableViewCell.h"
-
+#import "SubBasketViewController.h"
 
 //<<<<<<< HEAD
 #import "AppShareData.h"
@@ -213,6 +213,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
+    
     UseCouponViewCtrl *vc = [UseCouponViewCtrl new];
     
     NSDictionary *d = self.dataList[[indexPath row]];
@@ -221,9 +222,9 @@
     
     vc.data = d;
     
-    
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    SubBasketViewController *suvc  = [SubBasketViewController new];
+    suvc.subData = d;
+    [self.navigationController pushViewController:suvc animated:YES];
     
     
     

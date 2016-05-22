@@ -818,37 +818,32 @@
 
     if ([sort isEqualToString:@"默认排序"]) {
         self.sortTitle=@"默认排序";
-        self.sortString=@"default";
+        self.sortString=@"";
     }
     
-    if ([sort isEqualToString:@"点赞升序"]) {
-        self.sortTitle=@"点赞升序";
-        self.sortString=@"good";
+    if ([sort isEqualToString:@"领取最多"]) {
+        self.sortTitle=@"领取最多";
+        self.sortString=@"-taken_coupon_count";
         
         
     }
     
-    if ([sort isEqualToString:@"点赞降序"]) {
-        self.sortTitle=@"点赞降序";
+    if ([sort isEqualToString:@"点赞最多"]) {
+        self.sortTitle=@"点赞最多";
         self.sortString=@"-good";
         
         
     }
     
     
-    if ([sort isEqualToString:@"收藏降序"]) {
-        self.sortTitle=@"收藏降序";
+    if ([sort isEqualToString:@"订阅最多"]) {
+        self.sortTitle=@"订阅最多";
         self.sortString=@"-favor_count";
         
         
     }
 
-    if ([sort isEqualToString:@"领取降序"]) {
-        self.sortTitle=@"领取降序";
-        self.sortString=@"-ordered_coupon_count";
-        
-        
-    }
+   
 
     
     
@@ -1087,18 +1082,18 @@
             
         }];
         
-        [as bk_addButtonWithTitle:@"点赞降序" handler:^{
+        [as bk_addButtonWithTitle:@"领取最多" handler:^{
             
             
-            [self doFilterSortData:self.filterString sort:@"点赞降序"];
+            [self doFilterSortData:self.filterString sort:@"点领取降序"];
             
  
             
         }];
         
-        [as bk_addButtonWithTitle:@"点赞升序" handler:^{
+        [as bk_addButtonWithTitle:@"点赞最多" handler:^{
             
-            [self doFilterSortData:self.filterString sort:@"点赞升序"];
+            [self doFilterSortData:self.filterString sort:@"点赞最多"];
 
             
             
@@ -1107,21 +1102,17 @@
             
         }];
         
-        [as bk_addButtonWithTitle:@"收藏降序" handler:^{
+        [as bk_addButtonWithTitle:@"订阅最多" handler:^{
             
             
-            [self doFilterSortData:self.filterString sort:@"收藏降序"];
+            [self doFilterSortData:self.filterString sort:@"订阅最多"];
 
             
     
             
         }];
  
-        [as bk_addButtonWithTitle:@"领取降序" handler:^{
-            
-            [sortButton setTitle:@"领取降序" forState:UIControlStateNormal];
-            
-        }];
+        
 
         
         [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{

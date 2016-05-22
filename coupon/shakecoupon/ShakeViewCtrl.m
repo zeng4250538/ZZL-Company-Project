@@ -15,7 +15,7 @@
 #import "MallService.h"
 #import "ShakeService.h"
 #import "AppShareData.h"
-
+#import "ShoppingCartSevice.h"
 @interface ShakeViewCtrl ()
 
 @property(nonatomic,strong)UIScrollView *contentView;
@@ -474,7 +474,18 @@
     
 }
 
-
+-(void)shoppingCartLoadDate{
+    
+    AppShareData *app = [AppShareData instance];
+    ShoppingCartSevice *spc = [ShoppingCartSevice new];
+    [spc soppingCartRequestUserId:app.customId withstatus:@"未消费" withSuccessful:^(id data) {
+        
+        NSLog(@"篮子数量：%@",SafeString(data));
+    } withFailure:^(id data) {
+        
+    }];
+    
+}
 
 #pragma mark ------------------------------ 摇动感应器触发
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
@@ -484,6 +495,8 @@
     
         if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake){
     
+            [self shoppingCartLoadDate];
+            
             [self loadShakeData:^(BOOL ret){
                 
                 if (ret) {
