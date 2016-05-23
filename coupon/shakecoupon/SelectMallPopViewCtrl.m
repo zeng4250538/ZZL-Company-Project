@@ -80,7 +80,11 @@
     
     MallService *service = [[MallService alloc] init];
     
-    [service queryMallByNear:@"北京市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+    NSString *city = [AppShareData instance].city;
+    double lon = [AppShareData instance].lon;
+    double lat = [AppShareData instance].lat;
+    
+    [service queryMallByNear:city lon:lon lat:lat success:^(NSInteger code, NSString *message, id data) {
         
         
         [ReloadHud showReloadMode:self.tableView];
@@ -291,21 +295,38 @@
     }];
     
     NSDictionary *mallDict = self.mallList[[indexPath row]];
-    NSLog(@"1231313%@",self.mallList);
     nameLabel.text=SafeString(mallDict[@"name"]);
 
     UILabel *distanceLabel = [UILabel new];
     distanceLabel.font = [UIFont systemFontOfSize:14];
     [cell.contentView addSubview:distanceLabel];
     [distanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(cell.contentView);
+        make.right.equalTo(cell.contentView).offset(-10);
         make.height.equalTo(cell.contentView);
         make.width.equalTo(@100);
         
     }];
     distanceLabel.textColor = [GUIConfig grayFontColor];
+    distanceLabel.textAlignment = NSTextAlignmentRight;
     
-    distanceLabel.text=[NSString stringWithFormat:@"%@",SafeString(mallDict[@"distance"])];
+  //  NSString *dictance = mallDict[@"distance"];
+    
+    double distance = [SafeString(mallDict[@"distance"]) floatValue];
+    
+    NSString *distanceFormat=@"0米";
+    if (distance>500.0) {
+        
+        double dd = distance/1000;
+        distanceFormat = [NSString stringWithFormat:@"%.2f公里",dd];
+        
+    }else{
+        distanceFormat = [NSString stringWithFormat:@"%.2f米",distance];
+        
+        
+    }
+    
+    
+    distanceLabel.text=distanceFormat;
     
    // mallDict[@"distance"];
 

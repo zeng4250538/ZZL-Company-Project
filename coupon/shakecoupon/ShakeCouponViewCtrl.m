@@ -890,7 +890,19 @@
 -(void)doSwipeUp:(UISwipeGestureRecognizer*)rg{
     
    // if (rg.direction == UISwipeGestureRecognizerDirectionUp){
+    
+    
+    if (![[AppShareData instance] isLogin]) {
         
+        [self dismissViewControllerAnimated:NO completion:^{
+            SafePostMessage(NoLoginNotice, @"");
+            
+        }];
+        
+        
+        return ;
+        
+    }
         
         [self addBasketWithAnimation:rg.view];
         

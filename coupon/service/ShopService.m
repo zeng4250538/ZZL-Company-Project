@@ -28,9 +28,9 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shoprecommend?"];
     
-    NSString *customerId = [AppShareData instance].customId;
+    NSString *customerId = [[AppShareData instance] customTestId];
     
-    NSDictionary *parm = @{@"shopMallId":mallid,
+    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),
                            @"customerId":customerId,
                            @"page":@(page),
                            @"per_page":@(pageCount)};
@@ -72,7 +72,7 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby?"];
     
-    NSDictionary *parm = @{@"shopMallId":mallid,@"page":@(page),@"per_page":@(per_page)};
+    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),@"page":@(page),@"per_page":@(per_page)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {

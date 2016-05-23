@@ -33,6 +33,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "ConfigService.h"
+#import "LoginViewCtrl.h"
 
 @interface AppDelegate ()
 
@@ -50,13 +51,15 @@ BOOL InLan = NO;
 
 NSString *ALiPayNotice=@"alipaynotice";
 NSString *WechatPayNotice=@"wechatpaynotice";
+NSString *NoLoginNotice=@"nologinnotice";
+
+
 
 NSString *UmengKey=@"56e906e267e58e54f2000607";
 NSString *WeChatAppId=@"wx77914cc659d2889c";
 NSString *WeChatAppSecret=@"";
 
 NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id = com.richstone.coupontest3
-
 
 
 
@@ -216,28 +219,28 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
     
     
     
-    if ([CLLocationManager locationServicesEnabled]) {
-        // 创建位置管理者对象
-        self.lcManager = [[CLLocationManager alloc] init];
-        self.lcManager.delegate = self; // 设置代理
-        // 设置定位距离过滤参数 (当本次定位和上次定位之间的距离大于或等于这个值时，调用代理方法)
-        self.lcManager.distanceFilter = 100;
-        self.lcManager.desiredAccuracy = kCLLocationAccuracyBest; // 设置定位精度(精度越高越耗电)
-        [self.lcManager startUpdatingLocation]; // 开始更新位置
-        
-        
-        
-    }
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
-        [self.lcManager requestWhenInUseAuthorization];//⓵只在前台开启定位
-        //[self.lcManager requestAlwaysAuthorization];//⓶在后台也可定位
-    }
-    // 5.iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
-        //self.lcManager.allowsBackgroundLocationUpdates = YES;
-    }
-    
+//    if ([CLLocationManager locationServicesEnabled]) {
+//        // 创建位置管理者对象
+//        self.lcManager = [[CLLocationManager alloc] init];
+//        self.lcManager.delegate = self; // 设置代理
+//        // 设置定位距离过滤参数 (当本次定位和上次定位之间的距离大于或等于这个值时，调用代理方法)
+//        self.lcManager.distanceFilter = 100;
+//        self.lcManager.desiredAccuracy = kCLLocationAccuracyBest; // 设置定位精度(精度越高越耗电)
+//        [self.lcManager startUpdatingLocation]; // 开始更新位置
+//        
+//        
+//        
+//    }
+//    
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
+//        [self.lcManager requestWhenInUseAuthorization];//⓵只在前台开启定位
+//        //[self.lcManager requestAlwaysAuthorization];//⓶在后台也可定位
+//    }
+//    // 5.iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+//        //self.lcManager.allowsBackgroundLocationUpdates = YES;
+//    }
+//    
     
     
     
@@ -270,12 +273,39 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
     
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doLogin:) name:NoLoginNotice object:nil];
+    
+    
     
   
     
     
     
     return YES;
+}
+
+-(void)doLogin:(id)sender{
+    
+    
+    LoginViewCtrl *vc = [LoginViewCtrl new];
+    
+    
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    
+    
+    [self.window.rootViewController presentViewController:nav animated:YES completion:^{
+        
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
 }
 
 /** 不能获取位置信息时调用*/
@@ -294,11 +324,16 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
         if (placemarks.count > 0) {
             CLPlacemark *placeMark = placemarks[0];
             self.city = placeMark.locality;
+            
+            CGFloat lat = placeMark.location.coordinate.latitude;
+            
+            CGFloat lon = placeMark.location.coordinate.longitude;
+            
+            
 //            SPVC.cityBlockView(self.city);
         
             [iConsole info:@"当前定位城市 %@",self.city ];
             [[AppShareData instance] setCity:self.city];
-            // ? placeMark.locality : placeMark.administrativeArea;
             if (!self.city) {
                 self.city = NSLocalizedString(@"home_cannot_locate_city", comment:@"无法定位当前城市");
             }
@@ -328,7 +363,7 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
     //社交分享
     [UMSocialData setAppKey:UmengKey];
     
-    [UMSocialData openLog:YES];
+    //[UMSocialData openLog:YES];
     
     //微信分享接口
     [UMSocialWechatHandler setWXAppId:WeChatAppId appSecret:@"d9ea274d9e5e60d83a462dc60d27d382" url:@"http://www.umeng.com/social"];

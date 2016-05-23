@@ -35,6 +35,5 @@ typedef void(^SubButtonHandle)();
 
 @property(nonatomic,strong)NSDictionary *data;
 
--(void)boll:(BOOL)bools;
 
 @end

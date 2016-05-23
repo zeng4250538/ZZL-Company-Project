@@ -33,7 +33,7 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/realtimepromotion"];
     
-    NSDictionary *parm = @{@"shopMallId":mallid,@"customerId":customerId,@"page":@(page),@"per_page":@(pageCount),@"sort":sort};
+    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),@"customerId":customerId,@"page":@(page),@"per_page":@(pageCount),@"sort":sort};
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         

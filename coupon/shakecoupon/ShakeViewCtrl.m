@@ -23,6 +23,8 @@
 @property(nonatomic,strong)UIButton *mallButton;
 
 @property(nonatomic,assign)BOOL isShakeDataLoaded;
+@property(nonatomic,strong)CLLocationManager *lcManager;
+
 
 
 @end
@@ -50,12 +52,64 @@
     }];
     
     
+    
+    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    
+    self.navigationController.navigationBar.tintColor =[UIColor whiteColor];
+    
+    [super viewWillAppear:animated];
+    
+    
+    [self makeBarItem];
+    
+    if ([[AppShareData instance] isNeedLocationUpdate]) {
+        
+        [self requestLocation];
+
+        
+    }
+    
+    
+    
+    
+    
 }
 
 #pragma mark - 请求定位数据
 -(void)requestLocation{
     
     
+    if ([CLLocationManager locationServicesEnabled]) {
+        // 创建位置管理者对象
+        self.lcManager = [[CLLocationManager alloc] init];
+        self.lcManager.delegate = self; // 设置代理
+        // 设置定位距离过滤参数 (当本次定位和上次定位之间的距离大于或等于这个值时，调用代理方法)
+        self.lcManager.distanceFilter = 100;
+        self.lcManager.desiredAccuracy = kCLLocationAccuracyBest; // 设置定位精度(精度越高越耗电)
+        [self.lcManager startUpdatingLocation]; // 开始更新位置
+        
+    }
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
+        [self.lcManager requestWhenInUseAuthorization];//⓵只在前台开启定位
+        //[self.lcManager requestAlwaysAuthorization];//⓶在后台也可定位
+    }
+    // 5.iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+        //self.lcManager.allowsBackgroundLocationUpdates = YES;
+    }
+    
+    
+    
+    //[self.lcManager startUpdatingLocation];
+    
+    
+
     
     
 }
@@ -71,7 +125,8 @@
     
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
-    [services queryMallByNear:@"北京市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+    [services queryMallByNear:[AppShareData instance].city lon:[AppShareData instance].lon
+     lat:[AppShareData instance].lat success:^(NSInteger code, NSString *message, id data) {
         
         
     
@@ -351,7 +406,6 @@
 
 -(void)makeBarItem{
     
-    self.navigationController.navigationBar.tintColor =[UIColor whiteColor];
     
     UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
@@ -365,8 +419,11 @@
         
         
     }];
+    
+    
+    NSString *city = [AppShareData instance].city;
    
-    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"北京市" style:UIBarButtonItemStylePlain handler:^(id sender) {
+    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:city style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
@@ -385,21 +442,14 @@
     
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
     mallButton.frame = CGRectMake(0, 0, 150, 44);
-    [mallButton setTitle:@"选择商城" forState:UIControlStateNormal];
-    mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-
+    [mallButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [self requestCurrentMall:^(id data) {
-        
-        NSString *mallId = SafeString(data[@"id"]);
-        
-        //存储为当前的mallid
-        
-        [[AppShareData instance] saveMallId:mallId];
-        
-        
-        [mallButton setTitle:SafeString(data[@"name"]) forState:UIControlStateNormal];
-    }];
+    mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    
+    [mallButton setTitle:[AppShareData instance].mallName forState:UIControlStateNormal];
+    
+    
+    
     
     self.mallButton =mallButton;
     
@@ -419,7 +469,15 @@
         vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
             
             
-            NSString *name = [NSString stringWithFormat:@"%@(%@)",SafeString(mall[@"name"]),SafeString(mall[@"distance"])];
+            NSString *name = [NSString stringWithFormat:@"%@",SafeString(mall[@"name"])
+                              /*,SafeString(mall[@"distance"])*/];
+            
+            
+            [[AppShareData instance] setMallName:SafeString(mall[@"name"])];
+            
+            [[AppShareData instance] saveMallId:SafeString(mall[@"id"])];
+            
+            
             
             
             
@@ -436,6 +494,82 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    CLLocation *currentLocation = [locations lastObject]; // 最后一个值为最新位置
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    // 根据经纬度反向得出位置城市信息
+    [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (placemarks.count > 0) {
+            CLPlacemark *placeMark = placemarks[0];
+            NSString *city = placeMark.locality;
+            
+            CGFloat lat = placeMark.location.coordinate.latitude;
+            
+            CGFloat lon = placeMark.location.coordinate.longitude;
+            
+            
+            //            SPVC.cityBlockView(self.city);
+            
+            [[AppShareData instance] setCity:city];
+            
+            [[AppShareData instance] setLat:lat];
+            
+            [[AppShareData instance] setLon:lon];
+            
+            [[AppShareData instance] setLastLocationDate:[NSDate date]];
+            
+            
+            
+            [self requestCurrentMall:^(id data) {
+                
+                NSString *mallId = SafeString(data[@"id"]);
+                
+                NSString *mallName = SafeString(data[@"name"]);
+                
+//                [self.mallButton setTitle:mallName forState:UIControlStateNormal];
+//                
+//                
+//                NSArray *ay = self.navigationItem.leftBarButtonItems;
+//                
+//                if ([ay count]>1) {
+//                    UINavigationItem *navButton = ay[1];
+//                    
+//                    [navButton setTitle:SafeString(data[@"city"])];
+//
+//                }
+//                
+                
+                
+                
+                [self makeBarItem];
+                
+                //存储为当前的mallid
+                
+                [[AppShareData instance] saveMallId:mallId];
+                
+                [[AppShareData instance] setMallName:mallName];
+                
+                
+                //[mallButton setTitle:SafeString(data[@"name"]) forState:UIControlStateNormal];
+            }];
+            
+            
+            // 获取城市信息后, 异步更新界面信息.      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+        } else if (error == nil && placemarks.count == 0) {
+            NSLog(@"No location and error returned");
+        } else if (error) {
+            [iConsole error:@"定位出错 %@",error];
+            
+        }
+    }];
+    
+    //[manager stopUpdatingLocation];
+}
+
+
 
 
 #pragma mark - 装载摇一摇控制器

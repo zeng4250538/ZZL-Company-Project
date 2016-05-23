@@ -49,6 +49,8 @@
 @property(nonatomic,strong)NSString *filterTitle;  //分类过滤数据
 @property(nonatomic,strong)NSString *sortTitle;    //排序数据
 
+@property(nonatomic,strong)UIButton *mallButton;
+
 
 
 @end
@@ -100,7 +102,20 @@
     [self makeBarItem];
     
     
+    
+    
+    
+    
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
     [self loadData];
+    
+    [self makeBarItem];
     
     
     
@@ -113,7 +128,11 @@
 
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
-    [services queryMallByNear:@"北京市" lon:113.333655 lat:23.138651 success:^(NSInteger code, NSString *message, id data) {
+
+    NSString *cityName = [AppShareData instance].city;
+    
+    
+    [services queryMallByNear:cityName lon:[AppShareData instance].lon lat:[AppShareData instance].lat success:^(NSInteger code, NSString *message, id data) {
         
         self.mallArray = data;
     
@@ -242,6 +261,111 @@
 -(void)makeBarItem{
     
     self.navigationController.navigationBar.tintColor =[UIColor whiteColor];
+    
+    UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+        
+        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }];
+    
+    
+    NSString *city = [AppShareData instance].city;
+    
+    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:city style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }];
+    
+    
+    self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
+    
+    //  self.navigationItem.rightBarButtonItem = scanerBarItem;
+    
+    
+    UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    mallButton.frame = CGRectMake(0, 0, 150, 44);
+    [mallButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    mallButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    
+    
+    [mallButton setTitle:[AppShareData instance].mallName forState:UIControlStateNormal];
+    
+    
+    
+    self.mallButton =mallButton;
+    
+    
+    self.navigationItem.titleView = mallButton;
+    
+    
+    
+    [mallButton bk_addEventHandler:^(id sender) {
+        
+        
+        
+        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+        
+        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
+        
+        vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
+            
+            
+            NSString *name = [NSString stringWithFormat:@"%@",SafeString(mall[@"name"])
+                              /*,SafeString(mall[@"distance"])*/];
+            
+            
+            [[AppShareData instance] setMallName:SafeString(mall[@"name"])];
+            
+            [[AppShareData instance] saveMallId:SafeString(mall[@"id"])];
+            
+            
+            
+            
+            
+            [self.mallButton setTitle:name forState:UIControlStateNormal];
+        };
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    UIBarButtonItem *roomMapBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"roommap"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        MallMapViewCtrl *vc = [MallMapViewCtrl new];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }];
+    
+    self.navigationItem.rightBarButtonItem = roomMapBarItem;
+    
+    
+  //  self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
+
+    
+}
+
+
+
+
+-(void)makeBarItem2{
+    
+    self.navigationController.navigationBar.tintColor =[UIColor whiteColor];
     UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
@@ -252,14 +376,6 @@
     
     
     UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"北京市" style:UIBarButtonItemStylePlain handler:^(id sender) {
-        
-        /**-------------------------------------------------
-         *  这里要拿到定位后的城市名称
-         *
-         *
-         *
-         *
-         -----------------------------------------------------*/
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         

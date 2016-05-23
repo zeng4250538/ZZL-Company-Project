@@ -174,13 +174,6 @@
         
         [service doLogin:userName password:password success:^(NSInteger code, NSString *message, id data) {
             
-//            if (![data isKindOfClass:[NSDictionary class]]) {
-//                
-//                [SVProgressHUD showErrorWithStatus:@"数据格式错误！"];
-//                
-////                return;
-//                
-//            }
             
             [SVProgressHUD dismiss];
             
@@ -204,6 +197,13 @@
                     [app myInformationData:data];
                     
                 } failure:^(id code) {
+                    
+                }];
+            
+            
+            
+                [self dismissViewControllerAnimated:YES completion:^{
+                    
                     
                 }];
                 
