@@ -362,6 +362,7 @@
     }else{
         
         self.cartNumLabel.text = [NSString stringWithFormat:@"%ld",count];
+        
         self.cartNumLabel.hidden = NO;
     }
     

@@ -158,6 +158,16 @@ static AppShareData *instance;
     
 }
 
+
+//我改的。。。可删（未使用）
+-(void)shoppingCartNumber:(id)data{
+
+    NSNumber *number = data;
+    
+    
+
+}
+
 -(NSUInteger)getCartCount{
     
     return [instance.cartList count];

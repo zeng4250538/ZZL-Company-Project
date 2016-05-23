@@ -365,8 +365,8 @@
     
     BaseRequest *req = [BaseRequest new];
     
-    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shop/"];
-    url = [url stringByAppendingString:shopId];
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/shop/%@/",shopId];
+    
  
     
     [req get:url param:nil success:^(NSInteger code, id object) {

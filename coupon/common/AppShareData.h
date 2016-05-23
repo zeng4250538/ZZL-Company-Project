@@ -49,7 +49,8 @@ extern NSString *const ReviewUpdateNotice;
 -(void)setDeviceToken:(NSString *)deviceToken;
 
 
-
+//我改的。。。可删（未使用）
+-(void)shoppingCartNumber:(id)data;
 
 
 -(void)saveMallId:(NSString*)mallId;

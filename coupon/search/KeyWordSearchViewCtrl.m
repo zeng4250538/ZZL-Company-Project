@@ -12,7 +12,7 @@
 #import "SearchShopService.h"
 #import "ShopInfoViewCtrl.h"
 
-@interface KeyWordSearchViewCtrl ()
+@interface KeyWordSearchViewCtrl ()<UISearchDisplayDelegate>
 
 @property(nonatomic,strong)NSArray *hotWordList;
 
@@ -69,7 +69,7 @@
 -(void)loadData{
     
     
-    self.hotWordList = @[@"美食",@"天河",@"优惠",@"店3",@"店4",@"奶茶",@"西餐",@"蛋糕"];
+//    self.hotWordList = @[@"美食",@"天河",@"优惠",@"店3",@"店4",@"奶茶",@"西餐",@"蛋糕"];
     
  //   self.searchWordList = @[@"贡茶",@"星巴克",@"都城",@"快餐"];
     
@@ -107,7 +107,6 @@
     searchBar.searchBarStyle = UISearchBarStyleProminent;
     
     searchBar.showsCancelButton = YES;
-    
 
     
     self.searchBar = searchBar;
@@ -204,16 +203,7 @@
     self.tableView.tableHeaderView = bgView;
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }
 
@@ -253,6 +243,15 @@
 }
 
 
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    SearchResultViewCtrl *vc =[SearchResultViewCtrl new];
+    vc.keyWord = searchBar.text;
+
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{                     // called when cancel
 
     [self dismissViewControllerAnimated:YES completion:^{
@@ -274,15 +273,15 @@
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *headView = [UIView new];
-    headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 30);
+//    UIView *headView = [UIView new];
+//    headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 30);
     
     
     
     UILabel *lab = [UILabel new];
     lab.font = [UIFont systemFontOfSize:14];
     lab.textColor = [GUIConfig grayFontColor];
-    lab.text = @"   历史记录";
+//    lab.text = @"   历史记录";
     lab.backgroundColor = [GUIConfig mainBackgroundColor];
     lab.frame = CGRectMake(0, 0, SCREEN_WIDTH, 30);
     

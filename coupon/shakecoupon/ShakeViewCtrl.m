@@ -480,6 +480,9 @@
     ShoppingCartSevice *spc = [ShoppingCartSevice new];
     [spc soppingCartRequestUserId:app.customId withstatus:@"未消费" withSuccessful:^(id data) {
         
+        
+        [app shoppingCartNumber:data];
+        
         NSLog(@"篮子数量：%@",SafeString(data));
     } withFailure:^(id data) {
         
