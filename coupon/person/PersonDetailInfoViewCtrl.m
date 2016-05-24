@@ -465,6 +465,7 @@
             
             self.imageView.image = image;
             
+            self.inforMationRefreshBlock(@"");
             
             [picker dismissViewControllerAnimated:YES completion:^{
                 //[self.tableView reloadData];

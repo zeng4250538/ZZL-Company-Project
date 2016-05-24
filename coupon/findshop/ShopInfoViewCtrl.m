@@ -161,63 +161,21 @@
         
         
     }];
-    
-
-    
-    
-    
-    
-    
-    
-    
+  
     
 }
 
 
-//远程模式，需要预先载入
--(void)preLoadData:(void(^)(BOOL ret))completion{
-    
-    
-    ShopService *service = [ShopService new];
-    
-    [service requestShopInfo:self.shopId success:^(NSInteger code, NSString *message, id data) {
-        self.data = data;
-        
-        [self.tableView reloadData];
-        
-        [self makeHeaderView];
-        
-        completion(YES);
-        
-        
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        [SVProgressHUD showErrorWithStatus:@"数据装载错误"];
-        
-        completion(NO);
-        
-        
-    }];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+
 
 -(void)doLoadShop:(void(^)(BOOL ret))completion{
     
     
     ShopService *service = [ShopService new];
     
-    [service requestShopInfo:self.shopId success:^(NSInteger code, NSString *message, id data) {
+    NSString *shopId = SafeString(self.data[@"id"]);
+    
+    [service requestShopInfo:shopId success:^(NSInteger code, NSString *message, id data) {
         self.data = data;
         
         [self.tableView reloadData];
@@ -237,17 +195,8 @@
     }];
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
+
 
 
 
@@ -295,7 +244,7 @@
  
     //查询其他优惠券
     
-    [couponService requestNormalCoupon:shopId page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestNormalCoupon:shopId page:1 pageCount:1 success:^(NSInteger code, NSString *message, id data) {
         
         
         

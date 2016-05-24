@@ -75,7 +75,6 @@
     self.isFirstIn = YES;
     
     
-    [self shoppingCartLoadDate];
     
     
     
@@ -92,17 +91,7 @@
     [self animationDidStart];
 }
 
--(void)shoppingCartLoadDate{
 
-    AppShareData *app = [AppShareData instance];
-    ShoppingCartSevice *spc = [ShoppingCartSevice new];
-    [spc soppingCartRequestUserId:app.customId withstatus:@"未消费" withSuccessful:^(id data) {
-        
-    } withFailure:^(id data) {
-        
-    }];
-
-}
 
 #pragma mark - 手势定义
 
@@ -373,6 +362,7 @@
     }else{
         
         self.cartNumLabel.text = [NSString stringWithFormat:@"%ld",count];
+        
         self.cartNumLabel.hidden = NO;
     }
     
@@ -1284,8 +1274,7 @@
     if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake){
         
        // -(void)loadShakeData:(void(^)(BOOL ret))completion{
-            
-            
+                    
         [self loadShakeData:^(BOOL ret) {
             
             if (ret) {

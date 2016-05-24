@@ -33,7 +33,7 @@ NSString *ALiPay_Private = @"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJ/
 
 NSString *CallBackUrl = @"http://183.6.190.75:9780/diamond-sis-web/v1/payment/wechat/result";
 
-
+NSString *aipayUrl = @"http://183.6.190.75:9780/diamond-sis-web/v1/payment/ali/result";
 
 //微信支付参数
 NSString *WechatPay_API_KEY = @"fengshiguangzhoutianhehuitong160";  //注意保密
@@ -226,7 +226,7 @@ NSString *WechatPay_MCH_ID =@"1332430001";
     
     
     order.partner =[ALiPay_Partner copy];
-    order.seller = [ALiPay_Seller copy];
+//    order.seller = [ALiPay_Seller copy];
     
     
     
@@ -234,7 +234,7 @@ NSString *WechatPay_MCH_ID =@"1332430001";
     
     
 //    order.partner = @"2088221016697815";
-//    order.seller = @"paytreasuredeveloper@richstonedt.com";
+    order.seller = @"paytreasuredeveloper@richstonedt.com";
     
     
     
@@ -244,7 +244,7 @@ NSString *WechatPay_MCH_ID =@"1332430001";
     order.productDescription = orderName; //商品描述
     
     order.amount = [NSString stringWithFormat:@"%.2f",money]; //商品价格
-    order.notifyURL =  CallBackUrl; //回调URL
+    order.notifyURL =  aipayUrl; //回调URL
     
     
     order.service = @"mobile.securitypay.pay";

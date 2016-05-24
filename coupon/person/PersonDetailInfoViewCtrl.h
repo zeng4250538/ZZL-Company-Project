@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^myInforMationRefreshBlock)(id data);
+
 @interface PersonDetailInfoViewCtrl : UITableViewController
+
+@property(nonatomic,copy)myInforMationRefreshBlock inforMationRefreshBlock;
+
 
 @end

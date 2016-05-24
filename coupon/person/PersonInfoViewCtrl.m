@@ -40,6 +40,8 @@
 
 @property(nonatomic,strong)NSDictionary *myInformationDictionary;
 
+@property(nonatomic,strong) PersonDetailInfoViewCtrl *vc;
+
 @end
 
 @implementation PersonInfoViewCtrl
@@ -48,7 +50,7 @@
     
     [super viewDidLoad];
     
-    
+    _vc = [PersonDetailInfoViewCtrl new];
     
     self.tableView = [GUIHelper makeTableView:self.view delegate:self];
   
@@ -77,6 +79,14 @@
         
         
         [self makeHeader:header];
+        
+        
+        __weak typeof(self) weakSelf = self;
+        _vc.inforMationRefreshBlock = ^(id data){
+            
+            [weakSelf makeHeader:header];
+            
+        };
         
     }
     
@@ -216,14 +226,14 @@
     NSLog(@"hahahahahhahah");
     
     
-    PersonDetailInfoViewCtrl *vc = [PersonDetailInfoViewCtrl new];
-    
-    vc.hidesBottomBarWhenPushed = YES;
     
     
+    _vc.hidesBottomBarWhenPushed = YES;
     
     
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    [self.navigationController pushViewController:_vc animated:YES];
 
 
 }

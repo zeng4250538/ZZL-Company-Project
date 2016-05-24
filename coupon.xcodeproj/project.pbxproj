@@ -251,6 +251,8 @@
 		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
 		7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */; };
 		7F5E98A01CE9579C00EB365A /* ClearCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E989F1CE9579C00EB365A /* ClearCache.m */; };
+		7FC54B251CED2C2D00A499BB /* SubBasketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC54B241CED2C2D00A499BB /* SubBasketViewController.m */; };
+		7FC54B291CF206CF00A499BB /* IndoorMapViewService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC54B281CF206CF00A499BB /* IndoorMapViewService.m */; };
 		7FF39E3D1CE57B96007810BC /* guangzhoufood.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF39E3C1CE57B96007810BC /* guangzhoufood.png */; };
 		7FF596751CB3F0FF008BDE5A /* MyInformationSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */; };
 /* End PBXBuildFile section */
@@ -751,6 +753,10 @@
 		7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationViewController.m; sourceTree = "<group>"; };
 		7F5E989E1CE9579C00EB365A /* ClearCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearCache.h; sourceTree = "<group>"; };
 		7F5E989F1CE9579C00EB365A /* ClearCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearCache.m; sourceTree = "<group>"; };
+		7FC54B231CED2C2D00A499BB /* SubBasketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubBasketViewController.h; sourceTree = "<group>"; };
+		7FC54B241CED2C2D00A499BB /* SubBasketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubBasketViewController.m; sourceTree = "<group>"; };
+		7FC54B271CF206CF00A499BB /* IndoorMapViewService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorMapViewService.h; sourceTree = "<group>"; };
+		7FC54B281CF206CF00A499BB /* IndoorMapViewService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndoorMapViewService.m; sourceTree = "<group>"; };
 		7FF39E3C1CE57B96007810BC /* guangzhoufood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guangzhoufood.png; sourceTree = "<group>"; };
 		7FF596731CB3F0FF008BDE5A /* MyInformationSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationSevice.h; sourceTree = "<group>"; };
 		7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationSevice.m; sourceTree = "<group>"; };
@@ -1472,6 +1478,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7FC54B261CF2068200A499BB /* IndoorMapViewService */,
 				7F242F8C1CEB23C800D5235A /* ShoppingCart */,
 				7F375F651CC4E23D0007098C /* ShopCommentSevice */,
 				7FF596721CB3F0D7008BDE5A /* MyInformationSevice */,
@@ -1542,6 +1549,7 @@
 		57F511A71C5CC923000DA1A8 /* basket */ = {
 			isa = PBXGroup;
 			children = (
+				7FC54B221CED2C0300A499BB /* SubBasketView */,
 				57F511AE1C5CD1AD000DA1A8 /* BasketNotUseViewCtrl.h */,
 				573E51D01C7C2561005DBBC3 /* BasketNotUseViewCtrl.m */,
 				57F511A81C5CCF86000DA1A8 /* BasketContainerViewCtrl.h */,
@@ -1683,6 +1691,24 @@
 				7F5E989F1CE9579C00EB365A /* ClearCache.m */,
 			);
 			name = ClearCacheUnitKit;
+			sourceTree = "<group>";
+		};
+		7FC54B221CED2C0300A499BB /* SubBasketView */ = {
+			isa = PBXGroup;
+			children = (
+				7FC54B231CED2C2D00A499BB /* SubBasketViewController.h */,
+				7FC54B241CED2C2D00A499BB /* SubBasketViewController.m */,
+			);
+			name = SubBasketView;
+			sourceTree = "<group>";
+		};
+		7FC54B261CF2068200A499BB /* IndoorMapViewService */ = {
+			isa = PBXGroup;
+			children = (
+				7FC54B271CF206CF00A499BB /* IndoorMapViewService.h */,
+				7FC54B281CF206CF00A499BB /* IndoorMapViewService.m */,
+			);
+			name = IndoorMapViewService;
 			sourceTree = "<group>";
 		};
 		7FF596721CB3F0D7008BDE5A /* MyInformationSevice */ = {
@@ -1976,6 +2002,7 @@
 				57F3E28C1C86D39300A8CCA8 /* OrderContainerViewCtrl.m in Sources */,
 				57017F331C5F4128007B0112 /* SelectMallPopViewCtrl.m in Sources */,
 				574BF3F31C9802640088A9A6 /* RegisterViewCtrl.m in Sources */,
+				7FC54B251CED2C2D00A499BB /* SubBasketViewController.m in Sources */,
 				574910CE1CC0084B00FB2B14 /* APAuthV2Info.m in Sources */,
 				574910BA1CBFEF8B00FB2B14 /* BasketMessageCell.m in Sources */,
 				576E78AF1CBFBF4300E19BDB /* MyCommentViewCtrl.m in Sources */,
@@ -2046,6 +2073,7 @@
 				574910D31CC0084B00FB2B14 /* WXUtil.mm in Sources */,
 				577169811C820D4F00223EDB /* ChangePasswordViewCtrl.m in Sources */,
 				7F121D591CA2B725005AF53D /* HistoryOfConsumptionTableViewController.m in Sources */,
+				7FC54B291CF206CF00A499BB /* IndoorMapViewService.m in Sources */,
 				57D148031CC0F8FF00F9E40C /* HistoryCouponUsageViewCtrl.m in Sources */,
 				57E722C61C686A51004DBA9C /* ShakeService.m in Sources */,
 				7F242F8F1CEB244100D5235A /* ShoppingCartSevice.m in Sources */,
