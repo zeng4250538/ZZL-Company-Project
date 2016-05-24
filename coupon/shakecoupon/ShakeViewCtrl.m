@@ -483,6 +483,9 @@
             
             [self.mallButton setTitle:name forState:UIControlStateNormal];
         };
+        vc.tabelViewRefresh = ^(id data){
+        
+        };
       
     } forControlEvents:UIControlEventTouchUpInside];
     

@@ -318,6 +318,13 @@
         
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
+        vc.tabelViewRefresh = ^(id data){
+            
+            [self loadData];
+            [_tableView reloadData];
+        
+        };
+        
         [Utils popTransparentViewCtrl:self childViewCtrl:vc];
         
         vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){

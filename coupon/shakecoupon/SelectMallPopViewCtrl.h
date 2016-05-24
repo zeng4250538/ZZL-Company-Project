@@ -12,6 +12,8 @@ typedef void(^SelectMallBlock)(BOOL ret,NSDictionary *data);
 
 typedef void (^myCity)(id cityArray);
 
+typedef void (^tabelViewRefreshBlock) (id data);
+
 @interface SelectMallPopViewCtrl : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong)NSString *cityString;
@@ -19,8 +21,8 @@ typedef void (^myCity)(id cityArray);
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *mallList;
 @property(nonatomic,copy)SelectMallBlock selectMallBlock;
-
 @property(nonatomic,copy)myCity cityArrayBlock;
+@property(nonatomic,copy)tabelViewRefreshBlock tabelViewRefresh;
 
 -(void)loadData;
 

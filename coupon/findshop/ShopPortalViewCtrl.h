@@ -10,7 +10,6 @@
 
 typedef void (^myBlock)(NSString *data);
 
-typedef void (^tabelViewRefreshBlock) (id data);
 
 @interface ShopPortalViewCtrl : UIViewController<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -22,6 +21,6 @@ typedef void (^tabelViewRefreshBlock) (id data);
 
 @property(nonatomic,copy)myBlock block;
 
-@property(nonatomic,copy)tabelViewRefreshBlock tabelViewRefresh;
+
 
 @end
