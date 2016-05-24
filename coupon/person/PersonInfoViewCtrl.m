@@ -42,6 +42,8 @@
 
 @property(nonatomic,strong) PersonDetailInfoViewCtrl *vc;
 
+@property(nonatomic,strong) UIImageView *header;
+
 @end
 
 @implementation PersonInfoViewCtrl
@@ -67,24 +69,28 @@
         CGFloat rate = 420.0f/750.0f;
         
         
-        UIImageView *header = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_WIDTH*rate )];
+        _header = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_WIDTH*rate )];
         
-        header.image = [UIImage imageNamed:@"personbg.png"];
+        _header.image = [UIImage imageNamed:@"personbg.png"];
         
-        self.tableView.tableHeaderView = header;
+        self.tableView.tableHeaderView = _header;
         [self.tableView.tableHeaderView setUserInteractionEnabled:YES];
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
         
         [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
         
         
-        [self makeHeader:header];
+        [self makeHeader:_header];
+        
+        
+        //接收通知
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updatePageData) name:@"updatePageView" object:nil];
         
         
         __weak typeof(self) weakSelf = self;
         _vc.inforMationRefreshBlock = ^(id data){
             
-            [weakSelf makeHeader:header];
+            [weakSelf makeHeader:weakSelf.header];
             
         };
         
@@ -136,7 +142,11 @@
 }
 
 
+-(void)updatePageData{
 
+    [self makeHeader:self.header];
+
+}
 
 
 -(void)makeHeader:(UIImageView*)header{
@@ -188,7 +198,7 @@
         
         [myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
         
-        
+        myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"name"])];
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         

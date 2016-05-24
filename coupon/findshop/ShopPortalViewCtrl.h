@@ -10,7 +10,7 @@
 
 typedef void (^myBlock)(NSString *data);
 
-//typedef void (^cityBlock)(NSString *city);
+typedef void (^tabelViewRefreshBlock) (id data);
 
 @interface ShopPortalViewCtrl : UIViewController<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -22,10 +22,6 @@ typedef void (^myBlock)(NSString *data);
 
 @property(nonatomic,copy)myBlock block;
 
-//@property(nonatomic,copy)cityBlock cityBlockView;//传城市
-
-//@property(nonatomic,strong)NSString *findShopId;
-
-//@property(nonatomic,strong)NSString *cityName;
+@property(nonatomic,copy)tabelViewRefreshBlock tabelViewRefresh;
 
 @end

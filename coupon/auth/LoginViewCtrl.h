@@ -14,10 +14,10 @@ typedef NS_ENUM(NSUInteger, LoginViewMode) {
     LoginViewModePush
 };
 
-typedef void(^LoginEndBlock)(BOOL isLogin);
+//typedef void(^LoginEndBlock)(BOOL isLogin);
 
 @interface LoginViewCtrl : UITableViewController
-@property(nonatomic,copy)LoginEndBlock loginEndBlock;
+//@property(nonatomic,copy)LoginEndBlock loginEndBlock;
 @property(nonatomic,assign)LoginViewMode loginViewMode;
 
 

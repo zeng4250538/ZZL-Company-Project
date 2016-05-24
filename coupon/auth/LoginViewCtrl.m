@@ -183,29 +183,16 @@
             
             [[AppShareData instance] saveLogin:userName password:password accessToken:accessToken];
             
-            if (self.loginEndBlock) {
-                
-                self.loginEndBlock(YES);
-            }
+//            if (self.loginEndBlock) {
+//                
+//                self.loginEndBlock(YES);
+//            }
             
-#pragma mark ------------------- 个人资料网络请求
-                AppShareData *app = [AppShareData instance];
-                MyInformationSevice *information = [MyInformationSevice new];
-                NSLog(@"%@",app.customId);
-                [information requestMyInformationCustomerID:app.customId success:^(id data) {
-//                    NSLog(@"%@", data);
-                    [app myInformationData:data];
-                    
-                } failure:^(id code) {
-                    
-                }];
+            //发送通知
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"updatePageView" object:nil];
             
             
-            
-                [self dismissViewControllerAnimated:YES completion:^{
-                    
-                    
-                }];
+                [self dismissViewControllerAnimated:YES completion:^{}];
                 
                 
             
