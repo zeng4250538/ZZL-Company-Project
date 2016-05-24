@@ -115,6 +115,8 @@
     
     [self loadData];
     
+    [_tableView reloadData];
+    
     [self makeBarItem];
     
     
@@ -662,10 +664,11 @@
         
         vc.hidesBottomBarWhenPushed = YES;
         
-        //回调刷新
-        vc.subButtonHandle = ^{
-            [self.tableView reloadData];
-        };
+//        //回调刷新
+//        vc.subButtonHandle = ^{
+//            [self.tableView reloadData];
+//        };
+        
         
         [self.navigationController pushViewController:vc animated:YES];
 
