@@ -348,12 +348,13 @@
     
     [AppShareData instance].currentMall = mallDict;
 
-    
+   
     [self dismissViewControllerAnimated:NO completion:^{
         
         if (self.selectMallBlock) {
             self.selectMallBlock(YES,mallDict);
         
+             self.tabelViewRefresh(@"");
         }
         
     }];

@@ -31,9 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self optionsTypeViewLayout];
     
-    self.tableView = [GUIHelper zzl_makeTableView:self.view dalegate:self];
+    self.tableView = [GUIHelper makeTableView:self.view delegate:self];
     
     
     [self.tableView registerClass:[FavShopCell class] forCellReuseIdentifier:@"cell"];
@@ -55,60 +54,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
--(void)optionsTypeViewLayout{
-
-    UIImageView *headBGView = [[UIImageView alloc]init];
-    headBGView.backgroundColor = UIColorFromRGB(238,238,238);
-    [self.view addSubview:headBGView];
-    [headBGView mas_makeConstraints:^(MASConstraintMaker *make) {
-       
-        make.left.equalTo(self.view).offset(0);
-        make.right.equalTo(self.view).offset(0);
-        make.height.equalTo(@50);
-        
-    }];
-    [headBGView setUserInteractionEnabled:YES];
-    
-    /**
-     左边button（类型）
-     */
-    UIButton *leftButton = [[UIButton alloc]init];
-    leftButton.backgroundColor = [UIColor whiteColor];
-    [leftButton setTitle:@"类型" forState:UIControlStateNormal];
-    [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    leftButton.frame = CGRectMake(0, 0, SCREEN_WIDTH/2, 50);
-    [headBGView addSubview:leftButton];
-    
-    [leftButton bk_addEventHandler:^(id sender) {
-        
-        UIActionSheet *as = [[UIActionSheet alloc]bk_initWithTitle:@""];
-        
-        [as bk_addButtonWithTitle:@"类型" handler:^{
-            [leftButton setTitle:@"类型" forState:UIControlStateNormal];
-        }];
-        
-        [as bk_addButtonWithTitle:@"美食" handler:^{
-            [leftButton setTitle:@"美食" forState:UIControlStateNormal];
-        }];
-        
-        [as bk_addButtonWithTitle:@"电影" handler:^{
-            [leftButton setTitle:@"电影" forState:UIControlStateNormal];
-        }];
-        
-        [as bk_addButtonWithTitle:@"休闲娱乐" handler:^{
-            [leftButton setTitle:@"休闲娱乐" forState:UIControlStateNormal];
-        }];
-        
-        [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{
-            
-        }];
-        
-        [as showInView:[UIApplication sharedApplication].keyWindow];
-    } forControlEvents:UIControlEventTouchUpInside];
-    
-   
-
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     
