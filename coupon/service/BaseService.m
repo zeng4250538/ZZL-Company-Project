@@ -20,10 +20,10 @@
     
     return url;
         }else{
-            NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-sis-web/%@",[self version]];
-    
+           NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-sis-web/%@",[self version]];
+
             return url;
-        }
+    }
     
     
     
@@ -41,9 +41,9 @@
 
         return url;
     }else{
-        NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-sis-web/%@",[self version]];
-        
-        return url;
+       NSString *url = [NSString stringWithFormat:@"http://192.168.6.97:8080/diamond-sis-web/%@",[self version]];
+       
+       return url;
     }
     
     
