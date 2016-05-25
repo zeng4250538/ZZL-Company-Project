@@ -102,7 +102,7 @@
     [self makeBarItem];
     
     
-    
+    [self loadData];
     
     
     
@@ -113,9 +113,9 @@
     
     [super viewWillAppear:animated];
     
-    [self loadData];
     
-    [_tableView reloadData];
+    
+//    [_tableView reloadData];
     
     [self makeBarItem];
     
@@ -326,6 +326,8 @@
             [_tableView reloadData];
         
         };
+        
+        
         
         [Utils popTransparentViewCtrl:self childViewCtrl:vc];
         

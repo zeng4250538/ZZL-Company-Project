@@ -236,15 +236,18 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    NSDictionary * d = self.data[indexPath.row];
+    NSDictionary * d = self.data[indexPath.section];
     
     NSString *shopId = SafeString(d[@"shopId"]);
+     NSLog(@"hahhahahahahaha dian ,,,,,>>>> %@",d[@"shopId"]);
+    ShopInfoViewCtrl *vce = [ShopInfoViewCtrl new];
     
-    ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+//    vce.shopMode = ShopViewModeNetwork;
+    vce.shopId = shopId;
     
-    vc.shopId = shopId;
-    vc.shopMode = ShopViewModeNetwork;
-    [self.navigationController pushViewController:vc animated:YES];
+   
+    
+    [self.navigationController pushViewController:vce animated:YES];
     
     
 

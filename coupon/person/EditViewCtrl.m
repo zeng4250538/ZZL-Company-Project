@@ -116,7 +116,7 @@
             
             self.isUpdated = YES;
             [SVProgressHUD showSuccessWithStatus:@"数据修改成功"];
-            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"updatePageView" object:nil];
             if (!self.isUpdated) {
                 return;
             }

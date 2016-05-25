@@ -89,8 +89,8 @@
         
         __weak typeof(self) weakSelf = self;
         _vc.inforMationRefreshBlock = ^(id data){
-            
-            [weakSelf makeHeader:weakSelf.header];
+            weakSelf.refreshBlock();
+//            [weakSelf makeHeader:weakSelf.header];
             
         };
         
@@ -128,11 +128,7 @@
     
     
     [self makeFooterView];
-    
-    
-    
-    
-    
+   
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -144,7 +140,7 @@
 
 -(void)updatePageData{
 
-    [self makeHeader:self.header];
+    self.refreshBlock();
 
 }
 
@@ -178,10 +174,11 @@
     
     if (![AppShareData instance].isLogin) {
         myInformationTitleLabel.text=@"未登录";
+        myInfromation.backgroundColor = [UIColor whiteColor];
         return ;
     }
     
-    
+    else{
     CustomerService *service = [CustomerService new];
     
     
@@ -198,7 +195,9 @@
         
         [myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
         
-        myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"name"])];
+        
+        
+        myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
@@ -224,9 +223,35 @@
         make.bottom.equalTo(header).offset(-20);
     }];
     
-
+    }
     
+    _refreshBlock = ^(){
     
+        CustomerService *service = [CustomerService new];
+        
+        
+        NSString *customerId = [AppShareData instance].customId;
+        
+        
+        [service requestCustomer:customerId success:^(NSInteger code, NSString *message, id data) {
+            
+            NSLog(@"data = %@ ",data);
+            
+            
+            NSURL *url =SafeUrl(data[@"photoUrl"]);
+            
+            
+            [myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
+            
+            
+            
+            myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+        }];
+    
+    };
     
     
 }
@@ -386,7 +411,6 @@
 {
     
     
-    
     [super viewWillAppear:YES];
     self.tableView.delegate = self;
     [self scrollViewDidScroll:self.tableView];
@@ -406,6 +430,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    //销毁通知
+//    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [super viewWillDisappear:animated];
     self.tableView.delegate = nil;
     [self.navigationController.navigationBar lt_reset];

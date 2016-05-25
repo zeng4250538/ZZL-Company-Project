@@ -173,7 +173,7 @@
     ShopService *service = [ShopService new];
     
     NSString *shopId = _shopId;
-    
+    NSLog(@"aaaaaaaaaaaaaaaaa---->%@",shopId);
     
     [service requestShopInfo:shopId success:^(NSInteger code, NSString *message, id data) {
         self.data = data;
@@ -357,7 +357,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [self loadShop];
-    
     
     [super viewWillAppear:animated];
     
