@@ -54,6 +54,10 @@
         
         
     }
+    
+    if (self.editFieldType == CustomerFieldTypePhone) {
+        self.navigationItem.title=@"修改手机号码";
+    }
 
     
     self.inputTextField = [UITextField new];

@@ -13,7 +13,8 @@ typedef NS_ENUM(NSUInteger, CustomerFieldType) {
     CustomerFieldTypeName,
     CustomerFieldTypeCity,
     CustomerFieldTypeSex,
-    CustomerFieldTypePhoto
+    CustomerFieldTypePhoto,
+    CustomerFieldTypePhone
 };
 
 @interface CustomerService : BaseService

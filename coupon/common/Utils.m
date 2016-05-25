@@ -73,9 +73,9 @@ BOOL SafeEmpty(id content){
     }
     
     
-    if ([content length]==0) {
-        return YES;
-    }
+//    if ([content length]==0) {
+//        return YES;
+//    }
     
 
     return NO;

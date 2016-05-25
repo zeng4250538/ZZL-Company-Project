@@ -35,7 +35,7 @@
     self.navigationItem.title=@"消费历史";
     
     
-    [self loadData];
+//    [self loadData];
     
     
   
@@ -90,7 +90,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
+    [self loadData];
     
     
     

@@ -44,6 +44,10 @@
 
 @property(nonatomic,strong) UIImageView *header;
 
+@property(nonatomic,strong) UIImageView *myInfromation;
+
+@property(nonatomic,strong) UILabel *myInformationTitleLabel;
+
 @end
 
 @implementation PersonInfoViewCtrl
@@ -82,16 +86,39 @@
         
         [self makeHeader:_header];
         
+        [self notification];
         
-        //接收通知
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updatePageData) name:@"updatePageView" object:nil];
         
         
         __weak typeof(self) weakSelf = self;
         _vc.inforMationRefreshBlock = ^(id data){
-            weakSelf.refreshBlock();
-//            [weakSelf makeHeader:weakSelf.header];
+//            if (weakSelf.refreshBlock) {
+//                weakSelf.refreshBlock();
+//            }
+            CustomerService *service = [CustomerService new];
             
+            
+            NSString *customerId = [AppShareData instance].customId;
+            
+            
+            [service requestCustomer:customerId success:^(NSInteger code, NSString *message, id data) {
+                
+                NSLog(@"data = %@ ",data);
+                
+                
+                NSURL *url =SafeUrl(data[@"photoUrl"]);
+                
+                
+                [weakSelf.myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
+                
+                
+                
+                weakSelf.myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
+                
+            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                
+            }];
+
         };
         
     }
@@ -137,13 +164,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+#pragma mark ----------- 接收通知
+-(void)notification{
 
--(void)updatePageData{
-
-    self.refreshBlock();
+    //接收通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updatePageData) name:@"updatePageView" object:nil];
 
 }
-
 
 -(void)makeHeader:(UIImageView*)header{
 
@@ -152,17 +179,33 @@
     /**
      *  头像显示（个人信息入口）
      */
-    UIImageView *myInfromation = [[UIImageView alloc]init];
-    myInfromation.backgroundColor = [UIColor whiteColor];
-    myInfromation.layer.masksToBounds = YES;
-    myInfromation.layer.cornerRadius = 65/2;
-    [header addSubview:myInfromation];
+    _myInfromation = [[UIImageView alloc]init];
+    _myInfromation.backgroundColor = [UIColor whiteColor];
+    _myInfromation.layer.masksToBounds = YES;
+    _myInfromation.layer.cornerRadius = 65/2;
+    [header addSubview:_myInfromation];
+    /**
+     *  开启交互
+     */
+    [_myInfromation setUserInteractionEnabled:YES];
     
-    UILabel *myInformationTitleLabel = [UILabel new];
-    myInformationTitleLabel.font = [UIFont systemFontOfSize:15];
-    myInformationTitleLabel.textColor = [UIColor whiteColor];
-    [header addSubview:myInformationTitleLabel];
-    [myInformationTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick)];
+    tap.numberOfTapsRequired = 1;
+    tap.numberOfTouchesRequired = 1;
+    [_myInfromation addGestureRecognizer:tap];
+    [_myInfromation mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@65);
+        make.height.equalTo(@65);
+        make.left.equalTo(header).offset(20);
+        make.bottom.equalTo(header).offset(-20);
+    }];
+
+    
+    _myInformationTitleLabel = [UILabel new];
+    _myInformationTitleLabel.font = [UIFont systemFontOfSize:15];
+    _myInformationTitleLabel.textColor = [UIColor whiteColor];
+    [header addSubview:_myInformationTitleLabel];
+    [_myInformationTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.width.equalTo(@110);
         make.height.equalTo(@65);
@@ -173,8 +216,8 @@
     
     
     if (![AppShareData instance].isLogin) {
-        myInformationTitleLabel.text=@"未登录";
-        myInfromation.backgroundColor = [UIColor whiteColor];
+        _myInformationTitleLabel.text=@"未登录";
+        _myInfromation.backgroundColor = [UIColor whiteColor];
         return ;
     }
     
@@ -193,11 +236,11 @@
         NSURL *url =SafeUrl(data[@"photoUrl"]);
         
         
-        [myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
+        [_myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
         
         
         
-        myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
+        _myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
@@ -205,53 +248,38 @@
     
     
     
-    
-    
-    /**
-     *  开启交互
-     */
-    [myInfromation setUserInteractionEnabled:YES];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick)];
-    tap.numberOfTapsRequired = 1;
-    tap.numberOfTouchesRequired = 1;
-    [myInfromation addGestureRecognizer:tap];
-    [myInfromation mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@65);
-        make.height.equalTo(@65);
-        make.left.equalTo(header).offset(20);
-        make.bottom.equalTo(header).offset(-20);
-    }];
-    
+        
     }
     
-    _refreshBlock = ^(){
     
-        CustomerService *service = [CustomerService new];
-        
-        
-        NSString *customerId = [AppShareData instance].customId;
-        
-        
-        [service requestCustomer:customerId success:^(NSInteger code, NSString *message, id data) {
-            
-            NSLog(@"data = %@ ",data);
-            
-            
-            NSURL *url =SafeUrl(data[@"photoUrl"]);
-            
-            
-            [myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
-            
-            
-            
-            myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
-            
-        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-            
-        }];
+}
+#pragma mark ---------- 通知的方法
+-(void)updatePageData{
     
-    };
+    CustomerService *service = [CustomerService new];
+    
+    
+    NSString *customerId = [AppShareData instance].customId;
+    
+    
+    [service requestCustomer:customerId success:^(NSInteger code, NSString *message, id data) {
+        
+        NSLog(@"data = %@ ",data);
+        
+        
+        NSURL *url =SafeUrl(data[@"photoUrl"]);
+        
+        
+        [_myInfromation sd_setImageWithURL:url placeholderImage:nil options:SDWebImageCacheMemoryOnly];
+        
+        
+        
+        _myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+    }];
+    
     
     
 }
@@ -409,8 +437,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-    
+//    [self makeHeader:_header];
+
     [super viewWillAppear:YES];
     self.tableView.delegate = self;
     [self scrollViewDidScroll:self.tableView];

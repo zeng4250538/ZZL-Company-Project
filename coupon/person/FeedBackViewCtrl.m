@@ -7,6 +7,7 @@
 //
 
 #import "FeedBackViewCtrl.h"
+#import "FeedbackSevice.h"
 
 @interface FeedBackViewCtrl ()
 
@@ -22,10 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"发布" style:UIBarButtonItemStylePlain handler:^(id sender) {
         
+        FeedbackSevice *app = [FeedbackSevice new];
+        
+        [app feedbackString:_textView.text withSuccess:^(id data) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"反馈成功"];
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        } withFailure:^(id data) {
+            
+           [SVProgressHUD showInfoWithStatus:@"反馈失败"];
+            
+        }];
         
     }];
     
@@ -80,12 +92,16 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if ([textView.text isEqualToString:@"请输入反馈意见！"]) {
+        
         textView.text = @"";
+        
     }
+    
 }
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.text.length<1) {
         textView.text = @"请输入反馈意见！";
+        
     }
 }
 

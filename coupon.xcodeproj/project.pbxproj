@@ -255,6 +255,7 @@
 		7FC54B291CF206CF00A499BB /* IndoorMapViewService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC54B281CF206CF00A499BB /* IndoorMapViewService.m */; };
 		7FF39E3D1CE57B96007810BC /* guangzhoufood.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF39E3C1CE57B96007810BC /* guangzhoufood.png */; };
 		7FF596751CB3F0FF008BDE5A /* MyInformationSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */; };
+		7FFEA1281CF5A9EB00EFBDC5 /* FeedbackSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFEA1271CF5A9EB00EFBDC5 /* FeedbackSevice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -760,6 +761,8 @@
 		7FF39E3C1CE57B96007810BC /* guangzhoufood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guangzhoufood.png; sourceTree = "<group>"; };
 		7FF596731CB3F0FF008BDE5A /* MyInformationSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationSevice.h; sourceTree = "<group>"; };
 		7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationSevice.m; sourceTree = "<group>"; };
+		7FFEA1261CF5A9EB00EFBDC5 /* FeedbackSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackSevice.h; sourceTree = "<group>"; };
+		7FFEA1271CF5A9EB00EFBDC5 /* FeedbackSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackSevice.m; sourceTree = "<group>"; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1478,6 +1481,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7FFEA1251CF5A9B300EFBDC5 /* FeedbackService */,
 				7FC54B261CF2068200A499BB /* IndoorMapViewService */,
 				7F242F8C1CEB23C800D5235A /* ShoppingCart */,
 				7F375F651CC4E23D0007098C /* ShopCommentSevice */,
@@ -1718,6 +1722,15 @@
 				7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */,
 			);
 			name = MyInformationSevice;
+			sourceTree = "<group>";
+		};
+		7FFEA1251CF5A9B300EFBDC5 /* FeedbackService */ = {
+			isa = PBXGroup;
+			children = (
+				7FFEA1261CF5A9EB00EFBDC5 /* FeedbackSevice.h */,
+				7FFEA1271CF5A9EB00EFBDC5 /* FeedbackSevice.m */,
+			);
+			name = FeedbackService;
 			sourceTree = "<group>";
 		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {
@@ -2087,6 +2100,7 @@
 				7F121D5F1CA3E08F005AF53D /* HistoryOfConsumptionService.m in Sources */,
 				5796FA5E1C4411AE004CA23B /* PersonInfoViewCtrl.m in Sources */,
 				5796FA6E1C460108004CA23B /* CartViewCtrl.m in Sources */,
+				7FFEA1281CF5A9EB00EFBDC5 /* FeedbackSevice.m in Sources */,
 				57CE97D21C63B39500CE0E57 /* MallMapViewCtrl.m in Sources */,
 				57E7E6B31CE1CA8A00F5247D /* PersonDetailInfoViewCtrl.m in Sources */,
 				57F511A61C5CC3BC000DA1A8 /* MHTabBarController.m in Sources */,

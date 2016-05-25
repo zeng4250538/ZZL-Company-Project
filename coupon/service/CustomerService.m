@@ -146,6 +146,11 @@
         
     }
     
+    if (fieldType == CustomerFieldTypePhone) {
+        
+        param =@{@"phoneMsisdn":value};
+
+    }
 
     
     
