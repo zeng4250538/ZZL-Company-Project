@@ -62,8 +62,7 @@
     
     
         
-    [self loadShop];
-        
+   
         
         
     
@@ -176,8 +175,8 @@
     
     ShopService *service = [ShopService new];
     
-    NSString *shopId = self.shopId;
-    
+    NSString *shopId = _shopId;
+    NSLog(@"aaaaaaaaaaaaaaaaa---->%@",shopId);
     [service requestShopInfo:shopId success:^(NSInteger code, NSString *message, id data) {
         self.data = data;
         
@@ -214,7 +213,9 @@
     //requestRealTimeCoupon
     
     NSString *shopId = SafeString(self.data[@"id"]);
-    
+    if (shopId.length == 0) {
+         shopId = SafeString(self.data[@"shopId"]);
+    }
     [couponService requestRealTimeCoupon:shopId page:1 pageCount:4 success:^(NSInteger code, NSString *message, id data) {
         
         
@@ -357,6 +358,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
+    [self loadShop];
+    
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -420,6 +423,7 @@
         
         vc.shopId =SafeString(self.data[@"id"]);
         
+        
          
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -440,11 +444,17 @@
             
         }
         
-    
+        if (url==nil) {
+            
+            url = SafeUrl(self.data[@"shopPhotoUrl"]);
+            
+        }
+        
+        shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate);
         
         [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
         
-        shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate);
+        
         
         
         
@@ -530,7 +540,7 @@
     [subButton bk_addEventHandler:^(id sender) {
         
         
-         _subButtonHandle();
+//         _subButtonHandle();
         
        
         

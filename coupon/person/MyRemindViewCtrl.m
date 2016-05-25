@@ -13,7 +13,7 @@
 #import "CouponInfoTableViewCell.h"
 
 #import "ReminderService.h"
-
+#import "CouponDetailViewCtrl.h"
 
 
 @interface MyRemindViewCtrl ()
@@ -194,7 +194,7 @@
     NSDictionary *promotion = d[@"couponPromotion"];
     
     NSDictionary *couponData =@{
-                                @"startTime":d[@"startTime"],
+                                @"startTime":promotion[@"startDateTime"],
                                 @"name":promotion[@"couponName"],
                                 @"smallPhotoUrl":promotion[@"smallPhotoUrl"],
                                 @"shopId":promotion[@"shopId"],
@@ -219,6 +219,30 @@
     // Configure the cell...
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    CouponDetailViewCtrl *CDVC = [CouponDetailViewCtrl new];
+    
+    NSDictionary *d = self.data[indexPath.row];
+    
+    NSDictionary *promotion = d[@"couponPromotion"];
+    
+    NSDictionary *couponData =@{
+                                @"startTime":promotion[@"startDateTime"],
+                                @"name":promotion[@"couponName"],
+                                @"smallPhotoUrl":promotion[@"smallPhotoUrl"],
+                                @"shopId":promotion[@"shopId"],
+                                @"status":promotion[@"status"]
+                                };
+    
+    CDVC.data = couponData;
+    
+    [self.navigationController pushViewController:CDVC animated:YES];
+    
+
+
 }
 
 

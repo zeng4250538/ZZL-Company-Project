@@ -305,6 +305,13 @@
 
             
         }
+        
+        if ((indexPath.row==4)) {
+            theCell.titleLabel.text=@"性别";
+            
+            
+            theCell.detailLabel.text = SafeString(self.data[@"gender"]);
+        }
 
         
         

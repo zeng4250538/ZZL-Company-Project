@@ -15,8 +15,8 @@
 
 @interface MySubViewCtrl ()
 
-@property(nonatomic,strong)NSArray *dataList;
-
+@property(nonatomic,strong)NSMutableArray *dataList;
+@property(nonatomic,strong)ShopInfoViewCtrl *vcs;
 
 @end
 
@@ -31,13 +31,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _vcs = [ShopInfoViewCtrl new];
     
     self.tableView = [GUIHelper makeTableView:self.view delegate:self];
     
     
     [self.tableView registerClass:[FavShopCell class] forCellReuseIdentifier:@"cell"];
     
-    self.navigationItem.title=@"消息订阅";
+    self.navigationItem.title=@"我的订阅";
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
@@ -60,10 +61,9 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.translucent = NO;
-    
-    //self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
+
+    [self loadData];
+    [_tableView reloadData];
 }
 
 -(void)loadData{
@@ -150,12 +150,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+   
     // Return the number of rows in the section.
     return self.dataList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+   
+    
     FavShopCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     
@@ -167,6 +171,8 @@
     cell.data = data;
     
     NSString *shopId = SafeString(data[@"shopId"]);
+    
+    
     
     cell.unFavBlock = ^(){
         
@@ -228,17 +234,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+    
     
     NSDictionary *d = self.dataList[indexPath.row];
     
-    vc.shopMode = ShopViewModeNetwork;
-    vc.shopId  = SafeString(d[@"shopId"]);
+    _vcs.shopMode = ShopViewModeNetwork;
+    _vcs.shopId  = SafeString(d[@"shopId"]);
+    
+    _vcs.data = d;
     
     
-    
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:_vcs animated:YES];
     
     
     
