@@ -633,7 +633,7 @@
         if (indexPath.section == 0) {
             
             NSDictionary *data =  self.recommendShopData[indexPath.row];
-            vc.data = self.recommendShopData[indexPath.row];
+            //vc.data = self.recommendShopData[indexPath.row];
             
             vc.shopId = SafeString(data[@"id"]);
         
@@ -648,9 +648,9 @@
             
             NSDictionary *data =  self.nearByShopData[indexPath.row];
             
-            vc.shopData = [Shop yy_modelWithDictionary:data];
+           // vc.shopData = [Shop yy_modelWithDictionary:data];
             
-            vc.data = self.nearByShopData[indexPath.row];
+            //vc.data = self.nearByShopData[indexPath.row];
             
             vc.shopId = SafeString(data[@"id"]);
             

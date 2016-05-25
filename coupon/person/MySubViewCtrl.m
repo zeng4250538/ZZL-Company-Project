@@ -235,7 +235,6 @@
     vc.shopMode = ShopViewModeNetwork;
     vc.shopId  = SafeString(d[@"shopId"]);
     
-    vc.data = d;
     
     
     

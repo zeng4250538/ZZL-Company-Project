@@ -531,19 +531,6 @@
                 
                 NSString *mallName = SafeString(data[@"name"]);
                 
-//                [self.mallButton setTitle:mallName forState:UIControlStateNormal];
-//                
-//                
-//                NSArray *ay = self.navigationItem.leftBarButtonItems;
-//                
-//                if ([ay count]>1) {
-//                    UINavigationItem *navButton = ay[1];
-//                    
-//                    [navButton setTitle:SafeString(data[@"city"])];
-//
-//                }
-//                
-                
                 
                 
                 [self makeBarItem];
@@ -554,12 +541,8 @@
                 
                 [[AppShareData instance] setMallName:mallName];
                 
-                
-                //[mallButton setTitle:SafeString(data[@"name"]) forState:UIControlStateNormal];
             }];
             
-            
-            // 获取城市信息后, 异步更新界面信息.      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
         } else if (error == nil && placemarks.count == 0) {
             NSLog(@"No location and error returned");

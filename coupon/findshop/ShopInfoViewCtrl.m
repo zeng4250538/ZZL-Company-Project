@@ -28,6 +28,9 @@
 @property(nonatomic,strong)UILabel *subLabel;
 @property(nonatomic,assign)__block  NSInteger inets;
 
+@property(nonatomic,strong)NSDictionary *data;
+
+
 
 
 
@@ -173,7 +176,7 @@
     
     ShopService *service = [ShopService new];
     
-    NSString *shopId = SafeString(self.data[@"id"]);
+    NSString *shopId = self.shopId;
     
     [service requestShopInfo:shopId success:^(NSInteger code, NSString *message, id data) {
         self.data = data;
@@ -542,7 +545,6 @@
             
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             
-           // [SVProgressHUD showWithStatus:@"" maskType:SVProgressHUDMaskTypeBlack];
             
             [service doFav:shopId success:^(NSInteger code, NSString *message, id data) {
                 

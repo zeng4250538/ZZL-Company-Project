@@ -2257,8 +2257,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: gmcc appmanager (HNW99ZVJGG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: gmcc appmanager (HNW99ZVJGG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2322,8 +2322,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: gmcc appmanager (HNW99ZVJGG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: gmcc appmanager (HNW99ZVJGG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

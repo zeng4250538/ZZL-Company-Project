@@ -20,20 +20,43 @@
  *  淘宝支付参数
  */
 
-//NSString *ALiPay_Partner=@"2088221016697815";
-//NSString *ALiPay_Seller=@"paytreasuredeveloper@richstonedt.com";
-//NSString *ALiPay_Private=@"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMeopdKUUa9Byr8v06x9ZuqfAPKj6gEy6ovijVfXa8OJZw7ack7J7r+hbCLESRdM1uR23JgtOS0BUumDKuO5wymH8dl8AlvTi0rOQZ6KfumIK20EahtyAWuzOdnFgs0Y9agljgUzdbTTTkHn+KRc83qlMrcDxPLBclm9ZaJfIfj1AgMBAAECgYBuIlpuQYCZk0o6kjBKStZVf6YvMjnntWVqCmt7VApOz2F48Qjy6zL2pB2ZQ/spjipP1j0y+Gc8qylIRCGJgrPjHtCijSLmUYmlEeI/BhCv0aeq9Lxo0JkNkW0BXOSrvaz40Hl3cxoi6HpBNHUvqw6FeH+wIaZGzv80wHoRUtB+9QJBAP3W3pPALD9uFfTnwJRfIJrm2/BRdnkmtKhHtgOprCS3DFBkZscidnvK0EojGn/2T37ZJvID/Wuw07udSH+xYpsCQQDJW7c7Ww1zPhEkDPMOAwVg3k6NijKvaCwLpJJI2Q99Jsa8WrqcNmwP6YR58yqPVwckBNm6T0NZUysnnN9kw0OvAkBE6ZCDjCh3D+vmEQS3QxwW8ZXEKFmBioCBLva7B9U0In21VYyRg0mnUeg6OE15b+UlCs8H5Q1nrxnMVWbZQ88BAkBL8cmkG21xP8GbRT8O09jddjtOawc+3R1vrrx1uVh8LXnbZKTpciVDwyFyFWLB+WL6FNJB0M9oC1RFdodTK8qFAkEAtMp/TXijvkRwg29xo+VlimX2fPt4eBeiNYeTFWR2QtEYMXunPrZPF28macVpclFicHwIowvtVctINd2GqJhLMA==";
+NSString *ALiPay_Partner=@"2088221016697815";
+NSString *ALiPay_Seller=@"paytreasuredeveloper@richstonedt.com";
+
+
+
+//NSString *ALiPay_Private= @"MIICXAIBAAKBgQDHqKXSlFGvQcq/L9OsfWbqnwDyo+oBMuqL4o1X12vDiWcO2nJO"
+//"ye6/oWwixEkXTNbkdtyYLTktAVLpgyrjucMph/HZfAJb04tKzkGein7piCttBGob"
+//"cgFrsznZxYLNGPWoJY4FM3W0005B5/ikXPN6pTK3A8TywXJZvWWiXyH49QIDAQAB"
+//"AoGAbiJabkGAmZNKOpIwSkrWVX+mLzI557Vlagpre1QKTs9hePEI8usy9qQdmUP7"
+//"KY4qT9Y9MvhnPKspSEQhiYKz4x7Qoo0i5lGJpRHiPwYQr9GnqvS8aNCZDZFtAVzk"
+//"q72s+NB5d3MaIuh6QTR1L6sOhXh/sCGmRs7/NMB6EVLQfvUCQQD91t6TwCw/bhX0"
+//"58CUXyCa5tvwUXZ5JrSoR7YDqawktwxQZGbHInZ7ytBKIxp/9k9+2SbyA/1rsNO7"
+//"nUh/sWKbAkEAyVu3O1sNcz4RJAzzDgMFYN5OjYoyr2gsC6SSSNkPfSbGvFq6nDZs"
+//"D+mEefMqj1cHJATZuk9DWVMrJ5zfZMNDrwJAROmQg4wodw/r5hEEt0McFvGVxChZ"
+//"gYqAgS72uwfVNCJ9tVWMkYNJp1HoOjhNeW/lJQrPB+UNZ68ZzFVm2UPPAQJAS/HJ"
+//"pBttcT/Bm0U/DtPY3XY7TmsHPt0db668dblYfC1522Sk6XIlQ8MhchViwfli+hTS"
+//"QdDPaAtURXaHUyvKhQJBALTKf014o75EcINvcaPlZYpl9nz7eHgXojWHkxVkdkLR"
+//"GDF7pz62TxdvJmnFaXJRYnB8CKML7VXLSDXdhqiYSzA=";
+
+
+
+NSString *ALiPay_Private= @"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMeopdKUUa9Byr8v06x9ZuqfAPKj6gEy6ovijVfXa8OJZw7ack7J7r+hbCLESRdM1uR23JgtOS0BUumDKuO5wymH8dl8AlvTi0rOQZ6KfumIK20EahtyAWuzOdnFgs0Y9agljgUzdbTTTkHn+KRc83qlMrcDxPLBclm9ZaJfIfj1AgMBAAECgYBuIlpuQYCZk0o6kjBKStZVf6YvMjnntWVqCmt7VApOz2F48Qjy6zL2pB2ZQ/spjipP1j0y+Gc8qylIRCGJgrPjHtCijSLmUYmlEeI/BhCv0aeq9Lxo0JkNkW0BXOSrvaz40Hl3cxoi6HpBNHUvqw6FeH+wIaZGzv80wHoRUtB+9QJBAP3W3pPALD9uFfTnwJRfIJrm2/BRdnkmtKhHtgOprCS3DFBkZscidnvK0EojGn/2T37ZJvID/Wuw07udSH+xYpsCQQDJW7c7Ww1zPhEkDPMOAwVg3k6NijKvaCwLpJJI2Q99Jsa8WrqcNmwP6YR58yqPVwckBNm6T0NZUysnnN9kw0OvAkBE6ZCDjCh3D+vmEQS3QxwW8ZXEKFmBioCBLva7B9U0In21VYyRg0mnUeg6OE15b+UlCs8H5Q1nrxnMVWbZQ88BAkBL8cmkG21xP8GbRT8O09jddjtOawc+3R1vrrx1uVh8LXnbZKTpciVDwyFyFWLB+WL6FNJB0M9oC1RFdodTK8qFAkEAtMp/TXijvkRwg29xo+VlimX2fPt4eBeiNYeTFWR2QtEYMXunPrZPF28macVpclFicHwIowvtVctINd2GqJhLMA==";
 
 
 
 
-NSString *ALiPay_Partner = @"2088801900305895";
-NSString *ALiPay_Seller = @"2088801900305895";
-NSString *ALiPay_Private = @"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJ/Dr1+h3bnaiStwth2AYQD/XxYRiK/0KCmKrhCXRufIAqSOztlS1XZepdu1OquGRsRlfYntr1+GpKH1sPYi6K2JMyzSQzNBM/cX8/wJl1Ewk3ERe35iKcW+sSJf0G+HBoWpdDO8ROHorFkKIb/UOs3P/D3o37WSF2ICSo5hW8oNAgMBAAECgYAyWEvvauagJomLMt1wtn/a/J5OKgBU0i/Fx3nKqKEjcRfEG2x7d2rk/jZt4dI3Mv0h7ol86XWWOKuwjefR6HZBmbBA8jmeR60oDBiGXVITM0gqN0KpaV0MgBMTK8QzbxGu0yMDiC/uum6AFf1Sd/G6bVJsu1aueZHIUPqBMBJY0QJBANDPP1Vo8AlfwbgXUogCyE1CNXNuM40+I4s0XMYKb/eQ1OBlIoC9iCFEcnRLKcu1Tlk6irHQDGUcFxpKz2SuWxMCQQDD3ulw0lKsD1DHVfZv35kJDuvLglnOPukw3V66p7ZvBKqHFwRmeYfDX9ZEKBiFhOxPxf0F7l4nE/Y7nI1SacpfAkBkTKinZhim6BAtVUaXfn6oXb0/DRhGKCr6mtRVbH4L9M3MW8gO/vt8v1wa8F/LMfPIeI5WixDpIG0YfAbS3c1xAkEAtGnFYbsIlR1CTWk7pc4xuqs4u2nkaFmAFxdAIvNJ0bZdkDK+RdlZGLdUt9CqzYki1VPLfEQUCzCS1FOdxDRXRwJAXTjH8DYxCwr2/G+6yUvpgsKtALxE8anWl98TJT/l5WzLQlIwQmuN4R2JnBxPaZ6heZmu+98lI4F8t+zGPFxZHw==";
+
+
+
+//NSString *ALiPay_Partner = @"2088801900305895";
+//NSString *ALiPay_Seller = @"2088801900305895";
+//NSString *ALiPay_Private = @"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJ/Dr1+h3bnaiStwth2AYQD/XxYRiK/0KCmKrhCXRufIAqSOztlS1XZepdu1OquGRsRlfYntr1+GpKH1sPYi6K2JMyzSQzNBM/cX8/wJl1Ewk3ERe35iKcW+sSJf0G+HBoWpdDO8ROHorFkKIb/UOs3P/D3o37WSF2ICSo5hW8oNAgMBAAECgYAyWEvvauagJomLMt1wtn/a/J5OKgBU0i/Fx3nKqKEjcRfEG2x7d2rk/jZt4dI3Mv0h7ol86XWWOKuwjefR6HZBmbBA8jmeR60oDBiGXVITM0gqN0KpaV0MgBMTK8QzbxGu0yMDiC/uum6AFf1Sd/G6bVJsu1aueZHIUPqBMBJY0QJBANDPP1Vo8AlfwbgXUogCyE1CNXNuM40+I4s0XMYKb/eQ1OBlIoC9iCFEcnRLKcu1Tlk6irHQDGUcFxpKz2SuWxMCQQDD3ulw0lKsD1DHVfZv35kJDuvLglnOPukw3V66p7ZvBKqHFwRmeYfDX9ZEKBiFhOxPxf0F7l4nE/Y7nI1SacpfAkBkTKinZhim6BAtVUaXfn6oXb0/DRhGKCr6mtRVbH4L9M3MW8gO/vt8v1wa8F/LMfPIeI5WixDpIG0YfAbS3c1xAkEAtGnFYbsIlR1CTWk7pc4xuqs4u2nkaFmAFxdAIvNJ0bZdkDK+RdlZGLdUt9CqzYki1VPLfEQUCzCS1FOdxDRXRwJAXTjH8DYxCwr2/G+6yUvpgsKtALxE8anWl98TJT/l5WzLQlIwQmuN4R2JnBxPaZ6heZmu+98lI4F8t+zGPFxZHw==";
 
 NSString *CallBackUrl = @"http://183.6.190.75:9780/diamond-sis-web/v1/payment/wechat/result";
 
 NSString *aipayUrl = @"http://183.6.190.75:9780/diamond-sis-web/v1/payment/ali/result";
+
 
 //微信支付参数
 NSString *WechatPay_API_KEY = @"fengshiguangzhoutianhehuitong160";  //注意保密
@@ -217,7 +240,76 @@ NSString *WechatPay_MCH_ID =@"1332430001";
 
 
 
-+(void)aliPay:(NSString*)orderId orderSn:orderSn orderName:(NSString*)orderName money:(CGFloat)money{
++(void)aliPayServer:(NSString*)orderString  sign:(NSString*)sign{
+    
+    
+    
+    
+    
+    
+    NSString *appScheme = @"coupon2";
+    
+    
+    
+    
+    
+    
+    
+    //            NSString *oderStringSource=@"partner=\"2088021577004853\"&seller_id=\"vab_pm@cmi.chinamobile.com\"&out_trade_no=\"RY2IA4Z78BYYCW1\"&subject=\"1\"&body=\"我是测试数据\"&total_fee=\"0.02\"&notify_url=\"http://www.xxx.com\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&show_url=\"m.alipay.com\"";
+    //
+    
+    
+    
+    
+    NSString *payString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                             orderString, sign, @"RSA"];
+    
+    
+    
+    
+    [[AlipaySDK defaultService] payOrder:payString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        
+        
+        NSInteger  statusCode = [resultDic[@"resultStatus"] integerValue];
+        
+        if (statusCode == 9000) {
+            //成功发布消息 
+            
+            SafePostMessage(ALiPayNotice, @"1");
+            
+            
+        }else{
+            
+            //失败发送消息
+            SafePostMessage(ALiPayNotice, @"0");
+            
+            
+        }
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
++(void)aliPay:(NSString*)orderId orderSn:orderSn orderName:(NSString*)orderName money:(CGFloat)money sign:(NSString*)sign{
     
     
     Order *order = [[Order alloc] init];
@@ -256,7 +348,7 @@ NSString *WechatPay_MCH_ID =@"1332430001";
     
     
     
-    NSString *appScheme = @"coupon";
+    NSString *appScheme = @"coupon2";
     
     
 
@@ -271,13 +363,16 @@ NSString *WechatPay_MCH_ID =@"1332430001";
          NSString *signKey = [signer signString:[order description]];
 
         
-        
-        
-        
+    
         
         NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        [order description], signKey, @"RSA"];
-        
+    
+    
+    [iConsole info:@"local sign %@",orderString];
+    
+    [iConsole info:@"remote %@",sign];
+    
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             
             

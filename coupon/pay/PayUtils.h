@@ -34,12 +34,21 @@ extern NSString *WechatPay_MCH_ID ;
 +(void)wechatPay:(NSString*)orderId orderSn:(NSString*)orderSn orderName:(NSString*)orderName money:(CGFloat)money;
 
 //淘宝支付
-+(void)aliPay:(NSString*)orderId orderSn:(NSString*)orderSn orderName:(NSString*)orderName money:(CGFloat)money;
+//+(void)aliPay:(NSString*)orderId orderSn:(NSString*)orderSn orderName:(NSString*)orderName money:(CGFloat)money;
+
+
++(void)aliPay:(NSString*)orderId orderSn:orderSn orderName:(NSString*)orderName money:(CGFloat)money sign:(NSString*)sign;
+
+
 
 
 //调起微信客户端
 
 +(void)callWeChatPay:(NSString*)prepayId sign:(NSString*)sign noncestr:(NSString*)noncestr timeStamp:(UInt32)timeStamp;
+
+//淘宝支付服务器版本
+
++(void)aliPayServer:(NSString*)orderString  sign:(NSString*)sign;
 
 
 @end

@@ -22,7 +22,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.qwelll</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -43,6 +43,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wx77914cc659d2889c</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>fenshi</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>coupon2</string>
 			</array>
 		</dict>
 	</array>
