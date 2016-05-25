@@ -24,7 +24,7 @@ typedef void(^SubButtonHandle)();
 @interface ShopInfoViewCtrl : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)Shop *shopData;
+//@property(nonatomic,strong)Shop *shopData;
 @property(nonatomic,strong)NSString *shopId;  //需要二次装载数据，使用shopId
 
 
@@ -34,7 +34,6 @@ typedef void(^SubButtonHandle)();
 @property(nonatomic,copy)SubButtonHandle subButtonHandle;
 
 
-@property(nonatomic,strong)NSDictionary *data;
 
 
 @end

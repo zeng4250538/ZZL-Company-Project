@@ -17,4 +17,10 @@
                failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 
+-(void)requestAliPaySign:(NSString*)couponInstanceId originalPrice:(CGFloat)originalPrice
+          sellingPrice:(CGFloat)sellingPrice
+               success:(void(^)(NSInteger code,NSString *message,id data))success
+               failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
 @end

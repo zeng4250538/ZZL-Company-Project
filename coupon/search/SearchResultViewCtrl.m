@@ -328,7 +328,10 @@
         NSDictionary *currentData = self.dataList[indexPath.row];
         
         
-        vc.data = currentData;
+        vc.shopId = currentData[@"id"];
+        
+        
+       // vc.data = currentData;
         
         [self.navigationController pushViewController:vc animated:YES];
 

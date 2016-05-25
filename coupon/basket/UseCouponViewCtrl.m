@@ -97,7 +97,6 @@
     [super viewWillDisappear:animated];
     
     
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:[WechatPayNotice copy] object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:[ALiPayNotice copy] object:nil];
@@ -113,6 +112,7 @@
 
 -(void)wechatPayResult:(id)sender{
     
+ 
     NSNotification *notice = (NSNotification*)sender;
     
     NSString *result = (NSString*)notice.object;
@@ -129,12 +129,6 @@
         
         [av show];
 
-        
-        
-        
-        
-        
-        
         
         
         
@@ -361,6 +355,10 @@
         
         NSString *couponInstanceId = SafeString(self.data[@"id"]);
         
+        
+        OrderService *service = [OrderService new];
+        
+        
 #pragma mark - 微信支付
         
         if (self.wechatPayButton.selected){
@@ -379,7 +377,6 @@
             //远程支付
             
             
-            OrderService *service = [OrderService new];
             
             
             
@@ -462,8 +459,80 @@
 #pragma mark - 淘宝支付
         if (self.aliPayButton.selected) {
             
-            [PayUtils aliPay:couponInstanceId orderSn:couponInstanceId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue]];
+            
+            
+            
+            [service requestAliPaySign:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice success:^(NSInteger code, NSString *message, id data) {
+                
+                NSLog(@"<----点击支付后的信息----》%@",data);
+                NSString *returnCode = data[@"returnCode"];
+                
+                if (![returnCode isEqualToString:@"SUCCESS"]) {
+                    
+                    [SVProgressHUD showErrorWithStatus:@"微信预支付失败" maskType:SVProgressHUDMaskTypeBlack];
+                    
+                    return ;
+                    
+                }
+                
+                
+                NSString *prepayId = SafeString(data[@"prepayId"]);
+                
+                
+                // NSDictionary *dict = [PayUtils weChatSign:prepayId];
+                
+                
+                
+                NSInteger timeStamp = [data[@"timestamp"] integerValue];
+                
+                
+                NSString *waitSign = data[@"waitSign"];
+                
+                
+               // [PayUtils aliPay:couponInstanceId orderSn:couponInstanceId orderName:@"test" money:1.0 sign:@""];
+                [PayUtils aliPayServer:waitSign sign:data[@"sign"]];
+                
+                
+//                [PayUtils aliPay:couponInstanceId orderSn:couponInstanceId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue] sign:data[@"sign"]];
+//               
+                
+                [SVProgressHUD dismiss];
+                
+                
+                
+                
+                //                PayUtils +(void)callWeChatPay:(NSString*)prepayId sign:(NSString*)sign noncestr:(NSString*)noncestr timeStamp:(UInt32)timeStamp;
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                
+                
+                [SVProgressHUD dismiss];
+                
+                
+                
+                [SVProgressHUD showErrorWithStatus:@"支付服务器繁忙" maskType:SVProgressHUDMaskTypeBlack];
+                
+                
+                
+            }];
 
+            
+            
+            
+            
+            
+  
             
         }
         
