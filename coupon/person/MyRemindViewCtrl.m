@@ -224,7 +224,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     CouponDetailViewCtrl *CDVC = [CouponDetailViewCtrl new];
-    
     NSDictionary *d = self.data[indexPath.row];
     
     NSDictionary *promotion = d[@"couponPromotion"];

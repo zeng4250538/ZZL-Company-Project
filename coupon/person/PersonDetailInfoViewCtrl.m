@@ -99,7 +99,7 @@
     
     [service requestCustomer:customerId success:^(NSInteger code, NSString *message, id data) {
         
-        //       NSLog(@"data = %@ ",data);
+               NSLog(@"data = %@ ",data);
         
 //        self.useNameLabel.text = SafeString(data[@"nickname"]);
 //        self.cityNameLabel.text = SafeString(data[@"cityName"]);
@@ -174,7 +174,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 
@@ -307,10 +307,10 @@
         }
         
         if ((indexPath.row==4)) {
-            theCell.titleLabel.text=@"性别";
+            theCell.titleLabel.text=@"手机号码";
             
             
-            theCell.detailLabel.text = SafeString(self.data[@"gender"]);
+            theCell.detailLabel.text = SafeString(self.data[@"phoneMsisdn"]);
         }
 
         
@@ -393,6 +393,14 @@
         
     }
     
+    if (indexPath.row==4) {
+        
+        vc.editFieldType = CustomerFieldTypePhone;
+        
+        vc.value = SafeString(self.data[@"phoneMsisdn"]);
+        
+    }
+    
     
     vc.updateBlock = ^(CustomerFieldType fieldType ,NSString *value){
         
@@ -409,6 +417,9 @@
         if (fieldType == CustomerFieldTypeCity) {
             
             self.data[@"cityName"]=value;
+        }
+        if (fieldType == CustomerFieldTypePhone) {
+            self.data[@"phoneMsisdn"] = value;
         }
         
         
