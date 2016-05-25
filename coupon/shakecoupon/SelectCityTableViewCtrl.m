@@ -30,6 +30,15 @@
     [self makeSearchBar];
     self.navigationItem.title=@"选择城市";
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"关闭" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+            
+        }];
+        
+    }];
+    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -78,12 +87,11 @@
 -(void)loadData{
     
     
-    self.sectionList=@[@"位置",@"A",@"B",@"C",@"D"];
+    self.sectionList=@[@"定位位置",@"B",@"G"];
     
-    self.cityList = @{@"位置":@[@"广州"],
-                      @"A":@[@"鞍山",@"安阳",@"安庆"],
-                      @"B":@[@"北京",@"包头",@"宝鸡"],
-                      @"C":@[@"长沙",@"成都",@"长春"]
+    self.cityList = @{@"定位位置":@[@"广州市"],
+                      @"B":@[@"北京市"],
+                      @"G":@[@"广州市"]
                       };
     
     
@@ -177,12 +185,39 @@
 }
 
 
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        if (self.selectBlock) {
+            
+            
+            NSString *section = self.sectionList[[indexPath section]];
+            
+            
+            
+            NSArray * currentCityList  = self.cityList[section];
+            
+            
+            
+            NSString *city = currentCityList[[indexPath row]];
+            
+            
+            if (self.selectBlock) {
+                self.selectBlock(city);
+                
+            }
+            
+        }
+        
+    }];
+    
+    
     
     
     

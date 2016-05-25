@@ -139,8 +139,12 @@
 
 
 -(void)updatePageData{
+    
+    
+    if (self.refreshBlock) {
+        self.refreshBlock();
+    }
 
-    self.refreshBlock();
 
 }
 

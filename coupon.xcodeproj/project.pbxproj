@@ -42,6 +42,7 @@
 		5701F4831CCF2D9100AC5C25 /* markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = 5701F4641CCF2D9000AC5C25 /* markdown.css */; };
 		570EA8DB1CD4FF1300CAE0AB /* QuickTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 570EA8DA1CD4FF1200CAE0AB /* QuickTableViewCell.m */; };
 		5718A27C1CAAABE0008191F8 /* BasketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A27B1CAAABE0008191F8 /* BasketService.m */; };
+		571A166F1CF5A8E2002F29EE /* CouponKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 571A166E1CF5A8E2002F29EE /* CouponKVO.m */; };
 		571C29721C707D8800DDBCE8 /* CellBlueSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 571C296E1C707D8800DDBCE8 /* CellBlueSelected@2x.png */; };
 		571C29731C707D8800DDBCE8 /* CellGraySelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 571C296F1C707D8800DDBCE8 /* CellGraySelected@2x.png */; };
 		571C29741C707D8800DDBCE8 /* CellNotSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 571C29701C707D8800DDBCE8 /* CellNotSelected@2x.png */; };
@@ -335,6 +336,8 @@
 		570EA8DA1CD4FF1200CAE0AB /* QuickTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickTableViewCell.m; sourceTree = "<group>"; };
 		5718A27A1CAAABE0008191F8 /* BasketService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketService.h; sourceTree = "<group>"; };
 		5718A27B1CAAABE0008191F8 /* BasketService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketService.m; sourceTree = "<group>"; };
+		571A166D1CF5A8E2002F29EE /* CouponKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponKVO.h; sourceTree = "<group>"; };
+		571A166E1CF5A8E2002F29EE /* CouponKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponKVO.m; sourceTree = "<group>"; };
 		571C296E1C707D8800DDBCE8 /* CellBlueSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellBlueSelected@2x.png"; sourceTree = "<group>"; };
 		571C296F1C707D8800DDBCE8 /* CellGraySelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellGraySelected@2x.png"; sourceTree = "<group>"; };
 		571C29701C707D8800DDBCE8 /* CellNotSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellNotSelected@2x.png"; sourceTree = "<group>"; };
@@ -1284,6 +1287,8 @@
 				5727C54B1CB3BFA700C92BF0 /* NSNull+Json.m */,
 				570EA8D91CD4FF1200CAE0AB /* QuickTableViewCell.h */,
 				570EA8DA1CD4FF1200CAE0AB /* QuickTableViewCell.m */,
+				571A166D1CF5A8E2002F29EE /* CouponKVO.h */,
+				571A166E1CF5A8E2002F29EE /* CouponKVO.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -2054,6 +2059,7 @@
 				572B5C1F1CE86D3A00BC1C37 /* ConfigService.m in Sources */,
 				578E63E51C2551B800C1FB19 /* NSObject+NSJSONSerialization.m in Sources */,
 				57E364A31C9DA17B003575FC /* Shop.m in Sources */,
+				571A166F1CF5A8E2002F29EE /* CouponKVO.m in Sources */,
 				574910B71CBFCEB000FB2B14 /* BasketNotUseTableViewCell.m in Sources */,
 				574911391CC00AAE00FB2B14 /* RSADataVerifier.m in Sources */,
 				7F5E98A01CE9579C00EB365A /* ClearCache.m in Sources */,

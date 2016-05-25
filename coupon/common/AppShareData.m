@@ -7,6 +7,7 @@
 //
 
 #import "AppShareData.h"
+#import "CouponKVO.h"
 
 
 NSString * const UserNameKey=@"username";
@@ -40,6 +41,8 @@ NSString *const DeviceTokenKey=@"DeviceToken";
 @interface AppShareData()
 
 @property(nonatomic,strong)NSMutableArray *cartList;
+@property(nonatomic,strong)CouponKVO *couponKVO;
+
 
 @end
 
@@ -62,6 +65,16 @@ static AppShareData *instance;
         
         instance.shakeCouponQueue =[CouponQueue new];
         
+        
+        instance.couponKVO = [CouponKVO new];
+        
+        
+     
+        
+        
+
+        
+        
     });
     
     return instance;
@@ -69,6 +82,25 @@ static AppShareData *instance;
     
 }
 
+
+
+-(void)addMallIdKVO:(id)delegate{
+    
+    
+    [self.couponKVO addObserver:delegate forKeyPath:@"mallId" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    
+    
+}
+
+
+-(void)removeMallIdKVO:(id)delegate{
+    
+    
+    [self.couponKVO removeObserver:delegate forKeyPath:@"mallId"];
+    
+    
+    
+}
 
 -(void)setCity:(NSString *)city{
     
@@ -84,6 +116,10 @@ static AppShareData *instance;
     
     
 }
+
+
+
+
 
 -(void)setDeviceToken:(NSString *)deviceToken{
     
@@ -193,6 +229,10 @@ static AppShareData *instance;
     [[NSUserDefaults standardUserDefaults] setObject:mallId forKey:MallIdKey];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //KVO通知
+    
+    self.couponKVO.mallId = mallId;
     
     
     

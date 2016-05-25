@@ -99,6 +99,11 @@ extern NSString *const ReviewUpdateNotice;
 
 -(NSString*)customTestId;
 
+-(void)addMallIdKVO:(id)delegate;
+
+-(void)removeMallIdKVO:(id)delegate;
+
+
 
 
 

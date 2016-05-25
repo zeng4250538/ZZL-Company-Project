@@ -469,33 +469,28 @@
                 
                 if (![returnCode isEqualToString:@"SUCCESS"]) {
                     
-                    [SVProgressHUD showErrorWithStatus:@"微信预支付失败" maskType:SVProgressHUDMaskTypeBlack];
+                    [SVProgressHUD showErrorWithStatus:@"支付宝支付服务器请求失败！" maskType:SVProgressHUDMaskTypeBlack];
                     
                     return ;
                     
                 }
                 
                 
-                NSString *prepayId = SafeString(data[@"prepayId"]);
-                
                 
                 // NSDictionary *dict = [PayUtils weChatSign:prepayId];
                 
                 
                 
-                NSInteger timeStamp = [data[@"timestamp"] integerValue];
                 
                 
                 NSString *waitSign = data[@"waitSign"];
                 
                 
+                
                // [PayUtils aliPay:couponInstanceId orderSn:couponInstanceId orderName:@"test" money:1.0 sign:@""];
                 [PayUtils aliPayServer:waitSign sign:data[@"sign"]];
                 
-                
-//                [PayUtils aliPay:couponInstanceId orderSn:couponInstanceId orderName:SafeString(self.data[@"name"]) money:[self.payMoneyTextField.text floatValue] sign:data[@"sign"]];
-//               
-                
+                                
                 [SVProgressHUD dismiss];
                 
                 

@@ -250,19 +250,15 @@ NSString *WechatPay_MCH_ID =@"1332430001";
     NSString *appScheme = @"coupon2";
     
     
-    
-    
-    
-    
-    
-    //            NSString *oderStringSource=@"partner=\"2088021577004853\"&seller_id=\"vab_pm@cmi.chinamobile.com\"&out_trade_no=\"RY2IA4Z78BYYCW1\"&subject=\"1\"&body=\"我是测试数据\"&total_fee=\"0.02\"&notify_url=\"http://www.xxx.com\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&show_url=\"m.alipay.com\"";
-    //
-    
+ 
     
     
     
     NSString *payString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                              orderString, sign, @"RSA"];
+    
+    
+    NSLog(@"payString %@",payString);
     
     
     

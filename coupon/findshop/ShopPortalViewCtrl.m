@@ -104,9 +104,18 @@
     
     [self loadData];
     
+    [[AppShareData instance] addMallIdKVO:self];
     
     
     
+    
+    
+}
+
+-(void)dealloc{
+    
+    
+    [[AppShareData instance] removeMallIdKVO:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -268,11 +277,11 @@
         
         
         
-        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
-        
-        vc.hidesBottomBarWhenPushed = YES;
-        
-        [self.navigationController pushViewController:vc animated:YES];
+//        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
+//        
+//        vc.hidesBottomBarWhenPushed = YES;
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
         
         
     }];
@@ -282,12 +291,12 @@
     
     UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:city style:UIBarButtonItemStylePlain handler:^(id sender) {
         
-        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
-        
-        vc.hidesBottomBarWhenPushed = YES;
-        
-        
-        [self.navigationController pushViewController:vc animated:YES];
+//        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
+//        
+//        vc.hidesBottomBarWhenPushed = YES;
+//        
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
         
     }];
     
@@ -1254,6 +1263,22 @@
     return uv;
     
 }
+
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if([keyPath isEqualToString:@"mallId"]){//这里只处理balance属性
+        
+        
+        
+        [self loadData];
+        
+        
+        NSLog(@"kvo ==== %@",object);
+        
+    }
+}
+
+
 
 /*
 // Override to support conditional editing of the table view.

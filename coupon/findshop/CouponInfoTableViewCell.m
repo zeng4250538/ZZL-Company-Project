@@ -137,7 +137,7 @@
     [self.logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerY.equalTo(self.contentView);
-        make.left.equalTo(self.contentView).with.offset(10);
+        make.left.equalTo(self.contentView).with.offset(15);
         make.size.mas_equalTo(CGSizeMake(120, 80));
         
         
