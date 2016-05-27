@@ -278,8 +278,8 @@
     self.tableView.tableFooterView = bgView;
     
     NSString *nums = SafeString(self.data[@"onlinePaymentDiscount"]);
-    NSInteger num = [nums integerValue];
-    
+    float num = [nums floatValue];
+    int number = num*10;
     UILabel *messageLabel = [UILabel new];
     messageLabel.font = [UIFont systemFontOfSize:12];
     messageLabel.textColor = [UIColor brownColor];
@@ -288,7 +288,9 @@
     
 //    messageLabel.text=@"    支付宝和微信支付额外九折";
     if (num < 1) {
-        messageLabel.text=[NSString stringWithFormat:@"    支付宝和微信支付额外%ld折",num*10];
+        NSLog(@"asdasd   %fl",num);
+        messageLabel.text=[NSString stringWithFormat:@"    支付宝和微信支付额外%d折",number];
+        
     }
     [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -623,7 +625,7 @@
     }];
     
     moneyTextField.text =[NSString stringWithFormat:@"%.2f",self.originPrice];
-    
+    NSLog(@"%@",moneyTextField.text);
     
     
 #pragma  mark - 修改moneyTextField
@@ -634,13 +636,16 @@
         CGFloat money = [moneyTextField.text floatValue];
         
         
+        
         self.originPrice = money;
         
-        CGFloat num = [SafeString(self.data[@""])floatValue];
+        NSString *nums = SafeString(self.data[@"onlinePaymentDiscount"]);
+        float num = [nums floatValue];
+//        int number = num*10;
         
         CGFloat discountRate = [SafeString(self.data[@"discountRate"]) floatValue];
-        
-        CGFloat payMoney = money *discountRate;
+#pragma  mark - 计算金额
+        CGFloat payMoney = money * discountRate * num;
         
         self.sellPrice = payMoney;
         

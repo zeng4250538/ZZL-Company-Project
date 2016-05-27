@@ -716,14 +716,12 @@
         make.centerY.equalTo(cell.contentView);
         make.right.equalTo(cell.contentView).offset(-20);
         make.height.equalTo(@20);
-        
     }];
     
     limitTimeLabel.textAlignment = NSTextAlignmentCenter;
     
-    limitTimeLabel.text=SafeString(self.data[@"validEndDate"]);
+    limitTimeLabel.text = [NSString stringWithFormat:@"%@ ~ %@", SafeString(self.data[@"startTime"]),SafeString(self.data[@"endTime"])];
     
-
     
 }
 
