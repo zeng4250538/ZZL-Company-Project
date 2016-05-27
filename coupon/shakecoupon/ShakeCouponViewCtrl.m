@@ -901,6 +901,7 @@
     if (![[AppShareData instance] isLogin]) {
         
         [self dismissViewControllerAnimated:NO completion:^{
+            
             SafePostMessage(NoLoginNotice, @"");
             
         }];

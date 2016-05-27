@@ -772,7 +772,6 @@
         
         cell.doActionBlock = ^(id sender){
             
-            
             NSString *isReminder = SafeString(d[@"setReminder"]);
             
             if ([ isReminder isEqualToString:@"0"]) {
@@ -1221,7 +1220,7 @@
         [as bk_addButtonWithTitle:@"领取最多" handler:^{
             
             
-            [self doFilterSortData:self.filterString sort:@"点领取降序"];
+            [self doFilterSortData:self.filterString sort:@"领取最多"];
             
  
             

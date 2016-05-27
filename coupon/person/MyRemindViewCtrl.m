@@ -14,7 +14,7 @@
 
 #import "ReminderService.h"
 #import "CouponDetailViewCtrl.h"
-
+#import "ReminderService.h"
 
 @interface MyRemindViewCtrl ()
 
@@ -193,15 +193,48 @@
     
 //    NSDictionary *promotion = d;
     
-    NSDictionary *couponData =@{@"name":d[@"coupon"][@"name"] ,@"shopName":d[@"shop"][@"name"],@"smallPhotoUrl":d[@"coupon"][@"photoUrl"],@"startTime":d[@"startTime"]};
+    NSDictionary *couponData =@{@"name":d[@"coupon"][@"name"] ,@"shopName":d[@"shop"][@"name"],@"smallPhotoUrl":d[@"coupon"][@"photoUrl"],@"startTime":d[@"startTime"],@"id":d[@"coupon"][@"id"]};
     
     
     cell.couponActionType = CouponTypeUnLimited;
     
     cell.data =couponData;
     
+    cell.remindBool = YES;
+    cell.doActionBlock = ^(id sender){
     
+        ReminderService *service = [ReminderService new];
+        
+        
+        [service deleteReminder:d[@"reminderId"] success:^(NSInteger code, NSString *message, id data) {
+            
+            
+            UIButton *button = (UIButton*)sender;
+            
+            [button setTitle:@"提醒" forState:UIControlStateNormal];
+            
+//            d[@"setReminder"]=@0;
+            
+            NSMutableArray *ary = [self.data mutableCopy];
+            
+            [ary removeObjectAtIndex:indexPath.row];
+            
+            self.data = ary;
+            
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [SVProgressHUD showSuccessWithStatus:@"取消提醒成功"];
+            
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+            
+            [SVProgressHUD showErrorWithStatus:@"取消提醒失败"];
+            
+            
+        }];
     
+    };
     
  //   cell.couponActionType = CouponTypeUnLimited;
     
@@ -220,10 +253,8 @@
     CouponDetailViewCtrl *CDVC = [CouponDetailViewCtrl new];
     NSDictionary *d = self.data[indexPath.row];
     
-   
     
-    
-    NSDictionary *couponData =@{@"name":d[@"coupon"][@"name"] ,@"shopName":d[@"shop"][@"name"],@"smallPhotoUrl":d[@"coupon"][@"photoUrl"],@"startTime":d[@"startTime"],@"shopPhone":d[@"shop"][@"phone"],@"longitude":d[@"address"][@"longitude"],@"latitude":d[@"address"][@"latitude"],@"validEndDate":d[@"coupon"][@"validEndDate"]};
+    NSDictionary *couponData =@{@"name":d[@"coupon"][@"name"] ,@"shopName":d[@"shop"][@"name"],@"smallPhotoUrl":d[@"coupon"][@"photoUrl"],@"startTime":d[@"startTime"],@"shopPhone":d[@"shop"][@"phone"],@"longitude":d[@"address"][@"longitude"],@"latitude":d[@"address"][@"latitude"],@"validEndDate":d[@"coupon"][@"validEndDate"],@"id":d[@"couponPromotion"][@"id"]};
     
     CDVC.data = couponData;
     

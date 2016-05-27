@@ -12,6 +12,7 @@
 #import "BasketMessageCell.h"
 #import "CouponDetailViewCtrl.h"
 #import "BasketSubMessageSevice.h"
+#import "SubBasketViewController.h"
 @interface BasketMessageViewCtrl ()
 
 @property(nonatomic,strong)NSArray *dataList;
@@ -277,7 +278,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    CouponDetailViewCtrl * CDVC = [CouponDetailViewCtrl new];
+    SubBasketViewController *suvc  = [SubBasketViewController new];
     
     NSString *messageId = self.dataList[indexPath.row][@"id"];
     
@@ -285,13 +286,11 @@
     
     [self messageLoadDatamessageId:messageId withSuccess:^(id data) {
         
+        suvc.subData = data[@"couponInstance"][@"coupon"];
         
-        CDVC.data = data[@"couponInstance"][@"coupon"];
-        
-        [self.navigationController pushViewController:CDVC animated:YES];
+         [self.navigationController pushViewController:suvc animated:YES];
         
     }];
-    
     
     
 }

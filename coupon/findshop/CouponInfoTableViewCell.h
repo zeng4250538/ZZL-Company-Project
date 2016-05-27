@@ -43,6 +43,7 @@ typedef void(^PayBlock)(id sender);
 
 @property(nonatomic,assign)CouponStatus couponStatus;    //退款的显示流程标志
 
+@property(nonatomic,assign)BOOL remindBool ;
 
 
 

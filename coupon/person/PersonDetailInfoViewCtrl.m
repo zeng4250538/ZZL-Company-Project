@@ -21,6 +21,12 @@
 
 @implementation PersonDetailInfoViewCtrl
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    [self loadData];
+    [self.tableView reloadData];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -28,7 +34,7 @@
     [self.tableView registerClass:[QuickTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
-    [self loadData];
+//    [self loadData];
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
