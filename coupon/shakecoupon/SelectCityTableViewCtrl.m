@@ -8,8 +8,9 @@
 
 #import "SelectCityTableViewCtrl.h"
 
-@interface SelectCityTableViewCtrl ()<UISearchBarDelegate>
+@interface SelectCityTableViewCtrl ()<UISearchBarDelegate,UISearchResultsUpdating>
 @property(nonatomic,strong)UISearchBar *searchBar;
+@property(nonatomic,strong)UISearchController *searchController;
 
 @end
 
@@ -26,6 +27,9 @@
     
     
     [self loadData];
+    
+    
+  
     
     [self makeSearchBar];
     self.navigationItem.title=@"选择城市";
@@ -52,30 +56,19 @@
 -(void)makeSearchBar{
     
     
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-    //self.searchBar.searchBarStyle = UISearchBarStyleProminent;
-    self.searchBar.barTintColor = [GUIConfig mainBackgroundColor];
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     
-    self.searchBar.backgroundImage =[UIImage new];
     
-    self.searchBar.delegate= self;
-    
-    //self.searchBar.barStyle = UIBarStyleDefault;
-    self.searchBar.backgroundColor = [UIColor whiteColor];
-    
-    self.searchBar.backgroundColor = [GUIConfig mainBackgroundColor];
+    self.searchController.searchResultsUpdater = self;
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
     
     
     
-    UIView *bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    self.searchController.obscuresBackgroundDuringPresentation = NO;
     
-    [bgView addSubview:self.searchBar];
+    self.searchController.hidesBottomBarWhenPushed = NO;
     
-    
-  //  [self.searchBar becomeFirstResponder];
-    
-    
-    self.tableView.tableHeaderView = bgView;
     
     
     
@@ -222,6 +215,21 @@
     
     
 }
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+    
+    
+    NSLog(@"search...");
+    
+    
+    
+    [self.tableView reloadData];
+    
+    
+    
+    
+}
+
 
 /*
 // Override to support conditional editing of the table view.

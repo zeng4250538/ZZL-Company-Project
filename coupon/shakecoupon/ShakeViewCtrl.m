@@ -70,12 +70,12 @@
     
     [self makeBarItem];
     
-    if ([[AppShareData instance] isNeedLocationUpdate]) {
+ //   if ([[AppShareData instance] isNeedLocationUpdate]) {
         
         [self requestLocation];
 
         
-    }
+  //  }
     
     
 }
@@ -101,6 +101,7 @@
     if([keyPath isEqualToString:@"mallId"]){//这里只处理balance属性
  
     
+        
         NSLog(@"kvo ==== %@",object);
     
     }
@@ -596,7 +597,6 @@
             CGFloat lon = placeMark.location.coordinate.longitude;
             
             
-            //            SPVC.cityBlockView(self.city);
             
             [[AppShareData instance] setCity:city];
             
@@ -605,6 +605,9 @@
             [[AppShareData instance] setLon:lon];
             
             [[AppShareData instance] setLastLocationDate:[NSDate date]];
+            
+            
+            [self doRequestMall];
             
             
             
