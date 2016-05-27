@@ -67,10 +67,10 @@
         
         
         self.reminderButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        
+//        if ([startTime timeIntervalSinceNow]>0) {
         [self.contentView addSubview:self.reminderButton];
-        
-        
+//
+//        }
         self.couponStatusLabel = [UILabel new];
         self.couponStatusLabel.font = [UIFont systemFontOfSize:13];
         self.couponStatusLabel.textColor = [UIColor redColor];
@@ -216,6 +216,7 @@
      
     
     
+    if ([startTime timeIntervalSinceNow]>0) {
     [self.reminderButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.height.equalTo(@25);
@@ -223,6 +224,17 @@
         make.bottom.equalTo(self.logoView.mas_bottom);
         make.right.equalTo(self.contentView.mas_right).with.offset(-15);
     }];
+    }
+    
+    if (_remindBool) {
+        [self.reminderButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.height.equalTo(@25);
+            make.width.equalTo(@60);
+            make.bottom.equalTo(self.logoView.mas_bottom);
+            make.right.equalTo(self.contentView.mas_right).with.offset(-15);
+        }];
+    }
     
     self.reminderButton.backgroundColor = UIColorFromRGB(40, 162, 123);
     

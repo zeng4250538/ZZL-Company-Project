@@ -22,6 +22,7 @@
 @implementation RegisterViewCtrl
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.navigationItem.title=@"用户注册";

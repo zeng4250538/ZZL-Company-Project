@@ -273,7 +273,7 @@
 
 -(void)updateData{
     
-    self.preferentialInformationLabel.text = SafeString(self.data[@"description"]);
+    self.preferentialInformationLabel.text = SafeString(self.data[@"newestCouponPromotion"]);
     self.titleLabel.text = SafeString(self.data[@"name"]);
     self.goodLabel.text = SafeString(self.data[@"good"]);
     self.badLabel.text = SafeString(self.data[@"bad"]);

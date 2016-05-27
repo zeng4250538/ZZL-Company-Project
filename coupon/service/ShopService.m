@@ -33,7 +33,8 @@
     NSDictionary *parm = @{@"shopMallId":SafeString(mallid),
                            @"customerId":customerId,
                            @"page":@(page),
-                           @"per_page":@(pageCount)};
+                           @"per_page":@(pageCount),
+                       @"fields":@"id,name,mallId,categoryId,addressId,city,distance,good,bad,longitude,latitude,favorcount,reviewcount,photoUrl,smallPhotoUrl,address,transport,description,phone,settlementDate,takenCouponCount,newestCouponPromotion"};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -72,7 +73,7 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby?"];
     
-    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),@"page":@(page),@"per_page":@(per_page)};
+    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),@"page":@(page),@"per_page":@(per_page),@"fields":@"id,name,mallId,categoryId,addressId,city,distance,good,bad,longitude,latitude,favorcount,reviewcount,photoUrl,smallPhotoUrl,address,transport,description,phone,settlementDate,takenCouponCount,newestCouponPromotion"};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {

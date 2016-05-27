@@ -47,8 +47,6 @@
         make.center.equalTo(self.view);
         //make.top.equalTo(self.view);
         make.width.equalTo(self.view);
-        
-        
     }];
     
     self.tableView.delegate = self;
@@ -445,6 +443,7 @@
     
     [addCartButton bk_addEventHandler:^(id sender) {
         
+        
         // [self loadData];
         
         ThrowLineTool *tool = [[ThrowLineTool alloc] init];
@@ -466,20 +465,60 @@
                      from:CGPointMake(startX, startY)
                        to:CGPointMake(endX, endY)
                    height:height duration:0.5];
-    
+        
+         __weak id weakSelf =self;
+        
         tool.didFinishBlock = ^(){
             
             [ballView removeFromSuperview];
-         
-            [[AppShareData instance] addCouponToCart:self.data];
             
-            [self updateCartNum];
+            [self addCouponToBasket:^(BOOL ret){
+                
+                if (ret) {
+                    [weakSelf updateCartNum];
+                    
+                }
+                
+            }];
         
         };
         
     } forControlEvents:UIControlEventTouchUpInside];
     
 }
+
+- (void)addCouponToBasket:(void(^)(BOOL ret))completion{
+    
+    
+    BasketService * service  = [BasketService new];
+    
+    
+    NSString *couponId = self.data[@"id"];
+    
+    [service requestADDBasket:couponId count:1 success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        
+        [[AppShareData instance] addCouponToCart:self.data];
+        
+        
+        completion(YES);
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        completion(NO);
+        
+        
+        [SVProgressHUD showErrorWithStatus:@"加入篮子失败"];
+        
+        
+        
+    }];
+    
+}
+
 
 
 #pragma mark - TableViewCell 
