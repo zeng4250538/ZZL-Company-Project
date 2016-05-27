@@ -277,7 +277,8 @@
     
     self.tableView.tableFooterView = bgView;
     
-    
+    NSString *nums = SafeString(self.data[@"onlinePaymentDiscount"]);
+    NSInteger num = [nums integerValue];
     
     UILabel *messageLabel = [UILabel new];
     messageLabel.font = [UIFont systemFontOfSize:12];
@@ -285,8 +286,10 @@
     
     [bgView addSubview:messageLabel];
     
-    messageLabel.text=@"    支付宝和微信支付额外九折";
-    
+//    messageLabel.text=@"    支付宝和微信支付额外九折";
+    if (num < 1) {
+        messageLabel.text=[NSString stringWithFormat:@"    支付宝和微信支付额外%ld折",num*10];
+    }
     [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(bgView).offset(5);
@@ -638,6 +641,7 @@
         
         self.originPrice = money;
         
+        CGFloat num = [SafeString(self.data[@""])floatValue];
         
         CGFloat discountRate = [SafeString(self.data[@"discountRate"]) floatValue];
         

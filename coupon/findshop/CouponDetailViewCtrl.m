@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   
     self.view.backgroundColor=[UIColor whiteColor];
     
     
@@ -106,12 +106,12 @@
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[UIColor whiteColor]];
     
     
-    
-    if (self.couponViewMode == CouponViewModeNetwork) { //需要通过网络装载
-        
-        
-        [self loadData];
-    }
+    //暂时注释
+//    if (self.couponViewMode == CouponViewModeNetwork) { //需要通过网络装载
+//        
+//        [self loadData];
+//        
+//    }
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"分享" style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -156,44 +156,46 @@
 }
 
 
+//暂时注释
+//-(void)loadData{
+//    
+//    
+//    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+//        
+//        
+//        [self doLoad:^(BOOL ret){
+//            
+//            if (ret) {
+//                [ReloadHud removeHud:self.tableView animated:YES];
+//            }else{
+//                
+//                [ReloadHud showReloadMode:self.tableView];
+//            }
+//            
+//            
+//        }];
+//        
+//        
+//    }];
+//    
+//    
+//    [self doLoad:^(BOOL ret){
+//        
+//        if (ret) {
+//            [ReloadHud removeHud:self.tableView animated:YES];
+//        }else{
+//            
+//            [ReloadHud showReloadMode:self.tableView];
+//        }
+//        
+//        
+//    }];
+//    
+//    
+//    
+//}
 
--(void)loadData{
-    
-    
-    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-        
-        
-        [self doLoad:^(BOOL ret){
-            
-            if (ret) {
-                [ReloadHud removeHud:self.tableView animated:YES];
-            }else{
-                
-                [ReloadHud showReloadMode:self.tableView];
-            }
-            
-            
-        }];
-        
-        
-    }];
-    
-    
-    [self doLoad:^(BOOL ret){
-        
-        if (ret) {
-            [ReloadHud removeHud:self.tableView animated:YES];
-        }else{
-            
-            [ReloadHud showReloadMode:self.tableView];
-        }
-        
-        
-    }];
-    
-    
-    
-}
+//暂时注释
 -(void)doLoad:(void(^)(BOOL ret))completion{
     
     
@@ -357,7 +359,8 @@
     
 //    CGFloat rate = 416.0f/750.0f;
     
-    
+//    NSLog(@"-------------------------hahhahahhahaha-------------------------------------%@",self.data);
+
     UIImageView *uv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     uv.backgroundColor = [UIColor whiteColor];
     
@@ -449,6 +452,7 @@
         UIView *ballView = [[UIView alloc] initWithFrame:CGRectMake(addCartButton.frame.origin.x+SCREEN_WIDTH/8, SCREEN_HEIGHT-60,20, 20)];
         
         ballView.backgroundColor = [UIColor redColor];
+        
         ballView.layer.cornerRadius =ballView.frame.size.width;
         
         [self.view addSubview:ballView];
@@ -569,9 +573,7 @@
     
     [callPhoneButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
     
-    
     [callPhoneButton bk_addEventHandler:^(id sender) {
-        
         
         //phone
         
@@ -744,13 +746,7 @@
     commentLabel.lineBreakMode = NSLineBreakByWordWrapping;
     commentLabel.text=@"1、商品说明：一次消费只能使用一张优惠券\n2、预约：免预约，消费高峰期可能";
     
-    
-    
-    
-    
-
-    
-    
+  
     
 }
 

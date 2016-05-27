@@ -241,7 +241,7 @@
     _vcs.shopMode = ShopViewModeNetwork;
     _vcs.shopId  = SafeString(d[@"shopId"]);
     
-    _vcs.data = d;
+//    _vcs.data = d;
     
     
     [self.navigationController pushViewController:_vcs animated:YES];

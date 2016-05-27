@@ -373,96 +373,96 @@
 
 
 
-
--(void)makeBarItem2{
-    
-    self.navigationController.navigationBar.tintColor =[UIColor whiteColor];
-    UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-        
-        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }];
-    
-    
-    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"北京市" style:UIBarButtonItemStylePlain handler:^(id sender) {
-        
-        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
-        
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        
-    }];
-    
-    
-    
-    
-    UIBarButtonItem *roomMapBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"roommap"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-        
-        MallMapViewCtrl *vc = [MallMapViewCtrl new];
-        
-        vc.hidesBottomBarWhenPushed = YES;
-        
-        [self.navigationController pushViewController:vc animated:YES];
-       
-    }];
-    
-    self.navigationItem.rightBarButtonItem = roomMapBarItem;
-    
-    
-    self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
-    
-    
-#pragma mark ----- 周边商城标题
-    _headButton = [[UIButton alloc]init];;
-    _headButton.frame = CGRectMake(0, 0, 100, 44);
-
-    [_headButton setTitle:@"选择商城" forState:UIControlStateNormal];
-    _headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-
-    [self.navigationItem setTitle:self.cityString];
-    self.navigationItem.titleView = _headButton;
-    
-    /**-------------------------------------------------
-     *  这里要拿到定位后的城市名称
-     *
-     *
-     *
-     *
-     -----------------------------------------------------*/
-    
-    
-    
-    
-    [self titleItenLabelString:@"" andcityLabel:^(id data) {
-        
-        [_headButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
-        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
-        vc.mallList = data;
-
-    }];
-    
-    [_headButton bk_addEventHandler:^(id sender) {
-
-        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
-        
-        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
-        
-        vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
-            
-            
-            NSString *name = [NSString stringWithFormat:@"%@(%@)",SafeString(mall[@"name"]),SafeString(mall[@"distance"])];
-            
-            
-            
-            [_headButton setTitle:name forState:UIControlStateNormal];
-        };
-        
-    } forControlEvents:UIControlEventTouchUpInside];
-    
-    
-}
+//暂时屏蔽（貌似没用）
+//-(void)makeBarItem2{
+//    
+//    self.navigationController.navigationBar.tintColor =[UIColor whiteColor];
+//    UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+//        
+//        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//    }];
+//    
+//    
+//    UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"北京市" style:UIBarButtonItemStylePlain handler:^(id sender) {
+//        
+//        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//        
+//    }];
+//    
+//    
+//    
+//    
+//    UIBarButtonItem *roomMapBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"roommap"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+//        
+//        MallMapViewCtrl *vc = [MallMapViewCtrl new];
+//        
+//        vc.hidesBottomBarWhenPushed = YES;
+//        
+//        [self.navigationController pushViewController:vc animated:YES];
+//       
+//    }];
+//    
+//    self.navigationItem.rightBarButtonItem = roomMapBarItem;
+//    
+//    
+//    self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
+//    
+//    
+//#pragma mark ----- 周边商城标题
+//    _headButton = [[UIButton alloc]init];;
+//    _headButton.frame = CGRectMake(0, 0, 100, 44);
+//
+//    [_headButton setTitle:@"选择商城" forState:UIControlStateNormal];
+//    _headButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+//
+//    [self.navigationItem setTitle:self.cityString];
+//    self.navigationItem.titleView = _headButton;
+//    
+//    /**-------------------------------------------------
+//     *  这里要拿到定位后的城市名称
+//     *
+//     *
+//     *
+//     *
+//     -----------------------------------------------------*/
+//    
+//    
+//    
+//    
+//    [self titleItenLabelString:@"" andcityLabel:^(id data) {
+//        
+//        [_headButton setTitle:data[0][@"name"] forState:UIControlStateNormal];
+//        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+//        vc.mallList = data;
+//
+//    }];
+//    
+//    [_headButton bk_addEventHandler:^(id sender) {
+//
+//        SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
+//        
+//        [Utils popTransparentViewCtrl:self childViewCtrl:vc];
+//        
+//        vc.selectMallBlock = ^(BOOL ret ,NSDictionary *mall){
+//            
+//            
+//            NSString *name = [NSString stringWithFormat:@"%@(%@)",SafeString(mall[@"name"]),SafeString(mall[@"distance"])];
+//            
+//            
+//            
+//            [_headButton setTitle:name forState:UIControlStateNormal];
+//        };
+//        
+//    } forControlEvents:UIControlEventTouchUpInside];
+//    
+//    
+//}
 
 
 
@@ -670,7 +670,6 @@
 //        vc.subButtonHandle = ^{
 //            [self.tableView reloadData];
 //        };
-        
         
         [self.navigationController pushViewController:vc animated:YES];
 

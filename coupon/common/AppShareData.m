@@ -41,6 +41,7 @@ NSString *const DeviceTokenKey=@"DeviceToken";
 
 @property(nonatomic,strong)NSMutableArray *cartList;
 
+
 @end
 
 
@@ -255,29 +256,34 @@ static AppShareData *instance;
 }
 
 
-//我改的。。。可删（未使用）
--(void)shoppingCartNumber:(id)data{
+//我改的。。。可删（已使用篮子数量）
+-(NSInteger)shoppingCartNumber:(id)data{
 
-    NSNumber *number = data;
+    NSString *num = [NSString stringWithFormat:@"%@",data];
+    instance.shoppingNumberl = [num integerValue];
     
-    
+    return instance.shoppingNumberl;
 
 }
 
--(NSUInteger)getCartCount{
+-(NSInteger)getCartCount{
     
-    return [instance.cartList count];
+//    return [instance.cartList count];
+    return instance.shoppingNumberl;
 }
 
--(NSUInteger)addCouponToCart:(NSDictionary*)data{
+-(NSInteger)addCouponToCart:(NSDictionary*)data{
     
     if (data==nil) {
         return 0;
     }
     
-    [instance.cartList addObject:[data mutableCopy]];
+//    [instance.cartList addObject:[data mutableCopy]];
     
-    return [instance.cartList count];
+//    return [instance.cartList count];
+    
+    instance.shoppingNumberl+=1;
+    return instance.shoppingNumberl;
     
 }
 

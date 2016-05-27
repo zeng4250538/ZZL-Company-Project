@@ -53,7 +53,7 @@
     //
     self.headTabBar.view.frame = frame;
     
-    self.navigationItem.title=@"篮子";
+    self.navigationItem.title=@"优惠篮子";
     
     
     [self addChildViewController:self.headTabBar];

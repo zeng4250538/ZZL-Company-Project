@@ -859,6 +859,7 @@
     }else{
         
         vc.data = self.otherCouponList[indexPath.row];
+        
     }
     
     
@@ -883,55 +884,59 @@
     
     if (section==0) {
         
+        if ([self.realTimeCouponList count] > 0) {
+            return [CouponInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
+                
+                
+                CouponListViewCtrl *vc =[CouponListViewCtrl new];
+                
+                vc.couponListType = CouponListTypeReminder;
+                
+                
+                //            NSString *shopId = SafeString(self.data[@"id"]);
+                //
+                //            vc.shopId = shopId;
+                //
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+                
+                
+                //            NSLog(@"click 即时优惠 ");
+                
+            }];
+        }
         
-        return [CouponInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
-            
-            
-            CouponListViewCtrl *vc =[CouponListViewCtrl new];
-            
-            vc.couponListType = CouponListTypeReminder;
-            
-            
-//            NSString *shopId = SafeString(self.data[@"id"]);
-//            
-//            vc.shopId = shopId;
-//            
-            
-            [self.navigationController pushViewController:vc animated:YES];
-            
-            
-            
-//            NSLog(@"click 即时优惠 ");
-            
-        }];
+        
 
         
         
     }else{
         
+        if ([self.otherCouponList count] > 0) {
+            return [CouponInfoTableViewCell headerView:@"其他优惠" clickBlock:^{
+                
+                CouponListViewCtrl *vc =[CouponListViewCtrl new];
+                
+                
+                
+                vc.couponListType = CouponListTypeNormal;
+                
+                //vc.shopId = shopId;
+                
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+                
+            }];
+        }
         
-        return [CouponInfoTableViewCell headerView:@"其他优惠" clickBlock:^{
-            
-            CouponListViewCtrl *vc =[CouponListViewCtrl new];
-            
-             
-            
-            vc.couponListType = CouponListTypeNormal;
-            
-            //vc.shopId = shopId;
-            
-            
-            [self.navigationController pushViewController:vc animated:YES];
-            
-            
-        }];
-
         
    
         
     }
     
-    
+    return [UIView new];
 }
 
 
@@ -954,6 +959,9 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
+    if ([self.realTimeCouponList count] == 0 || [self.otherCouponList count] == 0) {
+        return 1;
+    }
     return 2;
 }
 
@@ -961,10 +969,18 @@
     
     if (section==0) {
         
+        if ([self.realTimeCouponList count] == 0) {
+            return 0;
+        }
+        
         return [self.realTimeCouponList count];
         
     }
     else{
+        
+        if ([self.otherCouponList count] == 0) {
+            return 0;
+        }
         
         return [self.otherCouponList count];
         
