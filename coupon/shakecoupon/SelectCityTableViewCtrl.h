@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef void(^SelectBlock)(NSString *cityName);
+
 @interface SelectCityTableViewCtrl : UITableViewController
 
 @property(nonatomic,strong)NSDictionary *cityList;
 @property(nonatomic,strong)NSArray *sectionList;
-
+@property(nonatomic,copy)SelectBlock selectBlock;
 
 
 

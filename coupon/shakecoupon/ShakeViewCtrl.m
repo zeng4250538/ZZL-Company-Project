@@ -52,6 +52,8 @@
     }];
     
     
+    [[AppShareData instance] addMallIdKVO:self];
+    
     
     
 }
@@ -77,8 +79,40 @@
     
     
     
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    
+    
+    
+    
     
 }
+
+
+-(void)dealloc{
+    
+    
+    [[AppShareData instance] removeMallIdKVO:self];
+
+    
+    
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if([keyPath isEqualToString:@"mallId"]){//这里只处理balance属性
+ 
+    
+        NSLog(@"kvo ==== %@",object);
+    
+    }
+}
+
+
+#pragma mark -
 
 #pragma mark - 请求定位数据
 -(void)requestLocation{
@@ -413,9 +447,25 @@
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
-        vc.hidesBottomBarWhenPushed = YES;
+       // vc.hidesBottomBarWhenPushed = YES;
         
-        [self.navigationController pushViewController:vc animated:YES];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        
+        [self presentViewController:nav animated:YES completion:^{
+            
+        }];
+        
+        vc.selectBlock = ^(NSString *city){
+            
+            [[AppShareData instance] setCity:city];
+            
+            [self doRequestMall];
+            
+            
+        };
+
+        
+        
         
         
     }];
@@ -427,10 +477,22 @@
         
         SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
         
-        vc.hidesBottomBarWhenPushed = YES;
+        // vc.hidesBottomBarWhenPushed = YES;
         
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         
-        [self.navigationController pushViewController:vc animated:YES];
+        [self presentViewController:nav animated:YES completion:^{
+            
+        }];
+        
+        vc.selectBlock = ^(NSString *city){
+            
+            [[AppShareData instance] setCity:city];
+            
+            [self doRequestMall];
+            
+            
+        };
         
     }];
     
@@ -498,6 +560,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - 装载商城
+-(void)doRequestMall{
+    
+    [self requestCurrentMall:^(id data) {
+        
+        NSString *mallId = SafeString(data[@"id"]);
+        
+        NSString *mallName = SafeString(data[@"name"]);
+        
+        
+        //存储为当前的mallid
+        
+        [[AppShareData instance] saveMallId:mallId];
+        [[AppShareData instance] setMallName:mallName];
+        
+        [self makeBarItem];
+        
+    }];
+    
+
+    
+    
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
     CLLocation *currentLocation = [locations lastObject]; // 最后一个值为最新位置
@@ -524,24 +610,6 @@
             [[AppShareData instance] setLastLocationDate:[NSDate date]];
             
             
-            
-            [self requestCurrentMall:^(id data) {
-                
-                NSString *mallId = SafeString(data[@"id"]);
-                
-                NSString *mallName = SafeString(data[@"name"]);
-                
-                
-                
-                [self makeBarItem];
-                
-                //存储为当前的mallid
-                
-                [[AppShareData instance] saveMallId:mallId];
-                
-                [[AppShareData instance] setMallName:mallName];
-                
-            }];
             
             
         } else if (error == nil && placemarks.count == 0) {
