@@ -51,15 +51,25 @@
 -(void)panClick:(UIPanGestureRecognizer *)pan{
 
 //    _mapImageView.center = [pan locationInView:self.view];
-    CGPoint tran = [pan translationInView:self.view];
-    pan.view.center = CGPointMake(pan.view.center.x + tran.x, pan.view.center.y + tran.y);
-    [pan setTranslation:CGPointZero inView:self.view];
+    
+    
+        CGPoint tran = [pan translationInView:self.view];
+        pan.view.center = CGPointMake(pan.view.center.x + tran.x, pan.view.center.y + tran.y);
+        [pan setTranslation:CGPointZero inView:self.view];
+    
+    
 
 }
 
 -(void)pinchClick:(UIPinchGestureRecognizer *)pinch{
 
+    
+    if (pinch.scale<1) {
+        pinch.scale = 1;
+    }
     _mapImageView.transform = CGAffineTransformMakeScale(pinch.scale, pinch.scale);
+    
+    
     
     
 }

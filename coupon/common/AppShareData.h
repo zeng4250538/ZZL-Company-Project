@@ -39,8 +39,8 @@ extern NSString *const ReviewUpdateNotice;
 @property(nonatomic,copy,readonly)NSString  *mallName;
 
 
-
-
+//购物车数量
+@property(nonatomic,assign)NSUInteger shoppingNumberl;
 
 
 @property(nonatomic,copy,readonly)NSString *deviceToken;
@@ -63,17 +63,17 @@ extern NSString *const ReviewUpdateNotice;
 -(void)setDeviceToken:(NSString *)deviceToken;
 
 
-//我改的。。。可删（未使用）
--(void)shoppingCartNumber:(id)data;
+//我改的。。。可删（已使用篮子数量）
+-(NSInteger)shoppingCartNumber:(id)data;
 
 
 -(void)saveMallId:(NSString*)mallId;
 
 -(BOOL)isLogin;
 
--(NSUInteger)addCouponToCart:(NSDictionary*)data;
+-(NSInteger)addCouponToCart:(NSDictionary*)data;
 
--(NSUInteger)getCartCount;
+-(NSInteger)getCartCount;
 
 
 

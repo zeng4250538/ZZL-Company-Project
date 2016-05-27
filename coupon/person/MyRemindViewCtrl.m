@@ -191,18 +191,12 @@
     
     NSDictionary *d = self.data[indexPath.row];
     
-    NSDictionary *promotion = d[@"couponPromotion"];
+//    NSDictionary *promotion = d;
     
-    NSDictionary *couponData =@{
-                                @"startTime":promotion[@"startDateTime"],
-                                @"name":promotion[@"couponName"],
-                                @"smallPhotoUrl":promotion[@"smallPhotoUrl"],
-                                @"shopId":promotion[@"shopId"],
-                                @"status":promotion[@"status"]
-                                };
+    NSDictionary *couponData =@{@"name":d[@"coupon"][@"name"] ,@"shopName":d[@"shop"][@"name"],@"smallPhotoUrl":d[@"coupon"][@"photoUrl"],@"startTime":d[@"startTime"]};
     
     
-    
+    cell.couponActionType = CouponTypeUnLimited;
     
     cell.data =couponData;
     
@@ -226,15 +220,10 @@
     CouponDetailViewCtrl *CDVC = [CouponDetailViewCtrl new];
     NSDictionary *d = self.data[indexPath.row];
     
-    NSDictionary *promotion = d[@"couponPromotion"];
+   
     
-    NSDictionary *couponData =@{
-                                @"startTime":promotion[@"startDateTime"],
-                                @"name":promotion[@"couponName"],
-                                @"smallPhotoUrl":promotion[@"smallPhotoUrl"],
-                                @"shopId":promotion[@"shopId"],
-                                @"status":promotion[@"status"]
-                                };
+    
+    NSDictionary *couponData =@{@"name":d[@"coupon"][@"name"] ,@"shopName":d[@"shop"][@"name"],@"smallPhotoUrl":d[@"coupon"][@"photoUrl"],@"startTime":d[@"startTime"],@"shopPhone":d[@"shop"][@"phone"],@"longitude":d[@"address"][@"longitude"],@"latitude":d[@"address"][@"latitude"],@"validEndDate":d[@"coupon"][@"validEndDate"]};
     
     CDVC.data = couponData;
     

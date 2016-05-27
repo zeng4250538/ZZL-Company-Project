@@ -10,7 +10,8 @@
 #import "CouponInfoTableViewCell.h"
 #import "CouponMessageService.h"
 #import "BasketMessageCell.h"
-
+#import "CouponDetailViewCtrl.h"
+#import "BasketSubMessageSevice.h"
 @interface BasketMessageViewCtrl ()
 
 @property(nonatomic,strong)NSArray *dataList;
@@ -166,7 +167,9 @@
     cell.data = d;
     
     
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressClick:)];
     
+    [cell addGestureRecognizer:longPress];
     
     
     // Configure the cell...
@@ -174,14 +177,125 @@
     return cell;
 }
 
+-(void)longPressClick:(UILongPressGestureRecognizer *)longPress{
+
+    
+        
+    if(longPress.state == UIGestureRecognizerStateBegan){
+        CGPoint point = [longPress locationInView:self.tableView];
+        
+        
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
+        
+        
+        if(indexPath == nil) return ;
+        
+        
+        UIActionSheet *act = [UIActionSheet bk_actionSheetWithTitle:@"操作"];
+        
+        [act bk_addButtonWithTitle:@"删除" handler:^{
+            
+            
+            
+            
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+            
+            
+            NSString *itemId = self.dataList[indexPath.row][@"id"];
+            
+            
+            BasketSubMessageSevice *BSMS = [BasketSubMessageSevice new];
+            
+            [BSMS removeMessageRequestMessageId:itemId withSuccess:^(id data) {
+                
+                 [SVProgressHUD dismiss];
+                
+                NSMutableArray *ary = [self.dataList mutableCopy];
+                
+                [ary removeObjectAtIndex:indexPath.row];
+                
+                self.dataList = ary;
+                
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                
+            } withFailure:^(id data) {
+                
+                [SVProgressHUD showErrorWithStatus:@"删除出错！"];
+                
+                [SVProgressHUD dismiss];
+                
+            }];
+            
+            
+            
+            // [self.tableView reloadData];
+            
+            
+            
+            
+            
+            
+            
+            
+        }];
+        
+        [act bk_setDestructiveButtonWithTitle:@"关闭" handler:^{
+            
+            
+            
+            
+        }];
+        
+        
+        [act showInView:self.view];
+        
+        //add your code here
+        
+        
+        
+    }
+    
+
+}
+
+-(void)messageLoadDatamessageId:(NSString *)message withSuccess:(void(^)(id data))success{
+// NSLog(@"消息详情数据------->%@",message);
+    BasketSubMessageSevice *BSMS = [BasketSubMessageSevice new];
+    [BSMS basketMessageRequestMessageId:message withSuccess:^(id data) {
+//        NSLog(@"消息详情数据------->%@",message);
+        success(data);
+        
+    } withFailure:^(id data) {
+        
+    }];
+    
+    
+
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    CouponDetailViewCtrl * CDVC = [CouponDetailViewCtrl new];
+    
+    NSString *messageId = self.dataList[indexPath.row][@"id"];
+    
+    NSLog(@"消息ID%@",messageId);
+    
+    [self messageLoadDatamessageId:messageId withSuccess:^(id data) {
+        
+        
+        CDVC.data = data[@"couponInstance"][@"coupon"];
+        
+        [self.navigationController pushViewController:CDVC animated:YES];
+        
+    }];
     
     
     
 }
+
 
 
 /*

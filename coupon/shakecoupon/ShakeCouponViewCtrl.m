@@ -74,7 +74,13 @@
     
     self.isFirstIn = YES;
     
-    
+    ShoppingCartSevice *SCS = [ShoppingCartSevice new];
+    NSString *cu = [NSString stringWithFormat:@"%@",[AppShareData instance].customId];
+    [SCS soppingCartRequestUserId:cu withstatus:@"未消费" withSuccessful:^(id data) {
+        [AppShareData instance].shoppingNumberl = [data[@"amount"] integerValue];
+    } withFailure:^(id data) {
+        
+    }];
     
     
     

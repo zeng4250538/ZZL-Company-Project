@@ -11,7 +11,7 @@
 @implementation FeedbackSevice
 
 -(void)feedbackString:(NSString *)string withSuccess:(void (^)(id data))success withFailure:(void (^)(id data))failure{
-    NSLog(@"---------------------->%@",string);
+//    NSLog(@"---------------------->%@",string);
     //http://192.168.6.97:8080/diamond-sis-web/v1/feedback 意见反馈
     
     BaseRequest *req = [BaseRequest new];

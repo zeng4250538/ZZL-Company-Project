@@ -248,7 +248,6 @@
 		7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */; };
 		7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */; };
 		7F242F8F1CEB244100D5235A /* ShoppingCartSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F242F8E1CEB244100D5235A /* ShoppingCartSevice.m */; };
-		7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3557851CACA8E6000DB7EA /* MapKit.framework */; };
 		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
 		7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */; };
 		7F5E98A01CE9579C00EB365A /* ClearCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E989F1CE9579C00EB365A /* ClearCache.m */; };
@@ -257,6 +256,8 @@
 		7FF39E3D1CE57B96007810BC /* guangzhoufood.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF39E3C1CE57B96007810BC /* guangzhoufood.png */; };
 		7FF596751CB3F0FF008BDE5A /* MyInformationSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */; };
 		7FFEA1281CF5A9EB00EFBDC5 /* FeedbackSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFEA1271CF5A9EB00EFBDC5 /* FeedbackSevice.m */; };
+		7FFEA12C1CF69A9E00EFBDC5 /* BasketSubMessageSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFEA12B1CF69A9E00EFBDC5 /* BasketSubMessageSevice.m */; };
+		7FFEA12E1CF6F7BF00EFBDC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFEA12D1CF6F7BF00EFBDC5 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -749,7 +750,6 @@
 		7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubscribeSevice.m; sourceTree = "<group>"; };
 		7F242F8D1CEB244100D5235A /* ShoppingCartSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartSevice.h; sourceTree = "<group>"; };
 		7F242F8E1CEB244100D5235A /* ShoppingCartSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartSevice.m; sourceTree = "<group>"; };
-		7F3557851CACA8E6000DB7EA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7F3557871CACA914000DB7EA /* coupon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = coupon.entitlements; sourceTree = "<group>"; };
 		7F4C6ACA1CAE6D1200ADD0F8 /* BrandStreetButtonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStreetButtonService.h; sourceTree = "<group>"; };
 		7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStreetButtonService.m; sourceTree = "<group>"; };
@@ -766,6 +766,9 @@
 		7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationSevice.m; sourceTree = "<group>"; };
 		7FFEA1261CF5A9EB00EFBDC5 /* FeedbackSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackSevice.h; sourceTree = "<group>"; };
 		7FFEA1271CF5A9EB00EFBDC5 /* FeedbackSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackSevice.m; sourceTree = "<group>"; };
+		7FFEA12A1CF69A9E00EFBDC5 /* BasketSubMessageSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketSubMessageSevice.h; sourceTree = "<group>"; };
+		7FFEA12B1CF69A9E00EFBDC5 /* BasketSubMessageSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketSubMessageSevice.m; sourceTree = "<group>"; };
+		7FFEA12D1CF6F7BF00EFBDC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A4A1C69B5551A2E090D83451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -778,6 +781,7 @@
 				5701F4741CCF2D9100AC5C25 /* TencentOpenAPI.framework in Frameworks */,
 				5701F4771CCF2D9100AC5C25 /* libWeChatSDK.a in Frameworks */,
 				574910C01CC0061900FB2B14 /* CoreMotion.framework in Frameworks */,
+				7FFEA12E1CF6F7BF00EFBDC5 /* MapKit.framework in Frameworks */,
 				574910BD1CC0057900FB2B14 /* AlipaySDK.framework in Frameworks */,
 				5749113C1CC00CD700FB2B14 /* libssl.a in Frameworks */,
 				5701F4711CCF2D9100AC5C25 /* libWeiboSDK.a in Frameworks */,
@@ -789,7 +793,6 @@
 				578B093C1CC7F32A00618A2D /* libUMessage_Sdk_1.2.6.a in Frameworks */,
 				5749113D1CC00CD700FB2B14 /* libcrypto.a in Frameworks */,
 				578E63EF1C25590500C1FB19 /* MobileCoreServices.framework in Frameworks */,
-				7F3557861CACA8E6000DB7EA /* MapKit.framework in Frameworks */,
 				1E6948255BF932C4567844B2 /* libPods.a in Frameworks */,
 				5701F4701CCF2D9000AC5C25 /* libSocialSinaSSO.a in Frameworks */,
 			);
@@ -808,13 +811,13 @@
 		49942032E160F0BBC893A916 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FFEA12D1CF6F7BF00EFBDC5 /* MapKit.framework */,
 				578B09391CC7F32A00618A2D /* umengmessage */,
 				5749113A1CC00CD700FB2B14 /* libssl.a */,
 				5749113B1CC00CD700FB2B14 /* libcrypto.a */,
 				574910BF1CC0061900FB2B14 /* CoreMotion.framework */,
 				574910BB1CC0057900FB2B14 /* AlipaySDK.framework */,
 				574910BC1CC0057900FB2B14 /* AlipaySDK.bundle */,
-				7F3557851CACA8E6000DB7EA /* MapKit.framework */,
 				578E63F41C25597900C1FB19 /* libc++.dylib */,
 				578E63F21C25597000C1FB19 /* Security.framework */,
 				578E63F01C25591900C1FB19 /* SystemConfiguration.framework */,
@@ -1486,6 +1489,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7FFEA1291CF69A2E00EFBDC5 /* BasketSubMessageSevice */,
 				7FFEA1251CF5A9B300EFBDC5 /* FeedbackService */,
 				7FC54B261CF2068200A499BB /* IndoorMapViewService */,
 				7F242F8C1CEB23C800D5235A /* ShoppingCart */,
@@ -1738,6 +1742,15 @@
 			name = FeedbackService;
 			sourceTree = "<group>";
 		};
+		7FFEA1291CF69A2E00EFBDC5 /* BasketSubMessageSevice */ = {
+			isa = PBXGroup;
+			children = (
+				7FFEA12A1CF69A9E00EFBDC5 /* BasketSubMessageSevice.h */,
+				7FFEA12B1CF69A9E00EFBDC5 /* BasketSubMessageSevice.m */,
+			);
+			name = BasketSubMessageSevice;
+			sourceTree = "<group>";
+		};
 		FAA98CD43FF0C3C036CBA6BA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1799,7 +1812,7 @@
 				TargetAttributes = {
 					5779BD601C25381600E15934 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = AVH25LS467;
+						DevelopmentTeam = 2D588MM827;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -2028,6 +2041,7 @@
 				574BF3F11C9802640088A9A6 /* ForgetViewCtrl.m in Sources */,
 				573E51D41C7C5407005DBBC3 /* ShopCommentEditViewCtrl.m in Sources */,
 				576E78A31CBF31F300E19BDB /* CouponMessageService.m in Sources */,
+				7FFEA12C1CF69A9E00EFBDC5 /* BasketSubMessageSevice.m in Sources */,
 				7F121D6F1CA6AF41005AF53D /* SaerchShopModel.m in Sources */,
 				5735A2551CC3F49F0001B239 /* ShopCommentSevice.m in Sources */,
 				57CE97C11C63231B00CE0E57 /* ShopCommentTableViewCell.m in Sources */,
@@ -2277,8 +2291,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2329,7 +2343,7 @@
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.baichen.coupon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qwelll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2342,8 +2356,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2394,7 +2408,7 @@
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.baichen.coupon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qwelll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
