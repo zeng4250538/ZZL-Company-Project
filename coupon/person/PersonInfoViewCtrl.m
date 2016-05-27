@@ -286,7 +286,17 @@
 #pragma mark ---------- 头像的点击方法
 -(void)tapClick{
 
-    NSLog(@"hahahahahhahah");
+    
+    
+    
+    if (![[AppShareData instance] isLogin]) {
+        
+        SafePostMessage(NoLoginNotice, self);
+        return ;
+        
+        
+    }
+    
     
     
     
