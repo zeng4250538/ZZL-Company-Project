@@ -73,9 +73,14 @@ BOOL SafeEmpty(id content){
     }
     
     
-//    if ([content length]==0) {
-//        return YES;
-//    }
+    if (![content isKindOfClass:[NSString class]]) {
+        return NO;
+    }
+    
+    
+    if ([content length]==0) {
+        return YES;
+    }
     
 
     return NO;
