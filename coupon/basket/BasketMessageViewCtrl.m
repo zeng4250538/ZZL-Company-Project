@@ -285,8 +285,8 @@
     NSLog(@"消息ID%@",messageId);
     
     [self messageLoadDatamessageId:messageId withSuccess:^(id data) {
-        
-        suvc.subData = data[@"couponInstance"][@"coupon"];
+        NSLog(@"消息ID%@",data);
+        suvc.subData = data;
         
          [self.navigationController pushViewController:suvc animated:YES];
         

@@ -444,10 +444,17 @@
    
 }
 
+- (void)exitPageData{
+
+    _myInfromation.image = [UIImage imageNamed:@""];
+    _myInformationTitleLabel.text = @"未登录";
+
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self makeHeader:_header];
+//点击正路界面的关闭后来的刷新通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(exitPageData) name:@"exitPageView" object:nil];
 
     [super viewWillAppear:YES];
     self.tableView.delegate = self;

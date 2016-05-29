@@ -118,12 +118,19 @@
     [[AppShareData instance] removeMallIdKVO:self];
 }
 
+-(void)refreshTableView{
+
+    [self loadData];
+    [_tableView reloadData];
+
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     
     
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshTableView) name:@"refreshFindShopTableView" object:nil];
 //    [_tableView reloadData];
     
     [self makeBarItem];

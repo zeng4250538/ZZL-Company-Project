@@ -436,6 +436,17 @@
         make.bottom.equalTo(uv).offset(-10);
     }];
     
+    BOOL bools = self.data[@"addedToBasket"];
+    
+    if (!bools) {
+        addCartButton.layer.cornerRadius = 7;
+        addCartButton.backgroundColor = [UIColor grayColor];
+        [addCartButton setTitle:@"已领取过了，明天再来吧" forState:UIControlStateNormal];
+        [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [addCartButton setUserInteractionEnabled:NO];
+        
+    }
+    else{
     [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [addCartButton setTitle:@"加入篮子" forState:UIControlStateNormal];
     addCartButton.layer.cornerRadius = 7;
@@ -477,6 +488,12 @@
                 if (ret) {
                     [weakSelf updateCartNum];
                     
+                    [addCartButton setTitle:@"已领取" forState:UIControlStateNormal];
+                    [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    addCartButton.backgroundColor = [UIColor grayColor];
+                    [addCartButton setUserInteractionEnabled:NO];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshFindShopTableView" object:nil];
+                    
                 }
                 
             }];
@@ -484,7 +501,7 @@
         };
         
     } forControlEvents:UIControlEventTouchUpInside];
-    
+    }
 }
 
 - (void)addCouponToBasket:(void(^)(BOOL ret))completion{

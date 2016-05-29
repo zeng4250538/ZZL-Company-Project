@@ -34,6 +34,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
+    //每次重新打开软件的时候都定位一次
+    [self doRequestMall];
     
     self.isShakeDataLoaded = NO;
     
@@ -69,6 +71,14 @@
     
     
     [self makeBarItem];
+    
+    ShoppingCartSevice *SCS = [ShoppingCartSevice new];
+    NSString *cu = [NSString stringWithFormat:@"%@",[AppShareData instance].customId];
+    [SCS soppingCartRequestUserId:cu withstatus:@"未消费" withSuccessful:^(id data) {
+        [AppShareData instance].shoppingNumberl = [data[@"amount"] integerValue];
+    } withFailure:^(id data) {
+        
+    }];
     
     if ([[AppShareData instance] isNeedLocationUpdate]) {
         

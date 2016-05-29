@@ -209,7 +209,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ((indexPath.row==0) && (indexPath.section==0)) {
         
         UIImageView *logoView = [UIImageView new];
@@ -450,12 +450,16 @@
     
     
     
+}
+
+
+-(void)subViewLoadData{
 
     
-    
-    
-    
+
+
 }
+
 
 /*
 // Override to support conditional editing of the table view.

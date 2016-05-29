@@ -196,11 +196,11 @@
     
     
     
-    NSDate* startTime =  SafeDate(self.data[@"startTime"]);
+    NSDate* startTime =  SafeDate(self.data[@"endTime"]);
     
     if ([startTime timeIntervalSinceNow]>0) {
         
-        NSString *startTimeString = [Utils downCountFormat:SafeString(self.data[@"startTime"])];
+        NSString *startTimeString = [Utils downCountFormat:SafeString(self.data[@"endTime"])];
         self.timeLabel.text =startTimeString;
         self.timeLabel.hidden = NO;
         self.reminderButton.hidden = NO;
