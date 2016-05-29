@@ -47,7 +47,11 @@
 @implementation AppDelegate
 
 
+<<<<<<< HEAD
 BOOL InLan = NO ;
+=======
+BOOL InLan = NO;
+>>>>>>> 3169438772c714c68b1cc979602b29ff8a57e919
 
 NSString *ALiPayNotice=@"alipaynotice";
 NSString *WechatPayNotice=@"wechatpaynotice";

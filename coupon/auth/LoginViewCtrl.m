@@ -48,6 +48,11 @@
         
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"关闭" style:UIBarButtonItemStylePlain handler:^(id sender) {
             
+            //发送通知
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"exitPageView" object:nil];
+            
+            
+            [self dismissViewControllerAnimated:YES completion:^{}];
             
             [self dismissViewControllerAnimated:YES completion:^{
                 

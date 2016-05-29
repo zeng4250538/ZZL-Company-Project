@@ -253,13 +253,12 @@
         
         [act bk_addButtonWithTitle:@"删除" handler:^{
             
-            
             BasketService *service =[BasketService new];
             
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             
             
-            NSString *itemId = self.dataList[indexPath.row][@"id"];
+            NSString *itemId = self.dataList[indexPath.row][@"itemId"];
             
             [service requestDeleteBasket:itemId success:^(NSInteger code, NSString *message, id data) {
                 

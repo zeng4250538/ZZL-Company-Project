@@ -34,6 +34,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
+    //每次重新打开软件的时候都定位一次
+    [self doRequestMall];
     
     self.isShakeDataLoaded = NO;
     
@@ -70,12 +72,20 @@
     
     [self makeBarItem];
     
- //   if ([[AppShareData instance] isNeedLocationUpdate]) {
+    ShoppingCartSevice *SCS = [ShoppingCartSevice new];
+    NSString *cu = [NSString stringWithFormat:@"%@",[AppShareData instance].customId];
+    [SCS soppingCartRequestUserId:cu withstatus:@"未消费" withSuccessful:^(id data) {
+        [AppShareData instance].shoppingNumberl = [data[@"amount"] integerValue];
+    } withFailure:^(id data) {
+        
+    }];
+    
+    if ([[AppShareData instance] isNeedLocationUpdate]) {
         
         [self requestLocation];
 
         
-  //  }
+    }
     
     
 }
@@ -101,7 +111,6 @@
     if([keyPath isEqualToString:@"mallId"]){//这里只处理balance属性
  
     
-        
         NSLog(@"kvo ==== %@",object);
     
     }
@@ -597,6 +606,7 @@
             CGFloat lon = placeMark.location.coordinate.longitude;
             
             
+            //            SPVC.cityBlockView(self.city);
             
             [[AppShareData instance] setCity:city];
             
@@ -605,9 +615,6 @@
             [[AppShareData instance] setLon:lon];
             
             [[AppShareData instance] setLastLocationDate:[NSDate date]];
-            
-            
-            [self doRequestMall];
             
             
             
