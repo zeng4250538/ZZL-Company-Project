@@ -119,21 +119,12 @@
     
     NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
     
-    
-    SafeLoadUrlImage(self.logoImageView, url, ^{
+    [self.logoImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         [self.logoImageView setNeedsLayout];
         
-        
-        
-    });
+    }];
     
-    
-//    [self.logoImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//        
-//    }];
-//    
     //self.endTimeLabel.text =[NSString stringWithFormat:@"截止时间:%@", SafeString(self.data[@"endTime"])];
     
     

@@ -17,14 +17,16 @@
 #import "BasketService.h"
 #import "CouponService.h"
 #import "GoToMapViewCtrl.h"
-
-
+#import "ShoppingCartSevice.h"
+#import "BasketNotUseTableViewCell.h"
+#import "ShakeService.h"
 
 @interface CouponDetailViewCtrl ()
 @property(nonatomic,strong)UILabel   *cartNumLabel;
 @property(nonatomic,strong)UIButton *cartButton;
 @property(nonatomic,strong)UIImage *couponImage;
 
+@property(nonatomic,strong)NSDictionary *bttonTabelViewDic;
 
 
 
@@ -39,13 +41,14 @@
     self.view.backgroundColor=[UIColor whiteColor];
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+//    [self likeButtonLoadData];
+    self.tableView = [[UITableView alloc] init];
     
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        //make.top.equalTo(self.view);
+        make.top.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-64);
         make.width.equalTo(self.view);
     }];
     
@@ -64,6 +67,7 @@
     
     
     
+    [self.tableView registerClass:[BasketNotUseTableViewCell class] forCellReuseIdentifier:@"cell2"];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
@@ -194,47 +198,47 @@
 //}
 
 //暂时注释
--(void)doLoad:(void(^)(BOOL ret))completion{
-    
-    
-    CouponService *service = [CouponService new];
-    
-    
-    
-    [service requestCouponInfo:self.couponId success:^(NSInteger code, NSString *message, id data) {
-        
-        
-        self.data = data[@"coupon"];
-        
-        [self makeHeaderView];
-        
-        [self.tableView reloadData];
-        
-        completion(YES);
-        
-        
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-        
-        [self makeHeaderView];
-        
-        
-        
-        
-        completion(NO);
-        
-        
-        
-        
-    }];
-    
-    
-    
-    
-    
-    
-}
+//-(void)doLoad:(void(^)(BOOL ret))completion{
+//    
+//    
+//    CouponService *service = [CouponService new];
+//    
+//    
+//    
+//    [service requestCouponInfo:self.couponId success:^(NSInteger code, NSString *message, id data) {
+//        
+//        
+//        self.data = data[@"coupon"];
+//        
+//        [self makeHeaderView];
+//        
+//        [self.tableView reloadData];
+//        
+//        completion(YES);
+//        
+//        
+//        
+//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+//        
+//        
+//        [self makeHeaderView];
+//        
+//        
+//        
+//        
+//        completion(NO);
+//        
+//        
+//        
+//        
+//    }];
+//    
+//    
+//    
+//    
+//    
+//    
+//}
 
 
 
@@ -365,6 +369,7 @@
     NSURL *url = SafeUrl(self.data[@"photoUrl"]);
     
     if (!url) {
+        
         url =  SafeUrl(self.data[@"smallPhotoUrl"]);
 
     }
@@ -389,6 +394,20 @@
     
     
     
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self otherButtonLoadData];
+
+    ShoppingCartSevice *SCS = [ShoppingCartSevice new];
+    NSString *cu = [NSString stringWithFormat:@"%@",[AppShareData instance].customId];
+    [SCS soppingCartRequestUserId:cu withstatus:@"未消费" withSuccessful:^(id data) {
+        [AppShareData instance].shoppingNumberl = [data[@"amount"] integerValue];
+    } withFailure:^(id data) {
+        
+    }];
+
 }
 
 -(void)makeBottomView{
@@ -454,6 +473,14 @@
     
     [addCartButton bk_addEventHandler:^(id sender) {
         
+        //判断是否已经登陆
+        if (![AppShareData instance].isLogin) {
+            
+            SafePostMessage(NoLoginNotice, @"");
+            
+            return ;
+            
+        }
         
         // [self loadData];
         
@@ -804,6 +831,7 @@
     
 }
 
+
 #pragma mark - Table view config
 
 
@@ -821,6 +849,10 @@
 
     if ([indexPath section]==3) {
         return 130;
+    }
+    
+    if ([indexPath section]== 4) {
+        return 100;
     }
 
     return 100;
@@ -844,9 +876,12 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
+    
     if (section == 4) {
         
         UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20+40)];
+        
+        uv.userInteractionEnabled = YES;
         
         uv.backgroundColor = [GUIConfig mainBackgroundColor];
         
@@ -910,6 +945,22 @@
         }];
         
         hLine.backgroundColor = [GUIConfig mainBackgroundColor];
+        
+        [otherButton bk_addEventHandler:^(id sender) {
+           
+            [self otherButtonLoadData];
+            [self.tableView reloadData];
+
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
+        [likeButton bk_addEventHandler:^(id sender) {
+            
+            [self likeButtonLoadData];
+            [self.tableView reloadData];
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
 
         
        // btn1.layer.borderWidth=1;
@@ -983,9 +1034,175 @@
         
     }
     
+    if ([indexPath section]==4) {
+        
+        [self makeCell5:cell];
+       
+    }
+    
     return cell;
 }
 
+-(void)makeCell5:(UITableViewCell *)cell{
+
+    UIImageView *imageView = [[UIImageView alloc]init];
+    [cell.contentView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.top.equalTo(cell.contentView).offset(10);
+        make.bottom.equalTo(cell.contentView).offset(-10);
+        make.left.equalTo(cell.contentView).offset(10);
+        make.width.equalTo(@100);
+        
+    }];
+    [imageView sd_setImageWithURL:SafeUrl(_bttonTabelViewDic[@"smallPhotoUrl"])];
+    
+    UILabel *titleLable = [[UILabel alloc]init];
+    [cell.contentView addSubview:titleLable];
+    [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cell.contentView).offset(10);
+        make.left.equalTo(cell.contentView).offset(120);
+        make.width.equalTo(@200);
+        make.height.equalTo(@40);
+    }];
+    titleLable.text = SafeString(_bttonTabelViewDic[@"shopName"]);
+    titleLable.textColor = UIColorFromRGB(160, 160, 160);
+    titleLable.font = [UIFont systemFontOfSize:14];
+    
+    UILabel *subTitleLable = [[UILabel alloc]init];
+    [cell.contentView addSubview:subTitleLable];
+    [subTitleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cell.contentView).offset(50);
+        make.left.equalTo(cell.contentView).offset(120);
+        make.width.equalTo(@200);
+        make.height.equalTo(@40);
+    }];
+    subTitleLable.text = SafeString(_bttonTabelViewDic[@"name"]);
+    subTitleLable.font = [UIFont systemFontOfSize:12];
+    subTitleLable.textColor = UIColorFromRGB(200, 200, 200);
+
+};
+
+-(void)loadShakeData:(void(^)(BOOL ret))completion{
+    
+    
+    ShakeService *service = [ShakeService new];
+    
+    
+    NSString *customId = [AppShareData instance].customId;
+    
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    
+    [service requestShakeCoupon:customId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
+        
+        
+        [SVProgressHUD dismiss];
+        self.bttonTabelViewDic = data[0];
+        
+        
+        completion(YES);
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        [SVProgressHUD dismiss];
+        
+        
+        completion(NO);
+        
+        
+    }];
+    
+    
+    
+}
+
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    //http://192.168.6.97:8080/diamond-sis-web/v1/couponPromotion?shopid=11&type=普通优惠
+    
+    //查询其他优惠券
+    
+    CouponService *couponService = [CouponService new];
+    
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [couponService requestNormalCoupon:@"11" page:1 pageCount:1 success:^(NSInteger code, NSString *message, id data) {
+        
+        [SVProgressHUD dismiss];
+        
+        _bttonTabelViewDic = data[0];
+        
+        if (![data isKindOfClass:[NSArray class]]) {
+            
+            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
+            return ;
+        }
+        
+        
+        
+        completion(YES);
+        
+        
+        
+        
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
+        
+        completion(NO);
+        
+        
+        
+        
+    }];
+    
+    
+}
+
+//猜你喜欢
+-(void)likeButtonLoadData{
+
+    [self loadShakeData:^(BOOL ret){
+        
+        if (ret) {
+            
+            
+            
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:@"网络错误，请重试！"];
+            
+        }
+        
+    }];
+
+}
+
+
+//其他优惠
+-(void)otherButtonLoadData{
+
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.view animated:YES];
+            // [self makeHeaderView];
+        }else{
+            
+            [ReloadHud showReloadMode:self.view];
+        }
+        
+        
+    }];
+
+}
 
 /*
 // Override to support conditional editing of the table view.

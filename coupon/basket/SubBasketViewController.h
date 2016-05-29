@@ -12,4 +12,6 @@
 
 @property(nonatomic,strong)NSDictionary *subData;
 
+@property(nonatomic,assign)BOOL boolView;
+
 @end

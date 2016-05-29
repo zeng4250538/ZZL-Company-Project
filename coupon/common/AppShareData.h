@@ -51,6 +51,7 @@ extern NSString *const ReviewUpdateNotice;
 
 @property(nonatomic,copy,readonly)NSString *deviceToken;
 
+@property(nonatomic,assign)int selected;
 
 @property(nonatomic,copy)NSString *accessToken;
 
@@ -101,9 +102,6 @@ extern NSString *const ReviewUpdateNotice;
 
 -(void)setMallName:(NSString *)mallName;
 
--(void)setIsViaWLan:(BOOL)isViaWLan;
-
-
 
 
 -(NSString*)customTestId;
@@ -112,13 +110,10 @@ extern NSString *const ReviewUpdateNotice;
 
 -(void)removeMallIdKVO:(id)delegate;
 
--(void)setNotDisplayImageViaCell:(BOOL)notDisplayImageViaCell;
-
-
-
-
-
-
+//推送开关
+-(void)setUMPush:( id)data;
+//推送开关
+-(BOOL)getUMPush;
 
 
 @end

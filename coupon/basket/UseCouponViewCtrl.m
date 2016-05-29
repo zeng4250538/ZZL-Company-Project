@@ -10,6 +10,7 @@
 #import "PayUtils.h"
 #import "OrderService.h"
 #import "WXUtil.h"
+#import "SubBasketViewController.h"
 
 @interface UseCouponViewCtrl ()
 
@@ -1007,6 +1008,15 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        
+        SubBasketViewController *SBVC = [SubBasketViewController new];
+        SBVC.boolView = NO;
+        SBVC.subData = self.data;
+        [self.navigationController pushViewController:SBVC animated:YES];
+        
+    }
     
     if (indexPath.section==3 && indexPath.row==0) {
         

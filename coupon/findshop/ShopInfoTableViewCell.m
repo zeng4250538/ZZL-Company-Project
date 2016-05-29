@@ -283,10 +283,19 @@
     
     
     
-    SafeLoadUrlImage(self.logoView, url, ^{
-        [self setNeedsLayout];
-    });
+//    NSString *stringUrl = [[NSString stringWithFormat:@"%@",url] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSURL *utlasd = [NSURL URLWithString:stringUrl];
+//   
     
+//    if (url==nil) {
+//        SafeUrl(self.data[@"photoUrl"]);
+//    }
+    
+    [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        [self setNeedsLayout];
+        
+    }];
    
 }
 

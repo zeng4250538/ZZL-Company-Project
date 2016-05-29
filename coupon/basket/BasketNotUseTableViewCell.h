@@ -10,7 +10,7 @@
 
 @interface BasketNotUseTableViewCell : UITableViewCell
 
-@property(nonatomic,strong)NSDictionary *data;
+@property(nonatomic,strong) NSDictionary *data;
 
 
 -(void)updateData;

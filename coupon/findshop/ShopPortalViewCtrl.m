@@ -107,9 +107,6 @@
     [[AppShareData instance] addMallIdKVO:self];
     
     
-    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
-    
-    
     
     
     

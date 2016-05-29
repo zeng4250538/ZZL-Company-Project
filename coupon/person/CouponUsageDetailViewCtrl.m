@@ -9,12 +9,13 @@
 #import "CouponUsageDetailViewCtrl.h"
 #import "CommentSubmitViewCtrl.h"
 #import "CouponDetailViewCtrl.h"
-
+#import "SubHistorySevice.h"
 @interface CouponUsageDetailViewCtrl ()
 
 
 @property(nonatomic,assign)BOOL isSubmitReturn;
 @property(nonatomic,strong)UIButton *toCommentButton;
+@property(nonatomic,strong)NSDictionary *subDic;
 
 
 @end
@@ -276,6 +277,8 @@
     
     if ((indexPath.row==0) && (indexPath.section==1)) {
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         UILabel *originPriceLabel = [UILabel new];
         originPriceLabel.font = [UIFont systemFontOfSize:14];
         originPriceLabel.textColor = [GUIConfig grayFontColorDeep];
@@ -443,10 +446,26 @@
     
     vc.couponDetailType = CouponDetailTypeNotHaveCart;
     
-    vc.couponId = couponId;
+//    vc.couponId = couponId;
     
-    [self.navigationController pushViewController:vc animated:YES];
     
+    
+    
+    if (indexPath.section == 0 && indexPath.row ==0) {
+       
+        SubHistorySevice *app = [SubHistorySevice new];
+        [app subRequrestCouponInstanceId:couponId withSuccess:^(id data) {
+            
+            _subDic = @{@"name":SafeString(data[@"coupon"][@"name"])};
+            
+            
+            vc.data = _subDic;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        } withFailure:^(id data) {
+            
+        }];
+    }
     
     
     

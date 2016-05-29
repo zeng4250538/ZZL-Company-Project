@@ -223,6 +223,7 @@
     vc.data = d;
     
     SubBasketViewController *suvc  = [SubBasketViewController new];
+    suvc.boolView = YES;
     suvc.subData = d;
     [self.navigationController pushViewController:suvc animated:YES];
     

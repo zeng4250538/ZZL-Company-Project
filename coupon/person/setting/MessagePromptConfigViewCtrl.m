@@ -12,7 +12,7 @@
 
 @property(nonatomic,strong)NSMutableArray *selectedArray;
 
-
+//@property(nonatomic,assign)NSInteger selected;
 @end
 
 @implementation MessagePromptConfigViewCtrl
@@ -24,13 +24,13 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
-    self.selectedArray =[@[@0,@0] mutableCopy];
+//    self.selectedArray =[@[@0,@0] mutableCopy];
     
     self.navigationItem.title=@"消息提醒设置";
     
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
-    
+//    _selected = 0;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -52,28 +52,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
+    
     if (indexPath.row==0) {
         cell.textLabel.text = @"优惠券消息";
     }
     
-    if (indexPath.row==1) {
-        cell.textLabel.text = @"订阅消息";
-    }
     
-    
-    if ([self.selectedArray[indexPath.row] integerValue]==0) {
-        
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }else{
+    if ( [AppShareData instance].selected == 0) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         
         
+    }else{
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        
+        //UITableViewCellAccessoryCheckmark
+        //UITableViewCellAccessoryNone
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:14];
@@ -90,19 +89,21 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
+//    NSInteger selected = [self.selectedArray[indexPath.row] integerValue];
     
-    
-   
-    
-    NSInteger selected = [self.selectedArray[indexPath.row] integerValue];
-    
-    if (selected==0) {
-        selected =1;
+    if ([AppShareData instance].selected == 0) {
+        
+        [AppShareData instance].selected = 1;
+        [[AppShareData instance] setUMPush:@"NO"];
+
     }else{
-        selected = 0;
+        
+        [AppShareData instance].selected = 0;
+        [[AppShareData instance] setUMPush:@"YES"];
+        
     }
     
-    self.selectedArray[indexPath.row] = @(selected);
+//    self.selectedArray[indexPath.row] = @(selected);
     
     
     [self.tableView reloadData];

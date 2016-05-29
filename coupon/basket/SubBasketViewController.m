@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self tableLayout];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"分享" style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         
@@ -48,7 +48,6 @@
 }
 
 -(void)tableLayout{
-
     
     _tableView =[[UITableView alloc]init];
     _tableView.dataSource = self;
@@ -74,6 +73,9 @@
         make.width.equalTo(@70);
     }];
     
+    if (_boolView == NO) {
+        return;
+    }
     UIButton *immediateUseButton = [[UIButton alloc]init];
     [immediateUseButton setTitle:@"立即使用" forState:UIControlStateNormal];
     immediateUseButton.layer.masksToBounds = YES;

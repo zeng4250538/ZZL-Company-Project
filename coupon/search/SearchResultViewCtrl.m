@@ -19,12 +19,11 @@
 
 @interface SearchResultViewCtrl ()
 @property(nonatomic,strong)UISearchBar *searchBar;
+@property(nonatomic,strong)UISearchDisplayController *displayCtrl;
 
 @property(nonatomic,strong)NSArray *keyWordList;
 
 @property(nonatomic,strong)NSArray *dataList;
-
-@property(nonatomic,strong)UISearchController *searchController;
 
 
 @end
@@ -38,21 +37,22 @@
     
     [self makeSearchBar];
     
-    self.navigationItem.title=@"商家搜索";
-    
+    [self makeDisplayCtrl];
     
     [self.tableView registerClass:[ShopInfoTableViewCell class] forCellReuseIdentifier:@"cell1"];
     
     
-    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
-    
-    
-    
+    [self.displayCtrl.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell2"];
     
     
     
     [self loadData];
     
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
@@ -98,40 +98,6 @@
 }
 
 
--(void)makeSearchBar{
-    
-    
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    
-    
-    self.searchController.searchResultsUpdater = self;
-    [self.searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-    
-    
-    self.searchController.searchBar.backgroundImage =[Utils imageWithColor:[GUIConfig mainBackgroundColor]];
-    
-    self.searchController.searchBar.backgroundColor = [GUIConfig mainBackgroundColor];
-    
-    
-    
-    self.searchController.obscuresBackgroundDuringPresentation = NO;
-    
-    self.searchController.hidesBottomBarWhenPushed = NO;
-    
-    
-    self.searchController.searchBar.delegate = self;
-    
-    
-    
-    
-    
-    
-}
-
-
-
-
 -(void)loadData{
     
     
@@ -174,78 +140,78 @@
 
 
 
-//-(void)makeDisplayCtrl{
-//    
-//    self.displayCtrl = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
-//    
-//    self.displayCtrl.delegate = self;
-//    self.displayCtrl.searchResultsDataSource = self;
-//    
-//    self.displayCtrl.searchResultsDelegate = self;
-//    
-//    self.displayCtrl.displaysSearchBarInNavigationBar = YES;
-//    
-//    //displaysSearchBarInNavigationBar
-//    
-//    
-//    
-//    
-//    
-//    [GUIConfig tableViewGUIFormat:self.tableView];
-//    
-//    [GUIConfig tableViewGUIFormat:self.displayCtrl.searchResultsTableView];
-//    
-//    
-//    
-//    
-//}
+-(void)makeDisplayCtrl{
+    
+    self.displayCtrl = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
+    
+    self.displayCtrl.delegate = self;
+    self.displayCtrl.searchResultsDataSource = self;
+    
+    self.displayCtrl.searchResultsDelegate = self;
+    
+    self.displayCtrl.displaysSearchBarInNavigationBar = YES;
+    
+    //displaysSearchBarInNavigationBar
+    
+    
+    
+    
+    
+    [GUIConfig tableViewGUIFormat:self.tableView];
+    
+    [GUIConfig tableViewGUIFormat:self.displayCtrl.searchResultsTableView];
+    
+    
+    
+    
+}
 
 
-//- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller{
-//    
-//    controller.searchBar.placeholder=@"";
-//    
-//    
-//    
-//    
-//}
-//
-//- (void) searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller{
-//    
-//    controller.searchBar.placeholder=self.keyWord;
-//    
-//}
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller{
+    
+    controller.searchBar.placeholder=@"";
+    
+    
+    
+    
+}
 
-
-
-
-//- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {
-//    
-//    
-//    
-//}
+- (void) searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller{
+    
+    controller.searchBar.placeholder=self.keyWord;
+    
+}
 
 
 
-//-(void)makeSearchBar{
-//    
-//    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-60, 44)];
-//    //self.searchBar.searchBarStyle = UISearchBarStyleProminent;
-//    self.searchBar.barTintColor = [GUIConfig mainBackgroundColor];
-//    
-//    self.searchBar.backgroundImage =[UIImage new];
-//    
-//    self.searchBar.delegate= self;
-//    
-//    self.searchBar.placeholder=self.keyWord;
-//    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
-//    
-//   // self.navigationItem.titleView = self.searchBar;
-//    
-//    
-//    
-//}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView {
+    
+    
+    
+}
+
+
+
+-(void)makeSearchBar{
+    
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-60, 44)];
+    //self.searchBar.searchBarStyle = UISearchBarStyleProminent;
+    self.searchBar.barTintColor = [GUIConfig mainBackgroundColor];
+    
+    self.searchBar.backgroundImage =[UIImage new];
+    
+    self.searchBar.delegate= self;
+    
+    self.searchBar.placeholder=self.keyWord;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+    
+   // self.navigationItem.titleView = self.searchBar;
+    
+    
+    
+}
 
 
 
@@ -264,16 +230,31 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
-    return [self.dataList count];
+    if (self.displayCtrl.searchResultsTableView == tableView) {
+        
+        return [self.keyWordList count];
+    }else{
+        
+        return [self.dataList count];
+    }
+    
+    return 7;
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    return [ShopInfoTableViewCell height];
+    if (self.displayCtrl.searchResultsTableView == tableView) {
+        
+        
+        return 50;
+ 
+    }else{
+        
+        return [ShopInfoTableViewCell height];
        
         
+    }
     
     
     
@@ -284,10 +265,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (self.displayCtrl.searchResultsTableView == tableView) {
+        
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+        
+        // Configure the cell...
+        
+        
+        cell.textLabel.text=self.keyWordList[[indexPath row]];
+        
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [GUIConfig grayFontColor];
+
+        
+        
+        return cell;
+    }
     
     
      ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
     
+    // Configure the cell...
     
     
     NSDictionary *d = self.dataList[indexPath.row];
@@ -310,73 +309,45 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+    //搜索点击
+    if (self.displayCtrl.searchResultsTableView == tableView) {
         
-        
-    NSDictionary *currentData = self.dataList[indexPath.row];
-        
-        
-    vc.shopId = currentData[@"id"];
-        
-        
-    
-    [self.navigationController pushViewController:vc animated:YES];
-
-    
-    
-    
-}
-
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
-    
-    
-    NSLog(@"search...");
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //  [self.tableView reloadData];
-    
-    
-    
-    
-}
-
-
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{                    // called when keyboard search
-
-
-    NSLog(@"searchBar %@",searchBar.text);
-    
-    
-    [searchBar endEditing:YES];
-    
-    
-    
-    self.keyWord = searchBar.text;
-    
-    
-    [self doLoad:^(BOOL ret) {
+        [self.displayCtrl setActive:NO animated:YES];
         
         [self.tableView reloadData];
         
-        self.searchController.active = NO;
+    }else{
+        
+        
+        
+        
+        
+        ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+        
+        
+        NSDictionary *currentData = self.dataList[indexPath.row];
+        
+        
+        vc.shopId = currentData[@"id"];
+        
+        
+       // vc.data = currentData;
+        
+        [self.navigationController pushViewController:vc animated:YES];
 
         
-    }];
+        
+        
+        
+        
+        
+        
+        
+    }
     
     
-    
-
 }
+
 
 /*
 // Override to support conditional editing of the table view.
