@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 
 
+typedef void (^block_t)(void);
+
+
+void SafeLoadUrlImage(UIView *uv,NSURL *url,block_t completionBlock);
+
+
+
 NSString *SafeString(id content);
 NSURL *SafeUrl(id content);
 BOOL SafeEmpty(id content);

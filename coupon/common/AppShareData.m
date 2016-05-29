@@ -118,9 +118,40 @@ static AppShareData *instance;
     
 }
 
+-(BOOL)notDisplayImageViaCell{
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"notdisplayimageviacell"];
+    
+}
+-(void)setNotDisplayImageViaCell:(BOOL)notDisplayImageViaCell{
+    
+    [[NSUserDefaults standardUserDefaults] setBool:notDisplayImageViaCell forKey:@"notdisplayimageviacell"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+}
 
 
+-(BOOL)isViaWLan{
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"isviawlan"];
+    
+    
+}
 
+-(void)setIsViaWLan:(BOOL)isViaWLan{
+    
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isViaWLan forKey:@"notdisplayimageviacell"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    
+    
+    
+}
 
 -(void)setDeviceToken:(NSString *)deviceToken{
     

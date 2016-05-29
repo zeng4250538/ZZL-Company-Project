@@ -164,7 +164,7 @@
     
 #pragma mark ------ 周边商城网络请求
     MallService *services = [[MallService alloc] init];
-    [services queryMallByNear:[AppShareData instance].city lon:[AppShareData instance].lon
+    [services queryMallByNear:SafeString([AppShareData instance].city) lon:[AppShareData instance].lon
      lat:[AppShareData instance].lat success:^(NSInteger code, NSString *message, id data) {
         
         

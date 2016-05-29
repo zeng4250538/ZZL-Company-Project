@@ -39,6 +39,12 @@ extern NSString *const ReviewUpdateNotice;
 @property(nonatomic,copy,readonly)NSString  *mallName;
 
 
+@property(nonatomic,assign,readonly)BOOL  notDisplayImageViaCell;
+
+//通过无线网访问
+@property(nonatomic,assign,readonly)BOOL  isViaWLan;
+
+
 //购物车数量
 @property(nonatomic,assign)NSUInteger shoppingNumberl;
 
@@ -95,6 +101,9 @@ extern NSString *const ReviewUpdateNotice;
 
 -(void)setMallName:(NSString *)mallName;
 
+-(void)setIsViaWLan:(BOOL)isViaWLan;
+
+
 
 
 -(NSString*)customTestId;
@@ -102,6 +111,9 @@ extern NSString *const ReviewUpdateNotice;
 -(void)addMallIdKVO:(id)delegate;
 
 -(void)removeMallIdKVO:(id)delegate;
+
+-(void)setNotDisplayImageViaCell:(BOOL)notDisplayImageViaCell;
+
 
 
 

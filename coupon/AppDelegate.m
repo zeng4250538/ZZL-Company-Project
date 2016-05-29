@@ -47,11 +47,7 @@
 @implementation AppDelegate
 
 
-<<<<<<< HEAD
 BOOL InLan = NO ;
-=======
-BOOL InLan = NO;
->>>>>>> 3169438772c714c68b1cc979602b29ff8a57e919
 
 NSString *ALiPayNotice=@"alipaynotice";
 NSString *WechatPayNotice=@"wechatpaynotice";
@@ -125,6 +121,81 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
     self.window.rootViewController = tabViewCtrl;
     
     [self.window makeKeyAndVisible];
+    
+    
+    [self startNetWorkCheck];
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+#pragma mark - 开启网络监测
+
+-(void)startNetWorkCheck{
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        switch (status) {
+                
+            case AFNetworkReachabilityStatusNotReachable:{
+                
+                
+                [iConsole info:@"无网络"];
+                
+                NSLog(@"无网络");
+                
+                break;
+                
+            }
+                
+            case AFNetworkReachabilityStatusReachableViaWiFi:{
+                
+                NSLog(@"WiFi网络");
+                
+                [iConsole info:@"WiFi"];
+                
+
+                [[AppShareData instance] setIsViaWLan:NO];
+                
+                break;
+                
+            }
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN:{
+                
+                NSLog(@"无线网络");
+                
+                [iConsole info:@"移动网络"];
+                
+                [[AppShareData instance] setIsViaWLan:YES];
+                
+                
+                break;
+                
+            }
+                
+            default:
+                
+                break;
+                
+        }
+        
+    }];
+    
+
+    
+    
+    
     
     
     
@@ -574,6 +645,9 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    
+    
+
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
@@ -584,6 +658,10 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    
+    
+    [self startNetWorkCheck];
+
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
