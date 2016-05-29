@@ -54,6 +54,13 @@ NSDate *SafeDate(NSString* ymd);
 
 
 
++(NSString*)firstLet:(NSString*)szString;
+
+
++(NSString*)firstLetAllWord:(NSString*)szString;
+
+
+
 
 
 

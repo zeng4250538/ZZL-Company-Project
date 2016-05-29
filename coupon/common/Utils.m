@@ -630,6 +630,64 @@ NSString *SafeString(id content){
 
 
 
++(NSString*)firstLet:(NSString*)szString{
+    
+    NSString *pyName = [Utils transChineseStringToPingyin:szString];
+    
+    if ([pyName length]>0) {
+        NSString *let = [pyName substringToIndex:1];
+        return let;
+        
+    }else{
+        
+        return @"";
+        
+    }
+    
+    
+    
+}
+
++(NSString*)firstLetAllWord:(NSString*)szString{
+    
+    NSString *pyName = [Utils transChineseStringToPingyin:szString];
+    
+    NSArray *ay = [pyName componentsSeparatedByString:@" "];
+    
+    NSString *allWord = @"";
+    
+    for (NSString *title in ay) {
+        
+        NSString *let = [title length]>0?[title substringToIndex:1]:@"";
+        
+        allWord =[allWord stringByAppendingString:let];
+    
+        
+        
+    }
+    
+    return allWord;
+    
+    
+}
+
+
+
++(NSString*)transChineseStringToPingyin:(NSString*)szString{
+    if ([szString length]) {
+        NSMutableString *ms = [[NSMutableString alloc] initWithString:szString];
+        if (CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformMandarinLatin, NO)) {
+        }
+        if (CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformStripDiacritics, NO)) {
+        }
+        return ms;
+    }
+    return @"";
+}
+
+
+
+
 
 
 
