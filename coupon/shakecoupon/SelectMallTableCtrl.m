@@ -21,6 +21,10 @@
 @property(nonatomic,strong)NSArray *keyList;
 @property(nonatomic,strong)NSDictionary *dataMap;
 
+@property(nonatomic,strong)NSArray *filterData;
+
+
+
 
 
 
@@ -96,16 +100,48 @@
     
 }
 
+-(void)makePyData{
+    
+    
+    NSMutableArray *pyArray = [NSMutableArray arrayWithCapacity:10];
+    
+    for (NSDictionary *d in self.data) {
+        
+        
+        NSString *name = d[@"name"];
+        
+        NSString *py = [Utils firstLetAllWord:name];
+        
+        py = [py stringByAppendingString:name];
+        
+        NSMutableDictionary *md = [d mutableCopy];
+        
+        md[@"py"]=py;
+        
+        [pyArray addObject:md];
+        
+        
+        
+    }
+
+    
+    self.data = pyArray;
+    
+    
+    
+    
+}
+
 -(void)makeSortData{
     
     
     
     NSMutableDictionary *dict=[@{} mutableCopy];
     
-    
     //将列表变成 字典 ，结构如下 @{"a":@[@{"cccc"},@{"bbbbbb"}]};
-    for (NSDictionary *d in self.data) {
+    for (NSDictionary *d in self.filterData) {
         NSString *name = d[@"name"];
+        
         
         NSString *letter = [Utils firstLetter:name];
         
@@ -183,9 +219,12 @@
     MallService *service = [MallService new];
     
     
-    [service queryMallByCity:@"广州市" success:^(NSInteger code, NSString *message, id data) {
+    [service queryMallByCity:[AppShareData instance].city success:^(NSInteger code, NSString *message, id data) {
         
         self.data = data;
+        
+        
+        self.filterData = self.data;
         
         [self makeSortData];
         
@@ -214,9 +253,51 @@
 }
 
 
+-(void)doSearchFilter:(NSString*)searchString{
+    
+    
+    //年龄小于30
+    //定义谓词对象，谓词对象中包含了过滤条件
+    
+    
+    [self makePyData];
+    
+    
+    NSString *condition = [NSString stringWithFormat:@"py like[c] '*%@*'",searchString];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:condition];
+    //使用谓词条件过滤数组中的元素，过滤之后返回查询的结果
+    NSArray *array = [self.data filteredArrayUsingPredicate:predicate];
+    
+    
+    self.filterData = array;
+    
+   // self.filterData = array;
+    
+   // [self makeMapData];
+    
+    [self makeSortData];
+    
+    [self.tableView reloadData];
+    
+    
+    //查询name=1的并且age大于40
+    
+    
+    
+}
 
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    
+    NSLog(@"xxxx");
+    
+    
+    [self doSearchFilter:searchText];
+    
+   // -(void)doSearchFilter:(NSString*)searchString{
+
 
     
 

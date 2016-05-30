@@ -12,6 +12,12 @@
 @property(nonatomic,strong)UISearchBar *searchBar;
 @property(nonatomic,strong)UISearchController *searchController;
 
+@property(nonatomic,strong)NSArray *cityList;
+@property(nonatomic,strong)NSArray *filterList;
+@property(nonatomic,strong)NSDictionary *cityMap;
+
+@property(nonatomic,strong)NSArray *mapKeyList;
+
 @end
 
 @implementation SelectCityTableViewCtrl
@@ -44,6 +50,12 @@
     }];
     
     
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+    
+    
+    
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -64,6 +76,11 @@
     self.tableView.tableHeaderView = self.searchController.searchBar;
     
     
+    self.searchController.searchBar.backgroundImage =[Utils imageWithColor:[GUIConfig mainBackgroundColor]];
+    
+    self.searchController.searchBar.backgroundColor = [GUIConfig mainBackgroundColor];
+    
+    
     
     self.searchController.obscuresBackgroundDuringPresentation = NO;
     
@@ -77,20 +94,118 @@
 }
 
 
+
+-(void)makeMapData{
+    
+    NSMutableDictionary *dict=[@{} mutableCopy];
+    
+    
+    //将列表变成 字典 ，结构如下 @{"a":@[@{"cccc"},@{"bbbbbb"}]};
+    for (NSDictionary *d in self.filterList) {
+        NSString *name = d[@"name"];
+        
+        NSString *letter = [Utils firstLet:name];
+        
+        NSMutableArray *ary = dict[letter];
+        
+        if (ary==nil) {
+            ary = [@[] mutableCopy];
+            dict[letter]=ary;
+        }
+        
+        [ary addObject:d];
+        
+    }
+    
+    
+    
+    
+    
+    self.cityMap = dict;
+    
+    self.mapKeyList = [self.cityMap allKeys];
+    
+    
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    self.mapKeyList = [self.mapKeyList sortedArrayUsingDescriptors:@[sd]];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
 -(void)loadData{
     
     
-    self.sectionList=@[@"定位位置",@"B",@"G"];
+    self.cityList = @[@{@"name":@"广州市"},
+                      @{@"name":@"北京市"},
+                      @{@"name":@"深圳市"},
+                      @{@"name":@"上海市"}
+                      ];
     
-    self.cityList = @{@"定位位置":@[@"广州市"],
-                      @"B":@[@"北京市"],
-                      @"G":@[@"广州市"]
-                      };
+    NSMutableArray *cityPyList = [@[] mutableCopy];
+    
+    for (NSDictionary *d in self.cityList) {
+        
+        NSString *name = d[@"name"];
+        
+        NSString *py = [Utils firstLetAllWord:name];
+        
+        
+        NSString *allString = [py stringByAppendingString:name];
+        
+        NSDictionary *dd = @{@"name":name,@"py":allString};
+        
+        [cityPyList addObject:dd];
+    
+        
+        
+        
+    }
+    
+    self.cityList = cityPyList;
+    
+    
+    self.filterList = self.cityList;
+    
+    
+    [self makeMapData];
     
     
     
+     
+    
+}
+
+
+
+-(void)doSearchFilter:(NSString*)searchString{
     
     
+    //年龄小于30
+    //定义谓词对象，谓词对象中包含了过滤条件
+    
+    
+    NSString *condition = [NSString stringWithFormat:@"py like[c] '*%@*'",searchString];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:condition];
+    //使用谓词条件过滤数组中的元素，过滤之后返回查询的结果
+    NSArray *array = [self.cityList filteredArrayUsingPredicate:predicate];
+    
+    
+    self.filterList = array;
+    
+    [self makeMapData];
+    
+    [self.tableView reloadData];
+    
+    
+    //查询name=1的并且age大于40
     
     
     
@@ -108,19 +223,24 @@
     
    
     
-    
+    UIView *uv = [UIView new];
+    uv.frame = CGRectMake(0, 0, SCREEN_WIDTH, 20);
+    uv.backgroundColor = [GUIConfig mainBackgroundColor];
     UILabel *lab = [UILabel new];
+    
+    [uv addSubview:lab];
     
     lab.backgroundColor = [GUIConfig mainBackgroundColor];
     
-    NSString *name = self.sectionList[section];
+    NSString *name = self.mapKeyList[section];
+    lab.frame = CGRectMake(15, 0, SCREEN_WIDTH-15, 20);
     
-    lab.text = [NSString stringWithFormat:@"  %@",name];
+    lab.text = [[NSString stringWithFormat:@"%@",name] uppercaseString];
     
     lab.font  = [UIFont systemFontOfSize:14];
     lab.textColor = [GUIConfig grayFontColor];
     
-    return lab;
+    return uv;
     
     
     
@@ -137,15 +257,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return [self.cityList count];
+    return [self.mapKeyList count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
-    NSString *name = self.sectionList[section];
     
-    return [self.cityList[name] count];
+   NSString *key =  self.mapKeyList[section];
+    
+   return [self.cityMap[key] count];
+    
     
     
 }
@@ -160,15 +282,15 @@
     
     
     cell.textLabel.font = [UIFont systemFontOfSize:14];
-    NSString *section = self.sectionList[[indexPath section]];
+    NSString *section = self.mapKeyList[[indexPath section]];
     
     
     
-    NSArray * currentCityList  = self.cityList[section];
+    NSArray * currentCityList  = self.cityMap[section];
     
     
     
-    cell.textLabel.text = currentCityList[[indexPath row]];
+    cell.textLabel.text = currentCityList[[indexPath row]][@"name"];
     
     
     
@@ -190,15 +312,15 @@
         if (self.selectBlock) {
             
             
-            NSString *section = self.sectionList[[indexPath section]];
+            NSString *section = self.mapKeyList[[indexPath section]];
             
             
             
-            NSArray * currentCityList  = self.cityList[section];
+            NSArray * currentCityList  = self.cityMap[section];
             
             
             
-            NSString *city = currentCityList[[indexPath row]];
+            NSString *city = currentCityList[[indexPath row]][@"name"];
             
             
             if (self.selectBlock) {
@@ -222,8 +344,11 @@
     NSLog(@"search...");
     
     
+    [self doSearchFilter:searchController.searchBar.text];
     
-    [self.tableView reloadData];
+    
+    
+  //  [self.tableView reloadData];
     
     
     

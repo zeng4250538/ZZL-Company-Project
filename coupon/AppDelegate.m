@@ -202,7 +202,7 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [AppShareData instance].selected = 0;
+    //[AppShareData instance].selected = 0;
     
     
     
@@ -510,12 +510,12 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     
-    if ([[AppShareData instance]getUMPush] == NO) {
-        [UMessage unregisterForRemoteNotifications];
-    }
-    else{
-    [UMessage didReceiveRemoteNotification:userInfo];
-    }
+//    if ([[AppShareData instance]getUMPush] == NO) {
+//        [UMessage unregisterForRemoteNotifications];
+//    }
+//    else{
+//    [UMessage didReceiveRemoteNotification:userInfo];
+//    }
 }
 
 

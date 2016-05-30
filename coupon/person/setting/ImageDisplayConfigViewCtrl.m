@@ -22,6 +22,8 @@
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
+    self.navigationItem.title=@"图片显示控制";
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -72,9 +74,43 @@
     UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-90, 10,80 , 20)];
     [cell.contentView addSubview:sw];
     
+    sw.tag=indexPath.row+1;
+    
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     
-    sw.on = YES;
+    
+    
+    if (indexPath.row==0) {
+        sw.on = ![AppShareData instance].notDisplayImageViaCell;
+    }
+    
+    
+    [sw bk_addEventHandler:^(id sender) {
+        
+        if (sw.tag==1) {
+            
+            if (sw.on) {
+                
+                [[AppShareData instance] setNotDisplayImageViaCell:NO];
+                
+                
+                
+                
+                
+                
+            }else{
+                
+                
+                [[AppShareData instance] setNotDisplayImageViaCell:YES];
+                
+                
+                
+            }
+            
+        }
+        
+    } forControlEvents:UIControlEventValueChanged];
+    
     
     
     // Configure the cell...
@@ -87,6 +123,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath  animated:YES];
+    
+    
+    
     
 }
 
