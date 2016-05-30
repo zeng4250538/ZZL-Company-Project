@@ -393,16 +393,21 @@
     
     NSURL *url =SafeUrl(self.data[@"smallPhotoUrl"]);
     
-//    NSString *stringUrl = [[NSString stringWithFormat:@"%@",url] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    
-//    NSURL *utlasd = [NSURL URLWithString:stringUrl];
-    
-    [self.logoView sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+   
+    SafeLoadUrlImage(self.logoView, url, ^{
         
         [self setNeedsLayout];
         
-    }];
+        
+    });
     
+    
+//    [self.logoView sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        [self setNeedsLayout];
+//        
+//    }];
+//    
     self.titleLabel.text=SafeString(self.data[@"shopName"]);
     self.subTitleLatbel.text = SafeString(self.data[@"name"]);
     

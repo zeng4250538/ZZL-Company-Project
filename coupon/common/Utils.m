@@ -15,6 +15,8 @@
 @implementation Utils
 
 
+
+
 NSDate *SafeDate(NSString* ymd){
     
     NSString *ymdString =  SafeString(ymd);
@@ -163,6 +165,94 @@ NSURL *SafeUrl(id content){
     
     
 }
+
+void SafeLoadUrlImage(UIView *uv,NSURL *url,block_t completionBlock){
+    
+    //在移动网络不显示图片，并且当前处于移动网络中
+    if ([AppShareData instance].notDisplayImageViaCell
+       /* &&[AppShareData instance].isViaWLan*/) {
+        
+        
+        uv.layer.borderWidth = 1;
+        uv.layer.borderColor = [[GUIConfig mainBackgroundColor] CGColor];
+        uv.layer.cornerRadius = 4;
+        uv.clipsToBounds = YES;
+        
+        [[uv viewWithTag:1] removeFromSuperview];
+        
+        
+        UILabel *label = [UILabel new];
+        label.textColor = [GUIConfig mainBackgroundColor];
+        label.frame = uv.frame;
+        label.font = [UIFont systemFontOfSize:12];
+        
+    
+        
+        label.text=@"非WIFI状态不显示图片";
+        label.tag = 1;
+        label.textAlignment = NSTextAlignmentCenter;
+        
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        
+        
+        [uv addSubview:label];
+        
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.equalTo(label.superview);
+        }];
+        
+        
+        
+        return ;
+
+    }
+    
+    
+    [[uv viewWithTag:1] removeFromSuperview];
+    
+    
+    
+    if ([uv isKindOfClass:[UIImageView class]]) {
+        
+        
+        UIImageView *imgView = (UIImageView*)uv;
+        
+        
+        [imgView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            completionBlock();
+        }];
+        
+        return ;
+        
+    }
+    
+    if ([uv isKindOfClass:[UIButton class]]) {
+        
+        
+        UIButton *btnView = (UIButton*)uv;
+        
+        [btnView sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:nil options:(SDWebImageLowPriority) completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            completionBlock();
+            
+        }];
+        
+        
+        
+        return ;
+        
+    }
+    
+    return ;
+    
+    
+    
+    
+    
+}
+
+
 
 
 id safeArrayValue(id array,NSInteger pos){
@@ -627,6 +717,64 @@ NSString *SafeString(id content){
     
     
 }
+
+
+
++(NSString*)firstLet:(NSString*)szString{
+    
+    NSString *pyName = [Utils transChineseStringToPingyin:szString];
+    
+    if ([pyName length]>0) {
+        NSString *let = [pyName substringToIndex:1];
+        return let;
+        
+    }else{
+        
+        return @"";
+        
+    }
+    
+    
+    
+}
+
++(NSString*)firstLetAllWord:(NSString*)szString{
+    
+    NSString *pyName = [Utils transChineseStringToPingyin:szString];
+    
+    NSArray *ay = [pyName componentsSeparatedByString:@" "];
+    
+    NSString *allWord = @"";
+    
+    for (NSString *title in ay) {
+        
+        NSString *let = [title length]>0?[title substringToIndex:1]:@"";
+        
+        allWord =[allWord stringByAppendingString:let];
+    
+        
+        
+    }
+    
+    return allWord;
+    
+    
+}
+
+
+
++(NSString*)transChineseStringToPingyin:(NSString*)szString{
+    if ([szString length]) {
+        NSMutableString *ms = [[NSMutableString alloc] initWithString:szString];
+        if (CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformMandarinLatin, NO)) {
+        }
+        if (CFStringTransform((__bridge CFMutableStringRef)ms, 0, kCFStringTransformStripDiacritics, NO)) {
+        }
+        return ms;
+    }
+    return @"";
+}
+
 
 
 

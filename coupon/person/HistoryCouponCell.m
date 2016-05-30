@@ -134,12 +134,19 @@
     self.detailLabel.text = SafeString(self.data[@"couponName"]);
     
     
-    [self.logoImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    SafeLoadUrlImage(self.logoImageView, url, ^{
         
-        [self.logoImageView setNeedsLayout];
+        [self setNeedsLayout];
         
-    }];
-  
+    });
+    
+    
+//    [self.logoImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        [self.logoImageView setNeedsLayout];
+//        
+//    }];
+//  
     
     if (!SafeEmpty(self.data[@"reviewId"])) {
         
