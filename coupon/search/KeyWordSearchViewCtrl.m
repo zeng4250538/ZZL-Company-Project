@@ -16,7 +16,6 @@
 
 @property(nonatomic,strong)NSArray *hotWordList;
 
-
 @property(nonatomic,strong)NSArray *searchWordList;
 
 @property(nonatomic,strong)UISearchDisplayController *displayCtrl;
@@ -24,7 +23,6 @@
 @property(nonatomic,strong)UISearchBar *searchBar;
 
 @property(nonatomic,assign)BOOL isLoading;
-
 
 @end
 

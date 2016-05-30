@@ -17,6 +17,8 @@
 
 @property(nonatomic,strong)NSArray *dataList;
 
+@property(nonatomic,strong)NSDictionary *dataDic;
+
 @end
 
 @implementation BasketMessageViewCtrl
@@ -285,8 +287,8 @@
     NSLog(@"消息ID%@",messageId);
     
     [self messageLoadDatamessageId:messageId withSuccess:^(id data) {
-        NSLog(@"消息ID%@",data);
-        suvc.subData = data;
+       
+        suvc.subData = _dataDic;
         
          [self.navigationController pushViewController:suvc animated:YES];
         
@@ -295,6 +297,12 @@
     
 }
 
+-(void)messageLoadData{
+    
+    
+
+
+}
 
 
 /*

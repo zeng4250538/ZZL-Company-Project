@@ -296,7 +296,7 @@ static AppShareData *instance;
 }
 
 
-//我改的。。。可删（已使用篮子数量）
+//（已使用篮子数量）
 -(NSInteger)shoppingCartNumber:(id)data{
 
     NSString *num = [NSString stringWithFormat:@"%@",data];
@@ -435,27 +435,27 @@ static AppShareData *instance;
 }
 
 
-
-//推送开关
--(void)setUMPush:(id)data{
-
-    [[NSUserDefaults description]setValue:data forKey:@"UMPush"];
-
-}
-//推送开关
--(BOOL)getUMPush{
-    
-    NSUserDefaults *asd = [[NSUserDefaults standardUserDefaults]objectForKey:@"UMPush"];
-    NSString *string  = [NSString stringWithFormat:@"%@",asd];
-    if ([string isEqualToString:@"YES"]) {
-        
-        return YES;
-        
-    }
-    
-        return NO;
-    
-}
+//通知暂时注释
+////推送开关
+//-(void)setUMPush:(id)data{
+//
+//    [[NSUserDefaults description]setValue:data forKey:@"UMPush"];
+//
+//}
+////推送开关
+//-(BOOL)getUMPush{
+//    
+//    NSUserDefaults *asd = [[NSUserDefaults standardUserDefaults]objectForKey:@"UMPush"];
+//    NSString *string  = [NSString stringWithFormat:@"%@",asd];
+//    if ([string isEqualToString:@"YES"]) {
+//        
+//        return YES;
+//        
+//    }
+//    
+//        return NO;
+//    
+//}
 
 
 

@@ -34,8 +34,13 @@
 
 -(void)doRegister:(NSString*)userName
          password:(NSString*)password
+ verificationCode:(NSString*)verification
        success:(void(^)(NSInteger code,NSString *message,id data))success
        failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
+//获取验证码
+-(void)verificationCode:(NSString *)userName password:(NSString*)password
+                success:(void(^)(NSInteger code,NSString *message,id data))success
+                failure:(void(^)(id data))failure;
 
 @end

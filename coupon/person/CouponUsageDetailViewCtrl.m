@@ -10,6 +10,7 @@
 #import "CommentSubmitViewCtrl.h"
 #import "CouponDetailViewCtrl.h"
 #import "SubHistorySevice.h"
+#import "IdShopSevice.h"
 @interface CouponUsageDetailViewCtrl ()
 
 
@@ -80,7 +81,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self subViewLoadData];
     
   //  self.toCommentButton.hidden = YES;
         
@@ -435,7 +436,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *couponId = SafeString(self.data[@"id"]);
+//    NSString *couponId = SafeString(self.data[@"id"]);
     
     
     
@@ -453,18 +454,10 @@
     
     if (indexPath.section == 0 && indexPath.row ==0) {
        
-        SubHistorySevice *app = [SubHistorySevice new];
-        [app subRequrestCouponInstanceId:couponId withSuccess:^(id data) {
-            
-            _subDic = @{@"name":SafeString(data[@"coupon"][@"name"])};
-            
-            
+//            
             vc.data = _subDic;
             [self.navigationController pushViewController:vc animated:YES];
-            
-        } withFailure:^(id data) {
-            
-        }];
+
     }
     
     
@@ -472,13 +465,44 @@
 }
 
 
+//获取消费明细点击进去的详情页的头部信息
 -(void)subViewLoadData{
-
     
+    
+
+    NSString *couponId = SafeString(self.data[@"id"]);
+    SubHistorySevice *app = [SubHistorySevice new];
+    [app subRequrestCouponInstanceId:couponId withSuccess:^(id data) {
+        
+        [self shopIdRequrestLoadData:SafeString(data[@"shopId"]) withSuccess:^(id shopData) {
+            
+             _subDic =@{@"name":SafeString(data[@"coupon"][@"name"]),@"photoUrl":SafeString(data[@"coupon"][@"photoUrl"]),@"shopName":SafeString(shopData[@"name"]),@"shopPhone":SafeString(shopData[@"phone"]),@"startTime":SafeString(data[@"couponPromotion"][@"startTime"]),@"endTime":SafeString(data[@"couponPromotion"][@"endTime"])};
+            
+        }];
+        
+//        _subDic = @{@"name":SafeString(data[@"coupon"][@"name"])};
+        
+//        vc.data = _subDic;
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+    } withFailure:^(id data) {
+        
+    }];
 
 
 }
 
+//消费明细点击进去的详情页的底部请求
+-(void)shopIdRequrestLoadData:(NSString *)shopId withSuccess:(void(^)(id shopData))success{
+
+    IdShopSevice *iss = [IdShopSevice new];
+    [iss shopIdRequrestString:shopId withSuccess:^(id data) {
+        success(data);
+    } withFailure:^(id data) {
+        
+    }];
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
