@@ -510,13 +510,13 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    
-    if ([[AppShareData instance]getUMPush] == NO) {
-        [UMessage unregisterForRemoteNotifications];
-    }
-    else{
-    [UMessage didReceiveRemoteNotification:userInfo];
-    }
+    //暂时注释调通知
+//    if ([[AppShareData instance]getUMPush] == NO) {
+//        [UMessage unregisterForRemoteNotifications];
+//    }
+//    else{
+//    [UMessage didReceiveRemoteNotification:userInfo];
+//    }
 }
 
 

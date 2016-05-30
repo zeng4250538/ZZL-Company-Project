@@ -996,7 +996,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     // Configure the cell...
     
     for (UIView *uv in [cell.contentView subviews]) {
@@ -1035,7 +1035,7 @@
     }
     
     if ([indexPath section]==4) {
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         [self makeCell5:cell];
        
     }
@@ -1201,6 +1201,12 @@
         
         
     }];
+
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 }
 

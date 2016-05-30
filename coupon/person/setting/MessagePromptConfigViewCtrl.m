@@ -89,21 +89,21 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-//    NSInteger selected = [self.selectedArray[indexPath.row] integerValue];
-    
-    if ([AppShareData instance].selected == 0) {
-        
-        [AppShareData instance].selected = 1;
-        [[AppShareData instance] setUMPush:@"NO"];
 
-    }else{
-        
-        [AppShareData instance].selected = 0;
-        [[AppShareData instance] setUMPush:@"YES"];
-        
-    }
+  //暂时注释掉通知
+//    if ([AppShareData instance].selected == 0) {
+//        
+//        [AppShareData instance].selected = 1;
+//        [[AppShareData instance] setUMPush:@"NO"];
+//
+//    }else{
+//        
+//        [AppShareData instance].selected = 0;
+//        [[AppShareData instance] setUMPush:@"YES"];
+//        
+//    }
     
-//    self.selectedArray[indexPath.row] = @(selected);
+
     
     
     [self.tableView reloadData];
