@@ -7,7 +7,7 @@
 //
 
 #import "RegisterViewCtrl.h"
-
+#import "LoginService.h"
 @interface RegisterViewCtrl ()
 
 @property(nonatomic,strong)UITextField *mobileTextField;
@@ -128,6 +128,12 @@
             
         }];
         
+        [smsButton bk_addEventHandler:^(id sender) {
+            
+            [self verificationCodeLoadData];
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        
         
         
         
@@ -139,6 +145,18 @@
     
     return cell;
 }
+
+-(void)verificationCodeLoadData{
+
+    LoginService *app = [LoginService new];
+    [app verificationCode:_mobileTextField.text password:_passwordTextField.text success:^(NSInteger code, NSString *message, id data) {
+        
+    } failure:^(id data) {
+        
+    }];
+
+}
+
 -(void)makeFooterView{
     
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];

@@ -71,7 +71,27 @@
     
 }
 
+-(void)verificationCode:(NSString *)userName password:(NSString*)password
+                success:(void(^)(NSInteger code,NSString *message,id data))success
+                failure:(void(^)(id data))failure{
 
+    BaseRequest *req = [BaseRequest new];
+    NSDate *time = [[NSDate alloc]init];
+    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+    format.dateFormat = @"yyyyMMddHHssmm";
+    NSString *strTime = [format stringFromDate:time];
+    
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/smscode"];
+    NSDictionary *param = @{@"mobile":userName,@"code":password,@"createdTime":strTime};
+    [req post:url param:param success:^(NSInteger code, id object, AFHTTPRequestOperation *operation) {
+        success(code,@"",object);
+    } failure:^(NSInteger code, NSString *content) {
+        failure(content);
+    }];
+
+
+
+}
 
     
 

@@ -59,7 +59,7 @@ NSString *UmengKey=@"56e906e267e58e54f2000607";
 NSString *WeChatAppId=@"wx77914cc659d2889c";
 NSString *WeChatAppSecret=@"";
 
-NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id = com.richstone.coupontest3
+NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.richstone.coupontest3
 
 
 
@@ -202,7 +202,8 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    //[AppShareData instance].selected = 0;
+    //通知暂时注释
+//    [AppShareData instance].selected = 0;
     
     
     
@@ -510,12 +511,12 @@ NSString *BaiduMapKey=@"nGyPKtwh9v9Q5GlsxvXml6lOosxdCWGI";  //对应的bundle id
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     
-//    if ([[AppShareData instance]getUMPush] == NO) {
-//        [UMessage unregisterForRemoteNotifications];
-//    }
-//    else{
-//    [UMessage didReceiveRemoteNotification:userInfo];
-//    }
+    if ([[AppShareData instance]getUMPush] == NO) {
+        [UMessage unregisterForRemoteNotifications];
+    }
+    else{
+    [UMessage didReceiveRemoteNotification:userInfo];
+    }
 }
 
 

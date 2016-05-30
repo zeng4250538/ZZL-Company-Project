@@ -8,7 +8,7 @@
 
 #import "MallMapViewCtrl.h"
 #import "IndoorMapViewService.h"
-@interface MallMapViewCtrl ()<UIGestureRecognizerDelegate>
+@interface MallMapViewCtrl ()<UIGestureRecognizerDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,strong)UIImageView *mapImageView;
 
@@ -28,8 +28,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self mapImageLayout];
+   
     
-    [self addGesture];
+    //暂时屏蔽
+//    [self addGesture];
     
     [self loadData];
     
@@ -90,18 +92,45 @@
 }
 
 -(void)mapImageLayout{
+    
+    UIScrollView *myScrollView = [[UIScrollView alloc]init];
+    
+    myScrollView.delegate = self;
+    myScrollView.frame = self.view.bounds;
+    [self.view addSubview:myScrollView];
 
      _mapImageView = [[UIImageView alloc]init];
     [_mapImageView setUserInteractionEnabled:YES];
     _mapImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    [self.view addSubview:_mapImageView];
+    [myScrollView addSubview:_mapImageView];
+    
+    ////设置UIScrollView的滚动范围和图片的真实尺寸一致
+    myScrollView.contentSize = _mapImageView.image.size;
+    //设置最大伸缩比例
+    myScrollView.maximumZoomScale=2.0;
+    //设置最小伸缩比例
+    myScrollView.minimumZoomScale=1;
+    
 
 }
 
+//告诉scrollview要缩放的是哪个子控件
+-(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+ {
+        return _mapImageView;
+ }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)viewWillDisappear:(BOOL)animated{
+
+     [SVProgressHUD dismiss];
+    
+}
+
+
 
 /*
 #pragma mark - Navigation

@@ -39,8 +39,6 @@ extern NSString *const ReviewUpdateNotice;
 @property(nonatomic,copy,readonly)NSString  *mallName;
 
 
-
-
 @property(nonatomic,assign,readonly)BOOL  notDisplayImageViaCell;
 
 //通过无线网访问
@@ -53,10 +51,9 @@ extern NSString *const ReviewUpdateNotice;
 
 @property(nonatomic,copy,readonly)NSString *deviceToken;
 
+@property(nonatomic,assign)int selected;
 
 @property(nonatomic,copy)NSString *accessToken;
-@property(nonatomic,assign)BOOL selected;
-
 
 +(instancetype)instance;
 
@@ -105,9 +102,6 @@ extern NSString *const ReviewUpdateNotice;
 
 -(void)setMallName:(NSString *)mallName;
 
--(void)setIsViaWLan:(BOOL)isViaWLan;
-
-
 
 
 -(NSString*)customTestId;
@@ -116,13 +110,11 @@ extern NSString *const ReviewUpdateNotice;
 
 -(void)removeMallIdKVO:(id)delegate;
 
--(void)setNotDisplayImageViaCell:(BOOL)notDisplayImageViaCell;
-
-
-
-
-
-
+//通知暂时注释
+////推送开关
+//-(void)setUMPush:( id)data;
+////推送开关
+//-(BOOL)getUMPush;
 
 
 @end

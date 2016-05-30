@@ -69,7 +69,7 @@ static AppShareData *instance;
         
         instance.couponKVO = [CouponKVO new];
         
-        
+//        instance.selected = 0;
      
         
         
@@ -118,40 +118,9 @@ static AppShareData *instance;
     
 }
 
--(BOOL)notDisplayImageViaCell{
-    
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"notdisplayimageviacell"];
-    
-}
--(void)setNotDisplayImageViaCell:(BOOL)notDisplayImageViaCell{
-    
-    [[NSUserDefaults standardUserDefaults] setBool:notDisplayImageViaCell forKey:@"notdisplayimageviacell"];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    
-}
 
 
--(BOOL)isViaWLan{
-    
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"isviawlan"];
-    
-    
-}
 
--(void)setIsViaWLan:(BOOL)isViaWLan{
-    
-    
-    [[NSUserDefaults standardUserDefaults] setBool:isViaWLan forKey:@"notdisplayimageviacell"];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    
-    
-    
-    
-}
 
 -(void)setDeviceToken:(NSString *)deviceToken{
     
@@ -327,7 +296,7 @@ static AppShareData *instance;
 }
 
 
-//我改的。。。可删（已使用篮子数量）
+//（已使用篮子数量）
 -(NSInteger)shoppingCartNumber:(id)data{
 
     NSString *num = [NSString stringWithFormat:@"%@",data];
@@ -466,7 +435,27 @@ static AppShareData *instance;
 }
 
 
-
+//通知暂时注释
+////推送开关
+//-(void)setUMPush:(id)data{
+//
+//    [[NSUserDefaults description]setValue:data forKey:@"UMPush"];
+//
+//}
+////推送开关
+//-(BOOL)getUMPush{
+//    
+//    NSUserDefaults *asd = [[NSUserDefaults standardUserDefaults]objectForKey:@"UMPush"];
+//    NSString *string  = [NSString stringWithFormat:@"%@",asd];
+//    if ([string isEqualToString:@"YES"]) {
+//        
+//        return YES;
+//        
+//    }
+//    
+//        return NO;
+//    
+//}
 
 
 
