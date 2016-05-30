@@ -70,7 +70,7 @@ extern NSString *const ReviewUpdateNotice;
 -(void)setDeviceToken:(NSString *)deviceToken;
 
 
-//我改的。。。可删（已使用篮子数量）
+//（已使用篮子数量）
 -(NSInteger)shoppingCartNumber:(id)data;
 
 
