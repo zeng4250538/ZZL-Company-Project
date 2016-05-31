@@ -85,6 +85,8 @@
         
     } failure:^(NSInteger code, NSString *content) {
        
+        failure(code , NO ,@"",content);
+        
     }];
     
 

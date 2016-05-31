@@ -259,7 +259,7 @@
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             
             
-            NSString *itemId = self.dataList[indexPath.row][@"itemId"];
+            NSString *itemId = self.dataList[indexPath.row][@"id"];
             
             [service requestDeleteBasket:itemId success:^(NSInteger code, NSString *message, id data) {
                 

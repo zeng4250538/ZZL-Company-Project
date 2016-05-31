@@ -8,15 +8,15 @@
 
 #import "RegisterViewCtrl.h"
 #import "LoginService.h"
-@interface RegisterViewCtrl ()
+@interface RegisterViewCtrl ()<UITextFieldDelegate>
 
 @property(nonatomic,strong)UITextField *mobileTextField;
 @property(nonatomic,strong)UITextField *passwordTextField;
 @property(nonatomic,strong)UITextField *repeatPasswordTextField;
 @property(nonatomic,strong)UITextField *smsCodeTextField;
-
-
-
+@property(nonatomic,strong)UIButton *smsButton;
+@property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic,assign)int i;
 @end
 
 @implementation RegisterViewCtrl
@@ -51,6 +51,43 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+//------------------------
+
+#define kAlphaNum  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+#define kAlpha      @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+#define kNumbers     @"0123456789"
+#define kNumbersPeriod  @"0123456789."
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    
+    if (self.passwordTextField ||self.repeatPasswordTextField) {
+        
+        NSCharacterSet *cs;
+        cs = [[NSCharacterSet characterSetWithCharactersInString:kAlphaNum] invertedSet];
+        NSString *filtered =
+        [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        BOOL basic = [string isEqualToString:filtered];
+        return basic;
+        
+    }
+    
+    NSCharacterSet *cs;
+    cs = [[NSCharacterSet characterSetWithCharactersInString:kNumbers] invertedSet];
+    NSString *filtered =
+    [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basic = [string isEqualToString:filtered];
+    return NO;
+
+    
+}
+
+//----------------------------
+
+
+
+//
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -87,22 +124,24 @@
     if (indexPath.row==0) {
         
         self.mobileTextField = [GUIHelper makeTableCellTextField:@"手机号：" cell:cell];
-        
-        
+        self.mobileTextField.keyboardType = UIKeyboardTypeNumberPad;
+        self.mobileTextField.delegate = self;
     }
 
     if (indexPath.row==1) {
         
         self.passwordTextField = [GUIHelper makeTableCellTextField:@"密码：" cell:cell];
-        
-        
+        self.passwordTextField.secureTextEntry = YES;
+        self.passwordTextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.passwordTextField.delegate = self;
     }
 
     if (indexPath.row==2) {
         
         self.repeatPasswordTextField = [GUIHelper makeTableCellTextField:@"重复密码：" cell:cell];
-        
-        
+        self.repeatPasswordTextField.secureTextEntry = YES;
+        self.repeatPasswordTextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.repeatPasswordTextField.delegate = self;
     }
     
 
@@ -111,15 +150,17 @@
         
         self.smsCodeTextField = [GUIHelper makeTableCellTextField:@"短信验证码：" cell:cell];
         
-        UIButton *smsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.smsCodeTextField.keyboardType = UIKeyboardTypeNumberPad;
         
-        [cell.contentView addSubview:smsButton];
+        _smsButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
-        [smsButton setTitle:@"验证码" forState:UIControlStateNormal];
-        [smsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        smsButton.backgroundColor = [GUIConfig mainColor];
+        [cell.contentView addSubview:_smsButton];
         
-        [smsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+        [_smsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _smsButton.backgroundColor = [GUIConfig mainColor];
+        
+        [_smsButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(cell.contentView).offset(-10);
             make.centerY.equalTo(cell.contentView);
             make.width.equalTo(@80);
@@ -127,12 +168,15 @@
             
             
         }];
-        smsButton.layer.cornerRadius = 2;
+        _smsButton.layer.cornerRadius = 2;
+        self.i = 60;
         
-        [smsButton bk_addEventHandler:^(id sender) {
+        [_smsButton bk_addEventHandler:^(id sender) {
             
             [self verificationCodeLoadData];
-            
+            [_smsButton setUserInteractionEnabled:NO];
+            _smsButton.backgroundColor = [UIColor grayColor];
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerNumber) userInfo:nil repeats:YES];
             
             
         } forControlEvents:UIControlEventTouchUpInside];
@@ -148,6 +192,24 @@
     
     return cell;
 }
+
+-(void)timerNumber{
+
+    self.i --;
+    
+    [_smsButton setTitle:[NSString stringWithFormat:@"验证码 %d",self.i] forState:UIControlStateNormal];
+    
+    if (self.i==0) {
+        [_smsButton setUserInteractionEnabled:YES];
+        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+        _smsButton.backgroundColor = [GUIConfig mainColor];
+        [_timer invalidate];
+        
+    }
+
+}
+
+
 
 -(void)verificationCodeLoadData{
 
@@ -182,6 +244,8 @@
     }];
     
     loginButton.backgroundColor = [GUIConfig mainColor];
+    
+    loginButton.layer.cornerRadius = 2;
     
     [loginButton setTitle:@"注册" forState:UIControlStateNormal];
     
@@ -234,20 +298,31 @@
             
         }
         
+        if (![self.passwordTextField.text isEqualToString:self.repeatPasswordTextField.text]) {
+            [SVProgressHUD showErrorWithStatus:@"重新输入的密码不正确"];
+        }
+        
         
         LoginService *log = [LoginService new];
         [log doRegister:_mobileTextField.text password:_repeatPasswordTextField.text verificationCode:_smsCodeTextField.text success:^(NSInteger code, NSString *message, id data) {
             
-            [SVProgressHUD showWithStatus:@"注册成功"];
+            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
             [self.navigationController popToRootViewControllerAnimated:YES];
+            [_smsButton setUserInteractionEnabled:YES];
+            [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+            _smsButton.backgroundColor = [GUIConfig mainColor];
+            [_timer invalidate];
             
         } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+            [SVProgressHUD showInfoWithStatus:@"手机号已注册过了"];
             
         }];
         
         
         
     } forControlEvents:UIControlEventTouchUpInside];
+    
     
 }
 
