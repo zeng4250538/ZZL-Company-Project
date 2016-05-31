@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title=@"重置密码";
+    self.navigationItem.title=@"找回密码";
  
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];

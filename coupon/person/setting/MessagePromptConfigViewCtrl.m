@@ -94,12 +94,12 @@
     if ([AppShareData instance].selected == 0) {
         
         [AppShareData instance].selected = 1;
-      //  [[AppShareData instance] setUMPush:@"NO"];
+        [[AppShareData instance] setUMPush:@"NO"];
 
     }else{
         
         [AppShareData instance].selected = 0;
-     //   [[AppShareData instance] setUMPush:@"YES"];
+        [[AppShareData instance] setUMPush:@"YES"];
         
     }
     

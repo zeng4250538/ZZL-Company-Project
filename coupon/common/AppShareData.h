@@ -111,10 +111,10 @@ extern NSString *const ReviewUpdateNotice;
 -(void)removeMallIdKVO:(id)delegate;
 
 //通知暂时注释
-////推送开关
-//-(void)setUMPush:( id)data;
-////推送开关
-//-(BOOL)getUMPush;
+//推送开关
+-(void)setUMPush:( id)data;
+//推送开关
+-(BOOL)getUMPush;
 
 
 @end

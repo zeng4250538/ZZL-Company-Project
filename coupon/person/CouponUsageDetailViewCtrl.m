@@ -81,6 +81,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [self subViewLoadData];
     
   //  self.toCommentButton.hidden = YES;

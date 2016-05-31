@@ -127,10 +127,13 @@
             
             
         }];
+        smsButton.layer.cornerRadius = 2;
         
         [smsButton bk_addEventHandler:^(id sender) {
             
             [self verificationCodeLoadData];
+            
+            
             
         } forControlEvents:UIControlEventTouchUpInside];
         
@@ -192,12 +195,20 @@
         
         if ([self.mobileTextField.text length]<1) {
             
-            [SVProgressHUD showErrorWithStatus:@"用户名为空"];
+            [SVProgressHUD showErrorWithStatus:@"手机号为空"];
             
             return;
             
         }
         
+        if ([self.mobileTextField.text length]!=11) {
+            
+            [SVProgressHUD showErrorWithStatus:@"请输入正确的手机号"];
+            
+            return;
+
+            
+        }
         
         if ([self.passwordTextField.text length]<1) {
             
@@ -224,7 +235,15 @@
         }
         
         
-        
+        LoginService *log = [LoginService new];
+        [log doRegister:_mobileTextField.text password:_repeatPasswordTextField.text verificationCode:_smsCodeTextField.text success:^(NSInteger code, NSString *message, id data) {
+            
+            [SVProgressHUD showWithStatus:@"注册成功"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+        }];
         
         
         

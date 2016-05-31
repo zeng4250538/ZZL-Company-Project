@@ -65,11 +65,34 @@
         
     }];
     
-
-    
-    
-    
 }
+
+
+-(void)doRegister:(NSString*)userName
+         password:(NSString*)password
+ verificationCode:(NSString*)verification
+          success:(void(^)(NSInteger code,NSString *message,id data))success
+          failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
+    
+      //http://192.168.6.97:8080/diamond-sis-web/v1/customer
+    
+    BaseRequest *req = [BaseRequest new];
+     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer"];
+    NSDictionary *param = @{@"phoneMsisdn":userName,@"passwordCredential":@{@"password":password},@"smscode":verification};
+    [req post:url param:param success:^(NSInteger code, id object, AFHTTPRequestOperation *operation) {
+        
+        success(code,@"",object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+       
+    }];
+    
+
+
+}
+
+
+
 
 -(void)verificationCode:(NSString *)userName password:(NSString*)password
                 success:(void(^)(NSInteger code,NSString *message,id data))success

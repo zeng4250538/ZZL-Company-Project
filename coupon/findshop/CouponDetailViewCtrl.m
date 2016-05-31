@@ -455,9 +455,9 @@
         make.bottom.equalTo(uv).offset(-10);
     }];
     
-    BOOL bools = self.data[@"addedToBasket"];
+    int bools = [self.data[@"addedToBasket"] intValue];
     
-    if (!bools) {
+    if (bools == 1) {
         addCartButton.layer.cornerRadius = 7;
         addCartButton.backgroundColor = [UIColor grayColor];
         [addCartButton setTitle:@"已领取过了，明天再来吧" forState:UIControlStateNormal];

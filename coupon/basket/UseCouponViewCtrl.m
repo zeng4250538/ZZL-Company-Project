@@ -33,6 +33,7 @@
 
 @property(nonatomic,assign)CGFloat originPrice;
 @property(nonatomic,assign)CGFloat sellPrice;
+@property(nonatomic,assign)CGFloat paymentPrice;
 
 
 
@@ -389,7 +390,7 @@
             
             [SVProgressHUD showWithStatus:@"支付中..." maskType:SVProgressHUDMaskTypeBlack];
             
-            [service requestPrepayId:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice success:^(NSInteger code, NSString *message, id data) {
+            [service requestPrepayId:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice paymentPrice:self.paymentPrice success:^(NSInteger code, NSString *message, id data) {
                 
                 NSLog(@"<----点击支付后的信息----》%@",data);
                 NSString *returnCode = data[@"returnCode"];
@@ -646,7 +647,9 @@
         
         CGFloat discountRate = [SafeString(self.data[@"discountRate"]) floatValue];
 #pragma  mark - 计算金额
-        CGFloat payMoney = money * discountRate * num;
+        CGFloat payMoney = money * discountRate;
+        
+        self.paymentPrice = payMoney*num;
         
         self.sellPrice = payMoney;
         
