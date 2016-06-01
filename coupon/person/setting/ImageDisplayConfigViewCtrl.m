@@ -91,7 +91,7 @@
             
             if (sw.on) {
                 
-               // [[AppShareData instance] setNotDisplayImageViaCell:NO];
+                [[AppShareData instance] setNotDisplayImageViaCell:NO];
                 
                 
                 
@@ -101,7 +101,7 @@
             }else{
                 
                 
-             //   [[AppShareData instance] setNotDisplayImageViaCell:YES];
+            [[AppShareData instance] setNotDisplayImageViaCell:YES];
                 
                 
                 
