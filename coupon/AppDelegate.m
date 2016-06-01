@@ -203,7 +203,7 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
     // Override point for customization after application launch.
     
     //通知暂时注释
-//    [AppShareData instance].selected = 0;
+    [AppShareData instance].selected = 0;
     
     
     
@@ -498,26 +498,21 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
     
     return ret;
     
-    
-    
-    
-    
-    
-    
-    
 }
+
 
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    
-//    if ([[AppShareData instance]getUMPush] == NO) {
-//        [UMessage unregisterForRemoteNotifications];
-//    }
-//    else{
-//    [UMessage didReceiveRemoteNotification:userInfo];
-//    }
+    //暂时注释调通知
+    if ([[AppShareData instance]getUMPush] == NO) {
+        [UMessage unregisterForRemoteNotifications];
+    }
+    else{
+    [UMessage didReceiveRemoteNotification:userInfo];
+    }
 }
+
 
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -532,6 +527,7 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
     
 }
 
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     
@@ -539,10 +535,6 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
                                stringByReplacingOccurrencesOfString: @"<" withString: @""]
                               stringByReplacingOccurrencesOfString: @">" withString: @""]
                              stringByReplacingOccurrencesOfString: @" " withString: @""] ;
-    
-    
-    
-    
     
     [iConsole info:@"token = %@",deviceTokenNString];
     

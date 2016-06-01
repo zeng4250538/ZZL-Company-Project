@@ -33,6 +33,7 @@
 
 @property(nonatomic,assign)CGFloat originPrice;
 @property(nonatomic,assign)CGFloat sellPrice;
+@property(nonatomic,assign)CGFloat paymentPrice;
 
 
 
@@ -389,7 +390,7 @@
             
             [SVProgressHUD showWithStatus:@"支付中..." maskType:SVProgressHUDMaskTypeBlack];
             
-            [service requestPrepayId:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice success:^(NSInteger code, NSString *message, id data) {
+            [service requestPrepayId:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice paymentPrice:self.paymentPrice success:^(NSInteger code, NSString *message, id data) {
                 
                 NSLog(@"<----点击支付后的信息----》%@",data);
                 NSString *returnCode = data[@"returnCode"];
@@ -641,16 +642,58 @@
         self.originPrice = money;
         
         NSString *nums = SafeString(self.data[@"onlinePaymentDiscount"]);
-        float num = [nums floatValue];
+//        float num = [nums floatValue];
 //        int number = num*10;
         
-        CGFloat discountRate = [SafeString(self.data[@"discountRate"]) floatValue];
-#pragma  mark - 计算金额
-        CGFloat payMoney = money * discountRate * num;
+        NSString *discountRate = SafeString(self.data[@"discountRate"]);
+#pragma mark - 计算金额
         
-        self.sellPrice = payMoney;
+        NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
+                                           
+                                           decimalNumberHandlerWithRoundingMode:NSRoundUp
+                                           
+                                           scale:2
+                                           
+                                           raiseOnExactness:NO
+                                           
+                                           raiseOnOverflow:NO
+                                           
+                                           raiseOnUnderflow:NO
+                                           
+                                           raiseOnDivideByZero:YES];
         
-        self.payMoneyTextField.text = [NSString stringWithFormat:@"%.2f元",payMoney];
+        
+        //打折计算
+//        CGFloat payMoney = money * discountRate;
+        //------ 打折
+        NSDecimalNumber*price1 = [NSDecimalNumber decimalNumberWithString:moneyTextField.text];
+
+        
+        NSDecimalNumber*price2 = [NSDecimalNumber decimalNumberWithString:discountRate];
+        
+        NSDecimalNumber*total = [price1 decimalNumberByMultiplyingBy:price2
+                                 
+                                                          withBehavior:roundUp];
+        NSLog(@"-------------- 打折的价格 ---------------------》%@",total);
+        //-------------
+        
+         self.sellPrice = [total floatValue];
+        
+        //-------------折上折
+        
+        NSDecimalNumber*price3 = [NSDecimalNumber decimalNumberWithString:nums];
+        
+        NSDecimalNumber*total2 = [total decimalNumberByMultiplyingBy:price3
+                                 
+                                                        withBehavior:roundUp];
+        NSLog(@"-------------- 打折上折的价格 ---------------------》%@",total2);
+        
+        //--------------
+        
+        self.paymentPrice = [total2 floatValue];
+        
+        
+        self.payMoneyTextField.text = [NSString stringWithFormat:@"%@元",total];
         
     } forControlEvents:UIControlEventEditingChanged];
     

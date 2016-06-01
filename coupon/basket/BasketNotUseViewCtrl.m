@@ -214,13 +214,13 @@
     
     
     
-    UseCouponViewCtrl *vc = [UseCouponViewCtrl new];
-    
+//    UseCouponViewCtrl *vc = [UseCouponViewCtrl new];
+//    
     NSDictionary *d = self.dataList[[indexPath row]];
-    
-    
-    
-    vc.data = d;
+//
+//    
+//    
+//    vc.data = d;
     
     SubBasketViewController *suvc  = [SubBasketViewController new];
     suvc.boolView = YES;
@@ -259,7 +259,7 @@
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             
             
-            NSString *itemId = self.dataList[indexPath.row][@"itemId"];
+            NSString *itemId = self.dataList[indexPath.row][@"id"];
             
             [service requestDeleteBasket:itemId success:^(NSInteger code, NSString *message, id data) {
                 
@@ -274,7 +274,7 @@
                 
                 [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 
-                
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshFindShopTableView" object:nil];
                 
             } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
                 
@@ -285,9 +285,6 @@
                 
                 
             }];
-            
-            
-            
             
             // [self.tableView reloadData];
             

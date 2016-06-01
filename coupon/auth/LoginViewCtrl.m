@@ -137,6 +137,8 @@
     
     loginButton.backgroundColor = [GUIConfig mainColor];
     
+    loginButton.layer.cornerRadius = 2;
+    
     [loginButton setTitle:@"登录" forState:UIControlStateNormal];
     
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -313,12 +315,15 @@
     
     if (indexPath.row==0) {
         
-      self.userNameTextField =   [GUIHelper makeTableCellTextField:@"用户名" cell:cell];
+      self.userNameTextField =   [GUIHelper makeTableCellTextField:@"手机号：" cell:cell];
+        self.userNameTextField.keyboardType = UIKeyboardTypeNumberPad;
 
     }
     
     if (indexPath.row==1) {
-       self.passwordTextField =  [GUIHelper makeTableCellTextField:@"密码" cell:cell];
+       self.passwordTextField =  [GUIHelper makeTableCellTextField:@"密码：" cell:cell];
+        
+        self.passwordTextField.keyboardType = UIKeyboardTypeAlphabet;
         
         self.passwordTextField.secureTextEntry = YES;
 

@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title=@"重置密码";
+    self.navigationItem.title=@"找回密码";
  
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -71,7 +71,7 @@
     loginButton.backgroundColor = [GUIConfig mainColor];
     
     [loginButton setTitle:@"重置密码" forState:UIControlStateNormal];
-    
+    loginButton.layer.cornerRadius = 2;
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     self.tableView.tableFooterView = footer;
@@ -161,21 +161,21 @@
     if (indexPath.row==0) {
         
         self.mobileTextField = [GUIHelper makeTableCellTextField:@"手机号：" cell:cell];
-        
+        self.mobileTextField.keyboardType = UIKeyboardTypeNumberPad;
         
     }
     
     if (indexPath.row==1) {
         
         self.passwordTextField = [GUIHelper makeTableCellTextField:@"密码：" cell:cell];
-        
+        self.passwordTextField.keyboardType = UIKeyboardTypeAlphabet;
         
     }
     
     if (indexPath.row==2) {
         
         self.repeatPasswordTextField = [GUIHelper makeTableCellTextField:@"重复密码：" cell:cell];
-        
+        self.repeatPasswordTextField.keyboardType = UIKeyboardTypeAlphabet;
         
     }
     
@@ -185,11 +185,14 @@
         
         self.smsCodeTextField = [GUIHelper makeTableCellTextField:@"短信验证码：" cell:cell];
         
+        self.smsCodeTextField.keyboardType = UIKeyboardTypeNumberPad;
+        
         UIButton *smsButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
         [cell.contentView addSubview:smsButton];
         
         [smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+        smsButton.layer.cornerRadius = 2;
         [smsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         smsButton.backgroundColor = [GUIConfig mainColor];
         

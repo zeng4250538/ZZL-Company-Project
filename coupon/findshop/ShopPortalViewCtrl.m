@@ -123,6 +123,8 @@
 
 -(void)refreshTableView{
 
+    NSLog(@"刷新了");
+    
     [self loadData];
     [_tableView reloadData];
 

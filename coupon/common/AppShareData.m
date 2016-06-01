@@ -436,26 +436,26 @@ static AppShareData *instance;
 
 
 //通知暂时注释
-////推送开关
-//-(void)setUMPush:(id)data{
-//
-//    [[NSUserDefaults description]setValue:data forKey:@"UMPush"];
-//
-//}
-////推送开关
-//-(BOOL)getUMPush{
-//    
-//    NSUserDefaults *asd = [[NSUserDefaults standardUserDefaults]objectForKey:@"UMPush"];
-//    NSString *string  = [NSString stringWithFormat:@"%@",asd];
-//    if ([string isEqualToString:@"YES"]) {
-//        
-//        return YES;
-//        
-//    }
-//    
-//        return NO;
-//    
-//}
+//推送开关
+-(void)setUMPush:(id)data{
+
+    [[NSUserDefaults standardUserDefaults]setValue:data forKey:@"UMPush"];
+
+}
+//推送开关
+-(BOOL)getUMPush{
+    
+    NSUserDefaults *asd = [[NSUserDefaults standardUserDefaults]objectForKey:@"UMPush"];
+    NSString *string  = [NSString stringWithFormat:@"%@",asd];
+    if ([string isEqualToString:@"YES"]) {
+        
+        return YES;
+        
+    }
+    
+        return NO;
+    
+}
 
 
 

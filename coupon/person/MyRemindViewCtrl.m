@@ -223,6 +223,8 @@
             
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshFindShopTableView" object:nil];
+            
             [SVProgressHUD showSuccessWithStatus:@"取消提醒成功"];
             
             

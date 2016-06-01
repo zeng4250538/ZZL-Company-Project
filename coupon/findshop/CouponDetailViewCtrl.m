@@ -455,9 +455,9 @@
         make.bottom.equalTo(uv).offset(-10);
     }];
     
-    BOOL bools = self.data[@"addedToBasket"];
+    int bools = [self.data[@"addedToBasket"] intValue];
     
-    if (!bools) {
+    if (bools == 1) {
         addCartButton.layer.cornerRadius = 7;
         addCartButton.backgroundColor = [UIColor grayColor];
         [addCartButton setTitle:@"已领取过了，明天再来吧" forState:UIControlStateNormal];
@@ -697,8 +697,8 @@
         
         
         CLLocationCoordinate2D loc;
-        loc.latitude = 23.138756;
-        loc.longitude = 113.32881;
+        loc.latitude = [self.data[@"latitude"] floatValue];
+        loc.longitude = [self.data[@"longitude"] floatValue];
         vc.endLocation = loc;
         
         
@@ -996,7 +996,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     // Configure the cell...
     
     for (UIView *uv in [cell.contentView subviews]) {
@@ -1035,7 +1035,7 @@
     }
     
     if ([indexPath section]==4) {
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         [self makeCell5:cell];
        
     }
@@ -1201,6 +1201,12 @@
         
         
     }];
+
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 }
 

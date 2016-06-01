@@ -90,9 +90,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
     [self loadData];
-    
-    
     
 }
 
@@ -140,7 +139,6 @@
     
     [service requestCuponHistoryWithPage:1 per_page:10
                          success:^(NSInteger code, NSString *message, id data) {
-        
         
         self.data = [data mutableCopy];
         
@@ -198,7 +196,6 @@
         CommentSubmitViewCtrl *vc = [CommentSubmitViewCtrl new];
         
         vc.data= data;
-        
         
         [self.navigationController pushViewController:vc animated:YES];
         
