@@ -136,15 +136,12 @@
     
     SafeLoadUrlImage(self.logoImageView, url, ^{
         
-//        [self setNeedsLayout];
+        //[self setNeedsLayout];
         
     });
     
     
     [self.logoImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        [self.logoImageView setNeedsLayout];
-        
     }];
   
     

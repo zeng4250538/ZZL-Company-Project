@@ -439,7 +439,7 @@ static AppShareData *instance;
 //推送开关
 -(void)setUMPush:(id)data{
 
-    [[NSUserDefaults description]setValue:data forKey:@"UMPush"];
+    [[NSUserDefaults standardUserDefaults]setValue:data forKey:@"UMPush"];
 
 }
 //推送开关

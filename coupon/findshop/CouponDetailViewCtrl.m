@@ -697,8 +697,8 @@
         
         
         CLLocationCoordinate2D loc;
-        loc.latitude = 23.138756;
-        loc.longitude = 113.32881;
+        loc.latitude = [self.data[@"latitude"] floatValue];
+        loc.longitude = [self.data[@"longitude"] floatValue];
         vc.endLocation = loc;
         
         
