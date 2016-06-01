@@ -55,6 +55,10 @@ extern NSString *const ReviewUpdateNotice;
 
 @property(nonatomic,copy)NSString *accessToken;
 
+-(void)setNotDisplayImageViaCell:(BOOL)notDisplayImageViaCell;
+
+
+
 +(instancetype)instance;
 
 

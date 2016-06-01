@@ -195,6 +195,24 @@ void SafeLoadUrlImage(UIView *uv,NSURL *url,block_t completionBlock){
         label.lineBreakMode = NSLineBreakByWordWrapping;
         
         
+        if ([uv isKindOfClass:[UIImageView class]]) {
+            UIImageView *imgView = (UIImageView*)uv;
+            imgView.image = nil;
+        }
+        
+        
+        if ([uv isKindOfClass:[UIButton class]]) {
+            
+            UIButton *btn = (UIButton*)uv;
+            
+            [btn setBackgroundImage:nil forState:UIControlStateNormal];
+           // imgView.image = nil;
+            
+            
+        }
+        
+        
+        
         
         [uv addSubview:label];
         
@@ -209,12 +227,14 @@ void SafeLoadUrlImage(UIView *uv,NSURL *url,block_t completionBlock){
     }
     
     
-    [[uv viewWithTag:1] removeFromSuperview];
     
     
     
     if ([uv isKindOfClass:[UIImageView class]]) {
         
+        
+        [[uv viewWithTag:1] removeFromSuperview];
+
         
         UIImageView *imgView = (UIImageView*)uv;
         
@@ -228,6 +248,10 @@ void SafeLoadUrlImage(UIView *uv,NSURL *url,block_t completionBlock){
     }
     
     if ([uv isKindOfClass:[UIButton class]]) {
+        
+        [[uv viewWithTag:1] removeFromSuperview];
+        
+
         
         
         UIButton *btnView = (UIButton*)uv;

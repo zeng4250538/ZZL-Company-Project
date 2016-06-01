@@ -118,6 +118,19 @@ static AppShareData *instance;
     
 }
 
+-(BOOL)notDisplayImageViaCell{
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"notdisplayimageviacell"];
+    
+}
+-(void)setNotDisplayImageViaCell:(BOOL)notDisplayImageViaCell{
+    
+    [[NSUserDefaults standardUserDefaults] setBool:notDisplayImageViaCell forKey:@"notdisplayimageviacell"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+}
 
 
 

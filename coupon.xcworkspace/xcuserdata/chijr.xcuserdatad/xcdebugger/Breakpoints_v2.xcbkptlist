@@ -57,8 +57,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "207"
             endingLineNumber = "207"
-            landmarkName = "-doLoad:"
-            landmarkType = "5">
+            landmarkName = "@implementation CouponDetailViewCtrl"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -148,12 +148,12 @@
                   moduleName = "coupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chijr/working/coupon/coupon/findshop/CouponDetailViewCtrl.m"
-                  timestampString = "486234426.269539"
+                  timestampString = "486463452.503403"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "2164">
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "1769">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -163,11 +163,11 @@
                   moduleName = "coupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chijr/working/coupon/coupon/findshop/CouponDetailViewCtrl.m"
-                  timestampString = "486234426.26982"
+                  timestampString = "486463452.503564"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
                   offsetFromSymbolStart = "40">
                </Location>
             </Locations>
