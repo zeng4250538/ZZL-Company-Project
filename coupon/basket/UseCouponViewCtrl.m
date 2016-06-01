@@ -342,7 +342,7 @@
         
         
         
-#pragma mark 支付功能
+#pragma mark - 支付功能
         
         
         NSString *moneyString = self.payMoneyTextField.text;
@@ -469,7 +469,7 @@
             
             
             
-            [service requestAliPaySign:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice success:^(NSInteger code, NSString *message, id data) {
+            [service requestAliPaySign:couponInstanceId originalPrice:self.originPrice sellingPrice:self.sellPrice paymentPrice:self.paymentPrice success:^(NSInteger code, NSString *message, id data) {
                 
                 NSLog(@"<----点击支付后的信息----》%@",data);
                 NSString *returnCode = data[@"returnCode"];

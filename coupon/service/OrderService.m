@@ -72,7 +72,8 @@
 }
 
 -(void)requestAliPaySign:(NSString*)couponInstanceId originalPrice:(CGFloat)originalPrice
-           sellingPrice:(CGFloat)sellingPrice
+            sellingPrice:(CGFloat)sellingPrice
+            paymentPrice:(CGFloat)paymentPrice
                 success:(void(^)(NSInteger code,NSString *message,id data))success
                 failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
@@ -103,9 +104,9 @@
     
     NSString *sellPriceStr = [NSString stringWithFormat:@"%.2f",sellingPrice];
     
+     NSString *paymentPrices = [NSString stringWithFormat:@"%.2f",paymentPrice];
     
-    
-    NSDictionary *parm = @{@"couponInstanceId":couponInstanceId,@"originalPrice":originalPriceStr,@"sellingPrice":sellPriceStr};
+    NSDictionary *parm = @{@"couponInstanceId":couponInstanceId,@"originalPrice":originalPriceStr,@"sellingPrice":sellPriceStr,@"paymentPrice":paymentPrices};
     
     
     [req post:url param:parm success:^(NSInteger code, id object,AFHTTPRequestOperation *operation) {

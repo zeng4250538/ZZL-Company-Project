@@ -80,6 +80,8 @@ static SimpleAudioPlayer *sharedInstance = nil;
 	return nil;
     
 }
+
+
 - (void) playFiles:(NSArray*) filesList withCompletionBlock:(CompletionBlock) completion
 {
     __block int idx = 0;

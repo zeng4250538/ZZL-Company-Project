@@ -202,8 +202,13 @@
 //    walkingRoutePlanOption.from = start;
 //    walkingRoutePlanOption.to = end;
     
+    start.name = @"南兴花园";
+    end.name = @"景辉苑";
+    
     transitRouteSearchOption.from= start;
     transitRouteSearchOption.to = end;
+    
+    
     
     //（步行）
 //    BOOL flag = [_searcher walkingSearch:walkingRoutePlanOption];
