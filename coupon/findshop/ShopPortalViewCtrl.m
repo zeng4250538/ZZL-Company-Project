@@ -51,6 +51,8 @@
 
 @property(nonatomic,strong)UIButton *mallButton;
 
+@property(nonatomic,assign)NSUInteger pageCount;    //当前总页
+
 
 
 @end
@@ -60,6 +62,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    self.pageCount = 1;
     
     self.navigationItem.title=@"找商家";
     
@@ -84,6 +88,34 @@
     [self.tableView registerClass:[CouponInfoTableViewCell class] forCellReuseIdentifier:@"cell2"];
     
     
+    [self makeSearchBar];
+   
+    [self makeBarItem];
+    
+    
+    [[AppShareData instance] addMallIdKVO:self];
+    
+    
+    
+    [self makePullRefresh];
+    
+    [self loadData];
+    
+    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+
+
+    
+    
+    
+    
+    
+}
+
+#pragma mark - 下拉和上拉刷新
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self doLoad:^(BOOL ret) {
@@ -96,21 +128,53 @@
     }];
     
     
-    [self makeSearchBar];
+    self.tableView.mj_footer = [MJRefreshAutoGifFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+   
+    
+    
+    
+    
+}
 
-    
-    [self makeBarItem];
-    
-    
-    [self loadData];
-    
-    [[AppShareData instance] addMallIdKVO:self];
-    
-    
-    [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
+
+#pragma mark - 下拉装载
+-(void)doLoadNextPage:(NSUInteger)page completion:(void (^)(BOOL))completion{
     
     
     
+    ShopService *service = [ShopService new];
+    
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    
+    [service requestNearbyShop:mallId page:page+1 per_page:10  success:^(NSInteger code, NSString *message, id data) {
+        
+        self.nearByShopData = [self.nearByShopData arrayByAddingObjectsFromArray:data];
+        
+        [self.tableView reloadData];
+        
+        completion(YES);
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+         completion(NO);
+        
+    }];
     
     
 }
@@ -206,8 +270,13 @@
 }
 
 
+
+
 -(void)doLoad:(void(^)(BOOL ret))completion{
     
+    
+    self.pageCount=1;
+
     
     NSString *mallId = [AppShareData instance].mallId;
 

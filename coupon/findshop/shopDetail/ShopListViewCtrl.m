@@ -17,6 +17,7 @@
 @interface ShopListViewCtrl ()
 
 @property(nonatomic,strong)NSArray *shopList;
+@property(nonatomic,assign)NSUInteger pageCount;
 
 
 @end
@@ -34,12 +35,60 @@
 
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
+    [self makePullRefresh];
+    
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+    self.tableView.mj_footer = [MJRefreshAutoStateFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+}
+
+
+
 
 
 -(void)loadData{
@@ -139,6 +188,80 @@
     
     
   
+    
+    
+}
+
+
+
+-(void)doLoadNextPage:(NSUInteger)page completion:(void (^)(BOOL))completion{
+    
+    
+    
+    ShopService *service = [ShopService new];
+    
+    
+    
+    
+    NSString *mallId = [AppShareData instance].mallId;
+    
+    
+    
+    
+    if (self.shopQueryType == ShopQueryTypeRecommend) {
+        
+        
+        [service requestRecommendShop:mallId page:page pageCount:10 success:^(NSInteger code, NSString *message, id data) {
+            
+            
+            
+            self.shopList = [self.shopList arrayByAddingObjectsFromArray:data];
+            
+            
+              
+            [self.tableView reloadData];
+            
+            completion(YES);
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            
+            
+            completion(NO);
+            
+        }];
+        
+        
+    }
+    
+    if (self.shopQueryType == ShopQueryTypeNearBy) {
+        
+        
+        
+        [service requestNearbyShop:mallId page:page per_page:10 success:^(NSInteger code, NSString *message, id data) {
+            
+            
+            self.shopList = [self.shopList arrayByAddingObjectsFromArray:data];
+            
+            
+            
+            
+            [self.tableView reloadData];
+            
+            completion(YES);
+            
+        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+            completion(NO);
+            
+        }];
+        
+        
+        
+        
+    }
+
+    
+    
+
     
     
 }
