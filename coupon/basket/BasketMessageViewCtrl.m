@@ -20,6 +20,7 @@
 @property(nonatomic,strong)NSArray *dataList;
 
 @property(nonatomic,strong)NSDictionary *dataDic;
+@property(nonatomic,assign)NSUInteger pageCount;
 
 @end
 
@@ -55,6 +56,8 @@
     
     [self loadData];
     
+    [self makePullRefresh];
+    
     
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
@@ -64,6 +67,47 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    
+    
+    
+}
+
+
 
 
 -(void)loadData{
@@ -128,6 +172,31 @@
     
 }
 
+
+-(void)doLoadNextPage:(NSUInteger)page completion:(void(^)(BOOL ret))completion{
+    
+    CouponMessageService *service = [CouponMessageService new];
+    
+    [service requestCouponMessageWithPage:page per_page:10 isRead:NO sort:@""
+                                  success:^(NSInteger code, NSString *message, id data) {
+                                      
+                                      self.dataList = [self.dataList arrayByAddingObjectsFromArray:data];
+                                      
+                                      [self.tableView reloadData];
+                                      
+                                      completion(YES);
+                                      
+                                      
+                                  } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                                      
+                                      
+                                      completion(NO);
+                                      
+                                  }];
+    
+    
+    
+}
 
 
 

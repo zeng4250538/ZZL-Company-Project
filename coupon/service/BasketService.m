@@ -44,7 +44,7 @@
 
 
 
--(void)requestNotUseStatus:(NSString *)status success:(void(^)(NSInteger code,NSString *message,id data))success
+-(void)requestNotUseStatus:(NSString *)status page:(NSUInteger)page per_page:(NSUInteger)per_page success:(void(^)(NSInteger code,NSString *message,id data))success
              failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     BaseRequest *req = [BaseRequest new];
@@ -52,7 +52,7 @@
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/couponbasket/basketitem"];
     
     
-    NSDictionary *parm = @{@"userid":[AppShareData instance].customId,@"status":status};
+    NSDictionary *parm = @{@"userid":[AppShareData instance].customId,@"status":status,@"page":@(page),@"per_page":@(per_page)};
     
     
     //[AppShareData instance].customId

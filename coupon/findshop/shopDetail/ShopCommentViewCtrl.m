@@ -15,6 +15,9 @@
 @interface ShopCommentViewCtrl ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSArray *data;
+
+@property (nonatomic,assign)NSUInteger pageCount;
+
 @end
 
 @implementation ShopCommentViewCtrl
@@ -24,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title=@"我的评论";
+    self.navigationItem.title=@"商家评论";
     
     
     self.tableView = [GUIHelper makeTableView:self.view delegate:self];
@@ -38,9 +41,55 @@
     [self loadData];
     
     
+    [self makePullRefresh];
+    
+    
     
     
 }
+
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    
+    
+    
+}
+
+
+
+
 
 
 -(void)loadData{
@@ -102,6 +151,27 @@
 
 }
 
+-(void)doLoadNextPage:(NSUInteger)page completion:(void(^)(BOOL ret))completion{
+    
+    CommentService *service = [CommentService new];
+    
+    [service requestCommentWithShop:self.shopId page:page per_page:10 sort:@""
+                            success:^(NSInteger code, NSString *message, id data) {
+                                
+                                
+                                self.data = [self.data arrayByAddingObjectsFromArray:data];
+                                
+                                [self.tableView reloadData];
+                                
+                                completion(YES);
+                            } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                                
+                                completion(NO);
+                                
+                            }];
+    
+    
+}
 
 
 

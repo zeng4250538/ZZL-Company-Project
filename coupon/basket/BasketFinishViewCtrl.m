@@ -16,6 +16,9 @@
 #import "BasketNotUseTableViewCell.h"
 @interface BasketFinishViewCtrl ()
 
+@property(nonatomic,assign)NSUInteger pageCount;
+
+
 @end
 
 @implementation BasketFinishViewCtrl
@@ -31,6 +34,9 @@
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
     [self loadData];
+    
+    
+    [self makePullRefresh];
 
     
     // Uncomment the following line to preserve selection between presentations.
@@ -49,6 +55,46 @@
     
     
 }
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    
+    
+    
+}
+
+
 
 
 -(void)loadData{
@@ -97,7 +143,7 @@
     
     
     
-    [service requestNotUseStatus:@"已过期" success:^(NSInteger code, NSString *message, id data) {
+    [service requestNotUseStatus:@"已过期" page:1 per_page:5  success:^(NSInteger code, NSString *message, id data) {
         
         self.dataList = data;
         
@@ -127,6 +173,45 @@
         
     }];
    
+    
+}
+-(void)doLoadNextPage:(NSUInteger)page completion:(void(^)(BOOL ret))completion{
+    
+    
+    BasketService *service = [BasketService new];
+    
+    
+    
+    [service requestNotUseStatus:@"已过期" page:page per_page:10  success:^(NSInteger code, NSString *message, id data) {
+        
+        self.dataList = [self.dataList arrayByAddingObjectsFromArray:data];
+        
+        [self.tableView reloadData];
+        
+        
+        completion(YES);
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        if (code>=400 && code<500) {
+            
+            
+            
+            [SVProgressHUD showErrorWithStatus:@"没有数据"];
+            
+            
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:@"后台数据错误"];
+            
+        }
+        
+        completion(NO);
+        
+    }];
+    
     
 }
 

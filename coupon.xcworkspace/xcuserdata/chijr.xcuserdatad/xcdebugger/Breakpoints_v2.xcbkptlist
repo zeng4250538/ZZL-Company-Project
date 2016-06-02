@@ -67,22 +67,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "coupon/person/PersonDetailInfoViewCtrl.m"
-            timestampString = "484819253.814844"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "coupon/basket/UseCouponViewCtrl.m"
             timestampString = "485789680.478783"
             startingColumnNumber = "9223372036854775807"
@@ -131,44 +115,60 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "coupon/findshop/CouponDetailViewCtrl.m"
-            timestampString = "486198886.068477"
+            filePath = "coupon/findshop/couponDetail/GoToMapViewCtrl.m"
+            timestampString = "486469228.936919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "-onGetTransitRouteResult:result:errorCode:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "coupon/findshop/CouponDetailViewCtrl.m"
+            timestampString = "486568806.969674"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
+            landmarkName = "-makeHeaderView"
             landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[CouponDetailViewCtrl viewDidLoad]"
+                  symbolName = "-[CouponDetailViewCtrl makeHeaderView]"
                   moduleName = "coupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chijr/working/coupon/coupon/findshop/CouponDetailViewCtrl.m"
-                  timestampString = "486492079.372162"
+                  timestampString = "486569015.438561"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "1769">
+                  startingLineNumber = "379"
+                  endingLineNumber = "379"
+                  offsetFromSymbolStart = "706">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__35-[CouponDetailViewCtrl viewDidLoad]_block_invoke88"
+                  symbolName = "__38-[CouponDetailViewCtrl makeHeaderView]_block_invoke"
                   moduleName = "coupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chijr/working/coupon/coupon/findshop/CouponDetailViewCtrl.m"
-                  timestampString = "486492079.372319"
+                  timestampString = "486569015.438844"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "40">
+                  startingLineNumber = "382"
+                  endingLineNumber = "382"
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -179,13 +179,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "coupon/findshop/couponDetail/GoToMapViewCtrl.m"
-            timestampString = "486469228.936919"
+            filePath = "coupon/findshop/CouponDetailViewCtrl.m"
+            timestampString = "486568931.110348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "-onGetTransitRouteResult:result:errorCode:"
+            startingLineNumber = "366"
+            endingLineNumber = "366"
+            landmarkName = "-makeHeaderView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -31,8 +31,11 @@
  *  @param success 成功回调
  *  @param failure 失败回调
  */
--(void)requestNotUseStatus:(NSString *)status success:(void(^)(NSInteger code,NSString *message,id data))success
-             failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
+
+-(void)requestNotUseStatus:(NSString *)status page:(NSUInteger)page per_page:(NSUInteger)per_page success:(void(^)(NSInteger code,NSString *message,id data))success
+                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
+
 
 
 

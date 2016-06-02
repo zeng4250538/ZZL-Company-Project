@@ -378,16 +378,20 @@
     
     
     
+    SafeLoadUrlImage(uv, url, ^{
+        
+        
+    });
     
-    [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo60@3x.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        
-        self.couponImage = image;
-        
-        
-        
-        
-    }];
+    
+//    [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo60@3x.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        
+//        
+//        
+//        
+//        
+//    }];
     
     
     
