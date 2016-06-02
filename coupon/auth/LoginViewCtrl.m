@@ -321,6 +321,7 @@
     }
     
     if (indexPath.row==1) {
+        
        self.passwordTextField =  [GUIHelper makeTableCellTextField:@"密码：" cell:cell];
         
         self.passwordTextField.keyboardType = UIKeyboardTypeAlphabet;

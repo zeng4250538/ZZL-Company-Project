@@ -43,4 +43,15 @@
                 success:(void(^)(NSInteger code,NSString *message,id data))success
                 failure:(void(^)(id data))failure;
 
+
+//重置密码
+-(void)modifyPassword:(NSString *)passWord withNewPassword:(NSString *)newPassword withRepeatPassword:(NSString *)repeatPassword success:(void(^)(id data))success failure:(void(^)(id data))failure;
+
+
+//验证验证码是否通过
+-(void)verificationCodeIsPassedModify:(NSString *)modify withCode:(NSString *)code withType:(NSString *)type success:(void(^)(id data))success failure:(void(^)(id data))failure;
+
+
+
+
 @end

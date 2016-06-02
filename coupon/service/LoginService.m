@@ -95,7 +95,7 @@
 
 
 
-
+//获取验证码
 -(void)verificationCode:(NSString *)userName password:(NSString*)password
                 success:(void(^)(NSInteger code,NSString *message,id data))success
                 failure:(void(^)(id data))failure{
@@ -107,7 +107,7 @@
     NSString *strTime = [format stringFromDate:time];
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/smscode"];
-    NSDictionary *param = @{@"mobile":userName,@"code":password,@"createdTime":strTime};
+    NSDictionary *param = @{@"mobile":userName,@"createdTime":strTime,@"type":password};
     [req post:url param:param success:^(NSInteger code, id object, AFHTTPRequestOperation *operation) {
         success(code,@"",object);
     } failure:^(NSInteger code, NSString *content) {
@@ -118,7 +118,43 @@
 
 }
 
-    
+//重置密码
+-(void)modifyPassword:(NSString *)passWord withNewPassword:(NSString *)newPassword withRepeatPassword:(NSString *)repeatPassword success:(void(^)(id data))success failure:(void(^)(id data))failure{
 
+    
+        //http://183.6.190.75:9780/diamond-sis-web/v1/customer/15818865756/password
+    
+        BaseRequest *req = [BaseRequest new];
+        NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/customer/%@/password",[AppShareData instance].customId];
+        NSDictionary *param = @{@"oldPassword":passWord,@"newPassword":newPassword,@"repeatPassword":repeatPassword};
+        [req put:url param:param success:^(NSInteger code, id object) {
+    
+            success(object);
+        } failure:^(NSInteger code, NSString *content) {
+            failure(content);
+        }];
+
+}
+
+
+//验证验证码是否通过
+-(void)verificationCodeIsPassedModify:(NSString *)modify withCode:(NSString *)code withType:(NSString *)type success:(void(^)(id data))success failure:(void(^)(id data))failure{
+    
+    //http://192.168.6.97:8080/diamond-sis-web/v1/verifySms?mobile=15360894730&code=1111111&type=1
+    
+    BaseRequest *req = [BaseRequest new];
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/verifySms"];
+    NSDictionary *param = @{@"mobile":modify,@"code":code,@"type":type};
+    [req get:url param:param success:^(NSInteger code, id object) {
+        
+        success(object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        failure(content);
+        
+    }];
+
+}
 
 @end

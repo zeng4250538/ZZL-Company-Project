@@ -46,7 +46,7 @@
 
 @implementation AppDelegate
 
-
+//YES 内网     NO外网
 BOOL InLan = NO;
 
 NSString *ALiPayNotice=@"alipaynotice";
