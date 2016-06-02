@@ -125,7 +125,6 @@
     
     self.nameLabel.text = SafeString(self.data[@"shopName"]);
     
-    NSURL *url = SafeUrl(self.data[@"couponPhotoUrl"]);
     
     
     
@@ -134,16 +133,8 @@
     self.detailLabel.text = SafeString(self.data[@"couponName"]);
     
     
-    SafeLoadUrlImage(self.logoImageView, url, ^{
-        
-        //[self setNeedsLayout];
-        
-    });
+     
     
-    
-    [self.logoImageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    }];
-  
     
     if (!SafeEmpty(self.data[@"reviewId"])) {
         
@@ -185,6 +176,23 @@
     
     
 }
+
+-(void)updateData{
+    
+    NSURL *url = SafeUrl(self.data[@"couponPhotoUrl"]);
+    
+    
+    
+    SafeLoadUrlImage(self.logoImageView, url, ^{
+        
+        
+    });
+    
+    
+    
+    
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

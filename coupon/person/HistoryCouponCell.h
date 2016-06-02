@@ -18,4 +18,6 @@ typedef void(^CommentTouchBlock)(NSDictionary *data);
 
 @property(nonatomic,copy)CommentTouchBlock commentTouchBlock;
 
+-(void)updateData;
+
 @end

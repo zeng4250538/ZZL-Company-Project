@@ -52,11 +52,18 @@
             NSURL *url = SafeUrl(self.data[@"smallPhotoUrl"]);
             
             
-            [uv sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            SafeLoadUrlImage(uv, url, ^{
                 
-                [uv setNeedsDisplay];
-            }];
+                 [uv setNeedsDisplay];
+                
+            });
             
+            
+//            [uv sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                
+//               
+//            }];
+//            
             
             
             
