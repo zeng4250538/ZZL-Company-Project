@@ -14,8 +14,10 @@
 
 
 
+
 @interface HistoryCouponUsageViewCtrl ()
 @property(nonatomic,strong)NSMutableArray *data;
+@property(nonatomic,assign)NSUInteger pageCount;
 
 //准备修改的行
 @property(nonatomic,assign)NSUInteger updateRow;
@@ -40,6 +42,9 @@
     
   
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotice:) name: ReviewUpdateNotice object:nil];
+    
+    
+    [self makePullRefresh];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -83,6 +88,49 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    
+    
+    
+}
+
+
+
 
 
 
@@ -162,6 +210,36 @@
     
 }
 
+
+-(void)doLoadNextPage:(NSUInteger)page completion:(void(^)(BOOL ret))completion{
+    
+    
+    CustomerService *service = [CustomerService new];
+    
+    [service requestCuponHistoryWithPage:page per_page:10
+                                 success:^(NSInteger code, NSString *message, id data) {
+                                     
+                                     [self.data addObjectsFromArray:data];
+                                     
+                                     [self.tableView reloadData];
+                                     
+                                     completion(YES);
+                                     
+                                     
+                                     
+                                 } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                                     
+                                     
+                                     completion(NO);
+                                     
+                                     
+                                     
+                                     
+                                 }];
+    
+    
+    
+}
 
 
 

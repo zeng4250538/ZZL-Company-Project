@@ -61,7 +61,7 @@
     }];
     
     
-    self.tableView.mj_footer = [MJRefreshAutoStateFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
         
         
         [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {

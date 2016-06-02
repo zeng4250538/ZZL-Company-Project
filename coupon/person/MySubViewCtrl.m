@@ -17,6 +17,7 @@
 
 @property(nonatomic,strong)NSMutableArray *dataList;
 @property(nonatomic,strong)ShopInfoViewCtrl *vcs;
+@property(nonatomic,assign)NSUInteger pageCount;
 
 @end
 
@@ -46,6 +47,10 @@
     
     [self loadData];
     
+    [self makePullRefresh];
+    
+    
+    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -63,8 +68,52 @@
     self.navigationController.navigationBar.translucent = NO;
 
     [self loadData];
-    [_tableView reloadData];
+    [self.tableView reloadData];
 }
+
+
+
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+//    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+//        
+//        
+//        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+//            [self.tableView.mj_footer endRefreshing];
+//            
+//            if (ret) {
+//                self.pageCount = self.pageCount+1;
+//            }
+//            
+//            
+//        }];
+//        
+//        
+//        
+//    }];
+    
+    
+    
+    
+}
+
+
+
 
 -(void)loadData{
 
@@ -232,6 +281,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     
     
     

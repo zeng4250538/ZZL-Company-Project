@@ -51,9 +51,9 @@
         
         
         [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView).offset(20);
-            make.top.equalTo(self.contentView).offset(10);
-            make.bottom.equalTo(self.contentView).offset(-10);
+            make.left.equalTo(self.contentView).offset(15);
+            make.centerY.equalTo(self.contentView);
+            make.height.equalTo(@80);
             make.width.equalTo(@120);
         }];
         

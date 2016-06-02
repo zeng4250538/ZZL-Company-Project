@@ -63,7 +63,7 @@
     }];
     
     
-    self.tableView.mj_footer = [MJRefreshAutoStateFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
         
         
         [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
@@ -79,8 +79,6 @@
         
         
     }];
-    
-    
     
     
     
@@ -215,6 +213,16 @@
             
             
             
+            if ([data count]==0) {
+                
+                [SVProgressHUD showInfoWithStatus:@"已经到达最底" maskType:SVProgressHUDMaskTypeBlack];
+                completion(NO);
+                return ;
+                
+            }
+
+            
+            
             self.shopList = [self.shopList arrayByAddingObjectsFromArray:data];
             
             
@@ -238,6 +246,16 @@
         
         
         [service requestNearbyShop:mallId page:page per_page:10 success:^(NSInteger code, NSString *message, id data) {
+            
+            if ([data count]==0) {
+                
+                [SVProgressHUD showInfoWithStatus:@"已经到达最底" maskType:SVProgressHUDMaskTypeBlack];
+                completion(NO);
+                return ;
+                
+            }
+            
+
             
             
             self.shopList = [self.shopList arrayByAddingObjectsFromArray:data];

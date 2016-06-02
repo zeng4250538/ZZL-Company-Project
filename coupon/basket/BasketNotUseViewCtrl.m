@@ -16,13 +16,12 @@
 #import "BasketNotUseTableViewCell.h"
 #import "SubBasketViewController.h"
 
-//<<<<<<< HEAD
 #import "AppShareData.h"
-//=======
 #import "UseCouponViewCtrl.h"
 
-//>>>>>>> 33fe839e0654da87eda8e68b79b7d17fea1112af
 @interface BasketNotUseViewCtrl ()
+@property(nonatomic,assign)NSUInteger pageCount;
+
 
 @end
 
@@ -45,12 +44,56 @@
     [self loadData];
     
     
+    [self makePullRefresh];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    
+    
+    
+}
+
+
 
 
 
@@ -111,7 +154,7 @@
     
     
     
-    [service requestNotUseStatus:@"未消费" success:^(NSInteger code, NSString *message, id data) {
+    [service requestNotUseStatus:@"未消费" page:1 per_page:10 success:^(NSInteger code, NSString *message, id data) {
         
         self.dataList = data;
         
@@ -150,6 +193,57 @@
     
     
 }
+
+
+-(void)doLoadNextPage:(NSUInteger)page completion:(void(^)(BOOL ret))completion{
+    
+    
+    BasketService *service = [BasketService new];
+    
+    
+    [service requestNotUseStatus:@"未消费" page:1 per_page:10 success:^(NSInteger code, NSString *message, id data) {
+        
+      //  self.dataList = data;
+        
+        self.dataList = [self.dataList arrayByAddingObjectsFromArray:data];
+        
+        
+        [self.tableView reloadData];
+        
+        
+        completion(YES);
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        
+        if (code>=400 && code<500) {
+            
+            
+            
+            [SVProgressHUD showErrorWithStatus:@"没有数据"];
+            
+            
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:@"后台数据错误"];
+            
+            
+        }
+        
+        completion(NO);
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
