@@ -111,6 +111,9 @@
 
 
     
+//    SafeLoadUrlImage(_image, , <#^(void)completionBlock#>)
+    
+    
     [_image sd_setImageWithURL:data[@"couponPhotoUrl"] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
 //        [self setNeedsLayout];
