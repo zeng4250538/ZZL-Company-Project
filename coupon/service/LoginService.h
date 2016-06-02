@@ -51,7 +51,8 @@
 //验证验证码是否通过
 -(void)verificationCodeIsPassedModify:(NSString *)modify withCode:(NSString *)code withType:(NSString *)type success:(void(^)(id data))success failure:(void(^)(id data))failure;
 
-
+//找回密码
+-(void)retrievePasswordPhone:(NSString *)phone withNewPassword:(NSString *)newPassword withRepeatPassword:(NSString *)repeatPassword success:(void(^)(id data))success failure:(void(^)(id data))failure;
 
 
 @end

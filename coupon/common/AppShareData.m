@@ -399,11 +399,11 @@ static AppShareData *instance;
     
 }
 
--(void)saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken{
+-(void)customId:(NSString *)customId saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken{
     
     [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserNameKey];
     
-    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:CustomIdKey];
+    [[NSUserDefaults standardUserDefaults] setObject:customId forKey:CustomIdKey];
     
     [[NSUserDefaults standardUserDefaults] setObject:password forKey:PasswordKey];
     

@@ -67,7 +67,7 @@ extern NSString *const ReviewUpdateNotice;
 
 -(void)loginOut;
 
--(void)saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken ;
+-(void)customId:(NSString *)customId saveLogin:(NSString*)userName password:(NSString*)password accessToken:(NSString*)accessToken ;
 
 -(void)setCity:(NSString *)city;
 

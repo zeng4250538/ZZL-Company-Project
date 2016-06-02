@@ -300,7 +300,7 @@
             self.data = ary;
             
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            
+            [self.tableView reloadData];
             [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshFindShopTableView" object:nil];
             
             [SVProgressHUD showSuccessWithStatus:@"取消提醒成功"];

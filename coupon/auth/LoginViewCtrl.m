@@ -188,15 +188,26 @@
             
             NSString *accessToken = returnData[@"access_token"];
             
-            [[AppShareData instance] saveLogin:userName password:password accessToken:accessToken];
+//            [[AppShareData instance] saveLogin:userName password:password accessToken:accessToken];
+            
+            MyInformationSevice *ms = [MyInformationSevice new];
+            
+            [ms requestMyInformationCustomerID:_userNameTextField.text success:^(id data) {
+                
+                [[AppShareData instance] customId:data[@"id"] saveLogin:userName password:password accessToken:accessToken];
+                //发送通知
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"updatePageView" object:nil];
+                
+            } failure:^(id code) {
+                
+            }];
             
 //            if (self.loginEndBlock) {
 //                
 //                self.loginEndBlock(YES);
 //            }
             
-            //发送通知
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"updatePageView" object:nil];
+            
             
             
                 [self dismissViewControllerAnimated:YES completion:^{}];
