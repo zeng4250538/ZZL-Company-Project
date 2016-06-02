@@ -158,7 +158,7 @@
 		5796FA871C481AB6004CA23B /* gocart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5796FA861C481AB6004CA23B /* gocart@2x.png */; };
 		579E54201CD1A00900B6C9E4 /* ShopDetailViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E541F1CD1A00900B6C9E4 /* ShopDetailViewCtrl.m */; };
 		579E54231CD1D2BA00B6C9E4 /* ReminderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 579E54221CD1D2BA00B6C9E4 /* ReminderService.m */; };
-		57A4F6D01CCA00D2004B6549 /* GoToMapViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A4F6CF1CCA00D2004B6549 /* GoToMapViewCtrl.m */; };
+		57A4F6D01CCA00D2004B6549 /* GoToMapViewCtrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 57A4F6CF1CCA00D2004B6549 /* GoToMapViewCtrl.mm */; };
 		57A94E581C37DBFD00BE0022 /* tab_brand_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E551C37DBFD00BE0022 /* tab_brand_icon@2x.png */; };
 		57A94E591C37DBFD00BE0022 /* tab_person_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E561C37DBFD00BE0022 /* tab_person_icon@2x.png */; };
 		57A94E5A1C37DBFD00BE0022 /* tab_shake_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A94E571C37DBFD00BE0022 /* tab_shake_icon@2x.png */; };
@@ -252,6 +252,7 @@
 		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
 		7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */; };
 		7F5E98A01CE9579C00EB365A /* ClearCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E989F1CE9579C00EB365A /* ClearCache.m */; };
+		7F9B4D771CFF7E8F00E12D7C /* LikeSubViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9B4D761CFF7E8F00E12D7C /* LikeSubViewViewController.m */; };
 		7FC54B251CED2C2D00A499BB /* SubBasketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC54B241CED2C2D00A499BB /* SubBasketViewController.m */; };
 		7FC54B291CF206CF00A499BB /* IndoorMapViewService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC54B281CF206CF00A499BB /* IndoorMapViewService.m */; };
 		7FF39E3D1CE57B96007810BC /* guangzhoufood.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF39E3C1CE57B96007810BC /* guangzhoufood.png */; };
@@ -610,7 +611,7 @@
 		579E54211CD1D2BA00B6C9E4 /* ReminderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderService.h; sourceTree = "<group>"; };
 		579E54221CD1D2BA00B6C9E4 /* ReminderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderService.m; sourceTree = "<group>"; };
 		57A4F6CE1CCA00D2004B6549 /* GoToMapViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoToMapViewCtrl.h; sourceTree = "<group>"; };
-		57A4F6CF1CCA00D2004B6549 /* GoToMapViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoToMapViewCtrl.m; sourceTree = "<group>"; };
+		57A4F6CF1CCA00D2004B6549 /* GoToMapViewCtrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GoToMapViewCtrl.mm; sourceTree = "<group>"; };
 		57A94E551C37DBFD00BE0022 /* tab_brand_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_brand_icon@2x.png"; sourceTree = "<group>"; };
 		57A94E561C37DBFD00BE0022 /* tab_person_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_person_icon@2x.png"; sourceTree = "<group>"; };
 		57A94E571C37DBFD00BE0022 /* tab_shake_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_shake_icon@2x.png"; sourceTree = "<group>"; };
@@ -761,6 +762,8 @@
 		7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationViewController.m; sourceTree = "<group>"; };
 		7F5E989E1CE9579C00EB365A /* ClearCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearCache.h; sourceTree = "<group>"; };
 		7F5E989F1CE9579C00EB365A /* ClearCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearCache.m; sourceTree = "<group>"; };
+		7F9B4D751CFF7E8F00E12D7C /* LikeSubViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeSubViewViewController.h; sourceTree = "<group>"; };
+		7F9B4D761CFF7E8F00E12D7C /* LikeSubViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeSubViewViewController.m; sourceTree = "<group>"; };
 		7FC54B231CED2C2D00A499BB /* SubBasketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubBasketViewController.h; sourceTree = "<group>"; };
 		7FC54B241CED2C2D00A499BB /* SubBasketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubBasketViewController.m; sourceTree = "<group>"; };
 		7FC54B271CF206CF00A499BB /* IndoorMapViewService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorMapViewService.h; sourceTree = "<group>"; };
@@ -1114,7 +1117,7 @@
 				573E51CD1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.h */,
 				573E51CE1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m */,
 				57A4F6CE1CCA00D2004B6549 /* GoToMapViewCtrl.h */,
-				57A4F6CF1CCA00D2004B6549 /* GoToMapViewCtrl.m */,
+				57A4F6CF1CCA00D2004B6549 /* GoToMapViewCtrl.mm */,
 			);
 			path = couponDetail;
 			sourceTree = "<group>";
@@ -1444,6 +1447,7 @@
 		57A94E631C37EAD500BE0022 /* findShop */ = {
 			isa = PBXGroup;
 			children = (
+				7F9B4D711CFF7DFF00E12D7C /* LikeSubView */,
 				5735A2561CC3F7920001B239 /* MallShopCommentTableViewCell.h */,
 				5735A2571CC3F7920001B239 /* MallShopCommentViewController.h */,
 				5735A2581CC3F7920001B239 /* MallShopCommentTableViewCell.m */,
@@ -1720,6 +1724,15 @@
 				7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */,
 			);
 			name = MyInformation;
+			sourceTree = "<group>";
+		};
+		7F9B4D711CFF7DFF00E12D7C /* LikeSubView */ = {
+			isa = PBXGroup;
+			children = (
+				7F9B4D751CFF7E8F00E12D7C /* LikeSubViewViewController.h */,
+				7F9B4D761CFF7E8F00E12D7C /* LikeSubViewViewController.m */,
+			);
+			name = LikeSubView;
 			sourceTree = "<group>";
 		};
 		7FAB49EA1CE9547B00A101E0 /* ClearCacheUnitKit */ = {
@@ -2061,6 +2074,7 @@
 				5796FA7A1C462719004CA23B /* ToPayTableViewCtrl.m in Sources */,
 				573E51CF1C7C0959005DBBC3 /* CouponPaymentDetailViewCtrl.m in Sources */,
 				579E54201CD1A00900B6C9E4 /* ShopDetailViewCtrl.m in Sources */,
+				7F9B4D771CFF7E8F00E12D7C /* LikeSubViewViewController.m in Sources */,
 				7F121D721CA6AF6A005AF53D /* SearchShopService.m in Sources */,
 				574911331CC00AAE00FB2B14 /* DataSigner.m in Sources */,
 				574910D01CC0084B00FB2B14 /* Order.m in Sources */,
@@ -2137,7 +2151,7 @@
 				57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */,
 				57D148101CC1392300F9E40C /* ShopMessageViewCtrl.m in Sources */,
 				5735A25B1CC3F7920001B239 /* MallShopCommentViewController.m in Sources */,
-				57A4F6D01CCA00D2004B6549 /* GoToMapViewCtrl.m in Sources */,
+				57A4F6D01CCA00D2004B6549 /* GoToMapViewCtrl.mm in Sources */,
 				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,
 				574910D31CC0084B00FB2B14 /* WXUtil.mm in Sources */,
 				577169811C820D4F00223EDB /* ChangePasswordViewCtrl.m in Sources */,

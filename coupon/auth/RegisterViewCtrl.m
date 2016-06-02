@@ -134,6 +134,7 @@
         self.passwordTextField.secureTextEntry = YES;
         self.passwordTextField.keyboardType = UIKeyboardTypeAlphabet;
         self.passwordTextField.delegate = self;
+        self.passwordTextField.secureTextEntry = YES;
     }
 
     if (indexPath.row==2) {
@@ -142,6 +143,7 @@
         self.repeatPasswordTextField.secureTextEntry = YES;
         self.repeatPasswordTextField.keyboardType = UIKeyboardTypeAlphabet;
         self.repeatPasswordTextField.delegate = self;
+        self.repeatPasswordTextField.secureTextEntry = YES;
     }
     
 
@@ -214,7 +216,7 @@
 -(void)verificationCodeLoadData{
 
     LoginService *app = [LoginService new];
-    [app verificationCode:_mobileTextField.text password:_passwordTextField.text success:^(NSInteger code, NSString *message, id data) {
+    [app verificationCode:_mobileTextField.text password:@"0" success:^(NSInteger code, NSString *message, id data) {
         
     } failure:^(id data) {
         

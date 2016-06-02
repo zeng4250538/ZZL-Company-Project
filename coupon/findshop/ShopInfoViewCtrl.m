@@ -452,7 +452,12 @@
         
         shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate);
         
-        [shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
+        
+        SafeLoadUrlImage(shopBgButton, url, ^{
+            
+        });
+        
+        //[shopBgButton sd_setBackgroundImageWithURL:url forState:UIControlStateNormal];
         
         
         

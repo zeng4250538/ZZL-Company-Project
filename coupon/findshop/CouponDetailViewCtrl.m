@@ -376,16 +376,20 @@
     
     
     
+    SafeLoadUrlImage(uv, url, ^{
+        
+        
+    });
     
-    [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo60@3x.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        
-        self.couponImage = image;
-        
-        
-        
-        
-    }];
+    
+//    [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo60@3x.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        
+//        
+//        
+//        
+//        
+//    }];
     
     
     
@@ -950,6 +954,7 @@
            
             [self otherButtonLoadData];
             [self.tableView reloadData];
+            
 
             
         } forControlEvents:UIControlEventTouchUpInside];
@@ -958,6 +963,7 @@
             
             [self likeButtonLoadData];
             [self.tableView reloadData];
+            
             
         } forControlEvents:UIControlEventTouchUpInside];
         
@@ -1100,7 +1106,7 @@
         
         [SVProgressHUD dismiss];
         self.bttonTabelViewDic = data[0];
-        
+//        self.data = data;
         
         completion(YES);
         
@@ -1135,6 +1141,8 @@
         [SVProgressHUD dismiss];
         
         _bttonTabelViewDic = data[0];
+        
+//        self.data = data;
         
         if (![data isKindOfClass:[NSArray class]]) {
             
@@ -1207,6 +1215,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 
 }
 

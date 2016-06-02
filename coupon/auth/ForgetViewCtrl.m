@@ -7,15 +7,16 @@
 //
 
 #import "ForgetViewCtrl.h"
-
+#import "LoginService.h"
 @interface ForgetViewCtrl ()
 
 @property(nonatomic,strong)UITextField *mobileTextField;
 @property(nonatomic,strong)UITextField *passwordTextField;
 @property(nonatomic,strong)UITextField *repeatPasswordTextField;
 @property(nonatomic,strong)UITextField *smsCodeTextField;
-
-
+@property(nonatomic,strong)UIButton *smsButton;
+@property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic,assign)int i;
 @end
 
 @implementation ForgetViewCtrl
@@ -70,7 +71,7 @@
     
     loginButton.backgroundColor = [GUIConfig mainColor];
     
-    [loginButton setTitle:@"重置密码" forState:UIControlStateNormal];
+    [loginButton setTitle:@"找回密码" forState:UIControlStateNormal];
     loginButton.layer.cornerRadius = 2;
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
@@ -113,7 +114,16 @@
             
         }
         
+        LoginService *ls = [LoginService new];
         
+        //验证验证码是否正确
+        [ls verificationCodeIsPassedModify:self.mobileTextField.text withCode:self.smsCodeTextField.text withType:@"1" success:^(id data) {
+            
+        } failure:^(id data) {
+            
+            [SVProgressHUD showErrorWithStatus:@"验证码错误，请重新输入"];
+            
+        }];
         
         
         
@@ -169,6 +179,7 @@
         
         self.passwordTextField = [GUIHelper makeTableCellTextField:@"密码：" cell:cell];
         self.passwordTextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.passwordTextField.secureTextEntry = YES;
         
     }
     
@@ -176,7 +187,8 @@
         
         self.repeatPasswordTextField = [GUIHelper makeTableCellTextField:@"重复密码：" cell:cell];
         self.repeatPasswordTextField.keyboardType = UIKeyboardTypeAlphabet;
-        
+        self.repeatPasswordTextField.secureTextEntry = YES;
+
     }
     
     
@@ -187,16 +199,16 @@
         
         self.smsCodeTextField.keyboardType = UIKeyboardTypeNumberPad;
         
-        UIButton *smsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _smsButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
-        [cell.contentView addSubview:smsButton];
+        [cell.contentView addSubview:_smsButton];
         
-        [smsButton setTitle:@"验证码" forState:UIControlStateNormal];
-        smsButton.layer.cornerRadius = 2;
-        [smsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        smsButton.backgroundColor = [GUIConfig mainColor];
+        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+        _smsButton.layer.cornerRadius = 2;
+        [_smsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _smsButton.backgroundColor = [GUIConfig mainColor];
         
-        [smsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_smsButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(cell.contentView).offset(-10);
             make.centerY.equalTo(cell.contentView);
             make.width.equalTo(@80);
@@ -205,7 +217,16 @@
             
         }];
         
-        
+        [_smsButton bk_addEventHandler:^(id sender) {
+            
+            [self verificationCodeLoadData];
+            [_smsButton setUserInteractionEnabled:NO];
+            _smsButton.backgroundColor = [UIColor grayColor];
+            _i = 60;
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerNumber) userInfo:nil repeats:YES];
+            
+            
+        } forControlEvents:UIControlEventTouchUpInside];
         
         
         
@@ -215,6 +236,34 @@
     // Configure the cell...
     
     return cell;
+}
+
+
+-(void)verificationCodeLoadData{
+    
+    LoginService *app = [LoginService new];
+    [app verificationCode:_mobileTextField.text password:@"1" success:^(NSInteger code, NSString *message, id data) {
+        
+    } failure:^(id data) {
+        
+    }];
+    
+}
+
+-(void)timerNumber{
+    
+    self.i --;
+    
+    [_smsButton setTitle:[NSString stringWithFormat:@"验证码 %d",self.i] forState:UIControlStateNormal];
+    
+    if (self.i==0) {
+        [_smsButton setUserInteractionEnabled:YES];
+        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+        _smsButton.backgroundColor = [GUIConfig mainColor];
+        [_timer invalidate];
+        
+    }
+    
 }
 
 

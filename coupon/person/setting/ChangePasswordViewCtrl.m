@@ -7,9 +7,14 @@
 //
 
 #import "ChangePasswordViewCtrl.h"
-
+#import "LoginService.h"
 @interface ChangePasswordViewCtrl ()
+@property(nonatomic,strong)UITextField *nameTextField;
+@property(nonatomic,strong)UITextField *newsPasswordTextField;
+@property(nonatomic,strong)UITextField *repeatPasswordTextField;
 
+
+@property(nonatomic,strong)UIButton *btn;
 @end
 
 @implementation ChangePasswordViewCtrl
@@ -28,23 +33,36 @@
     footerView.backgroundColor = [GUIConfig mainBackgroundColor];
     
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn setTitle:@"修改密码" forState:UIControlStateNormal];
+    _btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_btn setTitle:@"修改密码" forState:UIControlStateNormal];
     
-    [footerView addSubview:btn];
+    [footerView addSubview:_btn];
     
     
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    btn.backgroundColor = [GUIConfig mainColor];
+    _btn.backgroundColor = [GUIConfig mainColor];
     
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(footerView).offset(20);
         make.left.equalTo(footerView).offset(30);
         make.right.equalTo(footerView).offset(-30);
         make.height.equalTo(@40);
         
     }];
+    LoginService *ls = [LoginService new];
+    
+    [_btn bk_addEventHandler:^(id sender) {
+       [ls modifyPassword:self.nameTextField.text withNewPassword:self.newsPasswordTextField.text withRepeatPassword:self.repeatPasswordTextField.text success:^(id data) {
+           [SVProgressHUD showSuccessWithStatus:@"修改密码成功"];
+           [self.navigationController popToRootViewControllerAnimated:YES];
+       } failure:^(id data) {
+           [SVProgressHUD showErrorWithStatus:@"修改密码失败"];
+
+       }];
+        
+        
+    } forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.tableFooterView = footerView;
     
@@ -89,7 +107,7 @@
     
     if (indexPath.row==0) {
         
-        UITextField *nameTextField  = [GUIHelper makeTableCellTextField:@"用户名:" cell:cell];
+        _nameTextField  = [GUIHelper makeTableCellTextField:@"原密码:" cell:cell];
         
         
         
@@ -97,16 +115,16 @@
     
     if (indexPath.row==1) {
         
-        UITextField *passwordTextField = [GUIHelper makeTableCellTextField:@"老密码:" cell:cell];
-        passwordTextField.secureTextEntry = YES;
+        _newsPasswordTextField = [GUIHelper makeTableCellTextField:@"新密码:" cell:cell];
+        _newsPasswordTextField.secureTextEntry = YES;
         
         
     }
     
     if (indexPath.row==2) {
         
-        UITextField *passwordTextField = [GUIHelper makeTableCellTextField:@"新密码:" cell:cell];
-        passwordTextField.secureTextEntry = YES;
+        _repeatPasswordTextField = [GUIHelper makeTableCellTextField:@"确认密码:" cell:cell];
+        _repeatPasswordTextField.secureTextEntry = YES;
         
         
     }
