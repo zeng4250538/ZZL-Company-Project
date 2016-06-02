@@ -48,6 +48,8 @@
 
 @property(nonatomic,strong) UILabel *myInformationTitleLabel;
 
+@property(nonatomic,strong) UIButton *exitButton;
+
 @end
 
 @implementation PersonInfoViewCtrl
@@ -282,6 +284,8 @@
     
     
     
+    
+    
 }
 #pragma mark ---------- 头像的点击方法
 -(void)tapClick{
@@ -322,10 +326,10 @@
     
     
     
-    UIButton *exitButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [footer addSubview:exitButton];
+    _exitButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [footer addSubview:_exitButton];
     
-    [exitButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_exitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(footer).offset(30);
         make.right.equalTo(footer).offset(-30);
@@ -338,16 +342,16 @@
     
     
     
-    exitButton.backgroundColor = [GUIConfig mainColor];
+    _exitButton.backgroundColor = [GUIConfig mainColor];
     
-    [exitButton setTitle:@"退出" forState:UIControlStateNormal];
+    [_exitButton setTitle:@"退出" forState:UIControlStateNormal];
     
-    [exitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_exitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     self.tableView.tableFooterView = footer;
     
     
-    [exitButton bk_addEventHandler:^(id sender) {
+    [_exitButton bk_addEventHandler:^(id sender) {
         
         
         UIAlertView *av = [UIAlertView bk_alertViewWithTitle:@"注意" message:@"是否退出系统？"];
@@ -401,11 +405,11 @@
     
     if ([[AppShareData instance] isLogin]) {
         
-        exitButton.hidden = NO;
+        _exitButton.hidden = NO;
         
     }else{
         
-        exitButton.hidden = YES;
+        _exitButton.hidden = YES;
         
     }
     
@@ -453,10 +457,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:YES];
+    
 //点击正路界面的关闭后来的刷新通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(exitPageData) name:@"exitPageView" object:nil];
 
-    [super viewWillAppear:YES];
     self.tableView.delegate = self;
     [self scrollViewDidScroll:self.tableView];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];

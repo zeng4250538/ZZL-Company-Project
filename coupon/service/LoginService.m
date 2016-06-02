@@ -157,4 +157,26 @@
 
 }
 
+
+//找回密码
+-(void)retrievePasswordPhone:(NSString *)phone withNewPassword:(NSString *)newPassword withRepeatPassword:(NSString *)repeatPassword success:(void(^)(id data))success failure:(void(^)(id data))failure{
+
+    //http://192.168.6.97:8080/diamond-sis-web/v1/customer/15818865756/resetCustomerPassword
+    
+    BaseRequest *req = [BaseRequest new];
+    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/customer/%@/resetCustomerPassword",phone];
+     NSDictionary *param = @{@"id":phone,@"newPassword":newPassword,@"repeatPassword":repeatPassword};
+    [req put:url param:param success:^(NSInteger code, id object) {
+        
+        success(object);
+        
+    } failure:^(NSInteger code, NSString *content) {
+        
+        failure(content);
+        
+    }];
+
+
+}
+
 @end

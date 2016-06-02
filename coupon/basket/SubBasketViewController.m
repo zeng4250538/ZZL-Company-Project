@@ -292,7 +292,7 @@
         NSString *phoneString=[NSString stringWithFormat:@"telprompt://%@",SafeString(self.subData[@"phone"])];
         NSLog(@"phoneString电话-----》 %@",phoneString);
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://12580"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
     } forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *rightButton = [[UIButton alloc]init];
@@ -333,7 +333,7 @@
     }];
     
     UILabel *timeLabel = [[UILabel alloc]init];
-    timeLabel.text = [NSString stringWithFormat:@"%@",SafeString(self.subData[@"endTime"])];
+    timeLabel.text = [NSString stringWithFormat:@"%@ ~ %@",SafeString(self.subData[@"startTime"]),SafeString(self.subData[@"endTime"])];
     [cell.contentView addSubview:timeLabel];
     [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
        

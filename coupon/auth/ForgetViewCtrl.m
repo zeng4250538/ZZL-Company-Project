@@ -118,7 +118,12 @@
         
         //验证验证码是否正确
         [ls verificationCodeIsPassedModify:self.mobileTextField.text withCode:self.smsCodeTextField.text withType:@"1" success:^(id data) {
-            
+            //找回密码！！！
+            [ls retrievePasswordPhone:self.mobileTextField.text withNewPassword:self.passwordTextField.text withRepeatPassword:self.repeatPasswordTextField.text success:^(id data) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            } failure:^(id data) {
+                [SVProgressHUD showErrorWithStatus:@"重复密码有误，请核对一下"];
+            }];
         } failure:^(id data) {
             
             [SVProgressHUD showErrorWithStatus:@"验证码错误，请重新输入"];
@@ -177,7 +182,7 @@
     
     if (indexPath.row==1) {
         
-        self.passwordTextField = [GUIHelper makeTableCellTextField:@"密码：" cell:cell];
+        self.passwordTextField = [GUIHelper makeTableCellTextField:@"重置密码：" cell:cell];
         self.passwordTextField.keyboardType = UIKeyboardTypeAlphabet;
         self.passwordTextField.secureTextEntry = YES;
         

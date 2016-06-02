@@ -13,6 +13,8 @@
 #import "CouponDetailViewCtrl.h"
 #import "BasketSubMessageSevice.h"
 #import "SubBasketViewController.h"
+#import "IdShopSevice.h"
+#import "BasketContainerViewCtrl.h"
 @interface BasketMessageViewCtrl ()
 
 @property(nonatomic,strong)NSArray *dataList;
@@ -261,11 +263,11 @@
 
 }
 
--(void)messageLoadDatamessageId:(NSString *)message withSuccess:(void(^)(id data))success{
+-(void)messageLoadDatamessageId:(NSString *)message withSuccess:(void(^)(id mdata))success{
 // NSLog(@"消息详情数据------->%@",message);
     BasketSubMessageSevice *BSMS = [BasketSubMessageSevice new];
     [BSMS basketMessageRequestMessageId:message withSuccess:^(id data) {
-//        NSLog(@"消息详情数据------->%@",message);
+        NSLog(@"消息详情数据------->%@",data);
         success(data);
         
     } withFailure:^(id data) {
@@ -281,16 +283,35 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     SubBasketViewController *suvc  = [SubBasketViewController new];
+    BasketContainerViewCtrl *bcvc = [BasketContainerViewCtrl new];
+    IdShopSevice *ls = [IdShopSevice new];
     
     NSString *messageId = self.dataList[indexPath.row][@"id"];
-    
+    NSString *typeString = SafeString(self.dataList[indexPath.row][@"couponMessageType"]);
+    int type = [typeString intValue];
     NSLog(@"消息ID%@",messageId);
     
-    [self messageLoadDatamessageId:messageId withSuccess:^(id data) {
-       
-        suvc.subData = _dataDic;
+    [self messageLoadDatamessageId:messageId withSuccess:^(id mdata) {
+       [ls shopIdRequrestString:mdata[@"couponInstance"][@"coupon"][@"shopId"] withSuccess:^(id data) {
+           _dataDic = @{@"name":mdata[@"couponInstance"][@"coupon"][@"name"],@"photoUrl":mdata[@"couponInstance"][@"coupon"][@"photoUrl"],@"shopName":data[@"name"],@"phone":data[@"phone"],@"startTime":mdata[@"couponInstance"][@"couponPromotion"][@"startTime"],@"endTime":mdata[@"couponInstance"][@"couponPromotion"][@"endTime"]};
+           
+           if (type == 1) {
+               suvc.subData = _dataDic;
+               suvc.boolView = YES;
+               [self.navigationController pushViewController:suvc animated:YES];
+               
+           }
+           else{
+           
+           [self.navigationController pushViewController:bcvc animated:YES];
+           
+           };
+           
+           
+       } withFailure:^(id data) {
+           
+       }];
         
-         [self.navigationController pushViewController:suvc animated:YES];
         
     }];
     

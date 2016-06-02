@@ -20,7 +20,7 @@
 #import "ShoppingCartSevice.h"
 #import "BasketNotUseTableViewCell.h"
 #import "ShakeService.h"
-
+#import "LikeSubViewViewController.h"
 @interface CouponDetailViewCtrl ()
 @property(nonatomic,strong)UILabel   *cartNumLabel;
 @property(nonatomic,strong)UIButton *cartButton;
@@ -28,7 +28,7 @@
 
 @property(nonatomic,strong)NSDictionary *bttonTabelViewDic;
 
-
+@property(nonatomic,strong)LikeSubViewViewController *LSVVC;
 
 
 @end
@@ -38,9 +38,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    [self doLoad];
+    
     self.view.backgroundColor=[UIColor whiteColor];
     
-    
+    self.LSVVC  = [LikeSubViewViewController new];
 //    [self likeButtonLoadData];
     self.tableView = [[UITableView alloc] init];
     
@@ -397,8 +399,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
-    [self otherButtonLoadData];
+    
 
     ShoppingCartSevice *SCS = [ShoppingCartSevice new];
     NSString *cu = [NSString stringWithFormat:@"%@",[AppShareData instance].customId];
@@ -699,6 +702,8 @@
         CLLocationCoordinate2D loc;
         loc.latitude = [self.data[@"latitude"] floatValue];
         loc.longitude = [self.data[@"longitude"] floatValue];
+        NSLog(@"经纬度%f",loc.longitude);
+        
         vc.endLocation = loc;
         
         
@@ -948,8 +953,8 @@
         
         [otherButton bk_addEventHandler:^(id sender) {
            
-            [self otherButtonLoadData];
-            [self.tableView reloadData];
+            [self doLoad];
+//            [self.tableView reloadData];
             
 
             
@@ -957,8 +962,8 @@
         
         [likeButton bk_addEventHandler:^(id sender) {
             
-            [self likeButtonLoadData];
-            [self.tableView reloadData];
+            [self loadShakeData];
+//            [self.tableView reloadData];
             
             
         } forControlEvents:UIControlEventTouchUpInside];
@@ -1085,7 +1090,7 @@
 
 };
 
--(void)loadShakeData:(void(^)(BOOL ret))completion{
+-(void)loadShakeData{
     
     
     ShakeService *service = [ShakeService new];
@@ -1103,9 +1108,9 @@
         [SVProgressHUD dismiss];
         self.bttonTabelViewDic = data[0];
 //        self.data = data;
-        
-        completion(YES);
-        
+//        self.LSVVC.data = data[0];
+        [self.tableView reloadData];
+
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
@@ -1113,7 +1118,7 @@
         [SVProgressHUD dismiss];
         
         
-        completion(NO);
+        
         
         
     }];
@@ -1122,7 +1127,7 @@
     
 }
 
--(void)doLoad:(void(^)(BOOL ret))completion{
+-(void)doLoad{
     
     //http://192.168.6.97:8080/diamond-sis-web/v1/couponPromotion?shopid=11&type=普通优惠
     
@@ -1135,7 +1140,7 @@
     [couponService requestNormalCoupon:@"11" page:1 pageCount:1 success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD dismiss];
-        
+//        self.LSVVC.data = data[0];
         _bttonTabelViewDic = data[0];
         
 //        self.data = data;
@@ -1146,9 +1151,10 @@
             return ;
         }
         
+        [self.tableView reloadData];
+
         
-        
-        completion(YES);
+       
         
         
         
@@ -1160,7 +1166,6 @@
         
         [SVProgressHUD showErrorWithStatus:@"网络请求错误！"];
         
-        completion(NO);
         
         
         
@@ -1171,47 +1176,51 @@
 }
 
 //猜你喜欢
--(void)likeButtonLoadData{
-
-    [self loadShakeData:^(BOOL ret){
-        
-        if (ret) {
-            
-            
-            
-        }else{
-            
-            [SVProgressHUD showErrorWithStatus:@"网络错误，请重试！"];
-            
-        }
-        
-    }];
-
-}
+//-(void)likeButtonLoadData{
+//
+//    [self loadShakeData:^(BOOL ret){
+//        
+//        if (ret) {
+//            
+//            
+//        }else{
+//            
+//            [SVProgressHUD showErrorWithStatus:@"网络错误，请重试！"];
+//            
+//        }
+//        
+//    }];
+//
+//}
 
 
 //其他优惠
--(void)otherButtonLoadData{
-
-    [self doLoad:^(BOOL ret){
-        
-        if (ret) {
-            [ReloadHud removeHud:self.view animated:YES];
-            // [self makeHeaderView];
-        }else{
-            
-            [ReloadHud showReloadMode:self.view];
-        }
-        
-        
-    }];
-
-}
+//-(void)otherButtonLoadData{
+//
+//    [self doLoad:^(BOOL ret){
+//        
+//        if (ret) {
+//            [ReloadHud removeHud:self.view animated:YES];
+//            // [self makeHeaderView];
+//        }else{
+//            
+//            [ReloadHud showReloadMode:self.view];
+//        }
+//        
+//        
+//    }];
+//
+//}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+    
+    if ([indexPath section]==4) {
+        self.LSVVC.data = self.bttonTabelViewDic;
+        [self.navigationController pushViewController:self.LSVVC animated:YES];
+    };
+//    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 
 }
 

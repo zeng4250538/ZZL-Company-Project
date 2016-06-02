@@ -8,7 +8,7 @@
 
 #import "CouponInfoTableViewCell.h"
 #import "ToPayTableViewCtrl.h"
-
+#import "LikeSubViewViewController.h"
 @interface CouponInfoTableViewCell()
 @property(nonatomic,strong)UIImageView *logoView;  //商店图片
 @property(nonatomic,strong)UILabel *titleLabel;    //优惠券标题
@@ -196,11 +196,11 @@
     
     
     
-    NSDate* startTime =  SafeDate(self.data[@"endTime"]);
+    NSDate* startTime =  SafeDate(self.data[@"startTime"]);
     
     if ([startTime timeIntervalSinceNow]>0) {
         
-        NSString *startTimeString = [Utils downCountFormat:SafeString(self.data[@"endTime"])];
+        NSString *startTimeString = [Utils downCountFormat:SafeString(self.data[@"startTime"])];
         self.timeLabel.text =startTimeString;
         self.timeLabel.hidden = NO;
         self.reminderButton.hidden = NO;
