@@ -284,6 +284,9 @@
     };
     
     
+    [cell updateData];
+    
+    
     
 
     

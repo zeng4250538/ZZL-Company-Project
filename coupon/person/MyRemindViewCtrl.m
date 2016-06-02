@@ -19,6 +19,7 @@
 @interface MyRemindViewCtrl ()
 
 @property(nonatomic,strong)NSArray *data;
+@property(nonatomic,assign)NSUInteger pageCount;
 
 @end
 
@@ -40,12 +41,57 @@
     [self loadData];
     
     
+    [self makePullRefresh];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    
+    
+    
+}
+
+
+
 
 
 
@@ -114,6 +160,38 @@
     
     
 }
+
+
+
+-(void)doLoadNextPage:(NSUInteger)page completion:(void(^)(BOOL ret))completion{
+    
+    
+    ReminderService *service = [ReminderService new];
+    
+    
+    [service requestReminder:page per_page:10 success:^(NSInteger code, NSString *message, id data) {
+        
+        self.data = [self.data arrayByAddingObjectsFromArray:data];
+        
+        [self.tableView reloadData];
+        
+        completion(YES);
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        completion(NO);
+        
+        
+    }];
+    
+    
+    
+    
+    
+    
+}
+
 
 
 
