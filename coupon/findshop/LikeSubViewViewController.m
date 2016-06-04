@@ -1141,8 +1141,12 @@
     [couponService requestNormalCoupon:@"11" page:1 pageCount:1 success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD dismiss];
-        _CDVC.data = data[0];
-        _bttonTabelViewDic = data[0];
+        NSArray *arr = [data mutableCopy];
+        if (arr.count != 0) {
+            _CDVC.data = data[0];
+            _bttonTabelViewDic = data[0];
+        }
+        
         [_tableView reloadData];
         
         completion(YES);

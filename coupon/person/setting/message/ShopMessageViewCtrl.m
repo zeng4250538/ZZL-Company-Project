@@ -7,13 +7,13 @@
 //
 
 #import "ShopMessageViewCtrl.h"
-
+#import "IdShopSevice.h"
 #import "ShopMessageService.h"
 
 @interface ShopMessageViewCtrl ()
 
-@property(nonatomic,strong)NSArray *data;
-
+@property(nonatomic,strong)NSMutableArray *data;
+@property(nonatomic,assign)NSUInteger pageCount;
 @end
 
 @implementation ShopMessageViewCtrl
@@ -30,7 +30,7 @@
     [self loadData];
     
     self.navigationItem.title=@"商店消息";
-    
+    [self makePullRefresh];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -40,6 +40,68 @@
      self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+-(void)makePullRefresh{
+    
+    self.pageCount = 1;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self doLoad:^(BOOL ret) {
+            
+            
+            [self.tableView.mj_header endRefreshing];
+            
+        }];
+        
+    }];
+    
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+        
+        [self doLoadNextPage:self.pageCount+1 completion:^(BOOL ret) {
+            [self.tableView.mj_footer endRefreshing];
+            
+            if (ret) {
+                self.pageCount = self.pageCount+1;
+            }
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    
+}
+    
+
+-(void)doLoadNextPage:(NSUInteger)page completion:(void(^)(BOOL ret))completion{
+    
+    
+    ShopMessageService *service = [ShopMessageService new];
+    
+    [service requestShopMessageWithPage:page per_page:10 success:^(NSInteger code, NSString *message, id data) {
+        
+        [self.data addObjectsFromArray:data];
+        
+        [self.tableView reloadData];
+        
+        completion(YES);
+        
+        
+    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        completion(NO);
+        
+    }];
+    
+    
+    
+}
 
 -(void)loadData{
     
@@ -85,7 +147,7 @@
     
     [service requestShopMessageWithPage:1 per_page:10 success:^(NSInteger code, NSString *message, id data) {
         
-        self.data = data;
+        self.data = [data mutableCopy];
         [self.tableView reloadData];
         
         completion(YES);
@@ -132,6 +194,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
     
     for (UIView *uv in [cell.contentView subviews]) {
         [uv removeFromSuperview];
@@ -208,6 +272,14 @@
     return cell;
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+
+
+}
 
 
 // Override to support conditional editing of the table view.

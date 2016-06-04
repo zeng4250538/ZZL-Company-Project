@@ -39,7 +39,6 @@
     [super viewDidLoad];
    
     
-    
     [self doLoad];
     
     self.view.backgroundColor=[UIColor whiteColor];
@@ -1068,7 +1067,12 @@
         make.width.equalTo(@100);
         
     }];
+    
+    
+    
     NSURL *url = SafeUrl(_bttonTabelViewDic[@"smallPhotoUrl"]);
+    
+    
     SafeLoadUrlImage(imageView, url, ^{
         [cell setNeedsLayout];
     });
@@ -1148,7 +1152,12 @@
         
         [SVProgressHUD dismiss];
 
-        _bttonTabelViewDic = data[0];
+        NSArray *array = [data mutableCopy];
+        if (array.count!=0) {
+             _bttonTabelViewDic = data[0];
+        }
+        
+       
         
         [self upLoadData:_bttonTabelViewDic];
         [self.tableView reloadData];
