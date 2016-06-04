@@ -2355,8 +2355,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: quanfeng dai (AVH25LS467)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: quanfeng dai (AVH25LS467)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2407,9 +2407,9 @@
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qwelll;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baichen.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51f16fbb-3ecc-460c-91be-7a3f460f81e1";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2420,8 +2420,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = coupon/coupon.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ZhiJian Lan (H9DTAF68NC)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: quanfeng dai (AVH25LS467)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: quanfeng dai (AVH25LS467)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2472,9 +2472,9 @@
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/thirdparty/umeng_ios_social_sdk_5.0.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qwelll;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baichen.coupon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51f16fbb-3ecc-460c-91be-7a3f460f81e1";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

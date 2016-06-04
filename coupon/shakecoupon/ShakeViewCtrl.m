@@ -39,11 +39,11 @@
     
     self.isShakeDataLoaded = NO;
 //
-//    [self makeContentView];
+    [self makeContentView];
+    
+    [self makeBarItem];
 //    
-//    [self makeBarItem];
-//    
-//    [self makeShakeBody];
+   [self makeShakeBody];
 //
     [self makeAudioControl];
     
