@@ -228,12 +228,9 @@
         }];
         
         NSURL *url = SafeUrl(self.data[@"couponPhotoUrl"]);
-        [logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
+        SafeLoadUrlImage(logoView, url, ^{
             [cell setNeedsLayout];
-            
-        }];
-        
+        });
         UILabel *shopLabel = [UILabel new];
         [cell.contentView addSubview:shopLabel];
         

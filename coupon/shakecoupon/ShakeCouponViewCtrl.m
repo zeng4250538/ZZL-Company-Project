@@ -158,11 +158,19 @@
     [service requestADDBasket:couponId count:1 success:^(NSInteger code, NSString *message, id data) {
         
         
+        if (code == 201) {
+            
+            [[AppShareData instance] addCouponToCart:self.currentData];
+            
+            
+            completion(YES);
+            
+        }
+        else{
         
-        [[AppShareData instance] addCouponToCart:self.currentData];
+            [SVProgressHUD showInfoWithStatus:@"此优惠券已经领取，小的给你切换到下一张"];
+        }
         
-        
-        completion(YES);
         
         
         
@@ -1026,6 +1034,12 @@
 -(void) viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+    
+    
+    
+    
+//    [self makeCartView];
   
 }
 
@@ -1051,6 +1065,9 @@
 
 #pragma mark - 优惠券展现完毕后，增加手势
 -(void)doAddAction{
+    
+    
+    
     
     self.imgView.userInteractionEnabled = YES;
     
@@ -1228,7 +1245,7 @@
     
     
   
-    [service requestShakeCoupon:customerId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:customerId shopMallId:mallId withCity:@"" success:^(NSInteger code, NSString *message, id data) {
        
         [[AppShareData instance].shakeCouponQueue resetData:data];
         

@@ -30,7 +30,10 @@ extern NSString *const ReviewUpdateNotice;
 
 @property(nonatomic,copy,readonly)NSString *customId;
 
+@property(nonatomic,copy,readonly)NSString *mallCityName;
+
 @property(nonatomic,copy,readonly)NSString *mallId;
+
 @property(nonatomic,copy,readonly)NSString *city;
 @property(nonatomic,assign,readonly)double lon;
 @property(nonatomic,assign,readonly)double lat;
@@ -73,6 +76,7 @@ extern NSString *const ReviewUpdateNotice;
 
 -(void)setDeviceToken:(NSString *)deviceToken;
 
+-(void)setMallCityNameKey:(id)data;
 
 //（已使用篮子数量）
 -(NSInteger)shoppingCartNumber:(id)data;

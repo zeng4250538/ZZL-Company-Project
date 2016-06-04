@@ -21,20 +21,20 @@
                   success:(void(^)(NSInteger code,NSString *message,id data))success
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
 
-    
+    //http://192.168.6.97:8080/diamond-sis-web/v1/realtimepromotion?customerId=15818865756&page=1&per_page=10&cityName=%E5%B9%BF%E5%B7%9E%E5%B8%82
     
     
     BaseRequest *req = [BaseRequest new];
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/shoprecommend?"];
     
-    NSString *customerId = [[AppShareData instance] customTestId];
+    NSString *customerId = [[AppShareData instance] customId];
     
     NSDictionary *parm = @{@"shopMallId":SafeString(mallid),
                            @"customerId":customerId,
                            @"page":@(page),
                            @"per_page":@(pageCount),
-                       @"fields":@"id,name,mallId,categoryId,addressId,city,distance,good,bad,longitude,latitude,favorcount,reviewcount,photoUrl,smallPhotoUrl,address,transport,description,phone,settlementDate,takenCouponCount,newestCouponPromotion"};
+                       @"fields":@"id,name,mallId,categoryId,addressId,city,distance,good,bad,longitude,latitude,favorcount,reviewcount,photoUrl,smallPhotoUrl,address,transport,description,phone,settlementDate,takenCouponCount,newestCouponPromotion",@"cityName":SafeString([AppShareData instance].mallCityName)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -73,7 +73,7 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/nearby?"];
     
-    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),@"page":@(page),@"per_page":@(per_page),@"fields":@"id,name,mallId,categoryId,addressId,city,distance,good,bad,longitude,latitude,favorcount,reviewcount,photoUrl,smallPhotoUrl,address,transport,description,phone,settlementDate,takenCouponCount,newestCouponPromotion"};
+    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),@"page":@(page),@"per_page":@(per_page),@"fields":@"id,name,mallId,categoryId,addressId,city,distance,good,bad,longitude,latitude,favorcount,reviewcount,photoUrl,smallPhotoUrl,address,transport,description,phone,settlementDate,takenCouponCount,newestCouponPromotion",@"cityName":SafeString([AppShareData instance].mallCityName)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -170,7 +170,7 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/search?"];
     
-    NSDictionary *parm = @{@"shopMallId":mallid,@"keyword":keyWord};
+    NSDictionary *parm = @{@"shopMallId":mallid,@"keyword":keyWord,@"cityName":SafeString([AppShareData instance].mallCityName)};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {

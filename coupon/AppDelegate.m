@@ -52,9 +52,6 @@ BOOL InLan = NO;
 NSString *ALiPayNotice=@"alipaynotice";
 NSString *WechatPayNotice=@"wechatpaynotice";
 NSString *NoLoginNotice=@"nologinnotice";
-
-
-
 NSString *UmengKey=@"56e906e267e58e54f2000607";
 NSString *WeChatAppId=@"wx77914cc659d2889c";
 NSString *WeChatAppSecret=@"";
@@ -183,16 +180,7 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
     
    
     
-    //背景反白，暂时屏蔽
-    //[UITabBar appearance].selectionIndicatorImage = [Utils imageWithColor:[GUIConfig mainColor] rect:CGRectMake(0, 0, SCREEN_WIDTH/4, 50)];
-
-    
-    
-    
-    // [[UITabBar appearance]setBackgroundColor:[UIColor redColor]];
-    
-    
-    
+        
     
     
 }
@@ -224,28 +212,28 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
     
     
     
-//    if ([CLLocationManager locationServicesEnabled]) {
-//        // 创建位置管理者对象
-//        self.lcManager = [[CLLocationManager alloc] init];
-//        self.lcManager.delegate = self; // 设置代理
-//        // 设置定位距离过滤参数 (当本次定位和上次定位之间的距离大于或等于这个值时，调用代理方法)
-//        self.lcManager.distanceFilter = 100;
-//        self.lcManager.desiredAccuracy = kCLLocationAccuracyBest; // 设置定位精度(精度越高越耗电)
-//        [self.lcManager startUpdatingLocation]; // 开始更新位置
-//        
-//        
-//        
-//    }
-//    
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
-//        [self.lcManager requestWhenInUseAuthorization];//⓵只在前台开启定位
-//        //[self.lcManager requestAlwaysAuthorization];//⓶在后台也可定位
-//    }
-//    // 5.iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
-//        //self.lcManager.allowsBackgroundLocationUpdates = YES;
-//    }
-//    
+    if ([CLLocationManager locationServicesEnabled]) {
+        // 创建位置管理者对象
+        self.lcManager = [[CLLocationManager alloc] init];
+        self.lcManager.delegate = self; // 设置代理
+        // 设置定位距离过滤参数 (当本次定位和上次定位之间的距离大于或等于这个值时，调用代理方法)
+        self.lcManager.distanceFilter = 100;
+        self.lcManager.desiredAccuracy = kCLLocationAccuracyBest; // 设置定位精度(精度越高越耗电)
+        [self.lcManager startUpdatingLocation]; // 开始更新位置
+        
+        
+        
+    }
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
+        [self.lcManager requestWhenInUseAuthorization];//⓵只在前台开启定位
+        //[self.lcManager requestAlwaysAuthorization];//⓶在后台也可定位
+    }
+    // 5.iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+        //self.lcManager.allowsBackgroundLocationUpdates = YES;
+    }
+    
     
     
     
@@ -338,10 +326,11 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
 //            SPVC.cityBlockView(self.city);
         
             [iConsole info:@"当前定位城市 %@",self.city ];
-            [[AppShareData instance] setCity:self.city];
+        [[AppShareData instance] setCity:self.city];
             if (!self.city) {
                 self.city = NSLocalizedString(@"home_cannot_locate_city", comment:@"无法定位当前城市");
             }
+        [[NSNotificationCenter  defaultCenter]postNotificationName:@"positioning" object:nil];
             // 获取城市信息后, 异步更新界面信息.      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
     } else if (error == nil && placemarks.count == 0) {
@@ -505,12 +494,15 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     //暂时注释调通知
-    if ([[AppShareData instance]getUMPush] == NO) {
-        [UMessage unregisterForRemoteNotifications];
-    }
-    else{
+    
+//    BOOL is = [[AppShareData instance]getUMPush];
+//    
+//    if (is == NO) {
+//        [UMessage unregisterForRemoteNotifications];
+//    }
+//    else{
     [UMessage didReceiveRemoteNotification:userInfo];
-    }
+//    }
 }
 
 

@@ -235,7 +235,9 @@
     UIImageView *topImage = [[UIImageView alloc]init];
     
     NSURL *url = SafeUrl(self.subData[@"photoUrl"]);
-    [topImage sd_setImageWithURL:url];
+    SafeLoadUrlImage(topImage, url, ^{
+        [cell setNeedsLayout];
+    });
     [cell.contentView addSubview:topImage];
     [topImage mas_makeConstraints:^(MASConstraintMaker *make) {
        

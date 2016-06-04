@@ -12,7 +12,7 @@
 
 
 -(void)requestShakeCoupon:(NSString*)mallid
-               shopMallId:(NSString *)shopMallId success:(void(^)(NSInteger code,NSString *message,id data))success
+               shopMallId:(NSString *)shopMallId withCity:(NSString *)city success:(void(^)(NSInteger code,NSString *message,id data))success
                   failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure{
     
     BaseRequest *req = [BaseRequest new];
@@ -26,7 +26,7 @@
     
     NSString *customerId = SafeString([AppShareData instance].customId);
     
-    NSDictionary *parm = @{@"customerId":SafeString(customerId),@"shopMallId":SafeString(shopMallId)};
+    NSDictionary *parm = @{@"customerId":SafeString(customerId),@"shopMallId":SafeString(shopMallId),@"city":SafeString(city)};
   
     [req get:url param:parm success:^(NSInteger code, id object) {
         

@@ -360,6 +360,8 @@
     
     [self loadShop];
     
+    [self.tableView reloadData];
+    
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];

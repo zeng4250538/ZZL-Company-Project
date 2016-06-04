@@ -89,7 +89,12 @@
 
 
 
+-(void)viewWillAppear:(BOOL)animated{
 
+    [self loadData];
+    [self.tableView reloadData];
+
+}
 
 -(void)loadData{
     
@@ -190,7 +195,7 @@
     
     
     
-    [couponService requestRecommendCoupon:mallId page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+    [couponService requestRecommendCoupon:mallId page:page pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
         
         
         
@@ -230,62 +235,62 @@
 
 
 
--(void)doLoad{
-    
-    
-    
-    CouponService *couponService = [CouponService new];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    NSString *mallId = [AppShareData instance].mallId;
-    
-    
-    
-    [couponService requestRecommendCoupon:mallId page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
-        
-        
-        [ReloadHud removeHud:self.tableView animated:YES];
-        
-        self.data=data;
-        
-        [self.tableView reloadData];
-        
-        
-        
-    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
-        
-        
-        [ReloadHud showReloadMode:self.tableView];
-        
-        
-        
-        
-    }];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+//-(void)doLoad{
+//    
+//    
+//    
+//    CouponService *couponService = [CouponService new];
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    NSString *mallId = [AppShareData instance].mallId;
+//    
+//    
+//    
+//    [couponService requestRecommendCoupon:mallId page:1 pageCount:10 sort:@"endTime" success:^(NSInteger code, NSString *message, id data) {
+//        
+//        
+//        [ReloadHud removeHud:self.tableView animated:YES];
+//        
+//        self.data=data;
+//        
+//        [self.tableView reloadData];
+//        
+//        
+//        
+//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+//        
+//        
+//        
+//        [ReloadHud showReloadMode:self.tableView];
+//        
+//        
+//        
+//        
+//    }];
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//}
 
 
 
@@ -322,6 +327,8 @@
 //    
 //    
 //}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

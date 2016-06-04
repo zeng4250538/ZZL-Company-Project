@@ -131,7 +131,7 @@
     CommentService *service = [CommentService new];
     
     
-    [service requestCommentWithCustomer:@"" page:1 per_page:10 sort:@"" success:^(NSInteger code, NSString *message, id data) {
+    [service requestCommentWithCustomer:@"" page:page per_page:10 sort:@"" success:^(NSInteger code, NSString *message, id data) {
         
         
         

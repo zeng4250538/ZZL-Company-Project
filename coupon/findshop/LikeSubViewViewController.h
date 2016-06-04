@@ -11,10 +11,10 @@
 #import "UMSocial.h"
 
 
-//typedef NS_ENUM(NSUInteger, CouponDetailType) {
-//    CouponDetailTypeHaveCart=0,   //普通的商品详情，有购物车
-//    CouponDetailTypeNotHaveCart
-//};
+typedef NS_ENUM(NSUInteger, CouponDetailTypes) {
+    CouponDetailTypeHaveCarts=0,   //普通的商品详情，有购物车
+    CouponDetailTypeNotHaveCarts
+};
 //
 //
 //typedef NS_ENUM(NSUInteger, CouponViewMode) {
@@ -35,7 +35,7 @@
 @property(nonatomic,strong)NSDictionary *data;
 @property(nonatomic,strong)NSString *couponId;
 
-//@property(nonatomic,assign)CouponDetailType couponDetailType;
+@property(nonatomic,assign)CouponDetailTypes couponDetailType;
 //@property(nonatomic,assign)CouponViewMode couponViewMode;
 //
 //

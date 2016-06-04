@@ -128,6 +128,7 @@
     {
     
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"setting_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+            
             SettingViewCtrl *set = [SettingViewCtrl new];
             set.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:set animated:YES];
@@ -141,9 +142,8 @@
         
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"message_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
             
-            
             SettingMessageTypeViewCtrl *vc = [SettingMessageTypeViewCtrl new];
-            
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             
         }];
@@ -283,7 +283,7 @@
     }];
     
     
-    
+    [self makeFooterView];
     
     
 }

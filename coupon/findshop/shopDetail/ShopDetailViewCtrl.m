@@ -67,16 +67,19 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     
+    imageView.backgroundColor = [UIColor whiteColor];
+    
     NSURL *url = SafeUrl(self.data[@"photoUrl"]);
     
     
     
     
-    [imageView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    SafeLoadUrlImage(imageView, url, ^{
+        
+        [self.tableView setNeedsLayout];
         
         
-        
-    }];
+    });
     
     uv.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
     

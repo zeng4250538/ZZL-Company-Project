@@ -34,11 +34,19 @@
     
     if (self.couponMessageType == CouponMessageTypeBasket) {
         self.navigationItem.title=@"篮子消息";
+        [self loadData];
+        
+        [self makePullRefresh];
+
         
     }
     
     if (self.couponMessageType == CouponMessageTypeCoupon) {
         self.navigationItem.title=@"优惠券消息";
+        [self loadData];
+        
+        [self makePullRefresh];
+
        
         
     }
@@ -54,9 +62,6 @@
     
     
     
-    [self loadData];
-    
-    [self makePullRefresh];
     
     
     

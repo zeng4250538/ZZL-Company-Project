@@ -16,14 +16,20 @@
 
 @implementation SettingMessageTypeViewCtrl
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    
+    
+}
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     self.navigationItem.title=@"消息列表";
-    
-    
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     

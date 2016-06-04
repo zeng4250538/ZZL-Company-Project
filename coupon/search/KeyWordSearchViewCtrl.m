@@ -11,7 +11,7 @@
 #import "ShopService.h"
 #import "SearchShopService.h"
 #import "ShopInfoViewCtrl.h"
-
+#import "HotSaerchSevice.h"
 @interface KeyWordSearchViewCtrl ()<UISearchDisplayDelegate>
 
 @property(nonatomic,strong)NSArray *hotWordList;
@@ -65,11 +65,24 @@
 
 
 -(void)loadData{
-    
+    HotSaerchSevice *HSS = [HotSaerchSevice new];
+    NSLog(@"asdasdasdasdasdasd>>>>>>>>>>>>>>%@>>>",[AppShareData instance].mallCityName);
+    [HSS hotSearchRequest:SafeString([AppShareData instance].mallId) withPage:@"1" withPageCount:@"9" withCityName:SafeString([AppShareData instance].mallCityName) success:^(id data) {
+        
+        NSMutableArray *muData = [data mutableCopy];
+//        NSMutableArray *dataArray;
+//        for (int i = 0; i<muData.count; i++) {
+//            [dataArray addObjectsFromArray:muData[i]];
+//        }
+        self.hotWordList = muData;
+        NSLog(@"哈哈哈哈哈asdasdasdasdasdasd>>>>>>>>>>>>>>%@>>>",self.hotWordList);
+    } failure:^(id data) {
+        
+    }];
     
 //    self.hotWordList = @[@"美食",@"天河",@"优惠",@"店3",@"店4",@"奶茶",@"西餐",@"蛋糕"];
     
- //   self.searchWordList = @[@"贡茶",@"星巴克",@"都城",@"快餐"];
+//    self.searchWordList = @[@"贡茶",@"星巴克",@"都城",@"快餐"];
     
     
 }

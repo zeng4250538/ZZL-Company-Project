@@ -201,7 +201,7 @@
     BasketService *service = [BasketService new];
     
     
-    [service requestNotUseStatus:@"未消费" page:1 per_page:10 success:^(NSInteger code, NSString *message, id data) {
+    [service requestNotUseStatus:@"未消费" page:page per_page:10 success:^(NSInteger code, NSString *message, id data) {
         
       //  self.dataList = data;
         
