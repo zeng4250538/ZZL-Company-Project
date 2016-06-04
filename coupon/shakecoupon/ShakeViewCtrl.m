@@ -34,10 +34,39 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-    //每次重新打开软件的时候都定位一次
-    [self doRequestMall];
+//    //每次重新打开软件的时候都定位一次
+//    [self doRequestMall];
     
     self.isShakeDataLoaded = NO;
+//
+//    [self makeContentView];
+//    
+//    [self makeBarItem];
+//    
+//    [self makeShakeBody];
+//
+    [self makeAudioControl];
+    
+    
+//    [self loadShakeData:^(BOOL ret){
+//        
+//        self.isShakeDataLoaded = ret;
+//    }];
+//    
+//    
+//    [[AppShareData instance] addMallIdKVO:self];
+    
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(positioningQWE) name:@"positioning" object:nil];
+    
+}
+
+
+
+-(void)positioningQWE{
+
+    //每次重新打开软件的时候都定位一次
+    [self doRequestMall];
     
     [self makeContentView];
     
@@ -45,7 +74,7 @@
     
     [self makeShakeBody];
     
-    [self makeAudioControl];
+//    [self makeAudioControl];
     
     
     [self loadShakeData:^(BOOL ret){
@@ -55,12 +84,8 @@
     
     
     [[AppShareData instance] addMallIdKVO:self];
-    
-    
-    
+
 }
-
-
 
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -103,7 +128,6 @@
     
     [[AppShareData instance] removeMallIdKVO:self];
 
-    
     
 }
 
@@ -216,7 +240,7 @@
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
-    [service requestShakeCoupon:customId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:customId shopMallId:mallId withCity:[AppShareData instance].mallCityName success:^(NSInteger code, NSString *message, id data) {
         
         self.isShakeDataLoaded = YES;
         
@@ -540,13 +564,13 @@
             
             NSString *name = [NSString stringWithFormat:@"%@",SafeString(mall[@"name"])
                               /*,SafeString(mall[@"distance"])*/];
-            
+            [[AppShareData instance] setMallCityNameKey:SafeString(mall[@"city"])];
             
             [[AppShareData instance] setMallName:SafeString(mall[@"name"])];
             
             [[AppShareData instance] saveMallId:SafeString(mall[@"id"])];
             
-            
+            NSLog(@"qweqweqweqweqweqwe>>>>>>>>>>>>>>>>>>>>>>>>>>>>%@---",[AppShareData instance].mallName);
             
             
             

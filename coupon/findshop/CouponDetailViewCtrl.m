@@ -38,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    
+    
     [self doLoad];
     
     self.view.backgroundColor=[UIColor whiteColor];
@@ -79,7 +81,7 @@
     
     
     
-    [self makeHeaderView];
+//    [self makeHeaderView];
     
     
     
@@ -405,7 +407,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    
+    [self makeHeaderView];
 
     ShoppingCartSevice *SCS = [ShoppingCartSevice new];
     NSString *cu = [NSString stringWithFormat:@"%@",[AppShareData instance].customId];
@@ -1066,7 +1068,10 @@
         make.width.equalTo(@100);
         
     }];
-    [imageView sd_setImageWithURL:SafeUrl(_bttonTabelViewDic[@"smallPhotoUrl"])];
+    NSURL *url = SafeUrl(_bttonTabelViewDic[@"smallPhotoUrl"]);
+    SafeLoadUrlImage(imageView, url, ^{
+        [cell setNeedsLayout];
+    });
     
     UILabel *titleLable = [[UILabel alloc]init];
     [cell.contentView addSubview:titleLable];
@@ -1106,13 +1111,11 @@
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
-    [service requestShakeCoupon:customId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
-        
+    [service requestShakeCoupon:customId shopMallId:mallId withCity:@"" success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD dismiss];
         self.bttonTabelViewDic = data[0];
-//        self.data = data;
-//        self.LSVVC.data = data[0];
+        [self upLoadData:_bttonTabelViewDic];
         [self.tableView reloadData];
 
         
@@ -1144,25 +1147,12 @@
     [couponService requestNormalCoupon:@"11" page:1 pageCount:1 success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD dismiss];
-//        self.LSVVC.data = data[0];
+
         _bttonTabelViewDic = data[0];
         
-//        self.data = data;
-        
-        if (![data isKindOfClass:[NSArray class]]) {
-            
-            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
-            return ;
-        }
-        
+        [self upLoadData:_bttonTabelViewDic];
         [self.tableView reloadData];
 
-        
-       
-        
-        
-        
-        
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
@@ -1179,49 +1169,22 @@
     
 }
 
-//猜你喜欢
-//-(void)likeButtonLoadData{
-//
-//    [self loadShakeData:^(BOOL ret){
-//        
-//        if (ret) {
-//            
-//            
-//        }else{
-//            
-//            [SVProgressHUD showErrorWithStatus:@"网络错误，请重试！"];
-//            
-//        }
-//        
-//    }];
-//
-//}
-
-
-//其他优惠
-//-(void)otherButtonLoadData{
-//
-//    [self doLoad:^(BOOL ret){
-//        
-//        if (ret) {
-//            [ReloadHud removeHud:self.view animated:YES];
-//            // [self makeHeaderView];
-//        }else{
-//            
-//            [ReloadHud showReloadMode:self.view];
-//        }
-//        
-//        
-//    }];
-//
-//}
+-(void)upLoadData:(id)data{
+    
+    self.LSVVC.data = data;
+    
+//    NSLog(@"hahahahhahaha,,,..... %@",self.LSVVC.data);
+    
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ([indexPath section]==4) {
-        self.LSVVC.data = self.bttonTabelViewDic;
+        NSLog(@"hahahahhahaha,,,..... %@",self.LSVVC.data);
+        self.LSVVC.couponDetailType = CouponDetailTypeHaveCarts;
+//        self.LSVVC.data = _bttonTabelViewDic;
         [self.navigationController pushViewController:self.LSVVC animated:YES];
     };
 //    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];

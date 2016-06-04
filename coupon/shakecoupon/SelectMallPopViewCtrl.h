@@ -19,7 +19,7 @@ typedef void (^tabelViewRefreshBlock) (id data);
 @property(nonatomic,strong)NSString *cityString;
 
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *mallList;
+@property(nonatomic,strong)NSMutableArray *mallList;
 @property(nonatomic,copy)SelectMallBlock selectMallBlock;
 @property(nonatomic,copy)myCity cityArrayBlock;
 @property(nonatomic,copy)tabelViewRefreshBlock tabelViewRefresh;

@@ -164,15 +164,15 @@
     //http://192.168.6.97:8080/diamond-sis-web/v1/customer/15818865756/resetCustomerPassword
     
     BaseRequest *req = [BaseRequest new];
-    NSString *url = [[self getBaseUrl] stringByAppendingFormat:@"/customer/%@/resetCustomerPassword",phone];
-     NSDictionary *param = @{@"id":phone,@"newPassword":newPassword,@"repeatPassword":repeatPassword};
+    NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer/resetCustomerPassword"];
+     NSDictionary *param = @{@"phoneMsisdn":phone,@"newPassword":newPassword,@"repeatPassword":repeatPassword};
     [req put:url param:param success:^(NSInteger code, id object) {
         
         success(object);
         
     } failure:^(NSInteger code, NSString *content) {
         
-        failure(content);
+        failure([NSString stringWithFormat:@"%ld",code]);
         
     }];
 

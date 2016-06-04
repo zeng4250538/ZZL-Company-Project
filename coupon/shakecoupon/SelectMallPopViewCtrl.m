@@ -12,7 +12,9 @@
 #import "MallService.h"
 
 @interface SelectMallPopViewCtrl ()
-
+@property(nonatomic,strong)NSMutableArray *mallArray;
+@property(nonatomic,strong)NSDictionary *wholeCity;
+@property(nonatomic,strong)NSMutableArray *wholeCityArray;
 @end
 
 @implementation SelectMallPopViewCtrl
@@ -94,11 +96,19 @@
         
         //NSDictionary *allCity = @{@"city":@"全城",}
         
-        self.mallList = data;
+//        self.wholeCity = @{@"id":@"" , @"name":@"全城" , @"city":@"广州市" , @"distance":@"" , @"mapPhotoUrl":@""};
         
+        
+        self.wholeCityArray = [data mutableCopy];
+        
+        //cuo
+        
+        [self.wholeCityArray replaceObjectAtIndex:3 withObject:@{@"id":@"" , @"name":@"全城" , @"city":@"广州市" , @"distance":@"" , @"mapPhotoUrl":@""}];
+        
+        
+        self.mallList = self.wholeCityArray;
         
         [self.tableView reloadData];
-        
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
@@ -212,7 +222,7 @@
             vc.selectMallBlock = self.selectMallBlock;
             
 //            if (self.selectMallBlock) {
-//                self.selectMallBlock(YES,mallDict);
+//                self.selectMallBlock(YES,_mallList);
 //                
 //            }
 
@@ -343,11 +353,9 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
     NSDictionary *mallDict = self.mallList[[indexPath row]];
     
     [AppShareData instance].currentMall = mallDict;
-
    
     [self dismissViewControllerAnimated:NO completion:^{
         

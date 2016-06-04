@@ -133,7 +133,10 @@ static AppShareData *instance;
 }
 
 
+-(NSString *)mallCityName{
 
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"mallCityNameKey"];
+}
 
 -(void)setDeviceToken:(NSString *)deviceToken{
     
@@ -273,6 +276,11 @@ static AppShareData *instance;
     
 }
 
+-(void)setMallCityNameKey:(id)data{
+
+    [[NSUserDefaults standardUserDefaults]setObject:data forKey:@"mallCityNameKey"];
+
+}
 
 -(NSString*)customId{
     

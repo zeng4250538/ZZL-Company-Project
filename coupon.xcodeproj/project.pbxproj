@@ -255,6 +255,7 @@
 		7F9B4D771CFF7E8F00E12D7C /* LikeSubViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9B4D761CFF7E8F00E12D7C /* LikeSubViewViewController.m */; };
 		7FC54B251CED2C2D00A499BB /* SubBasketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC54B241CED2C2D00A499BB /* SubBasketViewController.m */; };
 		7FC54B291CF206CF00A499BB /* IndoorMapViewService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC54B281CF206CF00A499BB /* IndoorMapViewService.m */; };
+		7FDCA2FF1D01B22E00244F7F /* HotSaerchSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FDCA2FE1D01B22E00244F7F /* HotSaerchSevice.m */; };
 		7FF39E3D1CE57B96007810BC /* guangzhoufood.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF39E3C1CE57B96007810BC /* guangzhoufood.png */; };
 		7FF596751CB3F0FF008BDE5A /* MyInformationSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */; };
 		7FFEA1281CF5A9EB00EFBDC5 /* FeedbackSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFEA1271CF5A9EB00EFBDC5 /* FeedbackSevice.m */; };
@@ -768,6 +769,8 @@
 		7FC54B241CED2C2D00A499BB /* SubBasketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubBasketViewController.m; sourceTree = "<group>"; };
 		7FC54B271CF206CF00A499BB /* IndoorMapViewService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorMapViewService.h; sourceTree = "<group>"; };
 		7FC54B281CF206CF00A499BB /* IndoorMapViewService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndoorMapViewService.m; sourceTree = "<group>"; };
+		7FDCA2FD1D01B22E00244F7F /* HotSaerchSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotSaerchSevice.h; sourceTree = "<group>"; };
+		7FDCA2FE1D01B22E00244F7F /* HotSaerchSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotSaerchSevice.m; sourceTree = "<group>"; };
 		7FF39E3C1CE57B96007810BC /* guangzhoufood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guangzhoufood.png; sourceTree = "<group>"; };
 		7FF596731CB3F0FF008BDE5A /* MyInformationSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInformationSevice.h; sourceTree = "<group>"; };
 		7FF596741CB3F0FF008BDE5A /* MyInformationSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInformationSevice.m; sourceTree = "<group>"; };
@@ -1499,6 +1502,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7FDCA2FC1D01B1C600244F7F /* HotSearchSevice */,
 				7F3EF6A51CFC046000B47CCD /* Requrest */,
 				7F3EF6A11CFBECE500B47CCD /* ShopIdSevice */,
 				7FFEA1521CFAF9C900EFBDC5 /* History Of ConsumptionSubViewSevice */,
@@ -1760,6 +1764,15 @@
 				7FC54B281CF206CF00A499BB /* IndoorMapViewService.m */,
 			);
 			name = IndoorMapViewService;
+			sourceTree = "<group>";
+		};
+		7FDCA2FC1D01B1C600244F7F /* HotSearchSevice */ = {
+			isa = PBXGroup;
+			children = (
+				7FDCA2FD1D01B22E00244F7F /* HotSaerchSevice.h */,
+				7FDCA2FE1D01B22E00244F7F /* HotSaerchSevice.m */,
+			);
+			name = HotSearchSevice;
 			sourceTree = "<group>";
 		};
 		7FF596721CB3F0D7008BDE5A /* MyInformationSevice */ = {
@@ -2150,6 +2163,7 @@
 				7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */,
 				57D238841C9AC41500CE5331 /* CouponQueue.m in Sources */,
 				57D148101CC1392300F9E40C /* ShopMessageViewCtrl.m in Sources */,
+				7FDCA2FF1D01B22E00244F7F /* HotSaerchSevice.m in Sources */,
 				5735A25B1CC3F7920001B239 /* MallShopCommentViewController.m in Sources */,
 				57A4F6D01CCA00D2004B6549 /* GoToMapViewCtrl.mm in Sources */,
 				57F511AD1C5CD188000DA1A8 /* BasketNoPayViewCtrl.m in Sources */,

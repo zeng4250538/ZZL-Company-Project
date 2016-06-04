@@ -20,7 +20,7 @@
 #import "ShoppingCartSevice.h"
 #import "BasketNotUseTableViewCell.h"
 #import "ShakeService.h"
-
+#import "CouponDetailViewCtrl.h"
 @interface LikeSubViewViewController ()
 
 @property(nonatomic,strong)UILabel   *cartNumLabel;
@@ -29,14 +29,16 @@
 
 @property(nonatomic,strong)NSDictionary *bttonTabelViewDic;
 
-
+@property(nonatomic,strong)CouponDetailViewCtrl *CDVC;
 @end
 
 @implementation LikeSubViewViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _CDVC = [CouponDetailViewCtrl new];
+    NSLog(@"ahhahahhahahahahhahaha----------------------------------<>%@",_data);
     self.view.backgroundColor=[UIColor whiteColor];
     
     
@@ -76,17 +78,17 @@
     
     
     
-    [self makeHeaderView];
+//    [self makeHeaderView];
     
     
     
-//    if (self.couponDetailType == CouponDetailTypeHaveCart) {
-//        
-//        [self makeBottomView];
-//        
-//        [self makeCartView];
-//        
-//    }
+    if (self.couponDetailType == CouponDetailTypeHaveCarts) {
+        
+        [self makeBottomView];
+        
+        [self makeCartView];
+        
+    }
     
     
 //    if (self.couponDetailPushMode == CouponDetailPushModePresent) {
@@ -376,16 +378,12 @@
     
     
     
-    [uv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"logo60@3x.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    SafeLoadUrlImage(uv, url, ^{
+        
+        [self.view setNeedsLayout];
         
         
-        self.couponImage = image;
-        
-        
-        
-        
-    }];
-    
+    });
     
     
     self.tableView.tableHeaderView = uv;
@@ -406,7 +404,8 @@
     } withFailure:^(id data) {
         
     }];
-    
+    [self makeHeaderView];
+    [_tableView reloadData];
 }
 
 -(void)makeBottomView{
@@ -948,7 +947,7 @@
         [otherButton bk_addEventHandler:^(id sender) {
             
             [self otherButtonLoadData];
-            [self.tableView reloadData];
+            
             
             
             
@@ -957,7 +956,6 @@
         [likeButton bk_addEventHandler:^(id sender) {
             
             [self likeButtonLoadData];
-            [self.tableView reloadData];
             
             
         } forControlEvents:UIControlEventTouchUpInside];
@@ -1056,7 +1054,15 @@
         make.width.equalTo(@100);
         
     }];
-    [imageView sd_setImageWithURL:SafeUrl(_bttonTabelViewDic[@"smallPhotoUrl"])];
+    
+    NSURL *url = SafeUrl(_bttonTabelViewDic[@"smallPhotoUrl"]);
+    SafeLoadUrlImage(imageView, url, ^{
+        
+        [cell setNeedsLayout];
+        
+        
+    });
+    
     
     UILabel *titleLable = [[UILabel alloc]init];
     [cell.contentView addSubview:titleLable];
@@ -1096,13 +1102,14 @@
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
-    [service requestShakeCoupon:customId shopMallId:mallId success:^(NSInteger code, NSString *message, id data) {
+    [service requestShakeCoupon:customId shopMallId:mallId withCity:@"" success:^(NSInteger code, NSString *message, id data) {
         
         
         [SVProgressHUD dismiss];
         self.bttonTabelViewDic = data[0];
         //        self.data = data;
-        
+        _CDVC.data = data[0];
+        [_tableView reloadData];
         completion(YES);
         
         
@@ -1134,18 +1141,9 @@
     [couponService requestNormalCoupon:@"11" page:1 pageCount:1 success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD dismiss];
-        
+        _CDVC.data = data[0];
         _bttonTabelViewDic = data[0];
-        
-        //        self.data = data;
-        
-        if (![data isKindOfClass:[NSArray class]]) {
-            
-            [SVProgressHUD showErrorWithStatus:@"优惠券数据格式错误"];
-            return ;
-        }
-        
-        
+        [_tableView reloadData];
         
         completion(YES);
         
@@ -1207,10 +1205,18 @@
     
 }
 
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+    if ([indexPath section]==4) {
+        
+        //        self.LSVVC.data = _bttonTabelViewDic;
+        [self.navigationController pushViewController:self.CDVC animated:YES];
+    };
+    
     
 }
 

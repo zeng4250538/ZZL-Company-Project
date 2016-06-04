@@ -267,11 +267,9 @@
     self.commentLabel.text = SafeString(self.data[@"description"]);
     NSURL *url = SafeUrl(self.data[@"shopPhotoUrl"]);
     
-    [self.logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
+    SafeLoadUrlImage(self.logoView, url, ^{
         [self setNeedsLayout];
-        
-    }];
+    });
    
 }
 

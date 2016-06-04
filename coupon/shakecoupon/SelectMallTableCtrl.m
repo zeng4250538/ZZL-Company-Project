@@ -223,9 +223,11 @@
         
         self.data = data;
         
+        NSMutableArray *arrayData = [data mutableCopy];
         
-        self.filterData = self.data;
-        
+        self.filterData = arrayData;
+        NSLog(@"asdassssssss.......................>>>>>>>>>>>>%@",self.filterData);
+
         [self makeSortData];
         
         
@@ -387,7 +389,7 @@
     
     
     NSString *key = self.keyList[indexPath.section];
-    
+//    NSLog(@"asdassssssss.......................>>>>>>>>>>>>%@",key);
     NSArray *dataList = [self.dataMap objectForKey:key];
     
     NSDictionary * d= dataList[indexPath.row];
@@ -395,7 +397,6 @@
     
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [GUIConfig grayFontColorDeep];
-    
     
     cell.textLabel.text =SafeString(d[@"name"]);
     
@@ -424,6 +425,7 @@
     
     
     
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
         if (self.selectMallBlock) {
@@ -441,7 +443,7 @@
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
     
     // Configure the cell...
     

@@ -12,7 +12,7 @@
 
 
 -(void)requestShakeCoupon:(NSString*)mallid
-                 shopMallId:(NSString *)shopMallId success:(void(^)(NSInteger code,NSString *message,id data))success
+                 shopMallId:(NSString *)shopMallId withCity:(NSString *)city success:(void(^)(NSInteger code,NSString *message,id data))success
                  failure:(void(^)(NSInteger code,BOOL retry,NSString*message,id data))failure;
 
 @end

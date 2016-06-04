@@ -33,7 +33,7 @@
     
     NSString *url = [[self getBaseUrl] stringByAppendingString:@"/realtimepromotion"];
     
-    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),@"customerId":customerId,@"page":@(page),@"per_page":@(pageCount),@"sort":sort};
+    NSDictionary *parm = @{@"shopMallId":SafeString(mallid),@"customerId":customerId,@"page":@(page),@"per_page":@(pageCount),@"cityName":SafeString([AppShareData instance].mallCityName)};
     
     [req get:url param:parm success:^(NSInteger code, id object) {
         
@@ -81,7 +81,7 @@
    // NSString *promotionType = [@"即时优惠" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     
-    NSDictionary *parm = @{@"type":@"即时优惠"};
+    NSDictionary *parm = @{@"type":@"即时优惠",@"customerId":[AppShareData instance].customId};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
@@ -122,7 +122,7 @@
     
    //   NSString *promotionType = [@"普通优惠" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSDictionary *parm = @{@"type":@"普通优惠"};
+    NSDictionary *parm = @{@"type":@"普通优惠",@"customerId":[AppShareData instance].customId};
     
     
     [req get:url param:parm success:^(NSInteger code, id object) {
