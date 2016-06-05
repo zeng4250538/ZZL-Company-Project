@@ -9,18 +9,20 @@
 #import "ShopMessageViewCtrl.h"
 #import "IdShopSevice.h"
 #import "ShopMessageService.h"
+#import "CouponDetailViewCtrl.h"
 
 @interface ShopMessageViewCtrl ()
 
 @property(nonatomic,strong)NSMutableArray *data;
 @property(nonatomic,assign)NSUInteger pageCount;
+@property(nonatomic,strong)NSMutableArray *subData;
+@property(nonatomic,strong)NSString *shopID;
 @end
 
 @implementation ShopMessageViewCtrl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
     
@@ -147,14 +149,16 @@
     
     [service requestShopMessageWithPage:1 per_page:10 success:^(NSInteger code, NSString *message, id data) {
         
+        
+        
         self.data = [data mutableCopy];
         [self.tableView reloadData];
         
         completion(YES);
         
+        
     
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
         
         completion(NO);
         
@@ -215,14 +219,14 @@
     
     NSDictionary *d =self.data[indexPath.row];
     
-    
     NSURL *url = SafeUrl(d[@"shop"][@"smallPhotoUrl"]);
-    
-    
-    [logoView sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+
+    SafeLoadUrlImage(logoView, url, ^{
         
         [cell setNeedsLayout];
-    }];
+        
+        
+    });
     
     
     UILabel *nameLabel = [UILabel new];
@@ -276,7 +280,23 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CouponDetailViewCtrl *CDVC = [CouponDetailViewCtrl new];
     
+    IdShopSevice *isp = [IdShopSevice new];
+    _shopID = [NSString stringWithFormat:@"%@",SafeString(self.data[indexPath.row][@"shopId"])];
+    [isp shopIdRequrestString:_shopID withSuccess:^(id data) {
+        
+        CDVC.data = @{@"name":self.data[indexPath.row][@"title"]  ,  @"shopName":data[@"name"]  ,  @"shopPhone":data[@"phone"]  ,  @"longitude":data[@"longitude"] ,  @"latitude":data[@"latitude"] , @"photoUrl":data[@"smallPhotoUrl"]};
+        
+        [self.navigationController pushViewController:CDVC animated:YES];
+        
+    } withFailure:^(id data) {
+        
+    }];
+    
+    
+    
+   
 
 
 }
