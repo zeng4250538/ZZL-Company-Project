@@ -148,11 +148,11 @@
                   moduleName = "coupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chijr/working/coupon/coupon/findshop/CouponDetailViewCtrl.m"
-                  timestampString = "486570156.552343"
+                  timestampString = "486744051.052417"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "379"
-                  endingLineNumber = "379"
+                  startingLineNumber = "383"
+                  endingLineNumber = "383"
                   offsetFromSymbolStart = "706">
                </Location>
                <Location
@@ -163,11 +163,11 @@
                   moduleName = "coupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chijr/working/coupon/coupon/findshop/CouponDetailViewCtrl.m"
-                  timestampString = "486570156.552521"
+                  timestampString = "486744051.052631"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "382"
-                  endingLineNumber = "382"
+                  startingLineNumber = "386"
+                  endingLineNumber = "386"
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
