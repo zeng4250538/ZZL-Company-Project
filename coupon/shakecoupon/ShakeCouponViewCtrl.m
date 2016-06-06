@@ -1246,9 +1246,11 @@
     
         CouponDetailViewCtrl *vc =  [CouponDetailViewCtrl new];
         
-        vc.data = self.couponData;
+    vc.data = self.couponData;
     
-        vc.hidesBottomBarWhenPushed = YES;
+    vc.shopingCarPush = YES;
+    
+    vc.hidesBottomBarWhenPushed = YES;
     
     vc.couponDetailPushMode = CouponDetailPushModePresent;
     
