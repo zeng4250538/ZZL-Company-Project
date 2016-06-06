@@ -112,7 +112,24 @@
         
     }
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshCarNumber) name:@"refreshShopingCarNumber" object:nil];
     
+}
+
+-(void)refreshCarNumber{
+
+    ShoppingCartSevice *SCS = [ShoppingCartSevice new];
+    NSString *cu = [NSString stringWithFormat:@"%@",[AppShareData instance].customId];
+    [SCS soppingCartRequestUserId:cu withstatus:@"未消费" withSuccessful:^(id data) {
+        [AppShareData instance].shoppingNumberl = [data[@"amount"] integerValue];
+    } withFailure:^(id data) {
+        
+    }];
+    
+//    [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshShopingCarView" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"refreshShopingCarNumber" object:nil];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -699,11 +716,8 @@
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     
     [super motionEnded:motion withEvent:event];
-
     
         if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake){
-    
-
             
             [self loadShakeData:^(BOOL ret){
                 

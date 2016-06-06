@@ -550,7 +550,9 @@
     [service requestADDBasket:couponId count:1 success:^(NSInteger code, NSString *message, id data) {
         
         
-        
+        if (self.shopingCarPush) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshShopingCarNumber" object:nil];
+        }
         [[AppShareData instance] addCouponToCart:self.data];
         
         

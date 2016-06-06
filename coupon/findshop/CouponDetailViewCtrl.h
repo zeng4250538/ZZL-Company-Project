@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, CouponDetailPushMode) {  //优惠券显示
 
 @property(nonatomic,assign)CouponDetailType couponDetailType;
 @property(nonatomic,assign)CouponViewMode couponViewMode;
-
+@property(nonatomic,assign)BOOL shopingCarPush;
 
 
 @property(nonatomic,assign)CouponDetailPushMode couponDetailPushMode;

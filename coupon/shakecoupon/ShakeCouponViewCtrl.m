@@ -169,6 +169,7 @@
         else{
         
             [SVProgressHUD showInfoWithStatus:@"此优惠券已经领取，小的给你切换到下一张"];
+            
         }
         
         
@@ -1035,7 +1036,7 @@
     
     [super viewWillAppear:animated];
     
-    
+    [self makeCartView];
     
     
     
