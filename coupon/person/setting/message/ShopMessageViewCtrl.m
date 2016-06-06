@@ -40,8 +40,21 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
      self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshTableView) name:@"refreshFindShopTableView" object:nil];
 }
 
+-(void)dealloc{
+    
+[[NSNotificationCenter defaultCenter]removeObserver:self name:@"refreshFindShopTableView" object:nil];
+
+}
+
+-(void)refreshTableView{
+
+    [self.tableView reloadData];
+    
+}
 
 -(void)makePullRefresh{
     
@@ -269,10 +282,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
-    
-    
-    
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CouponDetailViewCtrl *CDVC = [CouponDetailViewCtrl new];
     
@@ -280,7 +289,7 @@
     _shopID = [NSString stringWithFormat:@"%@",SafeString(self.data[indexPath.row][@"shopId"])];
     [isp shopIdRequrestString:_shopID withSuccess:^(id data) {
         
-        CDVC.data = @{@"name":self.data[indexPath.row][@"title"]  ,  @"shopName":data[@"name"]  ,  @"shopPhone":data[@"phone"]  ,  @"longitude":data[@"longitude"] ,  @"latitude":data[@"latitude"] , @"photoUrl":data[@"smallPhotoUrl"]};
+        CDVC.data = @{@"name":self.data[indexPath.row][@"title"]  ,  @"shopName":data[@"name"]  ,  @"shopPhone":data[@"phone"]  ,  @"longitude":data[@"longitude"] ,  @"latitude":data[@"latitude"] , @"photoUrl":data[@"smallPhotoUrl"] , @"id":self.data[indexPath.row][@"id"]};
         
         [self.navigationController pushViewController:CDVC animated:YES];
         
