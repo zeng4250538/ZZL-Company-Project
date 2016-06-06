@@ -78,7 +78,7 @@
     
     BaseRequest *req = [BaseRequest new];
      NSString *url = [[self getBaseUrl] stringByAppendingString:@"/customer"];
-    NSDictionary *param = @{@"phoneMsisdn":userName,@"passwordCredential":@{@"password":password},@"smscode":verification};
+    NSDictionary *param = @{@"phoneMsisdn":userName,@"passwordCredential":@{@"password":password},@"smscode":verification,@"type":@"0"};
     [req post:url param:param success:^(NSInteger code, id object, AFHTTPRequestOperation *operation) {
         
         success(code,@"",object);
@@ -115,13 +115,12 @@
     }];
 
 
-
 }
+
 
 //重置密码
 -(void)modifyPassword:(NSString *)passWord withNewPassword:(NSString *)newPassword withRepeatPassword:(NSString *)repeatPassword success:(void(^)(id data))success failure:(void(^)(id data))failure{
 
-    
         //http://183.6.190.75:9780/diamond-sis-web/v1/customer/15818865756/password
     
         BaseRequest *req = [BaseRequest new];
