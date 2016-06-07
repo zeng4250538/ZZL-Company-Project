@@ -248,6 +248,12 @@
 		7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */; };
 		7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */; };
 		7F242F8F1CEB244100D5235A /* ShoppingCartSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F242F8E1CEB244100D5235A /* ShoppingCartSevice.m */; };
+		7F3113D41D0574D000639DE4 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113D31D0574D000639DE4 /* libiconv.2.dylib */; };
+		7F3113D61D05750000639DE4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113D51D05750000639DE4 /* CoreGraphics.framework */; };
+		7F3113D81D05755A00639DE4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113D71D05755A00639DE4 /* libsqlite3.dylib */; };
+		7F3113DA1D05757800639DE4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113D91D05757800639DE4 /* CoreTelephony.framework */; };
+		7F3113DC1D0575C400639DE4 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113DB1D0575C400639DE4 /* libstdc++.6.0.9.dylib */; };
+		7F3113DE1D0575E400639DE4 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113DD1D0575E400639DE4 /* libz.1.dylib */; };
 		7F3EF6A41CFBED0A00B47CCD /* IdShopSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3EF6A31CFBED0A00B47CCD /* IdShopSevice.m */; };
 		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
 		7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */; };
@@ -754,6 +760,12 @@
 		7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubscribeSevice.m; sourceTree = "<group>"; };
 		7F242F8D1CEB244100D5235A /* ShoppingCartSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartSevice.h; sourceTree = "<group>"; };
 		7F242F8E1CEB244100D5235A /* ShoppingCartSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartSevice.m; sourceTree = "<group>"; };
+		7F3113D31D0574D000639DE4 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
+		7F3113D51D05750000639DE4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7F3113D71D05755A00639DE4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
+		7F3113D91D05757800639DE4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		7F3113DB1D0575C400639DE4 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
+		7F3113DD1D0575E400639DE4 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		7F3557871CACA914000DB7EA /* coupon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = coupon.entitlements; sourceTree = "<group>"; };
 		7F3EF6A21CFBED0A00B47CCD /* IdShopSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdShopSevice.h; sourceTree = "<group>"; };
 		7F3EF6A31CFBED0A00B47CCD /* IdShopSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdShopSevice.m; sourceTree = "<group>"; };
@@ -789,6 +801,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3113DE1D0575E400639DE4 /* libz.1.dylib in Frameworks */,
+				7F3113DC1D0575C400639DE4 /* libstdc++.6.0.9.dylib in Frameworks */,
+				7F3113DA1D05757800639DE4 /* CoreTelephony.framework in Frameworks */,
+				7F3113D81D05755A00639DE4 /* libsqlite3.dylib in Frameworks */,
+				7F3113D61D05750000639DE4 /* CoreGraphics.framework in Frameworks */,
+				7F3113D41D0574D000639DE4 /* libiconv.2.dylib in Frameworks */,
 				5701F4731CCF2D9100AC5C25 /* libSocialQQ.a in Frameworks */,
 				5701F4741CCF2D9100AC5C25 /* TencentOpenAPI.framework in Frameworks */,
 				5701F4771CCF2D9100AC5C25 /* libWeChatSDK.a in Frameworks */,
@@ -823,6 +841,13 @@
 		49942032E160F0BBC893A916 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5779BD8A1C2539D000E15934 /* Podfile */,
+				7F3113DD1D0575E400639DE4 /* libz.1.dylib */,
+				7F3113DB1D0575C400639DE4 /* libstdc++.6.0.9.dylib */,
+				7F3113D91D05757800639DE4 /* CoreTelephony.framework */,
+				7F3113D71D05755A00639DE4 /* libsqlite3.dylib */,
+				7F3113D51D05750000639DE4 /* CoreGraphics.framework */,
+				7F3113D31D0574D000639DE4 /* libiconv.2.dylib */,
 				7FFEA12D1CF6F7BF00EFBDC5 /* MapKit.framework */,
 				578B09391CC7F32A00618A2D /* umengmessage */,
 				5749113A1CC00CD700FB2B14 /* libssl.a */,
@@ -1192,7 +1217,6 @@
 				574910C11CC0084B00FB2B14 /* pay */,
 				578E63F61C255B4800C1FB19 /* images */,
 				578E63E61C2558A800C1FB19 /* thirdParty */,
-				5779BD8A1C2539D000E15934 /* Podfile */,
 				5779BD631C25381600E15934 /* coupon */,
 				5779BD7D1C25381600E15934 /* couponTests */,
 				5779BD621C25381600E15934 /* Products */,
@@ -1541,6 +1565,7 @@
 		57F511A71C5CC923000DA1A8 /* basket */ = {
 			isa = PBXGroup;
 			children = (
+				7F3113DF1D06D17500639DE4 /* PayView */,
 				7FC54B221CED2C0300A499BB /* SubBasketView */,
 				57F511AE1C5CD1AD000DA1A8 /* BasketNotUseViewCtrl.h */,
 				573E51D01C7C2561005DBBC3 /* BasketNotUseViewCtrl.m */,
@@ -1554,8 +1579,6 @@
 				573E51E51C7CCF09005DBBC3 /* BasketMessageViewCtrl.m */,
 				57F3E28A1C86D39200A8CCA8 /* OrderContainerViewCtrl.h */,
 				57F3E28B1C86D39200A8CCA8 /* OrderContainerViewCtrl.m */,
-				5727C4CC1CB0390E00C92BF0 /* UseCouponViewCtrl.h */,
-				5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */,
 				574910B51CBFCEB000FB2B14 /* BasketNotUseTableViewCell.h */,
 				574910B61CBFCEB000FB2B14 /* BasketNotUseTableViewCell.m */,
 				574910B81CBFEF8B00FB2B14 /* BasketMessageCell.h */,
@@ -1622,6 +1645,15 @@
 				7F242F8E1CEB244100D5235A /* ShoppingCartSevice.m */,
 			);
 			name = ShoppingCart;
+			sourceTree = "<group>";
+		};
+		7F3113DF1D06D17500639DE4 /* PayView */ = {
+			isa = PBXGroup;
+			children = (
+				5727C4CC1CB0390E00C92BF0 /* UseCouponViewCtrl.h */,
+				5727C4CD1CB0390E00C92BF0 /* UseCouponViewCtrl.m */,
+			);
+			name = PayView;
 			sourceTree = "<group>";
 		};
 		7F375F651CC4E23D0007098C /* ShopCommentSevice */ = {

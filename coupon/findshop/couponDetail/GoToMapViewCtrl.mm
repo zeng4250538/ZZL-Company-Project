@@ -29,12 +29,13 @@
 @end
 
 
-@interface GoToMapViewCtrl ()<CLLocationManagerDelegate,BMKMapViewDelegate,BMKRouteSearchDelegate>
+@interface GoToMapViewCtrl ()<CLLocationManagerDelegate,BMKMapViewDelegate,BMKRouteSearchDelegate,BMKLocationServiceDelegate>
 
 @property (nonatomic, strong) CLLocationManager *lcManager;
 @property(nonatomic,strong)BMKRouteSearch *searcher;
 @property (nonatomic,assign)CLLocationCoordinate2D locals;
 @property(nonatomic,strong)NSString *cityString;
+@property(nonatomic,strong)BMKLocationService *locService;
 @end
 
 @implementation GoToMapViewCtrl
@@ -42,7 +43,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title=@"导航位置";
+    self.navigationItem.title=@"导航位置 - 步行";
+    
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc]init];
+    _locService.delegate = self;
+    _locService.desiredAccuracy = 0;
+    //启动LocationService
+    [_locService startUserLocationService];
     
     self.mapView = [[BMKMapView alloc] init];
     [self.view addSubview:self.mapView];
@@ -107,6 +115,8 @@
     //驾车
     [oneButton bk_addEventHandler:^(id sender) {
         
+        self.navigationItem.title=@"导航位置 - 驾车";
+        
         BMKPlanNode* start = [[BMKPlanNode alloc]init];
         
         BMKPlanNode* end = [[BMKPlanNode alloc]init];
@@ -117,6 +127,7 @@
         asd.latitude = _locals.latitude;
         asd.longitude = _locals.longitude;
         start.pt = asd;
+        
         start.cityName = _cityString;
         end.cityName = _cityString;
         
@@ -141,6 +152,8 @@
     } forControlEvents:UIControlEventTouchUpInside];
     
     [twoButton bk_addEventHandler:^(id sender) {
+        
+        self.navigationItem.title=@"导航位置 - 步行";
         
         //初始化检索对象
         _searcher = [[BMKRouteSearch alloc]init];
@@ -187,6 +200,8 @@
     } forControlEvents:UIControlEventTouchUpInside];
     
     [threeButton bk_addEventHandler:^(id sender) {
+        
+        self.navigationItem.title=@"导航位置 - 公交";
         
         BMKPlanNode* start = [[BMKPlanNode alloc]init];
         BMKPlanNode* end = [[BMKPlanNode alloc]init];
@@ -276,7 +291,7 @@
         self.lcManager = [[CLLocationManager alloc] init];
         self.lcManager.delegate = self; // 设置代理
         // 设置定位距离过滤参数 (当本次定位和上次定位之间的距离大于或等于这个值时，调用代理方法)
-        self.lcManager.distanceFilter = 100;
+        self.lcManager.distanceFilter = 1000;
         self.lcManager.desiredAccuracy = kCLLocationAccuracyBest; // 设置定位精度(精度越高越耗电)
         [self.lcManager startUpdatingLocation]; // 开始更新位置
         
@@ -298,21 +313,32 @@
     
 }
 
-
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    CLLocation *currentLocation = [locations lastObject]; // 最后一个值为最新位置
+//实现相关delegate 处理位置信息更新
+//处理方向变更信息
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    //NSLog(@"heading is %@",userLocation.heading);
+}
+//处理位置坐标更新
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    CLLocation *currentLocation = userLocation.location;
+    [_locService stopUserLocationService];
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    
     // 根据经纬度反向得出位置城市信息
     [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         if (placemarks.count > 0) {
             CLPlacemark *placeMark = placemarks[0];
             NSString *city = placeMark.locality;
             
-            CGFloat lat = placeMark.location.coordinate.latitude;
+//            CGFloat lat = placeMark.location.coordinate.latitude;
             
-            CGFloat lon = placeMark.location.coordinate.longitude;
+            CGFloat lat = _locService.userLocation.location.coordinate.latitude;
+            
+//            CGFloat lon = placeMark.location.coordinate.longitude;
+            
+            CGFloat lon = _locService.userLocation.location.coordinate.longitude;
             
             BMKCoordinateRegion region ;//表示范围的结构体
             //
@@ -327,11 +353,14 @@
             _locals.latitude = lat;
             _locals.longitude = lon;
             
+            NSLog(@"经度》》》----%f   纬度》》》----%f",lon,lat);
+            
+            
             [self locationWithLatitude:lat withLongitude:lon withCity:city];
             
             [self.mapView setRegion:region animated:YES];
             
-        
+            
             
         } else if (error == nil && placemarks.count == 0) {
             NSLog(@"No location and error returned");
@@ -340,10 +369,8 @@
             
         }
     }];
-    
-    //[manager stopUpdatingLocation];
+    //NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
 }
-
 
 -(void)locationWithLatitude:(CGFloat)latitudes withLongitude:(CGFloat)longitudes withCity:(NSString *)city{
 

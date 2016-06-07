@@ -77,6 +77,7 @@ static SimpleAudioPlayer *sharedInstance = nil;
 		[player play];
 		return player;
 	}
+    
 	return nil;
     
 }

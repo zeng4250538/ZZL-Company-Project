@@ -49,10 +49,32 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>fenshi</string>
+			<string>weibo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>coupon2</string>
+				<string>wb643547533</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Tencent</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent1105243920</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string></string>
+			<key>CFBundleURLName</key>
+			<string>Tencent</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>QQ41e0af10</string>
 			</array>
 		</dict>
 	</array>
@@ -62,6 +84,13 @@
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+        <string>mqq</string>
+        <string>mqqopensdkapiV2</string>
+        <string>weixin</string>
+        <string>weibosdk2.5</string>
+        <string>sinaweibo</string>
+        <string>weibosdk</string>
+        <string>mqqapi</string>
 		<string>baidumap</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

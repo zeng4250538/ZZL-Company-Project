@@ -19,12 +19,11 @@
 
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
-//#import "UMSocialSinaHandler.h"
+
 #import "UMSocialSinaSSOHandler.h"
 
 #import <AlipaySDK/AlipaySDK.h>
 
-//#import "UMSocialTencentWeiboHandler.h"
 
 #import "WXApi.h"
 
@@ -360,11 +359,11 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
     //[UMSocialData openLog:YES];
     
     //微信分享接口
-    [UMSocialWechatHandler setWXAppId:WeChatAppId appSecret:@"d9ea274d9e5e60d83a462dc60d27d382" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:WeChatAppId appSecret:@"d9ea274d9e5e60d83a462dc60d27d382" url:@"http://www.baidu.com"];
     //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
     
     //QQ分享接口
-    [UMSocialQQHandler setQQWithAppId:@"1105243920" appKey:@"qwXUdQcP6OtqHMBU" url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setQQWithAppId:@"1105243920" appKey:@"qwXUdQcP6OtqHMBU" url:@"http://www.baidu.com"];
     //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。需要 #import "UMSocialSinaSSOHandler.h"
     //新浪分享接口
     [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"643547533"
@@ -419,19 +418,7 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
     //for log
    // [UMessage setLogEnabled:YES];
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
 }
 

@@ -27,7 +27,7 @@
 @property(nonatomic,strong)id idDaata;
 @property(nonatomic,strong)UILabel *subLabel;
 @property(nonatomic,assign)__block  NSInteger inets;
-
+@property(nonatomic,strong)UIImage *titleImageView;
 @property(nonatomic,strong)NSDictionary *data;
 
 
@@ -96,7 +96,7 @@
         [UMSocialSnsService presentSnsIconSheetView:self
                                              appKey:UmengKey
                                           shareText:couponName
-                                         shareImage:@""
+                                         shareImage:_titleImageView
                                     shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToSina,nil]
                                            delegate:self];
         
@@ -454,6 +454,9 @@
         
         shopBgButton.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*rate);
         
+        UIImageView *image = [[UIImageView alloc]init];
+        [image sd_setImageWithURL:url];
+        _titleImageView = image.image;
         
         SafeLoadUrlImage(shopBgButton, url, ^{
             
@@ -517,7 +520,7 @@
                 
                 [subButton setTitle:@"取消订阅" forState:UIControlStateNormal];
                 subButton.selected = YES;
-                
+                [subButton setUserInteractionEnabled:NO];
                 return ;
                 
                 
@@ -568,15 +571,17 @@
                 [btn setTitle:@"取消订阅" forState:UIControlStateNormal];
                 btn.selected = YES;
                 
+                [btn setUserInteractionEnabled:NO];
+                
                 /**
                  *  逻辑有待修改
                  */
-                if (inter>0) {
-                    i = inter;
-                }
-                else{
+//                if (inter>0) {
+//                    i = inter;
+//                }
+//                else{
                 i = inter+1;
-                }
+//                }
                 _subLabel.text=[NSString stringWithFormat:@"订阅数 %d",i];
 
                
@@ -642,7 +647,7 @@
         
         
         
-        //subButton.selected = !subButton.selected;
+        
         
         
         

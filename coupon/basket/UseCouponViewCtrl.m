@@ -11,7 +11,7 @@
 #import "OrderService.h"
 #import "WXUtil.h"
 #import "SubBasketViewController.h"
-
+#import "HistoryCouponUsageViewCtrl.h"
 @interface UseCouponViewCtrl ()
 
 
@@ -200,6 +200,7 @@
         
         
         UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"支付宝支付成功！"];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         [av bk_addButtonWithTitle:@"关闭" handler:^{
             
         }];
@@ -291,7 +292,7 @@
 //    messageLabel.text=@"    支付宝和微信支付额外九折";
     if (num < 1) {
         NSLog(@"asdasd   %fl",num);
-        messageLabel.text=[NSString stringWithFormat:@"    支付宝和微信支付额外%d折",number];
+        messageLabel.text=[NSString stringWithFormat:@"    支付宝和微信支付再打%d折",number];
         
     }
     [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -693,9 +694,16 @@
         self.paymentPrice = [total2 floatValue];
         
         
-        self.payMoneyTextField.text = [NSString stringWithFormat:@"%@元",total];
+        
+        self.payMoneyTextField.text = [NSString stringWithFormat:@"%@元",total2];
+        NSString *nus = [NSString stringWithFormat:@"%@",total2];
+        if ( [nus isEqualToString:@"NaN"]) {
+            self.payMoneyTextField.text = @"0.00";
+        }
         
     } forControlEvents:UIControlEventEditingChanged];
+    
+    
     
  
 
@@ -775,6 +783,7 @@
     }];
     
     moneyTextField.enabled = NO;
+    
     
     self.payMoneyTextField = moneyTextField;
     

@@ -135,7 +135,8 @@ static AppShareData *instance;
 
 -(NSString *)mallCityName{
 
-    return [[NSUserDefaults standardUserDefaults]objectForKey:@"mallCityNameKey"];
+//    return [[NSUserDefaults standardUserDefaults]objectForKey:@"mallCityNameKey"];
+    return [[NSUserDefaults standardUserDefaults]objectForKey:CityKey];
 }
 
 -(void)setDeviceToken:(NSString *)deviceToken{

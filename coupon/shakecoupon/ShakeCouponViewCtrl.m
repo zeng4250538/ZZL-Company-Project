@@ -721,6 +721,8 @@
             [self makeMaskCircleViewOpenNoData];
 
         
+            _cartButton.hidden = YES;
+            _cartNumLabel.hidden = YES;
             
             UIAlertView *av = [[UIAlertView alloc] bk_initWithTitle:@"错误" message:@"当前无优惠券，请重新摇一摇"];
             

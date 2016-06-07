@@ -331,7 +331,7 @@
         UILabel *realPriceValueLabel = [UILabel new];
         realPriceValueLabel.font = [UIFont systemFontOfSize:14];
         realPriceValueLabel.textColor = [GUIConfig grayFontColor];
-        realPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"sellingPrice"])];
+        realPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"paymentPrice"])];
         
         [cell.contentView addSubview:realPriceValueLabel];
         
