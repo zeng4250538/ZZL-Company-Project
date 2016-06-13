@@ -25,7 +25,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     
-    self.navigationItem.title=@"设置消息";
+    self.navigationItem.title=@"设置";
     
     
     [GUIConfig tableViewGUIFormat:self.tableView backgroundColor:[GUIConfig mainBackgroundColor]];
@@ -53,7 +53,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -65,6 +65,9 @@
     
     if (section==1) {
         return 2;
+    }
+    if (section==2) {
+        return 1;
     }
     return 10;
 }
@@ -107,6 +110,13 @@
         
  
         
+    }
+    
+    if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+             cell.textLabel.text=@"霸气测试中";
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        }
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:14];
@@ -181,7 +191,65 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-    
+    if (indexPath.row == 0 && indexPath.section == 2) {
+        
+        UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
+
+        
+        [as bk_addButtonWithTitle:@"v1" handler:^{
+            
+            [[AppShareData instance] versionsSetNumber:@"v1"];
+            
+            
+        }];
+        
+        
+        [as bk_addButtonWithTitle:@"v1.0" handler:^{
+            
+            [[AppShareData instance] versionsSetNumber:@"v1.0"];
+            
+            
+        }];
+        
+        [as bk_addButtonWithTitle:@"-------邪恶的分割线-------" handler:^{
+            
+            
+            
+            
+        }];
+        
+        [as bk_addButtonWithTitle:@"外网" handler:^{
+            
+            
+            InLan = NO;
+            
+            
+        }];
+        
+        
+        [as bk_addButtonWithTitle:@"内网" handler:^{
+            
+            
+            InLan = YES;
+            
+        }];
+        
+        
+        
+        [as bk_addButtonWithTitle:@"-------邪恶的分割线-------" handler:^{
+            
+            
+            
+            
+        }];
+        
+        
+        [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{
+            
+        }];
+        [as showInView:[UIApplication sharedApplication].keyWindow];
+        
+        }
     
 }
 

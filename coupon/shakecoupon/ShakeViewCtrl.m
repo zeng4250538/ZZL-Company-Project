@@ -43,7 +43,7 @@
     
     [self makeBarItem];
 //    
-   [self makeShakeBody];
+    [self makeShakeBody];
 //
     [self makeAudioControl];
     
@@ -190,7 +190,7 @@
     
     
 
-    
+     
     
 }
 

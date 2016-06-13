@@ -95,6 +95,7 @@
         
         NSDictionary *d = self.subData;
         
+//        NSLog(@"消费详情信息---------》》》》》------- %@",d);
         
         
         vc.data = d;

@@ -11,12 +11,19 @@
 #import "CouponDetailViewCtrl.h"
 #import "SubHistorySevice.h"
 #import "IdShopSevice.h"
+#import "ConsumptionSuccessDataSevice.h"
+#import "HistoryCouponUsageViewCtrl.h"
 @interface CouponUsageDetailViewCtrl ()
 
 
 @property(nonatomic,assign)BOOL isSubmitReturn;
 @property(nonatomic,strong)UIButton *toCommentButton;
 @property(nonatomic,strong)NSDictionary *subDic;
+
+@property(nonatomic,strong)UILabel *originPriceValueLabel;
+@property(nonatomic,strong)UILabel *realPriceValueLabel;
+@property(nonatomic,strong)UILabel *payMethodValueLabel;
+@property(nonatomic,strong)UILabel *payTimeValueLabel;
 
 
 @end
@@ -82,13 +89,104 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self subViewLoadData];
-    
   //  self.toCommentButton.hidden = YES;
         
+    if (_boolConsumptionData == YES) {
         
+        UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(barButtonClickEvent)];
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+        
+        
+        [self loadData];
+        
+        
+        
+    }
+    
+    [self subViewLoadData];
+    
+}
+//跳转到指定页面
+-(void)barButtonClickEvent{
+    HistoryCouponUsageViewCtrl *VC = [HistoryCouponUsageViewCtrl new];
+     VC = self.navigationController.viewControllers[1];
+    [self.navigationController popToViewController:VC animated:YES];
+
+}
+
+-(void)loadData{
+
+    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
+        
+        
+        [self doLoad:^(BOOL ret){
+            
+            if (ret) {
+                
+                
+                [ReloadHud removeHud:self.tableView animated:YES];
+            }else{
+                
+                [ReloadHud showReloadMode:self.tableView];
+            }
+            
+            
+        }];
+        
+        
+    }];
     
     
+    [self doLoad:^(BOOL ret){
+        
+        if (ret) {
+            [ReloadHud removeHud:self.tableView animated:YES];
+        }else{
+            
+            [ReloadHud showReloadMode:self.tableView];
+        }
+        
+        
+    }];
+
+}
+
+#pragma mark ------ 网络数据获取
+-(void)doLoad:(void(^)(BOOL ret))completion{
+    
+    ConsumptionSuccessDataSevice *app = [ConsumptionSuccessDataSevice new];
+    [app consumptionDataRequestCouponInstanceId:_couponInstanceId success:^(id data) {
+        
+        
+        NSDictionary *dic = @{@"id":data[@"id"] , @"reviewId":data[@"reviewId"] , @"couponPhotoUrl":data[@"coupon"][@"photoUrl"] , @"shopName":@"" , @"couponName":data[@"coupon"][@"name"] , @"originalPrice":data[@"originalPrice"] , @"paymentPrice":data[@"paymentPrice"] , @"paymentServiceProvider":data[@"paymentServiceProvider"] , @"consumedTime":data[@"consumedTime_Timestamp"] };
+        
+        _data = dic;
+        completion(YES);
+        [self.tableView reloadData];
+        [self againLoadLayout];
+        [self subViewLoadData];
+        
+        
+    } failure:^(id data) {
+        
+        completion(NO);
+        
+    }];
+    
+    
+    
+}
+
+
+//重新获得数据
+-(void)againLoadLayout{
+
+    _payTimeValueLabel.text=SafeString(self.data[@"consumedTime"]);
+    _originPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"originalPrice"])];
+    _realPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"paymentPrice"])];
+    _payMethodValueLabel.text = SafeString(self.data[@"paymentServiceProvider"]);
+    _payTimeValueLabel.text=SafeString(self.data[@"consumedTime"]);
+
 }
 
 -(void)makeFooterView{
@@ -293,14 +391,15 @@
             
         }];
         
-        UILabel *originPriceValueLabel = [UILabel new];
-        originPriceValueLabel.font = [UIFont systemFontOfSize:14];
-        originPriceValueLabel.textColor = [GUIConfig grayFontColor];
-        originPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"originalPrice"])];
+        _originPriceValueLabel = [UILabel new];
+        _originPriceValueLabel.font = [UIFont systemFontOfSize:14];
+        _originPriceValueLabel.textColor = [GUIConfig grayFontColor];
         
-        [cell.contentView addSubview:originPriceValueLabel];
+        _originPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"originalPrice"])];
         
-        [originPriceValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [cell.contentView addSubview:_originPriceValueLabel];
+        
+        [_originPriceValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(SCREEN_WIDTH/2));
             make.top.equalTo(originPriceLabel);
             make.width.equalTo(@100);
@@ -328,14 +427,16 @@
             
         }];
         
-        UILabel *realPriceValueLabel = [UILabel new];
-        realPriceValueLabel.font = [UIFont systemFontOfSize:14];
-        realPriceValueLabel.textColor = [GUIConfig grayFontColor];
-        realPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"paymentPrice"])];
         
-        [cell.contentView addSubview:realPriceValueLabel];
+        //实付金额钱数
+        _realPriceValueLabel = [UILabel new];
+        _realPriceValueLabel.font = [UIFont systemFontOfSize:14];
+        _realPriceValueLabel.textColor = [GUIConfig grayFontColor];
+        _realPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"paymentPrice"])];
         
-        [realPriceValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [cell.contentView addSubview:_realPriceValueLabel];
+        
+        [_realPriceValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(SCREEN_WIDTH/2));
             make.top.equalTo(realPriceLabel);
             make.width.equalTo(@100);
@@ -355,20 +456,20 @@
         
         [payMethodLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(cell.contentView).offset(15);
-            make.top.equalTo(realPriceValueLabel.mas_bottom).offset(10);
+            make.top.equalTo(_realPriceValueLabel.mas_bottom).offset(10);
             make.width.equalTo(@100);
             make.height.equalTo(@20);
             
         }];
 //
-        UILabel *payMethodValueLabel = [UILabel new];
-        payMethodValueLabel.font = [UIFont systemFontOfSize:14];
-        payMethodValueLabel.textColor = [GUIConfig grayFontColor];
-        payMethodValueLabel.text = SafeString(self.data[@"paymentServiceProvider"]);
+        _payMethodValueLabel = [UILabel new];
+        _payMethodValueLabel.font = [UIFont systemFontOfSize:14];
+        _payMethodValueLabel.textColor = [GUIConfig grayFontColor];
+        _payMethodValueLabel.text = SafeString(self.data[@"paymentServiceProvider"]);
         
-        [cell.contentView addSubview:payMethodValueLabel];
+        [cell.contentView addSubview:_payMethodValueLabel];
         
-        [payMethodValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_payMethodValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(SCREEN_WIDTH/2));
             make.top.equalTo(payMethodLabel);
             make.right.equalTo(cell.contentView.mas_right).offset(-10);
@@ -392,14 +493,14 @@
             
         }];
         
-        UILabel *payTimeValueLabel = [UILabel new];
-        payTimeValueLabel.font = [UIFont systemFontOfSize:14];
-        payTimeValueLabel.textColor = [GUIConfig grayFontColor];
-        payTimeValueLabel.text=SafeString(self.data[@"consumedTime"]);
+        _payTimeValueLabel = [UILabel new];
+        _payTimeValueLabel.font = [UIFont systemFontOfSize:14];
+        _payTimeValueLabel.textColor = [GUIConfig grayFontColor];
+        _payTimeValueLabel.text=SafeString(self.data[@"consumedTime"]);
         
-        [cell.contentView addSubview:payTimeValueLabel];
+        [cell.contentView addSubview:_payTimeValueLabel];
         
-        [payTimeValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_payTimeValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(SCREEN_WIDTH/2));
             make.top.equalTo(payTimeLabel);
             make.right.equalTo(cell.contentView.mas_right).offset(-10);

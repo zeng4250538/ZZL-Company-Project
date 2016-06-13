@@ -12,4 +12,8 @@
 
 @property(nonatomic,strong)NSDictionary *data;
 
+@property(nonatomic,strong)NSString *couponInstanceId;
+
+@property(nonatomic,assign)BOOL boolConsumptionData;
+
 @end

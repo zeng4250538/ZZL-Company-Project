@@ -78,7 +78,9 @@
 
 -(NSString*)version{
     
-    return @"v1";
+    NSString *versionsString = [NSString stringWithFormat:@"%@",[AppShareData instance].versions];
+    
+    return versionsString;
 }
 
 -(BOOL)checkParams{

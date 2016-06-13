@@ -132,6 +132,19 @@ static AppShareData *instance;
     
 }
 
+-(void)versionsSetNumber:(NSString *)versionsNumber{
+
+    [[NSUserDefaults standardUserDefaults]setObject:versionsNumber forKey:@"versionsNumber"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
+
+- (NSString *)versions{
+    
+  return [[NSUserDefaults standardUserDefaults]objectForKey:@"versionsNumber"];
+    
+}
+
 
 -(NSString *)mallCityName{
 

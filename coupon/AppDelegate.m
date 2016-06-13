@@ -47,17 +47,13 @@
 
 
 BOOL InLan = NO;
-
 NSString *ALiPayNotice=@"alipaynotice";
 NSString *WechatPayNotice=@"wechatpaynotice";
 NSString *NoLoginNotice=@"nologinnotice";
 NSString *UmengKey=@"56e906e267e58e54f2000607";
 NSString *WeChatAppId=@"wx77914cc659d2889c";
 NSString *WeChatAppSecret=@"";
-
 NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.richstone.coupontest3
-
-
 
 #pragma mark - tab控制器创建
 -(void)makeTabViewCtrl{
@@ -192,7 +188,8 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
     //通知暂时注释
     [AppShareData instance].selected = 0;
     
-    
+    //a版本设置
+    [[AppShareData instance] versionsSetNumber:@"v1"];
     
     //微信
     
@@ -317,7 +314,7 @@ NSString *BaiduMapKey=@"7eP1eoOupsAFicaVLDCXxBW9";  //对应的bundle id = com.r
             CLPlacemark *placeMark = placemarks[0];
             self.city = placeMark.locality;
             
-            CGFloat lat = placeMark.location.coordinate.latitude;
+            CGFloat lat = placeMark.location.coordinate.latitude ;
             
             CGFloat lon = placeMark.location.coordinate.longitude;
             

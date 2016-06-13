@@ -11,7 +11,7 @@
 #import "OrderService.h"
 #import "WXUtil.h"
 #import "SubBasketViewController.h"
-#import "HistoryCouponUsageViewCtrl.h"
+#import "CouponUsageDetailViewCtrl.h"
 @interface UseCouponViewCtrl ()
 
 
@@ -121,8 +121,11 @@
     
     if ([result isEqualToString:@"1"]){  //支付成功
         
+        CouponUsageDetailViewCtrl *VC = [CouponUsageDetailViewCtrl new];
+        VC.boolConsumptionData = YES;
+        VC.couponInstanceId = self.data[@"id"];
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController pushViewController:VC animated:YES];
         
         UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"微信支付成功！"];
         [av bk_addButtonWithTitle:@"关闭" handler:^{
@@ -198,9 +201,13 @@
     
     if ([result isEqualToString:@"1"]){  //支付成功
         
+        CouponUsageDetailViewCtrl *VC = [CouponUsageDetailViewCtrl new];
+        VC.boolConsumptionData = YES;
+        VC.couponInstanceId = self.data[@"id"];
+        [self.navigationController pushViewController:VC animated:YES];
         
         UIAlertView *av =[UIAlertView bk_alertViewWithTitle:@"注意" message:@"支付宝支付成功！"];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
         [av bk_addButtonWithTitle:@"关闭" handler:^{
             
         }];

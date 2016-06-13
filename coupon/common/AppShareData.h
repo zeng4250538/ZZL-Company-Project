@@ -41,6 +41,7 @@ extern NSString *const ReviewUpdateNotice;
 
 @property(nonatomic,copy,readonly)NSString  *mallName;
 
+@property(nonatomic,strong)NSString *versions;//版本控制
 
 @property(nonatomic,assign,readonly)BOOL  notDisplayImageViaCell;
 
@@ -81,6 +82,9 @@ extern NSString *const ReviewUpdateNotice;
 //（已使用篮子数量）
 -(NSInteger)shoppingCartNumber:(id)data;
 
+//设置版本号
+
+-(void)versionsSetNumber:(NSString *)versionsNumber;
 
 -(void)saveMallId:(NSString*)mallId;
 
