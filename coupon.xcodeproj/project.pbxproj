@@ -255,6 +255,7 @@
 		7F3113DC1D0575C400639DE4 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113DB1D0575C400639DE4 /* libstdc++.6.0.9.dylib */; };
 		7F3113DE1D0575E400639DE4 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113DD1D0575E400639DE4 /* libz.1.dylib */; };
 		7F3113E31D08199100639DE4 /* ConsumptionSuccessDataSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3113E21D08199100639DE4 /* ConsumptionSuccessDataSevice.m */; };
+		7F3113EB1D0EAFDB00639DE4 /* VersionNumberSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3113EA1D0EAFDB00639DE4 /* VersionNumberSevice.m */; };
 		7F3EF6A41CFBED0A00B47CCD /* IdShopSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3EF6A31CFBED0A00B47CCD /* IdShopSevice.m */; };
 		7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACB1CAE6D1200ADD0F8 /* BrandStreetButtonService.m */; };
 		7F4C6AD01CB33C4F00ADD0F8 /* MyInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C6ACF1CB33C4F00ADD0F8 /* MyInformationViewController.m */; };
@@ -769,6 +770,8 @@
 		7F3113DD1D0575E400639DE4 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		7F3113E11D08199100639DE4 /* ConsumptionSuccessDataSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsumptionSuccessDataSevice.h; sourceTree = "<group>"; };
 		7F3113E21D08199100639DE4 /* ConsumptionSuccessDataSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsumptionSuccessDataSevice.m; sourceTree = "<group>"; };
+		7F3113E91D0EAFDB00639DE4 /* VersionNumberSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionNumberSevice.h; sourceTree = "<group>"; };
+		7F3113EA1D0EAFDB00639DE4 /* VersionNumberSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionNumberSevice.m; sourceTree = "<group>"; };
 		7F3557871CACA914000DB7EA /* coupon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = coupon.entitlements; sourceTree = "<group>"; };
 		7F3EF6A21CFBED0A00B47CCD /* IdShopSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdShopSevice.h; sourceTree = "<group>"; };
 		7F3EF6A31CFBED0A00B47CCD /* IdShopSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdShopSevice.m; sourceTree = "<group>"; };
@@ -1529,6 +1532,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7F3113E81D0EAF8000639DE4 /* VersionNumber */,
 				7F3113E01D0817F100639DE4 /* ConsumptionSuccessViewService */,
 				7FDCA2FC1D01B1C600244F7F /* HotSearchSevice */,
 				7F3EF6A51CFC046000B47CCD /* Requrest */,
@@ -1667,6 +1671,15 @@
 				7F3113E21D08199100639DE4 /* ConsumptionSuccessDataSevice.m */,
 			);
 			name = ConsumptionSuccessViewService;
+			sourceTree = "<group>";
+		};
+		7F3113E81D0EAF8000639DE4 /* VersionNumber */ = {
+			isa = PBXGroup;
+			children = (
+				7F3113E91D0EAFDB00639DE4 /* VersionNumberSevice.h */,
+				7F3113EA1D0EAFDB00639DE4 /* VersionNumberSevice.m */,
+			);
+			name = VersionNumber;
 			sourceTree = "<group>";
 		};
 		7F375F651CC4E23D0007098C /* ShopCommentSevice */ = {
@@ -2252,6 +2265,7 @@
 				574910D11CC0084B00FB2B14 /* payRequsestHandler.mm in Sources */,
 				57A94E621C37E34900BE0022 /* ShakeViewCtrl.m in Sources */,
 				574AE8A81C626C8200928B09 /* ShopCommentViewCtrl.m in Sources */,
+				7F3113EB1D0EAFDB00639DE4 /* VersionNumberSevice.m in Sources */,
 				571C29C71C787FD100DDBCE8 /* MyRemindViewCtrl.m in Sources */,
 				57A94E691C3805E500BE0022 /* ShopInfoTableViewCell.m in Sources */,
 				7F3EF6A41CFBED0A00B47CCD /* IdShopSevice.m in Sources */,

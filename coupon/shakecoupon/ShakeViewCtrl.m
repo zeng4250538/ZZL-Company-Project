@@ -686,6 +686,7 @@
         
     }
     
+#pragma mark --------- 摇一摇后显示摇出优惠券的页面
     ShakeCouponViewCtrl *vc = [ShakeCouponViewCtrl new];
     
     vc.nav = self.navigationController;
@@ -707,6 +708,7 @@
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:vc animated:NO completion:^{
         
     }];
+    
     
 }
 

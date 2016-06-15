@@ -1014,7 +1014,7 @@
         
         [self makeSelectCoupon:cell];
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         
     }
@@ -1070,10 +1070,10 @@
     
     if (indexPath.section == 1 && indexPath.row == 0) {
         
-        SubBasketViewController *SBVC = [SubBasketViewController new];
-        SBVC.boolView = NO;
-        SBVC.subData = self.data;
-        [self.navigationController pushViewController:SBVC animated:YES];
+//        SubBasketViewController *SBVC = [SubBasketViewController new];
+//        SBVC.boolView = NO;
+//        SBVC.subData = self.data;
+//        [self.navigationController pushViewController:SBVC animated:YES];
         
     }
     

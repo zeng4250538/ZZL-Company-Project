@@ -14,6 +14,8 @@ typedef void (^refreshBlock)();
 
 @property(nonatomic,copy)refreshBlock refreshBlock;
 
+@property(nonatomic,assign)BOOL bollJump;
+
 @property(nonatomic,strong)UITableView *tableView;
 
 @end

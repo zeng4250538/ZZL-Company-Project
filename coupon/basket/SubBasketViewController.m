@@ -52,7 +52,8 @@
     _tableView =[[UITableView alloc]init];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _tableView.bounces = NO;
+    [self setExtraCellLineHidden:_tableView];
+//    _tableView.bounces = NO;
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
        
@@ -106,9 +107,20 @@
 
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-
+//消除自己的创建tableView的方法多余的横线
+- (void)setExtraCellLineHidden: (UITableView *)tableView{
     
+    UIView *view =[ [UIView alloc]init];
+    
+    view.backgroundColor = [UIColor clearColor];
+    
+    [tableView setTableFooterView:view];
+    
+    [tableView setTableHeaderView:view];
+    
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return 6;
 }
@@ -140,6 +152,10 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
+    if (section == 1) {
+        return 1;
+    }
+    
     if (section == 4) {
         return 1;
     }
@@ -183,6 +199,7 @@
     
     return 0;
 }
+
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -284,18 +301,31 @@
 
 -(void)firstThreeCellView:(UITableViewCell *)cell{
 
+    cell.backgroundColor = UIColorFromRGB(240, 240, 240);
+    
     UIButton *leftButton = [[UIButton alloc]init];
     leftButton.backgroundColor = [UIColor whiteColor];
     [leftButton setTitle:@"拨打电话" forState:UIControlStateNormal];
     [leftButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    leftButton.frame = CGRectMake(0, 0, self.view.bounds.size.width/2-1, 60);
+    leftButton.frame = CGRectMake(0, 0, self.view.bounds.size.width/2, 60);
     [cell.contentView addSubview:leftButton];
     
     [leftButton bk_addEventHandler:^(id sender) {
-        NSString *phoneString=[NSString stringWithFormat:@"telprompt://%@",SafeString(self.subData[@"phone"])];
-        NSLog(@"phoneString电话-----》 %@",phoneString);
+        NSString *str = SafeString(self.subData[@"shop"][@"phone"]);
+        if (str.length > 0) {
+            
+            NSString *phoneString=[NSString stringWithFormat:@"telprompt://%@",SafeString(self.subData[@"shop"][@"phone"])];
+            NSLog(@"phoneString电话-----》 %@",phoneString);
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
+            
+        }
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
+        else{
+        
+            [SVProgressHUD showInfoWithStatus:@"此商家为提供电话号码"];
+        
+        }
+        
     } forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *rightButton = [[UIButton alloc]init];
@@ -336,7 +366,9 @@
     }];
     
     UILabel *timeLabel = [[UILabel alloc]init];
-    timeLabel.text = [NSString stringWithFormat:@"%@ ~ %@",SafeString(self.subData[@"startTime"]),SafeString(self.subData[@"endTime"])];
+    timeLabel.font = [UIFont systemFontOfSize:14];
+    timeLabel.text = [NSString stringWithFormat:@"     从：%@ \n     至：%@",SafeString(self.subData[@"startTime"]),SafeString(self.subData[@"endTime"])];
+    timeLabel.numberOfLines = 2;
     [cell.contentView addSubview:timeLabel];
     [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
        

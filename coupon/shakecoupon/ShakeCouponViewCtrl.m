@@ -312,13 +312,15 @@
         
         
         [self dismissViewControllerAnimated:NO completion:^{
-            
-            
+        
             BasketContainerViewCtrl *vc = [BasketContainerViewCtrl new];
             
             vc.hidesBottomBarWhenPushed = YES;
-            [self.nav pushViewController:vc animated:YES];
             
+            [self.nav pushViewController:vc animated:YES];
+        
+            
+        
             
         }];
         

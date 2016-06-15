@@ -311,10 +311,6 @@
 //    UseCouponViewCtrl *vc = [UseCouponViewCtrl new];
 //    
     NSDictionary *d = self.dataList[[indexPath row]];
-//
-//    
-//    
-//    vc.data = d;
     
     SubBasketViewController *suvc  = [SubBasketViewController new];
     suvc.boolView = YES;

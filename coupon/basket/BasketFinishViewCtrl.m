@@ -14,6 +14,7 @@
 #import "ShopCommentEditViewCtrl.h"
 #import "BasketService.h"
 #import "BasketNotUseTableViewCell.h"
+#import "SubBasketViewController.h"
 @interface BasketFinishViewCtrl ()
 
 @property(nonatomic,assign)NSUInteger pageCount;
@@ -268,15 +269,21 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    CouponPaymentDetailViewCtrl *vc = [CouponPaymentDetailViewCtrl new];
-    
-    vc.couponPaymentType = CouponPaymentTypeUsed;
-    
+//    CouponPaymentDetailViewCtrl *vc = [CouponPaymentDetailViewCtrl new];
+//    
+//    vc.couponPaymentType = CouponPaymentTypeUsed;
+//    
+//    NSDictionary *d = self.dataList[[indexPath row]];
+//    
+//    vc.data =d;
+//    
+//    [self.navigationController pushViewController:vc animated:YES];
     NSDictionary *d = self.dataList[[indexPath row]];
     
-    vc.data =d;
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    SubBasketViewController *suvc  = [SubBasketViewController new];
+    suvc.boolView = NO;
+    suvc.subData = d;
+    [self.navigationController pushViewController:suvc animated:YES];
 
     
 }

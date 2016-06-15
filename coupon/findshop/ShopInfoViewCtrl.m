@@ -1043,7 +1043,7 @@
             
             if ([ isReminder isEqualToString:@"0"]) {
                 
-                NSString *promotionId = SafeString(d[@"couponPromotionId"]);
+                NSString *promotionId = SafeString(d[@"id"]);
                 ReminderService *service = [ReminderService new];
                 [service addReminder:promotionId success:^(NSInteger code, NSString *message, id data) {
                     UIButton *button = (UIButton*)sender;

@@ -671,13 +671,22 @@
         
         //phone
         
-        NSString *phone = SafeString(self.data[@"shopPhone"]);
+        if (SafeString(self.data[@"shopPhone"]) != nil) {
+            
+            NSString *phone = SafeString(self.data[@"shopPhone"]);
+            
+            NSString *phoneString=[NSString stringWithFormat:@"telprompt://%@",phone];
+            NSLog(@"phoneString电话-----》 %@",phoneString);
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
+            
+        }
         
-        NSString *phoneString=[NSString stringWithFormat:@"telprompt://%@",phone];
-        NSLog(@"phoneString电话-----》 %@",phoneString);
+        else{
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]];
+            [SVProgressHUD showInfoWithStatus:@"商家未提供手机号码"];
         
+        }
         
 
         
@@ -755,7 +764,7 @@
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(cell.contentView.mas_left).with.offset(15);
         make.centerY.equalTo(cell.contentView);
-        make.width.equalTo(@100);
+        make.width.equalTo(@80);
         make.height.equalTo(@20);
         
     }];
@@ -772,12 +781,13 @@
         make.left.equalTo(nameLabel.mas_right).with.offset(20);
         make.centerY.equalTo(cell.contentView);
         make.right.equalTo(cell.contentView).offset(-20);
-        make.height.equalTo(@20);
+        make.height.equalTo(@40);
     }];
     
-    limitTimeLabel.textAlignment = NSTextAlignmentCenter;
+//    limitTimeLabel.textAlignment = NSTextAlignmentCenter;
     
-    limitTimeLabel.text = [NSString stringWithFormat:@"%@ ~ %@", SafeString(self.data[@"startTime"]),SafeString(self.data[@"endTime"])];
+    limitTimeLabel.text = [NSString stringWithFormat:@"从：%@ \n至：%@", SafeString(self.data[@"startTime"]),SafeString(self.data[@"endTime"])];
+    limitTimeLabel.numberOfLines = 2;
     
     
 }
@@ -1121,7 +1131,15 @@
     [service requestShakeCoupon:customId shopMallId:mallId withCity:@"" success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD dismiss];
-        self.bttonTabelViewDic = data[0];
+        NSArray *arrData = data;
+        if (arrData.count >0) {
+            self.bttonTabelViewDic = data[0];
+        }
+        else{
+        
+            self.bttonTabelViewDic = nil;
+        
+        }
         [self upLoadData:_bttonTabelViewDic];
         [self.tableView reloadData];
 

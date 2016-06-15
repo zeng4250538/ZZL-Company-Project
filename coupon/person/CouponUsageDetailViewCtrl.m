@@ -13,6 +13,7 @@
 #import "IdShopSevice.h"
 #import "ConsumptionSuccessDataSevice.h"
 #import "HistoryCouponUsageViewCtrl.h"
+#import "PersonInfoViewCtrl.h"
 @interface CouponUsageDetailViewCtrl ()
 
 
@@ -93,6 +94,7 @@
         
     if (_boolConsumptionData == YES) {
         
+        
         UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(barButtonClickEvent)];
         self.navigationItem.leftBarButtonItem = leftBarButtonItem;
         
@@ -108,9 +110,12 @@
 }
 //跳转到指定页面
 -(void)barButtonClickEvent{
-    HistoryCouponUsageViewCtrl *VC = [HistoryCouponUsageViewCtrl new];
-     VC = self.navigationController.viewControllers[1];
-    [self.navigationController popToViewController:VC animated:YES];
+    
+//     VC = self.navigationController.viewControllers[0];
+    
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"pushView" object:nil];
+    
 
 }
 

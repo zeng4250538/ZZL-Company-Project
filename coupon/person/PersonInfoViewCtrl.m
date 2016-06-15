@@ -23,13 +23,10 @@
 #import "MyInformationViewController.h"
 #import "MyInformationSevice.h"
 #import "MyCommentViewCtrl.h"
-
 #import "CustomerService.h"
 #import "HistoryCouponUsageViewCtrl.h"
-
 #import "PersonDetailInfoViewCtrl.h"
-
-
+#import "CouponUsageDetailViewCtrl.h"
 
 
 
@@ -57,6 +54,9 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    //消费完跳转的通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pushViewView) name:@"pushView" object:nil];
     
     _vc = [PersonDetailInfoViewCtrl new];
     
@@ -455,9 +455,19 @@
 
 }
 
+-(void)pushViewView{
+
+    HistoryCouponUsageViewCtrl *vc = [HistoryCouponUsageViewCtrl new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"pushView" object:nil];
+
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+//     CouponUsageDetailViewCtrl *vc = [CouponUsageDetailViewCtrl new];
     
 //点击正路界面的关闭后来的刷新通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(exitPageData) name:@"exitPageView" object:nil];

@@ -1106,10 +1106,23 @@
         
         
         [SVProgressHUD dismiss];
-        self.bttonTabelViewDic = data[0];
-        //        self.data = data;
-        _CDVC.data = data[0];
-        [_tableView reloadData];
+        
+        NSArray *str = data;
+        
+        if (str.count >0) {
+            
+            self.bttonTabelViewDic = data[0];
+            //        self.data = data;
+            _CDVC.data = data[0];
+            [_tableView reloadData];
+            
+        }
+        else{
+        
+            _CDVC.data = nil;
+        
+        }
+        
         completion(YES);
         
         

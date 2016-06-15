@@ -168,7 +168,7 @@
         
         if ([data count]==0) {
             
-            [SVProgressHUD showInfoWithStatus:@"已经到达最底" maskType:SVProgressHUDMaskTypeBlack];
+//            [SVProgressHUD showInfoWithStatus:@"已经到达最底" maskType:SVProgressHUDMaskTypeBlack];
             completion(NO);
             return ;
             
@@ -745,7 +745,6 @@
         
         
         CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
-        
         
         
         NSMutableDictionary *d   = [self.couponData[indexPath.row] mutableCopy];
