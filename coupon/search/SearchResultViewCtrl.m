@@ -17,7 +17,7 @@
 
 
 
-@interface SearchResultViewCtrl ()
+@interface SearchResultViewCtrl ()<UISearchResultsUpdating>
 @property(nonatomic,strong)UISearchBar *searchBar;
 
 @property(nonatomic,strong)NSArray *keyWordList;

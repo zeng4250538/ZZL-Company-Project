@@ -207,25 +207,17 @@
 //                self.loginEndBlock(YES);
 //            }
             
-            
-            
-            
                 [self dismissViewControllerAnimated:YES completion:^{}];
-                
-                
             
-          
             
         } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
             
-            [SVProgressHUD showErrorWithStatus:@"登录出错"];
+            [SVProgressHUD showInfoWithStatus:@"用户名或密码不正确"];
             
         }];
         
         
     } forControlEvents:UIControlEventTouchUpInside];
-    
-    
     
     
     UIButton *registerButton = [UIButton buttonWithType:UIButtonTypeSystem];

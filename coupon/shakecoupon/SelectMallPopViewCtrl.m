@@ -93,35 +93,26 @@
         
         [ReloadHud removeHud:self.tableView animated:YES];
         
-        
-        //NSDictionary *allCity = @{@"city":@"全城",}
-        
-//        self.wholeCity = @{@"id":@"" , @"name":@"全城" , @"city":@"广州市" , @"distance":@"" , @"mapPhotoUrl":@""};
-        
-        
         self.wholeCityArray = [data mutableCopy];
         
-        //cuo
+        if (self.wholeCityArray.count >0) {
+            
+            [self.wholeCityArray insertObject:@{@"id":@"" , @"name":@"全城" , @"city":@"广州市" , @"distance":@"" , @"mapPhotoUrl":@""} atIndex:3];
+        }
+        else{
+        [self.wholeCityArray insertObject:@{@"id":@"" , @"name":@"全城" , @"city":@"广州市" , @"distance":@"" , @"mapPhotoUrl":@""} atIndex:0];
         
-        [self.wholeCityArray replaceObjectAtIndex:3 withObject:@{@"id":@"" , @"name":@"全城" , @"city":@"广州市" , @"distance":@"" , @"mapPhotoUrl":@""}];
-        
+        }
         
         self.mallList = self.wholeCityArray;
         
         [self.tableView reloadData];
         
-        
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-        
         
         [ReloadHud showReloadMode:self.tableView];
         
-        
-        
-        
-        
     }];
-    
     
 }
 
@@ -168,14 +159,12 @@
     self.tableView.clipsToBounds = YES;
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
         make.center.equalTo(self.view);
         make.height.equalTo(@(40*4+60));
         make.width.equalTo(@(SCREEN_WIDTH-100));
         
-        
     }];
-    
-    
     
     {
         UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-100, 40)];

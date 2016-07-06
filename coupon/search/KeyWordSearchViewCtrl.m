@@ -67,7 +67,7 @@
 -(void)loadData{
     HotSaerchSevice *HSS = [HotSaerchSevice new];
      NSMutableArray *dataArray = [[NSMutableArray alloc]init];;
-    NSLog(@"asdasdasdasdasdasd>>>>>>>>>>>>>>%@>>>",[AppShareData instance].mallCityName);
+//    NSLog(@"asdasdasdasdasdasd>>>>>>>>>>>>>>%@>>>",[AppShareData instance].mallCityName);
     [HSS hotSearchRequest:SafeString([AppShareData instance].mallId) withPage:@"1" withPageCount:@"9" withCityName:SafeString([AppShareData instance].mallCityName) success:^(id data) {
         
         NSMutableArray *muData = [data mutableCopy];
@@ -93,7 +93,7 @@
     self.hotWordList = data;
     [self makeHeaderView];
     [self.tableView reloadData];
-    NSLog(@"哈哈哈哈哈asdasdasdasdasdasd>>>>>>>>>>>>>>%@>>>",self.hotWordList);
+//    NSLog(@"哈哈哈哈哈asdasdasdasdasdasd>>>>>>>>>>>>>>%@>>>",self.hotWordList);
 
 }
 

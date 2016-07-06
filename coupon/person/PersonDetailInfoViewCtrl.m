@@ -12,7 +12,7 @@
 #import "EditViewCtrl.h"
 #import "ImageUploadService.h"
 
-@interface PersonDetailInfoViewCtrl ()
+@interface PersonDetailInfoViewCtrl ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property(nonatomic,strong)NSMutableDictionary *data;
 @property(nonatomic,strong)UIImageView *imageView;
@@ -393,9 +393,35 @@
 
     
     if (indexPath.row==3) {
-        vc.editFieldType = CustomerFieldTypeSex;
+//        vc.editFieldType = CustomerFieldTypeSex;
+//        
+//        vc.value =SafeString(self.data[@"gender"]);
         
-        vc.value =SafeString(self.data[@"gender"]);
+        UIActionSheet *act = [[UIActionSheet alloc]init];
+        
+        [act bk_addButtonWithTitle:@"男" handler:^{
+            
+            [self gender:@"男"];
+            
+            
+        }];
+        
+        [act bk_addButtonWithTitle:@"女" handler:^{
+            
+            [self gender:@"女"];
+            
+            
+        }];
+        
+        [act bk_setDestructiveButtonWithTitle:@"取消" handler:^{
+            
+        }];
+        
+        
+        [act showInView:self.view];
+
+        
+        return;
         
     }
     
@@ -447,6 +473,29 @@
     
 }
 
+-(void)gender:(NSString *)genderString{
+    EditViewCtrl *vc = [EditViewCtrl new];
+    vc.editFieldType = CustomerFieldTypeSex;
+    CustomerService *service = [CustomerService new];
+    [service updateCustomer:vc.editFieldType value:genderString success:^(NSInteger code, NSString *message, id data) {
+    [SVProgressHUD showSuccessWithStatus:@"数据修改成功"];
+        
+        [self loadData];
+    
+    }failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+        
+        
+        [SVProgressHUD showErrorWithStatus:@"数据修改错误！"];
+        
+        
+        
+        
+    }];
+
+
+}
+
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     
     [picker dismissViewControllerAnimated:YES completion:^{
@@ -495,47 +544,20 @@
                 //[self.tableView reloadData];
 
             }];
-            
-            
-              
-       
-            
+        
             
         } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
             
-            
             [SVProgressHUD showErrorWithStatus:@"修改用户头像错误"];
             
-            
         }];
-        
-        
-
-        
-        
-        
-        
-        
+   
         
     } failure:^(NSInteger code, NSString *content) {
-        
         
         [SVProgressHUD showErrorWithStatus:@"文件上传错误"];
         
     }];
-    
-    
-    
-    
-    
-    
-      
-    
-     //
-    //
-    
-    
-    //  [self presentViewController:vc animated:YES completion:nil];
     
 }
 

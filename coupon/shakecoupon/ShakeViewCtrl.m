@@ -61,7 +61,35 @@
     
 }
 
+#pragma mark -  定位失败调用的方法
+- (void)locationManager:(CLLocationManager*)manager
 
+       didFailWithError:(NSError*)error{
+    
+    SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
+    
+    // vc.hidesBottomBarWhenPushed = YES;
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
+    
+    
+    
+    vc.selectBlock = ^(NSString *city){
+        
+        [[AppShareData instance] setCity:city];
+        
+        [self doRequestMall];
+        
+        
+    };
+
+    
+    NSLog(@"location error");
+}
 
 -(void)positioningQWE{
 

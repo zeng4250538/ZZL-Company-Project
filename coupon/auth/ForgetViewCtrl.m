@@ -16,6 +16,8 @@
 @property(nonatomic,strong)UITextField *smsCodeTextField;
 @property(nonatomic,strong)UIButton *smsButton;
 @property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic,strong)UILabel *buttonLable;
+@property(nonatomic,strong)UILabel *dateLable;
 @property(nonatomic,assign)int i;
 @end
 
@@ -89,6 +91,20 @@
             
         }
         
+        if ([self.passwordTextField.text length]<6) {
+            [SVProgressHUD showInfoWithStatus:@"请输入至少6位的字母或数字"];
+            return;
+        }
+        
+        if ([self.repeatPasswordTextField.text length]<6) {
+            [SVProgressHUD showInfoWithStatus:@"请输入至少6位的字母或数字"];
+            return;
+        }
+        
+        if (self.passwordTextField.text != self.repeatPasswordTextField.text) {
+            [SVProgressHUD showInfoWithStatus:@"两次输入的密码不一致，\n请重新输入"];
+            return;
+        }
         
         if ([self.passwordTextField.text length]<1) {
             
@@ -211,7 +227,7 @@
     
     if (indexPath.row==2) {
         
-        self.repeatPasswordTextField = [GUIHelper makeTableCellTextField:@"重复密码：" cell:cell];
+        self.repeatPasswordTextField = [GUIHelper makeTableCellTextField:@"确认密码：" cell:cell];
         self.repeatPasswordTextField.keyboardType = UIKeyboardTypeAlphabet;
         self.repeatPasswordTextField.secureTextEntry = YES;
 
@@ -229,7 +245,7 @@
         
         [cell.contentView addSubview:_smsButton];
         
-        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+//        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
         _smsButton.layer.cornerRadius = 2;
         [_smsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _smsButton.backgroundColor = [GUIConfig mainColor];
@@ -243,18 +259,37 @@
             
         }];
         
+        _buttonLable = [[UILabel alloc]init];
+        _buttonLable.frame = CGRectMake(10, 0, 60, 30);
+        _buttonLable.text = @"验证码";
+        _buttonLable.textColor = [UIColor whiteColor];
+        _buttonLable.font = [UIFont systemFontOfSize:14];
+        _buttonLable.textAlignment = NSTextAlignmentCenter;
+        [_smsButton addSubview:_buttonLable];
+        
+        _dateLable = [[UILabel alloc]init];
+        _dateLable.frame = CGRectMake(40, 0, 30, 30);
+        _dateLable.textColor = [UIColor whiteColor];
+        _dateLable.font = [UIFont systemFontOfSize:14];
+        _dateLable.textAlignment = NSTextAlignmentRight;
+        
         [_smsButton bk_addEventHandler:^(id sender) {
             
             [self verificationCodeLoadData];
+            
             [_smsButton setUserInteractionEnabled:NO];
+            
             _smsButton.backgroundColor = [UIColor grayColor];
+            
             _i = 60;
+            
+            [_smsButton addSubview:_dateLable];
+            _dateLable.text = [NSString stringWithFormat:@"%d",_i];
+            _buttonLable.textAlignment = NSTextAlignmentLeft;
+            
             self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerNumber) userInfo:nil repeats:YES];
             
-            
         } forControlEvents:UIControlEventTouchUpInside];
-        
-        
         
     }
     
@@ -280,11 +315,12 @@
     
     self.i --;
     
-    [_smsButton setTitle:[NSString stringWithFormat:@"验证码 %d",self.i] forState:UIControlStateNormal];
+    _dateLable.text = [NSString stringWithFormat:@"%d",_i];
     
     if (self.i==0) {
         [_smsButton setUserInteractionEnabled:YES];
-        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+        _buttonLable.textAlignment = NSTextAlignmentCenter;
+        [_dateLable removeFromSuperview];
         _smsButton.backgroundColor = [GUIConfig mainColor];
         [_timer invalidate];
         

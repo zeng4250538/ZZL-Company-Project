@@ -46,7 +46,7 @@
 @implementation AppDelegate
 
 
-BOOL InLan = NO;
+BOOL InLan = YES;
 NSString *ALiPayNotice=@"alipaynotice";
 NSString *WechatPayNotice=@"wechatpaynotice";
 NSString *NoLoginNotice=@"nologinnotice";

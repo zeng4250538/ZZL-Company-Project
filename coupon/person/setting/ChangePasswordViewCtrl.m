@@ -53,25 +53,40 @@
     LoginService *ls = [LoginService new];
     
     [_btn bk_addEventHandler:^(id sender) {
+        
+        if (self.nameTextField.text.length<6) {
+            [SVProgressHUD showInfoWithStatus:@"原密码有误"];
+            return ;
+        }
+        
+        if (self.newsPasswordTextField.text.length<6) {
+            [SVProgressHUD showInfoWithStatus:@"请输入至少6位的字母或数字的密码组合"];
+            return;
+        }
+        
+        if (self.repeatPasswordTextField.text.length<6) {
+            [SVProgressHUD showInfoWithStatus:@"请输入至少6位的字母或数字的密码组合"];
+            return;
+        }
+        
+        if (self.repeatPasswordTextField.text != self.newsPasswordTextField.text) {
+            [SVProgressHUD showInfoWithStatus:@"两次输入的新密码不一致"];
+            return;
+        }
+        
        [ls modifyPassword:self.nameTextField.text withNewPassword:self.newsPasswordTextField.text withRepeatPassword:self.repeatPasswordTextField.text success:^(id data) {
            [SVProgressHUD showSuccessWithStatus:@"修改密码成功"];
            [self.navigationController popToRootViewControllerAnimated:YES];
        } failure:^(id data) {
-           [SVProgressHUD showErrorWithStatus:@"修改密码失败"];
+           [SVProgressHUD showInfoWithStatus:@"修改密码失败"];
 
        }];
-        
         
     } forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.tableFooterView = footerView;
     
     self.tableView.backgroundColor = [GUIConfig mainBackgroundColor];
-    
-    
-    
-    
-    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

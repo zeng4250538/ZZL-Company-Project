@@ -16,6 +16,8 @@
 @property(nonatomic,strong)UITextField *smsCodeTextField;
 @property(nonatomic,strong)UIButton *smsButton;
 @property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic,strong)UILabel *buttonLable;
+@property(nonatomic,strong)UILabel *dateLable;
 @property(nonatomic,assign)int i;
 @end
 
@@ -27,22 +29,17 @@
     
     self.navigationItem.title=@"用户注册";
     
-    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    
     
     [self makeFooterView];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] bk_initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        
         
         [self.view endEditing:YES];
         
     }];
     
     [self.view addGestureRecognizer:tap];
-    
-    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -158,28 +155,46 @@
         
         [cell.contentView addSubview:_smsButton];
         
-        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
-        [_smsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+//        [_smsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        _buttonLable = [[UILabel alloc]init];
+        _buttonLable.frame = CGRectMake(10, 0, 60, 30);
+        _buttonLable.text = @"验证码";
+        _buttonLable.textColor = [UIColor whiteColor];
+        _buttonLable.font = [UIFont systemFontOfSize:14];
+        _buttonLable.textAlignment = NSTextAlignmentCenter;
+        [_smsButton addSubview:_buttonLable];
+        
+        _dateLable = [[UILabel alloc]init];
+        _dateLable.frame = CGRectMake(40, 0, 30, 30);
+        _dateLable.textColor = [UIColor whiteColor];
+        _dateLable.font = [UIFont systemFontOfSize:14];
+        _dateLable.textAlignment = NSTextAlignmentRight;
         _smsButton.backgroundColor = [GUIConfig mainColor];
         
         [_smsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
             make.right.equalTo(cell.contentView).offset(-10);
             make.centerY.equalTo(cell.contentView);
             make.width.equalTo(@80);
             make.height.equalTo(@30);
             
-            
         }];
+        
         _smsButton.layer.cornerRadius = 2;
-        self.i = 60;
         
         [_smsButton bk_addEventHandler:^(id sender) {
-            
+            self.i = 60;
             [self verificationCodeLoadData];
             [_smsButton setUserInteractionEnabled:NO];
             _smsButton.backgroundColor = [UIColor grayColor];
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerNumber) userInfo:nil repeats:YES];
             
+            [_smsButton addSubview:_dateLable];
+            _dateLable.text = [NSString stringWithFormat:@"%d",_i];
+            _buttonLable.textAlignment = NSTextAlignmentLeft;
+            
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerNumber) userInfo:nil repeats:YES];
             
         } forControlEvents:UIControlEventTouchUpInside];
         
@@ -199,11 +214,13 @@
 
     self.i --;
     
-    [_smsButton setTitle:[NSString stringWithFormat:@"验证码 %d",self.i] forState:UIControlStateNormal];
-    
+//    [_smsButton setTitle:[NSString stringWithFormat:@"验证码 %d",self.i] forState:UIControlStateNormal];
+    _dateLable.text = [NSString stringWithFormat:@"%d",_i];
     if (self.i==0) {
         [_smsButton setUserInteractionEnabled:YES];
-        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+//        [_smsButton setTitle:@"验证码" forState:UIControlStateNormal];
+        _buttonLable.textAlignment = NSTextAlignmentCenter;
+        [_dateLable removeFromSuperview];
         _smsButton.backgroundColor = [GUIConfig mainColor];
         [_timer invalidate];
         
@@ -302,6 +319,8 @@
         
         if (![self.passwordTextField.text isEqualToString:self.repeatPasswordTextField.text]) {
             [SVProgressHUD showErrorWithStatus:@"重新输入的密码不正确"];
+            
+            return ;
         }
         
         
