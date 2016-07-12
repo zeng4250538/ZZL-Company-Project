@@ -12,4 +12,6 @@
 
 -(void)subRequrestCouponInstanceId:(id)data withSuccess:(void (^)(id data))success withFailure:(void(^)(id data))failure;
 
+-(void)subBoolShopCart:(NSString *)couponPromotionId customerId:(NSString *)customerId withSuccess:(void (^)(id cartData))success withFailure:(void(^)(id cartData))failure;
+
 @end

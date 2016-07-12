@@ -124,7 +124,7 @@
    
     if (fieldType == CustomerFieldTypeName) {
         
-        param =@{@"nickname":value};
+        param =@{@"name":value};
        
     }
     

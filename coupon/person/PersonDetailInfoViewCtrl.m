@@ -284,7 +284,7 @@
             
             theCell.titleLabel.text=@"名字";
             
-            theCell.detailLabel.text = SafeString(self.data[@"nickname"]);
+            theCell.detailLabel.text = SafeString(self.data[@"name"]);
             
         }
  
@@ -317,6 +317,9 @@
             
             
             theCell.detailLabel.text = SafeString(self.data[@"phoneMsisdn"]);
+            
+            
+            
         }
 
         
@@ -381,7 +384,7 @@
     
     if (indexPath.row==1) {
         vc.editFieldType = CustomerFieldTypeName;
-        vc.value =SafeString(self.data[@"nickname"]);
+        vc.value =SafeString(self.data[@"name"]);
     }
  
     if (indexPath.row==2) {
@@ -439,7 +442,7 @@
         
         if (fieldType == CustomerFieldTypeName) {
             
-            self.data[@"nickname"]=value;
+            self.data[@"name"]=value;
         }
         if (fieldType == CustomerFieldTypeSex) {
             

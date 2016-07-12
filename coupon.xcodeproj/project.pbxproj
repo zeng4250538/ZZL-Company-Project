@@ -128,7 +128,6 @@
 		5779BD6D1C25381600E15934 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BD6C1C25381600E15934 /* ViewController.m */; };
 		5779BD701C25381600E15934 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5779BD6E1C25381600E15934 /* Main.storyboard */; };
 		5779BD721C25381600E15934 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5779BD711C25381600E15934 /* Images.xcassets */; };
-		5779BD751C25381600E15934 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5779BD731C25381600E15934 /* LaunchScreen.xib */; };
 		5779BD811C25381600E15934 /* couponTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BD801C25381600E15934 /* couponTests.m */; };
 		5779BD8B1C2539D000E15934 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5779BD8A1C2539D000E15934 /* Podfile */; };
 		578B093C1CC7F32A00618A2D /* libUMessage_Sdk_1.2.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 578B093A1CC7F32A00618A2D /* libUMessage_Sdk_1.2.6.a */; };
@@ -248,6 +247,9 @@
 		7F121D761CA7DAF7005AF53D /* ChildPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D751CA7DAF7005AF53D /* ChildPagesViewController.m */; };
 		7F121D7B1CAA8499005AF53D /* UISubscribeSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */; };
 		7F242F8F1CEB244100D5235A /* ShoppingCartSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F242F8E1CEB244100D5235A /* ShoppingCartSevice.m */; };
+		7F2962091D3383CD006A88AB /* SubCouponDatail.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2962081D3383CD006A88AB /* SubCouponDatail.m */; };
+		7F2962111D348CB3006A88AB /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F2962101D348CB3006A88AB /* Launch Screen.storyboard */; };
+		7F2962151D3493D4006A88AB /* QDS.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2962141D3493D4006A88AB /* QDS.png */; };
 		7F3113D41D0574D000639DE4 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113D31D0574D000639DE4 /* libiconv.2.dylib */; };
 		7F3113D61D05750000639DE4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113D51D05750000639DE4 /* CoreGraphics.framework */; };
 		7F3113D81D05755A00639DE4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3113D71D05755A00639DE4 /* libsqlite3.dylib */; };
@@ -570,7 +572,6 @@
 		5779BD6C1C25381600E15934 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5779BD6F1C25381600E15934 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5779BD711C25381600E15934 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5779BD741C25381600E15934 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5779BD7A1C25381600E15934 /* couponTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = couponTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5779BD7F1C25381600E15934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5779BD801C25381600E15934 /* couponTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = couponTests.m; sourceTree = "<group>"; };
@@ -762,6 +763,10 @@
 		7F121D7A1CAA8499005AF53D /* UISubscribeSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubscribeSevice.m; sourceTree = "<group>"; };
 		7F242F8D1CEB244100D5235A /* ShoppingCartSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartSevice.h; sourceTree = "<group>"; };
 		7F242F8E1CEB244100D5235A /* ShoppingCartSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartSevice.m; sourceTree = "<group>"; };
+		7F2962071D3383CD006A88AB /* SubCouponDatail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCouponDatail.h; sourceTree = "<group>"; };
+		7F2962081D3383CD006A88AB /* SubCouponDatail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCouponDatail.m; sourceTree = "<group>"; };
+		7F2962101D348CB3006A88AB /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "common/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		7F2962141D3493D4006A88AB /* QDS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QDS.png; sourceTree = "<group>"; };
 		7F3113D31D0574D000639DE4 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
 		7F3113D51D05750000639DE4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7F3113D71D05755A00639DE4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
@@ -1260,8 +1265,8 @@
 				5779BD6B1C25381600E15934 /* ViewController.h */,
 				5779BD6C1C25381600E15934 /* ViewController.m */,
 				5779BD6E1C25381600E15934 /* Main.storyboard */,
+				7F2962101D348CB3006A88AB /* Launch Screen.storyboard */,
 				5779BD711C25381600E15934 /* Images.xcassets */,
-				5779BD731C25381600E15934 /* LaunchScreen.xib */,
 				5779BD641C25381600E15934 /* Supporting Files */,
 				578E63E21C254E1900C1FB19 /* coupon.pch */,
 			);
@@ -1353,6 +1358,7 @@
 		578E63F61C255B4800C1FB19 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				7F2962141D3493D4006A88AB /* QDS.png */,
 				572B5C201CEA2ACB00BC1C37 /* arrow@2x.png */,
 				7FF39E3C1CE57B96007810BC /* guangzhoufood.png */,
 				5727C4CF1CB0EE1B00C92BF0 /* trash@2x.png */,
@@ -1532,6 +1538,7 @@
 		57CE97D61C65E8E100CE0E57 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				7F2962051D338222006A88AB /* TheNewNetwrokingService */,
 				7F3113E81D0EAF8000639DE4 /* VersionNumber */,
 				7F3113E01D0817F100639DE4 /* ConsumptionSuccessViewService */,
 				7FDCA2FC1D01B1C600244F7F /* HotSearchSevice */,
@@ -1653,6 +1660,23 @@
 				7F242F8E1CEB244100D5235A /* ShoppingCartSevice.m */,
 			);
 			name = ShoppingCart;
+			sourceTree = "<group>";
+		};
+		7F2962051D338222006A88AB /* TheNewNetwrokingService */ = {
+			isa = PBXGroup;
+			children = (
+				7F2962061D33824F006A88AB /* SubCouponDatail */,
+			);
+			name = TheNewNetwrokingService;
+			sourceTree = "<group>";
+		};
+		7F2962061D33824F006A88AB /* SubCouponDatail */ = {
+			isa = PBXGroup;
+			children = (
+				7F2962071D3383CD006A88AB /* SubCouponDatail.h */,
+				7F2962081D3383CD006A88AB /* SubCouponDatail.m */,
+			);
+			name = SubCouponDatail;
 			sourceTree = "<group>";
 		};
 		7F3113DF1D06D17500639DE4 /* PayView */ = {
@@ -2003,6 +2027,7 @@
 				5701F46D1CCF2D9000AC5C25 /* UMSnsAccountViewController.xib in Resources */,
 				57A94E6F1C380BE400BE0022 /* shoplogo2.png in Resources */,
 				57B0196E1C7D8F6300884E0E /* animation_11.png in Resources */,
+				7F2962111D348CB3006A88AB /* Launch Screen.storyboard in Resources */,
 				574910BE1CC0057900FB2B14 /* AlipaySDK.bundle in Resources */,
 				57CE97C91C634A5900CE0E57 /* head_icon1.png in Resources */,
 				57B57CE41C95C74C009F4EB2 /* logo60@3x.png in Resources */,
@@ -2026,6 +2051,7 @@
 				574EE02C1C7DC79C0009D6EF /* mask_right@2x.png in Resources */,
 				57B019661C7D8F6300884E0E /* animation_02.png in Resources */,
 				5701F4781CCF2D9100AC5C25 /* iOS-social-analytics-releasenote.html in Resources */,
+				7F2962151D3493D4006A88AB /* QDS.png in Resources */,
 				5701F47D1CCF2D9100AC5C25 /* ios-social-sdk-login-detail.html in Resources */,
 				5701F46C1CCF2D9000AC5C25 /* UMSLoginViewController.xib in Resources */,
 				574EE03E1C7DD9E40009D6EF /* soundoff@2x.png in Resources */,
@@ -2042,7 +2068,6 @@
 				57B57CDF1C95C74C009F4EB2 /* logo29@2x.png in Resources */,
 				5701F4651CCF2D9000AC5C25 /* UMSocialLocalizable.strings in Resources */,
 				57A94E701C380BE400BE0022 /* shoplogo.png in Resources */,
-				5779BD751C25381600E15934 /* LaunchScreen.xib in Resources */,
 				574EE0321C7DCFF20009D6EF /* cart@2x.png in Resources */,
 				5701F4671CCF2D9000AC5C25 /* UMSCommentDetailController.xib in Resources */,
 				571C29741C707D8800DDBCE8 /* CellNotSelected@2x.png in Resources */,
@@ -2199,6 +2224,7 @@
 				7F4C6ACC1CAE6D1200ADD0F8 /* BrandStreetButtonService.m in Sources */,
 				57A94E661C37EB1200BE0022 /* ShopPortalViewCtrl.m in Sources */,
 				57D148061CC0FF3B00F9E40C /* HistoryCouponCell.m in Sources */,
+				7F2962091D3383CD006A88AB /* SubCouponDatail.m in Sources */,
 				574911321CC00AAE00FB2B14 /* base64.m in Sources */,
 				57A94E7E1C38FF5800BE0022 /* CouponInfoTableViewCell.m in Sources */,
 				5736E9F51C4D3E420055774D /* AppShareData.m in Sources */,
@@ -2312,14 +2338,6 @@
 				5779BD6F1C25381600E15934 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		5779BD731C25381600E15934 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5779BD741C25381600E15934 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

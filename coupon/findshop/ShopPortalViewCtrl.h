@@ -17,8 +17,6 @@ typedef void (^myBlock)(NSString *data);
 
 -(void)doLoad:(void(^)(BOOL ret))completion;
 
--(void)subRefreshView;
-
 @property(nonatomic,copy)myBlock block;
 
 

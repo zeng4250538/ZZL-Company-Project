@@ -42,7 +42,7 @@ NSString *const DeviceTokenKey=@"DeviceToken";
 
 @property(nonatomic,strong)NSMutableArray *cartList;
 @property(nonatomic,strong)CouponKVO *couponKVO;
-
+@property(nonatomic,strong)NSMutableArray *searchText;
 
 
 @end
@@ -66,7 +66,7 @@ static AppShareData *instance;
         
         instance.shakeCouponQueue =[CouponQueue new];
         
-        
+        instance.searchText = [[NSMutableArray alloc]init];
         instance.couponKVO = [CouponKVO new];
         
 //        instance.selected = 0;
@@ -474,7 +474,7 @@ static AppShareData *instance;
 //推送开关
 -(void)setUMPush:(id)data{
 
-    [[NSUserDefaults standardUserDefaults]setValue:data forKey:@"UMPush"];
+    [[NSUserDefaults standardUserDefaults]setObject:data forKey:@"UMPush"];
 
 }
 //推送开关
@@ -492,6 +492,25 @@ static AppShareData *instance;
     
 }
 
+//找商家里的搜索商家的搜索历史
+-(void)searchShopName:(NSString *)string{
+
+    [_searchText addObject:string];
+    [[NSUserDefaults standardUserDefaults]setObject:_searchText forKey:@"searchShopName"];
+
+}
+
+
+//获取搜索商家的历史数据
+-(NSMutableArray *)searchShopNameData{
+
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"searchShopName"];
+}
+-(void)removeShopNameData{
+    [_searchText setArray:@[]];
+    [[NSUserDefaults standardUserDefaults]setObject:_searchText forKey:@"searchShopName"];
+
+}
 
 
 @end

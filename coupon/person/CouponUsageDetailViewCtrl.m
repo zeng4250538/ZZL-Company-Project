@@ -105,7 +105,7 @@
         
     }
     
-    [self subViewLoadData];
+//    [self subViewLoadData];
     
 }
 //跳转到指定页面
@@ -169,7 +169,7 @@
         completion(YES);
         [self.tableView reloadData];
         [self againLoadLayout];
-        [self subViewLoadData];
+//        [self subViewLoadData];
         
         
     } failure:^(id data) {
@@ -314,7 +314,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    for(UIView * subView in cell.contentView.subviews) [subView removeFromSuperview];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ((indexPath.row==0) && (indexPath.section==0)) {
         
@@ -400,7 +400,15 @@
         _originPriceValueLabel.font = [UIFont systemFontOfSize:14];
         _originPriceValueLabel.textColor = [GUIConfig grayFontColor];
         
-        _originPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"originalPrice"])];
+        if ([SafeString(self.data[@"originalPrice"]) length]>0) {
+            _originPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"originalPrice"])];
+        }
+        else{
+        
+            _originPriceValueLabel.text= @"0元";
+        
+        }
+        
         
         [cell.contentView addSubview:_originPriceValueLabel];
         
@@ -437,7 +445,16 @@
         _realPriceValueLabel = [UILabel new];
         _realPriceValueLabel.font = [UIFont systemFontOfSize:14];
         _realPriceValueLabel.textColor = [GUIConfig grayFontColor];
-        _realPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"paymentPrice"])];
+        if ([SafeString(self.data[@"paymentPrice"]) length]>0) {
+            
+            _realPriceValueLabel.text= [NSString stringWithFormat:@"%@元",SafeString(self.data[@"paymentPrice"])];
+            
+        }
+        else{
+        
+            _realPriceValueLabel.text= @"0元";
+        
+        }
         
         [cell.contentView addSubview:_realPriceValueLabel];
         
@@ -501,7 +518,11 @@
         _payTimeValueLabel = [UILabel new];
         _payTimeValueLabel.font = [UIFont systemFontOfSize:14];
         _payTimeValueLabel.textColor = [GUIConfig grayFontColor];
-        _payTimeValueLabel.text=SafeString(self.data[@"consumedTime"]);
+        
+//        SafeString(self.data[@"consumedTime"]);
+        
+       
+        _payTimeValueLabel.text = dateController(self.data[@"consumedTime"]);
         
         [cell.contentView addSubview:_payTimeValueLabel];
         
@@ -517,23 +538,29 @@
         
         return cell;
         
-        
-        
-        
-        
-        
     }
     
     return cell;
     
-    
-    
-    
-    
-    
     // Configure the cell...
     
 }
+
+#pragma mark - long时间转换
+//-(NSString *)dateData:(NSString *)data{
+//
+//    const long dateTimeLong = [data longLongValue]/1000;
+//    NSDate *dateTime = [[NSDate alloc] initWithTimeIntervalSince1970:dateTimeLong];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setTimeStyle:NSDateFormatterNoStyle];
+//    [formatter setDateStyle:NSDateFormatterMediumStyle];
+//    NSLocale *formatterLocal = [[NSLocale alloc] initWithLocaleIdentifier:@"en_us"];
+//    [formatter setLocale:formatterLocal];
+//    [formatter setDateFormat:@"yyyy-MM-dd"];
+//    NSString *dateString = [formatter stringFromDate:dateTime];
+//    return dateString;
+//    
+//}
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -549,7 +576,7 @@
     
     vc.couponViewMode = CouponViewModeNetwork;
     
-    vc.couponDetailType = CouponDetailTypeNotHaveCart;
+    vc.couponDetailType = CouponDetailPushModePush;
     
 //    vc.couponId = couponId;
     
@@ -558,29 +585,37 @@
     
     if (indexPath.section == 0 && indexPath.row ==0) {
        
-//            
-            vc.data = _subDic;
-            [self.navigationController pushViewController:vc animated:YES];
-
+        [self subViewLoadData:^(bool data) {
+            
+            if (data) {
+                vc.data = _subDic;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
+        }];
+        
     }
-    
-    
-    
+
 }
 
 
 //获取消费明细点击进去的详情页的头部信息
--(void)subViewLoadData{
+-(void)subViewLoadData:(void(^)(bool data))success{
     
-    
-
     NSString *couponId = SafeString(self.data[@"id"]);
     SubHistorySevice *app = [SubHistorySevice new];
     [app subRequrestCouponInstanceId:couponId withSuccess:^(id data) {
         
         [self shopIdRequrestLoadData:SafeString(data[@"shopId"]) withSuccess:^(id shopData) {
             
-             _subDic =@{@"name":SafeString(data[@"coupon"][@"name"]),@"photoUrl":SafeString(data[@"coupon"][@"photoUrl"]),@"shopName":SafeString(shopData[@"name"]),@"shopPhone":SafeString(shopData[@"phone"]),@"startTime":SafeString(data[@"couponPromotion"][@"startTime"]),@"endTime":SafeString(data[@"couponPromotion"][@"endTime"])};
+            [app subBoolShopCart:SafeString(data[@"couponPromotion"][@"id"]) customerId:[AppShareData instance].customId withSuccess:^(id cartData) {
+                
+                _subDic =@{@"name":SafeString(data[@"coupon"][@"name"]),@"photoUrl":SafeString(data[@"coupon"][@"photoUrl"]),@"shopName":SafeString(shopData[@"name"]),@"shopPhone":SafeString(shopData[@"phone"]),@"startTime":dateController(data[@"couponPromotion"][@"validStartDate"]),@"endTime":dateController(data[@"couponPromotion"][@"validEndDate"]),@"id":SafeString(data[@"couponId"]),@"addedToBasket":SafeString([NSString stringWithFormat:@"%@",cartData[@"allowedTakenByCurrentCustomer"]])};
+                success(YES);
+                
+            } withFailure:^(id cartData) {
+                
+            }];
             
         }];
         

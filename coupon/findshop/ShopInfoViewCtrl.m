@@ -551,7 +551,14 @@
         
         
 //         _subButtonHandle();
-        
+        //判断是否已经登陆
+        if (![AppShareData instance].isLogin) {
+            
+            SafePostMessage(NoLoginNotice, @"");
+            
+            return ;
+            
+        }
        
         
         //拿到按钮的状态

@@ -21,11 +21,10 @@ extern NSString * const IsLoginKey;
 
 extern NSString *const ReviewUpdateNotice;
 
-
-
 @interface AppShareData : NSObject
 
 @property(nonatomic,strong)NSDictionary *currentMall;
+
 @property(nonatomic,strong)CouponQueue *shakeCouponQueue;
 
 @property(nonatomic,copy,readonly)NSString *customId;
@@ -35,8 +34,11 @@ extern NSString *const ReviewUpdateNotice;
 @property(nonatomic,copy,readonly)NSString *mallId;
 
 @property(nonatomic,copy,readonly)NSString *city;
+
 @property(nonatomic,assign,readonly)double lon;
+
 @property(nonatomic,assign,readonly)double lat;
+
 @property(nonatomic,strong,readonly)NSDate  *lastLocationDate;
 
 @property(nonatomic,copy,readonly)NSString  *mallName;
@@ -52,22 +54,20 @@ extern NSString *const ReviewUpdateNotice;
 //购物车数量
 @property(nonatomic,assign)NSUInteger shoppingNumberl;
 
-
 @property(nonatomic,copy,readonly)NSString *deviceToken;
 
 @property(nonatomic,assign)int selected;
 
 @property(nonatomic,copy)NSString *accessToken;
 
+//获取搜索历史的数据
+@property(nonatomic,strong)NSMutableArray *searchShopNameData;
+
 -(void)setNotDisplayImageViaCell:(BOOL)notDisplayImageViaCell;
-
-
 
 +(instancetype)instance;
 
-
 -(BOOL)isNeedLocationUpdate;
-
 
 -(void)loginOut;
 
@@ -83,7 +83,6 @@ extern NSString *const ReviewUpdateNotice;
 -(NSInteger)shoppingCartNumber:(id)data;
 
 //设置版本号
-
 -(void)versionsSetNumber:(NSString *)versionsNumber;
 
 -(void)saveMallId:(NSString*)mallId;
@@ -122,11 +121,21 @@ extern NSString *const ReviewUpdateNotice;
 
 -(void)removeMallIdKVO:(id)delegate;
 
-//通知暂时注释
+
 //推送开关
 -(void)setUMPush:( id)data;
 //推送开关
 -(BOOL)getUMPush;
+
+
+//找商家里的搜索商家的搜索历史
+-(void)searchShopName:(NSString *)string;
+
+//获取搜索商家的历史数据
+-(NSMutableArray *)searchShopNameData;
+
+//清除历史记录
+-(void)removeShopNameData;
 
 
 @end

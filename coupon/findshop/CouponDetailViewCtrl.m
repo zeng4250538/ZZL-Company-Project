@@ -79,11 +79,6 @@
     
     
     
-    
-//    [self makeHeaderView];
-    
-    
-    
     if (self.couponDetailType == CouponDetailTypeHaveCart) {
         
         [self makeBottomView];
@@ -159,92 +154,6 @@
     
     
 }
-
-
-//暂时注释
-//-(void)loadData{
-//    
-//    
-//    [ReloadHud showHUDAddedTo:self.tableView reloadBlock:^{
-//        
-//        
-//        [self doLoad:^(BOOL ret){
-//            
-//            if (ret) {
-//                [ReloadHud removeHud:self.tableView animated:YES];
-//            }else{
-//                
-//                [ReloadHud showReloadMode:self.tableView];
-//            }
-//            
-//            
-//        }];
-//        
-//        
-//    }];
-//    
-//    
-//    [self doLoad:^(BOOL ret){
-//        
-//        if (ret) {
-//            [ReloadHud removeHud:self.tableView animated:YES];
-//        }else{
-//            
-//            [ReloadHud showReloadMode:self.tableView];
-//        }
-//        
-//        
-//    }];
-//    
-//    
-//    
-//}
-
-//暂时注释
-//-(void)doLoad:(void(^)(BOOL ret))completion{
-//    
-//    
-//    CouponService *service = [CouponService new];
-//    
-//    
-//    
-//    [service requestCouponInfo:self.couponId success:^(NSInteger code, NSString *message, id data) {
-//        
-//        
-//        self.data = data[@"coupon"];
-//        
-//        [self makeHeaderView];
-//        
-//        [self.tableView reloadData];
-//        
-//        completion(YES);
-//        
-//        
-//        
-//    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
-//        
-//        
-//        [self makeHeaderView];
-//        
-//        
-//        
-//        
-//        completion(NO);
-//        
-//        
-//        
-//        
-//    }];
-//    
-//    
-//    
-//    
-//    
-//    
-//}
-
-
-
 
 
 
@@ -463,6 +372,15 @@
         make.bottom.equalTo(uv).offset(-10);
     }];
     
+    if (dateBool(_data[@"endTime"])) {
+        addCartButton.layer.cornerRadius = 7;
+        addCartButton.backgroundColor = [UIColor grayColor];
+        [addCartButton setTitle:@"此优惠券已过期" forState:UIControlStateNormal];
+        [addCartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [addCartButton setUserInteractionEnabled:NO];
+        return;
+    }
+    
     int bools = [self.data[@"addedToBasket"] intValue];
     
     if (bools == 1) {
@@ -549,16 +467,27 @@
     
     [service requestADDBasket:couponId count:1 success:^(NSInteger code, NSString *message, id data) {
         
-        
-        if (self.shopingCarPush == YES) {
+        if (code == 201) {
+            if (self.shopingCarPush == YES) {
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshShopingCarNumber" object:nil];
+            }
+            [[AppShareData instance] addCouponToCart:self.data];
             
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshShopingCarNumber" object:nil];
+            
+            completion(YES);
+            
         }
-        [[AppShareData instance] addCouponToCart:self.data];
+//        if (self.shopingCarPush == YES) {
+//            
+//            [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshShopingCarNumber" object:nil];
+//        }
+//        [[AppShareData instance] addCouponToCart:self.data];
         
-        
-        completion(YES);
-        
+        else{
+            completion(NO);
+            [SVProgressHUD showInfoWithStatus:SafeString(data[@"responseCode"])];
+        }
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {

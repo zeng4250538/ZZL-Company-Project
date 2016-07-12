@@ -26,7 +26,9 @@ NSString *SafeLeft(NSString *content,NSUInteger length);
 void SafePostMessage(NSString* messageName,id body);
 
 
+BOOL dateBool(id content);
 
+NSString *dateController(id content);
 
 @interface Utils : NSObject
 

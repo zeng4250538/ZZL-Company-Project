@@ -22,7 +22,9 @@ NSDate *SafeDate(NSString* ymd){
     NSString *ymdString =  SafeString(ymd);
     
     if ([ymdString length]<19) {
+        
         return nil;
+        
     }
     
     
@@ -34,9 +36,68 @@ NSDate *SafeDate(NSString* ymd){
     
     return date;
     
+    
+}
 
+NSString *dateController(id content){
+
+    if (content==nil) {
+        return @"";
+    }
+    if ((NSNull*)content==[NSNull null]) {
+        return @"";
+    }
     
+    const long dateTimeLong = [content longLongValue]/1000;
+    NSDate *dateTime = [[NSDate alloc] initWithTimeIntervalSince1970:dateTimeLong];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    NSLocale *formatterLocal = [[NSLocale alloc] initWithLocaleIdentifier:@"en_us"];
+    [formatter setLocale:formatterLocal];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *dateString = [formatter stringFromDate:dateTime];
+    return dateString;
+
+
+}
+
+BOOL dateBool(id content){
+    if ([content length]<=0) {
+        return YES;
+    }
+    NSLog(@"传过来要处理的时间：%@",content);
+    NSDate *ymdStringFM = [[NSDate alloc]init];
+    NSDate *ymdStringFN = [[NSDate alloc]init];
+    NSDateFormatter *fm = [NSDateFormatter new];
+    NSDateFormatter *fn = [NSDateFormatter new];
+    fm.dateFormat = @"-MM";
+    fn.dateFormat = @"dd";
+    NSString *strFM = [fm stringFromDate:ymdStringFM];
+    NSString *strFN = [fn stringFromDate:ymdStringFN];
+    NSLog(@"获取到的系统的时间：月 %@ -- 日%@",strFM,strFN);
+    NSString *conFM = [content substringWithRange:NSMakeRange(4,4)];
+    NSString *conFN = [content substringFromIndex:8];
+    NSLog(@"截取到的系统的时间：月 %@ -- 日%@",conFM,conFN);
+    int strInFM = [strFM intValue];
+    int strInFN = [strFN intValue];
+    int conInFM = [conFM intValue];
+    int conInFN = [conFN intValue];
     
+    NSLog(@"转换后系统的：月：%d zhi 日：%d > 转换后后天传得：月：%d zhi 日：%d",strInFM,strInFN,conInFM,conInFN);
+    
+    if (strInFM < conInFM) {
+        
+        return YES;
+    }
+    
+    if (strInFN > conInFN) {
+        
+        if (strInFM < conInFM) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 void SafePostMessage(NSString* messageName,id body){

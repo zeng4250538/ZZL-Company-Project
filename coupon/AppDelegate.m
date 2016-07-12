@@ -14,23 +14,13 @@
 #import "MallService.h"
 #import "MobClick.h"
 #import "UMessage.h"
-
 #import "UMSocial.h"
-
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
-
 #import "UMSocialSinaSSOHandler.h"
-
 #import <AlipaySDK/AlipaySDK.h>
-
-
 #import "WXApi.h"
-
-
-
 #import <CoreLocation/CoreLocation.h>
-
 #import "ConfigService.h"
 #import "LoginViewCtrl.h"
 
@@ -40,13 +30,11 @@
 
 @property(nonatomic,strong)BMKMapManager* mapManager;
 
-
 @end
 
 @implementation AppDelegate
 
-
-BOOL InLan = YES;
+BOOL InLan = NO;
 NSString *ALiPayNotice=@"alipaynotice";
 NSString *WechatPayNotice=@"wechatpaynotice";
 NSString *NoLoginNotice=@"nologinnotice";

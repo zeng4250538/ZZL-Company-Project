@@ -115,7 +115,7 @@
                 
                 
                 
-                weakSelf.myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
+                weakSelf.myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"name"])];
                 
             } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
                 
@@ -242,7 +242,7 @@
         
         
         
-        _myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
+        _myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"name"])];
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
@@ -276,7 +276,7 @@
         
         
         
-        _myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"nickname"])];
+        _myInformationTitleLabel.text= [NSString stringWithFormat:@"%@",SafeString(data[@"name"])];
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         

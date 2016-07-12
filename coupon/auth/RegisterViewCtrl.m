@@ -197,13 +197,9 @@
             self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerNumber) userInfo:nil repeats:YES];
             
         } forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
-        
+ 
         
     }
-    
     
     // Configure the cell...
     
@@ -247,8 +243,6 @@
     
     footer.backgroundColor = [UIColor whiteColor];
     
-    
-    
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [footer addSubview:loginButton];
     
@@ -258,7 +252,6 @@
         make.right.equalTo(footer).offset(-30);
         make.top.equalTo(footer).offset(20);
         make.height.equalTo(@40);
-        
         
     }];
     
@@ -272,9 +265,7 @@
     
     self.tableView.tableFooterView = footer;
     
-    
     [loginButton bk_addEventHandler:^(id sender) {
-        
         
         if ([self.mobileTextField.text length]<1) {
             
@@ -289,7 +280,6 @@
             [SVProgressHUD showErrorWithStatus:@"请输入正确的手机号"];
             
             return;
-
             
         }
         

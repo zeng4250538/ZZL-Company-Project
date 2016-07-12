@@ -84,13 +84,13 @@
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-        <string>mqq</string>
-        <string>mqqopensdkapiV2</string>
-        <string>weixin</string>
-        <string>weibosdk2.5</string>
-        <string>sinaweibo</string>
-        <string>weibosdk</string>
-        <string>mqqapi</string>
+		<string>mqq</string>
+		<string>mqqopensdkapiV2</string>
+		<string>weixin</string>
+		<string>weibosdk2.5</string>
+		<string>sinaweibo</string>
+		<string>weibosdk</string>
+		<string>mqqapi</string>
 		<string>baidumap</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
@@ -121,7 +121,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>YES</string>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

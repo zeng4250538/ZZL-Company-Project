@@ -56,6 +56,12 @@
 //    
 //    [[AppShareData instance] addMallIdKVO:self];
     
+    if ([[AppShareData instance] isNeedLocationUpdate]) {
+        
+        [self requestLocation];
+        
+    }
+    
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(positioningQWE) name:@"positioning" object:nil];
     
@@ -64,7 +70,8 @@
 #pragma mark -  定位失败调用的方法
 - (void)locationManager:(CLLocationManager*)manager
 
-       didFailWithError:(NSError*)error{
+
+    didFailWithError:(NSError*)error{
     
     SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
     
@@ -133,12 +140,11 @@
         
     }];
     
-    if ([[AppShareData instance] isNeedLocationUpdate]) {
-        
-        [self requestLocation];
-
-        
-    }
+//    if ([[AppShareData instance] isNeedLocationUpdate]) {
+//        
+//        [self requestLocation];
+//
+//    }
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshCarNumber) name:@"refreshShopingCarNumber" object:nil];
     
@@ -190,7 +196,6 @@
 
 #pragma mark - 请求定位数据
 -(void)requestLocation{
-    
     
     if ([CLLocationManager locationServicesEnabled]) {
         // 创建位置管理者对象
@@ -567,16 +572,12 @@
             
             [self doRequestMall];
             
-            
         };
         
     }];
     
     
     self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
-    
-  //  self.navigationItem.rightBarButtonItem = scanerBarItem;
-    
     
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
     mallButton.frame = CGRectMake(0, 0, 150, 44);
@@ -586,19 +587,11 @@
     
     [mallButton setTitle:[AppShareData instance].mallName forState:UIControlStateNormal];
     
-    
-    
-    
     self.mallButton =mallButton;
     
-    
     self.navigationItem.titleView = mallButton;
-    
-    
-    
+
     [mallButton bk_addEventHandler:^(id sender) {
-        
-        
         
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
@@ -636,6 +629,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+
 #pragma mark - 装载商城
 -(void)doRequestMall{
     
@@ -655,10 +651,10 @@
         
     }];
     
-
-    
-    
 }
+
+
+
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     

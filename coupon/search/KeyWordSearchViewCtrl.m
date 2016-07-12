@@ -24,6 +24,8 @@
 
 @property(nonatomic,assign)BOOL isLoading;
 
+@property(nonatomic,assign)BOOL historyBool;
+
 @end
 
 @implementation KeyWordSearchViewCtrl
@@ -31,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _historyBool = NO;
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
@@ -81,10 +84,6 @@
     }];
    
 
-//    self.hotWordList = @[@"美食",@"天河",@"优惠",@"店3",@"店4",@"奶茶",@"西餐",@"蛋糕"];
-    
-//    self.searchWordList = @[@"贡茶",@"星巴克",@"都城",@"快餐"];
-    
     
 }
 
@@ -113,9 +112,6 @@
     
     [GUIConfig tableViewGUIFormat:self.displayCtrl.searchResultsTableView];
     
-    
-    
-    
 }
 
 
@@ -128,22 +124,16 @@
     
     searchBar.showsCancelButton = YES;
 
-    
     self.searchBar = searchBar;
-    
-    
-    
+ 
     searchBar.placeholder=@"搜索优惠券";
     
     NSLog(@"qweqwe%@",searchBar.text);
     
     
-    
-    
 }
 
 -(void)makeHeaderView{
-    
     
     NSInteger column = 3;
     
@@ -153,36 +143,36 @@
     
     CGFloat columnHeight = 50;
     
-    
     UIView *bgView = [[UIView alloc] init];
+    
     bgView.backgroundColor = [UIColor whiteColor];
     
     NSInteger row = ceil([self.hotWordList count]*1.0f / column*1.0f);
     
     CGFloat height = row*columnHeight+40;
     
-    
     bgView.frame = CGRectMake(0, 0, SCREEN_WIDTH,height);
-    
-    
-    
     
     CGFloat space = (SCREEN_WIDTH - column*buttonWidth)/(column+1);
     
-    
     int pos = 0;
+    
     for (NSString *title in self.hotWordList) {
         
         CGFloat x = (space*(pos%column+1)+(pos%column)*buttonWidth);
+        
         CGFloat y =20+columnHeight* (pos/column);
         
         UIButton *hotWordButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
         hotWordButton.frame = CGRectMake(x, y, buttonWidth, buttonHeight);
         
         hotWordButton.layer.borderWidth=1;
+        
         hotWordButton.layer.borderColor = [[GUIConfig mainBackgroundColor] CGColor];
         
         [hotWordButton setTitle:title forState:UIControlStateNormal];
+        
         [hotWordButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
         
         [hotWordButton bk_addEventHandler:^(id sender) {
@@ -193,37 +183,20 @@
             SearchResultViewCtrl *vc =[SearchResultViewCtrl new];
             vc.keyWord = button.titleLabel.text;
             
-            
             [self.navigationController pushViewController:vc animated:YES];
-            
-            
-            
-            
             
         } forControlEvents:UIControlEventTouchUpInside];
         
-        
-        
-        
         [bgView addSubview:hotWordButton];
         
-        
-        
-        
         hotWordButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        
         
         pos++;
         
         
-        
     }
     
-    
     self.tableView.tableHeaderView = bgView;
-    
-    
-
     
 }
 
@@ -233,14 +206,12 @@
     if (self.isLoading) {
         return ;
     }
-//    NSLog(@"搜索关键字：%@",searchText);
+    NSLog(@"搜索关键字：%@",searchText);
     self.isLoading = YES;
     
     ShopService *service = [ShopService new];
     
    AppShareData *app = [AppShareData instance];
-    
-    
     
     [service requestKeyword:app.mallId
                     keyWord:searchText
@@ -266,7 +237,7 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     SearchResultViewCtrl *vc =[SearchResultViewCtrl new];
     vc.keyWord = searchBar.text;
-
+    [[AppShareData instance]searchShopName:searchBar.text];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -287,27 +258,22 @@
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
+    if (tableView == self.displayCtrl.searchResultsTableView) {
+        return 0;
+    }
     return 30;
     
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-//    UIView *headView = [UIView new];
-//    headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 30);
-    
-    
-    
     UILabel *lab = [UILabel new];
     lab.font = [UIFont systemFontOfSize:14];
     lab.textColor = [GUIConfig grayFontColor];
-//    lab.text = @"   历史记录";
+    lab.text = @"   历史记录";
     lab.backgroundColor = [GUIConfig mainBackgroundColor];
     lab.frame = CGRectMake(0, 0, SCREEN_WIDTH, 30);
     
     return  lab;
-    
-    
     
 }
 
@@ -316,19 +282,50 @@
     return 1;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (tableView == self.displayCtrl.searchResultsTableView) {
+        return 0;
+    }
+    if ([[AppShareData instance].searchShopNameData count]==0) {
+        return 0;
+    }
+    return 30;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    UIButton *cleanButton = [[UIButton alloc]init];
+    cleanButton.titleLabel.textColor = UIColorFromRGB(180, 180, 180);
+    cleanButton.frame = CGRectMake(0, 0, self.view.bounds.size.width,30);
+    [cleanButton bk_addEventHandler:^(id sender) {
+        [[AppShareData instance] removeShopNameData];
+        [self.tableView reloadData];
+        NSLog(@"点击了清除按钮");
+    } forControlEvents:UIControlEventTouchUpInside];
+    UILabel *asd = [[UILabel alloc]init];
+    asd.frame = CGRectMake(0, 0, self.view.bounds.size.width, 30);
+    asd.text = @"清除历史记录";
+    asd.textColor = UIColorFromRGB(180, 180, 180);
+    asd.textAlignment = NSTextAlignmentCenter;
+    [cleanButton addSubview:asd];
+    
+    return cleanButton;
+
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    
     
     if (tableView == self.displayCtrl.searchResultsTableView) {
         
         return [self.searchWordList count];
     }
     
+    if ([[AppShareData instance].searchShopNameData count]==0) {
+        return 1;
+    }
     
-    
-    
-    return [self.hotWordList count];
+    return [[AppShareData instance].searchShopNameData count];
+
 }
 
 
@@ -339,12 +336,9 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         
         
-        
         NSDictionary *d = self.searchWordList[indexPath.row];
         
         NSString *name = d[@"name"];
-        
-        
         
         cell.textLabel.text=name;
         cell.textLabel.font = [UIFont systemFontOfSize:14];
@@ -354,123 +348,70 @@
         
     }else{
     
-    
-    
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         
-        
-        
         cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.textLabel.text = self.hotWordList[[indexPath row]];
-        
-        
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        
-        cell.imageView.image = [UIImage imageNamed:@"history.png"];
-        
+        if ([[[AppShareData instance]searchShopNameData]count]>0) {
+           cell.textLabel.text = [NSString stringWithFormat:@"%@",[AppShareData instance].searchShopNameData[indexPath.row]];;
+       }
+        else{
+           cell.textLabel.text = @"暂无搜索历史记录";
+           cell.textLabel.textColor = UIColorFromRGB(180, 180, 180);
+       }
         return cell;
         
     }
     
-    
-    
-    
 }
+
 
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (tableView == self.displayCtrl.searchResultsTableView) {
         
         NSDictionary *d = self.searchWordList[indexPath.row];
         
+        [[AppShareData instance] searchShopName:self.searchWordList[indexPath.row][@"name"]];
         
         ShopInfoViewCtrl *vc = [ShopInfoViewCtrl new];
+        
         vc.hidesBottomBarWhenPushed = YES;
+        
         vc.shopId = SafeString(d[@"id"]);
         
         [self.navigationController pushViewController:vc animated:YES];
         
-    
-        
-        
         NSLog(@"keyword %@",d);
-        
-        
         
         return;
     }
     
-    
-    
-    
+    if ([[AppShareData instance].searchShopNameData count]>0) {
     
     SearchResultViewCtrl *vc =[SearchResultViewCtrl new];
     
-    vc.keyWord = self.hotWordList[[indexPath row]];
-    
+    vc.keyWord = [AppShareData instance].searchShopNameData[[indexPath row]];
     
     [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    
+    else{
+    
+        [[AppShareData instance] removeShopNameData];
+        
+        [self.tableView reloadData];
+    
+    }
     
     
     
-    
 }
 
-//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{                      // return NO to not become
-//
-//    [self.displayCtrl setActive:YES animated:YES];
-//    
-//    
-//    
-//    return YES;
-//    
-//}
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

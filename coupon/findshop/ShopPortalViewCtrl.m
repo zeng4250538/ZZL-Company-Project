@@ -42,15 +42,11 @@
 @property(nonatomic,strong)NSString *cityString;
 @property(nonatomic,strong)NSArray *mallArray;
 @property(nonatomic,strong)UIButton *headButton;
-
 @property(nonatomic,strong)NSString *filterString;  //分类过滤数据
 @property(nonatomic,strong)NSString *sortString;    //排序数据
-
 @property(nonatomic,strong)NSString *filterTitle;  //分类过滤数据
 @property(nonatomic,strong)NSString *sortTitle;    //排序数据
-
 @property(nonatomic,strong)UIButton *mallButton;
-
 @property(nonatomic,assign)NSUInteger pageCount;    //当前总页
 
 
@@ -141,22 +137,13 @@
             
         }];
         
-        
-        
     }];
-    
-   
-    
-    
-    
     
 }
 
 
 #pragma mark - 下拉装载
 -(void)doLoadNextPage:(NSUInteger)page completion:(void (^)(BOOL))completion{
-    
-    
     
     ShopService *service = [ShopService new];
     
@@ -165,10 +152,8 @@
     
     [service requestNearbyShop:mallId page:page per_page:10  success:^(NSInteger code, NSString *message, id data) {
         
-        
         if ([data count]==0) {
             
-//            [SVProgressHUD showInfoWithStatus:@"已经到达最底" maskType:SVProgressHUDMaskTypeBlack];
             completion(NO);
             return ;
             
@@ -188,11 +173,12 @@
     
 }
 
+
 -(void)dealloc{
-    
     
     [[AppShareData instance] removeMallIdKVO:self];
 }
+
 
 -(void)refreshTableView{
 
@@ -203,21 +189,18 @@
 
 }
 
+
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshTableView) name:@"refreshFindShopTableView" object:nil];
-//    [_tableView reloadData];
     
     [self makeBarItem];
     
-    
-    
-    
-    
 }
+
 
 
 -(void)titleItenLabelString:(NSString *)city andcityLabel:(void(^)(id data))cityLabel{
@@ -232,10 +215,8 @@
         
         self.mallArray = data;
     
-//        NSLog(@"%@",self.mallArray[0][@"name"]);
         
         cityLabel(data);
-        
         
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
@@ -341,18 +322,9 @@
         
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
-        
-        
-        
-        
-        
         completion(NO);
         
     }];
-    
-    
-
-
     
 }
 
@@ -365,15 +337,6 @@
     
     UIBarButtonItem *addressBarItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"location_icon.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
-        
-        
-//        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
-//        
-//        vc.hidesBottomBarWhenPushed = YES;
-//        
-//        [self.navigationController pushViewController:vc animated:YES];
-        
-        
     }];
     
     
@@ -381,19 +344,10 @@
     
     UIBarButtonItem *addressNameBarItem = [[UIBarButtonItem alloc] bk_initWithTitle:city style:UIBarButtonItemStylePlain handler:^(id sender) {
         
-//        SelectCityTableViewCtrl *vc = [SelectCityTableViewCtrl new];
-//        
-//        vc.hidesBottomBarWhenPushed = YES;
-//        
-//        
-//        [self.navigationController pushViewController:vc animated:YES];
-        
     }];
     
     
     self.navigationItem.leftBarButtonItems = @[addressBarItem,addressNameBarItem];
-    
-    //  self.navigationItem.rightBarButtonItem = scanerBarItem;
     
     
     UIButton *mallButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -414,9 +368,7 @@
     
     
     [mallButton bk_addEventHandler:^(id sender) {
-        
-        
-        
+       
         SelectMallPopViewCtrl *vc = [SelectMallPopViewCtrl new];
         
         vc.tabelViewRefresh = ^(id data){
@@ -473,22 +425,22 @@
 
 
 
-
--(void)makeHeaderSearchBar{
-    
-    UISearchBar *searchBar = [[UISearchBar alloc] init];
-    
-    searchBar.delegate = self;
-    searchBar.frame = CGRectMake(-30, 4, SCREEN_WIDTH-100, 28);
- 
-    searchBar.backgroundImage =[UIImage new];
-
-    searchBar.placeholder = self.navigationItem.title;
-    
-    self.navigationItem.titleView = searchBar;
-  
-    
-}
+//未知是否有用，暂时屏蔽
+//-(void)makeHeaderSearchBar{
+//    
+//    UISearchBar *searchBar = [[UISearchBar alloc] init];
+//    
+//    searchBar.delegate = self;
+//    searchBar.frame = CGRectMake(-30, 4, SCREEN_WIDTH-100, 28);
+// 
+//    searchBar.backgroundImage =[UIImage new];
+//
+//    searchBar.placeholder = self.navigationItem.title;
+//    
+//    self.navigationItem.titleView = searchBar;
+//  
+//    
+//}
 
 
 -(void)makeSearchBar{
@@ -505,14 +457,11 @@
     
     self.searchBar.backgroundColor = [GUIConfig mainBackgroundColor];
     
-    self.searchBar.placeholder=@"搜索品牌，商家，优惠券";
+    self.searchBar.placeholder=@"搜索品牌商家";
     
     UIView *bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     
     [bgView addSubview:self.searchBar];
-    
-    
-    //  [self.searchBar becomeFirstResponder];
     
     
     self.tableView.tableHeaderView = bgView;
@@ -522,7 +471,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -533,9 +481,7 @@
 #pragma mark ----- 商家搜索
     KeyWordSearchViewCtrl *vc = [KeyWordSearchViewCtrl new];
     
-    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    
     
     [self presentViewController:nav animated:vc completion:^{
         
@@ -543,71 +489,185 @@
     
     return NO;
 
-
 }
 
 
 #pragma  mark ---- cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    if (indexPath.section==0 || indexPath.section==2) {
-        
-        return [ShopInfoTableViewCell height];
-
-        
-        
-    }else{
-        
-        return [CouponInfoTableViewCell height];
-    }
-    
-    
-    
-    
-    
+    return 100;
+  
 }
 
 
 #pragma mark ------------ 设置cell的组头
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
+    if ([self.recommendShopData count]>0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+        
+        if (section ==0) {
+            
+            return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
+                
+                ShopListViewCtrl *vc = [ShopListViewCtrl new];
+                
+                vc.hidesBottomBarWhenPushed = YES;
+                
+                vc.navigationItem.title=@"优选品牌";
+                
+                vc.shopQueryType = ShopQueryTypeRecommend;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+        }else if (section ==1) {
+            
+            return  [ShopInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
+                
+                CouponListViewCtrl *vc = [CouponListViewCtrl new];
+                
+                vc.couponListType = CouponListTypeReminder;
+                vc.hidesBottomBarWhenPushed = YES;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+        }else{
+            return  [self headerViewWithSort:@"品牌街" clickBlock:^{
+                
+                ShopListViewCtrl *vc = [ShopListViewCtrl new];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.navigationItem.title=@"品牌街";
+                vc.shopQueryType = ShopQueryTypeNearBy;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+        }
+        
+    }
+    
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+        
+        if (section == 0) {
+            return  [ShopInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
+                
+                CouponListViewCtrl *vc = [CouponListViewCtrl new];
+                
+                vc.couponListType = CouponListTypeReminder;
+                vc.hidesBottomBarWhenPushed = YES;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+
+        }
+        else{
+        
+            return  [self headerViewWithSort:@"品牌街" clickBlock:^{
+                
+                ShopListViewCtrl *vc = [ShopListViewCtrl new];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.navigationItem.title=@"品牌街";
+                vc.shopQueryType = ShopQueryTypeNearBy;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+        
+        }
+    }
+    
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
+    if ([self.couponData count] == 0 && [self.recommendShopData count]>0 && [self.nearByShopData count]>0) {
+        
+        if (section == 0) {
+            return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
+                
+                ShopListViewCtrl *vc = [ShopListViewCtrl new];
+                
+                vc.hidesBottomBarWhenPushed = YES;
+                
+                vc.navigationItem.title=@"优选品牌";
+                
+                vc.shopQueryType = ShopQueryTypeRecommend;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+        }
+        else{
+            
+            return  [self headerViewWithSort:@"品牌街" clickBlock:^{
+                
+                ShopListViewCtrl *vc = [ShopListViewCtrl new];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.navigationItem.title=@"品牌街";
+                vc.shopQueryType = ShopQueryTypeNearBy;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+        }
+        
+    }
     
     
-    if (section ==0) {
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
+    if ([self.nearByShopData count] == 0 && [self.recommendShopData count]>0 && [self.couponData count]>0) {
         
-       return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
-           
-           ShopListViewCtrl *vc = [ShopListViewCtrl new];
-           
-           vc.hidesBottomBarWhenPushed = YES;
-           
-           vc.navigationItem.title=@"优选品牌";
-           
-           vc.shopQueryType = ShopQueryTypeRecommend;
-           
-           [self.navigationController pushViewController:vc animated:YES];
-           
-           
-        }];
+        if (section == 0) {
+            return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
+                
+                ShopListViewCtrl *vc = [ShopListViewCtrl new];
+                
+                vc.hidesBottomBarWhenPushed = YES;
+                
+                vc.navigationItem.title=@"优选品牌";
+                
+                vc.shopQueryType = ShopQueryTypeRecommend;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+        }
+        else{
+            
+            return  [ShopInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
+                
+                CouponListViewCtrl *vc = [CouponListViewCtrl new];
+                
+                vc.couponListType = CouponListTypeReminder;
+                vc.hidesBottomBarWhenPushed = YES;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+        }
         
-    }else if (section ==1) {
+    }
+    
+    
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count] == 0 && [self.nearByShopData count]>0) {
         
-        return  [ShopInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
-            
-            CouponListViewCtrl *vc = [CouponListViewCtrl new];
-            
-            vc.couponListType = CouponListTypeReminder;
-            vc.hidesBottomBarWhenPushed = YES;
-            
-            
-            
-            
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }];
-        
-        
-    }else{
         return  [self headerViewWithSort:@"品牌街" clickBlock:^{
             
             ShopListViewCtrl *vc = [ShopListViewCtrl new];
@@ -618,19 +678,87 @@
             [self.navigationController pushViewController:vc animated:YES];
             
         }];
-        
+    }
+    
+    if ([self.recommendShopData count] == 0 && [self.nearByShopData count] == 0 && [self.couponData count]>0) {
+        return  [ShopInfoTableViewCell headerView:@"即时优惠" clickBlock:^{
+            
+            CouponListViewCtrl *vc = [CouponListViewCtrl new];
+            
+            vc.couponListType = CouponListTypeReminder;
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }];
+    }
+    
+    if ([self.couponData count] == 0 && [self.nearByShopData count] == 0 && [self.recommendShopData count]>0) {
+        return  [ShopInfoTableViewCell headerView:@"优选品牌" clickBlock:^{
+            
+            ShopListViewCtrl *vc = [ShopListViewCtrl new];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            vc.navigationItem.title=@"优选品牌";
+            
+            vc.shopQueryType = ShopQueryTypeRecommend;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }];
+
     }
 
     
+    return [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    if (section==2) {
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
+    
+    if ([self.recommendShopData count]>0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+         if (section==2) {
+             return 80;
+        };
+        return 30;
+    }
+    
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+        if (section==1) {
+            return 80;
+        };
+        return 30;
+    }
+    if ([self.couponData count] == 0 && [self.recommendShopData count]>0 && [self.nearByShopData count]>0) {
+        if (section==1) {
+            return 80;
+        };
+        return 30;
+    }
+    if ([self.nearByShopData count] == 0 && [self.recommendShopData count]>0 && [self.couponData count]>0) {
+        return 30;
+    }
+    
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count] == 0 && [self.nearByShopData count]>0) {
         return 80;
     }
     
-    return 30;
+    if ([self.recommendShopData count] == 0 && [self.nearByShopData count] == 0 && [self.couponData count]>0) {
+        return 30;
+    }
+    
+    if ([self.couponData count] == 0 && [self.nearByShopData count] == 0 && [self.recommendShopData count]>0) {
+        return 30;
+    }
+
+    return 0;
 }
 
 #pragma mark -------- 点击cell跳转 <---> 有转模型
@@ -638,28 +766,89 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0 || indexPath.section==2) {
-        ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
+    
+    if ([self.recommendShopData count]>0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
         
-        if (indexPath.section == 0) {
+        if (indexPath.section == 0 || indexPath.section==2) {
+            ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
             
-            NSDictionary *data =  self.recommendShopData[indexPath.row];
-            //vc.data = self.recommendShopData[indexPath.row];
+            if (indexPath.section == 0) {
+                
+                NSDictionary *data =  self.recommendShopData[indexPath.row];
+                
+                vc.shopId = SafeString(data[@"id"]);
+                
+                vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
+                
+                self.bools = YES;
+                
+            }
             
-            vc.shopId = SafeString(data[@"id"]);
-        
-            vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
+            if (indexPath.section == 2) {
+                
+                
+                NSDictionary *data =  self.nearByShopData[indexPath.row];
+                
+                // vc.shopData = [Shop yy_modelWithDictionary:data];
+                
+                //vc.data = self.nearByShopData[indexPath.row];
+                
+                vc.shopId = SafeString(data[@"id"]);
+                
+                self.bools = NO;
+                
+            }
             
-            self.bools = YES;
+            // [vc boll:self.bools];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else{
+            
+#pragma mark - 点击进入即时优惠
+            CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+            
+            // vc.couponViewMode = CouponViewModeNetwork;
+            vc.data = self.couponData[indexPath.row];
+            // NSString *couponId = SafeString(self.couponData[indexPath.row][@"couponId"]);
+            //vc.couponId = couponId;
+            
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
             
         }
-        
-        if (indexPath.section == 2) {
-          
+    }
+    
+    
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+        if (indexPath.section == 0) {
+#pragma mark - 点击进入即时优惠
+            CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
             
+            // vc.couponViewMode = CouponViewModeNetwork;
+            vc.data = self.couponData[indexPath.row];
+            // NSString *couponId = SafeString(self.couponData[indexPath.row][@"couponId"]);
+            //vc.couponId = couponId;
+            
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            }
+        
+        if (indexPath.section == 1) {
+            ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
             NSDictionary *data =  self.nearByShopData[indexPath.row];
             
-           // vc.shopData = [Shop yy_modelWithDictionary:data];
+            // vc.shopData = [Shop yy_modelWithDictionary:data];
             
             //vc.data = self.nearByShopData[indexPath.row];
             
@@ -667,35 +856,165 @@
             
             self.bools = NO;
             
+            
+            
+            // [vc boll:self.bools];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
         }
         
-       // [vc boll:self.bools];
-        
-        vc.hidesBottomBarWhenPushed = YES;
-        
-//        //回调刷新
-//        vc.subButtonHandle = ^{
-//            [self.tableView reloadData];
-//        };
-        
-        [self.navigationController pushViewController:vc animated:YES];
+        }
+    
+    
 
-    }else{
+    if ([self.couponData count] == 0 && [self.recommendShopData count]>0 && [self.nearByShopData count]>0) {
+            ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
+            
+            if (indexPath.section == 0) {
+                
+                NSDictionary *data =  self.recommendShopData[indexPath.row];
+                
+                vc.shopId = SafeString(data[@"id"]);
+                
+//                vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
+                
+                self.bools = YES;
+                
+            }
+            
+            if (indexPath.section == 1) {
+                
+                
+                NSDictionary *data =  self.nearByShopData[indexPath.row];
+                
+                // vc.shopData = [Shop yy_modelWithDictionary:data];
+                
+                //vc.data = self.nearByShopData[indexPath.row];
+                
+                vc.shopId = SafeString(data[@"id"]);
+                
+                self.bools = NO;
+                
+            }
+            
+            // [vc boll:self.bools];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+    
+    
+    
+    if ([self.nearByShopData count] == 0 && [self.recommendShopData count]>0 && [self.couponData count]>0) {
+        ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
+        if (indexPath.section == 0) {
+            
+            NSDictionary *data =  self.recommendShopData[indexPath.row];
+            
+            vc.shopId = SafeString(data[@"id"]);
+            
+            vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
+            
+            self.bools = YES;
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+
+            
+        }
         
+        if (indexPath.section == 1) {
+        
+#pragma mark - 点击进入即时优惠
+            CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
+            
+            // vc.couponViewMode = CouponViewModeNetwork;
+            vc.data = self.couponData[indexPath.row];
+            // NSString *couponId = SafeString(self.couponData[indexPath.row][@"couponId"]);
+            //vc.couponId = couponId;
+            
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+        
+        }
+    }
+    
+    
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count] == 0 && [self.nearByShopData count]>0) {
+        ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
+        NSDictionary *data =  self.nearByShopData[indexPath.row];
+        
+        // vc.shopData = [Shop yy_modelWithDictionary:data];
+        
+        //vc.data = self.nearByShopData[indexPath.row];
+        
+        vc.shopId = SafeString(data[@"id"]);
+        
+        self.bools = NO;
+        
+    
+    // [vc boll:self.bools];
+    
+    vc.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+    }
+
+    
+    
+    if ([self.recommendShopData count] == 0 && [self.nearByShopData count] == 0 && [self.couponData count]>0) {
 #pragma mark - 点击进入即时优惠
         CouponDetailViewCtrl *vc = [CouponDetailViewCtrl new];
         
-       // vc.couponViewMode = CouponViewModeNetwork;
+        // vc.couponViewMode = CouponViewModeNetwork;
         vc.data = self.couponData[indexPath.row];
-       // NSString *couponId = SafeString(self.couponData[indexPath.row][@"couponId"]);
+        // NSString *couponId = SafeString(self.couponData[indexPath.row][@"couponId"]);
         //vc.couponId = couponId;
         
         
         vc.hidesBottomBarWhenPushed = YES;
         
         [self.navigationController pushViewController:vc animated:YES];
+
+    }
+    
+    
+    
+    if ([self.couponData count] == 0 && [self.nearByShopData count] == 0 && [self.recommendShopData count]>0) {
+        
+        ShopInfoViewCtrl *vc =[[ShopInfoViewCtrl alloc] init];
+        
+//        if (indexPath.section == 0) {
+        
+            NSDictionary *data =  self.recommendShopData[indexPath.row];
+            
+            vc.shopId = SafeString(data[@"id"]);
+            
+            vc.OptimizingBrand = [OptimizingBrandModel yy_modelWithDictionary:data];
+            
+            self.bools = YES;
+            
+//        }
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+
+
         
     }
+    
     
 }
 
@@ -703,51 +1022,157 @@
 #pragma mark - 创建cell的组数
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 3;
+    
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
+
+    if ([self.recommendShopData count]>0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+        
+        return 3;
+    }
+    
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+        return 2;
+    }
+    if ([self.couponData count] == 0 && [self.recommendShopData count]>0 && [self.nearByShopData count]>0) {
+        return 2;
+    }
+    if ([self.nearByShopData count] == 0 && [self.recommendShopData count]>0 && [self.couponData count]>0) {
+        return 2;
+    }
+    
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count] == 0 && [self.nearByShopData count]>0) {
+        return 1;
+    }
+    
+    if ([self.recommendShopData count] == 0 && [self.nearByShopData count] == 0 && [self.couponData count]>0) {
+        return 1;
+    }
+    
+    if ([self.couponData count] == 0 && [self.nearByShopData count] == 0 && [self.recommendShopData count]>0) {
+        return 1;
+    }
+
+    
+    return 0;
 }
 
 #pragma mark - 创建cell的个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
     
-    if (section ==0 ) {
+    if ([self.recommendShopData count]>0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+        if (section ==0 ) {
+            
+            return [self.recommendShopData count];
+            
+        }
+        if (section ==1){
+            
+            return [self.couponData count];
+            
+        }else{
+            
+            return [self.nearByShopData count];
+            
+        }
+
+    }
+    
+    if ([self.recommendShopData count]==0 && [self.couponData count]>0 && [self.nearByShopData count]>0) {
+        if (section ==0 ) {
+            
+            return [self.couponData count];
+            
+        }
+        if (section ==1){
+            
+            return [self.nearByShopData count];
+
+     }
         
-        return [self.recommendShopData count];
-        
-    }else if (section ==1){
-        
-        return [self.couponData count];
-        
-    }else{
-        
-        return [self.nearByShopData count];
+  }
+    if ([self.couponData count]==0 && [self.recommendShopData count]>0 && [self.nearByShopData count]>0) {
+        if (section ==0 ) {
+            
+            return [self.recommendShopData count];
+            
+        }
+        if (section ==1){
+            
+            return [self.nearByShopData count];
+            
+        }
         
     }
-    // Return the number of rows in the section.
-    return 2;
+
+    if ([self.nearByShopData count]==0 && [self.recommendShopData count]>0 && [self.couponData count]>0) {
+        if (section ==0 ) {
+            
+            return [self.recommendShopData count];
+            
+        }
+        if (section ==1){
+            
+            return [self.couponData count];
+            
+        }
+        
+    }
+    
+    if ([self.recommendShopData count] == 0 && [self.couponData count] == 0) {
+        return [self.nearByShopData count];
+    }
+    
+    if ([self.recommendShopData count] == 0 && [self.nearByShopData count] == 0) {
+        return [self.couponData count];
+    }
+    
+    if ([self.couponData count] == 0 && [self.nearByShopData count] == 0) {
+        return [self.recommendShopData count];
+    }
+    
+    
+    
+        // Return the number of rows in the section.
+    return 0;
 }
 
 #pragma mark ------- cell的创建
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //self.recommendShopData 优选品牌
+    //self.couponData  即时优惠
+    //self.nearByShopData 品牌街
+    
+    if ([self.recommendShopData count]>0 &&[self.couponData count]>0 &&[self.nearByShopData count]>0) {
     
     if ([indexPath section]==0) {
         
         ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
- 
-        cell.data = self.recommendShopData[[indexPath row]];
-        
-        [cell updateData];
+        if (([self.recommendShopData count]>0)) {
+            cell.data = self.recommendShopData[[indexPath row]];
+            
+            [cell updateData];
+        }
         
         return cell;
         
-    }else   if ([indexPath section]==1) {
+    }
         
+    else   if ([indexPath section]==1) {
         
         CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         
+        if ([self.couponData count]>0) {
+            
         
-        NSMutableDictionary *d   = [self.couponData[indexPath.row] mutableCopy];
+        NSMutableDictionary *d  = [self.couponData[indexPath.row] mutableCopy];
         
         cell.data = d;
         
@@ -824,51 +1249,20 @@
                     
                     
                 }];
-                
-                
-                
-                
-                
-                
-                
-                
+         
             }
-            
-            
-        
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+       
         };
-        
-        
-        
+ 
         
         [cell updateData];
-        
-        
-        
-        
-        
-        
-      //  cell.couponActionType = CouponTypeLimited;
-        
-        
-        
+            
+        }
         return cell;
         
-    }else if([indexPath section]==2) {
+    }
+        
+    else if([indexPath section]==2) {
         
         
         ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
@@ -905,21 +1299,463 @@
 
         return cell;
         
-    }else{
-
+    }
         
-        return nil;
+    }
+    
+    if ([self.recommendShopData count] == 0 &&[self.couponData count]>0 &&[self.nearByShopData count]>0) {
+        
+        if ([indexPath section]==0) {
+            
+            CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+            
+            if ([self.couponData count]>0) {
+                
+                
+                NSMutableDictionary *d  = [self.couponData[indexPath.row] mutableCopy];
+                
+                cell.data = d;
+                
+                NSString *isRemider  = SafeString(d[@"setReminder"]);
+                
+                if ([isRemider isEqualToString:@"1"]) {
+                    
+                    cell.couponActionType = CouponTypeUnLimited;
+                }else{
+                    
+                    cell.couponActionType = CouponTypeLimited;
+                    
+                }
+     
+                
+                cell.doActionBlock = ^(id sender){
+                    
+                    NSString *isReminder = SafeString(d[@"setReminder"]);
+                    
+                    if ([ isReminder isEqualToString:@"0"]) {
+                        
+                        NSString *promotionId = SafeString(d[@"couponPromotionId"]);
+                        ReminderService *service = [ReminderService new];
+                        [service addReminder:promotionId success:^(NSInteger code, NSString *message, id data) {
+                            UIButton *button = (UIButton*)sender;
+                            [button setTitle:@"取消提醒" forState:UIControlStateNormal];
+                            d[@"setReminder"]=@1;
+                            NSString * reminderId = data[@"reminderId"];
+                            
+                            d[@"reminderId"]=SafeString(reminderId);
+                            [SVProgressHUD showSuccessWithStatus:@"提醒成功"];
+                            
+                        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                            
+                            
+                            [SVProgressHUD showErrorWithStatus:@"提醒失败"];
+                            
+                            
+                        }];
+                        
+                        
+                        
+                    }else{
+                        
+                        
+                        
+                        NSString *reminderId = SafeString(d[@"reminderId"]);
+                        
+                        
+                        ReminderService *service = [ReminderService new];
+                        
+                        
+                        [service deleteReminder:reminderId success:^(NSInteger code, NSString *message, id data) {
+                            
+                            
+                            UIButton *button = (UIButton*)sender;
+                            
+                            [button setTitle:@"提醒" forState:UIControlStateNormal];
+                            
+                            d[@"setReminder"]=@0;
+                            
+                            
+                            [SVProgressHUD showSuccessWithStatus:@"取消提醒成功"];
+                            
+                            
+                        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                            
+                            
+                            [SVProgressHUD showErrorWithStatus:@"取消提醒失败"];
+                            
+                            
+                        }];
+                        
+                    }
+                    
+                };
+                
+                
+                [cell updateData];
+                
+            }
+            return cell;
+            
+        }
+        
+        else if([indexPath section]==1) {
+            
+            
+            ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+            
+            cell.data = self.nearByShopData[[indexPath row]];
+            
+            [cell updateData];
+            
+            BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
+            
+            __weak ShopPortalViewCtrl *weakSelf = self;
+            
+            self.block = ^(NSString *data){
+                
+                [brandStreetButton requestButtonString:data shopMallId:@"2" success:^(id data) {
+                    
+                    
+                    cell.data = data[indexPath.row];
+                    
+                    [cell updateData];
+                    
+                    //                __weak ShopPortalViewCtrl *weakSelf = self;
+                    
+                    [weakSelf.tableView reloadData];
+                    
+                    
+                } failure:^(id code) {
+                    
+                }];
+                
+                NSLog(@"刷新了");
+                
+            };
+            
+            return cell;
+            
+        }
+    }
+    
+    if ([self.couponData count] == 0 &&[self.recommendShopData count]>0 &&[self.nearByShopData count]>0) {
+        
+        if ([indexPath section]==0) {
+            
+            ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+            if (([self.recommendShopData count]>0)) {
+                cell.data = self.recommendShopData[[indexPath row]];
+                
+                [cell updateData];
+            }
+            
+            return cell;
+            
+        }
+        else if([indexPath section]==1) {
+            
+            
+            ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+            
+            cell.data = self.nearByShopData[[indexPath row]];
+            
+            [cell updateData];
+            
+            BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
+            
+            __weak ShopPortalViewCtrl *weakSelf = self;
+            
+            self.block = ^(NSString *data){
+                
+                [brandStreetButton requestButtonString:data shopMallId:@"2" success:^(id data) {
+                    
+                    
+                    cell.data = data[indexPath.row];
+                    
+                    [cell updateData];
+                    
+                    //                __weak ShopPortalViewCtrl *weakSelf = self;
+                    
+                    [weakSelf.tableView reloadData];
+                    
+                    
+                } failure:^(id code) {
+                    
+                }];
+                
+                NSLog(@"刷新了");
+                
+            };
+            
+            return cell;
+            
+        }
+    }
+    
+    if ([self.nearByShopData count] == 0&&[self.recommendShopData count]>0 &&[self.couponData count]>0) {
+        
+        if ([indexPath section]==0) {
+            
+            ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+            if (([self.recommendShopData count]>0)) {
+                cell.data = self.recommendShopData[[indexPath row]];
+                
+                [cell updateData];
+            }
+            
+            return cell;
+            
+        }
+        else   if ([indexPath section]==1) {
+            
+            CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+            
+            if ([self.couponData count]>0) {
+                
+                
+                NSMutableDictionary *d  = [self.couponData[indexPath.row] mutableCopy];
+                
+                cell.data = d;
+                
+                NSString *isRemider  = SafeString(d[@"setReminder"]);
+                
+                if ([isRemider isEqualToString:@"1"]) {
+                    
+                    cell.couponActionType = CouponTypeUnLimited;
+                }else{
+                    
+                    cell.couponActionType = CouponTypeLimited;
+                    
+                }
+                
+                
+                
+                //setReminder
+                
+                
+                cell.doActionBlock = ^(id sender){
+                    
+                    NSString *isReminder = SafeString(d[@"setReminder"]);
+                    
+                    if ([ isReminder isEqualToString:@"0"]) {
+                        
+                        NSString *promotionId = SafeString(d[@"couponPromotionId"]);
+                        ReminderService *service = [ReminderService new];
+                        [service addReminder:promotionId success:^(NSInteger code, NSString *message, id data) {
+                            UIButton *button = (UIButton*)sender;
+                            [button setTitle:@"取消提醒" forState:UIControlStateNormal];
+                            d[@"setReminder"]=@1;
+                            NSString * reminderId = data[@"reminderId"];
+                            
+                            d[@"reminderId"]=SafeString(reminderId);
+                            [SVProgressHUD showSuccessWithStatus:@"提醒成功"];
+                            
+                        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                            
+                            
+                            [SVProgressHUD showErrorWithStatus:@"提醒失败"];
+                            
+                            
+                        }];
+                        
+                        
+                        
+                    }else{
+                        
+                        
+                        
+                        NSString *reminderId = SafeString(d[@"reminderId"]);
+                        
+                        
+                        ReminderService *service = [ReminderService new];
+                        
+                        
+                        [service deleteReminder:reminderId success:^(NSInteger code, NSString *message, id data) {
+                            
+                            
+                            UIButton *button = (UIButton*)sender;
+                            
+                            [button setTitle:@"提醒" forState:UIControlStateNormal];
+                            
+                            d[@"setReminder"]=@0;
+                            
+                            
+                            [SVProgressHUD showSuccessWithStatus:@"取消提醒成功"];
+                            
+                            
+                        } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                            
+                            
+                            [SVProgressHUD showErrorWithStatus:@"取消提醒失败"];
+                            
+                            
+                        }];
+                        
+                    }
+                    
+                };
+                
+                
+                [cell updateData];
+                
+            }
+            
+            return cell;
+            
+        }
+
     }
     
     
     
+    if ([self.recommendShopData count] == 0 && [self.couponData count] == 0) {
+        
+        ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+        
+        cell.data = self.nearByShopData[[indexPath row]];
+        
+        [cell updateData];
+        
+        BrandStreetButtonService *brandStreetButton = [BrandStreetButtonService new];
+        
+        __weak ShopPortalViewCtrl *weakSelf = self;
+        
+        self.block = ^(NSString *data){
+            
+            [brandStreetButton requestButtonString:data shopMallId:@"2" success:^(id data) {
+                
+                
+                cell.data = data[indexPath.row];
+                
+                [cell updateData];
+                
+                //                __weak ShopPortalViewCtrl *weakSelf = self;
+                
+                [weakSelf.tableView reloadData];
+                
+                
+            } failure:^(id code) {
+                
+            }];
+            
+            NSLog(@"刷新了");
+            
+        };
+        
+        return cell;
+    }
     
-    // Configure the cell...
+    if ([self.recommendShopData count] == 0 && [self.nearByShopData count] == 0) {
+        CouponInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
+        
+        if ([self.couponData count]>0) {
+            
+            
+            NSMutableDictionary *d  = [self.couponData[indexPath.row] mutableCopy];
+            
+            cell.data = d;
+            
+            NSString *isRemider  = SafeString(d[@"setReminder"]);
+            
+            if ([isRemider isEqualToString:@"1"]) {
+                
+                cell.couponActionType = CouponTypeUnLimited;
+            }else{
+                
+                cell.couponActionType = CouponTypeLimited;
+                
+            }
+            
+            
+            
+            //setReminder
+            
+            
+            cell.doActionBlock = ^(id sender){
+                
+                NSString *isReminder = SafeString(d[@"setReminder"]);
+                
+                if ([ isReminder isEqualToString:@"0"]) {
+                    
+                    NSString *promotionId = SafeString(d[@"couponPromotionId"]);
+                    ReminderService *service = [ReminderService new];
+                    [service addReminder:promotionId success:^(NSInteger code, NSString *message, id data) {
+                        UIButton *button = (UIButton*)sender;
+                        [button setTitle:@"取消提醒" forState:UIControlStateNormal];
+                        d[@"setReminder"]=@1;
+                        NSString * reminderId = data[@"reminderId"];
+                        
+                        d[@"reminderId"]=SafeString(reminderId);
+                        [SVProgressHUD showSuccessWithStatus:@"提醒成功"];
+                        
+                    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                        
+                        
+                        [SVProgressHUD showErrorWithStatus:@"提醒失败"];
+                        
+                        
+                    }];
+                    
+                    
+                    
+                }else{
+                    
+                    
+                    
+                    NSString *reminderId = SafeString(d[@"reminderId"]);
+                    
+                    
+                    ReminderService *service = [ReminderService new];
+                    
+                    
+                    [service deleteReminder:reminderId success:^(NSInteger code, NSString *message, id data) {
+                        
+                        
+                        UIButton *button = (UIButton*)sender;
+                        
+                        [button setTitle:@"提醒" forState:UIControlStateNormal];
+                        
+                        d[@"setReminder"]=@0;
+                        
+                        
+                        [SVProgressHUD showSuccessWithStatus:@"取消提醒成功"];
+                        
+                        
+                    } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
+                        
+                        
+                        [SVProgressHUD showErrorWithStatus:@"取消提醒失败"];
+                        
+                        
+                    }];
+                    
+                }
+                
+            };
+            
+            
+            [cell updateData];
+            
+        }
+        return cell;
+    }
     
+    if ([self.couponData count] == 0 && [self.nearByShopData count] == 0) {
+        ShopInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+        if (([self.recommendShopData count]>0)) {
+            cell.data = self.recommendShopData[[indexPath row]];
+            
+            [cell updateData];
+        }
+        
+        return cell;
+    }
+    
+    return nil;
 }
+
+
 -(void)doFilterSortData:(NSString*)filter sort:(NSString*)sort{
-    
-    
     
     self.filterString = filter;
     self.sortString = sort;
@@ -930,8 +1766,6 @@
         
     }
 
-    
-    
     if ([filter isEqualToString:@"美食"]) {
         self.filterTitle=@"美食";
         self.filterString=@"00001";
@@ -975,39 +1809,23 @@
         
     }
 
-   
-
-    
-    
-    
-    
-    
-    
-    
-    
     
     ShopService *service = [ShopService new];
     
     NSString *mallId = [AppShareData instance].mallId;
 
-    
-    
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [service requestNearbyShopWithFilter:mallId page:1 per_page:10 cat:self.filterString sort:self.sortString success:^(NSInteger code, NSString *message, id data) {
         
         [SVProgressHUD dismiss];
         
-        
         self.nearByShopData = data;
         
         [self.tableView reloadData];
         
-        
-        
     } failure:^(NSInteger code, BOOL retry, NSString *message, id data) {
         
         [SVProgressHUD dismiss];
-        
         
         if (code==404) {
             
@@ -1016,17 +1834,10 @@
             
         }
         
-        
-        
     }];
-    
-    
-    
-    
-    
-    
-    
+   
 }
+
 
 
 -(UIView*)headerViewWithSort:(NSString*)title clickBlock:(void(^)())clickBlock{
@@ -1043,17 +1854,14 @@
     moreButton.frame = CGRectMake(SCREEN_WIDTH-80, 0, 80, 30);
     moreButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [moreButton setTitleColor:[GUIConfig grayFontColorDeep] forState:UIControlStateNormal];
-    [uv addSubview:moreButton];
+//    [uv addSubview:moreButton];
     [moreButton bk_addEventHandler:^(id sender) {
         if (clickBlock) {
             clickBlock();
             
-            
         }
         
     } forControlEvents:UIControlEventTouchUpInside];
-    
-    
     
     UIView *sortBarView = [UIView new];
     sortBarView.backgroundColor = [UIColor whiteColor];
@@ -1061,14 +1869,12 @@
     sortBarView.frame = CGRectMake(0, 30, SCREEN_WIDTH, 50);
     [uv addSubview:sortBarView];
     
-    
     UIView *line = [UIView new];
     line.frame = CGRectMake(0, 79, SCREEN_WIDTH, 1);
     
     line.backgroundColor = [GUIConfig mainBackgroundColor];
     
     [uv addSubview:line];
-    
     
     UIButton *filterButton = [UIButton buttonWithType:UIButtonTypeSystem];
     filterButton.frame = CGRectMake(0, 0, SCREEN_WIDTH/2, 50);
@@ -1085,8 +1891,6 @@
     [sortBarView addSubview:filterButton];
     
     [filterButton setTitleColor:[GUIConfig grayFontColor] forState:UIControlStateNormal];
-    
-    
     
     UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeSystem];
     sortButton.frame = CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 50);
@@ -1111,45 +1915,31 @@
     
     [sortBarView addSubview:line2];
     
-    
-    NSString *mallId = [AppShareData instance].mallId;
-    
+//    NSString *mallId = [AppShareData instance].mallId;
     
     [filterButton bk_addEventHandler:^(id sender) {
         
         UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
         
         
-          
-        
         
         [as bk_addButtonWithTitle:@"全部" handler:^{
             
             [filterButton setTitle:@"全部" forState:UIControlStateNormal];
             
-            
-            
             [self doFilterSortData:@"全部" sort:self.sortString];
-            
-            
-            
             
         }];
         
         [as bk_addButtonWithTitle:@"美食" handler:^{
             
-            
             [self doFilterSortData:@"美食" sort:self.sortString];
-            
             
         }];
         
         [as bk_addButtonWithTitle:@"电影" handler:^{
             
-            
             [self doFilterSortData:@"电影" sort:self.sortString];
-            
-            
             
         }];
         
@@ -1157,12 +1947,10 @@
             
             [self doFilterSortData:@"休闲娱乐" sort:self.sortString];
             
-            
-            
         }];
         
         
-        
+
         
         [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{
             
@@ -1174,43 +1962,24 @@
         
         UITapGestureRecognizer *tap =[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
             
-            
             [as dismissWithClickedButtonIndex:0 animated:YES];
             
-            
-            
-            
         }];
-        
         
         [as.window addGestureRecognizer:tap];
         
     } forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
-    //    [tan release];
-    
-    
     ShopService *service = [ShopService new];
-    
     
     [sortButton bk_addEventHandler:^(id sender) {
         
+        UIActionSheet *as = [[UIActionSheet alloc]init];
         
-        UIActionSheet *as = [[UIActionSheet alloc] bk_initWithTitle:@""];
         
         [as bk_addButtonWithTitle:@"默认排序" handler:^{
             
-            
-            
             [self doFilterSortData:self.filterString sort:@"默认排序"];
-            
-            
-            
-           
-        
-
             
         }];
         
@@ -1219,38 +1988,28 @@
             
             [self doFilterSortData:self.filterString sort:@"领取最多"];
             
- 
-            
         }];
+        
         
         [as bk_addButtonWithTitle:@"点赞最多" handler:^{
             
             [self doFilterSortData:self.filterString sort:@"点赞最多"];
-
-            
-            
-            
- 
             
         }];
+        
         
         [as bk_addButtonWithTitle:@"订阅最多" handler:^{
             
-            
             [self doFilterSortData:self.filterString sort:@"订阅最多"];
 
-            
-    
-            
         }];
  
-        
-
         
         [as bk_setDestructiveButtonWithTitle:@"取消" handler:^{
             
         }];
        
+        
         [as showInView:[UIApplication sharedApplication].keyWindow];
        
     } forControlEvents:UIControlEventTouchUpInside];
@@ -1273,50 +2032,5 @@
     }
 }
 
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

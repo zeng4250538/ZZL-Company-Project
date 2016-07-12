@@ -80,10 +80,11 @@
 
     IndoorMapViewService *IMVS = [IndoorMapViewService new];
     [IMVS mapReqestSuccess:^(id data) {
+        if ([data count]>0) {
+            NSURL *url = data[0][@"mapPhotoUrl"];
+            [_mapImageView sd_setImageWithURL:url];
+        }
         
-        NSURL *url = data[0][@"mapPhotoUrl"];
-        [_mapImageView sd_setImageWithURL:url];
-
         [SVProgressHUD dismiss];
     } withFailure:^(id data) {
         
